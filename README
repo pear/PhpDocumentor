@@ -1,0 +1,11 @@
+To access phpDocumentor CVS, please see http://www.phpdoc.org for up-to-date
+anonymous CVS instructions
+
+Development versions of phpDocumentor (aka cvs) can be access either through the nightly builds available at http://developer.phpdoc.org/downloads/ or by using anonymous cvs.
+
+Anonymous cvs instructions 
+
+cvs -d :pserver:anonymous@phpdoc.org:/opt/cvsroot login
+cvs -d :pserver:anonymous@phpdoc.org:/opt/cvsroot co phpdoc
+
+email Josh Eichorn, jeichorn@phpdoc.org, if you have any problems
