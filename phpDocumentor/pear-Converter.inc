@@ -27,7 +27,7 @@
 /**
  * Smarty template files
  */
-include_once("phpDocumentor/Smarty-2.6.0/libs/Smarty.class.php");
+include_once("phpDocumentor/Smarty-2.6.10/libs/Smarty.class.php");
 /**
  * Base class for all output converters.
  *
@@ -51,7 +51,7 @@ include_once("phpDocumentor/Smarty-2.6.0/libs/Smarty.class.php");
  * The converter takes output directly from {@link phpDocumentor_IntermediateParser}
  * and using {@link walk()} or {@link walk_everything} (depending on the value of
  * {@link $sort_absolutely_everything}) it "walks" over an array of phpDocumentor elements.}}
- * 
+ *
  * @package Converters
  * @abstract
  * @author Greg Beaver <cellog@users.sourceforge.net>
@@ -99,7 +99,7 @@ class Converter
      * @see functionLink, pageLink, classLink, defineLink, methodLink, varLink, globalLink
      */
     var $links = array();
-    
+
     /**
      * the workhorse of linking, with allowance for support of multiple
      * elements in different files.
@@ -120,31 +120,31 @@ class Converter
      * @var mixed
      */
     var $package_output;
-    
+
     /**
      * name of current page being converted
      * @var string
      */
     var $page;
-    
+
     /**
      * path of current page being converted
      * @var string
      */
     var $path;
-    
+
     /**
      * template for the procedural page currently being processed
      * @var Smarty
      */
     var $page_data;
-    
+
     /**
      * template for the class currently being processed
      * @var Smarty
      */
     var $class_data;
-    
+
     /**
      * current procedural page being processed
      * @var parserPage
@@ -208,7 +208,7 @@ class Converter
      * @see formatPkgIndex(), HTMLframesConverter::formatPkgIndex()
      */
     var $pkg_elements = array();
-    
+
     /**
      * alphabetical index of all elements on a page by package/subpackage
      *
@@ -217,7 +217,7 @@ class Converter
      * @see formatLeftIndex()
      */
     var $page_contents = array();
-    
+
     /**
      * This determines whether the {@link $page_contents} array should be sorted by element type as well as alphabetically by name
      * @see sortPageContentsByElementType()
@@ -234,12 +234,12 @@ class Converter
      * alphabetical index of all methods and vars in a class by package/subpackage
      *
      * The class itself has a link under ###main
-     * @var array 
+     * @var array
      * Format:<pre>
      * array(package =>
      *       array(subpackage =>
      *             array(path =>
-     *                   array(class => 
+     *                   array(class =>
      *                         array({@link abstractLink} descendant 1, ...
      *                        )
      *                  )
@@ -262,43 +262,43 @@ class Converter
      * @var bool
      */
     var $quietmode;
-    
+
     /**
      * directory that output is sent to. -t command-line sets this.
      * @tutorial phpDocumentor.howto.pkg#using.command-line.target
      */
     var $targetDir = '';
-    
+
     /**
      * Directory that the template is in, relative to phpDocumentor root directory
      * @var string
      */
     var $templateDir = '';
-    
+
     /**
      * Directory that the smarty templates are in
      * @var string
      */
     var $smarty_dir = '';
-    
+
     /**
      * Name of the template, from last part of -o
      * @tutorial phpDocumentor.howto.pkg#using.command-line.output
      * @var string
      */
     var $templateName = '';
-    
+
     /**
      * full path of the current file being converted
      */
     var $curfile;
-    
+
     /**
      * All class information, organized by path, and by package
      * @var Classes
      */
     var $classes;
-    
+
     /**
      * Hierarchy of packages
      *
@@ -322,7 +322,7 @@ class Converter
      * @see phpDocumentor_IntermediateParser::$package_parents
      */
     var $package_parents;
-    
+
     /**
      * Packages associated with categories
      *
@@ -332,14 +332,14 @@ class Converter
      * @var array
      */
     var $packagecategories;
-    
+
     /**
      * All packages encountered in parsing
      * @var array
      * @see phpDocumentor_IntermediateParser::$all_packages
      */
     var $all_packages;
-    
+
     /**
      * A list of files that have had source code generated
      * @var array
@@ -357,7 +357,7 @@ class Converter
      * @var array
      */
     var $leftindex = array('classes' => true, 'pages' => true, 'functions' => true, 'defines' => true, 'globals' => true);
-    
+
     /** @access private */
     var $killclass = false;
     /**
@@ -365,28 +365,28 @@ class Converter
      * @see phpDocumentor_IntermediateParser::$title
      */
     var $title = 'Generated Documentation';
-    
+
     /**
      * Options for each template, parsed from the options.ini file in the template base directory
      * @tutorial phpDocumentor/tutorials.pkg#conversion.ppage
      * @var array
      */
     var $template_options;
-    
+
     /**
      * Tutorials and Extended Documentation parsed from a tutorials/package[/subpackage] directory
      * @tutorial tutorials.pkg
      * @access private
      */
     var $tutorials = array();
-    
+
     /**
      * tree-format structure of tutorials and their child tutorials, if any
      * @var array
      * @access private
      */
     var $tutorial_tree = false;
-    
+
     /**
      * list of tutorials that have already been processed. Used by @link _setupTutorialTree()
      * @var array
@@ -402,7 +402,7 @@ class Converter
      * @var array
      */
     var $todoList = array();
-    
+
     /**
      * Initialize Converter data structures
      * @param array {@link $all_packages} value
@@ -437,7 +437,7 @@ class Converter
         $this->setTemplateDir($template);
         $this->setTargetdir($targetDir);
     }
-    
+
     /**
      * Called by IntermediateParser after creation
      * @access private
@@ -446,7 +446,7 @@ class Converter
     {
         $this->tutorials = $tutorials;
     }
-    
+
     /**
      * @param pkg|cls|proc the tutorial type to search for
      * @param tutorial name
@@ -460,7 +460,7 @@ class Converter
             return $this->tutorials[$package][$subpackage][$type][$name . '.' . $type];
         return false;
     }
-    
+
     /**
      * Called by {@link walk()} while converting, when the last class element
      * has been parsed.
@@ -474,7 +474,7 @@ class Converter
     function endClass()
     {
     }
-    
+
     /**
     * Called by {@link walk()} while converting, when the last procedural page
     * element has been parsed.
@@ -488,7 +488,7 @@ class Converter
     function endPage()
     {
     }
-    
+
     /**
     * Called by {@link walk()} while converting.
     *
@@ -500,7 +500,7 @@ class Converter
     function formatPkgIndex()
     {
     }
-    
+
     /**
     * Called by {@link walk()} while converting.
     *
@@ -512,7 +512,7 @@ class Converter
     function formatIndex()
     {
     }
-    
+
     /**
     * Called by {@link walk()} while converting.
     *
@@ -526,7 +526,7 @@ class Converter
     function formatLeftIndex()
     {
     }
-    
+
     /**
      * Called by {@link parserSourceInlineTag::stringConvert()} to allow
      * converters to format the source code the way they'd like.
@@ -546,17 +546,17 @@ class Converter
     /**
      * Initialize highlight caching
      */
-    function startHighlight()    
+    function startHighlight()
     {
         $this->_highlightCache = array(false, false);
         $this->_appendHighlight = '';
     }
-    
+
     function getHighlightState()
     {
         return $this->_highlightCache;
     }
-    
+
     function _setHighlightCache($type, $token)
     {
         $test = ($this->_highlightCache[0] === $type && $this->_highlightCache[1] == $token);
@@ -568,7 +568,7 @@ class Converter
         $this->_highlightCache = array($type, $token);
         return $test;
     }
-    
+
     /**
      * Return the close text for the current token
      * @return string
@@ -637,7 +637,7 @@ class Converter
             }
         }
     }
-    
+
     /**
      * Used to allow converters to format the source code of DocBlocks the way
      * they'd like.
@@ -675,7 +675,7 @@ class Converter
             return $e . ($preformatted ? $word : $this->postProcess($word));
         }
     }
-    
+
     /**
      * Used to allow converters to format the source code of DocBlocks the way
      * they'd like.
@@ -713,7 +713,7 @@ class Converter
             return $e . ($preformatted ? $word : $this->postProcess($word));
         }
     }
-    
+
     /**
      * Called by {@link parserReturnTag::Convert()} to allow converters to
      * change type names to desired formatting
@@ -727,10 +727,10 @@ class Converter
     {
         return $typename;
     }
-    
+
     /**
      * Used to convert the {@}example} inline tag in a docblock.
-     * 
+     *
      * By default, this just wraps ProgramExample
      * @see XMLDocBookpeardoc2Converter::exampleProgramExample
      * @param string
@@ -742,7 +742,7 @@ class Converter
     {
         return $this->ProgramExample($example, $tutorial, $inlinesourceparse, $class, $linenum, $filesourcepath);
     }
-    
+
     /**
      * Used to convert the <<code>> tag in a docblock
      * @param string
@@ -796,7 +796,7 @@ class Converter
         {
             $example = $this->postProcess($example);
         }
-        
+
         if ($tutorial)
         {
             return $example;
@@ -808,7 +808,7 @@ class Converter
         if (!isset($this->template_options['desctranslate']['/code'])) return $example;
         return $example . $this->template_options['desctranslate']['/code'];
     }
-    
+
     /**
      * @param string
      */
@@ -817,7 +817,7 @@ class Converter
         $parse = new phpDocumentor_TutorialHighlightParser;
         return $parse->parse($example, $this);
     }
-    
+
     /**
      * Used to convert the contents of <<li>> in a docblock
      * @param string
@@ -831,7 +831,7 @@ class Converter
         if (!isset($this->template_options['desctranslate']['/li'])) return $item;
         return $item . $this->template_options['desctranslate']['/li'];
     }
-    
+
     /**
      * Used to convert the contents of <<ol>> or <<ul>> in a docblock
      * @param string
@@ -846,7 +846,7 @@ class Converter
         if (!isset($this->template_options['desctranslate']['/'.$listname])) return $list;
         return $list . $this->template_options['desctranslate']['/'.$listname];
     }
-    
+
     /**
      * Used to convert the contents of <<pre>> in a docblock
      * @param string
@@ -860,7 +860,7 @@ class Converter
         if (!isset($this->template_options['desctranslate']['/pre'])) return $string;
         return $string . $this->template_options['desctranslate']['/pre'];
     }
-    
+
     /**
      * Used to enclose a paragraph in a docblock
      * @param string
@@ -874,7 +874,7 @@ class Converter
         if (!isset($this->template_options['desctranslate']['/p'])) return $para;
         return $para . $this->template_options['desctranslate']['/p'];
     }
-    
+
     /**
      * Used to convert the contents of <<b>> in a docblock
      * @param string
@@ -888,7 +888,7 @@ class Converter
         if (!isset($this->template_options['desctranslate']['/b'])) return $para;
         return $para . $this->template_options['desctranslate']['/b'];
     }
-    
+
     /**
      * Used to convert the contents of <<i>> in a docblock
      * @param string
@@ -902,7 +902,7 @@ class Converter
         if (!isset($this->template_options['desctranslate']['/i'])) return $para;
         return $para . $this->template_options['desctranslate']['/i'];
     }
-    
+
     /**
      * Used to convert the contents of <<var>> in a docblock
      * @param string
@@ -916,7 +916,7 @@ class Converter
         if (!isset($this->template_options['desctranslate']['/var'])) return $para;
         return $para . $this->template_options['desctranslate']['/var'];
     }
-    
+
     /**
      * Used to convert the contents of <<kbd>> in a docblock
      * @param string
@@ -930,7 +930,7 @@ class Converter
         if (!isset($this->template_options['desctranslate']['/kbd'])) return $para;
         return $para . $this->template_options['desctranslate']['/kbd'];
     }
-    
+
     /**
      * Used to convert the contents of <<samp>> in a docblock
      * @param string
@@ -944,7 +944,7 @@ class Converter
         if (!isset($this->template_options['desctranslate']['/samp'])) return $para;
         return $para . $this->template_options['desctranslate']['/samp'];
     }
-    
+
     /**
      * Used to convert <<br>> in a docblock
      * @param string
@@ -957,7 +957,7 @@ class Converter
         $para = $this->template_options['desctranslate']['br'] . $para;
         return $para;
     }
-    
+
     /**
      * This version does nothing
      *
@@ -969,10 +969,10 @@ class Converter
     {
         return $text;
     }
-    
+
     /**
      * Creates a table of contents for a {@}toc} inline tag in a tutorial
-     * 
+     *
      * This function should return a formatted table of contents.  By default, it
      * does nothing, it is up to the converter to format the TOC
      * @abstract
@@ -983,7 +983,7 @@ class Converter
     {
         return '';
     }
-    
+
     /**
      * Write out the formatted source code for a php file
      *
@@ -998,7 +998,7 @@ class Converter
         debug($source);
         return;
     }
-    
+
     /**
      * Write out the formatted source code for an example php file
      *
@@ -1013,11 +1013,11 @@ class Converter
     {
         return;
     }
-    
+
     /** Translate the path info into a unique file name for the highlighted
      * source code.
      * @param string $pathinfo
-     * @return string 
+     * @return string
      */
     function getFileSourceName($path)
     {
@@ -1027,10 +1027,10 @@ class Converter
         $pathinfo['source_loc'] = str_replace('/','_',$pathinfo['source_loc']);
         return "fsource_{$pathinfo['package']}_{$pathinfo['subpackage']}_{$pathinfo['source_loc']}";
     }
-    
+
     /** Return the fixed path to the source-code file folder.
      * @param string $base Path is relative to this folder
-     * @return string 
+     * @return string
      */
     function getFileSourcePath($base)
     {
@@ -1039,10 +1039,10 @@ class Converter
         }
         return $base . '__filesource';
     }
-    
-    /** Return the path to the current 
+
+    /** Return the path to the current
      * @param string $pathinfo
-     * @return string 
+     * @return string
      */
     function getCurrentPageURL()
     {
@@ -1058,7 +1058,7 @@ class Converter
     {
         return '';
     }
-    
+
     /**
      * @return string Link to the current page being parsed.
      * Should return {@link $curname} and a converter-specific extension.
@@ -1090,7 +1090,7 @@ class Converter
             return $this->Br(sprintf('%-6u',$linenumber).str_replace("\n",'',$line));
         }
     }
-    
+
     /**
      * Determine whether an element's file has generated source code, used for
      * linking to line numbers of source.
@@ -1103,7 +1103,7 @@ class Converter
     {
         return isset($this->sourcePaths[$path]);
     }
-    
+
     /**
      * Mark a file as having had source code highlighted
      * @param string full path of source file
@@ -1112,7 +1112,7 @@ class Converter
     {
         $this->sourcePaths[$path] = true;
     }
-    
+
     /**
      * Used to translate an XML DocBook entity like &rdquo; from a tutorial by
      * reading the options.ini file for the template.
@@ -1138,7 +1138,7 @@ class Converter
             return '&'.$name.';';
         }
     }
-    
+
     /**
      * Used to translate an XML DocBook tag from a tutorial by reading the
      * options.ini file for the template.
@@ -1193,7 +1193,7 @@ class Converter
                     $cdata = $new . $cdata;
                 }
             }
-            
+
             if (!isset($this->template_options['ppage']['/'.$name]))
             {// if the close tag isn't specified, we put opening and closing tags around it, with translated attributes
                 if (isset($this->template_options['ppage'][$name.'/']))
@@ -1232,7 +1232,7 @@ class Converter
             }
         }
     }
-    
+
     /**
      * Convert the attribute of a Tutorial docbook tag's attribute list
      * to a string based on the template options.ini
@@ -1320,7 +1320,7 @@ class Converter
         }
         return $ret;
     }
-    
+
     /**
      * Convert the title of a Tutorial docbook tag section
      * to a string based on the template options.ini
@@ -1344,7 +1344,7 @@ class Converter
         } else $cdata = $title.$cdata;
         return array($attr,$cdata);
     }
-    
+
     /**
      * Return a converter-specific id to distinguish tutorials and their
      * sections
@@ -1356,7 +1356,7 @@ class Converter
     {
         return $package.$subpackage.$tutorial.$id;
     }
-    
+
     /**
      * Create the {@link $elements, $pkg_elements} and {@link $links} arrays
      * @access private
@@ -1451,7 +1451,7 @@ class Converter
         $this->sortTodos();
         if ($this->sort_page_contents_by_type) $this->sortPageContentsByElementType($pages);
     }
-    
+
     /**
      * Process the {@link $tutorials} array
      *
@@ -1598,7 +1598,7 @@ class Converter
         $this->tutorial_tree = $this->_setupTutorialTree();
         return $new;
     }
-    
+
     /**
     * called by {@link phpDocumentor_IntermediateParser::Convert()} to traverse
     * the array of pages and their elements, converting them to the output format
@@ -1889,7 +1889,7 @@ class Converter
         phpDocumentor_out("done\n");
         flush();
     }
-    
+
 
     /**
      * Get a tree structure representing the hierarchy of tutorials
@@ -1939,7 +1939,7 @@ class Converter
         }
         return $tree;
     }
-    
+
     /**
      * Remove tutorials one by one from $all, and transfer them into $new in the
      * order they should be parsed
@@ -2004,11 +2004,11 @@ class Converter
         }
         return;
     }
-    
+
 		/** Returns the path to this tutorial as a string
-		 * @param parserTutorial $pkg 
-		 * @param parserTutorial $subpkg 
-		 * @param parserTutorial $namepkg 
+		 * @param parserTutorial $pkg
+		 * @param parserTutorial $subpkg
+		 * @param parserTutorial $namepkg
 		 * @return string */
 		function _tutorial_path($pkg, $subpkg = 0, $namepkg = 0)
 		{
@@ -2025,7 +2025,7 @@ class Converter
      *
      * Format:
      * <pre>
-     * array('package/subpackage/tutorial1.ext' => 
+     * array('package/subpackage/tutorial1.ext' =>
      *          array('tutorial' => {@link parserTutorial},
      *                'child'    =>
      *                    array('package/subpackage/child1tutorial.ext' => ...,
@@ -2062,8 +2062,8 @@ class Converter
 																		$this->processed_tutorials[$child_path] = $tutorial;
 																		//debug("parent ".$tutorial->name);
 																		$ret = $this->_setupTutorialTree($tutorial);
-																		if (!count($tree)) 
-																			$tree = $ret; 
+																		if (!count($tree))
+																			$tree = $ret;
 																		else
 																			$tree = array_merge($tree,$ret);
 																}
@@ -2084,7 +2084,7 @@ class Converter
                 if (isset($this->tutorials[$parent->package][$parent->subpackage][$parent->tutorial_type][$child . '.' . $parent->tutorial_type]))
 												// remove the child from the list of remaining tutorials
 										$tute = $this->tutorials[$parent->package][$parent->subpackage][$parent->tutorial_type][$child . '.' . $parent->tutorial_type];
-                else 
+                else
 										$tute = false;
 
                 if ($tute)
@@ -2112,7 +2112,7 @@ class Converter
         }
         return $tree;
     }
-    
+
     /**
      * Debugging function for dumping {@link $tutorial_tree}
      * @return string
@@ -2128,7 +2128,7 @@ class Converter
         }
         return substr($a,0,strlen($a) - 1);
     }
-    
+
     /**
      * @access private
      */
@@ -2154,7 +2154,7 @@ class Converter
         if ($a->type == 'function') return -1;
         if ($b->type == 'function') return 1;
     }
-    
+
     /**
      * @access private
      */
@@ -2172,7 +2172,7 @@ class Converter
     {
         return strnatcasecmp(key($a),key($b));
     }
-    
+
     /**
      * walk over elements by package rather than page
      *
@@ -2336,7 +2336,7 @@ class Converter
         phpDocumentor_out("done\n");
         flush();
     }
-    
+
     /**
      * Convert the phpDocumentor parsing/conversion error log
      * @abstract
@@ -2344,7 +2344,7 @@ class Converter
     function ConvertErrorLog()
     {
     }
-    
+
     /**
      * Convert the list of all @todo tags
      * @abstract
@@ -2352,7 +2352,7 @@ class Converter
     function ConvertTodoList()
     {
     }
-    
+
     /**
      * Sorts the @todo list - do not override or modify this function
      * @access private
@@ -2366,13 +2366,13 @@ class Converter
         usort($this->todoList[$package],array($this, '_sortTodos'));
         phpDocumentor_out("done\n");
     }
-    
+
     /** @access private */
     function _sortTodos($a, $b)
     {
         return strnatcasecmp($a[0]->name, $b[0]->name);
     }
-    
+
     /**
      * Sorts all indexes - do not override or modify this function
      * @uses $leftindex based on the value of leftindex, sorts link arrays
@@ -2465,7 +2465,7 @@ class Converter
         phpDocumentor_out("done\n");
         flush();
     }
-    
+
     /**
      * sorts {@link $page_contents} by element type as well as alphabetically
      * @see $sort_page_contents_by_element_type
@@ -2489,7 +2489,7 @@ class Converter
             }
         }
     }
-    
+
     /**
      * @access private
      * @see Converter::sortIndexes()
@@ -2498,7 +2498,7 @@ class Converter
     {
          return strnatcasecmp($a->name,$b->name);
     }
-    
+
     /**
      * @access private
      * @see Converter::sortPageContentsByElementType()
@@ -2509,7 +2509,7 @@ class Converter
         if ($b->type == 'page') return 1;
          return strnatcasecmp($a->type.$a->name,$b->type.$b->name);
     }
-    
+
     /**
      * does a nat case sort on the specified second level value of the array
      *
@@ -2541,7 +2541,7 @@ class Converter
         if (PHPDOCUMENTOR_DEBUG && $this->killclass) debug("$class $path killed");
         return $this->killclass;
     }
-    
+
     /**
      * @param abstractLink descendant of abstractLink
      * @param array|parserTag list of @todos|@todo tag
@@ -2551,7 +2551,7 @@ class Converter
     {
         $this->todoList[$link->package][] = array($link, $todos);
     }
-    
+
     /**
      * Adds all elements to the {@link $elements, $pkg_elements, $links},
      * {@link $linkswithfile} and left indexes - Do not modify or override
@@ -2712,7 +2712,7 @@ class Converter
             $this->pkg_elements[$this->package][$this->subpackage][substr(strtolower($element->getName()),$i,1)][] = $element;
         }
     }
-    
+
     /**
      * returns an abstract link to element.  Do not modify or override
      *
@@ -2792,7 +2792,7 @@ class Converter
      * In most cases, the array returned is:
      *
      * <pre>
-     * array('#root' => 
+     * array('#root' =>
      *         array('link' => {@link classLink} to $class,
      *               'parent' => false,
      *               'children' => array(array('class' => 'childclass1',
@@ -2848,7 +2848,7 @@ class Converter
      * @param string class name
      * @param string
      * @param string
-     * @return array Format: see docs 
+     * @return array Format: see docs
      */
     function getSortedClassTreeFromClass($class,$package,$subpackage)
     {
@@ -2944,7 +2944,7 @@ class Converter
         }
         return $my_tree;
     }
-    
+
     /**
      * do not override
      * @return bool true if a link to this class exists in package $package and subpackage $subpackage
@@ -2959,7 +2959,7 @@ class Converter
         return isset($this->linkswithfile[$package][$subpackage]['class'][$file][$expr]);
         return isset($this->links[$package][$subpackage]['class'][$expr]);
     }
-    
+
     /**
      * do not override
      * @return bool true if a link to this function exists in package $package and subpackage $subpackage
@@ -2974,7 +2974,7 @@ class Converter
         return isset($this->linkswithfile[$package][$subpackage]['function'][$file][$expr]);
         return isset($this->links[$package][$subpackage]['function'][$expr]);
     }
-    
+
     /**
      * do not override
      * @return bool true if a link to this define exists in package $package and subpackage $subpackage
@@ -2989,7 +2989,7 @@ class Converter
         return isset($this->linkswithfile[$package][$subpackage]['define'][$file][$expr]);
         return isset($this->links[$package][$subpackage]['define'][$expr]);
     }
-    
+
     /**
      * do not override
      * @return bool true if a link to this define exists in package $package and subpackage $subpackage
@@ -3004,7 +3004,7 @@ class Converter
         return isset($this->linkswithfile[$package][$subpackage]['global'][$file][$expr]);
         return isset($this->links[$package][$subpackage]['global'][$expr]);
     }
-    
+
     /**
      * do not override
      * @return bool true if a link to this procedural page exists in package $package and subpackage $subpackage
@@ -3019,7 +3019,7 @@ class Converter
         return isset($this->linkswithfile[$package][$subpackage]['page'][$path][$expr]);
         return isset($this->links[$package][$subpackage]['page'][$expr]);
     }
-    
+
     /**
      * do not override
      * @return bool true if a link to this method exists in package $package, subpackage $subpackage and class $class
@@ -3035,7 +3035,7 @@ class Converter
         return isset($this->linkswithfile[$package][$subpackage]['method'][$file][$class][$expr]);
         return isset($this->links[$package][$subpackage]['method'][$class][$expr]);
     }
-    
+
     /**
      * do not override
      * @return bool true if a link to this method exists in package $package, subpackage $subpackage and class $class
@@ -3051,7 +3051,7 @@ class Converter
         return isset($this->linkswithfile[$package][$subpackage]['var'][$file][$class][$expr]);
         return isset($this->links[$package][$subpackage]['var'][$class][$expr]);
     }
-    
+
     /**
      * do not override
      * @return bool true if a link to this method exists in package $package, subpackage $subpackage and class $class
@@ -3067,7 +3067,7 @@ class Converter
         return isset($this->linkswithfile[$package][$subpackage]['const'][$file][$class][$expr]);
         return isset($this->links[$package][$subpackage]['const'][$class][$expr]);
     }
-    
+
     /**
      * return false or a {@link classLink} to $expr
      * @param string $expr class name
@@ -3163,7 +3163,7 @@ class Converter
         }
         return false;
     }
-    
+
     /**
      * return false or a {@link pageLink} to $expr
      * @param string $expr procedural page name
@@ -3268,7 +3268,7 @@ class Converter
         }
         return false;
     }
-    
+
     /**
      * The meat of the @tutorial tag and inline {@}tutorial} tag
      *
@@ -3351,7 +3351,7 @@ class Converter
         if (!$subpackage) $subpackage = $this->subpackage;
         if (!isset($this->all_packages[$package])) return $expr;
         elseif (isset($packages[$package])) unset($packages[$package]);
-        $ext = array_pop(explode('.',$expr));
+        $ext = pathinfo($expr, PATHINFO_EXTENSION);
         if (isset($this->tutorials[$package][$subpackage][$ext][$expr]))
         {
             $a = $this->tutorials[$package][$subpackage][$ext][$expr];
@@ -3440,7 +3440,7 @@ class Converter
      *    {
      *    }
      * }
-     * 
+     *
      * function conflict()
      * {
      * }
@@ -3488,14 +3488,14 @@ class Converter
         $a = &$this->_getLink($expr, $package, $packages);
         return $a;
     }
-    
+
     /**
      * @access private
      */
     function &_getLink($expr, $package = false, $packages = false)
     {
         if (!$package) $package = $this->package;
-        // 
+        //
         if (!isset($this->all_packages[$package])) return $expr;
         elseif (isset($packages[$package])) unset($packages[$package]);
         $links = &$this->links;
@@ -3618,7 +3618,7 @@ class Converter
         // no links found
         return $expr;
     }
-    
+
     /**
      * Split up getLink to make it easier to debug
      * @access private
@@ -3712,7 +3712,7 @@ class Converter
         // no links found
         return false;
     }
-    
+
     /**
      * cycle through parent classes to retrieve a link to a var
      * do not use or override, used by getLink
@@ -3761,7 +3761,7 @@ class Converter
         // no links found
         return false;
     }
-    
+
     /**
      * cycle through parent classes to retrieve a link to a class constant
      * do not use or override, used by getLink
@@ -3809,7 +3809,7 @@ class Converter
         // no links found
         return false;
     }
-    
+
     /**
      * take URL $link and text $text and return a link in the format needed for the Converter
      * @param string URL
@@ -3832,9 +3832,9 @@ class Converter
     function returnSee(&$link, $eltext = false)
     {
     }
-    
+
     /**
-     * take {@link abstractLink} descendant and text $eltext and return a 
+     * take {@link abstractLink} descendant and text $eltext and return a
      * unique ID in the format needed for the Converter
      * @param abstractLink
      * @return string unique identifier of $element
@@ -3843,7 +3843,7 @@ class Converter
     function getId(&$link)
     {
     }
-    
+
     /**
      * Convert README/INSTALL/CHANGELOG file contents to output format
      * @param README|INSTALL|CHANGELOG
@@ -3853,7 +3853,7 @@ class Converter
     function Convert_RIC($name, $contents)
     {
     }
-    
+
     /**
      * Convert all elements to output format
      *
@@ -3929,7 +3929,7 @@ class Converter
      *
      * Sets up the class template.
      * {@internal special methods
-     * {@link generateChildClassList(), generateFormattedClassTree()}, 
+     * {@link generateChildClassList(), generateFormattedClassTree()},
      * {@link getFormattedConflicts, getFormattedInheritedMethods},
      * and {@link getFormattedInheritedVars} are called to complete vital
      * template setup.}}
@@ -3991,8 +3991,8 @@ class Converter
             $this->class_data->assign("iconsts",false);
         }
     }
-    
-    
+
+
     /**
      * Converts method for template output
      *
@@ -4049,7 +4049,7 @@ class Converter
                                                    'params' => $params),
                                              $additions));
     }
-    
+
     /**
      * Converts class variables for template output.
      *
@@ -4061,7 +4061,7 @@ class Converter
     {
         $docblock = $this->prepareDocBlock($element);
         $b = 'mixed';
-				
+
         if ($element->docblock->hasaccess)
             $acc = $element->docblock->tags['access'][0]->value;
         else
@@ -4091,7 +4091,7 @@ class Converter
                                                 'id' => $this->getId($element)),
                                           $additions));
     }
-    
+
     /**
      * Converts class constants for template output.
      *
@@ -4102,7 +4102,7 @@ class Converter
     function convertConst(&$element, $additions = array())
     {
         $docblock = $this->prepareDocBlock($element);
-				
+
         if ($element->docblock->hasaccess)
         	$acc = $element->docblock->tags['access'][0]->value;
         else
@@ -4201,7 +4201,7 @@ class Converter
                                                   'id' => $this->getId($element)),
                                             $addition));
     }
-    
+
     /**
      * Converts defines for template output
      *
@@ -4233,8 +4233,8 @@ class Converter
                                                   'id' => $this->getId($element)),
                                             $addition));
     }
-    
-    
+
+
     /**
      * Converts includes for template output
      *
@@ -4262,7 +4262,7 @@ class Converter
                                                    'include_value'    => $per),
                                              $addition));
     }
-    
+
     /**
      * Converts function for template output
      *
@@ -4309,7 +4309,7 @@ class Converter
                                               $addition));
     }
     /**#@-*/
-    
+
     /**
      * convert the element's DocBlock for output
      *
@@ -4421,7 +4421,7 @@ class Converter
         $ret['utags'] = $utags;
         return $ret;
     }
-    
+
     /**
      * gets a list of all classes declared on a procedural page represented by
      * $element, a {@link parserData} class
@@ -4471,7 +4471,7 @@ class Converter
         }
         return $classes;
     }
-    
+
     /**
      * returns an array containing the class inheritance tree from the root
      * object to the class.
@@ -4482,12 +4482,12 @@ class Converter
      * @param parserClass    class variable
      * @abstract
      */
-    
+
     function generateFormattedClassTree($class)
     {
         addErrorDie(PDERROR_CONVERTER_OVR_GFCT,phpDocumentor_get_class($this));
     }
-    
+
     /**
      * returns an array containing the class inheritance tree from the root
      * object to the class.
@@ -4498,7 +4498,7 @@ class Converter
      * @param parserClass    class variable
      * @abstract
      */
-    
+
     function getFormattedImplements($el)
     {
         $ret = array();
@@ -4508,7 +4508,7 @@ class Converter
         }
         return $ret;
     }
-    
+
     /**
      * @param mixed {@link parserClass, parserFunction, parserDefine} or
      * {@link parserGlobal}
@@ -4532,7 +4532,7 @@ class Converter
         if (!empty($r)) $r = array('conflicttype' => $type, 'conflicts' => $r);
         return $r;
     }
-    
+
     /**
      * Get a list of methods in child classes that override this method
      * @return array empty array or array(array('link'=>link to method,
@@ -4553,7 +4553,7 @@ class Converter
         }
         return $r;
     }
-    
+
     /**
      * Get a list of vars in child classes that override this var
      * @return array empty array or array('link'=>link to var,
@@ -4589,14 +4589,14 @@ class Converter
         $sdesc = $ovr->docblock->getSDesc($this);
         return array('link' => $ovr->getLink($this),'sdesc' => $sdesc);
     }
-    
+
     /**
      * returns a list of child classes
      *
      * @param parserClass class variable
      * @uses parserClass::getChildClassList()
      */
-    
+
     function generateChildClassList($class)
     {
         $kids = $class->getChildClassList($this);
@@ -4607,20 +4607,20 @@ class Converter
             {
                 $lt['link'] = $kids[$i]->getLink($this);
                 $lt['sdesc'] = $kids[$i]->docblock->getSDesc($this);
-								
+
 								if ($kids[$i]->docblock->hasaccess)
 									$lt['access'] = $kids[$i]->docblock->tags['access'][0]->value;
 								else
 									$lt['access'] = 'public';
 
 								$lt['abstract'] = isset ($kids[$i]->docblock->tags['abstract'][0]);
-                
+
                 $list[] = $lt;
             }
         } else return false;
         return $list;
     }
-    
+
     /**
      * Return template-enabled list of inherited variables
      *
@@ -4632,7 +4632,7 @@ class Converter
      * <pre>
      * array(
      *   array('parent_class' => link to parent class's documentation,
-     *         'ivars' => 
+     *         'ivars' =>
      *            array(
      *              array('name' => inherited variable name,
      *                    'link' => link to inherited variable's documentation,
@@ -4642,7 +4642,7 @@ class Converter
      *   ...)
      * </pre>
      */
-    
+
     function getFormattedInheritedVars($child)
     {
         $package = $child->docblock->package;
@@ -4661,14 +4661,14 @@ class Converter
             foreach($vars as $var)
             {
                 $info = array();
-                
+
 								if ($var->docblock->hasaccess)
 									$info['access'] = $var->docblock->tags['access'][0]->value;
 								else
 									$info['access'] = 'public';
 
 								$info['abstract'] = isset ($var->docblock->tags['abstract'][0]);
-								
+
 								$info['name'] = $var->getName();
                 $info['link'] = $var->getLink($this);
                 $info['default'] = $this->postProcess($var->getValue());
@@ -4681,7 +4681,7 @@ class Converter
         }
         return $results;
     }
-    
+
     /**
      * Return template-enabled list of inherited methods
      *
@@ -4693,7 +4693,7 @@ class Converter
      * <pre>
      * array(
      *   array('parent_class' => link to parent class's documentation,
-     *         'ivars' => 
+     *         'ivars' =>
      *            array(
      *              array('name' => inherited variable name,
      *                    'link' => link to inherited variable's documentation,
@@ -4723,7 +4723,7 @@ class Converter
             foreach($methods as $method)
             {
                 $info = array();
-								
+
 								if ($method->docblock->hasaccess)
 									$info['access'] = $method->docblock->tags['access'][0]->value;
 								else
@@ -4743,7 +4743,7 @@ class Converter
                     $a = $val->Convert($this);
                     $params[$param] = array("var" => $param,"datatype" => $val->converted_returnType,"data" => $a);
                 }
-        
+
                 $info['function_call'] = $method->getIntricateFunctionCall($this,$params);
                 $result["imethods"][] = $info;
             }
@@ -4752,7 +4752,7 @@ class Converter
         }
         return $results;
     }
-    
+
     /**
      * Return template-enabled list of inherited class constants
      *
@@ -4764,7 +4764,7 @@ class Converter
      * <pre>
      * array(
      *   array('parent_class' => link to parent class's documentation,
-     *         'ivars' => 
+     *         'ivars' =>
      *            array(
      *              array('name' => inherited constant name,
      *                    'link' => link to inherited constant's documentation,
@@ -4793,12 +4793,12 @@ class Converter
             foreach($vars as $var)
             {
                 $info = array();
-                
+
                 if ($var->docblock->hasaccess)
                 	$info['access'] = $var->docblock->tags['access'][0]->value;
                 else
                 	$info['access'] = 'public';
-                
+
                 $info['name'] = $var->getName();
                 $info['link'] = $var->getLink($this);
                 $info['value'] = $this->postProcess($var->getValue());
@@ -4835,7 +4835,7 @@ class Converter
         if (method_exists($this,'SmartyInit')) return $this->SmartyInit($templ);
         return $templ;
     }
-    
+
     /**
      * do all necessary output
      * @see Converter
@@ -4845,7 +4845,7 @@ class Converter
     {
         phpDocumentor_out("WARNING: Generic Converter::Output was used, no output will be generated");
     }
-    
+
     /**
      * Set the template directory with a different template base directory
      * @tutorial phpDocumentor.howto.pkg#using.command-line.templatebase
@@ -4863,7 +4863,7 @@ class Converter
         {
             addErrorDie(PDERROR_TEMPLATEDIR_DOESNT_EXIST, $this->templateDir);
         }
-        
+
         $this->smarty_dir = $this->templateDir;
         if (file_exists($this->templateDir . PATH_DELIMITER . 'options.ini'))
         {
@@ -4871,7 +4871,7 @@ class Converter
             $this->template_options = phpDocumentor_parse_ini_file($this->templateDir . PATH_DELIMITER . 'options.ini',true);
         }
     }
-    
+
     /**
      * sets the template directory based on the {@link $outputformat} and {@link $name}
      * Also sets {@link $templateName} to the $dir parameter
@@ -4883,7 +4883,7 @@ class Converter
 //        $templateBase = str_replace('\\','/',$GLOBALS['_phpDocumentor_install_dir']) . '/phpDocumentor';
         $this->setTemplateBase($templateBase, $dir);
     }
-    
+
     /**
      * Get the absolute path to the converter's base directory
      * @return string
@@ -4892,7 +4892,7 @@ class Converter
     {
         return str_replace('\\', '/', "@DATA-DIR@/PhpDocumentor/phpDocumentor/Converters/") . $this->outputformat . "/" . $this->name;
     }
-    
+
     /**
      * Parse a global variable's default value for class initialization.
      *
@@ -4922,7 +4922,7 @@ class Converter
         }
         return $value;
     }
-    
+
     /**
      * Parse an include's file to see if it is a file documented in this project
      *
@@ -4972,7 +4972,7 @@ class Converter
         }
         return $value;
     }
-    
+
     /**
      * Recursively creates all subdirectories that don't exist in the $dir path
      * @param string $dir
@@ -5004,7 +5004,7 @@ class Converter
      */
     function setTargetDir($dir)
     {
-        if (strlen($dir) > 0) 
+        if (strlen($dir) > 0)
         {
             $this->targetDir = $dir;
             // if directory does exist create it, this should have more error checking in the future
@@ -5018,7 +5018,7 @@ class Converter
                 $this->createParentDir($tmp);
                 phpDocumentor_out("Creating Directory $dir\n");
                 mkdir($dir,0775);
-            } 
+            }
              else if (!is_dir($dir))
             {
                 echo "Output path: '$dir' is not a directory\n";
@@ -5053,7 +5053,7 @@ class Converter
         fwrite($fp,$data,strlen($data));
         fclose($fp);
     }
-    
+
     /**
      * Copies a file from the template directory to the target directory
      * thanks to Robert Hoffmann for this fix
@@ -5063,10 +5063,10 @@ class Converter
     {
         if (!file_exists($this->targetDir))
         {
-            mkdir($this->targetDir,0775); 
+            mkdir($this->targetDir,0775);
         }
-        copy($this->templateDir . $subdir  . PATH_DELIMITER . $file, $this->targetDir . PATH_DELIMITER . $file); 
-    } 
+        copy($this->templateDir . $subdir  . PATH_DELIMITER . $file, $this->targetDir . PATH_DELIMITER . $file);
+    }
 
     /**
      * Return parserStringWithInlineTags::Convert() cache state

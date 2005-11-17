@@ -512,10 +512,9 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
                     {
                         // Make sure the file isn't a hidden file
                         $file = strtr($file, "\\", "/");
-                        $test = array_pop(explode("/",$file));
-                        if (substr($test,0,1) != ".") 
+                        if (substr(basename($file),0,1) != ".")
                         {
-                               if (!$this->setup->checkIgnore(basename($file),str_replace('\\','/',dirname($file)),$this->ignore_files))
+                            if (!$this->setup->checkIgnore(basename($file),str_replace('\\','/',dirname($file)),$this->ignore_files))
                             {
                                 $filelist[] = str_replace('\\','/',$file);
                             } else {

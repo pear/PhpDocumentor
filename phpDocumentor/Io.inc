@@ -467,11 +467,8 @@ class Io
             if ($this->checkIgnore(basename($file),dirname($file),$ignore)) continue;
             $path = substr(dirname($file),strlen(str_replace('\\','/',realpath($base_dir)))+1);
             if (!$path) $path = '/';
-            $file1 = $file;
-            $file = basename($file);
-            $ext = array_pop(explode('.',$file));
-            if (strlen($ext) == strlen($file)) $ext = '';
-            $struc[$path][] = array('file' => $file,'ext' => $ext,'path' => $file1);
+            $parts = pathinfo($file);
+            $struc[$path][] = array('file' => $parts('basename'),'ext' => $parts('extension'),'path' => $file);
         }
         uksort($struc,'strnatcasecmp');
         foreach($struc as $key => $ind)
