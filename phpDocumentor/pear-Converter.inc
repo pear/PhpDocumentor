@@ -27,7 +27,7 @@
 /**
  * Smarty template files
  */
-include_once("phpDocumentor/Smarty-2.6.10/libs/Smarty.class.php");
+include_once("phpDocumentor/Smarty-2.6.0/libs/Smarty.class.php");
 /**
  * Base class for all output converters.
  *
