@@ -637,7 +637,7 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
             {
                 phpDocumentor_out("Reading file $file");
                 flush();
-                $this->parse->parse($this->setup->readPhpFile($file, $this->render->quietMode),$file,$base,$this->packages);
+                $this->parse->parse($a = $this->setup->readPhpFile($file, $this->render->quietMode),$file,$base,$this->packages);
     
             }
             $b = (time() - $this->parse_start_time);
