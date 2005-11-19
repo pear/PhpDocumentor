@@ -468,7 +468,14 @@ class Io
             $path = substr(dirname($file),strlen(str_replace('\\','/',realpath($base_dir)))+1);
             if (!$path) $path = '/';
             $parts = pathinfo($file);
-            $struc[$path][] = array('file' => $parts['basename'],'ext' => $parts['extension'],'path' => $file);
+            if (!isset($parts['extension']))
+            {
+                $parts['extension'] = '';
+            }
+            $struc[$path][] = array(
+                'file' => $parts['basename'],
+                'ext' => $parts['extension'],
+                'path' => $file);
         }
         uksort($struc,'strnatcasecmp');
         foreach($struc as $key => $ind)
