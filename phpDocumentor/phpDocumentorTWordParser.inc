@@ -243,22 +243,11 @@ class phpDocumentorTWordParser extends WordParser
             $lines = str_replace("\r", '', explode("\n",$word[1]));
             foreach($lines as $i => $line)
             {
-                if ($line == '')
+                $this->_set_sars($file, array($word[0],$line));
+                if ($i < count($lines) - 1)
                 {
-                    $this->_set_sars($file, array(T_WHITESPACE, ''));
-                    if ($i < count($lines) - 1)
-                    {
-                        // increment sourceline
-                        $this->_sourceline++;
-                    }
-                } else
-                {
-                    $this->_set_sars($file, array($word[0],$line));
-                    if ($i < count($lines) - 1)
-                    {
-                        // increment sourceline
-                        $this->_sourceline++;
-                    }
+                    // increment sourceline
+                    $this->_sourceline++;
                 }
             }
         } else $this->_set_sars($file, $word);
