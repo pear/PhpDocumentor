@@ -252,14 +252,15 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         
         if (isset($_phpDocumentor_setting['ignoretags']))
         {
-            $_phpDocumentor_setting['ignoretags'] = explode(',',str_replace(' ','',$_phpDocumentor_setting['ignoretags']));
+            $ignoretags = explode(',', $_phpDocumentor_setting['ignoretags']);
+            $ignoretags = array_map('trim', $ignoretags);
             $tags = array();
-            foreach($_phpDocumentor_setting['ignoretags'] as $tag)
+            foreach($ignoretags as $tag)
             {
                 if (!in_array($tag,array('@global', '@access', '@package', '@ignore', '@name', '@param', '@return', '@staticvar', '@var')))
                     $tags[] = $tag;
             }
-            $_phpDocumentor_setting['ignore-tags'] = $tags;
+            $_phpDocumentor_setting['ignoretags'] = $tags;
         }
         
         if (isset($_phpDocumentor_setting['readmeinstallchangelog']))
