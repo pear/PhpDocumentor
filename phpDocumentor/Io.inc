@@ -351,9 +351,10 @@ class Io
      */
     function getBase($filelist)
     {
+        $masterPath = false;
         foreach($filelist as $path)
         {
-            if (!isset($masterPath))
+            if (!$masterPath)
             {
                 $masterPath = str_replace('\\','/',dirname($path));
             } else
