@@ -226,7 +226,7 @@ class phpdocpdf extends Cezpdf
             foreach($this->indexContents as $letter => $contents)
             {
                 if ($z++/50 == 0) {phpDocumentor_out('.');flush();}
-                uksort($this->indexContents[$letter],array($this,'mystrnatcasecmp'));
+                uksort($this->indexContents[$letter],array($this->converter,'mystrnatcasecmp'));
             }
             $template->assign('indexcontents',$this->indexContents);
             $this->ezText($template->fetch('index.tpl'));

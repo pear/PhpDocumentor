@@ -83,6 +83,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1203451 ] array to string conversion notice in InlineTags.inc
 - fixed these bugs reported in PEAR:
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
+ Bug #5011: PDF generation warning on uksort
 ',
 'package' => 'PhpDocumentor',
 'dir_roles' => array(
