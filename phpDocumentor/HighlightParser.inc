@@ -686,7 +686,12 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
             $this->_addoutput($word);
             return;
         }
-        if ($this->checkEventPop($word, $pevent)) return;
+        if ($this->checkEventPop($word, $pevent)) {
+            if ($word == ';') {
+                $this->_addoutput($word);
+            }
+            return;
+        }
         $this->_methodlink($word);
     }
     
@@ -2285,7 +2290,7 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
                 T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
             );
 
-        $this->wordpopEvent[PARSER_EVENT_METHOD] = array("}");
+        $this->wordpopEvent[PARSER_EVENT_METHOD] = array("}", ";");
 /**************************************************************/
 
         $this->wordpushEvent[PARSER_EVENT_METHOD_LOGICBLOCK] = 
