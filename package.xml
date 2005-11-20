@@ -120,6 +120,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 896444 ] Bad line numbers
  [ 937235 ] duplicated /** after abstract method declaration
  [ 962319 ] Define : don&apos;t show the assigned value
+ [ 977674 ] Parser error
  [ 1150809 ] Infinite loop when class extends itself
  [ 1151196 ] PHP Fatal error: Cannot re-assign $this
  [ 1151650 ] UTF8 decoding for DocBook packages
@@ -2714,6 +2715,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 896444 ] Bad line numbers
  [ 937235 ] duplicated /** after abstract method declaration
  [ 962319 ] Define : don&apos;t show the assigned value
+ [ 977674 ] Parser error
  [ 1150809 ] Infinite loop when class extends itself
  [ 1151196 ] PHP Fatal error: Cannot re-assign $this
  [ 1151650 ] UTF8 decoding for DocBook packages

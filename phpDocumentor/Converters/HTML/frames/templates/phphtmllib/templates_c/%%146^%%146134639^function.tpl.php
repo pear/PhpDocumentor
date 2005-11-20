@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.0, created on 2004-04-02 22:27:16
+<?php /* Smarty version 2.6.0, created on 2005-11-20 15:20:58
          compiled from function.tpl */ ?>
 <?php require_once(SMARTY_DIR . 'core' . DIRECTORY_SEPARATOR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'cycle', 'function.tpl', 3, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'cycle', 'function.tpl', 3, false),array('modifier', 'escape', 'function.tpl', 17, false),)), $this); ?>
 <?php if (isset($this->_sections['func'])) unset($this->_sections['func']);
 $this->_sections['func']['name'] = 'func';
 $this->_sections['func']['loop'] = is_array($_loop=$this->_tpl_vars['functions']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
@@ -76,7 +76,7 @@ $this->_sections['params']['first']      = ($this->_sections['params']['iteratio
 $this->_sections['params']['last']       = ($this->_sections['params']['iteration'] == $this->_sections['params']['total']);
  if ($this->_sections['params']['iteration'] != 1): ?>, <?php endif;  if ($this->_tpl_vars['functions'][$this->_sections['func']['index']]['ifunction_call']['params'][$this->_sections['params']['index']]['hasdefault']): ?>[<?php endif; ?><span class="var-type"><?php echo $this->_tpl_vars['functions'][$this->_sections['func']['index']]['ifunction_call']['params'][$this->_sections['params']['index']]['type']; ?>
 </span>&nbsp;<span class="var-name"><?php echo $this->_tpl_vars['functions'][$this->_sections['func']['index']]['ifunction_call']['params'][$this->_sections['params']['index']]['name']; ?>
-</span><?php if ($this->_tpl_vars['functions'][$this->_sections['func']['index']]['ifunction_call']['params'][$this->_sections['params']['index']]['hasdefault']): ?> = <span class="var-default"><?php echo $this->_tpl_vars['functions'][$this->_sections['func']['index']]['ifunction_call']['params'][$this->_sections['params']['index']]['default']; ?>
+</span><?php if ($this->_tpl_vars['functions'][$this->_sections['func']['index']]['ifunction_call']['params'][$this->_sections['params']['index']]['hasdefault']): ?> = <span class="var-default"><?php echo ((is_array($_tmp=$this->_tpl_vars['functions'][$this->_sections['func']['index']]['ifunction_call']['params'][$this->_sections['params']['index']]['default'])) ? $this->_run_mod_handler('escape', true, $_tmp, 'html') : smarty_modifier_escape($_tmp, 'html')); ?>
 </span>]<?php endif;  endfor; endif; ?>)
 		<?php else: ?>
 		()

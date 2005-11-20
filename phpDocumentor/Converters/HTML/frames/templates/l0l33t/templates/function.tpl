@@ -14,7 +14,7 @@
 			{if $functions[func].ifunction_call.returnsref}&amp;{/if}{$functions[func].function_name}
 		</span>
 		{if count($functions[func].ifunction_call.params)}
-			({section name=params loop=$functions[func].ifunction_call.params}{if $smarty.section.params.iteration != 1}, {/if}{if $functions[func].ifunction_call.params[params].hasdefault}[{/if}<span class="var-type">{$functions[func].ifunction_call.params[params].type}</span>&nbsp;<span class="var-name">{$functions[func].ifunction_call.params[params].name}</span>{if $functions[func].ifunction_call.params[params].hasdefault} = <span class="var-default">{$functions[func].ifunction_call.params[params].default}</span>]{/if}{/section})
+			({section name=params loop=$functions[func].ifunction_call.params}{if $smarty.section.params.iteration != 1}, {/if}{if $functions[func].ifunction_call.params[params].hasdefault}[{/if}<span class="var-type">{$functions[func].ifunction_call.params[params].type}</span>&nbsp;<span class="var-name">{$functions[func].ifunction_call.params[params].name}</span>{if $functions[func].ifunction_call.params[params].hasdefault} = <span class="var-default">{$functions[func].ifunction_call.params[params].default|escape:"html"}</span>]{/if}{/section})
 		{else}
 		()
 		{/if}
