@@ -82,7 +82,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1203445 ] Call to a member function on a non-object in Parser.inc
  [ 1203451 ] array to string conversion notice in InlineTags.inc
 - fixed these bugs reported in PEAR:
- 
+ Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
 ',
 'package' => 'PhpDocumentor',
 'dir_roles' => array(

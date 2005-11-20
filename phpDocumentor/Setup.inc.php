@@ -432,6 +432,7 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
             if (!empty($ig))
             $this->ignore_files = array($ig);
         }
+        $this->ignore_files = array_map('trim', $this->ignore_files);
     }
     
     function createDocs($title = false)
