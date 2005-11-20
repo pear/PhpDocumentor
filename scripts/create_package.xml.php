@@ -72,6 +72,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
  [ 896444 ] Bad line numbers
  [ 937235 ] duplicated /** after abstract method declaration
+ [ 962319 ] Define : don\'t show the assigned value
  [ 1150809 ] Infinite loop when class extends itself
  [ 1151196 ] PHP Fatal error: Cannot re-assign $this
  [ 1151650 ] UTF8 decoding for DocBook packages

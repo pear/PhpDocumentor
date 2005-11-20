@@ -864,6 +864,17 @@ class phpDocumentorTParser extends Parser
                 else
                 {
                     $this->_pv_define_value = "";
+                    switch ($w) {
+                        case 0:
+                        $this->_pv_define_value = "0";
+                        break;
+                        case null:
+                        $this->_pv_define_value = "null";
+                        break;
+                        case "":
+                        $this->_pv_define_value = "";
+                        break;
+                    }
                 }
             }
         }
