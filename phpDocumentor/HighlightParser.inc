@@ -2069,6 +2069,9 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function phpDocumentor_HighlightParser()
     {
+        if (!defined('T_INTERFACE')) {
+            define('T_INTERFACE', -1);
+        }
         $this->allowableTags = $GLOBALS['_phpDocumentor_tags_allowed'];
         $this->allowableInlineTags = $GLOBALS['_phpDocumentor_inline_doc_tags_allowed'];
         $this->inlineTagHandlers = array('*' => 'handleDefaultInlineTag');
@@ -2085,6 +2088,7 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
             array(
                 T_FUNCTION     => PARSER_EVENT_FUNCTION,
                 T_CLASS     => PARSER_EVENT_CLASS,
+                T_INTERFACE     => PARSER_EVENT_CLASS,
                 T_INCLUDE_ONCE => PARSER_EVENT_INCLUDE,
                 T_INCLUDE => PARSER_EVENT_INCLUDE,
                 T_START_HEREDOC   => PARSER_EVENT_EOFQUOTE,
