@@ -13,7 +13,12 @@
 // +------------------------------------------------------------------------+
 //
 $path = dirname(__FILE__);
-include_once( "$path/includes/utilities.php" );
+if ('@WEB-DIR@' != '@'.'WEB-DIR@')
+{
+    include_once( "@WEB-DIR@/PhpDocumentor/docbuilder/includes/utilities.php" );
+} else {
+    include_once( "$path/includes/utilities.php" );
+}
 
 $filename = '';
 if (isset($_GET) && isset($_GET['fileName'])) {

@@ -20,34 +20,55 @@
 // +------------------------------------------------------------------------+
 //
 
-$root_dir = dirname(dirname(__FILE__));
-
 if (!function_exists( 'version_compare' )) {
 	print "phpDocumentor requires PHP version 4.1.0 or greater to function";
 	exit;
 }
 
-// set up include path so we can find all files, no matter what
-$GLOBALS['_phpDocumentor_install_dir'] = dirname(dirname( realpath( __FILE__ ) ));
-// add my directory to the include path, and make it first, should fix any errors
-if (substr(PHP_OS, 0, 3) == 'WIN') {
-	ini_set('include_path',$GLOBALS['_phpDocumentor_install_dir'].';'.ini_get('include_path'));
-} else {
-	ini_set('include_path',$GLOBALS['_phpDocumentor_install_dir'].':'.ini_get('include_path'));
-}
+if ('@DATA-DIR@' != '@'.'DATA-DIR@')
+{
+    $root_dir = 'PhpDocumentor';
+    $path = '@WEB-DIR@/PhpDocumentor/docbuilder/images/';
 
-/**
-* common file information
-*/
-include_once("$root_dir/phpDocumentor/common.inc.php");
-include_once("$root_dir/docbuilder/includes/utilities.php" );
+    /**
+    * common file information
+    */
+    include_once("PhpDocumentor/phpDocumentor/common.inc.php");
+    include_once("@WEB-DIR@/PhpDocumentor/docbuilder/includes/utilities.php" );
 
-// find the .ini directory by parsing phpDocumentor.ini and extracting _phpDocumentor_options[userdir]
-$ini = phpDocumentor_parse_ini_file($_phpDocumentor_install_dir . PATH_DELIMITER . 'phpDocumentor.ini', true);
-if (isset($ini['_phpDocumentor_options']['userdir'])) {
-	$configdir = $ini['_phpDocumentor_options']['userdir'];
+    // find the .ini directory by parsing phpDocumentor.ini and extracting _phpDocumentor_options[userdir]
+    $ini = phpDocumentor_parse_ini_file('@DATA-DIR@/PhpDocumentor/phpDocumentor.ini', true);
+    if (isset($ini['_phpDocumentor_options']['userdir'])) {
+    	$configdir = $ini['_phpDocumentor_options']['userdir'];
+    } else {
+    	$configdir =  '@DATA-DIR@/PhpDocumentor/user';
+    }
 } else {
-	$configdir = $_phpDocumentor_install_dir . '/user';
+    $root_dir = dirname(dirname(__FILE__));
+    $path = 'images/';
+
+    // set up include path so we can find all files, no matter what
+    $GLOBALS['_phpDocumentor_install_dir'] = dirname(dirname( realpath( __FILE__ ) ));
+    // add my directory to the include path, and make it first, should fix any errors
+    if (substr(PHP_OS, 0, 3) == 'WIN') {
+    	ini_set('include_path',$GLOBALS['_phpDocumentor_install_dir'].';'.ini_get('include_path'));
+    } else {
+    	ini_set('include_path',$GLOBALS['_phpDocumentor_install_dir'].':'.ini_get('include_path'));
+    }
+
+    /**
+    * common file information
+    */
+    include_once("$root_dir/phpDocumentor/common.inc.php");
+    include_once("$root_dir/docbuilder/includes/utilities.php" );
+
+    // find the .ini directory by parsing phpDocumentor.ini and extracting _phpDocumentor_options[userdir]
+    $ini = phpDocumentor_parse_ini_file($_phpDocumentor_install_dir . PATH_DELIMITER . 'phpDocumentor.ini', true);
+    if (isset($ini['_phpDocumentor_options']['userdir'])) {
+    	$configdir = $ini['_phpDocumentor_options']['userdir'];
+    } else {
+    	$configdir = $_phpDocumentor_install_dir . '/user';
+    }
 }
 
 // allow the user to change this at runtime
@@ -79,7 +100,6 @@ $converters = array(
 // compile a list of available screen shots
 $convScreenShots = array();
 
-$path = 'images/';
 if ($dir = opendir($path)) {
 	while (($file = readdir( $dir )) !== false) { 
 		if ($file != '.' && $file != '..') {
@@ -266,6 +286,7 @@ var screenShots = new Array();
 		<p>This is the new web-interface for running, in our opinion, the best in-code documentation compiler there is: <b>phpDocumentor</b>.</p>
 		<p>What's new in this release?  Heaps of things, but here are the headlines:</p>
 		<ul>
+            <li>Much greater support for PEAR on both windows and linux</li>
 			<li>CHM, PDF and XML:DocBook/peardoc2 converters are all stable!</li>
 			<li>New tokenizer-based parser is literally twice as fast as the old parser (requires PHP 4.3.0+)</li>
 			<li>New external user-level manual parsing and generation allows cross-linking between API docs and DocBook-format tutorials/manuals!</li>

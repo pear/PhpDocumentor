@@ -23,7 +23,12 @@
  * @filesource
  */
 /** phpDocumentor version */
-define("PHPDOCUMENTOR_VER","1.3.0RC3");
+if ('@VER@' != '@'.'VER@')
+{
+    define("PHPDOCUMENTOR_VER","@VER@");
+} else {
+    define("PHPDOCUMENTOR_VER","1.3.0RC4");
+}
 /** phpDocumentor version */
 define("PHPDOCUMENTOR_WEBSITE","http://www.phpdoc.org");
 define('SMART_PATH_DELIMITER', DIRECTORY_SEPARATOR ); // set the correct path delimiter
@@ -33,10 +38,19 @@ define('PATH_DELIMITER', '/' ); // set the correct path delimiter
 define('PHPDOCUMENTOR_WINDOWS',substr(PHP_OS, 0, 3) == 'WIN');
 define('_IN_PHP5', phpversion() == '5.0.0RC1-dev' || phpversion() == '5.0.0RC2-dev' ||
     version_compare(phpversion(), '5.0.0', 'ge'));
-if (_IN_PHP5) {
-    require_once dirname(__FILE__) . '/clone5.inc.php';
+if (/*@donotremove@*/0)
+{
+    if (_IN_PHP5) {
+        require_once 'PhpDocumentor/phpDocumentor/clone5.inc.php';
+    } else {
+        require_once 'PhpDocumentor/phpDocumentor/clone.inc.php';
+    }
 } else {
-    require_once dirname(__FILE__) . '/clone.inc.php';
+    if (_IN_PHP5) {
+        require_once dirname(__FILE__) . '/clone5.inc.php';
+    } else {
+        require_once dirname(__FILE__) . '/clone.inc.php';
+    }
 }
 if (isset($_SERVER['argv'])) {
     $argv = $_SERVER['argv'];

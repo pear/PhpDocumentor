@@ -13,7 +13,12 @@
 // +------------------------------------------------------------------------+
 //
 
-include_once(dirname(realpath(__FILE__))."/../../HTML_TreeMenu-1.1.2/TreeMenu.php");
+if ('@DATA-DIR@' != '@'.'DATA-DIR@')
+{
+    include_once('PhpDocumentor/HTML_TreeMenu-1.1.2/TreeMenu.php');
+} else {
+    include_once(dirname(realpath(__FILE__))."/../../HTML_TreeMenu-1.1.2/TreeMenu.php");
+}
 
 /**
  *	Allows png's with alpha transparency to be displayed in IE 6

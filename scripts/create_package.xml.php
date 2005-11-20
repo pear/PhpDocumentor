@@ -1,6 +1,7 @@
 <?php
 set_time_limit(0);
 require_once('PEAR/PackageFileManager.php');
+PEAR::setErrorHandling(PEAR_ERROR_DIE);
 $test = new PEAR_PackageFileManager;
 
 $packagedir = dirname(dirname(__FILE__));
@@ -80,6 +81,8 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1202772 ] missing parentheses in Parser.inc line 946
  [ 1203445 ] Call to a member function on a non-object in Parser.inc
  [ 1203451 ] array to string conversion notice in InlineTags.inc
+- fixed these bugs reported in PEAR:
+ 
 ',
 'package' => 'PhpDocumentor',
 'dir_roles' => array(
@@ -140,35 +143,15 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           "$packagedir/phpdoc",
           'phpdoc.bat', 
           'LICENSE',
-          '*docbuilder/actions.php',
-          '*docbuilder/builder.php',
-          '*docbuilder/config.php',
-          '*docbuilder/file_dialog.php',
-          '*docbuilder/top.php',
-          'utilities.php',
-          'Converter.inc',
-          'IntermediateParser.inc',
           '*templates/PEAR/*',
           'phpDocumentor/Smarty-2.5.0/*',
           '*CSV*',
-          'Setup.inc.php',
           'makedocs.ini',
-          'common.inc.php',
           'publicweb-PEAR-1.2.1.patch.txt',
           ),
 'installas' =>
     array('pear-phpdoc' => 'phpdoc',
           'pear-phpdoc.bat' => 'phpdoc.bat',
-          'docbuilder/pear-actions.php' => 'docbuilder/actions.php',
-          'docbuilder/pear-builder.php' => 'docbuilder/builder.php',
-          'docbuilder/pear-config.php' => 'docbuilder/config.php',
-          'docbuilder/pear-file_dialog.php' => 'docbuilder/file_dialog.php',
-          'docbuilder/pear-top.php' => 'docbuilder/top.php',
-          'docbuilder/includes/pear-utilities.php' => 'docbuilder/includes/utilities.php',
-          'phpDocumentor/pear-IntermediateParser.inc' => 'phpDocumentor/IntermediateParser.inc',
-          'phpDocumentor/pear-Converter.inc' => 'phpDocumentor/Converter.inc',
-          'phpDocumentor/pear-Setup.inc.php' => 'phpDocumentor/Setup.inc.php',
-          'phpDocumentor/pear-common.inc.php' => 'phpDocumentor/common.inc.php',
           'user/pear-makedocs.ini' => 'user/makedocs.ini',
           ),
 'installexceptions' => array('pear-phpdoc' => '/', 'pear-phpdoc.bat' => '/', 'scripts/makedoc.sh' => '/'),
@@ -177,123 +160,39 @@ if (PEAR::isError($e)) {
     echo $e->getMessage();
     exit;
 }
-$e = $test->addPlatformException('pear-phpdoc.bat', 'windows');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addDependency('php', '4.1.0', 'ge', 'php');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
+$test->addPlatformException('pear-phpdoc.bat', 'windows');
+$test->addDependency('php', '4.1.0', 'ge', 'php');
 // just to make sure people don't try to install this with a broken Archive_Tar
-$e = $test->addDependency('Archive_Tar', '1.1', 'ge');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
+$test->addDependency('Archive_Tar', '1.1', 'ge');
 // optional dep for peardoc2 converter
-$e = $test->addDependency('XML_Beautifier', '1.1', 'ge', 'pkg', true);
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
+$test->addDependency('XML_Beautifier', '1.1', 'ge', 'pkg', true);
 // replace @PHP-BIN@ in this file with the path to php executable!  pretty neat
-$e = $test->addReplacement('pear-phpdoc', 'pear-config', '@PHP-BIN@', 'php_bin');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('pear-phpdoc.bat', 'pear-config', '@PHP-BIN@', 'php_bin');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('pear-phpdoc.bat', 'pear-config', '@BIN-DIR@', 'bin_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('pear-phpdoc.bat', 'pear-config', '@PEAR-DIR@', 'php_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('pear-phpdoc.bat', 'pear-config', '@DATA-DIR@', 'data_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('docbuilder/pear-builder.php', 'pear-config', '@DATA-DIR@', 'data_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('docbuilder/pear-file_dialog.php', 'pear-config', '@DATA-DIR@', 'data_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('docbuilder/pear-file_dialog.php', 'pear-config', '@WEB-DIR@', 'data_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('docbuilder/pear-actions.php', 'pear-config', '@WEB-DIR@', 'data_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('docbuilder/pear-config.php', 'pear-config', '@DATA-DIR@', 'data_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('docbuilder/pear-config.php', 'pear-config', '@WEB-DIR@', 'data_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('phpDocumentor/pear-Setup.inc.php', 'pear-config', '@DATA-DIR@', 'data_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('phpDocumentor/pear-Converter.inc', 'pear-config', '@DATA-DIR@', 'data_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('phpDocumentor/pear-common.inc.php', 'package-info', '@VER@', 'version');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('user/pear-makedocs.ini', 'pear-config', '@PEAR-DIR@', 'php_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('user/pear-makedocs.ini', 'pear-config', '@DOC-DIR@', 'doc_dir');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
-$e = $test->addReplacement('user/pear-makedocs.ini', 'package-info', '@VER@', 'version');
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
+$test->addReplacement('pear-phpdoc', 'pear-config', '@PHP-BIN@', 'php_bin');
+$test->addReplacement('pear-phpdoc.bat', 'pear-config', '@PHP-BIN@', 'php_bin');
+$test->addReplacement('pear-phpdoc.bat', 'pear-config', '@BIN-DIR@', 'bin_dir');
+$test->addReplacement('pear-phpdoc.bat', 'pear-config', '@PEAR-DIR@', 'php_dir');
+$test->addReplacement('pear-phpdoc.bat', 'pear-config', '@DATA-DIR@', 'data_dir');
+$test->addReplacement('docbuilder/includes/utilities.php', 'pear-config', '@DATA-DIR@', 'data_dir');
+$test->addReplacement('docbuilder/builder.php', 'pear-config', '@DATA-DIR@', 'data_dir');
+$test->addReplacement('docbuilder/file_dialog.php', 'pear-config', '@DATA-DIR@', 'data_dir');
+$test->addReplacement('docbuilder/file_dialog.php', 'pear-config', '@WEB-DIR@', 'data_dir');
+$test->addReplacement('docbuilder/actions.php', 'pear-config', '@WEB-DIR@', 'data_dir');
+$test->addReplacement('docbuilder/top.php', 'pear-config', '@DATA-DIR@', 'data_dir');
+$test->addReplacement('docbuilder/config.php', 'pear-config', '@DATA-DIR@', 'data_dir');
+$test->addReplacement('docbuilder/config.php', 'pear-config', '@WEB-DIR@', 'data_dir');
+$test->addReplacement('phpDocumentor/Setup.inc.php', 'pear-config', '@DATA-DIR@', 'data_dir');
+$test->addReplacement('phpDocumentor/Converter.inc', 'pear-config', '@DATA-DIR@', 'data_dir');
+$test->addReplacement('phpDocumentor/common.inc.php', 'package-info', '@VER@', 'version');
+$test->addReplacement('phpDocumentor/IntermediateParser.inc', 'package-info', '@VER@', 'version');
+$test->addReplacement('user/pear-makedocs.ini', 'pear-config', '@PEAR-DIR@', 'php_dir');
+$test->addReplacement('user/pear-makedocs.ini', 'pear-config', '@DOC-DIR@', 'doc_dir');
+$test->addReplacement('user/pear-makedocs.ini', 'package-info', '@VER@', 'version');
 $test->addRole('inc', 'php');
 $test->addRole('sh', 'script');
 if (isset($_GET['make'])) {
-    $e = $test->writePackageFile();
+    $test->writePackageFile();
 } else {
-    $e = $test->debugPackageFile();
-}
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
+    $test->debugPackageFile();
 }
 if (!isset($_GET['make'])) {
     echo '<a href="' . $_SERVER['PHP_SELF'] . '?make=1">Make this file</a>';

@@ -19,34 +19,58 @@
 // | license@php.net so we can mail you a copy immediately.                 |
 // +------------------------------------------------------------------------+
 //
-
-$root_dir = dirname(dirname(__FILE__));
-
 if (!function_exists( 'version_compare' )) {
     print "phpDocumentor requires PHP version 4.1.0 or greater to function";
     exit;
 }
 
-// set up include path so we can find all files, no matter what
-$GLOBALS['_phpDocumentor_install_dir'] = dirname(dirname( realpath( __FILE__ ) ));
-// add my directory to the include path, and make it first, should fix any errors
-if (substr(PHP_OS, 0, 3) == 'WIN') {
-	ini_set('include_path',$GLOBALS['_phpDocumentor_install_dir'].';'.ini_get('include_path'));
-} else {
-	ini_set('include_path',$GLOBALS['_phpDocumentor_install_dir'].':'.ini_get('include_path'));
-}
+if ('@WEB-DIR@' != '@'.'WEB-DIR@')
+{
+    /**
+    * common file information
+    */
+    require_once 'PhpDocumentor/phpDocumentor/common.inc.php';
+    require_once 'PhpDocumentor/HTML_TreeMenu-1.1.2/TreeMenu.php';
+    require_once( '@WEB-DIR@' . PATH_DELIMITER . 'PhpDocumentor/docbuilder/includes/utilities.php' );
 
-/**
-* common file information
-*/
-include_once("$root_dir/phpDocumentor/common.inc.php");
+    $root_dir = 'PhpDocumentor';
 
-// find the .ini directory by parsing phpDocumentor.ini and extracting _phpDocumentor_options[userdir]
-$ini = phpDocumentor_parse_ini_file($_phpDocumentor_install_dir . PATH_DELIMITER . 'phpDocumentor.ini', true);
-if (isset($ini['_phpDocumentor_options']['userdir'])) {
-    $configdir = $ini['_phpDocumentor_options']['userdir'];
+    // set up include path so we can find all files, no matter what
+    $GLOBALS['_phpDocumentor_install_dir'] = $root_dir;
+
+    // find the .ini directory by parsing phpDocumentor.ini and extracting _phpDocumentor_options[userdir]
+    $ini = phpDocumentor_parse_ini_file('@DATA-DIR@' . PATH_DELIMITER . 'PhpDocumentor/phpDocumentor.ini', true);
+    if (isset($ini['_phpDocumentor_options']['userdir'])) {
+        $configdir = $ini['_phpDocumentor_options']['userdir'];
+    } else {
+        $configdir = '@DATA-DIR@' . PATH_DELIMITER . 'PhpDocumentor/user';
+    }
 } else {
-    $configdir = $_phpDocumentor_install_dir . '/user';
+    /**
+    * common file information
+    */
+    include_once("$root_dir/phpDocumentor/common.inc.php");
+	include_once("$root_dir/HTML_TreeMenu-1.1.2/TreeMenu.php");
+	include_once("$root_dir/docbuilder/includes/utilities.php" );
+
+    $root_dir = dirname(dirname(__FILE__));
+
+    // set up include path so we can find all files, no matter what
+    $GLOBALS['_phpDocumentor_install_dir'] = dirname(dirname( realpath( __FILE__ ) ));
+    // add my directory to the include path, and make it first, should fix any errors
+    if (substr(PHP_OS, 0, 3) == 'WIN') {
+    	ini_set('include_path',$GLOBALS['_phpDocumentor_install_dir'].';'.ini_get('include_path'));
+    } else {
+    	ini_set('include_path',$GLOBALS['_phpDocumentor_install_dir'].':'.ini_get('include_path'));
+    }
+
+    // find the .ini directory by parsing phpDocumentor.ini and extracting _phpDocumentor_options[userdir]
+    $ini = phpDocumentor_parse_ini_file($_phpDocumentor_install_dir . PATH_DELIMITER . 'phpDocumentor.ini', true);
+    if (isset($ini['_phpDocumentor_options']['userdir'])) {
+        $configdir = $ini['_phpDocumentor_options']['userdir'];
+    } else {
+        $configdir = $_phpDocumentor_install_dir . '/user';
+    }
 }
 
 // allow the user to change this at runtime
@@ -80,7 +104,6 @@ if (!empty( $_REQUEST['altuserdir'] )) {
 	<script src="../HTML_TreeMenu-1.1.2/TreeMenu.js" language="JavaScript" type="text/javascript"></script>
 
 <?php
-	include_once("$root_dir/HTML_TreeMenu-1.1.2/TreeMenu.php");
 	set_time_limit(0);    // six minute timeout
 	ini_set("memory_limit","256M");
 
@@ -107,7 +130,6 @@ if (!empty( $_REQUEST['altuserdir'] )) {
 		}
 	}
 
-	include_once( "$root_dir/docbuilder/includes/utilities.php" );
 
 	$menu  = new HTML_TreeMenu();
 	$filename = '';
@@ -120,20 +142,26 @@ if (!empty( $_REQUEST['altuserdir'] )) {
 	if (empty($filename) || ($filename == $test)) {
 		$filename = ($pd == '/') ? '/' : 'C:\\';
 		$node = false;
-		getDir($filename,$node);
-	} else {
-		flush();
+        getDir($filename,$node);
+    } else {
+        flush();
 //            if ($pd != '/') $pd = $pd.$pd;
-		$anode = false;
-		switchDirTree($filename,$anode);
+        $anode = false;
+        switchDirTree($filename,$anode);
 //            recurseDir($filename,$anode);
-		$node = new HTML_TreeNode(array('text' => "Click to view ".addslashes($filename),'link' => "",'icon' => 'branchtop.gif'));
-		$node->addItem($anode);
-	};
-	$menu->addItem($node);
-	$DHTMLmenu = &new HTML_TreeMenu_DHTML($menu,
+        $node = new HTML_TreeNode(array('text' => "Click to view ".addslashes($filename),'link' => "",'icon' => 'branchtop.gif'));
+        $node->addItem($anode);
+    };
+    $menu->addItem($node);
+    if ('@WEB-DIR@' != '@'.'WEB-DIR@')
+    {
+    	$DHTMLmenu = &new HTML_TreeMenu_DHTML($menu,
+                        array('images' => '../HTML_TreeMenu-1.1.2/images'));
+    } else {
+       $DHTMLmenu = &new HTML_TreeMenu_DHTML($menu,
                         array('images' => str_replace('/docbuilder/file_dialog.php','',$_SERVER['PHP_SELF']) .
-                                          '/HTML_TreeMenu-1.1.2/images'));
+                              '/HTML_TreeMenu-1.1.2/images'));
+    }
 ?>
 <script type="text/javascript" language="Javascript">
 /**

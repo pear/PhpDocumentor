@@ -6,8 +6,13 @@
  * @package  phpDocumentor
  * @filesource
  */
-$path = dirname(dirname(__FILE__));
-include_once( "$path/phpDocumentor/common.inc.php");
+if ('@DATA-DIR@' != '@'.'DATA-DIR@')
+{
+    include_once( "PhpDocumentor/phpDocumentor/common.inc.php");
+} else {
+    $path = dirname(dirname(__FILE__));
+    include_once( "$path/phpDocumentor/common.inc.php");
+}
 //
 // +------------------------------------------------------------------------+
 // | phpDocumentor :: docBuilder Web Interface                              |

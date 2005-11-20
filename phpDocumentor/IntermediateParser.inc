@@ -1618,11 +1618,20 @@ class phpDocumentor_IntermediateParser
         {
             $parent = explode(PATH_DELIMITER,$name);
             $parent = $parent[0];
-            $filename = str_replace('\\','/',$GLOBALS['_phpDocumentor_install_dir']) . '/phpDocumentor/Converters' .
-                PATH_DELIMITER . $output . PATH_DELIMITER . $parent . PATH_DELIMITER . $output . $parent . "Converter" . ".inc";
-            if (file_exists($filename) && is_readable($filename))
-            {
-                include_once($filename);
+            if ('@VER@' != '@'.'VER@') {
+                $filename = 'PhpDocumentor/phpDocumentor/Converters' .
+                    PATH_DELIMITER . $output . PATH_DELIMITER . $parent . PATH_DELIMITER . $output . $parent . "Converter" . ".inc";
+                if (Io::isIncludeable($filename))
+                {
+                    include_once($filename);
+                }
+            } else {
+                $filename = str_replace('\\','/',$GLOBALS['_phpDocumentor_install_dir']) . '/phpDocumentor/Converters' .
+                    PATH_DELIMITER . $output . PATH_DELIMITER . $parent . PATH_DELIMITER . $output . $parent . "Converter" . ".inc";
+                if (file_exists($filename) && is_readable($filename))
+                {
+                    include_once($filename);
+                }
             }
             if (!class_exists($output . $parent . 'Converter'))
             {

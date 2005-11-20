@@ -149,15 +149,14 @@ class phpDocumentor_setup
         }
 	
         // set runtime to a large value since this can take quite a while
-	// we can only set_time_limit when not in safe_mode bug #912064
-	if (!ini_get('safe_mode'))
-	{
-        	set_time_limit(0);    // unlimited runtime
-	}
-	else
-	{
-		phpDocumentor_out("time_limit cannot be set since your in safe_mode, please edit time_limit in your php.ini to allow enough time for phpDocumentor to run"); 
-	}
+        // we can only set_time_limit when not in safe_mode bug #912064
+        if (!ini_get('safe_mode'))
+        {
+            set_time_limit(0);    // unlimited runtime
+        } else
+        {
+            phpDocumentor_out("time_limit cannot be set since your in safe_mode, please edit time_limit in your php.ini to allow enough time for phpDocumentor to run"); 
+        }
         ini_set("memory_limit","256M");
 
         $phpver = phpversion();
@@ -198,7 +197,12 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
             $_phpDocumentor_setting = phpDocumentor_parse_ini_file($file.'.ini');
         } else
         {
-            $configdir = str_replace('\\','/',$GLOBALS['_phpDocumentor_install_dir']) . PATH_DELIMITER . 'user' . PATH_DELIMITER;
+            if ('@DATA-DIR@' != '@'.'DATA-DIR@')
+            {
+                $configdir = str_replace('\\','/', '@DATA-DIR@/PhpDocumentor') . PATH_DELIMITER . 'user' . PATH_DELIMITER;
+            } else {
+                $configdir = str_replace('\\','/',$GLOBALS['_phpDocumentor_install_dir']) . PATH_DELIMITER . 'user' . PATH_DELIMITER;
+            }
             if (isset($_phpDocumentor_options['userdir'])) $configdir = $_phpDocumentor_options['userdir'];
             if (substr($configdir,-1) != '/')
             {
@@ -523,7 +527,7 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
                         $file = strtr($file, "\\", "/");
                         if (substr(basename($file),0,1) != ".")
                         {
-                               if (!$this->setup->checkIgnore(basename($file),str_replace('\\','/',dirname($file)),$this->ignore_files))
+                            if (!$this->setup->checkIgnore(basename($file),str_replace('\\','/',dirname($file)),$this->ignore_files))
                             {
                                 $filelist[] = str_replace('\\','/',$file);
                             } else {
@@ -667,7 +671,12 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
     {
         phpDocumentor_out("Parsing configuration file phpDocumentor.ini...");
         flush();
-        $options = phpDocumentor_parse_ini_file(str_replace('\\','/',$GLOBALS['_phpDocumentor_install_dir']) . PATH_DELIMITER . 'phpDocumentor.ini',true);
+        if ('@DATA-DIR@' != '@'.'DATA-DIR@')
+        {
+            $options = phpDocumentor_parse_ini_file(str_replace('\\','/', '@DATA-DIR@/PhpDocumentor') . PATH_DELIMITER . 'phpDocumentor.ini',true);
+        } else {
+            $options = phpDocumentor_parse_ini_file(str_replace('\\','/',$GLOBALS['_phpDocumentor_install_dir']) . PATH_DELIMITER . 'phpDocumentor.ini',true);
+        }
 
         if (!$options)
         {
