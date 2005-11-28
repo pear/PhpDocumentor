@@ -862,7 +862,8 @@ class parserClass extends parserElement
      */
     function &getParent(&$c)
     {
-        if (!$this->parent) return false;
+        $a = false;
+        if (!$this->parent) return $a;
         if (is_array($this->parent))
         {
             return $c->classes->getClass($this->parent[1],$this->parent[0]);

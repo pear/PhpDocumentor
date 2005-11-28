@@ -3759,7 +3759,8 @@ class Converter
             } else $class = false;
         } while ($class);
         // no links found
-        return false;
+        $class = false;
+        return $class;
     }
 
     /**
