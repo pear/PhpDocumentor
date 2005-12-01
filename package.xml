@@ -50,13 +50,25 @@ http://localhost/pear/PhpDocumentor is the web interface
   <maintainer>
    <user>cellog</user>
    <name>Gregory Beaver</name>
-   <email>cellog@users.sourceforge.net</email>
+   <email>cellog@php.net</email>
    <role>lead</role>
+  </maintainer>
+  <maintainer>
+   <user>jeichorn</user>
+   <name>Joshua Eichorn</name>
+   <email>jeichorn@php.net</email>
+   <role>lead</role>
+  </maintainer>
+  <maintainer>
+   <user>drewish</user>
+   <name>Andrew Morton</name>
+   <email>drewish@php.net</email>
+   <role>developer</role>
   </maintainer>
   </maintainers>
  <release>
-  <version>1.3.0RC4</version>
-  <date>2005-11-20</date>
+  <version>1.3.0RC5</version>
+  <date>2005-12-01</date>
   <license>PHP License</license>
   <state>beta</state>
   <notes>PHP 5 support and more, fix bugs
@@ -116,6 +128,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
   changes made to the code to make it work in PHP 5, including parsing
   of private/public/static/etc. access modifiers
 - fixed these bugs:
+ [ not entered ] phpdoc script broken on unix
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
  [ 896444 ] Bad line numbers
  [ 937235 ] duplicated /** after abstract method declaration
@@ -139,7 +152,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
   </notes>
   <deps>
    <dep type="php" rel="ge" version="4.1.0" optional="no"/>
-   <dep type="pkg" rel="ge" version="1.1" optional="no">Archive_Tar</dep>
    <dep type="pkg" rel="ge" version="1.1" optional="yes">XML_Beautifier</dep>
   </deps>
   <filelist>
@@ -2652,7 +2664,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
    </release>
    <release>
     <version>1.3.0RC4</version>
-    <date>2005-11-20</date>
+    <date>2005-12-01</date>
     <license>PHP License</license>
     <state>beta</state>
     <notes>PHP 5 support and more, fix bugs
@@ -2712,6 +2724,91 @@ segfaults with the simplest of files.  Generation still works great in PHP4
   changes made to the code to make it work in PHP 5, including parsing
   of private/public/static/etc. access modifiers
 - fixed these bugs:
+ [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
+ [ 896444 ] Bad line numbers
+ [ 937235 ] duplicated /** after abstract method declaration
+ [ 962319 ] Define : don&apos;t show the assigned value
+ [ 977674 ] Parser error
+ [ 989258 ] wrong interfaces parsing
+ [ 1150809 ] Infinite loop when class extends itself
+ [ 1151196 ] PHP Fatal error: Cannot re-assign $this
+ [ 1151650 ] UTF8 decoding for DocBook packages
+ [ 1152781 ] PHP_NOTICE: Uninitialized string offset in ParserDescCleanup
+ [ 1153593 ] string id=&quot;....&quot; in tutorials
+ [ 1164253 ] Inherited Class Constants are not displayed
+ [ 1171583 ] CHM wrong filesource
+ [ 1180200 ] HighlightParser does not handle Heredoc Blocks.
+ [ 1202772 ] missing parentheses in Parser.inc line 946
+ [ 1203445 ] Call to a member function on a non-object in Parser.inc
+ [ 1203451 ] array to string conversion notice in InlineTags.inc
+- fixed these bugs reported in PEAR:
+ Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
+ Bug #5011: PDF generation warning on uksort
+    </notes>
+   </release>
+   <release>
+    <version>1.3.0RC5</version>
+    <date>2005-12-01</date>
+    <license>PHP License</license>
+    <state>beta</state>
+    <notes>PHP 5 support and more, fix bugs
+
+This will be the last release in the 1.x series.  2.0 is next
+
+Features added to this release include:
+
+ * Full PHP 5 support, phpDocumentor both runs in and parses Zend Engine 2
+   language constructs.  Note that you must be running phpDocumentor in
+   PHP 5 in order to parse PHP 5 code
+ * XML:DocBook/peardoc2:default converter now beautifies the source using
+   PEAR&apos;s XML_Beautifier if available
+ * inline {@example} tag - this works just like {@source} except that
+   it displays the contents of another file.  In tutorials, it works
+   like &lt;programlisting&gt;
+ * customizable README/INSTALL/CHANGELOG files
+ * phpDocumentor tries to run .ini files out of the current directory
+   first, to allow you to put them anywhere you want to
+ * multi-national characters are now allowed in package/subpackage names
+ * images in tutorials with the &lt;graphic&gt; tag
+ * un-modified output with &lt;programlisting role=&quot;html&quot;&gt;
+ * html/xml source highlighting with &lt;programlisting role=&quot;tutorial&quot;&gt;
+
+From both Windows and Unix, both the command-line version
+of phpDocumentor and the web interface will work
+out of the box by using command phpdoc - guaranteed :)
+
+WARNING: in order to use the web interface through PEAR, you must set your
+data_dir to a subdirectory of your document root.
+
+$ pear config-set data_dir /path/to/public_html/pear
+
+on Windows with default apache setup, it might be
+
+C:\&gt; pear config-set data_dir &quot;C:\Program Files\Apache\htdocs\pear&quot;
+
+After this, install/upgrade phpDocumentor
+
+$ pear upgrade phpDocumentor
+
+and you can browse to:
+
+http://localhost/pear/PhpDocumentor/
+
+for the web interface
+
+------
+WARNING: The PDF Converter will not work in PHP5.  The PDF library that it relies upon
+segfaults with the simplest of files.  Generation still works great in PHP4
+------
+
+- WARNING: phpDocumentor installs phpdoc in the
+  scripts directory, and this will conflict with PHPDoc,
+  you can&apos;t have both installed at the same time
+- Switched to Smarty 2.6.0, now it will work in PHP 5.  Other
+  changes made to the code to make it work in PHP 5, including parsing
+  of private/public/static/etc. access modifiers
+- fixed these bugs:
+ [ not entered ] phpdoc script broken on unix
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
  [ 896444 ] Bad line numbers
  [ 937235 ] duplicated /** after abstract method declaration

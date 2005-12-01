@@ -1,0 +1,2991 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.4.5" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>PhpDocumentor</name>
+ <channel>pear.php.net</channel>
+ <summary>The phpDocumentor package provides automatic documenting of php api directly from the source.</summary>
+ <description>The phpDocumentor tool is a standalone auto-documentor similar to JavaDoc
+written in PHP.  It differs from PHPDoc in that it is MUCH faster, parses a much
+wider range of php files, and comes with many customizations including 11 HTML
+templates, windows help file CHM output, PDF output, and XML DocBook peardoc2
+output for use with documenting PEAR.  In addition, it can do PHPXref source
+code highlighting and linking.
+
+Features (short list):
+-output in HTML, PDF (directly), CHM (with windows help compiler), XML DocBook
+-very fast
+-web and command-line interface
+-fully customizable output with Smarty-based templates
+-recognizes JavaDoc-style documentation with special tags customized for PHP 4
+-automatic linking, class inheritance diagrams and intelligent override
+-customizable source code highlighting, with phpxref-style cross-referencing
+-parses standard README/CHANGELOG/INSTALL/FAQ files and includes them
+ directly in documentation
+-generates a todo list from @todo tags in source
+-generates multiple documentation sets based on @access private, @internal and
+ {@internal} tags
+-example php files can be placed directly in documentation with highlighting
+ and phpxref linking using the @example tag
+-linking between external manual and API documentation is possible at the
+ sub-section level in all output formats
+-easily extended for specific documentation needs with Converter
+-full documentation of every feature, manual can be generated directly from
+ the source code with &quot;phpdoc -c makedocs&quot; in any format desired.
+-current manual always available at http://www.phpdoc.org/manual.php
+-user .ini files can be used to control output, multiple outputs can be
+ generated at once
+ 
+**WARNING**:
+To use the web interface, you must set PEAR&apos;s data_dir to a subdirectory of
+document root.
+
+If browsing to http://localhost/index.php displays /path/to/htdocs/index.php,
+set data_dir to a subdirectory of /path/to/htdocs:
+
+$ pear config-set data_dir /path/to/htdocs/pear
+$ pear install PhpDocumentor
+
+http://localhost/pear/PhpDocumentor is the web interface</description>
+ <lead>
+  <name>Gregory Beaver</name>
+  <user>cellog</user>
+  <email>cellog@php.net</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Joshua Eichorn</name>
+  <user>jeichorn</user>
+  <email>jeichorn@php.net</email>
+  <active>yes</active>
+ </lead>
+ <developer>
+  <name>Andrew Morton</name>
+  <user>drewish</user>
+  <email>drewish@php.net</email>
+  <active>yes</active>
+ </developer>
+ <date>2005-12-01</date>
+ <time>00:52:58</time>
+ <version>
+  <release>1.3.0RC5</release>
+  <api>1.3.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.php.net/license">PHP License</license>
+ <notes>PHP 5 support and more, fix bugs
+
+This will be the last release in the 1.x series.  2.0 is next
+
+Features added to this release include:
+
+ * Full PHP 5 support, phpDocumentor both runs in and parses Zend Engine 2
+   language constructs.  Note that you must be running phpDocumentor in
+   PHP 5 in order to parse PHP 5 code
+ * XML:DocBook/peardoc2:default converter now beautifies the source using
+   PEAR&apos;s XML_Beautifier if available
+ * inline {@example} tag - this works just like {@source} except that
+   it displays the contents of another file.  In tutorials, it works
+   like &lt;programlisting&gt;
+ * customizable README/INSTALL/CHANGELOG files
+ * phpDocumentor tries to run .ini files out of the current directory
+   first, to allow you to put them anywhere you want to
+ * multi-national characters are now allowed in package/subpackage names
+ * images in tutorials with the &lt;graphic&gt; tag
+ * un-modified output with &lt;programlisting role=&quot;html&quot;&gt;
+ * html/xml source highlighting with &lt;programlisting role=&quot;tutorial&quot;&gt;
+
+From both Windows and Unix, both the command-line version
+of phpDocumentor and the web interface will work
+out of the box by using command phpdoc - guaranteed :)
+
+WARNING: in order to use the web interface through PEAR, you must set your
+data_dir to a subdirectory of your document root.
+
+$ pear config-set data_dir /path/to/public_html/pear
+
+on Windows with default apache setup, it might be
+
+C:\&gt; pear config-set data_dir &quot;C:\Program Files\Apache\htdocs\pear&quot;
+
+After this, install/upgrade phpDocumentor
+
+$ pear upgrade phpDocumentor
+
+and you can browse to:
+
+http://localhost/pear/PhpDocumentor/
+
+for the web interface
+
+------
+WARNING: The PDF Converter will not work in PHP5.  The PDF library that it relies upon
+segfaults with the simplest of files.  Generation still works great in PHP4
+------
+
+- WARNING: phpDocumentor installs phpdoc in the
+  scripts directory, and this will conflict with PHPDoc,
+  you can&apos;t have both installed at the same time
+- Switched to Smarty 2.6.0, now it will work in PHP 5.  Other
+  changes made to the code to make it work in PHP 5, including parsing
+  of private/public/static/etc. access modifiers
+- fixed these bugs:
+ [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
+ [ 896444 ] Bad line numbers
+ [ 937235 ] duplicated /** after abstract method declaration
+ [ 962319 ] Define : don&apos;t show the assigned value
+ [ 977674 ] Parser error
+ [ 989258 ] wrong interfaces parsing
+ [ 1150809 ] Infinite loop when class extends itself
+ [ 1151196 ] PHP Fatal error: Cannot re-assign $this
+ [ 1151650 ] UTF8 decoding for DocBook packages
+ [ 1152781 ] PHP_NOTICE: Uninitialized string offset in ParserDescCleanup
+ [ 1153593 ] string id=&quot;....&quot; in tutorials
+ [ 1164253 ] Inherited Class Constants are not displayed
+ [ 1171583 ] CHM wrong filesource
+ [ 1180200 ] HighlightParser does not handle Heredoc Blocks.
+ [ 1202772 ] missing parentheses in Parser.inc line 946
+ [ 1203445 ] Call to a member function on a non-object in Parser.inc
+ [ 1203451 ] array to string conversion notice in InlineTags.inc
+- fixed these bugs reported in PEAR:
+ Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
+ Bug #5011: PDF generation warning on uksort</notes>
+ <contents>
+  <dir baseinstalldir="PhpDocumentor" name="/">
+   <dir name="docbuilder">
+    <dir name="images">
+     <file name="rc-gui-install-24.png" role="data" />
+     <file name="ss_CHM_default_default.png" role="data" />
+     <file name="ss_HTML_frames_default.png" role="data" />
+     <file name="ss_HTML_frames_DOM-default.png" role="data" />
+     <file name="ss_HTML_frames_DOM-earthli.png" role="data" />
+     <file name="ss_HTML_frames_DOM-l0l33t.png" role="data" />
+     <file name="ss_HTML_frames_DOM-phpdoc.de.png" role="data" />
+     <file name="ss_HTML_frames_DOM-phphtmllib.png" role="data" />
+     <file name="ss_HTML_frames_earthli.png" role="data" />
+     <file name="ss_HTML_frames_l0l33t.png" role="data" />
+     <file name="ss_HTML_frames_phpdoc.de.png" role="data" />
+     <file name="ss_HTML_frames_phpedit.png" role="data" />
+     <file name="ss_HTML_frames_phphtmllib.png" role="data" />
+     <file name="ss_HTML_Smarty_default.png" role="data" />
+     <file name="ss_HTML_Smarty_HandS.png" role="data" />
+     <file name="ss_HTML_Smarty_PHP.png" role="data" />
+     <file name="ss_PDF_default_default.png" role="data" />
+     <file name="ss_XML_DocBook-peardoc2_default.png" role="data" />
+    </dir> <!-- /docbuilder/images -->
+    <dir name="includes">
+     <file name="tab.webfx.css" role="data" />
+     <file name="tabpane.js" role="data" />
+     <file name="utilities.php" role="data">
+      <tasks:replace from="@DATA-DIR@" to="data_dir" type="pear-config" />
+     </file>
+    </dir> <!-- /docbuilder/includes -->
+    <file name="actions.php" role="data">
+     <tasks:replace from="@WEB-DIR@" to="data_dir" type="pear-config" />
+    </file>
+    <file name="blank.html" role="data" />
+    <file name="builder.php" role="data">
+     <tasks:replace from="@DATA-DIR@" to="data_dir" type="pear-config" />
+    </file>
+    <file name="config.php" role="data">
+     <tasks:replace from="@DATA-DIR@" to="data_dir" type="pear-config" />
+     <tasks:replace from="@WEB-DIR@" to="data_dir" type="pear-config" />
+    </file>
+    <file name="file_dialog.php" role="data">
+     <tasks:replace from="@DATA-DIR@" to="data_dir" type="pear-config" />
+     <tasks:replace from="@WEB-DIR@" to="data_dir" type="pear-config" />
+    </file>
+    <file name="index.html" role="data" />
+    <file name="top.php" role="data">
+     <tasks:replace from="@DATA-DIR@" to="data_dir" type="pear-config" />
+    </file>
+   </dir> <!-- /docbuilder -->
+   <dir name="Documentation">
+    <dir name="Release-old">
+     <file name="Release-0.2.4" role="doc" />
+     <file name="Release-0.2.5" role="doc" />
+     <file name="Release-0.2.6" role="doc" />
+     <file name="Release-0.3.0" role="doc" />
+     <file name="Release-0.4.0" role="doc" />
+     <file name="Release-0.4.1" role="doc" />
+     <file name="Release-0.4.2" role="doc" />
+     <file name="Release-1.0.0" role="doc" />
+     <file name="Release-1.0.0rc1" role="doc" />
+     <file name="Release-1.1.0" role="doc" />
+     <file name="Release-1.1.0rc1" role="doc" />
+     <file name="Release-1.1.0rc2" role="doc" />
+     <file name="Release-1.2.0" role="doc" />
+     <file name="Release-1.2.0beta1" role="doc" />
+     <file name="Release-1.2.0beta2" role="doc" />
+     <file name="Release-1.2.0beta3" role="doc" />
+     <file name="Release-1.2.0rc1" role="doc" />
+     <file name="Release-1.2.0rc2" role="doc" />
+     <file name="Release-1.2.1" role="doc" />
+     <file name="Release-1.2.2" role="doc" />
+     <file name="Release-1.2.3" role="doc" />
+     <file name="Release-1.2.3.1" role="doc" />
+    </dir> <!-- /Documentation/Release-old -->
+    <dir name="tests">
+     <dir name="bug-557861">
+      <file name="bug-557861.php" role="test" />
+     </dir> <!-- /Documentation/tests/bug-557861 -->
+     <dir name="DocBlock_Lexer">
+      <file name="setup.php.inc" role="test" />
+      <file name="test_br.phpt" role="test" />
+      <file name="test_code.phpt" role="test" />
+      <file name="test_empty.phpt" role="test" />
+      <file name="test_eschtml.phpt" role="test" />
+      <file name="test_html.phpt" role="test" />
+      <file name="test_inlinetags.phpt" role="test" />
+      <file name="test_internal.phpt" role="test" />
+      <file name="test_kbd.phpt" role="test" />
+      <file name="test_pre.phpt" role="test" />
+      <file name="test_samp.phpt" role="test" />
+      <file name="test_simplelist.phpt" role="test" />
+      <file name="test_singleline.phpt" role="test" />
+      <file name="test_tags.phpt" role="test" />
+      <file name="test_twoline.phpt" role="test" />
+     </dir> <!-- /Documentation/tests/DocBlock_Lexer -->
+     <file name="bug-441275.php" role="test" />
+     <file name="bug-441278.php" role="test" />
+     <file name="bug-441287.php" role="test" />
+     <file name="bug-441289.php" role="test" />
+     <file name="bug-441433.php" role="test" />
+     <file name="bug-443153.php" role="test" />
+     <file name="bug-445298.php" role="test" />
+     <file name="bug-445305.php" role="test" />
+     <file name="bug-445820.php" role="test" />
+     <file name="bug-489398.php" role="test" />
+     <file name="bug-540341.php" role="test" />
+     <file name="bug-540368.php" role="test" />
+     <file name="bug-541886.php" role="test" />
+     <file name="bug-542586.php" role="test" />
+     <file name="bug-548331.php" role="test" />
+     <file name="bug-550489.php" role="test" />
+     <file name="bug-551120.php" role="test" />
+     <file name="bug-553137.php" role="test" />
+     <file name="bug-553138.php" role="test" />
+     <file name="bug-553560.php" role="test" />
+     <file name="bug-553607.php" role="test" />
+     <file name="bug-554712.php" role="test" />
+     <file name="bug-555768.php" role="test" />
+     <file name="bug-556031-01.php" role="test" />
+     <file name="bug-556031.php" role="test" />
+     <file name="bug-556860.php" role="test" />
+     <file name="bug-556894.php" role="test" />
+     <file name="bug-557390.php" role="test" />
+     <file name="bug-558031.php" role="test" />
+     <file name="bug-558051.php" role="test" />
+     <file name="bug-559467.php" role="test" />
+     <file name="bug-559494.php" role="test" />
+     <file name="bug-559668.php" role="test" />
+     <file name="bug-560532.php" role="test" />
+     <file name="bug-560578.php" role="test" />
+     <file name="bug-560595.php" role="test" />
+     <file name="bug-561101.php" role="test" />
+     <file name="bug-562997.php" role="test" />
+     <file name="bug-566200.php" role="test" />
+     <file name="bug-566600.php" role="test" />
+     <file name="bug-567059.php" role="test" />
+     <file name="bug-587733.php" role="test" />
+     <file name="bug-645588.php" role="test" />
+     <file name="bug-698356.php" role="test" />
+     <file name="bug-772441.php" role="test" />
+     <file name="bug-904820.php" role="test" />
+     <file name="bug-authoremail.php" role="test" />
+     <file name="bug-defineparse.php" role="test" />
+     <file name="bug-eofquotes.php" role="test" />
+     <file name="bug-escaping.php" role="test" />
+     <file name="bug-loseprocedural.php" role="test" />
+     <file name="bug-loseunknowntags.php" role="test" />
+     <file name="bug-pageleveldocsblocks.php" role="test" />
+     <file name="bug-quote_new_parser.php" role="test" />
+     <file name="bug-shortdesc.php" role="test" />
+     <file name="phpt_test.php.inc" role="test" />
+    </dir> <!-- /Documentation/tests -->
+    <file name="RoadMap" role="doc" />
+    <file name="TODO" role="doc" />
+   </dir> <!-- /Documentation -->
+   <dir name="HTML_TreeMenu-1.1.2">
+    <dir name="images">
+     <file name="branch.gif" role="data" />
+     <file name="branchbottom.gif" role="data" />
+     <file name="branchtop.gif" role="data" />
+     <file name="folder.gif" role="data" />
+     <file name="line.gif" role="data" />
+     <file name="linebottom.gif" role="data" />
+     <file name="minus.gif" role="data" />
+     <file name="minusbottom.gif" role="data" />
+     <file name="minustop.gif" role="data" />
+     <file name="plus.gif" role="data" />
+     <file name="plusbottom.gif" role="data" />
+     <file name="plustop.gif" role="data" />
+    </dir> <!-- /HTML_TreeMenu-1.1.2/images -->
+    <file name="TreeMenu.js" role="data" />
+    <file name="TreeMenu.php" role="php" />
+   </dir> <!-- /HTML_TreeMenu-1.1.2 -->
+   <dir name="media">
+    <dir name="images">
+     <dir name="earthli">
+      <file name="abstract_class.png" role="data" />
+      <file name="abstract_method.png" role="data" />
+      <file name="abstract_private_class.png" role="data" />
+      <file name="abstract_private_method.png" role="data" />
+      <file name="class.png" role="data" />
+      <file name="class_folder.png" role="data" />
+      <file name="constant.png" role="data" />
+      <file name="constructor_method.png" role="data" />
+      <file name="destructor_method.png" role="data" />
+      <file name="file.png" role="data" />
+      <file name="folder.png" role="data" />
+      <file name="function.png" role="data" />
+      <file name="function_folder.png" role="data" />
+      <file name="global.png" role="data" />
+      <file name="index.png" role="data" />
+      <file name="lock.png" role="data" />
+      <file name="method.png" role="data" />
+      <file name="next_button.png" role="data" />
+      <file name="package.png" role="data" />
+      <file name="package_folder.png" role="data" />
+      <file name="previous_button.png" role="data" />
+      <file name="private_class.png" role="data" />
+      <file name="private_method.png" role="data" />
+      <file name="private_variable.png" role="data" />
+      <file name="tutorial.png" role="data" />
+      <file name="tutorial_folder.png" role="data" />
+      <file name="variable.png" role="data" />
+     </dir> <!-- /media/images/earthli -->
+    </dir> <!-- /media/images -->
+   </dir> <!-- /media -->
+   <dir name="phpDocumentor">
+    <dir name="Converters">
+     <dir name="CHM">
+      <dir name="default">
+       <dir name="templates">
+        <dir name="default">
+         <dir name="templates">
+          <dir name="media">
+           <file name="bg_left.png" role="data" />
+           <file name="stylesheet.css" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/CHM/default/templates/default/templates/media -->
+          <file name="basicindex.tpl" role="data" />
+          <file name="blank.tpl" role="data" />
+          <file name="class.tpl" role="data" />
+          <file name="classleft.tpl" role="data" />
+          <file name="classtrees.tpl" role="data" />
+          <file name="const.tpl" role="data" />
+          <file name="contents.hhc.tpl" role="data" />
+          <file name="define.tpl" role="data" />
+          <file name="docblock.tpl" role="data" />
+          <file name="elementindex.tpl" role="data" />
+          <file name="errors.tpl" role="data" />
+          <file name="fileleft.tpl" role="data" />
+          <file name="filesource.tpl" role="data" />
+          <file name="footer.tpl" role="data" />
+          <file name="function.tpl" role="data" />
+          <file name="global.tpl" role="data" />
+          <file name="header.tpl" role="data" />
+          <file name="hhp.tpl" role="data" />
+          <file name="include.tpl" role="data" />
+          <file name="index.hhk.tpl" role="data" />
+          <file name="index.tpl" role="data" />
+          <file name="method.tpl" role="data" />
+          <file name="packages.tpl" role="data" />
+          <file name="page.tpl" role="data" />
+          <file name="pkgelementindex.tpl" role="data" />
+          <file name="ric.tpl" role="data" />
+          <file name="tocentry.tpl" role="data" />
+          <file name="todolist.tpl" role="data" />
+          <file name="tutorial.tpl" role="data" />
+          <file name="tutorial_toc.tpl" role="data" />
+          <file name="tutorial_tree.tpl" role="data" />
+          <file name="var.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/CHM/default/templates/default/templates -->
+         <dir name="templates_c">
+          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+          <file name="%%-15^%%-1529790141^tocentry.tpl.php" role="data" />
+          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+          <file name="%%-49^%%-49834008^index.hhk.tpl.php" role="data" />
+          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+          <file name="%%108^%%1081015296^hhp.tpl.php" role="data" />
+          <file name="%%117^%%1173289593^contents.hhc.tpl.php" role="data" />
+          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+          <file name="%%146^%%146134639^function.tpl.php" role="data" />
+          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+          <file name="%%708^%%708843835^var.tpl.php" role="data" />
+          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/CHM/default/templates/default/templates_c -->
+         <file name="options.ini" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/CHM/default/templates/default -->
+       </dir> <!-- /phpDocumentor/Converters/CHM/default/templates -->
+       <file name="CHMdefaultConverter.inc" role="php" />
+      </dir> <!-- /phpDocumentor/Converters/CHM/default -->
+     </dir> <!-- /phpDocumentor/Converters/CHM -->
+     <dir name="HTML">
+      <dir name="frames">
+       <dir name="templates">
+        <dir name="default">
+         <dir name="templates">
+          <dir name="media">
+           <file name="banner.css" role="data" />
+           <file name="stylesheet.css" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/default/templates/media -->
+          <file name="basicindex.tpl" role="data" />
+          <file name="blank.tpl" role="data" />
+          <file name="class.tpl" role="data" />
+          <file name="classtrees.tpl" role="data" />
+          <file name="const.tpl" role="data" />
+          <file name="define.tpl" role="data" />
+          <file name="docblock.tpl" role="data" />
+          <file name="elementindex.tpl" role="data" />
+          <file name="errors.tpl" role="data" />
+          <file name="examplesource.tpl" role="data" />
+          <file name="filesource.tpl" role="data" />
+          <file name="footer.tpl" role="data" />
+          <file name="function.tpl" role="data" />
+          <file name="global.tpl" role="data" />
+          <file name="header.tpl" role="data" />
+          <file name="include.tpl" role="data" />
+          <file name="index.tpl" role="data" />
+          <file name="left_frame.tpl" role="data" />
+          <file name="method.tpl" role="data" />
+          <file name="page.tpl" role="data" />
+          <file name="pkgelementindex.tpl" role="data" />
+          <file name="ric.tpl" role="data" />
+          <file name="todolist.tpl" role="data" />
+          <file name="top_frame.tpl" role="data" />
+          <file name="tutorial.tpl" role="data" />
+          <file name="tutorial_nav.tpl" role="data" />
+          <file name="tutorial_toc.tpl" role="data" />
+          <file name="tutorial_tree.tpl" role="data" />
+          <file name="var.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/default/templates -->
+         <dir name="templates_c">
+          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+          <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
+          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+          <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
+          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+          <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
+          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+          <file name="%%146^%%146134639^function.tpl.php" role="data" />
+          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+          <file name="%%708^%%708843835^var.tpl.php" role="data" />
+          <file name="%%845^%%845383602^examplesource.tpl.php" role="data" />
+          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/default/templates_c -->
+         <file name="options.ini" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/default -->
+        <dir name="DOM">
+         <dir name="default">
+          <dir name="templates">
+           <dir name="media">
+            <dir name="images">
+             <file name="blank.png" role="data" />
+             <file name="empty.png" role="data" />
+             <file name="I.png" role="data" />
+             <file name="L.png" role="data" />
+             <file name="Lminus.png" role="data" />
+             <file name="Lplus.png" role="data" />
+             <file name="T.png" role="data" />
+             <file name="Tminus.png" role="data" />
+             <file name="Tplus.png" role="data" />
+            </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/default/templates/media/images -->
+            <dir name="lib">
+             <file name="classTree.js" role="data" />
+            </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/default/templates/media/lib -->
+            <file name="banner.css" role="data" />
+            <file name="stylesheet.css" role="data" />
+           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/default/templates/media -->
+           <file name="basicindex.tpl" role="data" />
+           <file name="blank.tpl" role="data" />
+           <file name="class.tpl" role="data" />
+           <file name="classtrees.tpl" role="data" />
+           <file name="const.tpl" role="data" />
+           <file name="define.tpl" role="data" />
+           <file name="docblock.tpl" role="data" />
+           <file name="elementindex.tpl" role="data" />
+           <file name="errors.tpl" role="data" />
+           <file name="examplesource.tpl" role="data" />
+           <file name="filesource.tpl" role="data" />
+           <file name="footer.tpl" role="data" />
+           <file name="function.tpl" role="data" />
+           <file name="global.tpl" role="data" />
+           <file name="header.tpl" role="data" />
+           <file name="include.tpl" role="data" />
+           <file name="index.tpl" role="data" />
+           <file name="left_frame.tpl" role="data" />
+           <file name="method.tpl" role="data" />
+           <file name="page.tpl" role="data" />
+           <file name="pkgelementindex.tpl" role="data" />
+           <file name="ric.tpl" role="data" />
+           <file name="todolist.tpl" role="data" />
+           <file name="top_frame.tpl" role="data" />
+           <file name="tutorial.tpl" role="data" />
+           <file name="tutorial_nav.tpl" role="data" />
+           <file name="tutorial_toc.tpl" role="data" />
+           <file name="tutorial_tree.tpl" role="data" />
+           <file name="var.tpl" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/default/templates -->
+          <dir name="templates_c">
+           <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+           <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+           <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+           <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+           <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+           <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+           <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
+           <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+           <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+           <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+           <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+           <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+           <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
+           <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+           <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
+           <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+           <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+           <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+           <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+           <file name="%%146^%%146134639^function.tpl.php" role="data" />
+           <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+           <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+           <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+           <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+           <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+           <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+           <file name="%%708^%%708843835^var.tpl.php" role="data" />
+           <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/default/templates_c -->
+          <file name="options.ini" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/default -->
+         <dir name="earthli">
+          <dir name="templates">
+           <dir name="media">
+            <dir name="images">
+             <file name="AbstractClass.png" role="data" />
+             <file name="AbstractClass_logo.png" role="data" />
+             <file name="AbstractMethod.png" role="data" />
+             <file name="AbstractPrivateClass.png" role="data" />
+             <file name="AbstractPrivateClass_logo.png" role="data" />
+             <file name="AbstractPrivateMethod.png" role="data" />
+             <file name="blank.png" role="data" />
+             <file name="Class.png" role="data" />
+             <file name="class_folder.png" role="data" />
+             <file name="Class_logo.png" role="data" />
+             <file name="Constant.png" role="data" />
+             <file name="Constructor.png" role="data" />
+             <file name="Destructor.png" role="data" />
+             <file name="empty.png" role="data" />
+             <file name="file.png" role="data" />
+             <file name="folder.png" role="data" />
+             <file name="Function.png" role="data" />
+             <file name="function_folder.png" role="data" />
+             <file name="Global.png" role="data" />
+             <file name="I.png" role="data" />
+             <file name="Index.png" role="data" />
+             <file name="L.png" role="data" />
+             <file name="Lminus.png" role="data" />
+             <file name="Lplus.png" role="data" />
+             <file name="Method.png" role="data" />
+             <file name="minus.gif" role="data" />
+             <file name="next_button.png" role="data" />
+             <file name="next_button_disabled.png" role="data" />
+             <file name="package.png" role="data" />
+             <file name="package_folder.png" role="data" />
+             <file name="Page.png" role="data" />
+             <file name="Page_logo.png" role="data" />
+             <file name="plus.gif" role="data" />
+             <file name="previous_button.png" role="data" />
+             <file name="previous_button_disabled.png" role="data" />
+             <file name="PrivateClass.png" role="data" />
+             <file name="PrivateClass_logo.png" role="data" />
+             <file name="PrivateMethod.png" role="data" />
+             <file name="PrivateVariable.png" role="data" />
+             <file name="private_class_logo.png" role="data" />
+             <file name="T.png" role="data" />
+             <file name="Tminus.png" role="data" />
+             <file name="Tplus.png" role="data" />
+             <file name="tutorial.png" role="data" />
+             <file name="tutorial_folder.png" role="data" />
+             <file name="up_button.png" role="data" />
+             <file name="Variable.png" role="data" />
+            </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/earthli/templates/media/images -->
+            <dir name="lib">
+             <file name="classTree.js" role="data" />
+            </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/earthli/templates/media/lib -->
+            <file name="banner.css" role="data" />
+            <file name="stylesheet.css" role="data" />
+           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/earthli/templates/media -->
+           <file name="basicindex.tpl" role="data" />
+           <file name="blank.tpl" role="data" />
+           <file name="class.tpl" role="data" />
+           <file name="classtrees.tpl" role="data" />
+           <file name="const.tpl" role="data" />
+           <file name="define.tpl" role="data" />
+           <file name="docblock.tpl" role="data" />
+           <file name="elementindex.tpl" role="data" />
+           <file name="errors.tpl" role="data" />
+           <file name="examplesource.tpl" role="data" />
+           <file name="filesource.tpl" role="data" />
+           <file name="footer.tpl" role="data" />
+           <file name="function.tpl" role="data" />
+           <file name="global.tpl" role="data" />
+           <file name="header.tpl" role="data" />
+           <file name="include.tpl" role="data" />
+           <file name="index.tpl" role="data" />
+           <file name="left_frame.tpl" role="data" />
+           <file name="method.tpl" role="data" />
+           <file name="page.tpl" role="data" />
+           <file name="pkgelementindex.tpl" role="data" />
+           <file name="ric.tpl" role="data" />
+           <file name="todolist.tpl" role="data" />
+           <file name="top_frame.tpl" role="data" />
+           <file name="tutorial.tpl" role="data" />
+           <file name="tutorial_nav.tpl" role="data" />
+           <file name="tutorial_toc.tpl" role="data" />
+           <file name="tutorial_tree.tpl" role="data" />
+           <file name="var.tpl" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/earthli/templates -->
+          <dir name="templates_c">
+           <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+           <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+           <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+           <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+           <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+           <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+           <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
+           <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+           <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+           <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+           <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+           <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+           <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
+           <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+           <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
+           <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+           <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+           <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+           <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+           <file name="%%146^%%146134639^function.tpl.php" role="data" />
+           <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+           <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+           <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+           <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+           <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+           <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+           <file name="%%708^%%708843835^var.tpl.php" role="data" />
+           <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/earthli/templates_c -->
+          <file name="options.ini" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/earthli -->
+         <dir name="l0l33t">
+          <dir name="templates">
+           <dir name="media">
+            <dir name="images">
+             <file name="blank.png" role="data" />
+             <file name="empty.png" role="data" />
+             <file name="I.png" role="data" />
+             <file name="L.png" role="data" />
+             <file name="Lminus.png" role="data" />
+             <file name="Lplus.png" role="data" />
+             <file name="T.png" role="data" />
+             <file name="Tminus.png" role="data" />
+             <file name="Tplus.png" role="data" />
+            </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/l0l33t/templates/media/images -->
+            <dir name="lib">
+             <file name="classTree.js" role="data" />
+            </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/l0l33t/templates/media/lib -->
+            <file name="banner.css" role="data" />
+            <file name="bg_left.png" role="data" />
+            <file name="minus.gif" role="data" />
+            <file name="plus.gif" role="data" />
+            <file name="stylesheet.css" role="data" />
+           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/l0l33t/templates/media -->
+           <file name="basicindex.tpl" role="data" />
+           <file name="blank.tpl" role="data" />
+           <file name="class.tpl" role="data" />
+           <file name="classtrees.tpl" role="data" />
+           <file name="const.tpl" role="data" />
+           <file name="define.tpl" role="data" />
+           <file name="docblock.tpl" role="data" />
+           <file name="elementindex.tpl" role="data" />
+           <file name="errors.tpl" role="data" />
+           <file name="examplesource.tpl" role="data" />
+           <file name="filesource.tpl" role="data" />
+           <file name="footer.tpl" role="data" />
+           <file name="function.tpl" role="data" />
+           <file name="global.tpl" role="data" />
+           <file name="header.tpl" role="data" />
+           <file name="include.tpl" role="data" />
+           <file name="index.tpl" role="data" />
+           <file name="left_frame.tpl" role="data" />
+           <file name="method.tpl" role="data" />
+           <file name="page.tpl" role="data" />
+           <file name="pkgelementindex.tpl" role="data" />
+           <file name="ric.tpl" role="data" />
+           <file name="todolist.tpl" role="data" />
+           <file name="top_frame.tpl" role="data" />
+           <file name="tutorial.tpl" role="data" />
+           <file name="tutorial_nav.tpl" role="data" />
+           <file name="tutorial_toc.tpl" role="data" />
+           <file name="tutorial_tree.tpl" role="data" />
+           <file name="var.tpl" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/l0l33t/templates -->
+          <dir name="templates_c">
+           <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+           <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+           <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+           <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+           <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+           <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+           <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
+           <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+           <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+           <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+           <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+           <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+           <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
+           <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+           <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
+           <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+           <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+           <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+           <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+           <file name="%%146^%%146134639^function.tpl.php" role="data" />
+           <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+           <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+           <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+           <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+           <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+           <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+           <file name="%%708^%%708843835^var.tpl.php" role="data" />
+           <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/l0l33t/templates_c -->
+          <file name="options.ini" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/l0l33t -->
+         <dir name="phpdoc.de">
+          <dir name="templates">
+           <dir name="media">
+            <dir name="images">
+             <file name="blank.png" role="data" />
+             <file name="empty.png" role="data" />
+             <file name="I.png" role="data" />
+             <file name="L.png" role="data" />
+             <file name="Lminus.png" role="data" />
+             <file name="Lplus.png" role="data" />
+             <file name="T.png" role="data" />
+             <file name="Tminus.png" role="data" />
+             <file name="Tplus.png" role="data" />
+            </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phpdoc.de/templates/media/images -->
+            <dir name="lib">
+             <file name="classTree.js" role="data" />
+            </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phpdoc.de/templates/media/lib -->
+            <file name="banner.css" role="data" />
+            <file name="stylesheet.css" role="data" />
+           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phpdoc.de/templates/media -->
+           <file name="basicindex.tpl" role="data" />
+           <file name="blank.tpl" role="data" />
+           <file name="class.tpl" role="data" />
+           <file name="classtrees.tpl" role="data" />
+           <file name="const.tpl" role="data" />
+           <file name="define.tpl" role="data" />
+           <file name="docblock.tpl" role="data" />
+           <file name="elementindex.tpl" role="data" />
+           <file name="errors.tpl" role="data" />
+           <file name="examplesource.tpl" role="data" />
+           <file name="filesource.tpl" role="data" />
+           <file name="footer.tpl" role="data" />
+           <file name="function.tpl" role="data" />
+           <file name="global.tpl" role="data" />
+           <file name="header.tpl" role="data" />
+           <file name="include.tpl" role="data" />
+           <file name="index.tpl" role="data" />
+           <file name="left_frame.tpl" role="data" />
+           <file name="method.tpl" role="data" />
+           <file name="page.tpl" role="data" />
+           <file name="pkgelementindex.tpl" role="data" />
+           <file name="ric.tpl" role="data" />
+           <file name="todolist.tpl" role="data" />
+           <file name="top_frame.tpl" role="data" />
+           <file name="tutorial.tpl" role="data" />
+           <file name="tutorial_nav.tpl" role="data" />
+           <file name="tutorial_toc.tpl" role="data" />
+           <file name="tutorial_tree.tpl" role="data" />
+           <file name="var.tpl" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phpdoc.de/templates -->
+          <dir name="templates_c">
+           <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+           <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+           <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+           <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+           <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+           <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+           <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
+           <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+           <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+           <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+           <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+           <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+           <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
+           <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+           <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
+           <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+           <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+           <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+           <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+           <file name="%%146^%%146134639^function.tpl.php" role="data" />
+           <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+           <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+           <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+           <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+           <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+           <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+           <file name="%%708^%%708843835^var.tpl.php" role="data" />
+           <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phpdoc.de/templates_c -->
+          <file name="options.ini" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phpdoc.de -->
+         <dir name="phphtmllib">
+          <dir name="templates">
+           <dir name="media">
+            <dir name="images">
+             <file name="blank.png" role="data" />
+             <file name="empty.png" role="data" />
+             <file name="I.png" role="data" />
+             <file name="L.png" role="data" />
+             <file name="Lminus.png" role="data" />
+             <file name="Lplus.png" role="data" />
+             <file name="T.png" role="data" />
+             <file name="Tminus.png" role="data" />
+             <file name="Tplus.png" role="data" />
+            </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phphtmllib/templates/media/images -->
+            <dir name="lib">
+             <file name="classTree.js" role="data" />
+            </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phphtmllib/templates/media/lib -->
+            <file name="banner.css" role="data" />
+            <file name="stylesheet.css" role="data" />
+           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phphtmllib/templates/media -->
+           <file name="basicindex.tpl" role="data" />
+           <file name="blank.tpl" role="data" />
+           <file name="class.tpl" role="data" />
+           <file name="classtrees.tpl" role="data" />
+           <file name="const.tpl" role="data" />
+           <file name="define.tpl" role="data" />
+           <file name="docblock.tpl" role="data" />
+           <file name="elementindex.tpl" role="data" />
+           <file name="errors.tpl" role="data" />
+           <file name="examplesource.tpl" role="data" />
+           <file name="filesource.tpl" role="data" />
+           <file name="footer.tpl" role="data" />
+           <file name="function.tpl" role="data" />
+           <file name="global.tpl" role="data" />
+           <file name="header.tpl" role="data" />
+           <file name="include.tpl" role="data" />
+           <file name="index.tpl" role="data" />
+           <file name="left_frame.tpl" role="data" />
+           <file name="method.tpl" role="data" />
+           <file name="page.tpl" role="data" />
+           <file name="pkgelementindex.tpl" role="data" />
+           <file name="ric.tpl" role="data" />
+           <file name="todolist.tpl" role="data" />
+           <file name="top_frame.tpl" role="data" />
+           <file name="tutorial.tpl" role="data" />
+           <file name="tutorial_nav.tpl" role="data" />
+           <file name="tutorial_toc.tpl" role="data" />
+           <file name="tutorial_tree.tpl" role="data" />
+           <file name="var.tpl" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phphtmllib/templates -->
+          <dir name="templates_c">
+           <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+           <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+           <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+           <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+           <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+           <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+           <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
+           <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+           <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+           <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+           <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+           <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+           <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
+           <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+           <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
+           <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+           <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+           <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+           <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+           <file name="%%146^%%146134639^function.tpl.php" role="data" />
+           <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+           <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+           <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+           <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+           <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+           <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+           <file name="%%708^%%708843835^var.tpl.php" role="data" />
+           <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phphtmllib/templates_c -->
+          <file name="options.ini" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phphtmllib -->
+        </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM -->
+        <dir name="earthli">
+         <dir name="templates">
+          <dir name="media">
+           <dir name="images">
+            <file name="AbstractClass.png" role="data" />
+            <file name="AbstractClass_logo.png" role="data" />
+            <file name="AbstractMethod.png" role="data" />
+            <file name="AbstractPrivateClass.png" role="data" />
+            <file name="AbstractPrivateClass_logo.png" role="data" />
+            <file name="AbstractPrivateMethod.png" role="data" />
+            <file name="blank.png" role="data" />
+            <file name="Class.png" role="data" />
+            <file name="class_folder.png" role="data" />
+            <file name="Class_logo.png" role="data" />
+            <file name="Constant.png" role="data" />
+            <file name="Constructor.png" role="data" />
+            <file name="Destructor.png" role="data" />
+            <file name="empty.png" role="data" />
+            <file name="file.png" role="data" />
+            <file name="folder.png" role="data" />
+            <file name="Function.png" role="data" />
+            <file name="function_folder.png" role="data" />
+            <file name="Global.png" role="data" />
+            <file name="I.png" role="data" />
+            <file name="Index.png" role="data" />
+            <file name="L.png" role="data" />
+            <file name="Lminus.png" role="data" />
+            <file name="Lplus.png" role="data" />
+            <file name="Method.png" role="data" />
+            <file name="next_button.png" role="data" />
+            <file name="next_button_disabled.png" role="data" />
+            <file name="package.png" role="data" />
+            <file name="package_folder.png" role="data" />
+            <file name="Page.png" role="data" />
+            <file name="Page_logo.png" role="data" />
+            <file name="previous_button.png" role="data" />
+            <file name="previous_button_disabled.png" role="data" />
+            <file name="PrivateClass.png" role="data" />
+            <file name="PrivateClass_logo.png" role="data" />
+            <file name="PrivateMethod.png" role="data" />
+            <file name="PrivateVariable.png" role="data" />
+            <file name="private_class_logo.png" role="data" />
+            <file name="T.png" role="data" />
+            <file name="Tminus.png" role="data" />
+            <file name="Tplus.png" role="data" />
+            <file name="tutorial.png" role="data" />
+            <file name="tutorial_folder.png" role="data" />
+            <file name="up_button.png" role="data" />
+            <file name="Variable.png" role="data" />
+           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/earthli/templates/media/images -->
+           <file name="banner.css" role="data" />
+           <file name="stylesheet.css" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/earthli/templates/media -->
+          <file name="basicindex.tpl" role="data" />
+          <file name="blank.tpl" role="data" />
+          <file name="class.tpl" role="data" />
+          <file name="classtrees.tpl" role="data" />
+          <file name="const.tpl" role="data" />
+          <file name="define.tpl" role="data" />
+          <file name="docblock.tpl" role="data" />
+          <file name="elementindex.tpl" role="data" />
+          <file name="errors.tpl" role="data" />
+          <file name="examplesource.tpl" role="data" />
+          <file name="filesource.tpl" role="data" />
+          <file name="footer.tpl" role="data" />
+          <file name="function.tpl" role="data" />
+          <file name="global.tpl" role="data" />
+          <file name="header.tpl" role="data" />
+          <file name="include.tpl" role="data" />
+          <file name="index.tpl" role="data" />
+          <file name="left_frame.tpl" role="data" />
+          <file name="method.tpl" role="data" />
+          <file name="page.tpl" role="data" />
+          <file name="pkgelementindex.tpl" role="data" />
+          <file name="ric.tpl" role="data" />
+          <file name="todolist.tpl" role="data" />
+          <file name="top_frame.tpl" role="data" />
+          <file name="tutorial.tpl" role="data" />
+          <file name="tutorial_nav.tpl" role="data" />
+          <file name="tutorial_toc.tpl" role="data" />
+          <file name="tutorial_tree.tpl" role="data" />
+          <file name="var.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/earthli/templates -->
+         <dir name="templates_c">
+          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+          <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
+          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+          <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
+          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+          <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
+          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+          <file name="%%146^%%146134639^function.tpl.php" role="data" />
+          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+          <file name="%%708^%%708843835^var.tpl.php" role="data" />
+          <file name="%%845^%%845383602^examplesource.tpl.php" role="data" />
+          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/earthli/templates_c -->
+         <file name="options.ini" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/earthli -->
+        <dir name="l0l33t">
+         <dir name="templates">
+          <dir name="media">
+           <file name="banner.css" role="data" />
+           <file name="bg_left.png" role="data" />
+           <file name="stylesheet.css" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/l0l33t/templates/media -->
+          <file name="basicindex.tpl" role="data" />
+          <file name="blank.tpl" role="data" />
+          <file name="class.tpl" role="data" />
+          <file name="classtrees.tpl" role="data" />
+          <file name="const.tpl" role="data" />
+          <file name="define.tpl" role="data" />
+          <file name="docblock.tpl" role="data" />
+          <file name="elementindex.tpl" role="data" />
+          <file name="errors.tpl" role="data" />
+          <file name="examplesource.tpl" role="data" />
+          <file name="filesource.tpl" role="data" />
+          <file name="footer.tpl" role="data" />
+          <file name="function.tpl" role="data" />
+          <file name="global.tpl" role="data" />
+          <file name="header.tpl" role="data" />
+          <file name="include.tpl" role="data" />
+          <file name="index.tpl" role="data" />
+          <file name="left_frame.tpl" role="data" />
+          <file name="method.tpl" role="data" />
+          <file name="page.tpl" role="data" />
+          <file name="pkgelementindex.tpl" role="data" />
+          <file name="ric.tpl" role="data" />
+          <file name="todolist.tpl" role="data" />
+          <file name="top_frame.tpl" role="data" />
+          <file name="tutorial.tpl" role="data" />
+          <file name="tutorial_nav.tpl" role="data" />
+          <file name="tutorial_toc.tpl" role="data" />
+          <file name="tutorial_tree.tpl" role="data" />
+          <file name="var.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/l0l33t/templates -->
+         <dir name="templates_c">
+          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+          <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
+          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+          <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
+          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+          <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
+          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+          <file name="%%146^%%146134639^function.tpl.php" role="data" />
+          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+          <file name="%%708^%%708843835^var.tpl.php" role="data" />
+          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/l0l33t/templates_c -->
+         <file name="options.ini" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/l0l33t -->
+        <dir name="phpdoc.de">
+         <dir name="templates">
+          <dir name="media">
+           <file name="banner.css" role="data" />
+           <file name="stylesheet.css" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpdoc.de/templates/media -->
+          <file name="basicindex.tpl" role="data" />
+          <file name="blank.tpl" role="data" />
+          <file name="class.tpl" role="data" />
+          <file name="classtrees.tpl" role="data" />
+          <file name="const.tpl" role="data" />
+          <file name="define.tpl" role="data" />
+          <file name="docblock.tpl" role="data" />
+          <file name="elementindex.tpl" role="data" />
+          <file name="errors.tpl" role="data" />
+          <file name="examplesource.tpl" role="data" />
+          <file name="filesource.tpl" role="data" />
+          <file name="footer.tpl" role="data" />
+          <file name="function.tpl" role="data" />
+          <file name="global.tpl" role="data" />
+          <file name="header.tpl" role="data" />
+          <file name="include.tpl" role="data" />
+          <file name="index.tpl" role="data" />
+          <file name="left_frame.tpl" role="data" />
+          <file name="method.tpl" role="data" />
+          <file name="page.tpl" role="data" />
+          <file name="pkgelementindex.tpl" role="data" />
+          <file name="ric.tpl" role="data" />
+          <file name="todolist.tpl" role="data" />
+          <file name="top_frame.tpl" role="data" />
+          <file name="tutorial.tpl" role="data" />
+          <file name="tutorial_nav.tpl" role="data" />
+          <file name="tutorial_toc.tpl" role="data" />
+          <file name="tutorial_tree.tpl" role="data" />
+          <file name="var.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpdoc.de/templates -->
+         <dir name="templates_c">
+          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+          <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
+          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+          <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
+          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+          <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
+          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+          <file name="%%146^%%146134639^function.tpl.php" role="data" />
+          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+          <file name="%%708^%%708843835^var.tpl.php" role="data" />
+          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpdoc.de/templates_c -->
+         <file name="options.ini" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpdoc.de -->
+        <dir name="phpedit">
+         <dir name="templates">
+          <dir name="media">
+           <dir name="images">
+            <file name="blank.png" role="data" />
+            <file name="Class.gif" role="data" />
+            <file name="classFolder.gif" role="data" />
+            <file name="Constant.gif" role="data" />
+            <file name="Constants.gif" role="data" />
+            <file name="Constructor.gif" role="data" />
+            <file name="Destructor.gif" role="data" />
+            <file name="Disk.gif" role="data" />
+            <file name="error.gif" role="data" />
+            <file name="file.png" role="data" />
+            <file name="FolderClosed.gif" role="data" />
+            <file name="foldericon.png" role="data" />
+            <file name="FolderOpened.gif" role="data" />
+            <file name="Functions.gif" role="data" />
+            <file name="GhostClass.gif" role="data" />
+            <file name="I.png" role="data" />
+            <file name="L.png" role="data" />
+            <file name="Lminus.png" role="data" />
+            <file name="Lplus.png" role="data" />
+            <file name="minus.gif" role="data" />
+            <file name="msgError.gif" role="data" />
+            <file name="msgFatalError.gif" role="data" />
+            <file name="msgHint.gif" role="data" />
+            <file name="msgInformation.gif" role="data" />
+            <file name="msgWarning.gif" role="data" />
+            <file name="openfoldericon.png" role="data" />
+            <file name="plus.gif" role="data" />
+            <file name="PrivateDataMember.gif" role="data" />
+            <file name="PrivateMethod.gif" role="data" />
+            <file name="PrivateProperty.gif" role="data" />
+            <file name="ProtectedDataMember.gif" role="data" />
+            <file name="ProtectedMethod.gif" role="data" />
+            <file name="ProtectedProperty.gif" role="data" />
+            <file name="PublicDataMember.gif" role="data" />
+            <file name="PublicMethod.gif" role="data" />
+            <file name="PublicProperty.gif" role="data" />
+            <file name="spacer.gif" role="data" />
+            <file name="T.png" role="data" />
+            <file name="Tminus.png" role="data" />
+            <file name="Tplus.png" role="data" />
+            <file name="Types.gif" role="data" />
+            <file name="Variable.gif" role="data" />
+            <file name="Vars.gif" role="data" />
+           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpedit/templates/media/images -->
+           <dir name="lib">
+            <file name="classTree.js" role="data" />
+            <file name="tab.webfx.css" role="data" />
+            <file name="tabpane.js" role="data" />
+            <file name="ua.js" role="data" />
+           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpedit/templates/media/lib -->
+           <file name="stylesheet.css" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpedit/templates/media -->
+          <file name="basicindex.tpl" role="data" />
+          <file name="blank.tpl" role="data" />
+          <file name="class.tpl" role="data" />
+          <file name="classtrees.tpl" role="data" />
+          <file name="const.tpl" role="data" />
+          <file name="define.tpl" role="data" />
+          <file name="docblock.tpl" role="data" />
+          <file name="elementindex.tpl" role="data" />
+          <file name="errors.tpl" role="data" />
+          <file name="examplesource.tpl" role="data" />
+          <file name="filesource.tpl" role="data" />
+          <file name="footer.tpl" role="data" />
+          <file name="function.tpl" role="data" />
+          <file name="global.tpl" role="data" />
+          <file name="header.tpl" role="data" />
+          <file name="include.tpl" role="data" />
+          <file name="index.tpl" role="data" />
+          <file name="left_frame.tpl" role="data" />
+          <file name="method.tpl" role="data" />
+          <file name="page.tpl" role="data" />
+          <file name="pkgelementindex.tpl" role="data" />
+          <file name="ric.tpl" role="data" />
+          <file name="todolist.tpl" role="data" />
+          <file name="top_frame.tpl" role="data" />
+          <file name="tutorial.tpl" role="data" />
+          <file name="tutorial_toc.tpl" role="data" />
+          <file name="tutorial_tree.tpl" role="data" />
+          <file name="var.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpedit/templates -->
+         <dir name="templates_c">
+          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+          <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
+          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+          <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
+          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+          <file name="%%146^%%146134639^function.tpl.php" role="data" />
+          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+          <file name="%%708^%%708843835^var.tpl.php" role="data" />
+          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpedit/templates_c -->
+         <file name="options.ini" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpedit -->
+        <dir name="phphtmllib">
+         <dir name="templates">
+          <dir name="media">
+           <file name="banner.css" role="data" />
+           <file name="stylesheet.css" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phphtmllib/templates/media -->
+          <file name="basicindex.tpl" role="data" />
+          <file name="blank.tpl" role="data" />
+          <file name="class.tpl" role="data" />
+          <file name="classtrees.tpl" role="data" />
+          <file name="const.tpl" role="data" />
+          <file name="define.tpl" role="data" />
+          <file name="docblock.tpl" role="data" />
+          <file name="elementindex.tpl" role="data" />
+          <file name="errors.tpl" role="data" />
+          <file name="examplesource.tpl" role="data" />
+          <file name="filesource.tpl" role="data" />
+          <file name="footer.tpl" role="data" />
+          <file name="function.tpl" role="data" />
+          <file name="global.tpl" role="data" />
+          <file name="header.tpl" role="data" />
+          <file name="include.tpl" role="data" />
+          <file name="index.tpl" role="data" />
+          <file name="left_frame.tpl" role="data" />
+          <file name="method.tpl" role="data" />
+          <file name="page.tpl" role="data" />
+          <file name="pkgelementindex.tpl" role="data" />
+          <file name="ric.tpl" role="data" />
+          <file name="todolist.tpl" role="data" />
+          <file name="top_frame.tpl" role="data" />
+          <file name="tutorial.tpl" role="data" />
+          <file name="tutorial_nav.tpl" role="data" />
+          <file name="tutorial_toc.tpl" role="data" />
+          <file name="tutorial_tree.tpl" role="data" />
+          <file name="var.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phphtmllib/templates -->
+         <dir name="templates_c">
+          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+          <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
+          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+          <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
+          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+          <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
+          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+          <file name="%%146^%%146134639^function.tpl.php" role="data" />
+          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+          <file name="%%708^%%708843835^var.tpl.php" role="data" />
+          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phphtmllib/templates_c -->
+         <file name="options.ini" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phphtmllib -->
+       </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates -->
+       <file name="HTMLframesConverter.inc" role="php" />
+      </dir> <!-- /phpDocumentor/Converters/HTML/frames -->
+      <dir name="Smarty">
+       <dir name="templates">
+        <dir name="default">
+         <dir name="templates">
+          <dir name="media">
+           <file name="layout.css" role="data" />
+           <file name="print.css" role="data" />
+           <file name="style.css" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/default/templates/media -->
+          <file name="basicindex.tpl" role="data" />
+          <file name="blank.tpl" role="data" />
+          <file name="class.tpl" role="data" />
+          <file name="classleft.tpl" role="data" />
+          <file name="classtrees.tpl" role="data" />
+          <file name="const.tpl" role="data" />
+          <file name="define.tpl" role="data" />
+          <file name="docblock.tpl" role="data" />
+          <file name="elementindex.tpl" role="data" />
+          <file name="errors.tpl" role="data" />
+          <file name="examplesource.tpl" role="data" />
+          <file name="fileleft.tpl" role="data" />
+          <file name="filesource.tpl" role="data" />
+          <file name="footer.tpl" role="data" />
+          <file name="function.tpl" role="data" />
+          <file name="global.tpl" role="data" />
+          <file name="header.tpl" role="data" />
+          <file name="include.tpl" role="data" />
+          <file name="index.tpl" role="data" />
+          <file name="layout.css" role="data" />
+          <file name="method.tpl" role="data" />
+          <file name="packages.tpl" role="data" />
+          <file name="page.tpl" role="data" />
+          <file name="pkgelementindex.tpl" role="data" />
+          <file name="ric.tpl" role="data" />
+          <file name="style.css" role="data" />
+          <file name="todolist.tpl" role="data" />
+          <file name="tutorial.tpl" role="data" />
+          <file name="tutorial_toc.tpl" role="data" />
+          <file name="tutorial_tree.tpl" role="data" />
+          <file name="var.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/default/templates -->
+         <dir name="templates_c">
+          <file name="%%-11^%%-1105741867^fileleft.tpl.php" role="data" />
+          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+          <file name="%%146^%%146134639^function.tpl.php" role="data" />
+          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+          <file name="%%537^%%537159954^classleft.tpl.php" role="data" />
+          <file name="%%708^%%708843835^var.tpl.php" role="data" />
+          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/default/templates_c -->
+         <file name="options.ini" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/default -->
+        <dir name="HandS">
+         <dir name="templates">
+          <dir name="media">
+           <file name="background.png" role="data" />
+           <file name="empty.png" role="data" />
+           <file name="logo.png" role="data" />
+           <file name="style.css" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/HandS/templates/media -->
+          <file name="basicindex.tpl" role="data" />
+          <file name="blank.tpl" role="data" />
+          <file name="class.tpl" role="data" />
+          <file name="classleft.tpl" role="data" />
+          <file name="classtags.tpl" role="data" />
+          <file name="classtrees.tpl" role="data" />
+          <file name="const.tpl" role="data" />
+          <file name="define.tpl" role="data" />
+          <file name="docblock.tpl" role="data" />
+          <file name="elementindex.tpl" role="data" />
+          <file name="errors.tpl" role="data" />
+          <file name="examplesource.tpl" role="data" />
+          <file name="fileleft.tpl" role="data" />
+          <file name="filesource.tpl" role="data" />
+          <file name="filetags.tpl" role="data" />
+          <file name="footer.tpl" role="data" />
+          <file name="function.tpl" role="data" />
+          <file name="global.tpl" role="data" />
+          <file name="header.tpl" role="data" />
+          <file name="include.tpl" role="data" />
+          <file name="index.tpl" role="data" />
+          <file name="method.tpl" role="data" />
+          <file name="packages.tpl" role="data" />
+          <file name="page.tpl" role="data" />
+          <file name="pkgelementindex.tpl" role="data" />
+          <file name="ric.tpl" role="data" />
+          <file name="tags.tpl" role="data" />
+          <file name="todolist.tpl" role="data" />
+          <file name="tutorial.tpl" role="data" />
+          <file name="tutorial_toc.tpl" role="data" />
+          <file name="tutorial_tree.tpl" role="data" />
+          <file name="var.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/HandS/templates -->
+         <dir name="templates_c">
+          <file name="%%-11^%%-1105741867^fileleft.tpl.php" role="data" />
+          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+          <file name="%%-12^%%-1286279509^tags.tpl.php" role="data" />
+          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+          <file name="%%-16^%%-1669679379^filetags.tpl.php" role="data" />
+          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+          <file name="%%146^%%146134639^function.tpl.php" role="data" />
+          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+          <file name="%%404^%%40462378^classtags.tpl.php" role="data" />
+          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+          <file name="%%537^%%537159954^classleft.tpl.php" role="data" />
+          <file name="%%708^%%708843835^var.tpl.php" role="data" />
+          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/HandS/templates_c -->
+         <file name="options.ini" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/HandS -->
+        <dir name="PHP">
+         <dir name="templates">
+          <dir name="media">
+           <file name="background.png" role="data" />
+           <file name="empty.png" role="data" />
+           <file name="style.css" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/PHP/templates/media -->
+          <file name="basicindex.tpl" role="data" />
+          <file name="blank.tpl" role="data" />
+          <file name="class.tpl" role="data" />
+          <file name="classleft.tpl" role="data" />
+          <file name="classtrees.tpl" role="data" />
+          <file name="const.tpl" role="data" />
+          <file name="define.tpl" role="data" />
+          <file name="docblock.tpl" role="data" />
+          <file name="elementindex.tpl" role="data" />
+          <file name="errors.tpl" role="data" />
+          <file name="examplesource.tpl" role="data" />
+          <file name="fileleft.tpl" role="data" />
+          <file name="filesource.tpl" role="data" />
+          <file name="footer.tpl" role="data" />
+          <file name="function.tpl" role="data" />
+          <file name="global.tpl" role="data" />
+          <file name="header.tpl" role="data" />
+          <file name="include.tpl" role="data" />
+          <file name="index.tpl" role="data" />
+          <file name="method.tpl" role="data" />
+          <file name="packages.tpl" role="data" />
+          <file name="page.tpl" role="data" />
+          <file name="pkgelementindex.tpl" role="data" />
+          <file name="ric.tpl" role="data" />
+          <file name="todolist.tpl" role="data" />
+          <file name="tutorial.tpl" role="data" />
+          <file name="tutorial_toc.tpl" role="data" />
+          <file name="tutorial_tree.tpl" role="data" />
+          <file name="var.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/PHP/templates -->
+         <dir name="templates_c">
+          <file name="%%-11^%%-1105741867^fileleft.tpl.php" role="data" />
+          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
+          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
+          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
+          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
+          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
+          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
+          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
+          <file name="%%146^%%146134639^function.tpl.php" role="data" />
+          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
+          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+          <file name="%%537^%%537159954^classleft.tpl.php" role="data" />
+          <file name="%%708^%%708843835^var.tpl.php" role="data" />
+          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/PHP/templates_c -->
+         <file name="options.ini" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/PHP -->
+       </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates -->
+       <file name="HTMLSmartyConverter.inc" role="php" />
+      </dir> <!-- /phpDocumentor/Converters/HTML/Smarty -->
+     </dir> <!-- /phpDocumentor/Converters/HTML -->
+     <dir name="PDF">
+      <dir name="default">
+       <dir name="templates">
+        <dir name="default">
+         <dir name="templates">
+          <dir name="media">
+           <file name="logo.jpg" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/PDF/default/templates/default/templates/media -->
+          <file name="appendix_title_page.tpl" role="data" />
+          <file name="class.tpl" role="data" />
+          <file name="classtree.tpl" role="data" />
+          <file name="const.tpl" role="data" />
+          <file name="define.tpl" role="data" />
+          <file name="docblock.tpl" role="data" />
+          <file name="examplesource.tpl" role="data" />
+          <file name="filesource.tpl" role="data" />
+          <file name="footer.tpl" role="data" />
+          <file name="function.tpl" role="data" />
+          <file name="global.tpl" role="data" />
+          <file name="include.tpl" role="data" />
+          <file name="index.tpl" role="data" />
+          <file name="method.tpl" role="data" />
+          <file name="newpackage_header.tpl" role="data" />
+          <file name="packagepage.tpl" role="data" />
+          <file name="page.tpl" role="data" />
+          <file name="pagenumbering.tpl" role="data" />
+          <file name="params.tpl" role="data" />
+          <file name="ric.tpl" role="data" />
+          <file name="ric_title_page.tpl" role="data" />
+          <file name="source_loop.tpl" role="data" />
+          <file name="source_title_page.tpl" role="data" />
+          <file name="title_page.tpl" role="data" />
+          <file name="toc.tpl" role="data" />
+          <file name="todolist.tpl" role="data" />
+          <file name="tutorial.tpl" role="data" />
+          <file name="var.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/PDF/default/templates/default/templates -->
+         <dir name="templates_c">
+          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
+          <file name="%%-15^%%-1528401657^source_loop.tpl.php" role="data" />
+          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
+          <file name="%%-16^%%-164156080^classtree.tpl.php" role="data" />
+          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
+          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
+          <file name="%%-24^%%-249219118^title_page.tpl.php" role="data" />
+          <file name="%%-27^%%-279354582^params.tpl.php" role="data" />
+          <file name="%%-63^%%-631908528^toc.tpl.php" role="data" />
+          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
+          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
+          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
+          <file name="%%138^%%1381784439^source_title_page.tpl.php" role="data" />
+          <file name="%%140^%%1408414618^ric_title_page.tpl.php" role="data" />
+          <file name="%%146^%%146134639^function.tpl.php" role="data" />
+          <file name="%%153^%%1533595741^newpackage_header.tpl.php" role="data" />
+          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
+          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
+          <file name="%%179^%%1794143582^pagenumbering.tpl.php" role="data" />
+          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
+          <file name="%%212^%%2124578681^appendix_title_page.tpl.php" role="data" />
+          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
+          <file name="%%708^%%708843835^var.tpl.php" role="data" />
+          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/PDF/default/templates/default/templates_c -->
+         <file name="options.ini" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/PDF/default/templates/default -->
+        <dir name="fonts">
+         <file name="Courier-Bold.afm" role="data" />
+         <file name="Courier-BoldOblique.afm" role="data" />
+         <file name="Courier-Oblique.afm" role="data" />
+         <file name="Courier.afm" role="data" />
+         <file name="Helvetica-Bold.afm" role="data" />
+         <file name="Helvetica-BoldOblique.afm" role="data" />
+         <file name="Helvetica-Oblique.afm" role="data" />
+         <file name="Helvetica.afm" role="data" />
+         <file name="php_Courier-Bold.afm" role="data" />
+         <file name="php_Courier-BoldOblique.afm" role="data" />
+         <file name="php_Courier-Oblique.afm" role="data" />
+         <file name="php_Courier.afm" role="data" />
+         <file name="php_Helvetica-Bold.afm" role="data" />
+         <file name="php_Helvetica-BoldOblique.afm" role="data" />
+         <file name="php_Helvetica-Oblique.afm" role="data" />
+         <file name="php_Helvetica.afm" role="data" />
+         <file name="php_Symbol.afm" role="data" />
+         <file name="php_Times-Bold.afm" role="data" />
+         <file name="php_Times-BoldItalic.afm" role="data" />
+         <file name="php_Times-Italic.afm" role="data" />
+         <file name="php_Times-Roman.afm" role="data" />
+         <file name="php_ZapfDingbats.afm" role="data" />
+         <file name="Symbol.afm" role="data" />
+         <file name="Times-Bold.afm" role="data" />
+         <file name="Times-BoldItalic.afm" role="data" />
+         <file name="Times-Italic.afm" role="data" />
+         <file name="Times-Roman.afm" role="data" />
+         <file name="ZapfDingbats.afm" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/PDF/default/templates/fonts -->
+       </dir> <!-- /phpDocumentor/Converters/PDF/default/templates -->
+       <file name="class.ezpdf.php" role="php" />
+       <file name="class.pdf.php" role="php" />
+       <file name="class.phpdocpdf.php" role="php" />
+       <file name="ParserPDF.inc" role="php" />
+       <file name="PDFdefaultConverter.inc" role="php" />
+      </dir> <!-- /phpDocumentor/Converters/PDF/default -->
+     </dir> <!-- /phpDocumentor/Converters/PDF -->
+     <dir name="XML">
+      <dir name="DocBook">
+       <dir name="peardoc2">
+        <dir name="templates">
+         <dir name="default">
+          <dir name="templates">
+           <file name="category.tpl" role="data" />
+           <file name="class.tpl" role="data" />
+           <file name="class_summary.tpl" role="data" />
+           <file name="constants.tpl" role="data" />
+           <file name="docblock.tpl" role="data" />
+           <file name="errors.tpl" role="data" />
+           <file name="globals.tpl" role="data" />
+           <file name="imethods.tpl" role="data" />
+           <file name="ivars.tpl" role="data" />
+           <file name="method.tpl" role="data" />
+           <file name="package.tpl" role="data" />
+           <file name="tutorial.tpl" role="data" />
+           <file name="var.tpl" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/XML/DocBook/peardoc2/templates/default/templates -->
+          <dir name="templates_c">
+           <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
+           <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
+           <file name="%%-46^%%-467269007^imethods.tpl.php" role="data" />
+           <file name="%%-98^%%-985719738^constants.tpl.php" role="data" />
+           <file name="%%137^%%1378042199^package.tpl.php" role="data" />
+           <file name="%%154^%%1544315249^globals.tpl.php" role="data" />
+           <file name="%%422^%%422353953^errors.tpl.php" role="data" />
+           <file name="%%625^%%625799756^class_summary.tpl.php" role="data" />
+           <file name="%%834^%%834873272^category.tpl.php" role="data" />
+           <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/XML/DocBook/peardoc2/templates/default/templates_c -->
+          <file name="options.ini" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/XML/DocBook/peardoc2/templates/default -->
+        </dir> <!-- /phpDocumentor/Converters/XML/DocBook/peardoc2/templates -->
+        <file name="Beautifier.php" role="php" />
+        <file name="Plain.php" role="php" />
+        <file name="Tokenizer.php" role="php" />
+        <file name="XMLDocBookpeardoc2Converter.inc" role="php" />
+       </dir> <!-- /phpDocumentor/Converters/XML/DocBook/peardoc2 -->
+       <dir name="templates">
+        <dir name="peardoc2">
+         <dir name="templates">
+          <file name="class_summary.tpl" role="data" />
+          <file name="ivars.tpl" role="data" />
+          <file name="tutorial.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/XML/DocBook/templates/peardoc2/templates -->
+        </dir> <!-- /phpDocumentor/Converters/XML/DocBook/templates/peardoc2 -->
+       </dir> <!-- /phpDocumentor/Converters/XML/DocBook/templates -->
+       <file name="XMLDocBookConverter.inc" role="php" />
+      </dir> <!-- /phpDocumentor/Converters/XML/DocBook -->
+     </dir> <!-- /phpDocumentor/Converters/XML -->
+    </dir> <!-- /phpDocumentor/Converters -->
+    <dir name="DocBlock">
+     <file name="Lexer.inc" role="php" />
+    </dir> <!-- /phpDocumentor/DocBlock -->
+    <dir name="Smarty-2.6.0">
+     <dir name="libs">
+      <dir name="core">
+       <file name="core.assemble_plugin_filepath.php" role="php" />
+       <file name="core.assign_smarty_interface.php" role="php" />
+       <file name="core.create_dir_structure.php" role="php" />
+       <file name="core.display_debug_console.php" role="php" />
+       <file name="core.get_include_path.php" role="php" />
+       <file name="core.get_microtime.php" role="php" />
+       <file name="core.get_php_resource.php" role="php" />
+       <file name="core.is_secure.php" role="php" />
+       <file name="core.is_trusted.php" role="php" />
+       <file name="core.load_plugins.php" role="php" />
+       <file name="core.load_resource_plugin.php" role="php" />
+       <file name="core.process_cached_inserts.php" role="php" />
+       <file name="core.process_compiled_include.php" role="php" />
+       <file name="core.read_cache_file.php" role="php" />
+       <file name="core.rmdir.php" role="php" />
+       <file name="core.rm_auto.php" role="php" />
+       <file name="core.run_insert_handler.php" role="php" />
+       <file name="core.smarty_include_php.php" role="php" />
+       <file name="core.write_cache_file.php" role="php" />
+       <file name="core.write_compiled_include.php" role="php" />
+       <file name="core.write_compiled_resource.php" role="php" />
+       <file name="core.write_file.php" role="php" />
+      </dir> <!-- /phpDocumentor/Smarty-2.6.0/libs/core -->
+      <dir name="plugins">
+       <file name="block.strip.php" role="php" />
+       <file name="block.textformat.php" role="php" />
+       <file name="function.assign.php" role="php" />
+       <file name="function.assign_debug_info.php" role="php" />
+       <file name="function.config_load.php" role="php" />
+       <file name="function.counter.php" role="php" />
+       <file name="function.cycle.php" role="php" />
+       <file name="function.debug.php" role="php" />
+       <file name="function.eval.php" role="php" />
+       <file name="function.fetch.php" role="php" />
+       <file name="function.html_checkboxes.php" role="php" />
+       <file name="function.html_image.php" role="php" />
+       <file name="function.html_options.php" role="php" />
+       <file name="function.html_radios.php" role="php" />
+       <file name="function.html_select_date.php" role="php" />
+       <file name="function.html_select_time.php" role="php" />
+       <file name="function.html_table.php" role="php" />
+       <file name="function.mailto.php" role="php" />
+       <file name="function.math.php" role="php" />
+       <file name="function.popup.php" role="php" />
+       <file name="function.popup_init.php" role="php" />
+       <file name="function.var_dump.php" role="php" />
+       <file name="modifier.capitalize.php" role="php" />
+       <file name="modifier.cat.php" role="php" />
+       <file name="modifier.count_characters.php" role="php" />
+       <file name="modifier.count_paragraphs.php" role="php" />
+       <file name="modifier.count_sentences.php" role="php" />
+       <file name="modifier.count_words.php" role="php" />
+       <file name="modifier.date_format.php" role="php" />
+       <file name="modifier.debug_print_var.php" role="php" />
+       <file name="modifier.default.php" role="php" />
+       <file name="modifier.escape.php" role="php" />
+       <file name="modifier.htmlentities.php" role="php" />
+       <file name="modifier.indent.php" role="php" />
+       <file name="modifier.lower.php" role="php" />
+       <file name="modifier.nl2br.php" role="php" />
+       <file name="modifier.rawurlencode.php" role="php" />
+       <file name="modifier.regex_replace.php" role="php" />
+       <file name="modifier.replace.php" role="php" />
+       <file name="modifier.spacify.php" role="php" />
+       <file name="modifier.string_format.php" role="php" />
+       <file name="modifier.strip.php" role="php" />
+       <file name="modifier.strip_tags.php" role="php" />
+       <file name="modifier.truncate.php" role="php" />
+       <file name="modifier.upper.php" role="php" />
+       <file name="modifier.wordwrap.php" role="php" />
+       <file name="outputfilter.trimwhitespace.php" role="php" />
+       <file name="shared.escape_special_chars.php" role="php" />
+       <file name="shared.make_timestamp.php" role="php" />
+      </dir> <!-- /phpDocumentor/Smarty-2.6.0/libs/plugins -->
+      <file name="Config_File.class.php" role="php" />
+      <file name="debug.tpl" role="php" />
+      <file name="Smarty.class.php" role="php" />
+      <file name="Smarty_Compiler.class.php" role="php" />
+     </dir> <!-- /phpDocumentor/Smarty-2.6.0/libs -->
+     <dir name="misc">
+      <file name="smarty_icon.gif" role="data" />
+      <file name="smarty_icon.README" role="data" />
+     </dir> <!-- /phpDocumentor/Smarty-2.6.0/misc -->
+     <file name="BUGS" role="data" />
+     <file name="ChangeLog" role="data" />
+     <file name="COPYING.lib" role="data" />
+     <file name="FAQ" role="data" />
+     <file name="INSTALL" role="data" />
+     <file name="NEWS" role="data" />
+     <file name="README" role="data" />
+     <file name="RELEASE_NOTES" role="data" />
+     <file name="TODO" role="data" />
+    </dir> <!-- /phpDocumentor/Smarty-2.6.0 -->
+    <file name="Classes.inc" role="php" />
+    <file name="clone.inc.php" role="php" />
+    <file name="clone5.inc.php" role="php" />
+    <file name="common.inc.php" role="php">
+     <tasks:replace from="@VER@" to="version" type="package-info" />
+    </file>
+    <file name="Converter.inc" role="php">
+     <tasks:replace from="@DATA-DIR@" to="data_dir" type="pear-config" />
+    </file>
+    <file name="DescHTML.inc" role="php" />
+    <file name="DocBlockTags.inc" role="php" />
+    <file name="Errors.inc" role="php" />
+    <file name="EventStack.inc" role="php" />
+    <file name="find_phpdoc.php" role="php" />
+    <file name="HighlightParser.inc" role="php" />
+    <file name="InlineTags.inc" role="php" />
+    <file name="IntermediateParser.inc" role="php">
+     <tasks:replace from="@VER@" to="version" type="package-info" />
+    </file>
+    <file name="Io.inc" role="php" />
+    <file name="LinkClasses.inc" role="php" />
+    <file name="PackagePageElements.inc" role="php" />
+    <file name="Parser.inc" role="php" />
+    <file name="ParserData.inc" role="php" />
+    <file name="ParserDescCleanup.inc" role="php" />
+    <file name="ParserDocBlock.inc" role="php" />
+    <file name="ParserElements.inc" role="php" />
+    <file name="phpdoc.inc" role="php" />
+    <file name="phpDocumentorTParser.inc" role="php" />
+    <file name="phpDocumentorTWordParser.inc" role="php" />
+    <file name="ProceduralPages.inc" role="php" />
+    <file name="Publisher.inc" role="php" />
+    <file name="Setup.inc.php" role="php">
+     <tasks:replace from="@DATA-DIR@" to="data_dir" type="pear-config" />
+    </file>
+    <file name="TutorialHighlightParser.inc" role="php" />
+    <file name="WordParser.inc" role="php" />
+    <file name="XMLpackagePageParser.inc" role="php" />
+   </dir> <!-- /phpDocumentor -->
+   <dir name="scripts">
+    <file name="add_cvs.php" role="php" />
+    <file name="create_examples.php" role="php" />
+    <file name="create_package.xml.php" role="php" />
+    <file name="makedoc.sh" role="script" />
+    <file name="tokenizer_test.php" role="php" />
+   </dir> <!-- /scripts -->
+   <dir name="tutorials">
+    <dir name="Converters">
+     <dir name="CHMdefault">
+      <file name="CHMdefaultConverter.cls" role="doc" />
+     </dir> <!-- /tutorials/Converters/CHMdefault -->
+     <dir name="HTMLframes">
+      <file name="HTMLframesConverter.cls" role="doc" />
+     </dir> <!-- /tutorials/Converters/HTMLframes -->
+     <dir name="HTMLSmarty">
+      <file name="HTMLSmartyConverter.cls" role="doc" />
+     </dir> <!-- /tutorials/Converters/HTMLSmarty -->
+     <dir name="PDFdefault">
+      <file name="PDFdefaultConverter.cls" role="doc" />
+      <file name="PDFParser.cls" role="doc" />
+     </dir> <!-- /tutorials/Converters/PDFdefault -->
+     <dir name="XMLDocBook">
+      <file name="XMLDocBookConverter.cls" role="doc" />
+     </dir> <!-- /tutorials/Converters/XMLDocBook -->
+     <file name="Converter.cls" role="doc" />
+     <file name="Converter.cls.ini" role="doc" />
+     <file name="Converter.methods.cls" role="doc" />
+     <file name="Converters.pkg" role="doc" />
+     <file name="template.vars.cls" role="doc" />
+    </dir> <!-- /tutorials/Converters -->
+    <dir name="phpDocumentor">
+     <dir name="examples">
+      <file name="sample1.php" role="doc" />
+      <file name="sample2.php" role="doc" />
+      <file name="sample3.php" role="doc" />
+     </dir> <!-- /tutorials/phpDocumentor/examples -->
+     <file name="elements.pkg" role="doc" />
+     <file name="inlinetags.pkg" role="doc" />
+     <file name="inlinetags.pkg.ini" role="doc" />
+     <file name="manual.pkg" role="doc" />
+     <file name="manual.pkg.ini" role="doc" />
+     <file name="phpDocumentor.howto.pkg" role="doc" />
+     <file name="phpDocumentor.howto.pkg.ini" role="doc" />
+     <file name="phpDocumentor.pkg" role="doc" />
+     <file name="phpDocumentor.pkg.ini" role="doc" />
+     <file name="phpDocumentor.quickstart.pkg" role="doc" />
+     <file name="phpDocumentor.quickstart.pkg.ini" role="doc" />
+     <file name="sample1.pkg" role="doc" />
+     <file name="sample2.pkg" role="doc" />
+     <file name="sample3.pkg" role="doc" />
+     <file name="tags.abstract.pkg" role="doc" />
+     <file name="tags.access.pkg" role="doc" />
+     <file name="tags.author.pkg" role="doc" />
+     <file name="tags.category.pkg" role="doc" />
+     <file name="tags.copyright.pkg" role="doc" />
+     <file name="tags.deprecated.pkg" role="doc" />
+     <file name="tags.example.pkg" role="doc" />
+     <file name="tags.filesource.pkg" role="doc" />
+     <file name="tags.final.pkg" role="doc" />
+     <file name="tags.global.pkg" role="doc" />
+     <file name="tags.ignore.pkg" role="doc" />
+     <file name="tags.inlineexample.pkg" role="doc" />
+     <file name="tags.inlineid.pkg" role="doc" />
+     <file name="tags.inlineinheritdoc.pkg" role="doc" />
+     <file name="tags.inlineinternal.pkg" role="doc" />
+     <file name="tags.inlinelink.pkg" role="doc" />
+     <file name="tags.inlinesource.pkg" role="doc" />
+     <file name="tags.inlinetoc.pkg" role="doc" />
+     <file name="tags.inlinetutorial.pkg" role="doc" />
+     <file name="tags.internal.pkg" role="doc" />
+     <file name="tags.license.pkg" role="doc" />
+     <file name="tags.link.pkg" role="doc" />
+     <file name="tags.name.pkg" role="doc" />
+     <file name="tags.package.pkg" role="doc" />
+     <file name="tags.param.pkg" role="doc" />
+     <file name="tags.pkg" role="doc" />
+     <file name="tags.pkg.ini" role="doc" />
+     <file name="tags.return.pkg" role="doc" />
+     <file name="tags.see.pkg" role="doc" />
+     <file name="tags.since.pkg" role="doc" />
+     <file name="tags.static.pkg" role="doc" />
+     <file name="tags.staticvar.pkg" role="doc" />
+     <file name="tags.subpackage.pkg" role="doc" />
+     <file name="tags.todo.pkg" role="doc" />
+     <file name="tags.tutorial.pkg" role="doc" />
+     <file name="tags.uses.pkg" role="doc" />
+     <file name="tags.var.pkg" role="doc" />
+     <file name="tags.version.pkg" role="doc" />
+     <file name="tutorials.pkg" role="doc" />
+    </dir> <!-- /tutorials/phpDocumentor -->
+   </dir> <!-- /tutorials -->
+   <dir name="user">
+    <file name="default.ini" role="data" />
+    <file name="demo.ini" role="data" />
+    <file name="error.ini" role="data" />
+    <file name="pear-makedocs.ini" role="data">
+     <tasks:replace from="@PEAR-DIR@" to="php_dir" type="pear-config" />
+     <tasks:replace from="@DOC-DIR@" to="doc_dir" type="pear-config" />
+     <tasks:replace from="@VER@" to="version" type="package-info" />
+    </file>
+    <file name="testdocbook.ini" role="data" />
+   </dir> <!-- /user -->
+   <file name="Authors" role="doc" />
+   <file name="ChangeLog" role="doc" />
+   <file name="FAQ" role="doc" />
+   <file name="index.html" role="data" />
+   <file name="INSTALL" role="doc" />
+   <file name="new_phpdoc.php" role="data" />
+   <file name="pear-phpdoc" role="script">
+    <tasks:replace from="@PHP-BIN@" to="php_bin" type="pear-config" />
+    <tasks:unixeol />
+   </file>
+   <file name="pear-phpdoc.bat" role="script">
+    <tasks:replace from="@PHP-BIN@" to="php_bin" type="pear-config" />
+    <tasks:replace from="@BIN-DIR@" to="bin_dir" type="pear-config" />
+    <tasks:replace from="@PEAR-DIR@" to="php_dir" type="pear-config" />
+    <tasks:replace from="@DATA-DIR@" to="data_dir" type="pear-config" />
+    <tasks:windowseol />
+   </file>
+   <file name="phpdoc.php" role="data" />
+   <file name="phpDocumentor.ini" role="data" />
+   <file name="PHPLICENSE.txt" role="doc" />
+   <file name="poweredbyphpdoc.gif" role="data" />
+   <file name="README" role="doc" />
+   <file name="Release-1.3.0" role="doc" />
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.1.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.3</min>
+   </pearinstaller>
+  </required>
+  <optional>
+   <package>
+    <name>XML_Beautifier</name>
+    <channel>pear.php.net</channel>
+    <min>1.1</min>
+   </package>
+  </optional>
+ </dependencies>
+ <phprelease>
+  <installconditions>
+   <os>
+    <name>windows</name>
+   </os>
+  </installconditions>
+  <filelist>
+   <install as="phpdoc.bat" name="pear-phpdoc.bat" />
+   <install as="user/makedocs.ini" name="user/pear-makedocs.ini" />
+   <ignore name="pear-phpdoc" />
+   <ignore name="scripts/makedoc.sh" />
+  </filelist>
+ </phprelease>
+ <phprelease>
+  <filelist>
+   <install as="phpdoc" name="pear-phpdoc" />
+   <install as="user/makedocs.ini" name="user/pear-makedocs.ini" />
+   <ignore name="pear-phpdoc.bat" />
+  </filelist>
+ </phprelease>
+ <changelog>
+  <release>
+   <version>
+    <release>1.1.0</release>
+    <api>1.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2002-11-22</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>This is the initial PEAR package.xml release of the phpDocumentor package.</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0beta1</release>
+    <api>1.2.0beta1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-01-03</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>This is the first attempt at a PEAR package.xml release of the
+phpDocumentor package.  We are very pleased to present this release to
+the PEAR community.  In it, there is a number of great enhancements
+that should make documenting very productive.
+
+We have included the beta of the new XML:DocBook:peardoc2 converter, and
+there are many problems with it.  Those of you who are familiar with
+peardoc2, please help us out by running a test of peardoc2 on the output
+from a sample and tell us where we need to fix things to make it better
+at the bug tracker
+
+http://sourceforge.net/tracker/?group_id=11194&amp;atid=111194</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0beta1a</release>
+    <api>1.2.0beta1a</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-01-08</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>This is the third attempt at a PEAR package.xml release of the
+phpDocumentor package.  Thanks to fixes in Archive_Tar it should install
+properly with any luck.
+
+We are very pleased to present this release to the PEAR community.
+In it, there is a number of great enhancements that should make
+documenting very productive.
+
+We have included the beta of the new XML:DocBook:peardoc2 converter, and
+there are many problems with it.  Those of you who are familiar with
+peardoc2, please help us out by running a test of peardoc2 on the output
+from a sample and tell us where we need to fix things to make it better
+at the bug tracker
+
+http://sourceforge.net/tracker/?group_id=11194&amp;atid=111194</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0beta1b</release>
+    <api>1.2.0beta1b</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-01-08</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>This is the fourth attempt at a PEAR package.xml release of the
+phpDocumentor package.  Thanks to fixes in Archive_Tar it should install
+properly with any luck.
+
+This version adds one new feature, --pear
+
+We are very pleased to present this release to the PEAR community.
+In it, there is a number of great enhancements that should make
+documenting very productive.
+
+We have included the beta of the new XML:DocBook:peardoc2 converter, and
+there are many problems with it.  Those of you who are familiar with
+peardoc2, please help us out by running a test of peardoc2 on the output
+from a sample and tell us where we need to fix things to make it better
+at the bug tracker
+
+http://sourceforge.net/tracker/?group_id=11194&amp;atid=111194</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0beta2</release>
+    <api>1.2.0beta2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-01-18</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>This is the fifth attempt at a PEAR package.xml release of the
+phpDocumentor package.  Thanks to fixes in Archive_Tar it should install
+properly with any luck.  If they get around to fixing the bug on
+pear.php.net (someday pear will be bug-free and we&apos;ll all be happy).
+
+This version adds several new features suggested by Darren Cook:
+- command-line --ignore-tags to exclude standard tags from output for
+  particular usage like @todo
+- @example tag for parsing external example files and including
+  highlighted source code in documentation
+- @filesource tag for parsing the full source of the current file
+  and including it in the documentation
+- @internal/{@internal}} tag/inline tag for marking text that should only
+  be parsed for advanced developers or for internal company documentation
+
+We are very pleased to present this release to the PEAR community.
+In it, there is a number of great enhancements that should make
+documenting very productive.
+
+We have included the beta of the new XML:DocBook:peardoc2 converter, and
+there are many problems with it.  Those of you who are familiar with
+peardoc2, please help us out by running a test of peardoc2 on the output
+from a sample and tell us where we need to fix things to make it better
+at the bug tracker
+
+http://sourceforge.net/tracker/?group_id=11194&amp;atid=111194</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0beta3</release>
+    <api>1.2.0beta3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-02-02</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>This is the sixth attempt at a PEAR package.xml release of the
+phpDocumentor package.  Thanks to fixes in Archive_Tar it should install
+properly with any luck.
+
+This version adds a new converter written by Harald Fielker:
+ - a CSV converter for the dia2code tool, to allow generation of UML
+   diagrams from the code.
+   
+In addition, many bugs are fixed, and features stablized
+
+We are very pleased to present this release to the PEAR community.
+In it, there is a number of great enhancements that should make
+documenting very productive.
+
+We have included the beta of the new XML:DocBook:peardoc2 converter, and
+there are many problems with it.  Those of you who are familiar with
+peardoc2, please help us out by running a test of peardoc2 on the output
+from a sample and tell us where we need to fix things to make it better
+at the bug tracker
+
+http://sourceforge.net/tracker/?group_id=11194&amp;atid=111194</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0rc1</release>
+    <api>1.2.0rc1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-04-17</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>We have included the final of the new XML:DocBook/peardoc2:default
+converter, and fixed all known bugs.  Post any new bugs at:
+
+http://sourceforge.net/tracker/?group_id=11194&amp;atid=111194
+
+new features since beta 3:
+-@license tag
+-link to element definition in highlighted source code from @filesource
+ generated sourcecode
+-phpEdit-style smart list support
+-starting/ending line numbers for docblocks/classes/methods
+-syntax highlighting for tutorial &lt;programlisting role=&quot;php&quot;&gt;
+-phpXref-style cross-referencing in source highlighting
+
+All major features have been implemented.  There will be few changes
+before 1.2.0STABLE</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0rc2</release>
+    <api>1.2.0rc2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-04-28</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>We have included the final of the new XML:DocBook/peardoc2:default
+converter, and fixed all known bugs.  Post any new bugs at:
+
+http://sourceforge.net/tracker/?group_id=11194&amp;atid=111194
+
+All major features have been implemented.  There will be few changes
+before 1.2.0STABLE</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0a</release>
+    <api>1.2.0a</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-06-04</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>This release marks the first stable release of phpDocumentor through
+PEAR.
+
+utilities.php, missing from docbuilder, has been added to the archive</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0</release>
+    <api>1.2.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-06-04</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>This release marks the first stable release of phpDocumentor through
+PEAR.</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.1</release>
+    <api>1.2.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-07-03</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>This is a bugfix release
+
+@example tag has been enhanced to be more intelligent
+several other minor bugfixes, see Release-1.2.1 file for information</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.2</release>
+    <api>1.2.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-08-19</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>Bugfix release
+
+From both Windows and Unix, both the command-line version
+of phpDocumentor and the web interface will work
+out of the box by using command phpdoc - guaranteed :)
+
+If you wish to use the web interface, you must upgrade to
+PEAR 1.2b4, and pear config-set publicweb_dir to a
+subdirectory of your web server&apos;s document root
+
+- WARNING: phpDocumentor installs phpdoc in the
+  scripts directory, and this will conflict with PHPDoc,
+  you can&apos;t have both installed at the same time
+- fixed minor problems with --ignore option
+- DocBook/peardoc2 converter outputs valid DocBook
+- CHM:default converter outputs valid CHM file
+- PDF:default converter outputs a great file
+  including color source-highlighting!
+- fixed Page-Level DocBlock issues, now a page-level
+  docblock is the first docblock in a file if it contains
+  a @package tag, UNLESS the next element is a class.  Warnings
+  raised are much more informative
+- removed erroneous warning of duplicate @package tag in certain cases
+- fixed these bugs:
+ [ 765455 ] phpdoc can&apos;t find php if it is in /usr/local/bin
+ [ 767251 ] broken links when no files in default package
+ [ 768947 ] Multiple vars not recognised
+ [ 772441 ] nested arrays fail parser
+ [ 778920 ] tutorial link warning
+ [ 779552 ] &quot;Documention&quot; instead of &quot;Documentation&quot; in generated pages
+ [ 780332 ] {@link} is closing the link prematurely when a &apos;,&apos; is found
+ [ 781913 ] usedby not when @uses at class level
+ [ 784810 ] stat failing.
+ [ 786180 ] simple lists fail if line starts with an inline tag
+ [ 788251 ] {@link function blah()} and {@link object blah} fail
+ [ 788271 ] HighlightParser links to methods before classes
+ [ 790685 ] HighlightParser doesn&apos;t link class::method() outside methods
+ [ 791023 ] bug in output: &lt;br;&amp;nbsp;/&gt;
+ [ 791030 ] old PHP version bug /t and &apos; becomes to &amp;quot;
+ [ 791131 ] old PHP version bug in output, if define contains &quot;(&quot;
+ [ 791291 ] ignoretags handling incorrectly looks for ignore-tags</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.2.1</release>
+    <api>1.2.2.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-08-29</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>Bugfix release
+
+From both Windows and Unix, both the command-line version
+of phpDocumentor and the web interface will work
+out of the box by using command phpdoc - guaranteed :)
+
+Note: the web interface will not work out of the box in PEAR.  Unfortunately,
+the file role needed to make this possible is still pending, but planned for
+addition in PEAR 1.3.  If you wish to use the web interface, you must
+download phpDocumentor 1.2.2 from http://www.phpdoc.org.
+
+- WARNING: phpDocumentor installs phpdoc in the
+  scripts directory, and this will conflict with PHPDoc,
+  you can&apos;t have both installed at the same time
+- fixed minor problems with --ignore option
+- DocBook/peardoc2 converter outputs valid DocBook
+- CHM:default converter outputs valid CHM file
+- PDF:default converter outputs a great file
+  including color source-highlighting!
+- fixed Page-Level DocBlock issues, now a page-level
+  docblock is the first docblock in a file if it contains
+  a @package tag, UNLESS the next element is a class.  Warnings
+  raised are much more informative
+- removed erroneous warning of duplicate @package tag in certain cases
+- fixed these bugs:
+ [ 765455 ] phpdoc can&apos;t find php if it is in /usr/local/bin
+ [ 767251 ] broken links when no files in default package
+ [ 768947 ] Multiple vars not recognised
+ [ 772441 ] nested arrays fail parser
+ [ 778920 ] tutorial link warning
+ [ 779552 ] &quot;Documention&quot; instead of &quot;Documentation&quot; in generated pages
+ [ 780332 ] {@link} is closing the link prematurely when a &apos;,&apos; is found
+ [ 781913 ] usedby not when @uses at class level
+ [ 784810 ] stat failing.
+ [ 786180 ] simple lists fail if line starts with an inline tag
+ [ 788251 ] {@link function blah()} and {@link object blah} fail
+ [ 788271 ] HighlightParser links to methods before classes
+ [ 790685 ] HighlightParser doesn&apos;t link class::method() outside methods
+ [ 791023 ] bug in output: &lt;br;&amp;nbsp;/&gt;
+ [ 791030 ] old PHP version bug /t and &apos; becomes to &amp;quot;
+ [ 791131 ] old PHP version bug in output, if define contains &quot;(&quot;
+ [ 791291 ] ignoretags handling incorrectly looks for ignore-tags</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.3</release>
+    <api>1.2.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-10-12</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>Bugfix release
+
+From both Windows and Unix, both the command-line version
+of phpDocumentor and the web interface will work
+out of the box by using command phpdoc - guaranteed :)
+
+WARNING: in order to use the web interface through PEAR, you must set your
+data_dir to a subdirectory of your document root.
+
+$ pear config-set data_dir /path/to/public_html/pear
+
+on Windows with default apache setup, it might be
+
+C:\&gt; pear config-set data_dir &quot;C:\Program Files\Apache\htdocs\pear&quot;
+
+After this, install/upgrade phpDocumentor
+
+$ pear upgrade phpDocumentor
+
+and you can browse to:
+
+http://localhost/pear/PhpDocumentor/
+
+for the web interface
+
+- WARNING: phpDocumentor installs phpdoc in the
+  scripts directory, and this will conflict with PHPDoc,
+  you can&apos;t have both installed at the same time
+- fixed these bugs:
+ [ 731750 ] Links to unparsed includes shown (2nd time reopened)
+ [ 771531 ] body styles not explicitly white
+ [ 795095 ] top_frame.tpl doesn&apos;t output single RIC element
+ [ 797066 ] HighlightParser stuffs whitespace in start of string in func
+ [ 802891 ] Inline link text does not show up</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.3.1</release>
+    <api>1.2.3.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-10-19</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>Bugfix release
+
+From both Windows and Unix, both the command-line version
+of phpDocumentor and the web interface will work
+out of the box by using command phpdoc - guaranteed :)
+
+WARNING: in order to use the web interface through PEAR, you must set your
+data_dir to a subdirectory of your document root.
+
+$ pear config-set data_dir /path/to/public_html/pear
+
+on Windows with default apache setup, it might be
+
+C:\&gt; pear config-set data_dir &quot;C:\Program Files\Apache\htdocs\pear&quot;
+
+After this, install/upgrade phpDocumentor
+
+$ pear upgrade phpDocumentor
+
+and you can browse to:
+
+http://localhost/pear/PhpDocumentor/
+
+for the web interface
+
+- WARNING: phpDocumentor installs phpdoc in the
+  scripts directory, and this will conflict with PHPDoc,
+  you can&apos;t have both installed at the same time
+- fixed these bugs:
+ [ 822373 ] global instruction in function, &apos;,&apos; and &apos;;&apos; missing
+ [ 823018 ] &lt;code&gt; in list not processed</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.3.0RC1</release>
+    <api>1.3.0RC1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2004-02-08</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>PHP 5 support and more, fix bugs
+
+This will be the last release in the 1.x series.  2.0 is next
+
+Features added to this release include:
+
+ * Full PHP 5 support, phpDocumentor both runs in and parses Zend Engine 2
+   language constructs.  Note that you must be running phpDocumentor in
+   PHP 5 in order to parse PHP 5 code
+ * inline {@example} tag - this works just like {@source} except that
+   it displays the contents of another file.  In tutorials, it works
+   like &lt;programlisting&gt;
+ * customizable README/INSTALL/CHANGELOG files
+ * phpDocumentor tries to run .ini files out of the current directory
+   first, to allow you to put them anywhere you want to
+ * multi-national characters are now allowed in package/subpackage names
+
+From both Windows and Unix, both the command-line version
+of phpDocumentor and the web interface will work
+out of the box by using command phpdoc - guaranteed :)
+
+WARNING: in order to use the web interface through PEAR, you must set your
+data_dir to a subdirectory of your document root.
+
+$ pear config-set data_dir /path/to/public_html/pear
+
+on Windows with default apache setup, it might be
+
+C:\&gt; pear config-set data_dir &quot;C:\Program Files\Apache\htdocs\pear&quot;
+
+After this, install/upgrade phpDocumentor
+
+$ pear upgrade phpDocumentor
+
+and you can browse to:
+
+http://localhost/pear/PhpDocumentor/
+
+for the web interface
+
+------
+WARNING: The PDF Converter will not work in PHP5.  The PDF library that it relies upon
+segfaults with the simplest of files.  Generation still works great in PHP4
+------
+
+- WARNING: phpDocumentor installs phpdoc in the
+  scripts directory, and this will conflict with PHPDoc,
+  you can&apos;t have both installed at the same time
+- Switched to Smarty 2.6.0, now it will work in PHP 5.  Other
+  changes made to the code to make it work in PHP 5, including parsing
+  of private/public/static/etc. access modifiers
+- fixed these bugs:
+ [ 834941 ] inline @link doesn&apos;t work within &lt;b&gt;
+ [ 839092 ] CHM:default:default produces bad links
+ [ 839466 ] {$array[&apos;Key&apos;]} in heredoc
+ [ 840792 ] File Missing XML:DocBook/peardoc2:default &quot;errors.tpl&quot;
+ [ 850731 ] No DocBlock template after page-level DocBlock?
+ [ 850767 ] MHW Reference wrong
+ [ 854321 ] web interface errors with template directory
+ [ 856310 ] HTML:frames:DOM/earthli missing Class_logo.png image
+ [ 865126 ] CHM files use hard paths
+ [ 875525 ] &lt;li&gt; escapes &lt;pre&gt; and ignores paragraphs
+ [ 876674 ] first line of pre and code gets left trimmed
+ [ 877229 ] PHP 5 incompatibilities bork tutorial parsing
+ [ 877233 ] PHP 5 incompatibilities bork docblock source highlighting
+ [ 878911 ] [PHP 5 incompatibility] argv
+ [ 879068 ] var arrays tripped up by comments
+ [ 879151 ] HTML:frames:earthli Top row too small for IE
+ [ 880070 ] PHP5 visability for member variables not working
+ [ 880488 ] &apos;0&apos; file stops processing
+ [ 884863 ] Multiple authors get added in wrong order.
+ [ 884869 ] Wrong highligthing of object type variables
+ [ 892305 ] peardoc2: summary require_once Path/File.php is PathFile.php
+ [ 892306 ] peardoc2: @see of method not working
+ [ 892479 ] {@link} in // comment is escaped</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.3.0RC2</release>
+    <api>1.3.0RC2</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2004-02-12</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>PHP 5 support and more, fix bugs
+
+This will be the last release in the 1.x series.  2.0 is next
+
+Features added to this release include:
+
+ * Full PHP 5 support, phpDocumentor both runs in and parses Zend Engine 2
+   language constructs.  Note that you must be running phpDocumentor in
+   PHP 5 in order to parse PHP 5 code
+ * inline {@example} tag - this works just like {@source} except that
+   it displays the contents of another file.  In tutorials, it works
+   like &lt;programlisting&gt;
+ * customizable README/INSTALL/CHANGELOG files
+ * phpDocumentor tries to run .ini files out of the current directory
+   first, to allow you to put them anywhere you want to
+ * multi-national characters are now allowed in package/subpackage names
+
+From both Windows and Unix, both the command-line version
+of phpDocumentor and the web interface will work
+out of the box by using command phpdoc - guaranteed :)
+
+WARNING: in order to use the web interface through PEAR, you must set your
+data_dir to a subdirectory of your document root.
+
+$ pear config-set data_dir /path/to/public_html/pear
+
+on Windows with default apache setup, it might be
+
+C:\&gt; pear config-set data_dir &quot;C:\Program Files\Apache\htdocs\pear&quot;
+
+After this, install/upgrade phpDocumentor
+
+$ pear upgrade phpDocumentor
+
+and you can browse to:
+
+http://localhost/pear/PhpDocumentor/
+
+for the web interface
+
+------
+WARNING: The PDF Converter will not work in PHP5.  The PDF library that it relies upon
+segfaults with the simplest of files.  Generation still works great in PHP4
+------
+
+- WARNING: phpDocumentor installs phpdoc in the
+  scripts directory, and this will conflict with PHPDoc,
+  you can&apos;t have both installed at the same time
+- Switched to Smarty 2.6.0, now it will work in PHP 5.  Other
+  changes made to the code to make it work in PHP 5, including parsing
+  of private/public/static/etc. access modifiers
+- fixed these bugs:
+ [ 834941 ] inline @link doesn&apos;t work within &lt;b&gt;
+ [ 839092 ] CHM:default:default produces bad links
+ [ 839466 ] {$array[&apos;Key&apos;]} in heredoc
+ [ 840792 ] File Missing XML:DocBook/peardoc2:default &quot;errors.tpl&quot;
+ [ 850731 ] No DocBlock template after page-level DocBlock?
+ [ 850767 ] MHW Reference wrong
+ [ 854321 ] web interface errors with template directory
+ [ 856310 ] HTML:frames:DOM/earthli missing Class_logo.png image
+ [ 865126 ] CHM files use hard paths
+ [ 875525 ] &lt;li&gt; escapes &lt;pre&gt; and ignores paragraphs
+ [ 876674 ] first line of pre and code gets left trimmed
+ [ 877229 ] PHP 5 incompatibilities bork tutorial parsing
+ [ 877233 ] PHP 5 incompatibilities bork docblock source highlighting
+ [ 878911 ] [PHP 5 incompatibility] argv
+ [ 879068 ] var arrays tripped up by comments
+ [ 879151 ] HTML:frames:earthli Top row too small for IE
+ [ 880070 ] PHP5 visability for member variables not working
+ [ 880488 ] &apos;0&apos; file stops processing
+ [ 884863 ] Multiple authors get added in wrong order.
+ [ 884869 ] Wrong highligthing of object type variables
+ [ 892305 ] peardoc2: summary require_once Path/File.php is PathFile.php
+ [ 892306 ] peardoc2: @see of method not working
+ [ 892479 ] {@link} in // comment is escaped
+ [ 893470 ] __clone called directly in PackagePageElements.inc
+ [ 895656 ] initialized private variables not recognized as private</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.3.0RC3</release>
+    <api>1.3.0RC3</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2004-04-10</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>PHP 5 support and more, fix bugs
+
+This will be the last release in the 1.x series.  2.0 is next
+
+Features added to this release include:
+
+ * Full PHP 5 support, phpDocumentor both runs in and parses Zend Engine 2
+   language constructs.  Note that you must be running phpDocumentor in
+   PHP 5 in order to parse PHP 5 code
+ * XML:DocBook/peardoc2:default converter now beautifies the source using
+   PEAR&apos;s XML_Beautifier if available
+ * inline {@example} tag - this works just like {@source} except that
+   it displays the contents of another file.  In tutorials, it works
+   like &lt;programlisting&gt;
+ * customizable README/INSTALL/CHANGELOG files
+ * phpDocumentor tries to run .ini files out of the current directory
+   first, to allow you to put them anywhere you want to
+ * multi-national characters are now allowed in package/subpackage names
+ * images in tutorials with the &lt;graphic&gt; tag
+ * un-modified output with &lt;programlisting role=&quot;html&quot;&gt;
+ * html/xml source highlighting with &lt;programlisting role=&quot;tutorial&quot;&gt;
+
+From both Windows and Unix, both the command-line version
+of phpDocumentor and the web interface will work
+out of the box by using command phpdoc - guaranteed :)
+
+WARNING: in order to use the web interface through PEAR, you must set your
+data_dir to a subdirectory of your document root.
+
+$ pear config-set data_dir /path/to/public_html/pear
+
+on Windows with default apache setup, it might be
+
+C:\&gt; pear config-set data_dir &quot;C:\Program Files\Apache\htdocs\pear&quot;
+
+After this, install/upgrade phpDocumentor
+
+$ pear upgrade phpDocumentor
+
+and you can browse to:
+
+http://localhost/pear/PhpDocumentor/
+
+for the web interface
+
+------
+WARNING: The PDF Converter will not work in PHP5.  The PDF library that it relies upon
+segfaults with the simplest of files.  Generation still works great in PHP4
+------
+
+- WARNING: phpDocumentor installs phpdoc in the
+  scripts directory, and this will conflict with PHPDoc,
+  you can&apos;t have both installed at the same time
+- Switched to Smarty 2.6.0, now it will work in PHP 5.  Other
+  changes made to the code to make it work in PHP 5, including parsing
+  of private/public/static/etc. access modifiers
+- fixed these bugs:
+ [ 834941 ] inline @link doesn&apos;t work within &lt;b&gt;
+ [ 839092 ] CHM:default:default produces bad links
+ [ 839466 ] {$array[&apos;Key&apos;]} in heredoc
+ [ 840792 ] File Missing XML:DocBook/peardoc2:default &quot;errors.tpl&quot;
+ [ 850731 ] No DocBlock template after page-level DocBlock?
+ [ 850767 ] MHW Reference wrong
+ [ 854321 ] web interface errors with template directory
+ [ 856310 ] HTML:frames:DOM/earthli missing Class_logo.png image
+ [ 865126 ] CHM files use hard paths
+ [ 875525 ] &lt;li&gt; escapes &lt;pre&gt; and ignores paragraphs
+ [ 876674 ] first line of pre and code gets left trimmed
+ [ 877229 ] PHP 5 incompatibilities bork tutorial parsing
+ [ 877233 ] PHP 5 incompatibilities bork docblock source highlighting
+ [ 878911 ] [PHP 5 incompatibility] argv
+ [ 879068 ] var arrays tripped up by comments
+ [ 879151 ] HTML:frames:earthli Top row too small for IE
+ [ 880070 ] PHP5 visability for member variables not working
+ [ 880488 ] &apos;0&apos; file stops processing
+ [ 884863 ] Multiple authors get added in wrong order.
+ [ 884869 ] Wrong highligthing of object type variables
+ [ 892305 ] peardoc2: summary require_once Path/File.php is PathFile.php
+ [ 892306 ] peardoc2: @see of method not working
+ [ 892479 ] {@link} in // comment is escaped
+ [ 893470 ] __clone called directly in PackagePageElements.inc
+ [ 895656 ] initialized private variables not recognized as private
+ [ 904823 ] IntermediateParser fatal error
+ [ 910676 ] Fatal error: Smarty error: unable to write to $compile_dir
+ [ 915770 ] Classes in file not showing
+ [ 924313 ] Objec access on array</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.3.0RC4</release>
+    <api>1.3.0RC4</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2005-12-01</date>
+   <license>PHP License</license>
+   <notes>PHP 5 support and more, fix bugs
+
+This will be the last release in the 1.x series.  2.0 is next
+
+Features added to this release include:
+
+ * Full PHP 5 support, phpDocumentor both runs in and parses Zend Engine 2
+   language constructs.  Note that you must be running phpDocumentor in
+   PHP 5 in order to parse PHP 5 code
+ * XML:DocBook/peardoc2:default converter now beautifies the source using
+   PEAR&apos;s XML_Beautifier if available
+ * inline {@example} tag - this works just like {@source} except that
+   it displays the contents of another file.  In tutorials, it works
+   like &lt;programlisting&gt;
+ * customizable README/INSTALL/CHANGELOG files
+ * phpDocumentor tries to run .ini files out of the current directory
+   first, to allow you to put them anywhere you want to
+ * multi-national characters are now allowed in package/subpackage names
+ * images in tutorials with the &lt;graphic&gt; tag
+ * un-modified output with &lt;programlisting role=&quot;html&quot;&gt;
+ * html/xml source highlighting with &lt;programlisting role=&quot;tutorial&quot;&gt;
+
+From both Windows and Unix, both the command-line version
+of phpDocumentor and the web interface will work
+out of the box by using command phpdoc - guaranteed :)
+
+WARNING: in order to use the web interface through PEAR, you must set your
+data_dir to a subdirectory of your document root.
+
+$ pear config-set data_dir /path/to/public_html/pear
+
+on Windows with default apache setup, it might be
+
+C:\&gt; pear config-set data_dir &quot;C:\Program Files\Apache\htdocs\pear&quot;
+
+After this, install/upgrade phpDocumentor
+
+$ pear upgrade phpDocumentor
+
+and you can browse to:
+
+http://localhost/pear/PhpDocumentor/
+
+for the web interface
+
+------
+WARNING: The PDF Converter will not work in PHP5.  The PDF library that it relies upon
+segfaults with the simplest of files.  Generation still works great in PHP4
+------
+
+- WARNING: phpDocumentor installs phpdoc in the
+  scripts directory, and this will conflict with PHPDoc,
+  you can&apos;t have both installed at the same time
+- Switched to Smarty 2.6.0, now it will work in PHP 5.  Other
+  changes made to the code to make it work in PHP 5, including parsing
+  of private/public/static/etc. access modifiers
+- fixed these bugs:
+ [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
+ [ 896444 ] Bad line numbers
+ [ 937235 ] duplicated /** after abstract method declaration
+ [ 962319 ] Define : don&apos;t show the assigned value
+ [ 977674 ] Parser error
+ [ 989258 ] wrong interfaces parsing
+ [ 1150809 ] Infinite loop when class extends itself
+ [ 1151196 ] PHP Fatal error: Cannot re-assign $this
+ [ 1151650 ] UTF8 decoding for DocBook packages
+ [ 1152781 ] PHP_NOTICE: Uninitialized string offset in ParserDescCleanup
+ [ 1153593 ] string id=&quot;....&quot; in tutorials
+ [ 1164253 ] Inherited Class Constants are not displayed
+ [ 1171583 ] CHM wrong filesource
+ [ 1180200 ] HighlightParser does not handle Heredoc Blocks.
+ [ 1202772 ] missing parentheses in Parser.inc line 946
+ [ 1203445 ] Call to a member function on a non-object in Parser.inc
+ [ 1203451 ] array to string conversion notice in InlineTags.inc
+- fixed these bugs reported in PEAR:
+ Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
+ Bug #5011: PDF generation warning on uksort</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.3.0RC5</release>
+    <api>1.3.0RC4</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2005-12-01</date>
+   <license>PHP License</license>
+   <notes>PHP 5 support and more, fix bugs
+
+This will be the last release in the 1.x series.  2.0 is next
+
+Features added to this release include:
+
+ * Full PHP 5 support, phpDocumentor both runs in and parses Zend Engine 2
+   language constructs.  Note that you must be running phpDocumentor in
+   PHP 5 in order to parse PHP 5 code
+ * XML:DocBook/peardoc2:default converter now beautifies the source using
+   PEAR&apos;s XML_Beautifier if available
+ * inline {@example} tag - this works just like {@source} except that
+   it displays the contents of another file.  In tutorials, it works
+   like &lt;programlisting&gt;
+ * customizable README/INSTALL/CHANGELOG files
+ * phpDocumentor tries to run .ini files out of the current directory
+   first, to allow you to put them anywhere you want to
+ * multi-national characters are now allowed in package/subpackage names
+ * images in tutorials with the &lt;graphic&gt; tag
+ * un-modified output with &lt;programlisting role=&quot;html&quot;&gt;
+ * html/xml source highlighting with &lt;programlisting role=&quot;tutorial&quot;&gt;
+
+From both Windows and Unix, both the command-line version
+of phpDocumentor and the web interface will work
+out of the box by using command phpdoc - guaranteed :)
+
+WARNING: in order to use the web interface through PEAR, you must set your
+data_dir to a subdirectory of your document root.
+
+$ pear config-set data_dir /path/to/public_html/pear
+
+on Windows with default apache setup, it might be
+
+C:\&gt; pear config-set data_dir &quot;C:\Program Files\Apache\htdocs\pear&quot;
+
+After this, install/upgrade phpDocumentor
+
+$ pear upgrade phpDocumentor
+
+and you can browse to:
+
+http://localhost/pear/PhpDocumentor/
+
+for the web interface
+
+------
+WARNING: The PDF Converter will not work in PHP5.  The PDF library that it relies upon
+segfaults with the simplest of files.  Generation still works great in PHP4
+------
+
+- WARNING: phpDocumentor installs phpdoc in the
+  scripts directory, and this will conflict with PHPDoc,
+  you can&apos;t have both installed at the same time
+- Switched to Smarty 2.6.0, now it will work in PHP 5.  Other
+  changes made to the code to make it work in PHP 5, including parsing
+  of private/public/static/etc. access modifiers
+- fixed these bugs:
+ [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
+ [ 896444 ] Bad line numbers
+ [ 937235 ] duplicated /** after abstract method declaration
+ [ 962319 ] Define : don&apos;t show the assigned value
+ [ 977674 ] Parser error
+ [ 989258 ] wrong interfaces parsing
+ [ 1150809 ] Infinite loop when class extends itself
+ [ 1151196 ] PHP Fatal error: Cannot re-assign $this
+ [ 1151650 ] UTF8 decoding for DocBook packages
+ [ 1152781 ] PHP_NOTICE: Uninitialized string offset in ParserDescCleanup
+ [ 1153593 ] string id=&quot;....&quot; in tutorials
+ [ 1164253 ] Inherited Class Constants are not displayed
+ [ 1171583 ] CHM wrong filesource
+ [ 1180200 ] HighlightParser does not handle Heredoc Blocks.
+ [ 1202772 ] missing parentheses in Parser.inc line 946
+ [ 1203445 ] Call to a member function on a non-object in Parser.inc
+ [ 1203451 ] array to string conversion notice in InlineTags.inc
+- fixed these bugs reported in PEAR:
+ Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
+ Bug #5011: PDF generation warning on uksort</notes>
+  </release>
+ </changelog>
+</package>

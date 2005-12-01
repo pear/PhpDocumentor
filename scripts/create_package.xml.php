@@ -1,14 +1,16 @@
 <?php
 set_time_limit(0);
 require_once('PEAR/PackageFileManager.php');
+require_once('PEAR/PackageFileManager2.php');
 PEAR::setErrorHandling(PEAR_ERROR_DIE);
 $test = new PEAR_PackageFileManager;
 
 $packagedir = dirname(dirname(__FILE__));
 
-$e = $test->setOptions(
-array('baseinstalldir' => 'PhpDocumentor',
-'version' => '1.3.0RC4',
+$version = '1.3.0RC5';
+$options = array(
+'baseinstalldir' => 'PhpDocumentor',
+'version' => $version,
 'packagedirectory' => $packagedir,
 'state' => 'beta',
 'filelistgenerator' => 'cvs',
@@ -69,6 +71,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
   changes made to the code to make it work in PHP 5, including parsing
   of private/public/static/etc. access modifiers
 - fixed these bugs:
+ [ not entered ] phpdoc script broken on unix
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
  [ 896444 ] Bad line numbers
  [ 937235 ] duplicated /** after abstract method declaration
@@ -145,7 +148,8 @@ segfaults with the simplest of files.  Generation still works great in PHP4
         'phpdoc.php' => 'data',
         ),
 'ignore' =>
-    array('package.xml', 
+    array('package.xml',
+          'package2.xml',
           "$packagedir/phpdoc",
           'phpdoc.bat', 
           'LICENSE',
@@ -155,21 +159,60 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           'makedocs.ini',
           'publicweb-PEAR-1.2.1.patch.txt',
           ),
-'installas' =>
+'installexceptions' => array('pear-phpdoc' => '/', 'pear-phpdoc.bat' => '/', 'scripts/makedoc.sh' => '/'),
+);
+$pfm2 = PEAR_PackageFileManager2::importOptions(dirname(dirname(__FILE__))
+    . DIRECTORY_SEPARATOR . 'package2.xml', array_merge($options, array('packagefile' => 'package2.xml')));
+$e = $test->setOptions(array_merge($options,
+array('installas' =>
     array('pear-phpdoc' => 'phpdoc',
           'pear-phpdoc.bat' => 'phpdoc.bat',
           'user/pear-makedocs.ini' => 'user/makedocs.ini',
           ),
-'installexceptions' => array('pear-phpdoc' => '/', 'pear-phpdoc.bat' => '/', 'scripts/makedoc.sh' => '/'),
-));
-if (PEAR::isError($e)) {
-    echo $e->getMessage();
-    exit;
-}
+)));
+$pfm2->setReleaseVersion($version);
+$pfm2->setPhpDep('4.1.0');
+$pfm2->setPearinstallerDep('1.4.3');
+$pfm2->addPackageDepWithChannel('optional', 'XML_Beautifier', 'pear.php.net', '1.1');
+$pfm2->addReplacement('pear-phpdoc', 'pear-config', '@PHP-BIN@', 'php_bin');
+$pfm2->addReplacement('pear-phpdoc.bat', 'pear-config', '@PHP-BIN@', 'php_bin');
+$pfm2->addReplacement('pear-phpdoc.bat', 'pear-config', '@BIN-DIR@', 'bin_dir');
+$pfm2->addReplacement('pear-phpdoc.bat', 'pear-config', '@PEAR-DIR@', 'php_dir');
+$pfm2->addReplacement('pear-phpdoc.bat', 'pear-config', '@DATA-DIR@', 'data_dir');
+$pfm2->addReplacement('docbuilder/includes/utilities.php', 'pear-config', '@DATA-DIR@', 'data_dir');
+$pfm2->addReplacement('docbuilder/builder.php', 'pear-config', '@DATA-DIR@', 'data_dir');
+$pfm2->addReplacement('docbuilder/file_dialog.php', 'pear-config', '@DATA-DIR@', 'data_dir');
+$pfm2->addReplacement('docbuilder/file_dialog.php', 'pear-config', '@WEB-DIR@', 'data_dir');
+$pfm2->addReplacement('docbuilder/actions.php', 'pear-config', '@WEB-DIR@', 'data_dir');
+$pfm2->addReplacement('docbuilder/top.php', 'pear-config', '@DATA-DIR@', 'data_dir');
+$pfm2->addReplacement('docbuilder/config.php', 'pear-config', '@DATA-DIR@', 'data_dir');
+$pfm2->addReplacement('docbuilder/config.php', 'pear-config', '@WEB-DIR@', 'data_dir');
+$pfm2->addReplacement('phpDocumentor/Setup.inc.php', 'pear-config', '@DATA-DIR@', 'data_dir');
+$pfm2->addReplacement('phpDocumentor/Converter.inc', 'pear-config', '@DATA-DIR@', 'data_dir');
+$pfm2->addReplacement('phpDocumentor/common.inc.php', 'package-info', '@VER@', 'version');
+$pfm2->addReplacement('phpDocumentor/IntermediateParser.inc', 'package-info', '@VER@', 'version');
+$pfm2->addReplacement('user/pear-makedocs.ini', 'pear-config', '@PEAR-DIR@', 'php_dir');
+$pfm2->addReplacement('user/pear-makedocs.ini', 'pear-config', '@DOC-DIR@', 'doc_dir');
+$pfm2->addReplacement('user/pear-makedocs.ini', 'package-info', '@VER@', 'version');
+$pfm2->addRole('inc', 'php');
+$pfm2->addRole('sh', 'script');
+$pfm2->addUnixEol('pear-phpdoc');
+$pfm2->addWindowsEol('pear-phpdoc.bat');
+$pfm2->generateContents();
+$pfm2->setPackageType('php');
+$pfm2->addRelease();
+$pfm2->setOsInstallCondition('windows');
+$pfm2->addIgnoreToRelease('pear-phpdoc');
+$pfm2->addIgnoreToRelease('scripts/makedoc.sh');
+$pfm2->addInstallAs('pear-phpdoc.bat', 'phpdoc.bat');
+$pfm2->addInstallAs('user/pear-makedocs.ini', 'user/makedocs.ini');
+$pfm2->addRelease();
+$pfm2->addIgnoreToRelease('pear-phpdoc.bat');
+$pfm2->addInstallAs('pear-phpdoc', 'phpdoc');
+$pfm2->addInstallAs('user/pear-makedocs.ini', 'user/makedocs.ini');
+
 $test->addPlatformException('pear-phpdoc.bat', 'windows');
 $test->addDependency('php', '4.1.0', 'ge', 'php');
-// just to make sure people don't try to install this with a broken Archive_Tar
-$test->addDependency('Archive_Tar', '1.1', 'ge');
 // optional dep for peardoc2 converter
 $test->addDependency('XML_Beautifier', '1.1', 'ge', 'pkg', true);
 // replace @PHP-BIN@ in this file with the path to php executable!  pretty neat
@@ -195,12 +238,14 @@ $test->addReplacement('user/pear-makedocs.ini', 'pear-config', '@DOC-DIR@', 'doc
 $test->addReplacement('user/pear-makedocs.ini', 'package-info', '@VER@', 'version');
 $test->addRole('inc', 'php');
 $test->addRole('sh', 'script');
-if (isset($_GET['make'])) {
+if (isset($_GET['make']) || (isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] == 'make')) {
+    $pfm2->writePackageFile();
     $test->writePackageFile();
 } else {
+    $pfm2->debugPackageFile();
     $test->debugPackageFile();
 }
-if (!isset($_GET['make'])) {
+if (!isset($_GET['make']) && !(isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] == 'make')) {
     echo '<a href="' . $_SERVER['PHP_SELF'] . '?make=1">Make this file</a>';
 }
 ?>
