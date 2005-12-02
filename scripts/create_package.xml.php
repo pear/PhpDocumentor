@@ -6,15 +6,10 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 $test = new PEAR_PackageFileManager;
 
 $packagedir = dirname(dirname(__FILE__));
+$notes = 'PHP 5 support and more, fix bugs
 
-$version = '1.3.0RC5';
-$options = array(
-'baseinstalldir' => 'PhpDocumentor',
-'version' => $version,
-'packagedirectory' => $packagedir,
-'state' => 'beta',
-'filelistgenerator' => 'cvs',
-'notes' => 'PHP 5 support and more, fix bugs
+This release fixes the broken "phpdoc" script in unix, and is
+otherwise functionally identical to 1.3.0RC4
 
 This will be the last release in the 1.x series.  2.0 is next
 
@@ -92,7 +87,15 @@ segfaults with the simplest of files.  Generation still works great in PHP4
 - fixed these bugs reported in PEAR:
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
  Bug #5011: PDF generation warning on uksort
-',
+';
+$version = '1.3.0RC5';
+$options = array(
+'baseinstalldir' => 'PhpDocumentor',
+'version' => $version,
+'packagedirectory' => $packagedir,
+'state' => 'beta',
+'filelistgenerator' => 'cvs',
+'notes' => $notes,
 'package' => 'PhpDocumentor',
 'dir_roles' => array(
     'Documentation' => 'doc',
@@ -171,8 +174,9 @@ array('installas' =>
           ),
 )));
 $pfm2->setReleaseVersion($version);
+$pfm2->setNotes($notes);
 $pfm2->setPhpDep('4.1.0');
-$pfm2->setPearinstallerDep('1.4.3');
+$pfm2->setPearinstallerDep('1.4.6');
 $pfm2->addPackageDepWithChannel('optional', 'XML_Beautifier', 'pear.php.net', '1.1');
 $pfm2->addReplacement('pear-phpdoc', 'pear-config', '@PHP-BIN@', 'php_bin');
 $pfm2->addReplacement('pear-phpdoc.bat', 'pear-config', '@PHP-BIN@', 'php_bin');
