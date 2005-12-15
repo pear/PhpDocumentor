@@ -1161,7 +1161,7 @@ class parserDescParser extends Parser
         if ((strlen($ltrimword) != strlen($word))
              && strlen($ltrimword) > 1
              && ((in_array($ltrimword{0},array('o','-','1','0','#','+')) && $ltrimword{1} == ' '))
-                 || ((strlen($ltrimword) >= 2) && (in_array(substr($ltrimword,0,2),array('1.','0.')) && $ltrimword{2} == ' ')))
+                 || ((strlen($ltrimword) >= 2) && (substr($ltrimword,0,2) === '1.' || substr($ltrimword,0,2) === '0.') && $ltrimword{2} == ' '))
         {
             // save the whitespace for comparison
             $this->p_vars['whitespace'] = substr($word,0,strlen($word) - strlen($ltrimword));
