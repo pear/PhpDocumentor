@@ -888,7 +888,10 @@ class Classes
      */
     function &getConsts($class, $file)
     {
-        if (!isset($this->constsbyfile[$file][$class])) return false;
+        if (!isset($this->constsbyfile[$file][$class])) {
+            $flag = false;
+            return $flag;
+        }
         return $this->constsbyfile[$file][$class];
     }
     
