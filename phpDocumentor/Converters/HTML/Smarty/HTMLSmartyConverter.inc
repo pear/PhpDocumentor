@@ -603,6 +603,7 @@ class HTMLSmartyConverter extends Converter
         $template->assign("index",$elindex);
         $template->assign("letters",$mletters);
         $template->assign("title","Element Index");
+		$template->assign("package", false);
         $template->assign("date",date("r",time()));
         phpDocumentor_out("\n");
         flush();
