@@ -3613,7 +3613,8 @@ class Converter
         // feature 564991, link to php manual
         if (in_array(str_replace(array('(',')'),array('',''),$expr),$funcs['internal']))
         {
-            return 'http://www.php.net/'.str_replace(array('(',')'),array('',''),$expr);
+            $return = 'http://www.php.net/'.str_replace(array('(',')'),array('',''),$expr);
+            return $return;
         }
         // no links found
         return $expr;
@@ -3710,7 +3711,8 @@ class Converter
             } else $class = false;
         } while ($class);
         // no links found
-        return false;
+        $flag = false;
+        return $flag;
     }
 
     /**
@@ -3808,7 +3810,8 @@ class Converter
             } else $class = false;
         } while ($class);
         // no links found
-        return false;
+        $flag = false;
+        return $flag;
     }
 
     /**
