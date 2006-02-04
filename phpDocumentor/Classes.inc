@@ -864,7 +864,10 @@ class Classes
      */
     function &getMethods($class, $file)
     {
-        if (!isset($this->methodsbyfile[$file][$class])) return false;
+        if (!isset($this->methodsbyfile[$file][$class])) {
+            $flag = false;
+            return $flag;
+        }
         return $this->methodsbyfile[$file][$class];
     }
     
