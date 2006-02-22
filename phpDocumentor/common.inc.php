@@ -27,7 +27,7 @@ if ('@VER@' != '@'.'VER@')
 {
     define("PHPDOCUMENTOR_VER","@VER@");
 } else {
-    define("PHPDOCUMENTOR_VER","1.3.0RC4");
+    define("PHPDOCUMENTOR_VER","1.3.0RC6");
 }
 /** phpDocumentor version */
 define("PHPDOCUMENTOR_WEBSITE","http://www.phpdoc.org");
