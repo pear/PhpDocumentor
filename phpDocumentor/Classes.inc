@@ -879,7 +879,10 @@ class Classes
      */
     function &getVars($class, $file)
     {
-        if (!isset($this->varsbyfile[$file][$class])) return false;
+        if (!isset($this->varsbyfile[$file][$class])) {
+            $flag = false;
+            return $flag;
+        }
         return $this->varsbyfile[$file][$class];
     }
     
@@ -957,7 +960,8 @@ class Classes
         if (!isset($this->classesbynamefile[$class]))
         {
 //            addWarning(PDERROR_CLASS_NOT_IN_PACKAGE,$class,$package); // removed, too many warnings, not very useful
-            return false;
+            $flag = false;
+            return $flag;
         }
         for($i=0; $i < count($this->classesbynamefile[$class]); $i++)
         {
