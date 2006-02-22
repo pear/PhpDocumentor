@@ -46,14 +46,14 @@ if ('@WEB-DIR@' != '@'.'WEB-DIR@')
         $configdir = '@DATA-DIR@' . PATH_DELIMITER . 'PhpDocumentor/user';
     }
 } else {
+
+    $root_dir = dirname(dirname(__FILE__));
     /**
     * common file information
     */
     include_once("$root_dir/phpDocumentor/common.inc.php");
 	include_once("$root_dir/HTML_TreeMenu-1.1.2/TreeMenu.php");
 	include_once("$root_dir/docbuilder/includes/utilities.php" );
-
-    $root_dir = dirname(dirname(__FILE__));
 
     // set up include path so we can find all files, no matter what
     $GLOBALS['_phpDocumentor_install_dir'] = dirname(dirname( realpath( __FILE__ ) ));
