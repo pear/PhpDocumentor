@@ -4828,7 +4828,11 @@ class Converter
         $templ = new Smarty;
         $templ->use_sub_dirs = false;
         $templ->template_dir = realpath($this->smarty_dir . PATH_DELIMITER . 'templates');
-        $templ->compile_dir = realpath($this->smarty_dir . PATH_DELIMITER . 'templates_c');
+        $templatename = get_class($this) . $this->templateName;
+        if (!file_exists($this->targetDir . DIRECTORY_SEPARATOR . md5($templatename))) {
+            mkdir($this->targetDir . DIRECTORY_SEPARATOR . md5($templatename),0775);
+        }
+        $templ->compile_dir = realpath($this->targetDir . PATH_DELIMITER . md5($templatename));
         $templ->config_dir = realpath($this->smarty_dir . PATH_DELIMITER . 'configs');
         $templ->assign("date",date("r",time()));
         $templ->assign("maintitle",$this->title);
@@ -5011,6 +5015,9 @@ class Converter
 
     /**
      * Sets the output directory for generated documentation
+     * 
+     * As of 1.3.0RC6, this also sets the compiled templates directory inside
+     * the target directory
      * @param string $dir the output directory
      */
     function setTargetDir($dir)
@@ -5029,8 +5036,7 @@ class Converter
                 $this->createParentDir($tmp);
                 phpDocumentor_out("Creating Directory $dir\n");
                 mkdir($dir,0775);
-            }
-             else if (!is_dir($dir))
+            } elseif (!is_dir($dir))
             {
                 echo "Output path: '$dir' is not a directory\n";
                 die();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.6" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.4.7" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>PhpDocumentor</name>
  <channel>pear.php.net</channel>
  <summary>The phpDocumentor package provides automatic documenting of php api directly from the source.</summary>
@@ -63,10 +63,10 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>drewish@php.net</email>
   <active>yes</active>
  </developer>
- <date>2005-12-02</date>
- <time>11:47:49</time>
+ <date>2006-02-22</date>
+ <time>16:33:35</time>
  <version>
-  <release>1.3.0RC5</release>
+  <release>1.3.0RC6</release>
   <api>1.3.0</api>
  </version>
  <stability>
@@ -407,35 +407,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           <file name="tutorial_tree.tpl" role="data" />
           <file name="var.tpl" role="data" />
          </dir> <!-- /phpDocumentor/Converters/CHM/default/templates/default/templates -->
-         <dir name="templates_c">
-          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-          <file name="%%-15^%%-1529790141^tocentry.tpl.php" role="data" />
-          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-          <file name="%%-49^%%-49834008^index.hhk.tpl.php" role="data" />
-          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-          <file name="%%108^%%1081015296^hhp.tpl.php" role="data" />
-          <file name="%%117^%%1173289593^contents.hhc.tpl.php" role="data" />
-          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-          <file name="%%146^%%146134639^function.tpl.php" role="data" />
-          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-          <file name="%%708^%%708843835^var.tpl.php" role="data" />
-          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-         </dir> <!-- /phpDocumentor/Converters/CHM/default/templates/default/templates_c -->
          <file name="options.ini" role="data" />
         </dir> <!-- /phpDocumentor/Converters/CHM/default/templates/default -->
        </dir> <!-- /phpDocumentor/Converters/CHM/default/templates -->
@@ -481,37 +452,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           <file name="tutorial_tree.tpl" role="data" />
           <file name="var.tpl" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/default/templates -->
-         <dir name="templates_c">
-          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-          <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
-          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-          <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
-          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-          <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
-          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-          <file name="%%146^%%146134639^function.tpl.php" role="data" />
-          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-          <file name="%%708^%%708843835^var.tpl.php" role="data" />
-          <file name="%%845^%%845383602^examplesource.tpl.php" role="data" />
-          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/default/templates_c -->
          <file name="options.ini" role="data" />
         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/default -->
         <dir name="DOM">
@@ -565,36 +505,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
            <file name="tutorial_tree.tpl" role="data" />
            <file name="var.tpl" role="data" />
           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/default/templates -->
-          <dir name="templates_c">
-           <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-           <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-           <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-           <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-           <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-           <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-           <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
-           <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-           <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-           <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-           <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-           <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-           <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
-           <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-           <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
-           <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-           <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-           <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-           <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-           <file name="%%146^%%146134639^function.tpl.php" role="data" />
-           <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-           <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-           <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-           <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-           <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-           <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-           <file name="%%708^%%708843835^var.tpl.php" role="data" />
-           <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/default/templates_c -->
           <file name="options.ini" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/default -->
          <dir name="earthli">
@@ -685,36 +595,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
            <file name="tutorial_tree.tpl" role="data" />
            <file name="var.tpl" role="data" />
           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/earthli/templates -->
-          <dir name="templates_c">
-           <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-           <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-           <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-           <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-           <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-           <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-           <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
-           <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-           <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-           <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-           <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-           <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-           <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
-           <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-           <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
-           <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-           <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-           <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-           <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-           <file name="%%146^%%146134639^function.tpl.php" role="data" />
-           <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-           <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-           <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-           <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-           <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-           <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-           <file name="%%708^%%708843835^var.tpl.php" role="data" />
-           <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/earthli/templates_c -->
           <file name="options.ini" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/earthli -->
          <dir name="l0l33t">
@@ -770,36 +650,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
            <file name="tutorial_tree.tpl" role="data" />
            <file name="var.tpl" role="data" />
           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/l0l33t/templates -->
-          <dir name="templates_c">
-           <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-           <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-           <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-           <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-           <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-           <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-           <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
-           <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-           <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-           <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-           <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-           <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-           <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
-           <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-           <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
-           <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-           <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-           <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-           <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-           <file name="%%146^%%146134639^function.tpl.php" role="data" />
-           <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-           <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-           <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-           <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-           <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-           <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-           <file name="%%708^%%708843835^var.tpl.php" role="data" />
-           <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/l0l33t/templates_c -->
           <file name="options.ini" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/l0l33t -->
          <dir name="phpdoc.de">
@@ -852,36 +702,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
            <file name="tutorial_tree.tpl" role="data" />
            <file name="var.tpl" role="data" />
           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phpdoc.de/templates -->
-          <dir name="templates_c">
-           <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-           <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-           <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-           <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-           <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-           <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-           <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
-           <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-           <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-           <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-           <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-           <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-           <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
-           <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-           <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
-           <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-           <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-           <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-           <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-           <file name="%%146^%%146134639^function.tpl.php" role="data" />
-           <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-           <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-           <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-           <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-           <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-           <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-           <file name="%%708^%%708843835^var.tpl.php" role="data" />
-           <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phpdoc.de/templates_c -->
           <file name="options.ini" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phpdoc.de -->
          <dir name="phphtmllib">
@@ -934,36 +754,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
            <file name="tutorial_tree.tpl" role="data" />
            <file name="var.tpl" role="data" />
           </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phphtmllib/templates -->
-          <dir name="templates_c">
-           <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-           <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-           <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-           <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-           <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-           <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-           <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
-           <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-           <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-           <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-           <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-           <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-           <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
-           <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-           <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
-           <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-           <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-           <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-           <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-           <file name="%%146^%%146134639^function.tpl.php" role="data" />
-           <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-           <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-           <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-           <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-           <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-           <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-           <file name="%%708^%%708843835^var.tpl.php" role="data" />
-           <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phphtmllib/templates_c -->
           <file name="options.ini" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM/phphtmllib -->
         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/DOM -->
@@ -1050,37 +840,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           <file name="tutorial_tree.tpl" role="data" />
           <file name="var.tpl" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/earthli/templates -->
-         <dir name="templates_c">
-          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-          <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
-          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-          <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
-          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-          <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
-          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-          <file name="%%146^%%146134639^function.tpl.php" role="data" />
-          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-          <file name="%%708^%%708843835^var.tpl.php" role="data" />
-          <file name="%%845^%%845383602^examplesource.tpl.php" role="data" />
-          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/earthli/templates_c -->
          <file name="options.ini" role="data" />
         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/earthli -->
         <dir name="l0l33t">
@@ -1120,36 +879,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           <file name="tutorial_tree.tpl" role="data" />
           <file name="var.tpl" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/l0l33t/templates -->
-         <dir name="templates_c">
-          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-          <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
-          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-          <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
-          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-          <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
-          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-          <file name="%%146^%%146134639^function.tpl.php" role="data" />
-          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-          <file name="%%708^%%708843835^var.tpl.php" role="data" />
-          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/l0l33t/templates_c -->
          <file name="options.ini" role="data" />
         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/l0l33t -->
         <dir name="phpdoc.de">
@@ -1188,36 +917,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           <file name="tutorial_tree.tpl" role="data" />
           <file name="var.tpl" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpdoc.de/templates -->
-         <dir name="templates_c">
-          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-          <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
-          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-          <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
-          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-          <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
-          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-          <file name="%%146^%%146134639^function.tpl.php" role="data" />
-          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-          <file name="%%708^%%708843835^var.tpl.php" role="data" />
-          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpdoc.de/templates_c -->
          <file name="options.ini" role="data" />
         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpdoc.de -->
         <dir name="phpedit">
@@ -1305,34 +1004,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           <file name="tutorial_tree.tpl" role="data" />
           <file name="var.tpl" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpedit/templates -->
-         <dir name="templates_c">
-          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-          <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
-          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-          <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
-          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-          <file name="%%146^%%146134639^function.tpl.php" role="data" />
-          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-          <file name="%%708^%%708843835^var.tpl.php" role="data" />
-          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpedit/templates_c -->
          <file name="options.ini" role="data" />
         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phpedit -->
         <dir name="phphtmllib">
@@ -1371,36 +1042,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           <file name="tutorial_tree.tpl" role="data" />
           <file name="var.tpl" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phphtmllib/templates -->
-         <dir name="templates_c">
-          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-          <file name="%%-17^%%-176809289^tutorial_nav.tpl.php" role="data" />
-          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-          <file name="%%-39^%%-392581648^top_frame.tpl.php" role="data" />
-          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-          <file name="%%-72^%%-727729411^left_frame.tpl.php" role="data" />
-          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-          <file name="%%146^%%146134639^function.tpl.php" role="data" />
-          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-          <file name="%%708^%%708843835^var.tpl.php" role="data" />
-          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phphtmllib/templates_c -->
          <file name="options.ini" role="data" />
         </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates/phphtmllib -->
        </dir> <!-- /phpDocumentor/Converters/HTML/frames/templates -->
@@ -1447,35 +1088,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           <file name="tutorial_tree.tpl" role="data" />
           <file name="var.tpl" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/default/templates -->
-         <dir name="templates_c">
-          <file name="%%-11^%%-1105741867^fileleft.tpl.php" role="data" />
-          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-          <file name="%%146^%%146134639^function.tpl.php" role="data" />
-          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-          <file name="%%537^%%537159954^classleft.tpl.php" role="data" />
-          <file name="%%708^%%708843835^var.tpl.php" role="data" />
-          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/default/templates_c -->
          <file name="options.ini" role="data" />
         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/default -->
         <dir name="HandS">
@@ -1519,38 +1131,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           <file name="tutorial_tree.tpl" role="data" />
           <file name="var.tpl" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/HandS/templates -->
-         <dir name="templates_c">
-          <file name="%%-11^%%-1105741867^fileleft.tpl.php" role="data" />
-          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-          <file name="%%-12^%%-1286279509^tags.tpl.php" role="data" />
-          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-          <file name="%%-16^%%-1669679379^filetags.tpl.php" role="data" />
-          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-          <file name="%%146^%%146134639^function.tpl.php" role="data" />
-          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-          <file name="%%404^%%40462378^classtags.tpl.php" role="data" />
-          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-          <file name="%%537^%%537159954^classleft.tpl.php" role="data" />
-          <file name="%%708^%%708843835^var.tpl.php" role="data" />
-          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/HandS/templates_c -->
          <file name="options.ini" role="data" />
         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/HandS -->
         <dir name="PHP">
@@ -1590,35 +1170,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           <file name="tutorial_tree.tpl" role="data" />
           <file name="var.tpl" role="data" />
          </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/PHP/templates -->
-         <dir name="templates_c">
-          <file name="%%-11^%%-1105741867^fileleft.tpl.php" role="data" />
-          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-          <file name="%%-13^%%-135052920^header.tpl.php" role="data" />
-          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-          <file name="%%-15^%%-1529700171^tutorial_toc.tpl.php" role="data" />
-          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-          <file name="%%-17^%%-1708446885^blank.tpl.php" role="data" />
-          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-          <file name="%%-17^%%-1760282031^tutorial_tree.tpl.php" role="data" />
-          <file name="%%-19^%%-1910644431^basicindex.tpl.php" role="data" />
-          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-          <file name="%%127^%%12781687^pkgelementindex.tpl.php" role="data" />
-          <file name="%%131^%%131447552^elementindex.tpl.php" role="data" />
-          <file name="%%146^%%146134639^function.tpl.php" role="data" />
-          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-          <file name="%%202^%%2027336986^classtrees.tpl.php" role="data" />
-          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-          <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-          <file name="%%537^%%537159954^classleft.tpl.php" role="data" />
-          <file name="%%708^%%708843835^var.tpl.php" role="data" />
-          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/PHP/templates_c -->
          <file name="options.ini" role="data" />
         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/PHP -->
        </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates -->
@@ -1662,34 +1213,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
           <file name="tutorial.tpl" role="data" />
           <file name="var.tpl" role="data" />
          </dir> <!-- /phpDocumentor/Converters/PDF/default/templates/default/templates -->
-         <dir name="templates_c">
-          <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-          <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-          <file name="%%-14^%%-1469097724^const.tpl.php" role="data" />
-          <file name="%%-15^%%-1528401657^source_loop.tpl.php" role="data" />
-          <file name="%%-15^%%-1530708541^todolist.tpl.php" role="data" />
-          <file name="%%-16^%%-164156080^classtree.tpl.php" role="data" />
-          <file name="%%-17^%%-1740578653^global.tpl.php" role="data" />
-          <file name="%%-20^%%-2040098360^filesource.tpl.php" role="data" />
-          <file name="%%-24^%%-249219118^title_page.tpl.php" role="data" />
-          <file name="%%-27^%%-279354582^params.tpl.php" role="data" />
-          <file name="%%-63^%%-631908528^toc.tpl.php" role="data" />
-          <file name="%%-65^%%-658603405^page.tpl.php" role="data" />
-          <file name="%%105^%%1054503566^define.tpl.php" role="data" />
-          <file name="%%117^%%1172603085^index.tpl.php" role="data" />
-          <file name="%%138^%%1381784439^source_title_page.tpl.php" role="data" />
-          <file name="%%140^%%1408414618^ric_title_page.tpl.php" role="data" />
-          <file name="%%146^%%146134639^function.tpl.php" role="data" />
-          <file name="%%153^%%1533595741^newpackage_header.tpl.php" role="data" />
-          <file name="%%165^%%1653142046^class.tpl.php" role="data" />
-          <file name="%%176^%%1767056382^include.tpl.php" role="data" />
-          <file name="%%179^%%1794143582^pagenumbering.tpl.php" role="data" />
-          <file name="%%187^%%1876689271^ric.tpl.php" role="data" />
-          <file name="%%212^%%2124578681^appendix_title_page.tpl.php" role="data" />
-          <file name="%%239^%%239105369^footer.tpl.php" role="data" />
-          <file name="%%708^%%708843835^var.tpl.php" role="data" />
-          <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-         </dir> <!-- /phpDocumentor/Converters/PDF/default/templates/default/templates_c -->
          <file name="options.ini" role="data" />
         </dir> <!-- /phpDocumentor/Converters/PDF/default/templates/default -->
         <dir name="fonts">
@@ -1750,18 +1273,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
            <file name="tutorial.tpl" role="data" />
            <file name="var.tpl" role="data" />
           </dir> <!-- /phpDocumentor/Converters/XML/DocBook/peardoc2/templates/default/templates -->
-          <dir name="templates_c">
-           <file name="%%-11^%%-1198818130^tutorial.tpl.php" role="data" />
-           <file name="%%-14^%%-1407541581^method.tpl.php" role="data" />
-           <file name="%%-46^%%-467269007^imethods.tpl.php" role="data" />
-           <file name="%%-98^%%-985719738^constants.tpl.php" role="data" />
-           <file name="%%137^%%1378042199^package.tpl.php" role="data" />
-           <file name="%%154^%%1544315249^globals.tpl.php" role="data" />
-           <file name="%%422^%%422353953^errors.tpl.php" role="data" />
-           <file name="%%625^%%625799756^class_summary.tpl.php" role="data" />
-           <file name="%%834^%%834873272^category.tpl.php" role="data" />
-           <file name="%%972^%%972954595^docblock.tpl.php" role="data" />
-          </dir> <!-- /phpDocumentor/Converters/XML/DocBook/peardoc2/templates/default/templates_c -->
           <file name="options.ini" role="data" />
          </dir> <!-- /phpDocumentor/Converters/XML/DocBook/peardoc2/templates/default -->
         </dir> <!-- /phpDocumentor/Converters/XML/DocBook/peardoc2/templates -->
@@ -2059,6 +1570,16 @@ segfaults with the simplest of files.  Generation still works great in PHP4
    </pearinstaller>
   </required>
   <optional>
+   <package>
+    <name>XML_Beautifier</name>
+    <channel>pear.php.net</channel>
+    <min>1.1</min>
+   </package>
+   <package>
+    <name>XML_Beautifier</name>
+    <channel>pear.php.net</channel>
+    <min>1.1</min>
+   </package>
    <package>
     <name>XML_Beautifier</name>
     <channel>pear.php.net</channel>
@@ -2912,8 +2433,101 @@ segfaults with the simplest of files.  Generation still works great in PHP4
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2005-12-02</date>
-   <license>PHP License</license>
+   <date>2006-02-22</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>PHP 5 support and more, fix bugs
+
+This release fixes the broken &quot;phpdoc&quot; script in unix, and is
+otherwise functionally identical to 1.3.0RC4
+
+This will be the last release in the 1.x series.  2.0 is next
+
+Features added to this release include:
+
+ * Full PHP 5 support, phpDocumentor both runs in and parses Zend Engine 2
+   language constructs.  Note that you must be running phpDocumentor in
+   PHP 5 in order to parse PHP 5 code
+ * XML:DocBook/peardoc2:default converter now beautifies the source using
+   PEAR&apos;s XML_Beautifier if available
+ * inline {@example} tag - this works just like {@source} except that
+   it displays the contents of another file.  In tutorials, it works
+   like &lt;programlisting&gt;
+ * customizable README/INSTALL/CHANGELOG files
+ * phpDocumentor tries to run .ini files out of the current directory
+   first, to allow you to put them anywhere you want to
+ * multi-national characters are now allowed in package/subpackage names
+ * images in tutorials with the &lt;graphic&gt; tag
+ * un-modified output with &lt;programlisting role=&quot;html&quot;&gt;
+ * html/xml source highlighting with &lt;programlisting role=&quot;tutorial&quot;&gt;
+
+From both Windows and Unix, both the command-line version
+of phpDocumentor and the web interface will work
+out of the box by using command phpdoc - guaranteed :)
+
+WARNING: in order to use the web interface through PEAR, you must set your
+data_dir to a subdirectory of your document root.
+
+$ pear config-set data_dir /path/to/public_html/pear
+
+on Windows with default apache setup, it might be
+
+C:\&gt; pear config-set data_dir &quot;C:\Program Files\Apache\htdocs\pear&quot;
+
+After this, install/upgrade phpDocumentor
+
+$ pear upgrade phpDocumentor
+
+and you can browse to:
+
+http://localhost/pear/PhpDocumentor/
+
+for the web interface
+
+------
+WARNING: The PDF Converter will not work in PHP5.  The PDF library that it relies upon
+segfaults with the simplest of files.  Generation still works great in PHP4
+------
+
+- WARNING: phpDocumentor installs phpdoc in the
+  scripts directory, and this will conflict with PHPDoc,
+  you can&apos;t have both installed at the same time
+- Switched to Smarty 2.6.0, now it will work in PHP 5.  Other
+  changes made to the code to make it work in PHP 5, including parsing
+  of private/public/static/etc. access modifiers
+- fixed these bugs:
+ [ not entered ] phpdoc script broken on unix
+ [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
+ [ 896444 ] Bad line numbers
+ [ 937235 ] duplicated /** after abstract method declaration
+ [ 962319 ] Define : don&apos;t show the assigned value
+ [ 977674 ] Parser error
+ [ 989258 ] wrong interfaces parsing
+ [ 1150809 ] Infinite loop when class extends itself
+ [ 1151196 ] PHP Fatal error: Cannot re-assign $this
+ [ 1151650 ] UTF8 decoding for DocBook packages
+ [ 1152781 ] PHP_NOTICE: Uninitialized string offset in ParserDescCleanup
+ [ 1153593 ] string id=&quot;....&quot; in tutorials
+ [ 1164253 ] Inherited Class Constants are not displayed
+ [ 1171583 ] CHM wrong filesource
+ [ 1180200 ] HighlightParser does not handle Heredoc Blocks.
+ [ 1202772 ] missing parentheses in Parser.inc line 946
+ [ 1203445 ] Call to a member function on a non-object in Parser.inc
+ [ 1203451 ] array to string conversion notice in InlineTags.inc
+- fixed these bugs reported in PEAR:
+ Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
+ Bug #5011: PDF generation warning on uksort</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.3.0RC6</release>
+    <api>1.3.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2006-02-22</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>PHP 5 support and more, fix bugs
 
 This release fixes the broken &quot;phpdoc&quot; script in unix, and is

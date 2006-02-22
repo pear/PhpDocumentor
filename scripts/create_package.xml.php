@@ -88,7 +88,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
  Bug #5011: PDF generation warning on uksort
 ';
-$version = '1.3.0RC5';
+$version = '1.3.0RC6';
 $options = array(
 'baseinstalldir' => 'PhpDocumentor',
 'version' => $version,
@@ -161,6 +161,7 @@ $options = array(
           '*CSV*',
           'makedocs.ini',
           'publicweb-PEAR-1.2.1.patch.txt',
+          '*templates_c*'
           ),
 'installexceptions' => array('pear-phpdoc' => '/', 'pear-phpdoc.bat' => '/', 'scripts/makedoc.sh' => '/'),
 );
