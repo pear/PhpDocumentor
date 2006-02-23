@@ -965,13 +965,14 @@ class Classes
         }
         for($i=0; $i < count($this->classesbynamefile[$class]); $i++)
         {
-						$cls = $this->classesbyfile[$this->classesbynamefile[$class][$i]][$class];
-						$pkg = $cls->getPackage();
+            $cls = $this->classesbyfile[$this->classesbynamefile[$class][$i]][$class];
+            $pkg = $cls->getPackage();
             if ($pkg == $package)
 								return $cls;
         }
 //        addWarning(PDERROR_CLASS_NOT_IN_PACKAGE,$class,$package);
-        return false;
+        $flag = false;
+        return $flag;
     }
     
     /**

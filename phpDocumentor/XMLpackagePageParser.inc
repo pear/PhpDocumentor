@@ -213,24 +213,26 @@ class XMLPackagePageParser extends Parser
             $this->p_vars['quote_data'] = "";
         }
         if (!is_object($word)) $this->checkEventPush( $word, $pevent);
-        if ($word != "\"")
+        if (is_object($word))
         {
-            if (is_object($word))
-            {
-                $this->p_vars['quote_data'] = $word;
-            }
-            else
+            $this->p_vars['quote_data'] = $word;
+        } else
+        {
+            if ($word != "\"")
             {
                 if (!is_object($this->p_vars['quote_data']))
-                $this->p_vars['quote_data'] .= $word;
+                {
+                    $this->p_vars['quote_data'] .= $word;
+                }
             }
-        }
-        if (!is_object($word))
-        {
             if ($word == '>')
             {
-                if (is_object($this->p_vars['quote_data'])) $this->p_vars['quote_data'] = '{@id '.$this->p_vars['quote_data']->id.'}';
-                addErrorDie(PDERROR_UNTERMINATED_ATTRIB,$this->curtag->name,$this->p_vars['attrname'],$this->p_vars['quote_data']);
+                if (is_object($this->p_vars['quote_data']))
+                {
+                    $this->p_vars['quote_data'] = '{@id '.$this->p_vars['quote_data']->id.'}';
+                }
+                addErrorDie(PDERROR_UNTERMINATED_ATTRIB,
+                    $this->curtag->name,$this->p_vars['attrname'],$this->p_vars['quote_data']);
             }
             if ($this->checkEventPop($word,$pevent))
             {
@@ -346,7 +348,7 @@ class XMLPackagePageParser extends Parser
                 return;
             }
         }
-        if ($word == '<![CDATA[')
+        if (is_string($word) && $word == '<![CDATA[')
         {
             $this->curtag->startCData();
             $this->p_flags['in_cdata'] = true;

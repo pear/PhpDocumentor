@@ -79,7 +79,8 @@ class parserTag extends parserStringWithInlineTags
             {
                 list(,$val) = each($this->value);
                 reset($this->value);
-                return $val->Convert($converter);
+                $a = $val->Convert($converter);
+                return $a;
             }
             $result = '';
             foreach($this->value as $val)
@@ -94,7 +95,8 @@ class parserTag extends parserStringWithInlineTags
             return $result;
         } else
         {
-            return $this->value->Convert($converter);
+            $a = $this->value->Convert($converter);
+            return $a;
         }
     }
     

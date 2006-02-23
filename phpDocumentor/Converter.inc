@@ -3419,6 +3419,7 @@ class Converter
      *  <li>classname::constantname</li> (new 1.2.4)
      *  <li>classname::$variablename</li>
      *  <li>classname</li>
+     *  <li>object classname</li>
      *  <li>function functionname()</li>
      *  <li>global $globalvarname</li>
      *  <li>packagename#expr where expr is any of the above</li>
