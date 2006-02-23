@@ -559,7 +559,9 @@ class phpDocumentorTParser extends Parser
         {
             if ($this->checkEventPop($word,$pevent) && $pevent == PARSER_EVENT_FUNCTION_PARAM_VAR)
             { // end of [typehint ]$param[= defaultval]
-                $this->_wp->backupPos();
+                if (is_string($word) && $word == ')') {
+                    $this->_wp->backupPos();
+                }
                 $this->endFunctionParam($word);
             } elseif ($word == '=')
             { // about to parse the default value
