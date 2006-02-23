@@ -344,14 +344,20 @@ class parserFunction extends parserElement
     var $statics = false;
     
     var $source = '';
+    
     /**
      * @param string
      * @param string default value parsed from function definition
      * @param boolean indicates whether this parameter has a default value
+     * @param null|string class type hint
      */
-    function addParam($name, $value, $has_default = true)
+    function addParam($name, $value, $has_default = true, $typehint = null)
     {
         $this->params[$name] = array($value, $has_default);
+        if (isset($typehint))
+        {
+            $this->params[$name][2] = $typehint;
+        }
     }
     
     /**

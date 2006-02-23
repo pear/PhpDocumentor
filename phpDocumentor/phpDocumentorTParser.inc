@@ -138,6 +138,7 @@ class phpDocumentorTParser extends Parser
                                 PARSER_EVENT_EOFQUOTE => 'handleHereDoc',
                                 PARSER_EVENT_FUNCTION => 'handleFunction',
                                 PARSER_EVENT_FUNCTION_PARAMS => 'handleFunctionParams',
+                                PARSER_EVENT_FUNCTION_PARAM_VAR => 'handleFunctionParams',
                                 PARSER_EVENT_FUNC_GLOBAL => 'handleFuncGlobal',
                                 PARSER_EVENT_DEFINE_GLOBAL => 'handleGlobal',
                                 PARSER_EVENT_GLOBAL_VALUE => 'handleGlobalValue',
@@ -549,23 +550,24 @@ class phpDocumentorTParser extends Parser
     
     function handleFunctionParams($word, $pevent)
     {
-        //echo $this->wp->getPos() . ": word=|$word|\t\t\tlastword=|".$this->_pv_last_word."|\n";
+        //echo $this->_wp->getPos() . ": word=|$word|\t\t\tlastword=|".$this->_pv_last_word."|\n";
         //echo "function_param = '".$this->_pv_function_param."'\n";
         //echo "function_data = '".$this->_pv_function_data."'\n";
-        $e1 = $this->checkEventPush( $word, $pevent); 
+        $e1 = $this->checkEventPush($word, $pevent); 
 
         if (!$e1)
         {
-            if ($word == ',' || $this->checkEventPop($word,$pevent))
-            {
+            if ($this->checkEventPop($word,$pevent) && $pevent == PARSER_EVENT_FUNCTION_PARAM_VAR)
+            { // end of [typehint ]$param[= defaultval]
+                $this->_wp->backupPos();
                 $this->endFunctionParam($word);
             } elseif ($word == '=')
-            {
+            { // about to parse the default value
                 $this->_pf_funcparam_val = true;
             } else
             {
                 if ($this->_pf_funcparam_val)
-                {
+                { // parsing default value
                     if (isset($this->_pv_quote_data))
                     {
                         $this->_pv_function_data .= $this->_pv_quote_data;
@@ -574,12 +576,12 @@ class phpDocumentorTParser extends Parser
                     if (is_array($word)) $word = $word[1];
                     $this->_pv_function_data .= $word;
                 } else
-                {
+                { // pre-param
                     if (!isset($this->_pv_function_param)) $this->_pv_function_param = '';
-                    if (is_array($word))
+                    if (is_array($word) && $pevent == PARSER_EVENT_FUNCTION_PARAMS)
                     {
-                        if ($word[0] == T_STRING)
-                        {
+                        if ($word[0] == T_STRING || $word[0] == T_ARRAY)
+                        { // object or array type hint
                             $this->_pv_function_param_type = $word[1];
                             return;
                         }
@@ -591,6 +593,9 @@ class phpDocumentorTParser extends Parser
         } elseif ($e1 == PARSER_EVENT_ARRAY)
         {
             $this->_wp->setWhiteSpace(true);
+        } elseif ($e1 == PARSER_EVENT_FUNCTION_PARAM_VAR) {
+            // we just got the $var part of the param
+            $this->_pv_function_param .= $word[1];
         }
     }
 
@@ -2396,17 +2401,26 @@ class phpDocumentorTParser extends Parser
 
         $this->tokenpushEvent[PARSER_EVENT_FUNCTION_PARAMS] =
             array(
-                T_CONSTANT_ENCAPSED_STRING => PARSER_EVENT_QUOTE,
-                T_ARRAY => PARSER_EVENT_ARRAY,
+                T_VARIABLE => PARSER_EVENT_FUNCTION_PARAM_VAR,
                 T_COMMENT => PARSER_EVENT_COMMENT,
                 T_DOC_COMMENT => PARSER_EVENT_COMMENT,
             );
-        $this->wordpushEvent[PARSER_EVENT_FUNCTION_PARAMS] =
+        $this->wordpopEvent[PARSER_EVENT_FUNCTION_PARAMS] = array(")");
+/**************************************************************/
+
+        $this->tokenpushEvent[PARSER_EVENT_FUNCTION_PARAM_VAR] =
+            array(
+                T_CONSTANT_ENCAPSED_STRING => PARSER_EVENT_QUOTE,
+                T_COMMENT => PARSER_EVENT_COMMENT,
+                T_DOC_COMMENT => PARSER_EVENT_COMMENT,
+                T_ARRAY => PARSER_EVENT_ARRAY,
+            );
+        $this->wordpushEvent[PARSER_EVENT_FUNCTION_PARAM_VAR] =
             array(
                 '"' => PARSER_EVENT_QUOTE,
                 "'" => PARSER_EVENT_QUOTE,
             );
-        $this->wordpopEvent[PARSER_EVENT_FUNCTION_PARAMS] = array(")");
+        $this->wordpopEvent[PARSER_EVENT_FUNCTION_PARAM_VAR] = array(",", ")");
 /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_ARRAY] = 

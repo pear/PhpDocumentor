@@ -152,6 +152,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
 - fixed these bugs reported in PEAR:
  Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
  Bug #5011: PDF generation warning on uksort
+ Bug #6305: array typehints break the parser
   </notes>
   <deps>
    <dep type="php" rel="ge" version="4.1.0" optional="no"/>
@@ -2434,6 +2435,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
 - fixed these bugs reported in PEAR:
  Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
  Bug #5011: PDF generation warning on uksort
+ Bug #6305: array typehints break the parser
     </notes>
    </release>
  </changelog>

@@ -87,6 +87,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
 - fixed these bugs reported in PEAR:
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
  Bug #5011: PDF generation warning on uksort
+ Bug #6305: array typehints break the parser
 ';
 $version = '1.3.0RC6';
 $options = array(
@@ -103,23 +104,6 @@ $options = array(
     'docbuilder' => 'data',
     'HTML_TreeMenu-1.1.2' => 'data',
     'tutorials' => 'doc',
-    'phpDocumentor/Converters/CHM/default/templates/default/templates_c' => 'data',
-    'phpDocumentor/Converters/PDF/default/templates/default/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/frames/templates/default/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/frames/templates/l0l33t/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/frames/templates/phpdoc.de/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/frames/templates/phphtmllib/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/frames/templates/phpedit/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/frames/templates/earthli/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/frames/templates/DOM/default/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/frames/templates/DOM/l0l33t/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/frames/templates/DOM/phpdoc.de/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/frames/templates/DOM/phphtmllib/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/frames/templates/DOM/earthli/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/Smarty/templates/default/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/Smarty/templates/PHP/templates_c' => 'data',
-    'phpDocumentor/Converters/HTML/Smarty/templates/HandS/templates_c' => 'data',
-    'phpDocumentor/Converters/XML/DocBook/peardoc2/templates/default/templates_c' => 'data',
     ),
 'simpleoutput' => true,
 'exceptions' =>
@@ -161,7 +145,6 @@ $options = array(
           '*CSV*',
           'makedocs.ini',
           'publicweb-PEAR-1.2.1.patch.txt',
-          '*templates_c*'
           ),
 'installexceptions' => array('pear-phpdoc' => '/', 'pear-phpdoc.bat' => '/', 'scripts/makedoc.sh' => '/'),
 );

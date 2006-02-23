@@ -283,6 +283,11 @@ define("PARSER_EVENT_VAR_ARRAY_COMMENT"    ,    143);
 /** currently parsing a comment in a variable array value */
 define("STATE_VAR_ARRAY_COMMENT"    ,    243);
 
+/** used when a $param is encountered in a function definition */
+define("PARSER_EVENT_FUNCTION_PARAM_VAR", 144);
+/** currently parsing a $param in a function definition */
+define("STATE_FUNCTION_PARAM_VAR", 244);
+
 if (!defined('T_INTERFACE'))
 {
     define('T_INTERFACE', 'foo');
