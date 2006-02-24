@@ -84,6 +84,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1202772 ] missing parentheses in Parser.inc line 946
  [ 1203445 ] Call to a member function on a non-object in Parser.inc
  [ 1203451 ] array to string conversion notice in InlineTags.inc
+ [ 1261287 ] @filesource bug?
  [ 1348852 ] Call to function Convert() on a non-object + DocBlockTags
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
  [ 1398977 ] @return is not merged when using DocBlock Templates

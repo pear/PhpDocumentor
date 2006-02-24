@@ -562,6 +562,7 @@ class parserDocBlock
     function addKeyword($keyword, $value)
     {
         global $_phpDocumentor_setting;
+        $keyword = trim($keyword);
         if (phpDocumentor_setup::checkIgnoreTag($keyword)) return;
         // don't add the tag at all if it was specified to ignore it with --ignore-tags
         if ($keyword == 'package' || $keyword == 'subpackage' || $keyword == 'category') return $this->addPackage($keyword, $value);
