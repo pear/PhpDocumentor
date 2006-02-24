@@ -1531,7 +1531,12 @@ class phpDocumentorTParser extends Parser
                 {
                     $this->_pv_docblock->addTag($tag);
                 }
-                if (!count($this->_pv_docblock->params)) $this->_pv_docblock->params = $this->_pv_dtemplate->params;
+                if (!count($this->_pv_docblock->params)) {
+                    $this->_pv_docblock->params = $this->_pv_dtemplate->params;
+                }
+                if (!$this->_pv_docblock->return) {
+                    $this->_pv_docblock->return = $this->_pv_dtemplate->return;
+                }
                 $my_desc->add($this->_pv_dtemplate->sdesc);
                 $my_desc->add($this->_pv_dtemplate->desc);
             }
@@ -1955,7 +1960,7 @@ class phpDocumentorTParser extends Parser
     {
         $info = $this->retrieveType($value, true);
         //if (!$info) addErrorDie(PDERROR_MALFORMED_TAG, '@param');
-	if (!$info) { addError(PDERROR_MALFORMED_TAG, '@param'); return; }
+	    if (!$info) { addError(PDERROR_MALFORMED_TAG, '@param'); return; }
         $type = $info['type'];
         $var = $info['var'];
         $desc = $info['desc'];
