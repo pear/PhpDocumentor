@@ -625,7 +625,8 @@ class HTMLSmartyConverter extends Converter
         if (!isset($this->pkg_elements[$key]))
         {
             // if there are no elements, use a random package as the default
-            $start = array_shift(array_keys($this->pkg_elements));
+            $a = array_keys($this->pkg_elements);
+            $start = array_shift($a);
         }
         $this->package = $start;
         $this->subpackage = '';
