@@ -48,6 +48,7 @@ class phpDocumentorTWordParser extends WordParser
     var $_nl_check = array(
         T_WHITESPACE,
         T_ENCAPSED_AND_WHITESPACE,
+        T_CONSTANT_ENCAPSED_STRING,
         T_COMMENT,
         T_DOC_COMMENT,
         T_OPEN_TAG,

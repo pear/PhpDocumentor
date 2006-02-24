@@ -1606,12 +1606,13 @@ class phpDocumentorTParser extends Parser
         foreach($newtags as $tag)
         {
             $x = explode(' ',str_replace("\t",'    ',$tag));
-            $tagname = substr(array_shift($x),1);
+            $tagname = trim(substr(array_shift($x),1));
             $restoftag = $x;
-            if (isset($this->tagHandlers[$tagname]))
-            $handle = $this->tagHandlers[$tagname];
-            else
-            $handle = $this->tagHandlers['*'];
+            if (isset($this->tagHandlers[$tagname])) {
+                $handle = $this->tagHandlers[$tagname];
+            } else {
+                $handle = $this->tagHandlers['*'];
+            }
             $this->$handle($tagname,$restoftag);
         }
     }
