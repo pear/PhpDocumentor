@@ -165,6 +165,7 @@ array('installas' =>
 )));
 $pfm2->setReleaseVersion($version);
 $pfm2->setNotes($notes);
+$pfm2->clearDeps();
 $pfm2->setPhpDep('4.1.0');
 $pfm2->setPearinstallerDep('1.4.6');
 $pfm2->addPackageDepWithChannel('optional', 'XML_Beautifier', 'pear.php.net', '1.1');
