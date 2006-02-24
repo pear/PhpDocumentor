@@ -68,7 +68,7 @@ http://localhost/pear/PhpDocumentor is the web interface
   </maintainers>
  <release>
   <version>1.3.0RC6</version>
-  <date>2006-02-23</date>
+  <date>2006-02-24</date>
   <license>PHP License</license>
   <state>beta</state>
   <notes>PHP 5 support and more, fix bugs
@@ -150,6 +150,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1203445 ] Call to a member function on a non-object in Parser.inc
  [ 1203451 ] array to string conversion notice in InlineTags.inc
  [ 1224317 ] functions refers to wrong line
+ [ 1255692 ] Support for &quot;--&quot; argument
  [ 1261287 ] @filesource bug?
  [ 1348852 ] Call to function Convert() on a non-object + DocBlockTags
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
@@ -2358,7 +2359,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
    </release>
    <release>
     <version>1.3.0RC6</version>
-    <date>2006-02-23</date>
+    <date>2006-02-24</date>
     <license>PHP License</license>
     <state>beta</state>
     <notes>PHP 5 support and more, fix bugs
@@ -2440,6 +2441,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1203445 ] Call to a member function on a non-object in Parser.inc
  [ 1203451 ] array to string conversion notice in InlineTags.inc
  [ 1224317 ] functions refers to wrong line
+ [ 1255692 ] Support for &quot;--&quot; argument
  [ 1261287 ] @filesource bug?
  [ 1348852 ] Call to function Convert() on a non-object + DocBlockTags
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix

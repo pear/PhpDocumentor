@@ -239,6 +239,9 @@ class Io
                 //if($cmd === 'phpdoc' || basename($cmd)==='phpdoc')
                 //    continue;
 
+                if ($cmd == '--') {
+                    continue;
+                }
                 if ($cmd == '-h' || $cmd == '--help')
                 {
                     echo $this->displayHelpMsg();
