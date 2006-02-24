@@ -513,6 +513,9 @@ class parserDescParser extends Parser
         if ($context == 'list')
         {
 //            debug('aded to '.$context);
+            if (!is_object($this->p_vars['list_item'][$this->p_vars['list_count']])) {
+                addErrorDie(PDERROR_UL_IN_UL);
+            }
             $this->p_vars['list_item'][$this->p_vars['list_count']]->add($text);
         } elseif ($context != 'normal')
         {
@@ -848,6 +851,9 @@ class parserDescParser extends Parser
                         if ($this->p_vars['list_count'] > 1)
                         {
                             // this is a sublist, add it to the list item of the parent list
+                            if (!isset($this->p_vars['list_item'][$this->p_vars['list_count'] - 1])) {
+                                addErrorDie(PDERROR_UL_IN_UL);
+                            }
                             $this->p_vars['list_item'][$this->p_vars['list_count'] - 1]->add($this->p_vars['lists'][$this->p_vars['list_count']]);
                             // remove the sublist item and sublist, drop to parent list
                             unset($this->p_vars['lists'][$this->p_vars['list_count']]);

@@ -299,10 +299,6 @@ define("PDERROR_UNTERMINATED_ENTITY",65);
  */
 define("PDERROR_BEAUTIFYING_FAILED",66);
 /**
- * warning triggered by improper "@uses {@link blah}"
- */
-define("PDERROR_DUMB_USES",67);
-/**
  * warning triggered by a function with no name
  *
  * <pre>
@@ -343,6 +339,14 @@ define("PDERROR_NO_DOCBOOK_ID", 71);
  * warning triggered if someone brilliant tries "class X extends X {"
  */
 define("PDERROR_CANNOT_EXTEND_SELF", 72);
+/**
+ * warning triggered by improper "@uses {@link blah}"
+ */
+define("PDERROR_DUMB_USES",73);
+/**
+ * warning triggered if <ul> is nested inside <ul> and not <li>
+ */
+define("PDERROR_UL_IN_UL", 74);
 
 /**
  * Error messages for phpDocumentor parser warnings
@@ -439,6 +443,7 @@ $GLOBALS['phpDocumentor_error_descrip'] =
         PDERROR_FUNCTION_HAS_NONAME => 'function has no name (PHP error - test your file before parsing!)',
         PDERROR_CANNOT_EXTEND_SELF => 'class %s cannot extend itself - TEST YOUR CODE BEFORE PARSING',
         PDERROR_DUMB_USES => '@uses can only link to string data',
+        PDERROR_UL_IN_UL => 'ul/ol tags cannot be directly nested inside ul/ol, nest inside li',
         );
 
 /**
