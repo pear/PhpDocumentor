@@ -642,6 +642,15 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
         $test = $this->checkEventPush($word, $pevent);
         if ($test == PARSER_EVENT_DOCBLOCK || $test == PARSER_EVENT_COMMENT)
         {
+            if (substr($word[1], 0, 2) == '/*' && strpos($word[1], '*/')) {
+                $this->_pv_last_word = $word;
+                if ($word[1] == '/**#@-*/') {
+                    $this->_pf_docblock_template = true;
+                } else {
+                    $this->_pf_docblock = true;
+                }
+                return $this->handleDocBlock($word, PARSER_EVENT_DOCBLOCK);
+            }
             $this->_pf_no_output_yet = true;
             $this->_pv_saveline = $this->_wp->linenum + 1;
             return;
@@ -1266,7 +1275,8 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
         foreach($desc as $line)
         {
             $this->getInlineTags($line[0].$line[1]);
-            if (strpos($line[0],'*/') === false)
+            if (strpos($line[0],'*/') === false &&
+                !(substr($line[0], 0, 2) == '/*' && strpos($line[1], '*/') !== false))
             {
                 $this->newLineNum();
                 $this->_wp->linenum++;

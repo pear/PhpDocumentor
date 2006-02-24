@@ -73,6 +73,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 962319 ] Define : don\'t show the assigned value
  [ 977674 ] Parser error
  [ 989258 ] wrong interfaces parsing
+ [ 1108018 ] Bad source code after /**#@-*/
  [ 1150809 ] Infinite loop when class extends itself
  [ 1151196 ] PHP Fatal error: Cannot re-assign $this
  [ 1151650 ] UTF8 decoding for DocBook packages
