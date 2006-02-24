@@ -28,8 +28,8 @@
 {if count($methods[methods].ifunction_call.params)}
 {section name=params loop=$methods[methods].ifunction_call.params}
 {if $smarty.section.params.iteration != 1}, {/if}
-{if $methods[methods].ifunction_call.params[params].default != ''}[{/if}<b>{$methods[methods].ifunction_call.params[params].type}</b>
-<i>{$methods[methods].ifunction_call.params[params].name}</i>{if $methods[methods].ifunction_call.params[params].default != ''} = {$methods[methods].ifunction_call.params[params].default}]{/if}
+{if $methods[methods].ifunction_call.params[params].hasdefault}[{/if}<b>{$methods[methods].ifunction_call.params[params].type}</b>
+<i>{$methods[methods].ifunction_call.params[params].name}</i>{if $methods[methods].ifunction_call.params[params].hasdefault} = {$methods[methods].ifunction_call.params[params].default}]{/if}
 {/section}
 {/if}<b> );</b>
 </p>

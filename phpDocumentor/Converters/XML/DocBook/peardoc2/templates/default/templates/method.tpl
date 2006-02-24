@@ -13,7 +13,7 @@
       {if $function_call.constructor}constructor {/if}<function>{$class}::{$function_name}</function></funcdef>
 {if count($function_call.params)}
 {section name=params loop=$function_call.params}
-      <paramdef>{if strpos('>',$function_call.params[params].type)}<replaceable>{/if}{$function_call.params[params].type}{if strpos('>',$function_call.params[params].type)}</replaceable>{/if} <parameter>{if $function_call.params[params].default != ''} <optional>{/if}{$function_call.params[params].name|replace:"&":"&amp;"}{if $function_call.params[params].default != ''} = {$function_call.params[params].default}</optional>{/if}</parameter></paramdef>
+      <paramdef>{if strpos('>',$function_call.params[params].type)}<replaceable>{/if}{$function_call.params[params].type}{if strpos('>',$function_call.params[params].type)}</replaceable>{/if} <parameter>{if $function_call.params[params].hasdefault} <optional>{/if}{$function_call.params[params].name|replace:"&":"&amp;"}{if $function_call.params[params].hasdefault} = {$function_call.params[params].default}</optional>{/if}</parameter></paramdef>
 {/section}
 {else}
 <paramdef></paramdef>

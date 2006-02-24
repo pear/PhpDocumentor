@@ -155,6 +155,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1255692 ] Support for &quot;--&quot; argument
  [ 1261287 ] @filesource bug?
  [ 1348852 ] Call to function Convert() on a non-object + DocBlockTags
+ [ 1366260 ] Default 0 parameter in function is not displayed
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
  [ 1398977 ] @return is not merged when using DocBlock Templates
  [ 1428660 ] Confusing error when using {@link} in @uses
@@ -2448,6 +2449,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1255692 ] Support for &quot;--&quot; argument
  [ 1261287 ] @filesource bug?
  [ 1348852 ] Call to function Convert() on a non-object + DocBlockTags
+ [ 1366260 ] Default 0 parameter in function is not displayed
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
  [ 1398977 ] @return is not merged when using DocBlock Templates
  [ 1428660 ] Confusing error when using {@link} in @uses
