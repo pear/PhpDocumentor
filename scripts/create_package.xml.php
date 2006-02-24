@@ -84,6 +84,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1202772 ] missing parentheses in Parser.inc line 946
  [ 1203445 ] Call to a member function on a non-object in Parser.inc
  [ 1203451 ] array to string conversion notice in InlineTags.inc
+ [ 1428660 ] Confusing error when using {@link} in @uses
 - fixed these bugs reported in PEAR:
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
  Bug #5011: PDF generation warning on uksort

@@ -554,6 +554,9 @@ class parserUsesTag extends parserSeeTag
      */
     function parserUsesTag($seeel, $description)
     {
+        if ($seeel->hasInlineTag()) {
+            addErrorDie(PDERROR_DUMB_USES);
+        }
         parent::parserSeeTag($seeel);
         $this->_description = $description;
     }

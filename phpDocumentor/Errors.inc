@@ -299,6 +299,10 @@ define("PDERROR_UNTERMINATED_ENTITY",65);
  */
 define("PDERROR_BEAUTIFYING_FAILED",66);
 /**
+ * warning triggered by improper "@uses {@link blah}"
+ */
+define("PDERROR_DUMB_USES",67);
+/**
  * warning triggered by a function with no name
  *
  * <pre>
@@ -434,6 +438,7 @@ $GLOBALS['phpDocumentor_error_descrip'] =
         PDERROR_UNTERMINATED_ENTITY => 'entity &%s is unterminated',
         PDERROR_FUNCTION_HAS_NONAME => 'function has no name (PHP error - test your file before parsing!)',
         PDERROR_CANNOT_EXTEND_SELF => 'class %s cannot extend itself - TEST YOUR CODE BEFORE PARSING',
+        PDERROR_DUMB_USES => '@uses can only link to string data',
         );
 
 /**
