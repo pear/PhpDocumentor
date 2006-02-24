@@ -77,8 +77,8 @@ class parserTag extends parserStringWithInlineTags
         {
             if (count($this->value) == 1)
             {
-                list(,$val) = each($this->value);
                 reset($this->value);
+                list(,$val) = each($this->value);
                 $a = $val->Convert($converter);
                 return $a;
             }

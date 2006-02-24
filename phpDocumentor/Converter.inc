@@ -4409,15 +4409,17 @@ class Converter
             foreach($tag as $t)
             $utags[] = array('keyword' => $keyword, 'data' => $t->Convert($this));
         }
-				$ret['abstract'] = FALSE;
-				$ret['access'] = 'public';
-				foreach($tags as $tag)
-				{
-						if ($tag['keyword'] == 'access')
-							  $ret['access'] = $tag['data'];
-						if ($tag['keyword'] == 'abstract')
-							  $ret['abstract'] = TRUE;
-				}
+        $ret['abstract'] = FALSE;
+        $ret['access'] = 'public';
+        foreach($tags as $tag)
+        {
+            if ($tag['keyword'] == 'access') {
+                $ret['access'] = $tag['data'];
+            }
+            if ($tag['keyword'] == 'abstract') {
+                $ret['abstract'] = TRUE;
+            }
+        }
         $ret['sdesc'] = $element->docblock->getSDesc($this);
         $ret['desc'] = $element->docblock->getDesc($this);
         $ret['tags'] = $tags;
