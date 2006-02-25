@@ -372,19 +372,20 @@ class HTMLframesConverter extends Converter
             {
                 for($i=0;$i<count($links);$i++)
                 {
-										$class = $this->classes->getClassByPackage($links[$i]->name, $links[$i]->package);
-										if ($class && isset($class->docblock) && $class->docblock->hasaccess)
-												$left[$package][$subpackage]['classes'][] =
-												array("link" => $this->getId($links[$i]), 
-															"title" => $links[$i]->name,
-															"access" => $class->docblock->tags['access'][0]->value,
-															"abstract" => isset ($class->docblock->tags['abstract'][0]));
-										else
-												$left[$package][$subpackage]['classes'][] =
-												array("link" => $this->getId($links[$i]), 
-															"title" => $links[$i]->name,
-															"access" => 'public',
-															"abstract" => isset ($class->docblock->tags['abstract'][0]));
+                    $class = $this->classes->getClassByPackage($links[$i]->name, $links[$i]->package);
+                    if ($class && isset($class->docblock) && $class->docblock->hasaccess) {
+                        $left[$package][$subpackage]['classes'][] =
+                            array("link" => $this->getId($links[$i]), 
+                                  "title" => $links[$i]->name,
+                                  "access" => $class->docblock->tags['access'][0]->value,
+                                  "abstract" => isset ($class->docblock->tags['abstract'][0]));
+                    } else {
+                        $left[$package][$subpackage]['classes'][] =
+                            array("link" => $this->getId($links[$i]), 
+                                  "title" => $links[$i]->name,
+                                  "access" => 'public',
+                                  "abstract" => isset ($class->docblock->tags['abstract'][0]));
+                    }
                 }
             }
         }
