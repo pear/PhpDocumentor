@@ -650,7 +650,7 @@ class phpDocumentor_IntermediateParser
         }
         foreach($data->listParams() as $param)
         {
-            $update_params[] = $param[0];
+            $update_params[] = $param;
         }
         foreach($data->listGlobals() as $param)
         {
@@ -751,7 +751,7 @@ class phpDocumentor_IntermediateParser
 
         foreach($data->listParams() as $param)
         {
-            $update_params[] = $param[0];
+            $update_params[] = $param;
         }
         foreach($data->listGlobals() as $param)
         {

@@ -76,6 +76,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 962319 ] Define : don\'t show the assigned value
  [ 977674 ] Parser error
  [ 989258 ] wrong interfaces parsing
+ [ 1016927 ] no highlight for paramtype in header of function
  [ 1108018 ] Bad source code after /**#@-*/
  [ 1145403 ] Call to a member function on a non-object 
  [ 1150809 ] Infinite loop when class extends itself

@@ -506,12 +506,17 @@ class parserDocBlock
         else
         $this->params[$paramVar] = new parserParamTag($paramType,$value);
     }
-    
+
+    function resetParams()
+    {
+        $this->params = array();
+    }
     /**
      * @param integer $index index of parameter in the {@link $params} array
      * @param string $name name of the parameter to set in the $params array
+     * @param string|null $type type of the parameter
      */
-    function changeParam($index,$name)
+    function changeParam($index, $name, $type)
     {
         $this->params[$name] = $this->params[$index];
         unset($this->params[$index]);
@@ -519,17 +524,36 @@ class parserDocBlock
     
     /**
      * replaces nameless parameters in the {@link $params} array with their names
-     * @param array $params Format: array(parameter index => parameter name,...)
+     * add @param tags for params in the function with no entry
+     * @param array $params Format: array(parameter key =>
+     *                      array(0 => parameter name[,1 => default value][,2 => type hint]),...)
      */
     function updateParams($params)
     {
-        for($i=0;$i<count($params);$i++)
+        $countparams = array_values($params);
+        reset($params);
+        for($i=0;$i<count($countparams);$i++, next($params))
         {
             if (isset($this->params[$i]))
             {
-                $this->changeParam($i,$params[$i]);
+                $info = current($params);
+                $type = isset($info[2]) ? $info[2] : null;
+                $this->changeParam($i, key($params), $type);
+                $params[key($params)] = false;
             }
         }
+        $blank = new parserStringWithInlineTags;
+        foreach ($params as $key => $info) {
+            if (!$info) {
+                continue;
+            }
+            $type = isset($info[2]) ? $info[2] : null;
+            if (!isset($this->params[$info[0]])) {
+                $this->addParam($info[0], $type, $blank);
+            }
+        }
+        reset($params);
+        
         if (isset($this->tags))
         unset($this->tags['param']);
     }
