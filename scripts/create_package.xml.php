@@ -71,6 +71,8 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 893186 ] HTMLframes converter sometimes misses package level docs
  [ 896444 ] Bad line numbers
  [ 937235 ] duplicated /** after abstract method declaration
+ [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
+ [ 952217 ] HTML:frames:earthli
  [ 962319 ] Define : don\'t show the assigned value
  [ 977674 ] Parser error
  [ 989258 ] wrong interfaces parsing

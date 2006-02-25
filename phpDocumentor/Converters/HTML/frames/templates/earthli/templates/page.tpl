@@ -171,7 +171,7 @@
 			{/if}
 			<span class="disabled">Variables</span>
 			{if $functions}|{/if}
-			{if $globals}
+			{if $functions}
 				<a href="#sec-functions">Functions</a>
 			{/if}
 		</div>
