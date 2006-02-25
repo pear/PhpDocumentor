@@ -133,6 +133,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
 - fixed these bugs:
  [ not entered ] phpdoc script broken on unix
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
+ [ 893186 ] HTMLframes converter sometimes misses package level docs
  [ 896444 ] Bad line numbers
  [ 937235 ] duplicated /** after abstract method declaration
  [ 962319 ] Define : don&apos;t show the assigned value
@@ -155,7 +156,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1255692 ] Support for &quot;--&quot; argument
  [ 1261287 ] @filesource bug?
  [ 1348852 ] Call to function Convert() on a non-object + DocBlockTags
- [ 1366260 ] Default 0 parameter in function is not displayed
+ [ 1366260 ] Default 0 parameter in method is not displayed
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
  [ 1398977 ] @return is not merged when using DocBlock Templates
  [ 1428660 ] Confusing error when using {@link} in @uses
@@ -2427,6 +2428,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
 - fixed these bugs:
  [ not entered ] phpdoc script broken on unix
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
+ [ 893186 ] HTMLframes converter sometimes misses package level docs
  [ 896444 ] Bad line numbers
  [ 937235 ] duplicated /** after abstract method declaration
  [ 962319 ] Define : don&apos;t show the assigned value
@@ -2449,7 +2451,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1255692 ] Support for &quot;--&quot; argument
  [ 1261287 ] @filesource bug?
  [ 1348852 ] Call to function Convert() on a non-object + DocBlockTags
- [ 1366260 ] Default 0 parameter in function is not displayed
+ [ 1366260 ] Default 0 parameter in method is not displayed
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
  [ 1398977 ] @return is not merged when using DocBlock Templates
  [ 1428660 ] Confusing error when using {@link} in @uses

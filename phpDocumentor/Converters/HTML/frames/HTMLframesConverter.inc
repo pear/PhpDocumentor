@@ -419,8 +419,10 @@ class HTMLframesConverter extends Converter
                 $tutes = array();
                 foreach($this->tutorial_tree as $root => $tr)
                 {
-                    if ($tr['tutorial']->package == $package && $tr['tutorial']->subpackage == $subpackage)
-                    $tutes[$tr['tutorial']->tutorial_type][] = $this->getTutorialTree($tr['tutorial']);
+                    if ($tr['tutorial']->package == $package && $tr['tutorial']->subpackage == '') {
+                        $tutes[$tr['tutorial']->tutorial_type][] =
+                            $this->getTutorialTree($tr['tutorial']);
+                    }
                 }
                 if (isset($this->childless_tutorials[$package][$subpackage]))
                 {

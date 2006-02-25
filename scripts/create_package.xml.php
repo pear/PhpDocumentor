@@ -68,6 +68,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
 - fixed these bugs:
  [ not entered ] phpdoc script broken on unix
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
+ [ 893186 ] HTMLframes converter sometimes misses package level docs
  [ 896444 ] Bad line numbers
  [ 937235 ] duplicated /** after abstract method declaration
  [ 962319 ] Define : don\'t show the assigned value

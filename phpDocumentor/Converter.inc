@@ -2012,11 +2012,14 @@ class Converter
 		 * @return string */
 		function _tutorial_path($pkg, $subpkg = 0, $namepkg = 0)
 		{
-			if (! $subpkg)
+			if (!$subpkg) {
 				$subpkg = $pkg;
-			if (! $namepkg)
+			}
+			if (!$namepkg) {
 				$namepkg = $pkg;
-			return $pkg->package.'/'.$subpkg->subpackage.'/'.$namepkg->name;
+			}
+			$subpackagename = ($subpkg->subpackage ? '/' . $subpkg->subpackage : '');
+			return $pkg->package . $subpackagename . '/' . $namepkg->name;
 		}
 
 
