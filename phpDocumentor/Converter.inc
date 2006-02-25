@@ -2041,8 +2041,9 @@ class Converter
      */
     function _setupTutorialTree($parent = false)
     {
-				if (! isset($this->processed_tutorials))
-						$this->processed_tutorials = array();
+        if (! isset($this->processed_tutorials)) {
+            $this->processed_tutorials = array();
+        }
         $tree = array();
         if (!$parent)
         {
@@ -2056,17 +2057,18 @@ class Converter
                         {
                             if (!$tutorial->parent)
                             {
-																$child_path = $this->_tutorial_path($tutorial,$tutorial,$tutorial);
-																if (! isset($this->processed_tutorials[$child_path]))
-																{
-																		$this->processed_tutorials[$child_path] = $tutorial;
-																		//debug("parent ".$tutorial->name);
-																		$ret = $this->_setupTutorialTree($tutorial);
-																		if (!count($tree))
-																			$tree = $ret;
-																		else
-																			$tree = array_merge($tree,$ret);
-																}
+                                $child_path = $this->_tutorial_path($tutorial,$tutorial,$tutorial);
+                                if (!isset($this->processed_tutorials[$child_path]))
+                                {
+                                    $this->processed_tutorials[$child_path] = $tutorial;
+                                    //debug("parent ".$tutorial->name);
+                                    $ret = $this->_setupTutorialTree($tutorial);
+                                    if (!count($tree)) {
+                                        $tree = $ret;
+                                    } else {
+                                        $tree = array_merge($tree,$ret);
+                                    }
+                                }
                             }
                         }
                     }
@@ -2074,39 +2076,45 @@ class Converter
             }
             return $tree;
         }
-				$parent_path = $this->_tutorial_path($parent);
+        $parent_path = $this->_tutorial_path($parent);
         $tree[$parent_path]['tutorial'] = $parent;
         // process all child tutorials, and insert them in order
         if ($parent->ini)
         {
             foreach($parent->ini['Linked Tutorials'] as $child)
             {
-                if (isset($this->tutorials[$parent->package][$parent->subpackage][$parent->tutorial_type][$child . '.' . $parent->tutorial_type]))
-												// remove the child from the list of remaining tutorials
-										$tute = $this->tutorials[$parent->package][$parent->subpackage][$parent->tutorial_type][$child . '.' . $parent->tutorial_type];
-                else
-										$tute = false;
+                if (isset($this->tutorials[$parent->package][$parent->subpackage]
+                                          [$parent->tutorial_type][$child . '.' .
+                                           $parent->tutorial_type])) {
+                    // remove the child from the list of remaining tutorials
+                    $tute = $this->tutorials[$parent->package][$parent->subpackage]
+                                            [$parent->tutorial_type][$child . '.' .
+                                             $parent->tutorial_type];
+                } else {
+                    $tute = false;
+                }
 
-                if ($tute)
-                {
-										$child_path = $this->_tutorial_path($parent,$parent,$tute);
-										if (! isset($this->processed_tutorials[$child_path]))
-										{
-												$this->processed_tutorials[$child_path] = $tute;
-												if ($tute->name == $child . '.' . $parent->tutorial_type)
-												{
-//														echo "Adding [$child_path] to [$parent_path]<br>";
-														$tree[$parent_path]['child'][$this->_tutorial_path($parent,$parent,$tute)]['tutorial'] = $tute;
-														if ($tute->ini)
-														{
-																// add all the child's child tutorials to the list
-																if (!isset($tree[$parent_path]['child']))
-																		$tree[$parent_path]['child'] = $this->_setupTutorialTree($tute);
-																else
-																		$tree[$parent_path]['child'] = array_merge($tree[$parent_path]['child'],$this->_setupTutorialTree($tute));
-														}
-												}
-										}
+                if ($tute) {
+                    $child_path = $this->_tutorial_path($parent,$parent,$tute);
+                    if (!isset($this->processed_tutorials[$child_path]))
+                    {
+                        $this->processed_tutorials[$child_path] = $tute;
+                        if ($tute->name == $child . '.' . $parent->tutorial_type)
+                        {
+                            //echo "Adding [$child_path] to [$parent_path]<br>";
+                            $tree[$parent_path]['child'][$this->_tutorial_path($parent,$parent,$tute)]
+                                 ['tutorial'] = $tute;
+                            if ($tute->ini)
+                            {
+                            // add all the child's child tutorials to the list
+                            if (!isset($tree[$parent_path]['child'])) {
+                                $tree[$parent_path]['child'] = $this->_setupTutorialTree($tute);
+                            } else {
+                                $tree[$parent_path]['child'] = array_merge($tree[$parent_path]['child'],
+                                    $this->_setupTutorialTree($tute));
+                            }
+                        }
+                    }
                 }
             }
         }
