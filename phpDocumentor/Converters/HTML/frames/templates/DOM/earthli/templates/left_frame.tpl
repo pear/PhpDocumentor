@@ -73,12 +73,12 @@ if (document.getElementById) {ldelim}
 		{/if}
 	
 		{if $info[p].classes}
-			var tree_classe = new WebFXTreeItem('Class(es)', '{$packagedoc}');
+			var tree_classe = new WebFXTreeItem('Class(es)', '{$packagedoc|escape:"quotes"}');
 			tree_classe.openIcon = 'media/images/class_folder.png';
 			tree_classe.icon = 'media/images/class_folder.png';
 			
 			{section name=class loop=$info[p].classes}
-				var classe = new WebFXTreeItem('{$info[p].classes[class].title}', '{$info[p].classes[class].link}');
+				var classe = new WebFXTreeItem('{$info[p].classes[class].title|escape:"quotes"}', '{$info[p].classes[class].link|escape:"quotes"}');
 				classe.openIcon = 'media/images/{if $info[p].classes[class].abstract}Abstract{/if}{if $info[p].classes[class].access == 'private'}Private{/if}Class.png';
 				classe.icon = 'media/images/{if $info[p].classes[class].abstract}Abstract{/if}{if $info[p].classes[class].access == 'private'}Private{/if}Class.png';
 				tree_classe.add(classe);
@@ -88,12 +88,12 @@ if (document.getElementById) {ldelim}
 		{/if}
 
 		{if $info[p].functions}
-			var tree_function = new WebFXTreeItem('Function(s)', '{$packagedoc}');
+			var tree_function = new WebFXTreeItem('Function(s)', '{$packagedoc|escape:"quotes"}');
 			tree_function.openIcon = 'media/images/function_folder.png';
 			tree_function.icon = 'media/images/function_folder.png';
 			
 			{section name=nonclass loop=$info[p].functions}
-				var fic = new WebFXTreeItem('{$info[p].functions[nonclass].title}', '{$info[p].functions[nonclass].link}');
+				var fic = new WebFXTreeItem('{$info[p].functions[nonclass].title|escape:"quotes"}', '{$info[p].functions[nonclass].link|escape:"quotes"}');
 				fic.openIcon = 'media/images/Function.png';
 				fic.icon = 'media/images/Function.png';
 				tree_function.add(fic);
@@ -103,12 +103,12 @@ if (document.getElementById) {ldelim}
 		{/if}
 	
 		{if $info[p].files}
-			var tree_file = new WebFXTreeItem('File(s)', '{$packagedoc}');
+			var tree_file = new WebFXTreeItem('File(s)', '{$packagedoc|escape:"quotes"}');
 			tree_file.openIcon = 'media/images/folder.png';
 			tree_file.icon = 'media/images/folder.png';
 	
 			{section name=nonclass loop=$info[p].files}
-				var file = new WebFXTreeItem('{$info[p].files[nonclass].title}', '{$info[p].files[nonclass].link}');
+				var file = new WebFXTreeItem('{$info[p].files[nonclass].title|escape:"quotes"}', '{$info[p].files[nonclass].link|escape:"quotes"}');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
@@ -119,9 +119,9 @@ if (document.getElementById) {ldelim}
 
 	{else}
 		{if $info[p].subpackagetutorial}
-			var subpackagetree = new WebFXTreeItem('<span class="sub-package">{$info[p].subpackagetutorialtitle|strip_tags}</span>', '{$info[p].subpackagetutorialnoa}');
+			var subpackagetree = new WebFXTreeItem('<span class="sub-package">{$info[p].subpackagetutorialtitle|strip_tags|escape:"quotes"}</span>', '{$info[p].subpackagetutorialnoa}');
 		{else}
-			var subpackagetree = new WebFXTreeItem('<span class="sub-package">{$info[p].subpackage}</span>', '{$packagedoc}');
+			var subpackagetree = new WebFXTreeItem('<span class="sub-package">{$info[p].subpackage}</span>', '{$packagedoc|escape:"quotes"}');
 		{/if}
 
 		subpackagetree.openIcon = 'media/images/package.png';
@@ -171,12 +171,12 @@ if (document.getElementById) {ldelim}
 		{/if}
 	
 		{if $info[p].classes}
-			var subpackagetree_classe = new WebFXTreeItem('Class(es)', '{$packagedoc}');
+			var subpackagetree_classe = new WebFXTreeItem('Class(es)', '{$packagedoc|escape:"quotes"}');
 			subpackagetree_classe.openIcon = 'media/images/class_folder.png';
 			subpackagetree_classe.icon = 'media/images/class_folder.png';
 			
 			{section name=class loop=$info[p].classes}
-				var classe = new WebFXTreeItem('{$info[p].classes[class].title}', '{$info[p].classes[class].link}');
+				var classe = new WebFXTreeItem('{$info[p].classes[class].title|escape:"quotes"}', '{$info[p].classes[class].link|escape:"quotes"}');
 				classe.openIcon = 'media/images/{if $info[p].classes[class].abstract}Abstract{/if}{if $info[p].classes[class].access == 'private'}Private{/if}Class.png';
 				classe.icon = 'media/images/{if $info[p].classes[class].abstract}Abstract{/if}{if $info[p].classes[class].access == 'private'}Private{/if}Class.png';
 				subpackagetree_classe.add(classe);
@@ -186,12 +186,12 @@ if (document.getElementById) {ldelim}
 		{/if}
 
 		{if $info[p].functions}
-			var subpackagetree_function = new WebFXTreeItem('Function(s)', '{$packagedoc}');
+			var subpackagetree_function = new WebFXTreeItem('Function(s)', '{$packagedoc|escape:"quotes"}');
 			subpackagetree_function.openIcon = 'media/images/function_folder.png';
 			subpackagetree_function.icon = 'media/images/function_folder.png';
 			
 			{section name=nonclass loop=$info[p].functions}
-				var fic = new WebFXTreeItem('{$info[p].functions[nonclass].title}', '{$info[p].functions[nonclass].link}');
+				var fic = new WebFXTreeItem('{$info[p].functions[nonclass].title|escape:"quotes"}', '{$info[p].functions[nonclass].link|escape:"quotes"}');
 				fic.openIcon = 'media/images/Function.png';
 				fic.icon = 'media/images/Function.png';
 				subpackagetree_function.add(fic);
@@ -201,12 +201,12 @@ if (document.getElementById) {ldelim}
 		{/if}
 		
 		{if $info[p].files}
-			var subpackagetree_file = new WebFXTreeItem('File(s)', '{$packagedoc}');
+			var subpackagetree_file = new WebFXTreeItem('File(s)', '{$packagedoc|escape:"quotes"}');
 			subpackagetree_file.openIcon = 'media/images/folder.png';
 			subpackagetree_file.icon = 'media/images/folder.png';
 			
 			{section name=nonclass loop=$info[p].files}
-				var file = new WebFXTreeItem('{$info[p].files[nonclass].title}', '{$info[p].files[nonclass].link}');
+				var file = new WebFXTreeItem('{$info[p].files[nonclass].title|escape:"quotes"}', '{$info[p].files[nonclass].link|escape:"quotes"}');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				subpackagetree_file.add(file);

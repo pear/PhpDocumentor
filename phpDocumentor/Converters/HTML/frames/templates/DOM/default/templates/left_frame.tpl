@@ -5,7 +5,7 @@
 if (document.getElementById) {ldelim}
 {section name=p loop=$info}
 	{if $info[p].subpackage == ""}
-		var tree = new WebFXTree('<span class="package">{$info.0.package}</span>');
+		var tree = new WebFXTree('<span class="package">{$info.0.package|escape:"quotes"}</span>');
 		tree.setBehavior('classic');
 	
 		{if $hastodos}
@@ -60,7 +60,7 @@ if (document.getElementById) {ldelim}
 			var tree_classe = new WebFXTreeItem('Class(es)', '{$packagedoc}');
 			
 			{section name=class loop=$info[p].classes}
-				var classe = new WebFXTreeItem('{$info[p].classes[class].title}', '{$info[p].classes[class].link}');
+				var classe = new WebFXTreeItem('{$info[p].classes[class].title|escape:"quotes"}', '{$info[p].classes[class].link|escape:"quotes"}');
 				tree_classe.add(classe);
 			{/section}
 	
@@ -68,10 +68,10 @@ if (document.getElementById) {ldelim}
 		{/if}
 
 		{if $info[p].functions}
-			var tree_function = new WebFXTreeItem('Function(s)', '{$packagedoc}');
+			var tree_function = new WebFXTreeItem('Function(s)', '{$packagedoc|escape:"quotes"}');
 			
 			{section name=nonclass loop=$info[p].functions}
-				var fic = new WebFXTreeItem('{$info[p].functions[nonclass].title}', '{$info[p].functions[nonclass].link}');
+				var fic = new WebFXTreeItem('{$info[p].functions[nonclass].title|escape:"quotes"}', '{$info[p].functions[nonclass].link}');
 				tree_function.add(fic);
 			{/section}
 		
@@ -79,10 +79,10 @@ if (document.getElementById) {ldelim}
 		{/if}
 	
 		{if $info[p].files}
-			var tree_file = new WebFXTreeItem('File(s)', '{$packagedoc}');
+			var tree_file = new WebFXTreeItem('File(s)', '{$packagedoc|escape:"quotes"}');
 	
 			{section name=nonclass loop=$info[p].files}
-				var file = new WebFXTreeItem('{$info[p].files[nonclass].title}', '{$info[p].files[nonclass].link}');
+				var file = new WebFXTreeItem('{$info[p].files[nonclass].title|escape:"quotes"}', '{$info[p].files[nonclass].link|escape:"quotes"}');
 				tree_file.add(file);
 			{/section}
 	
@@ -91,9 +91,9 @@ if (document.getElementById) {ldelim}
 
 	{else}
 		{if $info[p].subpackagetutorial}
-			var subpackagetree = new WebFXTreeItem('<span class="sub-package">{$info[p].subpackagetutorialtitle|strip_tags}</span>', '{$info[p].subpackagetutorialnoa}');
+			var subpackagetree = new WebFXTreeItem('<span class="sub-package">{$info[p].subpackagetutorialtitle|strip_tags|escape:"quotes"}</span>', '{$info[p].subpackagetutorialnoa|escape:"quotes"}');
 		{else}
-			var subpackagetree = new WebFXTreeItem('<span class="sub-package">{$info[p].subpackage}</span>', '{$packagedoc}');
+			var subpackagetree = new WebFXTreeItem('<span class="sub-package">{$info[p].subpackage|escape:"quotes"}</span>', '{$packagedoc|escape:"quotes"}');
 		{/if}
 
 		{if $info[p].tutorials}
@@ -132,10 +132,10 @@ if (document.getElementById) {ldelim}
 		{/if}
 	
 		{if $info[p].classes}
-			var subpackagetree_classe = new WebFXTreeItem('Class(es)', '{$packagedoc}');
+			var subpackagetree_classe = new WebFXTreeItem('Class(es)', '{$packagedoc|escape:"quotes"}');
 			
 			{section name=class loop=$info[p].classes}
-				var classe = new WebFXTreeItem('{$info[p].classes[class].title}', '{$info[p].classes[class].link}');
+				var classe = new WebFXTreeItem('{$info[p].classes[class].title|escape:"quotes"}', '{$info[p].classes[class].link|escape:"quotes"}');
 				subpackagetree_classe.add(classe);
 			{/section}
 			
@@ -146,7 +146,7 @@ if (document.getElementById) {ldelim}
 			var subpackagetree_function = new WebFXTreeItem('Function(s)', '{$packagedoc}');
 			
 			{section name=nonclass loop=$info[p].functions}
-				var fic = new WebFXTreeItem('{$info[p].functions[nonclass].title}', '{$info[p].functions[nonclass].link}');
+				var fic = new WebFXTreeItem('{$info[p].functions[nonclass].title|escape:"quotes"}', '{$info[p].functions[nonclass].link|escape:"quotes"}');
 				subpackagetree_function.add(fic);
 			{/section}
 			
@@ -154,10 +154,10 @@ if (document.getElementById) {ldelim}
 		{/if}
 		
 		{if $info[p].files}
-			var subpackagetree_file = new WebFXTreeItem('File(s)', '{$packagedoc}');
+			var subpackagetree_file = new WebFXTreeItem('File(s)', '{$packagedoc|escape:"quotes"}');
 			
 			{section name=nonclass loop=$info[p].files}
-				var file = new WebFXTreeItem('{$info[p].files[nonclass].title}', '{$info[p].files[nonclass].link}');
+				var file = new WebFXTreeItem('{$info[p].files[nonclass].title|escape:"quotes"}', '{$info[p].files[nonclass].link|escape:"quotes"}');
 				subpackagetree_file.add(file);
 			{/section}
 		

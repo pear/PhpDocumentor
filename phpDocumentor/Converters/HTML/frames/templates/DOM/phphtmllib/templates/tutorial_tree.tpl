@@ -1,4 +1,4 @@
-	var {$name|replace:"-":"_"}node = new WebFXTreeItem('{$main.title|strip_tags}','{$main.link}', parent_node);
+	var {$name|replace:"-":"_"}node = new WebFXTreeItem('{$main.title|strip_tags|escape:"quotes"}','{$main.link}', parent_node);
 
 {if $haskids}
   var {$name|replace:"-":"_"}_old_parent_node = parent_node;
