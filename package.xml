@@ -68,7 +68,7 @@ http://localhost/pear/PhpDocumentor is the web interface
   </maintainers>
  <release>
   <version>1.3.0RC6</version>
-  <date>2006-02-24</date>
+  <date>2006-02-25</date>
   <license>PHP License</license>
   <state>beta</state>
   <notes>PHP 5 support and more, fix bugs
@@ -81,7 +81,8 @@ This will be the last release in the 1.x series.  2.0 is next
 Features added to this release include:
 
  * Full PHP 5 support, phpDocumentor both runs in and parses Zend Engine 2
-   language constructs.  Note that you must be running phpDocumentor in
+   language constructs.  Internal classes are recognized and inheritance is
+   documented.  Note that you must be running phpDocumentor in
    PHP 5 in order to parse PHP 5 code
  * XML:DocBook/peardoc2:default converter now beautifies the source using
    PEAR&apos;s XML_Beautifier if available
@@ -135,6 +136,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
  [ 893186 ] HTMLframes converter sometimes misses package level docs
  [ 896444 ] Bad line numbers
+ [ 907734 ] Exception Class is builtin to PHP5
  [ 937235 ] duplicated /** after abstract method declaration
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
  [ 952217 ] HTML:frames:earthli
@@ -2366,7 +2368,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
    </release>
    <release>
     <version>1.3.0RC6</version>
-    <date>2006-02-24</date>
+    <date>2006-02-25</date>
     <license>PHP License</license>
     <state>beta</state>
     <notes>PHP 5 support and more, fix bugs
@@ -2379,7 +2381,8 @@ This will be the last release in the 1.x series.  2.0 is next
 Features added to this release include:
 
  * Full PHP 5 support, phpDocumentor both runs in and parses Zend Engine 2
-   language constructs.  Note that you must be running phpDocumentor in
+   language constructs.  Internal classes are recognized and inheritance is
+   documented.  Note that you must be running phpDocumentor in
    PHP 5 in order to parse PHP 5 code
  * XML:DocBook/peardoc2:default converter now beautifies the source using
    PEAR&apos;s XML_Beautifier if available
@@ -2433,6 +2436,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
  [ 893186 ] HTMLframes converter sometimes misses package level docs
  [ 896444 ] Bad line numbers
+ [ 907734 ] Exception Class is builtin to PHP5
  [ 937235 ] duplicated /** after abstract method declaration
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
  [ 952217 ] HTML:frames:earthli

@@ -1030,6 +1030,12 @@ class Classes
             }
         } else
         {
+            if (class_exists('ReflectionClass') && class_exists($ex)) {
+                $r = new ReflectionClass($ex);
+                if ($r->isInternal()) {
+                    return $ex; // no warning
+                }
+            }
             addWarning(PDERROR_PARENT_NOT_FOUND, $class, $ex);
             return $ex;
         }

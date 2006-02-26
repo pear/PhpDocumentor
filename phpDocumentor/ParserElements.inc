@@ -1008,7 +1008,7 @@ class parserClass extends parserElement
      */
     function getInheritedMethods(&$c,$override = false)
     {
-        $x = $this;
+        $x = $oldx = $this;
         $methods = array();
         $arr = array();
         while ($x->parent && is_array($x->parent))
@@ -1043,7 +1043,58 @@ class parserClass extends parserElement
                     $arr[$par->getName()]['file'] = $par->curfile;
                 }
             }
+            $oldx = $x;
             $x = &$par;
+        }
+        if (is_a($oldx, 'parserClass') && is_a($oldx->getExtends(true), 'ReflectionClass')) {
+            $extends = $oldx->getExtends(true);
+            foreach ($extends->getMethods() as $method) {
+                $var = new parserMethod($oldx->getExtends());
+                if ($method->returnsReference()) {
+                    $var->setReturnsReference();
+                }
+                $doc = new parserDocBlock;
+                foreach ($method->getParameters() as $param) {
+                    $value = $param->isDefaultValueAvailable() ? var_export($param->getDefaultValue(), true) : null;
+                    if ($param->isPassedByReference()) {
+                        $var->addParam('&$' . $param->getName(), $value, $param->isOptional(),
+                            $param->getClass());
+                    } else {
+                        $var->addParam('$' . $param->getName(), $value, $param->isOptional(),
+                            $param->getClass());
+                    }
+                }
+                $var->setName($method->getName());
+                $doc->addPackage('package', $oldx->getPackage());
+                $var->setDocBlock($doc);
+                $par = $method->getDeclaringClass();
+                $var->setLineNumber($par->getStartLine());
+                $modifiers = array();
+                if ($method->isPrivate()) {
+                    $modifiers[] = 'private';
+                }
+                if ($method->isAbstract()) {
+                    $modifiers[] = 'abstract';
+                }
+                if ($method->isFinal()) {
+                    $modifiers[] = 'final';
+                }
+                if ($method->isProtected()) {
+                    $modifiers[] = 'protected';
+                }
+                if ($method->isPublic()) {
+                    $modifiers[] = 'public';
+                }
+                if ($method->isStatic()) {
+                    $modifiers[] = 'static';
+                }
+                if ($method->isConstructor()) {
+                    $var->setConstructor();
+                }
+                $var->setModifiers($modifiers);
+                $arr[$oldx->getExtends()]['methods'][] = $var;
+                $arr[$oldx->getExtends()]['file'] = '(internal)';
+            }
         }
         return $arr;
     }
@@ -1055,7 +1106,7 @@ class parserClass extends parserElement
      */
     function getInheritedVars(&$c,$override = true, $vars = false)
     {
-        $x = $this;
+        $x = $oldx = $this;
         $vars = array();
         $arr = array();
         while ($x->parent && is_array($x->parent))
@@ -1090,7 +1141,36 @@ class parserClass extends parserElement
                     $arr[$par->getName()]['file'] = $par->curfile;
                 }
             }
+            $oldx = $x;
             $x = &$par;
+        }
+        if (is_a($oldx, 'parserClass') && is_a($oldx->getExtends(true), 'ReflectionClass')) {
+            $extends = $oldx->getExtends(true);
+            foreach ($extends->getProperties() as $property) {
+                $var = new parserVar($oldx->getExtends());
+                $doc = new parserDocBlock;
+                $var->setName('$' . $property->getName());
+                $doc->addPackage('package', $oldx->getPackage());
+                $par = $property->getDeclaringClass();
+                $var->setLineNumber($par->getStartLine());
+                $modifiers = array();
+                if ($property->isPrivate()) {
+                    $modifiers[] = 'private';
+                    $doc->addAccess('private');
+                }
+                if ($property->isProtected()) {
+                    $modifiers[] = 'protected';
+                    $doc->addAccess('protected');
+                }
+                if ($property->isPublic()) {
+                    $modifiers[] = 'public';
+                    $doc->addAccess('public');
+                }
+                $var->setDocBlock($doc);
+                $var->setModifiers($modifiers);
+                $arr[$oldx->getExtends()]['vars'][] = $var;
+                $arr[$oldx->getExtends()]['file'] = '(internal)';
+            }
         }
         return $arr;
     }
@@ -1102,7 +1182,7 @@ class parserClass extends parserElement
      */
     function getInheritedConsts(&$c,$override = false, $consts = false)
     {
-        $x = $this;
+        $x = $oldx = $this;
         $consts = array();
         $arr = array();
         while ($x->parent && is_array($x->parent))
@@ -1137,7 +1217,25 @@ class parserClass extends parserElement
                     $arr[$par->getName()]['file'] = $par->curfile;
                 }
             }
+            $oldx = $x;
             $x = &$par;
+        }
+        if (is_a($oldx, 'parserClass') && is_a($oldx->getExtends(true), 'ReflectionClass')) {
+            $extends = $oldx->getExtends(true);
+            if (!$extends->getConstants()) {
+                return $arr;
+            }
+            foreach ($extends->getConstants() as $property => $value) {
+                $var = new parserConst($oldx->getExtends());
+                $doc = new parserDocBlock;
+                $var->setName($property);
+                $var->setValue(var_export($value, true));
+                $doc->addPackage('package', $oldx->getPackage());
+                $var->setLineNumber($extends->getStartLine());
+                $var->setDocBlock($doc);
+                $arr[$oldx->getExtends()]['consts'][] = $var;
+                $arr[$oldx->getExtends()]['file'] = '(internal)';
+            }
         }
         return $arr;
     }
@@ -1221,6 +1319,15 @@ class parserClass extends parserElement
     function setExtends($extends)
     {
         $this->extends = $extends;
+        if (!class_exists('ReflectionClass') || !class_exists($extends)) {
+            return;
+        }
+        // this may throw an exception.  Hopefully it won't if the class exists
+        $parent = new ReflectionClass($extends);
+        if (!$parent->isInternal()) {
+            return;
+        }
+        $this->extends = $parent;
     }
     
     /**
@@ -1243,9 +1350,14 @@ class parserClass extends parserElement
      * @return boolean
      * @see $extends
      */
-    function getExtends()
+    function getExtends($raw = false)
     {
         if (!isset($this->extends)) return false;
+        if (!$raw) {
+            if (is_a($this->extends, 'ReflectionClass')) {
+                return $this->extends->getName();
+            }
+        }
         return $this->extends;
     }
 }
@@ -1328,15 +1440,50 @@ class parserVar extends parserElement
         $class = $c->classes->getClass($this->class,$this->path);
         $par = $class->getParent($c);
         
+        if (!is_object($par)) {
+            if (is_a($class->getExtends(true), 'ReflectionClass')) {
+                $pare = $class->getExtends(true);
+                if ($pare->hasProperty(substr($this->name, 1))) {
+                    $par = $pare;
+                    $property = $par->getProperty(substr($this->name, 1));
+                    $ret = new parserVar($par->getName());
+                    $doc = new parserDocBlock;
+                    $ret->setName('$' . $property->getName());
+                    $doc->addPackage('package', $class->getPackage());
+                    $ret->setLineNumber($par->getStartLine());
+                    $modifiers = array();
+                    if ($property->isPrivate()) {
+                        if ($c->parseprivate) {
+                            return false;
+                        }
+                        $modifiers[] = 'private';
+                        $doc->addAccess('private');
+                    }
+                    if ($property->isProtected()) {
+                        $modifiers[] = 'protected';
+                        $doc->addAccess('protected');
+                    }
+                    if ($property->isPublic()) {
+                        $modifiers[] = 'public';
+                        $doc->addAccess('public');
+                    }
+                    $ret->setDocBlock($doc);
+                    $ret->setModifiers($modifiers);
+                    return $ret;
+                }
+            }
+        }
         while (is_object($par))
         {
-          if ($par->hasVar($c,$this->name))
-					{
-						$var = $par->getVar($c,$this->name);
-						if (!($var->docblock && $var->docblock->hasaccess && !$c->parseprivate && $var->docblock->tags['access'][0]->value == 'private'))
-							return $var;
-					}
-          $par = $par->getParent($c);
+            if ($par->hasVar($c,$this->name))
+            {
+                $var = $par->getVar($c,$this->name);
+                if (!($var->docblock && $var->docblock->hasaccess &&
+                      !$c->parseprivate && $var->docblock->tags['access'][0]->value == 'private')) {
+                    return $var;
+                }
+            }
+            $par = $par->getParent($c);
         }
         
         return false;
@@ -1528,17 +1675,79 @@ class parserMethod extends parserFunction
         $class = $c->classes->getClass($this->class,$this->path);
         
         $par = $class->getParent($c);
-        
+        if (!is_object($par)) {
+            if (is_a($class->getExtends(true), 'ReflectionClass')) {
+                $pare = $class->getExtends(true);
+                if ($pare->hasMethod($this->name)) {
+                    $par = $pare;
+                    $method = $par->getMethod($this->name);
+                    $var = new parserMethod($par->getName());
+                    if ($method->returnsReference()) {
+                        $var->setReturnsReference();
+                    }
+                    $doc = new parserDocBlock;
+                    foreach ($method->getParameters() as $param) {
+                        $value = $param->isOptional() ? var_export($param->getDefaultValue(), true) : null;
+                        if ($param->isPassedByReference()) {
+                            $var->addParam('&$' . $param->getName(), $value, $param->isOptional(),
+                                $param->getClass());
+                        } else {
+                            $var->addParam('$' . $param->getName(), $value, $param->isOptional(),
+                                $param->getClass());
+                        }
+                    }
+                    $var->setName($method->getName());
+                    $doc->addPackage('package', $this->getPackage());
+                    $par = $method->getDeclaringClass();
+                    $var->setLineNumber($par->getStartLine());
+                    $modifiers = array();
+                    if ($method->isPrivate()) {
+                        $modifiers[] = 'private';
+                        $doc->addAccess('private');
+                    }
+                    $blank = new parserStringWithInlineTags;
+                    if ($method->isAbstract()) {
+                        $modifiers[] = 'abstract';
+                        $doc->addKeyword('abstract', $blank);
+                    }
+                    if ($method->isFinal()) {
+                        $modifiers[] = 'final';
+                        $doc->addKeyword('final', $blank);
+                    }
+                    if ($method->isProtected()) {
+                        $modifiers[] = 'protected';
+                        $doc->addAccess('protected');
+                    }
+                    if ($method->isPublic()) {
+                        $modifiers[] = 'public';
+                        $doc->addAccess('public');
+                    }
+                    if ($method->isStatic()) {
+                        $modifiers[] = 'static';
+                        $doc->addKeyword('static', $blank);
+                    }
+                    if ($method->isConstructor()) {
+                        $var->setConstructor();
+                    }
+                    $var->setDocBlock($doc);
+                    $var->setModifiers($modifiers);
+                    return $var;
+                }
+            }
+        }
+
         while (is_object($par))
         {
-          if ($par->hasMethod($c,$this->name))
-					{
-						$meth = $par->getMethod($c,$this->name);
-						if (!($meth->docblock && $meth->docblock->hasaccess && !$c->parseprivate && $meth->docblock->tags['access'][0]->value == 'private'))
-							return $meth;
-					}
-
-          $par = $par->getParent($c);
+            if ($par->hasMethod($c,$this->name))
+            {
+                $meth = $par->getMethod($c,$this->name);
+                if (!($meth->docblock && $meth->docblock->hasaccess &&
+                      !$c->parseprivate && $meth->docblock->tags['access'][0]->value == 'private')) {
+                    return $meth;
+                }
+            }
+            
+            $par = $par->getParent($c);
         }
         
         return false;

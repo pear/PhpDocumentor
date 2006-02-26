@@ -4608,7 +4608,9 @@ class Converter
         $ovr = $element->getOverrides($this);
         if (!$ovr) return false;
         $sdesc = $ovr->docblock->getSDesc($this);
-        return array('link' => $ovr->getLink($this),'sdesc' => $sdesc);
+        $name = method_exists($ovr, 'getFunctionCall') ? $ovr->getFunctionCall() : $ovr->getName();
+        $link = ($link = $ovr->getLink($this)) ? $link : $ovr->getClass() . '::' . $name;
+        return array('link' => $link,'sdesc' => $sdesc);
     }
 
     /**
@@ -4647,7 +4649,7 @@ class Converter
      *
      * uses parserVar helper function getInheritedVars and generates a
      * template-enabled list using getClassLink()
-     * @param parserVar $child class method
+     * @param parserVar $child class var
      * @see getClassLink(), parserVar::getInheritedVars()
      * @return array Format:
      * <pre>
@@ -4676,22 +4678,31 @@ class Converter
             $file = $vars['file'];
             $vars = $vars['vars'];
             $par = $this->classes->getClass($parent,$file);
-            $package = $par->docblock->package;
+            if ($par) {
+                $package = $par->docblock->package;
+            }
             usort($vars,array($this,"sortVar"));
-            $result['parent_class'] = $this->getClassLink($parent,$package);
+            $result['parent_class'] = $this->getClassLink($parent, $package);
+            if (!$result['parent_class']) {
+                $result['parent_class'] = $parent . ' (Internal Class)';
+            }
             foreach($vars as $var)
             {
                 $info = array();
 
-								if ($var->docblock->hasaccess)
-									$info['access'] = $var->docblock->tags['access'][0]->value;
-								else
-									$info['access'] = 'public';
+                if ($var->docblock->hasaccess) {
+                    $info['access'] = $var->docblock->tags['access'][0]->value;
+                } else {
+                    $info['access'] = 'public';
+                }
 
-								$info['abstract'] = isset ($var->docblock->tags['abstract'][0]);
+                $info['abstract'] = isset ($var->docblock->tags['abstract'][0]);
 
-								$info['name'] = $var->getName();
+                $info['name'] = $var->getName();
                 $info['link'] = $var->getLink($this);
+                if (!$info['link']) {
+                    $info['link'] = $info['name'];
+                }
                 $info['default'] = $this->postProcess($var->getValue());
                 if ($var->docblock)
                 $info['sdesc'] = $var->docblock->getSDesc($this);
@@ -4738,22 +4749,30 @@ class Converter
             $file = $methods['file'];
             $methods = $methods['methods'];
             $par = $this->classes->getClass($parent,$file);
-            $package = $par->docblock->package;
+            if ($par) {
+                $package = $par->docblock->package;
+            }
             usort($methods,array($this,"sortMethod"));
             $result['parent_class'] = $this->getClassLink($parent,$package);
+            if (!$result['parent_class']) {
+                $result['parent_class'] = $parent . ' (Internal Class)';
+            }
             foreach($methods as $method)
             {
                 $info = array();
 
-								if ($method->docblock->hasaccess)
-									$info['access'] = $method->docblock->tags['access'][0]->value;
-								else
-									$info['access'] = 'public';
+                if ($method->docblock->hasaccess) {
+                    $info['access'] = $method->docblock->tags['access'][0]->value;
+                } else {
+                    $info['access'] = 'public';
+                }
+                $info['abstract'] = isset ($method->docblock->tags['abstract'][0]);
 
-								$info['abstract'] = isset ($method->docblock->tags['abstract'][0]);
-
-								if ($method->isConstructor) $info['constructor'] = 1;
+                if ($method->isConstructor) $info['constructor'] = 1;
                 $info['link'] = $method->getLink($this);
+                if (!$info['link']) {
+                    $info['link'] = $method->getFunctionCall();
+                }
                 $info['name'] = $method->getName();
                 if ($method->docblock)
                 $info['sdesc'] = $method->docblock->getSDesc($this);
@@ -4808,20 +4827,28 @@ class Converter
             $file = $vars['file'];
             $vars = $vars['consts'];
             $par = $this->classes->getClass($parent,$file);
-            $package = $par->docblock->package;
+            if ($par) {
+                $package = $par->docblock->package;
+            }
             usort($vars,array($this,"sortVar"));
             $result['parent_class'] = $this->getClassLink($parent,$package);
+            if (!$result['parent_class']) {
+                $result['parent_class'] = $parent . ' (Internal Class)';
+            }
             foreach($vars as $var)
             {
                 $info = array();
 
-                if ($var->docblock->hasaccess)
+                if ($var->docblock->hasaccess) {
                 	$info['access'] = $var->docblock->tags['access'][0]->value;
-                else
+                } else {
                 	$info['access'] = 'public';
-
+                }
                 $info['name'] = $var->getName();
                 $info['link'] = $var->getLink($this);
+                if (!$info['link']) {
+                    $info['link'] = $info['name'] . ' = ' . $var->getValue();
+                }
                 $info['value'] = $this->postProcess($var->getValue());
                 if ($var->docblock)
                 $info['sdesc'] = $var->docblock->getSDesc($this);

@@ -16,7 +16,8 @@ This will be the last release in the 1.x series.  2.0 is next
 Features added to this release include:
 
  * Full PHP 5 support, phpDocumentor both runs in and parses Zend Engine 2
-   language constructs.  Note that you must be running phpDocumentor in
+   language constructs.  Internal classes are recognized and inheritance is
+   documented.  Note that you must be running phpDocumentor in
    PHP 5 in order to parse PHP 5 code
  * XML:DocBook/peardoc2:default converter now beautifies the source using
    PEAR\'s XML_Beautifier if available
@@ -70,6 +71,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
  [ 893186 ] HTMLframes converter sometimes misses package level docs
  [ 896444 ] Bad line numbers
+ [ 907734 ] Exception Class is builtin to PHP5
  [ 937235 ] duplicated /** after abstract method declaration
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
  [ 952217 ] HTML:frames:earthli
@@ -175,7 +177,7 @@ array('installas' =>
 $pfm2->setReleaseVersion($version);
 $pfm2->setNotes($notes);
 $pfm2->clearDeps();
-$pfm2->setPhpDep('4.1.0');
+$pfm2->setPhpDep('4.2.0');
 $pfm2->setPearinstallerDep('1.4.6');
 $pfm2->addPackageDepWithChannel('optional', 'XML_Beautifier', 'pear.php.net', '1.1');
 $pfm2->addReplacement('pear-phpdoc', 'pear-config', '@PHP-BIN@', 'php_bin');
