@@ -64,7 +64,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2006-02-25</date>
- <time>20:42:52</time>
+ <time>20:54:01</time>
  <version>
   <release>1.3.0RC6</release>
   <api>1.3.0</api>
@@ -147,6 +147,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 977674 ] Parser error
  [ 989258 ] wrong interfaces parsing
  [ 1016927 ] no highlight for paramtype in header of function
+ [ 1051941 ] private variables on same line not recognized
  [ 1108018 ] Bad source code after /**#@-*/
  [ 1145403 ] Call to a member function on a non-object 
  [ 1150809 ] Infinite loop when class extends itself
@@ -2610,6 +2611,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 977674 ] Parser error
  [ 989258 ] wrong interfaces parsing
  [ 1016927 ] no highlight for paramtype in header of function
+ [ 1051941 ] private variables on same line not recognized
  [ 1108018 ] Bad source code after /**#@-*/
  [ 1145403 ] Call to a member function on a non-object 
  [ 1150809 ] Infinite loop when class extends itself

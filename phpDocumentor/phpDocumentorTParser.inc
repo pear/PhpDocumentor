@@ -1092,7 +1092,6 @@ class phpDocumentorTParser extends Parser
             if (isset($this->_accessModifiers))
             {
                 $this->_pv_var->setModifiers($this->_accessModifiers);
-                unset($this->_accessModifiers);
             }
             $this->publishEvent(PHPDOCUMENTOR_EVENT_VAR,$this->_pv_var);
             unset($this->_pv_var);
