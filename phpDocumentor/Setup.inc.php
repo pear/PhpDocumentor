@@ -512,7 +512,12 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
             $dirs = explode(",",$this->dirs);
             foreach($dirs as $dir)
             {
+                $olddir = $dir;
                 $dir = trim(realpath($dir));
+                if (!$dir) {
+                    phpDocumentor_out('ERROR: "' . $olddir . '" does not exist, skipping');
+                    continue;
+                }
                 $dir = strtr($dir, "\\", "/");
                 $dir = str_replace('//','/',$dir);
                 // strip trailing directory seperator

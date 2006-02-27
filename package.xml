@@ -146,6 +146,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1016927 ] no highlight for paramtype in header of function
  [ 1044486 ] duplicate parameters
  [ 1051941 ] private variables on same line not recognized
+ [ 1079637 ] Use of realpath() leads to empty $dir
  [ 1108018 ] Bad source code after /**#@-*/
  [ 1145403 ] Call to a member function on a non-object 
  [ 1150809 ] Infinite loop when class extends itself
@@ -2450,6 +2451,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1016927 ] no highlight for paramtype in header of function
  [ 1044486 ] duplicate parameters
  [ 1051941 ] private variables on same line not recognized
+ [ 1079637 ] Use of realpath() leads to empty $dir
  [ 1108018 ] Bad source code after /**#@-*/
  [ 1145403 ] Call to a member function on a non-object 
  [ 1150809 ] Infinite loop when class extends itself
