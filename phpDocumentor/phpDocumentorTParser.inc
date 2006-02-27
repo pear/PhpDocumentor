@@ -461,7 +461,7 @@ class phpDocumentorTParser extends Parser
             {
                 addErrorDie(PDERROR_FUNCTION_HAS_NONAME);
             }
-            if ($e == PARSER_EVENT_COMMENT || $e == PARSER_EVENT_COMMENTBLOCK || $e == PARSER_EVENT_FUNCTION_PARAMS) return;
+            if ($e == PARSER_EVENT_COMMENT || $e == PARSER_EVENT_COMMENTBLOCK || $e == PARSER_EVENT_FUNCTION_PARAMS || $e == PARSER_EVENT_LOGICBLOCK) return;
         }
     
         if (!isset($this->_pv_func)) $this->_pv_func = false;
@@ -557,7 +557,7 @@ class phpDocumentorTParser extends Parser
 
         if (!$e1)
         {
-            if ($this->checkEventPop($word,$pevent) && $pevent == PARSER_EVENT_FUNCTION_PARAM_VAR)
+            if (($pop = $this->checkEventPop($word,$pevent)) && $pevent == PARSER_EVENT_FUNCTION_PARAM_VAR)
             { // end of [typehint ]$param[= defaultval]
                 if (is_string($word) && $word == ')') {
                     $this->_wp->backupPos();
@@ -579,6 +579,9 @@ class phpDocumentorTParser extends Parser
                     $this->_pv_function_data .= $word;
                 } else
                 { // pre-param
+                    if ($pop) {
+                        return;
+                    }
                     if (!isset($this->_pv_function_param)) $this->_pv_function_param = '';
                     if (is_array($word) && $pevent == PARSER_EVENT_FUNCTION_PARAMS)
                     {

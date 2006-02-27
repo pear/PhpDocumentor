@@ -629,7 +629,13 @@ class parserFunction extends parserElement
             }
             if (isset($param[2]))
             {
-                $b['type'] = $param[2];
+                $link = $converter->getLink('object ' . $param[2]);
+                if ($link) {
+                    $link = $converter->returnSee($link, $param[2], true);
+                    $b['type'] = $link;
+                } else {
+                    $b['type'] = $param[2];
+                }
             }
             $b['name'] = $param[0];
             $b['default'] = $param[1];
