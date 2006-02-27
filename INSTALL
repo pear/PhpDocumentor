@@ -28,15 +28,9 @@ pear config-set data_dir /path/to/public_html/pear
 The line above assumes that /path/to/public_html is the location of index.html if you browse
 to http://localhost/index.html
 
-Simply run
+To install or upgrade phpDocumentor, simply run
 
-pear install /path/to/phpDocumentor-1.3.0/package.xml
-
-on Windows:
-
-pear install C:\path\to\phpDocumentor-1.3.0\package.xml
-
-If you have an existing install, pear uninstall PhpDocumentor first.
+pear upgrade PhpDocumentor-beta
 
 To use the web interface, browse to http://localhost/pear/PhpDocumentor/index.html
 

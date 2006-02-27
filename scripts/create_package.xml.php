@@ -108,6 +108,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  Bug #5011: PDF generation warning on uksort
  Bug #6305: array typehints break the parser
  Bug #6848: Reference Patch
+ Bug #6952: Update Install docs to tell correct package.xml location
 ';
 $version = '1.3.0RC6';
 $options = array(
