@@ -64,7 +64,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2006-02-27</date>
- <time>16:27:59</time>
+ <time>22:46:47</time>
  <version>
   <release>1.3.0RC6</release>
   <api>1.3.0</api>
@@ -150,6 +150,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1044486 ] duplicate parameters
  [ 1051941 ] private variables on same line not recognized
  [ 1079637 ] Use of realpath() leads to empty $dir
+ [ 1081396 ] Display of inline {@link} tags with PHP functions
  [ 1108018 ] Bad source code after /**#@-*/
  [ 1145403 ] Call to a member function on a non-object 
  [ 1150809 ] Infinite loop when class extends itself
@@ -2617,6 +2618,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1044486 ] duplicate parameters
  [ 1051941 ] private variables on same line not recognized
  [ 1079637 ] Use of realpath() leads to empty $dir
+ [ 1081396 ] Display of inline {@link} tags with PHP functions
  [ 1108018 ] Bad source code after /**#@-*/
  [ 1145403 ] Call to a member function on a non-object 
  [ 1150809 ] Infinite loop when class extends itself

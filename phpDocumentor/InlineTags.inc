@@ -199,7 +199,8 @@ class parserLinkInlineTag extends parserInlineTag
                 if (strpos($value,'://'))
                 {
                     // php function
-                    return $c->returnLink($value,str_replace('PHP_MANUAL#','',$value));
+                    return $c->returnLink($value,
+                        $descrip ? $descrip : str_replace('PHP_MANUAL#','',$value));
                 }
                 return $value;
             }
