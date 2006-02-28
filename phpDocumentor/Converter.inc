@@ -4101,6 +4101,7 @@ class Converter
                                                 'api_tags' => $docblock['api_tags'],
                                                 'info_tags' => $docblock['info_tags'],
                                                 'var_name' => $element->getName(),
+                                                'has_default' => strlen($element->getValue()),
                                                 'var_default' => $this->postProcess($element->getValue()),
                                                 'var_type' => $b,
                                                 'access' => $acc,

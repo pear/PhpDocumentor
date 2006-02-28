@@ -64,7 +64,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2006-02-27</date>
- <time>23:01:53</time>
+ <time>23:16:56</time>
  <version>
   <release>1.3.0RC6</release>
   <api>1.3.0</api>
@@ -157,6 +157,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1150809 ] Infinite loop when class extends itself
  [ 1151196 ] PHP Fatal error: Cannot re-assign $this
  [ 1151650 ] UTF8 decoding for DocBook packages
+ [ 1152286 ] 1.3.0RC3 - PHP5 - Smarty template doesn&apos;t work properly?
  [ 1152781 ] PHP_NOTICE: Uninitialized string offset in ParserDescCleanup
  [ 1153593 ] string id=&quot;....&quot; in tutorials
  [ 1164253 ] Inherited Class Constants are not displayed
@@ -2626,6 +2627,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1150809 ] Infinite loop when class extends itself
  [ 1151196 ] PHP Fatal error: Cannot re-assign $this
  [ 1151650 ] UTF8 decoding for DocBook packages
+ [ 1152286 ] 1.3.0RC3 - PHP5 - Smarty template doesn&apos;t work properly?
  [ 1152781 ] PHP_NOTICE: Uninitialized string offset in ParserDescCleanup
  [ 1153593 ] string id=&quot;....&quot; in tutorials
  [ 1164253 ] Inherited Class Constants are not displayed
