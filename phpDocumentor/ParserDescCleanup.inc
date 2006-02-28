@@ -464,7 +464,8 @@ class parserDescParser extends Parser
         if (is_string($word) && $this->checkEventPush($word, $pevent)) return;
 //        if (!isset($this->parse_Ps) || !$this->parse_Ps)
         {
-            if (!is_object($word) && ($word == ' ' && $this->p_vars['last_word'] == ' ')) return;
+            if (is_string($word) && is_string($this->p_vars['last_word'] &&
+                  ($word == ' ' && $this->p_vars['last_word'] == ' ')) return;
             if ($pevent == PARSER_EVENT_NOEVENTS)
             {
                 if ($this->doSimpleList($word)) return;
