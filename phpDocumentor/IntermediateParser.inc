@@ -1508,16 +1508,28 @@ class phpDocumentor_IntermediateParser
                     switch(phpDocumentor_get_class($reallink))
                     {
                         case 'pagelink' :
+                            $this->pages[$reallink->path]->docblock->addUsedBy(
+                                $element[0]->getLink($converter, false, true),
+                                $element[1]);
+                        break;
                         case 'functionlink' :
                         case 'definelink' :
                         case 'globallink' :
                         if (isset($this->pages[$reallink->path]))
                         {
-                            for ($i=0;$i<count($this->pages[$reallink->path]->elements);$i++)
-                            {
-                                if ($this->pages[$reallink->path]->elements[$i]->type == str_replace('link','',phpDocumentor_get_class($reallink)) && $this->pages[$reallink->path]->elements[$i]->getName() == $reallink->name)
-                                {
-                                    $this->pages[$reallink->path]->elements[$i]->docblock->addUsedBy($element[0]->getLink($converter,false,true), $element[1]);
+                            for ($i=0;
+                                 $i<count($this->pages[$reallink->path]->elements);
+                                 $i++) {
+                                if ($this->pages[$reallink->path]->elements[$i]->type ==
+                                      str_replace('link', '',
+                                      phpDocumentor_get_class($reallink)) &&
+                                      $this->pages[$reallink->path]->
+                                      elements[$i]->getName() 
+                                      == $reallink->name) {
+                                    $this->pages[$reallink->path]->elements[$i]->
+                                    docblock->addUsedBy(
+                                        $element[0]->getLink($converter,false,true),
+                                        $element[1]);
 //                                   debug('added @usedby to '.str_replace('link','',phpDocumentor_get_class($reallink)).' '.$reallink->name);
                                 }
                             }

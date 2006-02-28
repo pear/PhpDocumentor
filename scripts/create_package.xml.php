@@ -83,6 +83,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1051941 ] private variables on same line not recognized
  [ 1079637 ] Use of realpath() leads to empty $dir
  [ 1081396 ] Display of inline {@link} tags with PHP functions
+ [ 1090009 ] @uses doesn\'t generate @usedby link when linking to file.ext
  [ 1108018 ] Bad source code after /**#@-*/
  [ 1145403 ] Call to a member function on a non-object 
  [ 1150809 ] Infinite loop when class extends itself
