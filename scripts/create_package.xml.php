@@ -90,6 +90,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1151196 ] PHP Fatal error: Cannot re-assign $this
  [ 1151650 ] UTF8 decoding for DocBook packages
  [ 1152286 ] 1.3.0RC3 - PHP5 - Smarty template doesn\'t work properly?
+ [ 1152316 ] 1.3RC3 - PHP5 - HTML:frames:* - Welcome to default!=@package
  [ 1152781 ] PHP_NOTICE: Uninitialized string offset in ParserDescCleanup
  [ 1153593 ] string id="...." in tutorials
  [ 1164253 ] Inherited Class Constants are not displayed

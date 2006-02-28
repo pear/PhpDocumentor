@@ -628,7 +628,7 @@ class HTMLframesConverter extends Converter
         {
             $index->assign("blank","blank");
             $blank = &$this->newSmarty();
-            $blank->assign('package',$phpDocumentor_DefaultPackageName);
+            $blank->assign('package',$this->package);
             $this->setTargetDir($this->base_dir);
             $this->writefile("blank.html",$blank->fetch('blank.tpl'));
         }
