@@ -895,10 +895,21 @@ class parserClass extends parserElement
      * @return mixed {@link parserMethod} or false if not found
      * @param Converter this function will not work before the Conversion stage of parsing
      * @param string method name in this class
+     * @param boolean determines whether to search inherited methods as well
      */
-    function getMethod(&$c, $name)
+    function getMethod(&$c, $name, $inherited = false)
     {
-        return $c->classes->getMethod($this->name,$this->curfile,$name);
+        $ret = $c->classes->getMethod($this->name, $this->curfile, $name);
+        if ($ret) return $ret;
+        if ($inherited) {
+            $x = $this;
+            while ($x->parent && is_array($x->parent)) {
+                $par = $x->getParent($c);
+                $x = $par;
+                if ($meth = $x->getMethod($c, $name)) return $meth;
+            }
+        }
+        return false;
     }
     
     /**
@@ -930,11 +941,22 @@ class parserClass extends parserElement
     /**
      * @param Converter this function will not work before the Conversion stage of parsing
      * @param string method name
+     * @param boolean determines whether to search inherited methods as well
      * @return boolean whether this class has a method of name $name
      */
-    function hasMethod(&$c,$name)
+    function hasMethod(&$c, $name, $inherited = false)
     {
-        return $c->classes->hasMethod($this->name, $this->curfile, $name);
+        $ret = $c->classes->hasMethod($this->name, $this->curfile, $name);
+        if ($ret) return $ret;
+        if ($inherited) {
+            $x = $this;
+            while ($x->parent && is_array($x->parent)) {
+                $par = $x->getParent($c);
+                $x = $par;
+                if ($x->hasMethod($c, $name)) return true;
+            }
+        }
+        return false;
     }
     
     /**
@@ -1674,7 +1696,8 @@ class parserMethod extends parserFunction
     
     /**
      * @param Converter
-     * @return mixed {@link parserMethod} representing method this method overrides from the parent class, or false if none
+     * @return mixed {@link parserMethod} representing method this method
+     * overrides from the parent class, or false if none
      */
     function getOverrides(&$c)
     {
@@ -1757,6 +1780,114 @@ class parserMethod extends parserFunction
         }
         
         return false;
+    }
+    /**
+     * @param Converter
+     * @return mixed {@link parserMethod} representing method this method implements
+     * from an interface, or false if none
+     */
+    function getImplements(&$c)
+    {
+        $class = $c->classes->getClass($this->class,$this->path);
+        
+        $implements = $class->getImplements();
+        if (!count($implements)) {
+            return false;
+        }
+        $ret = array();
+        $haveAlready = array();
+        foreach ($implements as $interface) {
+            $interface_link = $c->getLink('object ' . $interface);
+            if (is_a($interface_link, 'classlink')) {
+                $par = $c->classes->getClass($interface_link->name,
+                    $interface_link->path);
+                if (is_object($par)) {
+                    if ($par->hasMethod($c, $this->name, true))
+                    {
+                        $meth = $par->getMethod($c, $this->name);
+                        if (!$meth) {
+                            $meth = $par->getMethod($c, $this->name, true);
+                        }
+                        if (!($meth->docblock && $meth->docblock->hasaccess &&
+                              !$c->parseprivate && $meth->docblock->tags['access'][0]->value == 'private')) {
+                            if (isset($haveAlready[$meth->getClass()])) {
+                                // this ensures extended interfaces don't cause
+                                // 2 links to the same method
+                                if ($haveAlready[$meth->getClass()] == $this->name) {
+                                    continue;
+                                }
+                            }
+                            $ret[] = $meth;
+                            $haveAlready = array($meth->getClass() => $this->name);
+                        }
+                    }
+                }
+                continue;
+            }
+            if (class_exists('ReflectionClass')) {
+                if (interface_exists($interface)) {
+                    $info = new ReflectionClass($interface);
+                    if ($info->hasMethod($this->name)) {
+                        $par = $info;
+                        $method = $par->getMethod($this->name);
+                        $var = new parserMethod($par->getName());
+                        if ($method->returnsReference()) {
+                            $var->setReturnsReference();
+                        }
+                        $doc = new parserDocBlock;
+                        foreach ($method->getParameters() as $param) {
+                            $value = $param->isOptional() ? var_export($param->getDefaultValue(), true) : null;
+                            if ($param->isPassedByReference()) {
+                                $var->addParam('&$' . $param->getName(), $value, $param->isOptional(),
+                                    $param->getClass());
+                            } else {
+                                $var->addParam('$' . $param->getName(), $value, $param->isOptional(),
+                                    $param->getClass());
+                            }
+                        }
+                        $var->setName($method->getName());
+                        $doc->addPackage('package', $this->getPackage());
+                        $par = $method->getDeclaringClass();
+                        $var->setLineNumber($par->getStartLine());
+                        $modifiers = array();
+                        if ($method->isPrivate()) {
+                            $modifiers[] = 'private';
+                            $doc->addAccess('private');
+                        }
+                        $blank = new parserStringWithInlineTags;
+                        if ($method->isAbstract()) {
+                            $modifiers[] = 'abstract';
+                            $doc->addKeyword('abstract', $blank);
+                        }
+                        if ($method->isFinal()) {
+                            $modifiers[] = 'final';
+                            $doc->addKeyword('final', $blank);
+                        }
+                        if ($method->isProtected()) {
+                            $modifiers[] = 'protected';
+                            $doc->addAccess('protected');
+                        }
+                        if ($method->isPublic()) {
+                            $modifiers[] = 'public';
+                            $doc->addAccess('public');
+                        }
+                        if ($method->isStatic()) {
+                            $modifiers[] = 'static';
+                            $doc->addKeyword('static', $blank);
+                        }
+                        if ($method->isConstructor()) {
+                            $var->setConstructor();
+                        }
+                        $var->setDocBlock($doc);
+                        $var->setModifiers($modifiers);
+                        $ret[] = $var;
+                        continue;
+                    }
+                }
+            }
+        }
+        
+        return $ret;
     }
     
     /**

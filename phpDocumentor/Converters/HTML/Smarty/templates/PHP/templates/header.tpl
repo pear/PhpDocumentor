@@ -68,6 +68,11 @@
       {eval var=$compiledfileindex}
       {/if}
 
+      {if $compiledinterfaceindex}
+      <b>Interfaces:</b><br />
+      {eval var=$compiledinterfaceindex}
+      {/if}
+
       {if $compiledclassindex}
       <b>Classes:</b><br />
       {eval var=$compiledclassindex}

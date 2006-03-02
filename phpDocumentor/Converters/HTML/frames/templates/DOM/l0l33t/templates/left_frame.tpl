@@ -56,15 +56,33 @@ if (document.getElementById) {ldelim}
 			{/if}		
 		{/if}
 	
-		{if $info[p].classes}
-			var tree_classe = new WebFXTreeItem('Class(es)', '{$packagedoc|escape:"quotes"}');
-			
-			{section name=class loop=$info[p].classes}
-				var classe = new WebFXTreeItem('{$info[p].classes[class].title|escape:"quotes"}', '{$info[p].classes[class].link|escape:"quotes"}');
-				tree_classe.add(classe);
-			{/section}
-	
-			tree.add(tree_classe);
+		{if $info[p].hasinterfaces}
+    		{if $info[p].classes}
+    			var tree_classe = new WebFXTreeItem('Interface(s)', '{$packagedoc}');
+    			
+    			{section name=class loop=$info[p].classes}
+    			    {if $info[p].classes[class].is_interface}
+        				var classe = new WebFXTreeItem('{$info[p].classes[class].title|escape:"quotes"}', '{$info[p].classes[class].link|escape:"quotes"}');
+        				tree_classe.add(classe);
+        			{/if}
+    			{/section}
+
+    			tree.add(tree_classe);
+    		{/if}
+		{/if}
+		{if $info[p].hasclasses}
+    		{if $info[p].classes}
+    			var tree_classe = new WebFXTreeItem('Class(es)', '{$packagedoc}');
+    			
+    			{section name=class loop=$info[p].classes}
+    			    {if $info[p].classes[class].is_class}
+        				var classe = new WebFXTreeItem('{$info[p].classes[class].title|escape:"quotes"}', '{$info[p].classes[class].link|escape:"quotes"}');
+        				tree_classe.add(classe);
+        			{/if}
+    			{/section}
+    	
+    			tree.add(tree_classe);
+    		{/if}
 		{/if}
 
 		{if $info[p].functions}

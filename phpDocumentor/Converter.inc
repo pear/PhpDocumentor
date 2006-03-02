@@ -760,8 +760,18 @@ class Converter
                 $obj = new phpDocumentorTWordParser;
                 $obj->setup($example);
                 $e = $obj->getFileSource();
-                if (!isset($e[0]) || !is_array($e[0][0]) || $e[0][0][0] != T_OPEN_TAG)
+                $bOpenTagFound = false;
+                foreach ($e as $ke => $ee)
                 {
+                    foreach ($ee as $kee => $eee)
+                    {
+                        if ((int) $e[$ke][$kee][0] == T_OPEN_TAG)
+                        {
+                            $bOpenTagFound = true;
+                        }
+                    }
+                }
+                if (!$bOpenTagFound) {
                     $example = "<?php\n".$example;
                     $obj->setup($example);
                     $e = $obj->getFileSource();
@@ -4038,31 +4048,34 @@ class Converter
             $params[] = $param_i[$param] = array("var" => $param,"datatype" => $val->converted_returnType,"data" => $a);
         }
 
-				if ($element->docblock->hasaccess)
-					$acc = $element->docblock->tags['access'][0]->value;
-				else
-					$acc = 'public';
-
+        if ($element->docblock->hasaccess) {
+            $acc = $docblock['access'];
+        } else {
+            $acc = 'public';
+        }
 
         if ($this->hasSourceCode($element->getPath()))
         $additions["slink"] = $this->getSourceAnchor($element->getPath(),$element->getLineNumber(),$element->getLineNumber(),true);
         $this->class_data->append('methods',array_merge(
                                              array('sdesc' => $docblock['sdesc'],
                                                    'desc' => $docblock['desc'],
-																									 'access' => $docblock['access'],
-																									 'abstract' => $docblock['abstract'],
+                                                   'static' => $docblock['static'],
+                                                   'abstract' => $docblock['abstract'],
                                                    'tags' => $docblock['tags'],
                                                    'api_tags' => $docblock['api_tags'],
+                                                   'see_tags' => $docblock['see_tags'],
+                                                   'info_tags_sorted' => $docblock['info_tags_sorted'],
                                                    'info_tags' => $docblock['info_tags'],
                                                    'utags' => $docblock['utags'],
                                                    'constructor' => $element->isConstructor,
-																									 'access' => $acc,
+                                                   'access' => $acc,
                                                    'function_name'     => $fname,
                                                    'function_return'    => $returntype,
                                                    'function_call'     => $element->getFunctionCall(),
                                                    'ifunction_call'     => $element->getIntricateFunctionCall($this, $param_i),
                                                    'descmethod'    => $this->getFormattedDescMethods($element),
                                                    'method_overrides'    => $this->getFormattedOverrides($element),
+                                                   'method_implements'    => $this->getFormattedMethodImplements($element),
                                                    'line_number' => $element->getLineNumber(),
                                                    'id' => $this->getId($element),
                                                    'params' => $params),
@@ -4168,6 +4181,8 @@ class Converter
         $this->page_data->assign("defines",array());
         $this->page_data->assign("globals",array());
         $this->page_data->assign("classes",$this->getClassesOnPage($element));
+        $this->page_data->assign("hasclasses",$element->hasClasses());
+        $this->page_data->assign("hasinterfaces",$element->hasInterfaces());
         $this->page_data->assign("name", $element->parent->getFile());
         if ($t = $element->getTutorial())
         {
@@ -4408,15 +4423,19 @@ class Converter
             $a = $val->Convert($this);
             $tags[] = $api_tags[] = array('keyword' => 'staticvar','data' => $val->converted_returnType.' '.$static.': '.$a);
         }
+        $info_tags_sorted = array();
         foreach($tagses as $tag)
         {
             if (isset($names[$tag->keyword])) $tag->keyword = $names[$tag->keyword];
             if ($tag->keyword)
                 $tags[] = array("keyword" => $tag->keyword,"data" => $tag->Convert($this));
-            if (in_array($tag->keyword, $api_tags_arr))
+            if (in_array($tag->keyword, $api_tags_arr)) {
                 $api_tags[] = array("keyword" => $tag->keyword,"data" => $tag->Convert($this));
-            else
+            } else {
                 $info_tags[] = array("keyword" => $tag->keyword,"data" => $tag->Convert($this));
+                @list( $className, $desc ) = explode( " ", $tag->Convert($this), 2 );
+                $info_tags_sorted[ $tag->keyword ][] = array( 'keyword' => $className, 'data' => $desc );
+            }
         }
         $utags = array();
         foreach($element->docblock->unknown_tags as $keyword => $tag)
@@ -4424,20 +4443,31 @@ class Converter
             foreach($tag as $t)
             $utags[] = array('keyword' => $keyword, 'data' => $t->Convert($this));
         }
-        $ret['abstract'] = FALSE;
+        $ret['abstract'] = false;
+        $ret['static'] = false;
         $ret['access'] = 'public';
+        $see_tags = array();
         foreach($tags as $tag)
         {
             if ($tag['keyword'] == 'access') {
                 $ret['access'] = $tag['data'];
             }
             if ($tag['keyword'] == 'abstract') {
-                $ret['abstract'] = TRUE;
+                $ret['abstract'] = true;
+            }
+            if ($tag['keyword'] == 'static') {
+                $ret['static'] = true;
+            }
+            if ($tag['keyword'] == 'see' || $tag['keyword'] == 'uses' ||
+                  $tag['keyword'] == 'usedby') {
+                $see_tags[] = $tag['data'];
             }
         }
         $ret['sdesc'] = $element->docblock->getSDesc($this);
         $ret['desc'] = $element->docblock->getDesc($this);
         $ret['tags'] = $tags;
+        $ret['see_tags'] = $see_tags;
+        $ret['info_tags_sorted'] = $info_tags_sorted;
         $ret['api_tags'] = $api_tags;
         $ret['info_tags'] = $info_tags;
         $ret['utags'] = $utags;
@@ -4526,7 +4556,23 @@ class Converter
         $ret = array();
         foreach ($el->getImplements() as $interface)
         {
-            $ret[] = $this->returnSee($this->getLink($interface));
+            $link = $this->getLink($interface);
+            if ($link && is_object($link)) {
+                $ret[] = $this->returnSee($link);
+            } else {
+                if (class_exists('ReflectionClass')) {
+                    if (interface_exists($interface)) {
+                        $inter = new ReflectionClass($interface);
+                        if ($inter->isInternal()) {
+                            $ret[] = $interface . ' (internal interface)';
+                        } else {
+                            $ret[] = $interface;
+                        }
+                    }
+                } else {
+                    $ret[] = $interface;
+                }
+            }
         }
         return $ret;
     }
@@ -4612,6 +4658,27 @@ class Converter
         $name = method_exists($ovr, 'getFunctionCall') ? $ovr->getFunctionCall() : $ovr->getName();
         $link = ($link = $ovr->getLink($this)) ? $link : $ovr->getClass() . '::' . $name;
         return array('link' => $link,'sdesc' => $sdesc);
+    }
+
+    /**
+     * Get the method this method(s) implemented from an interface, if any
+     * @return array|false array('link'=>link to implemented method,
+     * 'sdesc'=>short description
+     * @uses parserMethod::getImplements()
+     * @param parserMethod
+     */
+    function getFormattedMethodImplements(&$element)
+    {
+        $ovr = $element->getImplements($this);
+        if (!$ovr) return false;
+        $ret = array();
+        foreach ($ovr as $impl) {
+            $sdesc = $impl->docblock->getSDesc($this);
+            $name = $impl->getName();
+            $link = ($link = $impl->getLink($this)) ? $link : $impl->getClass() . '::' . $name;
+            $ret[] = array('link' => $link,'sdesc' => $sdesc);
+        }
+        return $ret;
     }
 
     /**
@@ -4770,6 +4837,16 @@ class Converter
                 $info['abstract'] = isset ($method->docblock->tags['abstract'][0]);
 
                 if ($method->isConstructor) $info['constructor'] = 1;
+                $returntype = 'void';
+                if ($method->isConstructor) {
+                    $returntype = $method->getClass();
+                }
+                if ($method->docblock->return) {
+                    $a = $method->docblock->return->Convert($this);
+                    $returntype = $method->docblock->return->converted_returnType;
+                }
+                $info['function_return'] = $returntype;
+                $info['static'] = isset ($method->docblock->tags['static'][0]);
                 $info['link'] = $method->getLink($this);
                 if (!$info['link']) {
                     $info['link'] = $method->getFunctionCall();

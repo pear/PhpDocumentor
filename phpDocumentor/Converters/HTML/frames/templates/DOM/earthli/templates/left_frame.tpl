@@ -71,17 +71,36 @@ if (document.getElementById) {ldelim}
 				{/section}
 			{/if}		
 		{/if}
+
+		{if $info[p].hasinterfaces}
+			var tree_classe = new WebFXTreeItem('Interface(s)', '{$packagedoc|escape:"quotes"}');
+			tree_classe.openIcon = 'media/images/class_folder.png';
+			tree_classe.icon = 'media/images/class_folder.png';
+			
+			{section name=class loop=$info[p].classes}
+			    {if $info[p].classes[class].is_interface}
+				var classe = new WebFXTreeItem('{$info[p].classes[class].title|escape:"quotes"}', '{$info[p].classes[class].link|escape:"quotes"}');
+				classe.openIcon = 'media/images/Interface.png';
+				classe.icon = 'media/images/Interface.png';
+				tree_classe.add(classe);
+				{/if}
+			{/section}
 	
-		{if $info[p].classes}
+			tree.add(tree_classe);
+		{/if}
+
+		{if $info[p].hasclasses}
 			var tree_classe = new WebFXTreeItem('Class(es)', '{$packagedoc|escape:"quotes"}');
 			tree_classe.openIcon = 'media/images/class_folder.png';
 			tree_classe.icon = 'media/images/class_folder.png';
 			
 			{section name=class loop=$info[p].classes}
+			    {if $info[p].classes[class].is_class}
 				var classe = new WebFXTreeItem('{$info[p].classes[class].title|escape:"quotes"}', '{$info[p].classes[class].link|escape:"quotes"}');
 				classe.openIcon = 'media/images/{if $info[p].classes[class].abstract}Abstract{/if}{if $info[p].classes[class].access == 'private'}Private{/if}Class.png';
 				classe.icon = 'media/images/{if $info[p].classes[class].abstract}Abstract{/if}{if $info[p].classes[class].access == 'private'}Private{/if}Class.png';
 				tree_classe.add(classe);
+				{/if}
 			{/section}
 	
 			tree.add(tree_classe);

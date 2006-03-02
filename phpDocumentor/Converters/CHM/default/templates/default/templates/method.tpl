@@ -46,6 +46,18 @@
 {if $methods[methods].method_overrides}
 <p>Overrides {$methods[methods].method_overrides.link} ({$methods[methods].method_overrides.sdesc|default:"parent method not documented"})</p>
 {/if}
+	{if $methods[methods].method_implements}
+		<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+	{section name=imp loop=$methods[methods].method_implements}
+		<dl>
+			<dt>{$methods[methods].method_implements[imp].link}</dt>
+			{if $methods[methods].method_implements[imp].sdesc}
+			<dd>{$methods[methods].method_implements[imp].sdesc}</dd>
+			{/if}
+		</dl>
+	{/section}
+	{/if}
 
 {include file="docblock.tpl" sdesc=$methods[methods].sdesc desc=$methods[methods].desc tags=$methods[methods].tags params=$methods[methods].params function=true}
 	<p class="top">[ <a href="#top">Top</a> ]</p>

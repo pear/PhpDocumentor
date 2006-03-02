@@ -56,6 +56,14 @@
   <li>{$copyright}</li>
 </ul>
 {/if}
+        {if $implements}
+        <p class="implements">
+            Implements interfaces:
+            <ul>
+                {foreach item="int" from=$implements}<li>{$int}</li>{/foreach}
+            </ul>
+        </p>
+        {/if}
 
 </td>
 

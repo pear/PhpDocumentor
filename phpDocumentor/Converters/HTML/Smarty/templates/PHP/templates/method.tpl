@@ -30,6 +30,18 @@ method {$methods[methods].function_call}, {$methods[methods].sdesc}<br />
 	</dl>
 	{/section}</p>
 {/if}
+	{if $methods[methods].method_implements}
+		<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+	{section name=imp loop=$methods[methods].method_implements}
+		<dl>
+			<dt>{$methods[methods].method_implements[imp].link}</dt>
+			{if $methods[methods].method_implements[imp].sdesc}
+			<dd>{$methods[methods].method_implements[imp].sdesc}</dd>
+			{/if}
+		</dl>
+	{/section}
+	{/if}
 {* original    {if $methods[methods].descmethod != ""
     {$methods[methods].descmethod<br /><br />
     {/if *}

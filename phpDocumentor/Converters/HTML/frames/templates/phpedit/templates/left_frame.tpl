@@ -33,15 +33,30 @@ if (document.getElementById) {ldelim}
 	tree_function.add(fic);
 	{/section}
 	tree.add(tree_function);
+
+	var tree_interface = new WebFXTreeItem('Interface(s)', '{$classtreepage}.html');
+    tree_interface.openIcon = 'media/images/classFolder.gif';
+    tree_interface.icon = 'media/images/classFolder.gif';
+    {section name=class loop=$info[p].classes}
+      {if $info[p].classes[class].is_interface}
+	  var classe = new WebFXTreeItem('{$info[p].classes[class].title}', '{$info[p].classes[class].link}');
+      classe.openIcon = 'media/images/Class.gif';
+      classe.icon = 'media/images/Class.gif';
+      tree_interface.add(classe);
+      {/if}
+    {/section}
+	tree.add(tree_interface);
 	
     var tree_classe = new WebFXTreeItem('Class(es)', '{$classtreepage}.html');
     tree_classe.openIcon = 'media/images/classFolder.gif';
     tree_classe.icon = 'media/images/classFolder.gif';
     {section name=class loop=$info[p].classes}
+      {if $info[p].classes[class].is_class}
 	  var classe = new WebFXTreeItem('{$info[p].classes[class].title}', '{$info[p].classes[class].link}');
       classe.openIcon = 'media/images/Class.gif';
       classe.icon = 'media/images/Class.gif';
       tree_classe.add(classe);
+      {/if}
     {/section}
 	tree.add(tree_classe);
 

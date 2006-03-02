@@ -280,6 +280,16 @@ class parserData
      */
     var $elements = array();
     /**
+     * @var boolean
+     * @access private
+     */
+    var $_hasclasses = false;
+    /**
+     * @var boolean
+     * @access private
+     */
+    var $_hasinterfaces = false;
+    /**
      * array of parsed elements with @access private
      * @var array
      */
@@ -343,6 +353,13 @@ class parserData
         if ($element->getType() == 'class' || $element->getType() == 'method' || $element->getType() == 'var'
             || $element->getType() == 'const')
         {
+            if ($element->getType() == 'class') {
+                if ($element->isInterface()) {
+                    $this->_hasinterfaces = true;
+                } else {
+                    $this->_hasclasses = true;
+                }
+            }
             $this->classelements[] = $element;
         } else
         {
@@ -350,7 +367,27 @@ class parserData
         }
         $this->clean = false;
     }
-    
+
+    /**
+     * Does this package have interfaces?
+     *
+     * @return boolean
+     */
+    function hasInterfaces()
+    {
+        return $this->_hasinterfaces;
+    }
+
+    /**
+     * Does this package have classes?
+     *
+     * @return boolean
+     */
+    function hasClasses()
+    {
+        return $this->_hasclasses;
+    }
+
     /**
      * @param parserTutorial
      * @param Converter

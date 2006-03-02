@@ -72,6 +72,10 @@
 				Files:<br>
 				{eval var=$compiledfileindex}{/if}
 			</div>
+			<div id="interfaces">
+				{if $compiledinterfaceindex}Interfaces:<br>
+				{eval var=$compiledinterfaceindex}{/if}
+			</div>
 			<div id="classes">
 				{if $compiledclassindex}Classes:<br>
 				{eval var=$compiledclassindex}{/if}

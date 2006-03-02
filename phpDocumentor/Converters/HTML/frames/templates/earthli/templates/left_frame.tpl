@@ -54,10 +54,20 @@
 					{/if}
 					</dd>
 				{/if}
-				{if $info[p].classes}
+				{if $info[p].hasinterfaces}
+					<dt class="folder-title"><img class="tree-icon" src="{$subdir}media/images/class_folder.png" alt=" ">Interfaces</dt>
+					{section name=class loop=$info[p].classes}
+					    {if $info[p].classes[class].is_interface}
+						    <dd><img class="tree-icon" src="{$subdir}media/images/Interface.png" alt="Interface"><a href='{$info[p].classes[class].link}' target='right'>{$info[p].classes[class].title}</a></dd>
+					    {/if}
+					{/section}
+				{/if}
+				{if $info[p].hasclasses}
 					<dt class="folder-title"><img class="tree-icon" src="{$subdir}media/images/class_folder.png" alt=" ">Classes</dt>
 					{section name=class loop=$info[p].classes}
-						<dd><img class="tree-icon" src="{$subdir}media/images/{if $info[p].classes[class].abstract}Abstract{/if}{if $info[p].classes[class].access == 'private'}Private{/if}Class.png" alt="Class"><a href='{$info[p].classes[class].link}' target='right'>{$info[p].classes[class].title}</a></dd>
+					    {if $info[p].classes[class].is_class}
+						    <dd><img class="tree-icon" src="{$subdir}media/images/{if $info[p].classes[class].abstract}Abstract{/if}{if $info[p].classes[class].access == 'private'}Private{/if}Class.png" alt="Class"><a href='{$info[p].classes[class].link}' target='right'>{$info[p].classes[class].title}</a></dd>
+					    {/if}
 					{/section}
 				{/if}
 				{if $info[p].functions}

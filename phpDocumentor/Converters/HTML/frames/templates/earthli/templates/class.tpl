@@ -1,6 +1,6 @@
 {include file="header.tpl" top3=true}
 
-<h2 class="class-name"><img src="{$subdir}media/images/{if $abstract}{if $access == 'private'}AbstractPrivate{else}Abstract{/if}{else}{if $access == 'private'}Private{/if}{/if}Class_logo.png"
+<h2 class="class-name"><img src="{$subdir}media/images/{if $abstract}{if $access == 'private'}AbstractPrivate{else}Abstract{/if}{else}{if $access == 'private'}Private{/if}{/if}{if $is_interface}Interface{else}Class{/if}_logo.png"
 														alt="{if $abstract}{if $access == 'private'}AbstractPrivate{else}Abstract{/if}{else}{if $access == 'private'}Private{/if}{/if} Class"
 														title="{if $abstract}{if $access == 'private'}AbstractPrivate{else}Abstract{/if}{else}{if $access == 'private'}Private{/if}{/if} Class"
 														style="vertical-align: middle">{if $is_interface}Interface{/if} {$class_name}</h2>

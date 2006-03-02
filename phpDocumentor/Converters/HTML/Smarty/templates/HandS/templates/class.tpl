@@ -13,6 +13,7 @@
 			<a href="#sec-descendents">Descendants</a>
 			{if $vars || $ivars || $methods || $imethods || $consts || $iconsts}|{/if}
 		{/if}
+		
 		{if $ivars || $imethods}
 			<a href="#sec-inherited">Inherited Properties, Constants, and Methods</a>
 			{if $vars || $ivars || $methods || $imethods || $consts || $iconsts}|{/if}
@@ -45,6 +46,14 @@
 		<table width="100%" border="0">
 		<tr><td valign="top" width="60%" class="class-overview">
 
+        {if $implements}
+        <p class="implements">
+            Implements interfaces:
+            <ul>
+                {foreach item="int" from=$implements}<li>{$int}</li>{/foreach}
+            </ul>
+        </p>
+        {/if}
 		{include file="docblock.tpl" type="class" sdesc=$sdesc desc=$desc}
 
 		<p class="notes">

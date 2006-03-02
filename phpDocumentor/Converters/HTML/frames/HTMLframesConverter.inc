@@ -366,6 +366,7 @@ class HTMLframesConverter extends Converter
                 }
             }
         }
+        $interfaces = $classes = false;
         foreach($this->class_elements as $package => $o1)
         {
             foreach($o1 as $subpackage => $links)
@@ -373,16 +374,28 @@ class HTMLframesConverter extends Converter
                 for($i=0;$i<count($links);$i++)
                 {
                     $class = $this->classes->getClassByPackage($links[$i]->name, $links[$i]->package);
+                    $isinterface = $isclass = false;
+                    if ($class->isInterface()) {
+                        $isinterface = true;
+                        $interfaces = true;
+                    } else {
+                        $isclass = true;
+                        $classes = true;
+                    }
                     if ($class && isset($class->docblock) && $class->docblock->hasaccess) {
                         $left[$package][$subpackage]['classes'][] =
                             array("link" => $this->getId($links[$i]), 
                                   "title" => $links[$i]->name,
+                                  'is_interface' => $isinterface,
+                                  'is_class' => $isclass,
                                   "access" => $class->docblock->tags['access'][0]->value,
                                   "abstract" => isset ($class->docblock->tags['abstract'][0]));
                     } else {
                         $left[$package][$subpackage]['classes'][] =
                             array("link" => $this->getId($links[$i]), 
                                   "title" => $links[$i]->name,
+                                  'is_interface' => $isinterface,
+                                  'is_class' => $isclass,
                                   "access" => 'public',
                                   "abstract" => isset ($class->docblock->tags['abstract'][0]));
                     }
@@ -498,6 +511,8 @@ class HTMLframesConverter extends Converter
                 $my['files'] = $info['files'];
                 if (isset($info['classes']))
                 $my['classes'] = $info['classes'];
+                $my['hasclasses'] = $classes;
+                $my['hasinterfaces'] = $interfaces;
                 if (isset($info['functions']))
                 $my['functions'] = $info['functions'];
                 $ret[$package][] = $my;
@@ -719,6 +734,7 @@ class HTMLframesConverter extends Converter
             // Create class tree page
             $template = &$this->newSmarty();
             $template->assign("classtrees",$this->generateFormattedClassTrees($package));
+            $template->assign("interfaces",$this->generateFormattedInterfaceTrees($package));
             $template->assign("package",$package);
             $template->register_outputfilter('HTMLframes_outputfilter');
             $this->writefile("classtrees_$package.html",$template->fetch('classtrees.tpl'));
@@ -1171,6 +1187,32 @@ class HTMLframesConverter extends Converter
         $roots = $this->roots[$package];
         for($i=0;$i<count($roots);$i++)
         {
+            $root = $this->classes->getClassByPackage($roots[$i], $package);
+            if ($root && $root->isInterface()) {
+                continue;
+            }
+            $trees[] = array('class' => $roots[$i],'class_tree' => "<ul>\n".$this->getRootTree($this->getSortedClassTreeFromClass($roots[$i],$package,''),$package)."</ul>\n");
+        }
+        return $trees;
+    }
+
+    /**
+     * returns a template-enabled array of interface inheritance trees
+     * 
+     * @param    string    $package    package to generate a class tree for
+     * @see $roots, HTMLConverter::getRootTree()
+     */
+    function generateFormattedInterfaceTrees($package)
+    {
+        if (!isset($this->roots[$package])) return array();
+        $roots = $trees = array();
+        $roots = $this->roots[$package];
+        for($i=0;$i<count($roots);$i++)
+        {
+            $root = $this->classes->getClassByPackage($roots[$i], $package);
+            if ($root && !$root->isInterface()) {
+                continue;
+            }
             $trees[] = array('class' => $roots[$i],'class_tree' => "<ul>\n".$this->getRootTree($this->getSortedClassTreeFromClass($roots[$i],$package,''),$package)."</ul>\n");
         }
         return $trees;
@@ -1180,10 +1222,11 @@ class HTMLframesConverter extends Converter
      * return formatted class tree for the Class Trees page
      *
      * @param array $tree output from {@link getSortedClassTreeFromClass()}
+     * @param string $package  package
      * @see Classes::$definitechild, generateFormattedClassTrees()
      * @return string
      */
-    function getRootTree($tree,$package)
+    function getRootTree($tree, $package)
     {
         if (!$tree) return '';
         $my_tree = '';
@@ -1202,6 +1245,7 @@ class HTMLframesConverter extends Converter
             else
             {
 //                        debug("parent ".$this->returnSee($tree[$cur]['parent'])." in other package");
+                $root = $this->classes->getClassByPackage($tree[$cur]['parent'], $package);
                 $my_tree .= '<li>' . $this->returnSee($tree[$cur]['parent']);
                 if ($tree[$cur]['parent']->package != $package) $my_tree .= ' <b>(Different package)</b><ul>';
             }
@@ -1216,7 +1260,24 @@ class HTMLframesConverter extends Converter
                 {
 //                    debug("set $cur kids");
                     $kids[$cur] = 1;
-                    $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link']);
+                    $root = $this->classes->getClassByPackage(
+                        $tree[$cur]['link']->name,
+                        $tree[$cur]['link']->package);
+                    if ($implements = $root->getImplements()) {
+                        $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link']) .
+                            ' (implements ';
+                        foreach ($implements as $i => $interface) {
+                            if ($i && $i != count($implements) - 1) $my_tree .= ', ';
+                            if ($link = $this->getLink('object ' .  $interface)) {
+                                $my_tree .= $this->returnSee($link);
+                            } else {
+                                $my_tree .= $interface;
+                            }
+                        }
+                        $my_tree .= ')';
+                    } else {
+                        $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link']);
+                    }
                     $my_tree .= '<ul>'."\n";
                 }
                 array_push($lastcur,$cur);
@@ -1246,125 +1307,126 @@ class HTMLframesConverter extends Converter
         } while ($cur);
         return $my_tree;
     }
-        /**
-         * Generate indexing information for given element
-         * 
-         * @param parserElement descendant of parserElement
-         * @see generateElementIndex()
-         * @return array
-         */
-        function getIndexInformation($elt)
+
+    /**
+     * Generate indexing information for given element
+     * 
+     * @param parserElement descendant of parserElement
+     * @see generateElementIndex()
+     * @return array
+     */
+    function getIndexInformation($elt)
+    {
+        $Result['type'] = $elt->type;
+        $Result['file_name'] = $elt->file;
+        $Result['path'] = $elt->getPath();
+        
+        if (isset($elt->docblock))
+					{
+						$Result['description'] = $elt->docblock->getSDesc($this);
+						
+						if ($elt->docblock->hasaccess)
+							$Result['access'] = $elt->docblock->tags['access'][0]->value;
+						else
+							$Result['access'] = 'public';
+
+						$Result['abstract'] = isset ($elt->docblock->tags['abstract'][0]);
+					}
+        else
+            $Result['description'] = '';
+        
+        $aa = $Result['description'];
+        if (!empty($aa)) $aa = "<br>&nbsp;&nbsp;&nbsp;&nbsp;$aa";
+
+        switch($elt->type)
         {
-            $Result['type'] = $elt->type;
-            $Result['file_name'] = $elt->file;
-            $Result['path'] = $elt->getPath();
-            
-            if (isset($elt->docblock))
-						{
-							$Result['description'] = $elt->docblock->getSDesc($this);
-							
-							if ($elt->docblock->hasaccess)
-								$Result['access'] = $elt->docblock->tags['access'][0]->value;
-							else
-								$Result['access'] = 'public';
-
-							$Result['abstract'] = isset ($elt->docblock->tags['abstract'][0]);
-						}
-            else
-                $Result['description'] = '';
-            
-            $aa = $Result['description'];
-            if (!empty($aa)) $aa = "<br>&nbsp;&nbsp;&nbsp;&nbsp;$aa";
-
-            switch($elt->type)
-            {
-                    case 'class':
-                            $Result['name'] = $elt->getName();
-                            $Result['title'] = 'Class';
-                            $Result['link'] = $this->getClassLink($elt->getName(),
-                                                                  $elt->docblock->package,
-                                                                  $elt->getPath(),
-                                                                  $elt->getName());
-                            $Result['listing'] = 'in file '.$elt->file.', class '.$Result['link']."$aa";
-                    break;
-                    case 'define':
-                            $Result['name'] = $elt->getName();
-                            $Result['title'] = 'Constant';
-                            $Result['link'] = $this->getDefineLink($elt->getName(),
-                                                                   $elt->docblock->package,
-                                                                   $elt->getPath(),
-                                                                   $elt->getName());
-                            $Result['listing'] = 'in file '.$elt->file.', constant '.$Result['link']."$aa";
-                    break;
-                    case 'global':
-                            $Result['name'] = $elt->getName();
-                            $Result['title'] = 'Global';
-                            $Result['link'] = $this->getGlobalLink($elt->getName(),
-                                                                   $elt->docblock->package,
-                                                                   $elt->getPath(),
-                                                                   $elt->getName());
-                            $Result['listing'] = 'in file '.$elt->file.', global variable '.$Result['link']."$aa";
-                    break;
-                    case 'function':
-                            $Result['name'] = $elt->getName();
-                            $Result['title'] = 'Function';
-                            $Result['link'] = $this->getFunctionLink($elt->getName(),
-                                                                     $elt->docblock->package,
-                                                                     $elt->getPath(),
-                                                                     $elt->getName().'()');
-                            $Result['listing'] = 'in file '.$elt->file.', function '.$Result['link']."$aa";
-                    break;
-                    case 'method':
-                            $Result['name'] = $elt->getName();
-                            $Result['title'] = 'Method';
-                            $Result['link'] = $this->getMethodLink($elt->getName(),
-                                                                   $elt->class,
-                                                                   $elt->docblock->package,
-                                                                   $elt->getPath(),
-                                                                   $elt->class.'::'.$elt->getName().'()'
-                                                                             );
-														if ($elt->isConstructor) $Result['constructor'] = 1;
-                            $Result['listing'] = 'in file '.$elt->file.', method '.$Result['link']."$aa";
-                    break;
-                    case 'var':
-                            $Result['name'] = $elt->getName();
-                            $Result['title'] = 'Variable';
-                            $Result['link'] = $this->getVarLink($elt->getName(),
-                                                                $elt->class,
-                                                                $elt->docblock->package,
-                                                                $elt->getPath(),
-                                                                $elt->class.'::'.$elt->getName());
-                            $Result['listing'] = 'in file '.$elt->file.', variable '.$Result['link']."$aa";
-                    break;
-                    case 'const':
-                            $Result['name'] = $elt->getName();
-                            $Result['title'] = 'Class Constant';
-                            $Result['link'] = $this->getConstLink($elt->getName(),
-                                                                $elt->class,
-                                                                $elt->docblock->package,
-                                                                $elt->getPath(),
-                                                                $elt->class.'::'.$elt->getName());
-                            $Result['listing'] = 'in file '.$elt->file.', class constant '.$Result['link']."$aa";
-                    break;
-                    case 'page':
-                            $Result['name'] = $elt->getFile();
-                            $Result['title'] = 'Page';
-                            $Result['link'] = $this->getPageLink($elt->getFile(),
-                                                                 $elt->package,
+                case 'class':
+                        $Result['name'] = $elt->getName();
+                        $Result['title'] = 'Class';
+                        $Result['link'] = $this->getClassLink($elt->getName(),
+                                                              $elt->docblock->package,
+                                                              $elt->getPath(),
+                                                              $elt->getName());
+                        $Result['listing'] = 'in file '.$elt->file.', class '.$Result['link']."$aa";
+                break;
+                case 'define':
+                        $Result['name'] = $elt->getName();
+                        $Result['title'] = 'Constant';
+                        $Result['link'] = $this->getDefineLink($elt->getName(),
+                                                               $elt->docblock->package,
+                                                               $elt->getPath(),
+                                                               $elt->getName());
+                        $Result['listing'] = 'in file '.$elt->file.', constant '.$Result['link']."$aa";
+                break;
+                case 'global':
+                        $Result['name'] = $elt->getName();
+                        $Result['title'] = 'Global';
+                        $Result['link'] = $this->getGlobalLink($elt->getName(),
+                                                               $elt->docblock->package,
+                                                               $elt->getPath(),
+                                                               $elt->getName());
+                        $Result['listing'] = 'in file '.$elt->file.', global variable '.$Result['link']."$aa";
+                break;
+                case 'function':
+                        $Result['name'] = $elt->getName();
+                        $Result['title'] = 'Function';
+                        $Result['link'] = $this->getFunctionLink($elt->getName(),
+                                                                 $elt->docblock->package,
                                                                  $elt->getPath(),
-                                                                 $elt->getFile());
-                            $Result['listing'] = 'procedural page '.$Result['link'];
-                    break;
-                    case 'include':
-                            $Result['name'] = $elt->getName();
-                            $Result['title'] = 'Include';
-                            $Result['link'] = $elt->getValue();
-                            $Result['listing'] = 'include '.$Result['name'];
-                    break;
-            }
-
-            return $Result;
+                                                                 $elt->getName().'()');
+                        $Result['listing'] = 'in file '.$elt->file.', function '.$Result['link']."$aa";
+                break;
+                case 'method':
+                        $Result['name'] = $elt->getName();
+                        $Result['title'] = 'Method';
+                        $Result['link'] = $this->getMethodLink($elt->getName(),
+                                                               $elt->class,
+                                                               $elt->docblock->package,
+                                                               $elt->getPath(),
+                                                               $elt->class.'::'.$elt->getName().'()'
+                                                                         );
+													if ($elt->isConstructor) $Result['constructor'] = 1;
+                        $Result['listing'] = 'in file '.$elt->file.', method '.$Result['link']."$aa";
+                break;
+                case 'var':
+                        $Result['name'] = $elt->getName();
+                        $Result['title'] = 'Variable';
+                        $Result['link'] = $this->getVarLink($elt->getName(),
+                                                            $elt->class,
+                                                            $elt->docblock->package,
+                                                            $elt->getPath(),
+                                                            $elt->class.'::'.$elt->getName());
+                        $Result['listing'] = 'in file '.$elt->file.', variable '.$Result['link']."$aa";
+                break;
+                case 'const':
+                        $Result['name'] = $elt->getName();
+                        $Result['title'] = 'Class Constant';
+                        $Result['link'] = $this->getConstLink($elt->getName(),
+                                                            $elt->class,
+                                                            $elt->docblock->package,
+                                                            $elt->getPath(),
+                                                            $elt->class.'::'.$elt->getName());
+                        $Result['listing'] = 'in file '.$elt->file.', class constant '.$Result['link']."$aa";
+                break;
+                case 'page':
+                        $Result['name'] = $elt->getFile();
+                        $Result['title'] = 'Page';
+                        $Result['link'] = $this->getPageLink($elt->getFile(),
+                                                             $elt->package,
+                                                             $elt->getPath(),
+                                                             $elt->getFile());
+                        $Result['listing'] = 'procedural page '.$Result['link'];
+                break;
+                case 'include':
+                        $Result['name'] = $elt->getName();
+                        $Result['title'] = 'Include';
+                        $Result['link'] = $elt->getValue();
+                        $Result['listing'] = 'include '.$Result['name'];
+                break;
         }
+
+        return $Result;
+    }
     /**
      * Generate alphabetical index of all elements
      *

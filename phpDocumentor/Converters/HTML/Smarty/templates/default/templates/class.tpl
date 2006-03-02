@@ -85,6 +85,12 @@
 	</div>
 
 	<div class="leftCol">
+    {if $implements}
+    <h2>Implements interfaces</h2>
+    <ul>
+        {foreach item="int" from=$implements}<li>{$int}</li>{/foreach}
+    </ul>
+    {/if}
 	<h2>Inherited Variables</h2>
 	{section name=ivars loop=$ivars}
 		<div class="indent">
