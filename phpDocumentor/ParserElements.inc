@@ -1427,8 +1427,8 @@ class parserVar extends parserElement
     }
     
     /**
-     * Return name of the class that contains this method
-     * @return string
+     * Return a list of access modifiers (static/private/etc.)
+     * @return array
      */
     function getModifiers()
     {

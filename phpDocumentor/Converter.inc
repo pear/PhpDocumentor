@@ -4108,6 +4108,7 @@ class Converter
         $this->class_data->append('vars',array_merge(
                                           array('sdesc' => $docblock['sdesc'],
                                                 'desc' => $docblock['desc'],
+                                                'static' => $docblock['static'],
                                                 'abstract' => $docblock['abstract'],
                                                 'utags' => $docblock['utags'],
                                                 'tags' => $docblock['tags'],
@@ -4376,7 +4377,7 @@ class Converter
         $tagses = $element->docblock->listTags();
         $tags = $ret = $api_tags = $info_tags = array();
         $api_tags_arr = array("abstract", "access", "deprecated", "example", "filesource",
-                             "global", "internal", "name", "return", "see", "static",
+                             "global", "internal", "name", "return", "see",
                              "staticvar", "uses", "var");
         if (!$nopackage)
         {
@@ -4424,9 +4425,14 @@ class Converter
             $tags[] = $api_tags[] = array('keyword' => 'staticvar','data' => $val->converted_returnType.' '.$static.': '.$a);
         }
         $info_tags_sorted = array();
+        $ret['static'] = false;
         foreach($tagses as $tag)
         {
             if (isset($names[$tag->keyword])) $tag->keyword = $names[$tag->keyword];
+            if ($tag->keyword == 'static') {
+                $ret['static'] = true;
+                continue;
+            }
             if ($tag->keyword)
                 $tags[] = array("keyword" => $tag->keyword,"data" => $tag->Convert($this));
             if (in_array($tag->keyword, $api_tags_arr)) {
@@ -4444,7 +4450,6 @@ class Converter
             $utags[] = array('keyword' => $keyword, 'data' => $t->Convert($this));
         }
         $ret['abstract'] = false;
-        $ret['static'] = false;
         $ret['access'] = 'public';
         $see_tags = array();
         foreach($tags as $tag)
@@ -4454,9 +4459,6 @@ class Converter
             }
             if ($tag['keyword'] == 'abstract') {
                 $ret['abstract'] = true;
-            }
-            if ($tag['keyword'] == 'static') {
-                $ret['static'] = true;
             }
             if ($tag['keyword'] == 'see' || $tag['keyword'] == 'uses' ||
                   $tag['keyword'] == 'usedby') {

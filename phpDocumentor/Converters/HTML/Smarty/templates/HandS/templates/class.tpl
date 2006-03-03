@@ -363,12 +363,23 @@
 			<div class="var-summary">
 			<table border="0" cellspacing="0" cellpadding="0" class="var-summary">
 			{section name=vars loop=$vars}
+			{if $vars[vars].static}
+				<div class="var-title">
+					<tr><td class="var-title">static <span class="var-type-summary">{$vars[vars].var_type}</span>&nbsp;&nbsp;</td>
+					<td class="var-title"><a href="#{$vars[vars].var_name}" title="details" class="var-name-summary">{$vars[vars].var_name}</a>&nbsp;&nbsp;</td>
+					<td class="var-summary-description">{$vars[vars].sdesc}</td></tr>
+				</div>
+			{/if}
+			{/section}
+			{section name=vars loop=$vars}
+			{if !$vars[vars].static}
 				<div class="var-title">
 					<tr><td class="var-title"><span class="var-type-summary">{$vars[vars].var_type}</span>&nbsp;&nbsp;</td>
 					<td class="var-title"><a href="#{$vars[vars].var_name}" title="details" class="var-name-summary">{$vars[vars].var_name}</a>&nbsp;&nbsp;</td>
 					<td class="var-summary-description">{$vars[vars].sdesc}</td></tr>
 				</div>
-				{/section}
+			{/if}
+			{/section}
 				</table>
 			</div>
 			<br /><div class="top">[ <a href="#top">Top</a> ]</div>
@@ -410,6 +421,19 @@
 			<div class="method-summary">
 				<table border="0" cellspacing="0" cellpadding="0" class="method-summary">
 				{section name=methods loop=$methods}
+				{if $methods[methods].static}
+				<div class="method-definition">
+					<tr><td class="method-definition">static
+					{if $methods[methods].function_return}
+						<span class="method-result">{$methods[methods].function_return}</span>&nbsp;&nbsp;
+					{/if}</td>
+					<td class="method-definition"><a href="#{$methods[methods].function_name}" title="details" class="method-name">{if $methods[methods].ifunction_call.returnsref}&amp;{/if}{$methods[methods].function_name}</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">{$methods[methods].sdesc}</td></tr>
+				</div>
+				{/if}
+				{/section}
+				{section name=methods loop=$methods}
+				{if !$methods[methods].static}
 				<div class="method-definition">
 					{if $methods[methods].function_return}
 						<tr><td class="method-definition"><span class="method-result">{$methods[methods].function_return}</span>&nbsp;&nbsp;</td>
@@ -417,6 +441,7 @@
 					<td class="method-definition"><a href="#{$methods[methods].function_name}" title="details" class="method-name">{if $methods[methods].ifunction_call.returnsref}&amp;{/if}{$methods[methods].function_name}</a>()&nbsp;&nbsp;</td>
 					<td class="method-definition">{$methods[methods].sdesc}</td></tr>
 				</div>
+				{/if}
 				{/section}
 				</table>
 			</div>

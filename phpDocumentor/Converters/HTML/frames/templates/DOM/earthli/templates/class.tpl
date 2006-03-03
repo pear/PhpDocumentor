@@ -201,11 +201,22 @@
 		<div class="info-box-body">
 			<div class="var-summary">
 				{section name=vars loop=$vars}
+				{if $vars[vars].static}
+				<div class="var-title">
+					<img src="{$subdir}media/images/StaticVariable.png" alt=" " />
+					static <span class="var-type">{$vars[vars].var_type}</span>
+					<a href="#{$vars[vars].var_name}" title="details" class="var-name">{$vars[vars].var_name}</a>
+				</div>
+				{/if}
+				{/section}
+				{section name=vars loop=$vars}
+				{if !$vars[vars].static}
 				<div class="var-title">
 					<img src="{$subdir}media/images/{if $vars[vars].access == 'private'}PrivateVariable{else}Variable{/if}.png" alt=" " />
 					<span class="var-type">{$vars[vars].var_type}</span>
 					<a href="#{$vars[vars].var_name}" title="details" class="var-name">{$vars[vars].var_name}</a>
 				</div>
+				{/if}
 				{/section}
 			</div>
 		</div>
@@ -240,7 +251,24 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-				{section name=methods loop=$methods}				
+				{section name=methods loop=$methods}
+				{if $methods[methods].static}			
+				<div class="method-definition">
+					<img src="{$subdir}media/images/StaticMethod.png" alt=" "/>
+					static {if $methods[methods].function_return}
+						<span class="method-result">{$methods[methods].function_return}</span>
+					{/if}
+					<a href="#{$methods[methods].function_name}" title="details" class="method-name">{if $methods[methods].ifunction_call.returnsref}&amp;{/if}{$methods[methods].function_name}</a>
+					{if count($methods[methods].ifunction_call.params)}
+						({section name=params loop=$methods[methods].ifunction_call.params}{if $smarty.section.params.iteration != 1}, {/if}{if $methods[methods].ifunction_call.params[params].hasdefault}[{/if}<span class="var-type">{$methods[methods].ifunction_call.params[params].type}</span>&nbsp;<span class="var-name">{$methods[methods].ifunction_call.params[params].name}</span>{if $methods[methods].ifunction_call.params[params].hasdefault} = <span class="var-default">{$methods[methods].ifunction_call.params[params].default}</span>]{/if}{/section})
+					{else}
+					()
+					{/if}
+				</div>
+				{/if}
+				{/section}
+				{section name=methods loop=$methods}
+				{if !$methods[methods].static}			
 				<div class="method-definition">
 					<img src="{$subdir}media/images/{if $methods[methods].ifunction_call.constructor}Constructor{elseif $methods[methods].ifunction_call.destructor}Destructor{elseif $methods[methods].access == 'private'}{if $methods[methods].abstract}Abstract{/if}PrivateMethod{else}{if $methods[methods].abstract}Abstract{/if}Method{/if}.png" alt=" "/>
 					{if $methods[methods].function_return}
@@ -253,6 +281,7 @@
 					()
 					{/if}
 				</div>
+				{/if}
 				{/section}
 			</div>
 		</div>

@@ -166,8 +166,8 @@
 	{include file="method.tpl"}
 
 	<hr>
-	<a name="class_methods"></a>
-	<h2>Class Methods</h2>
+	<a name="class_consts"></a>
+	<h2>Class Constants</h2>
 	{include file="const.tpl"}
 </div>
 {include file="footer.tpl"}
