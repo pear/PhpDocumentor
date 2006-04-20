@@ -1024,7 +1024,7 @@ class phpDocumentor_IntermediateParser
      * tag in a page-level DocBlock will ignore all functions, defines, global
      * variables, and includes.  It will not ignore classes!  The function next
      * checks for an @access private, and if --parseprivate is off, performs the
-     * same actions as @ignore, raising a warning for the unsuspecting user.
+     * same actions as @ignore.
      * Next, it checks for the @name tag, which is used to rename the page.
      * This is also a PEAR compatibility issue, and may not be very useful in
      * the long run.  Documentation is best when it refers to real entities in
@@ -1077,7 +1077,6 @@ class phpDocumentor_IntermediateParser
         {
             if (is_object($access) && ($access->getString() == 'private') && (!$this->parsePrivate))
             {
-                addWarning(PDERROR_PARSEPRIVATE, $this->data->parent->getPath());
                 $this->proceduralpages->ignorePage($this->data->parent);
                 $this->private_page = true;
                 unset($this->last);
