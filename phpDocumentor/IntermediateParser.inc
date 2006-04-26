@@ -1542,10 +1542,13 @@ class phpDocumentor_IntermediateParser
                         {
                             for ($i=0;$i<count($this->pages[$reallink->path]->classelements);$i++)
                             {
-                                if ($this->pages[$reallink->path]->classelements[$i]->type == str_replace('link','',phpDocumentor_get_class($reallink)) && $this->pages[$reallink->path]->classelements[$i]->getName() == $reallink->name)
+                                if ($this->pages[$reallink->path]->classelements[$i]->type ==
+                                      str_replace('link','',phpDocumentor_get_class($reallink)) &&
+                                      $this->pages[$reallink->path]->classelements[$i]->getName() == $reallink->name &&
+                                      $this->pages[$reallink->path]->classelements[$i]->getClass() == $reallink->class)
                                 {
                                     $this->pages[$reallink->path]->classelements[$i]->docblock->addUsedBy($element[0]->getLink($converter,false,true), $element[1]);
-//                                   debug('added @usedby to '.str_replace('link','',phpDocumentor_get_class($reallink)).' '.$reallink->name);
+                                   debug('added @usedby to '.str_replace('link','',phpDocumentor_get_class($reallink)).' '.$reallink->name);
                                 }
                             }
                         }
