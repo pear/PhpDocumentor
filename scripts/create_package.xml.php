@@ -108,6 +108,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
  [ 1398977 ] @return is not merged when using DocBlock Templates
  [ 1428660 ] Confusing error when using {@link} in @uses
+ [ 1473272 ] Update references of phpdoc to pear-phpdoc
 - fixed these bugs reported in PEAR:
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
  Bug #5011: PDF generation warning on uksort
@@ -163,8 +164,6 @@ $options = array(
 'ignore' =>
     array('package.xml',
           'package2.xml',
-          "$packagedir/phpdoc",
-          'phpdoc.bat', 
           'LICENSE',
           '*templates/PEAR/*',
           'phpDocumentor/Smarty-2.5.0/*',
@@ -212,16 +211,26 @@ $pfm2->addReplacement('user/pear-makedocs.ini', 'package-info', '@VER@', 'versio
 $pfm2->addRole('inc', 'php');
 $pfm2->addRole('sh', 'script');
 $pfm2->addUnixEol('pear-phpdoc');
+$pfm2->addUnixEol('phpdoc');
 $pfm2->addWindowsEol('pear-phpdoc.bat');
+$pfm2->addWindowsEol('phpdoc.bat');
 $pfm2->generateContents();
 $pfm2->setPackageType('php');
 $pfm2->addRelease();
 $pfm2->setOsInstallCondition('windows');
+// these next two files are only used if the archive is extracted as-is
+// without installing via "pear install blah"
+$pfm2->addIgnoreToRelease("phpdoc");
+$pfm2->addIgnoreToRelease('phpdoc.bat');
 $pfm2->addIgnoreToRelease('pear-phpdoc');
 $pfm2->addIgnoreToRelease('scripts/makedoc.sh');
 $pfm2->addInstallAs('pear-phpdoc.bat', 'phpdoc.bat');
 $pfm2->addInstallAs('user/pear-makedocs.ini', 'user/makedocs.ini');
 $pfm2->addRelease();
+// these next two files are only used if the archive is extracted as-is
+// without installing via "pear install blah"
+$pfm2->addIgnoreToRelease("phpdoc");
+$pfm2->addIgnoreToRelease('phpdoc.bat');
 $pfm2->addIgnoreToRelease('pear-phpdoc.bat');
 $pfm2->addInstallAs('pear-phpdoc', 'phpdoc');
 $pfm2->addInstallAs('user/pear-makedocs.ini', 'user/makedocs.ini');
