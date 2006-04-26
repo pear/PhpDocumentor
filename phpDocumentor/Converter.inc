@@ -2386,15 +2386,25 @@ class Converter
     {
         phpDocumentor_out("\nSorting @todo list...");
         flush();
-        foreach($this->todoList as $package => $r)
-        usort($this->todoList[$package],array($this, '_sortTodos'));
+        foreach($this->todoList as $package => $r) {
+            usort($this->todoList[$package], array('Converter', '_sortTodoPackage'));
+            foreach ($r as $a => $sub) {
+                usort($this->todoList[$package][$a][1],array('Converter', '_sortTodos'));
+            }
+        }
         phpDocumentor_out("done\n");
+    }
+
+    /** @access private */
+    function _sortTodoPackage($a, $b)
+    {
+        return strnatcasecmp($a[0]->name, $b[0]->name);
     }
 
     /** @access private */
     function _sortTodos($a, $b)
     {
-        return strnatcasecmp($a[0]->name, $b[0]->name);
+        return strnatcasecmp($a->getString(), $b->getString());
     }
 
     /**
