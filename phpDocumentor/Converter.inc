@@ -4391,7 +4391,7 @@ class Converter
         $tags = $ret = $api_tags = $info_tags = array();
         $api_tags_arr = array("abstract", "access", "deprecated", "example", "filesource",
                              "global", "internal", "name", "return", "see",
-                             "staticvar", "uses", "var");
+                             "staticvar", "usedby", "uses", "var");
         if (!$nopackage)
         {
             $tags[] = array('keyword' => 'package','data' => $element->docblock->package);

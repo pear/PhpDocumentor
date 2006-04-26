@@ -105,6 +105,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1348852 ] Call to function Convert() on a non-object + DocBlockTags
  [ 1366260 ] Default 0 parameter in method is not displayed
  [ 1373244 ] Undefined variable: root_dir in docbuilder/file_dialog.php
+ [ 1380845 ] @uses tags not sorting
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
  [ 1398977 ] @return is not merged when using DocBlock Templates
  [ 1428660 ] Confusing error when using {@link} in @uses

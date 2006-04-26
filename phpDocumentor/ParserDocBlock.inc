@@ -1032,8 +1032,22 @@ class parserDocBlock
     function addUses($seeel, $description)
     {
         $this->tags['uses'][] = new parserUsesTag($seeel, $description);
+        usort($this->tags['uses'], array($this, '_sortUses'));
     }
-    
+
+    /**
+     * Custom sorting function for sorting @uses tags
+     *
+     * @param parserTag $a
+     * @param parserTag $b
+     * @access private
+     * @return int
+     */
+    function _sortUses($a, $b)
+    {
+        return strnatcasecmp($a->getString(), $b->getString());
+    }
+
     /**
      * @param string
      * @return mixed false if no keyword, unconverted value if one keyword, array of unconverted values if more than one keyword
