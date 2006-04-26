@@ -4244,7 +4244,7 @@ class Converter
                                                   'utags' => $docblock['utags'],
                                                   'global_name'     => $element->getName(),
                                                   'global_type' => $element->getDataType($this),
-                                                  'global_value'    => $this->postProcess($value),
+                                                  'global_value'    => $value,
                                                   'line_number' => $element->getLineNumber(),
                                                   'global_conflicts'    => $this->getFormattedConflicts($element,"global variables"),
                                                   'id' => $this->getId($element)),
@@ -5064,15 +5064,17 @@ class Converter
     {
         if (strpos($value,'new') === 0)
         {
-            preg_match('/new([^(]*)(.*)/',$value,$newval);
+            preg_match('/new([^(]*)((?:.|\r|\n)*)/',$value,$newval);
             if (isset($newval[1]))
             {
                 $a = Converter::getLink(trim($newval[1]));
                 if (!isset($newval[2])) $newval[2] = '';
-                if ($a && phpDocumentor_get_class($a) == 'classlink') $value = 'new '.$this->returnSee($a).$newval[2];
+                if ($a && phpDocumentor_get_class($a) == 'classlink') $value = 'new '.$this->returnSee($a) .
+                    $this->postProcess($newval[2]);
             }
+            return $value;
         }
-        return $value;
+        return $this->postProcess($value);
     }
 
     /**
