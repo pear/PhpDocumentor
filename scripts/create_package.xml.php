@@ -108,6 +108,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
  [ 1398977 ] @return is not merged when using DocBlock Templates
  [ 1428660 ] Confusing error when using {@link} in @uses
+ [ 1462690 ] PHP Notices
  [ 1466205 ] more usedby than uses
  [ 1473272 ] Update references of phpdoc to pear-phpdoc
 - fixed these bugs reported in PEAR:

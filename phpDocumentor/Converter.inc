@@ -3505,9 +3505,12 @@ class Converter
             if (count($a) == 2)
             { // can have exactly 1 package override, otherwise it's ignored
                 // feature 564991, link to php manual
-                if ($a[0] == 'PHP_MANUAL')
-                return 'http://www.php.net/'.$a[1];
-                return Converter::getLink($a[1],$a[0],array());
+                if ($a[0] == 'PHP_MANUAL') {
+                    $s = 'http://www.php.net/'.$a[1];
+                    return $s;
+                }
+                $s = &Converter::getLink($a[1],$a[0],array());
+                return $s;
             }
         }
         $a = &$this->_getLink($expr, $package, $packages);
