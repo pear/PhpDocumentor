@@ -64,7 +64,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2006-04-26</date>
- <time>15:43:57</time>
+ <time>16:02:12</time>
  <version>
   <release>1.3.0RC6</release>
   <api>1.3.0</api>
@@ -176,6 +176,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
  [ 1398977 ] @return is not merged when using DocBlock Templates
  [ 1428660 ] Confusing error when using {@link} in @uses
+ [ 1473272 ] Update references of phpdoc to pear-phpdoc
 - fixed these bugs reported in PEAR:
  Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
  Bug #5011: PDF generation warning on uksort
@@ -1471,7 +1472,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
     <file name="add_cvs.php" role="php" />
     <file name="create_examples.php" role="php" />
     <file name="create_package.xml.php" role="php" />
-    <file name="makedoc.sh" role="script" />
+    <file baseinstalldir="/" name="makedoc.sh" role="script" />
     <file name="tokenizer_test.php" role="php" />
    </dir> <!-- /scripts -->
    <dir name="tutorials">
@@ -1576,11 +1577,11 @@ segfaults with the simplest of files.  Generation still works great in PHP4
    <file name="index.html" role="data" />
    <file name="INSTALL" role="doc" />
    <file name="new_phpdoc.php" role="data" />
-   <file name="pear-phpdoc" role="script">
+   <file baseinstalldir="/" name="pear-phpdoc" role="script">
     <tasks:replace from="@PHP-BIN@" to="php_bin" type="pear-config" />
     <tasks:unixeol />
    </file>
-   <file name="pear-phpdoc.bat" role="script">
+   <file baseinstalldir="/" name="pear-phpdoc.bat" role="script">
     <tasks:replace from="@PHP-BIN@" to="php_bin" type="pear-config" />
     <tasks:replace from="@BIN-DIR@" to="bin_dir" type="pear-config" />
     <tasks:replace from="@PEAR-DIR@" to="php_dir" type="pear-config" />
@@ -2665,6 +2666,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
  [ 1398977 ] @return is not merged when using DocBlock Templates
  [ 1428660 ] Confusing error when using {@link} in @uses
+ [ 1473272 ] Update references of phpdoc to pear-phpdoc
 - fixed these bugs reported in PEAR:
  Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
  Bug #5011: PDF generation warning on uksort

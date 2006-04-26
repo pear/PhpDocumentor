@@ -173,6 +173,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
  [ 1398977 ] @return is not merged when using DocBlock Templates
  [ 1428660 ] Confusing error when using {@link} in @uses
+ [ 1473272 ] Update references of phpdoc to pear-phpdoc
 - fixed these bugs reported in PEAR:
  Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
  Bug #5011: PDF generation warning on uksort
@@ -2492,6 +2493,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1393998 ] HTMLSmartyConverter Fatal error (line 627) fix
  [ 1398977 ] @return is not merged when using DocBlock Templates
  [ 1428660 ] Confusing error when using {@link} in @uses
+ [ 1473272 ] Update references of phpdoc to pear-phpdoc
 - fixed these bugs reported in PEAR:
  Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
  Bug #5011: PDF generation warning on uksort

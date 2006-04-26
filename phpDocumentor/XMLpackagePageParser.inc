@@ -400,7 +400,7 @@ class XMLPackagePageParser extends Parser
         {
             if ($this->p_flags['start_attr'])
             {
-                $this->p_vars['attrname'] = trim($word);
+                $this->p_vars['attrname'] = $word;
             } else
             {
                 if (isset($this->p_vars['attrname']))
