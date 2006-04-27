@@ -1241,7 +1241,7 @@ class parserDescParser extends Parser
                                                             '<var>', '<kbd>', '<samp>');
         $this->tokens[PHPDOCUMENTOR_PDP_STATE_BR]    = array(">","/>");
         $this->tokens[PHPDOCUMENTOR_PDP_STATE_ESCAPE]    = array('code>>', '/code>>', 'pre>>', '/pre>>', 'b>>', '/b>>', 
-                                                                 'i>>', '/i>>', 'ol>>', '/ol>>', 'ul>>', '/ul>>', 
+                                                                 'i>>', '/i>>', 'ol>>', '/ol>>', 'ul>>', '/ul>>', 'li>>', '/li>>', 
                                                                  'br>>', 'br />>', 'p>>', '/p>>', 'samp>>', '/samp>>', 
                                                                  'kbd>>', '/kbd>>', 'var>>', '/var>>'); 
         if (PHPDOCUMENTOR_KILL_WHITESPACE) $this->tokens[PHPDOCUMENTOR_PDP_STATE_DOUBLECR][] = ' ';
