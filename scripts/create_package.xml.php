@@ -115,6 +115,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1466205 ] more usedby than uses
  [ 1473272 ] Update references of phpdoc to pear-phpdoc
 - fixed these bugs reported in PEAR:
+ Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
  Bug #5011: PDF generation warning on uksort
  Bug #6305: array typehints break the parser
