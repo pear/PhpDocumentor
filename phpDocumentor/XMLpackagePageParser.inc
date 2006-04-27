@@ -470,7 +470,7 @@ class XMLPackagePageParser extends Parser
         $this->_cursection = 0;
         if (isset($this->p_vars['toc'])) unset($this->p_vars['toc']);
         
-        $this->tokens[STATE_NOEVENTS]                     = array('</','<','<!--','<?');
+        $this->tokens[STATE_NOEVENTS]                     = array('</','<!--','<?','<');
         $this->tokens[STATE_COMMENTBLOCK]                 = array('-->');
         $this->tokens[STATE_OUTPHP]                       = array('?>');
         $this->tokens[STATE_QUOTE]                        = array("\\\"","\\\\","\"",'>');
@@ -483,10 +483,10 @@ class XMLPackagePageParser extends Parser
         // For each event word to event mapings
         $this->pushEvent[PARSER_EVENT_NOEVENTS] = 
             array(
-                "<" => PHPDOCUMENTOR_PDP_EVENT_TAG,
-                "</" => PHPDOCUMENTOR_PDP_EVENT_TAG,
                 '<!--' => PARSER_EVENT_COMMENTBLOCK,
+                "</" => PHPDOCUMENTOR_PDP_EVENT_TAG,
                 '<?' => PARSER_EVENT_OUTPHP,
+                "<" => PHPDOCUMENTOR_PDP_EVENT_TAG,
                 '&' => PHPDOCUMENTOR_PDP_EVENT_ENTITY,
             );
 ##########################
@@ -547,6 +547,8 @@ class XMLPackagePageParser extends Parser
             PHPDOCUMENTOR_PDP_EVENT_LIST    => "PHPDOCUMENTOR_PDP_EVENT_LIST",
             PARSER_EVENT_QUOTE  => "PARSER_EVENT_QUOTE",
             PHPDOCUMENTOR_PDP_EVENT_ENTITY => "PHPDOCUMENTOR_PDP_EVENT_ENTITY",
+            PHPDOCUMENTOR_PDP_EVENT_COMMENT => "PHPDOCUMENTOR_PDP_EVENT_COMMENT",
+            PHPDOCUMENTOR_PDP_EVENT_PI => "PHPDOCUMENTOR_PDP_EVENT_PI",
         );
         if (isset($lookup[$value]))
         return $lookup[$value];
