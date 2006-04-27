@@ -2110,6 +2110,8 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
         $this->wordpushEvent[PARSER_EVENT_PHPCODE] =
             array(
                 "define"     => PARSER_EVENT_DEFINE,
+                '"'    => PARSER_EVENT_QUOTE,
+                '\''    => PARSER_EVENT_QUOTE,
             );
 /**************************************************************/
 

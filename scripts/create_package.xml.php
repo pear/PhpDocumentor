@@ -120,6 +120,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  Bug #2294: @toc tag is incompatible when XML prolog exists
  Bug #5011: PDF generation warning on uksort
  Bug #6305: array typehints break the parser
+ Bug #6306: Tokenizer doesn\'t read "....<%{$key}>..." properly
  Bug #6848: Reference Patch
  Bug #6952: Update Install docs to tell correct package.xml location
 ';
