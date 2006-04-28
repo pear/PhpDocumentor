@@ -100,6 +100,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1203445 ] Call to a member function on a non-object in Parser.inc
  [ 1203451 ] array to string conversion notice in InlineTags.inc
  [ 1224317 ] functions refers to wrong line
+ [ 1230004 ] Undefined index in class phpDocumentorTParser
  [ 1255692 ] Support for "--" argument
  [ 1261287 ] @filesource bug?
  [ 1348852 ] Call to function Convert() on a non-object + DocBlockTags

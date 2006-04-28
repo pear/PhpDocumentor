@@ -1311,6 +1311,9 @@ class phpDocumentorTParser extends Parser
     {
         unset($this->_pv_periodline);
         $this->_pf_useperiod = false;
+        if (empty($desc)) {
+            $desc = array('');
+        }
         foreach($desc as $i => $line)
         {
             $line = trim($line);
