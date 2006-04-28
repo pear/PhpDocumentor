@@ -41,6 +41,12 @@
 class HTMLSmartyConverter extends Converter
 {
     /**
+     * This converter knows about the new root tree processing
+     * In order to fix PEAR Bug #6389
+     * @var boolean
+     */
+    var $processSpecialRoots = true;
+    /**
      * Smarty Converter wants elements sorted by type as well as alphabetically
      * @see Converter::$sort_page_contents_by_type
      * @var boolean
@@ -1234,16 +1240,48 @@ class HTMLSmartyConverter extends Converter
      */
     function generateFormattedClassTrees($package)
     {
-        if (!isset($this->roots[$package])) return array();
-        $roots = $trees = array();
-        $roots = $this->roots[$package];
-        for($i=0;$i<count($roots);$i++)
-        {
-            $root = $this->classes->getClassByPackage($roots[$i], $package);
-            if ($root && $root->isInterface()) {
-                continue;
+        if (!isset($this->roots['normal'][$package]) &&
+              !isset($this->roots['special'][$package])) {
+            return array();
+        }
+        $trees = array();
+        if (isset($this->roots['normal'][$package])) {
+            $roots = $this->roots['normal'][$package];
+            for($i=0;$i<count($roots);$i++)
+            {
+                $root = $this->classes->getClassByPackage($roots[$i], $package);
+                if ($root && $root->isInterface()) {
+                    continue;
+                }
+                $trees[] = array('class' => $roots[$i],'class_tree' => "<ul>\n".$this->getRootTree($this->getSortedClassTreeFromClass($roots[$i],$package,''),$package)."</ul>\n");
             }
-            $trees[] = array('class' => $roots[$i],'class_tree' => "<ul>\n".$this->getRootTree($this->getSortedClassTreeFromClass($roots[$i],$package,''),$package)."</ul>\n");
+        }
+        if (isset($this->roots['special'][$package])) {
+            $roots = $this->roots['special'][$package];
+            foreach ($roots as $parent => $classes) {
+                $thistree = '';
+                foreach ($classes as $classinfo) {
+                    $root = $this->classes->getClassByPackage($classinfo, $package);
+                    if ($root && $root->isInterface()) {
+                        continue;
+                    }
+                    $thistree .=
+                        $this->getRootTree(
+                            $this->getSortedClassTreeFromClass(
+                                $classinfo,
+                                $package,
+                                ''),
+                            $package,
+                            true);
+                }
+                if (!$thistree) {
+                    continue;
+                }
+                $trees[] = array(
+                    'class' => $parent,
+                    'class_tree' => "<ul>\n" . $thistree . "</ul>\n"
+                );
+            }
         }
         return $trees;
     }
@@ -1256,16 +1294,48 @@ class HTMLSmartyConverter extends Converter
      */
     function generateFormattedInterfaceTrees($package)
     {
-        if (!isset($this->roots[$package])) return array();
-        $roots = $trees = array();
-        $roots = $this->roots[$package];
-        for($i=0;$i<count($roots);$i++)
-        {
-            $root = $this->classes->getClassByPackage($roots[$i], $package);
-            if ($root && !$root->isInterface()) {
-                continue;
+        if (!isset($this->roots['normal'][$package]) &&
+              !isset($this->roots['special'][$package])) {
+            return array();
+        }
+        $trees = array();
+        if (isset($this->roots['normal'][$package])) {
+            $roots = $this->roots['normal'][$package];
+            for($i=0;$i<count($roots);$i++)
+            {
+                $root = $this->classes->getClassByPackage($roots[$i], $package);
+                if ($root && !$root->isInterface()) {
+                    continue;
+                }
+                $trees[] = array('class' => $roots[$i],'class_tree' => "<ul>\n".$this->getRootTree($this->getSortedClassTreeFromClass($roots[$i],$package,''),$package)."</ul>\n");
             }
-            $trees[] = array('class' => $roots[$i],'class_tree' => "<ul>\n".$this->getRootTree($this->getSortedClassTreeFromClass($roots[$i],$package,''),$package)."</ul>\n");
+        }
+        if (isset($this->roots['special'][$package])) {
+            $roots = $this->roots['special'][$package];
+            foreach ($roots as $parent => $classes) {
+                $thistree = '';
+                foreach ($classes as $classinfo) {
+                    $root = $this->classes->getClassByPackage($classinfo, $package);
+                    if ($root && !$root->isInterface()) {
+                        continue;
+                    }
+                    $thistree .=
+                        $this->getRootTree(
+                            $this->getSortedClassTreeFromClass(
+                                $classinfo,
+                                $package,
+                                ''),
+                            $package,
+                            true);
+                }
+                if (!$thistree) {
+                    continue;
+                }
+                $trees[] = array(
+                    'class' => $parent,
+                    'class_tree' => "<ul>\n" . $thistree . "</ul>\n"
+                );
+            }
         }
         return $trees;
     }
@@ -1275,10 +1345,11 @@ class HTMLSmartyConverter extends Converter
      *
      * @param array $tree output from {@link getSortedClassTreeFromClass()}
      * @param string $package  package
+     * @param boolean $nounknownparent if true, an object's parent will not be checked
      * @see Classes::$definitechild, generateFormattedClassTrees()
      * @return string
      */
-    function getRootTree($tree, $package)
+    function getRootTree($tree, $package, $noparent = false)
     {
         if (!$tree) return '';
         $my_tree = '';
@@ -1286,7 +1357,7 @@ class HTMLSmartyConverter extends Converter
         $lastcur = array(false);
         $kids = array();
         $dopar = false;
-        if ($tree[$cur]['parent'])
+        if (!$noparent && $tree[$cur]['parent'])
         {
             $dopar = true;
             if (!is_object($tree[$cur]['parent']))

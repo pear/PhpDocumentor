@@ -250,6 +250,15 @@ class Classes
      * @var array
      */
     var $roots = array();
+    /**
+     * All classes with a parent that was not parsed are included in this array
+     *
+     * Format:<pre>
+     * array(classname => array(name of file1 that contains root classname,
+     *                          name of file2 that contains root classname,...))</pre>
+     * @var array
+     */
+    var $specialRoots = array();
     
     /**
      * array of all files that contain classes with the same name
@@ -554,7 +563,7 @@ class Classes
                     if (isset($this->roots[$class]))
                     foreach($this->roots[$class] as $i => $files)
                     {
-                        // find the file kkey and unset
+                        // find the file key and unset
                         if ($files == $file) unset($this->roots[$class][$i]);
                     }
                     // if this is a child, remove it from the list of child classes of its parent
@@ -594,7 +603,7 @@ class Classes
         if ($furb && !is_array($db->parent))
         {
 //            debug("furb adding $class $file to roots");
-            $this->roots[$class][] = $file;
+            $this->specialRoots[$db->parent][] = array($class, $file);
         }
         // fix for 591396
         if (!$db->docblock->getExplicitPackage())
@@ -1044,12 +1053,22 @@ class Classes
     /**
      * Get a list of all root classes indexed by package.  Used to generate
      * class trees by {@link Converter}
+     * @param boolean $all [since phpDocumentor 1.3.0RC6] determines whether to
+     *                     return class trees that extend non-parsed classes
      * @return array array(package => array(rootclassname, rootclassname,...),...)
      */
-    function getRoots()
+    function getRoots($all = false)
     {
         $roots = array();
-        foreach($this->roots as $class => $files)
+        $temproots = $this->roots;
+        if (!$all) {
+            foreach ($this->specialRoots as $package => $root) {
+                foreach ($root as $parent => $info) {
+                    $temproots[$info[0]] = $info[1];
+                }
+            }
+        }
+        foreach($temproots as $class => $files)
         {
             if (count($files))
             {
@@ -1063,6 +1082,25 @@ class Classes
         foreach($roots as $package => $root)
         {
             usort($roots[$package],"strnatcasecmp");
+        }
+        if ($all) {
+            $specialRoots = array();
+            foreach ($this->specialRoots as $parent => $classinfo) {
+                if (count($classinfo)) {
+                    foreach ($classinfo as $i => $info) {
+                        $x = $this->getClass($info[0], $info[1]);
+                        $specialRoots[$x->getPackage()][$parent][] = $info[0];
+                    }
+                }
+            }
+            foreach($specialRoots as $package => $root)
+            {
+                uksort($specialRoots[$package],"strnatcasecmp");
+                foreach ($specialRoots[$package] as $parent => $classes) {
+                    usort($specialRoots[$package][$parent], 'strnatcasecmp');
+                }
+            }
+            return array('special' => $specialRoots, 'normal' => $roots);
         }
         return $roots;
     }

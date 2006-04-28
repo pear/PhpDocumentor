@@ -61,6 +61,12 @@ include_once("phpDocumentor/Smarty-2.6.0/libs/Smarty.class.php");
 class Converter
 {
     /**
+     * This converter knows about the new root tree processing
+     * In order to fix PEAR Bug #6389
+     * @var boolean
+     */
+    var $processSpecialRoots = false;
+    /**
      * output format of this converter
      *
      * in Child converters, this will match the first part of the -o command-line
@@ -432,7 +438,7 @@ class Converter
         $this->parseprivate = $pp;
         $this->quietmode = $qm;
         $this->classes = &$classes;
-        $this->roots = $classes->getRoots();
+        $this->roots = $classes->getRoots($this->processSpecialRoots);
         $this->title = $title;
         $this->setTemplateDir($template);
         $this->setTargetdir($targetDir);
