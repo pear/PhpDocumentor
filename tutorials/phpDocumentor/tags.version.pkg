@@ -7,7 +7,7 @@
   <refsynopsisdivinfo>
    <author>
     Gregory Beaver
-    <authorblurb>Tag Documentation written by {@link mailto:cellog@users.sourceforge.net cellog@users.sourceforge.net}</authorblurb>
+    <authorblurb>Tag Documentation written by {@link mailto:cellog@php.net cellog@php.net}</authorblurb>
    </author>
    <copyright>Copyright 2002, Gregory Beaver</copyright>
    <releaseinfo>phpDocumentor 0.1+</releaseinfo>
@@ -32,7 +32,7 @@
    <![CDATA[
 /**
  * example of @version tag with CVS tag
- * @version $Id: tags.version.pkg,v 1.1 2005-10-17 18:37:47 jeichorn Exp $;
+ * @version $Id: tags.version.pkg,v 1.2 2006-04-29 04:08:27 cellog Exp $;
  */
 function datafunction()
 {

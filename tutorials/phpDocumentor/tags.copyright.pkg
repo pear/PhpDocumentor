@@ -7,7 +7,7 @@
   <refsynopsisdivinfo>
    <author>
     Gregory Beaver
-    <authorblurb>Tag Documentation written by {@link mailto:cellog@users.sourceforge.net cellog@users.sourceforge.net}</authorblurb>
+    <authorblurb>Tag Documentation written by {@link mailto:cellog@php.net cellog@php.net}</authorblurb>
    </author>
    <copyright>Copyright 2002, Gregory Beaver</copyright>
    <releaseinfo>phpDocumentor 0.1+</releaseinfo>
@@ -29,7 +29,7 @@
    <![CDATA[
 /**
  * Page-Level DocBlock example.
- * @author Gregory Beaver <cellog@users.sourceforge.net>
+ * @author Gregory Beaver <cellog@php.net>
  * @copyright Copyright &copy; 2002, Gregory Beaver
  */
 /**

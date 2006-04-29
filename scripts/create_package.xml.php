@@ -94,6 +94,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1152316 ] 1.3RC3 - PHP5 - HTML:frames:* - Welcome to default!=@package
  [ 1152781 ] PHP_NOTICE: Uninitialized string offset in ParserDescCleanup
  [ 1153593 ] string id="...." in tutorials
+ [ 1156816 ] undeliverable email addresses for doc/tutorial authors
  [ 1164253 ] Inherited Class Constants are not displayed
  [ 1171583 ] CHM wrong filesource
  [ 1180200 ] HighlightParser does not handle Heredoc Blocks.
