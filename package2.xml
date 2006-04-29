@@ -64,7 +64,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2006-04-28</date>
- <time>22:30:11</time>
+ <time>23:35:19</time>
  <version>
   <release>1.3.0RC6</release>
   <api>1.3.0</api>
@@ -149,6 +149,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1016927 ] no highlight for paramtype in header of function
  [ 1043330 ] Make Command Line Parser support shorter syntax
  [ 1044486 ] duplicate parameters
+ [ 1046856 ] Small filesource link bug under windows
  [ 1051941 ] private variables on same line not recognized
  [ 1079637 ] Use of realpath() leads to empty $dir
  [ 1081396 ] Display of inline {@link} tags with PHP functions
@@ -162,6 +163,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1152316 ] 1.3RC3 - PHP5 - HTML:frames:* - Welcome to default!=@package
  [ 1152781 ] PHP_NOTICE: Uninitialized string offset in ParserDescCleanup
  [ 1153593 ] string id=&quot;....&quot; in tutorials
+ [ 1156816 ] undeliverable email addresses for doc/tutorial authors
  [ 1164253 ] Inherited Class Constants are not displayed
  [ 1171583 ] CHM wrong filesource
  [ 1180200 ] HighlightParser does not handle Heredoc Blocks.
@@ -2651,6 +2653,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1016927 ] no highlight for paramtype in header of function
  [ 1043330 ] Make Command Line Parser support shorter syntax
  [ 1044486 ] duplicate parameters
+ [ 1046856 ] Small filesource link bug under windows
  [ 1051941 ] private variables on same line not recognized
  [ 1079637 ] Use of realpath() leads to empty $dir
  [ 1081396 ] Display of inline {@link} tags with PHP functions
@@ -2664,6 +2667,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1152316 ] 1.3RC3 - PHP5 - HTML:frames:* - Welcome to default!=@package
  [ 1152781 ] PHP_NOTICE: Uninitialized string offset in ParserDescCleanup
  [ 1153593 ] string id=&quot;....&quot; in tutorials
+ [ 1156816 ] undeliverable email addresses for doc/tutorial authors
  [ 1164253 ] Inherited Class Constants are not displayed
  [ 1171583 ] CHM wrong filesource
  [ 1180200 ] HighlightParser does not handle Heredoc Blocks.

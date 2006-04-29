@@ -94,6 +94,7 @@ The following bugs are fixed in version 1.3.0
  [ 1016927 ] no highlight for paramtype in header of function
  [ 1043330 ] Make Command Line Parser support shorter syntax
  [ 1044486 ] duplicate parameters
+ [ 1046856 ] Small filesource link bug under windows
  [ 1051941 ] private variables on same line not recognized
  [ 1081396 ] Display of inline {@link} tags with PHP functions
  [ 1090009 ] @uses doesn't generate @usedby link when linking to file.ext

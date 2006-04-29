@@ -81,6 +81,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1016927 ] no highlight for paramtype in header of function
  [ 1043330 ] Make Command Line Parser support shorter syntax
  [ 1044486 ] duplicate parameters
+ [ 1046856 ] Small filesource link bug under windows
  [ 1051941 ] private variables on same line not recognized
  [ 1079637 ] Use of realpath() leads to empty $dir
  [ 1081396 ] Display of inline {@link} tags with PHP functions
