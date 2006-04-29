@@ -238,7 +238,7 @@ class Io
         $setting['template'] = 'templates' . PATH_DELIMITER .'default' . PATH_DELIMITER;
 
         $valnext = "junk";
-        $data = array('type' => '');
+        $data = array();
         if(isset($argv) && is_array($argv))
         {
             foreach ($argv as $cmd)
@@ -254,7 +254,7 @@ class Io
                     echo $this->displayHelpMsg();
                     die();
                 }
-                if ($data['type'] == 'set') {
+                if (isset($data['type']) && $data['type'] == 'set') {
                     if (!in_array(strtolower($cmd), $data['validvalues'], true)) {
                         addErrorDie(PDERROR_INVALID_VALUES, $valnext, $cmd,
                             '(' . implode(', ', $data['validvalues']) . ')');
