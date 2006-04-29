@@ -87,11 +87,13 @@ class Io
 
         $this->phpDocOptions['hidden']['tag'] = array("-dh", "--hidden");
         $this->phpDocOptions['hidden']['desc'] = "set equal to on (-dh on) to descend into hidden directories (directories starting with '.'), default is off";
-        $this->phpDocOptions['hidden']['type'] = "value";
+        $this->phpDocOptions['hidden']['type'] = "set";
+        $this->phpDocOptions['hidden']['validvalues'] = array('on', 'off');
 
         $this->phpDocOptions['quiet']['tag'] = array("-q", "--quiet");
         $this->phpDocOptions['quiet']['desc'] = "do not display parsing/conversion messages.  Useful for cron jobs on/off default off";
-        $this->phpDocOptions['quiet']['type'] = "value";
+        $this->phpDocOptions['quiet']['type'] = "set";
+        $this->phpDocOptions['quiet']['validvalues'] = array('on', 'off');
 
         $this->phpDocOptions['title']['tag'] = array("-ti","--title");
         $this->phpDocOptions['title']['desc'] = "title of generated documentation, default is 'Generated Documentation'";
@@ -106,7 +108,8 @@ class Io
 
         $this->phpDocOptions['parseprivate']['tag'] = array("-pp","--parseprivate");
         $this->phpDocOptions['parseprivate']['desc'] = "parse @internal and elements marked private with @access.  Use on/off, default off";
-        $this->phpDocOptions['parseprivate']['type'] = "value";
+        $this->phpDocOptions['parseprivate']['type'] = "set";
+        $this->phpDocOptions['parseprivate']['validvalues'] = array('on', 'off');
 
         $this->phpDocOptions['packageoutput']['tag'] = array("-po","--packageoutput");
         $this->phpDocOptions['packageoutput']['desc'] = "output documentation only for selected packages.  Use a comma-delimited list";
@@ -134,15 +137,18 @@ class Io
 
         $this->phpDocOptions['sourcecode']['tag'] = array("-s","--sourcecode");
         $this->phpDocOptions['sourcecode']['desc'] = "generate highlighted sourcecode for every parsed file (PHP 4.3.0+ only) on/off default off";
-        $this->phpDocOptions['sourcecode']['type'] = "value";
+        $this->phpDocOptions['sourcecode']['type'] = "set";
+        $this->phpDocOptions['sourcecode']['validvalues'] = array('on', 'off');
 
         $this->phpDocOptions['javadocdesc']['tag'] = array("-j","--javadocdesc");
         $this->phpDocOptions['javadocdesc']['desc'] = "JavaDoc-compliant description parsing.  Use on/off, default off (more flexibility)";
-        $this->phpDocOptions['javadocdesc']['type'] = "value";
+        $this->phpDocOptions['javadocdesc']['type'] = "set";
+        $this->phpDocOptions['javadocdesc']['validvalues'] = array('on', 'off');
 
         $this->phpDocOptions['pear']['tag'] = array("-p","--pear");
         $this->phpDocOptions['pear']['desc'] = "Parse a PEAR-style repository (package is directory, _members are @access private) on/off default off";
-        $this->phpDocOptions['pear']['type'] = "value";
+        $this->phpDocOptions['pear']['type'] = "set";
+        $this->phpDocOptions['pear']['validvalues'] = array('on', 'off');
 
         $this->phpDocOptions['readmeinstallchangelog']['tag'] = array("-ric","--readmeinstallchangelog");
         $this->phpDocOptions['readmeinstallchangelog']['desc'] = "Specify custom filenames to parse like README, INSTALL or CHANGELOG files";
@@ -232,6 +238,7 @@ class Io
         $setting['template'] = 'templates' . PATH_DELIMITER .'default' . PATH_DELIMITER;
 
         $valnext = "junk";
+        $data = array('type' => '');
         if(isset($argv) && is_array($argv))
         {
             foreach ($argv as $cmd)
@@ -246,6 +253,12 @@ class Io
                 {
                     echo $this->displayHelpMsg();
                     die();
+                }
+                if ($data['type'] == 'set') {
+                    if (!in_array(strtolower($cmd), $data['validvalues'], true)) {
+                        addErrorDie(PDERROR_INVALID_VALUES, $valnext, $cmd,
+                            '(' . implode(', ', $data['validvalues']) . ')');
+                    }
                 }
                 $setting[$valnext] = $cmd;
                 foreach( $this->phpDocOptions as $name => $data )

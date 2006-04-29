@@ -347,6 +347,10 @@ define("PDERROR_DUMB_USES",73);
  * warning triggered if <ul> is nested inside <ul> and not <li>
  */
 define("PDERROR_UL_IN_UL", 74);
+/**
+ * warning triggered if a command line option does not have a valid value passed in
+ */
+define("PDERROR_INVALID_VALUES", 75);
 
 /**
  * Error messages for phpDocumentor parser warnings
@@ -444,6 +448,7 @@ $GLOBALS['phpDocumentor_error_descrip'] =
         PDERROR_CANNOT_EXTEND_SELF => 'class %s cannot extend itself - TEST YOUR CODE BEFORE PARSING',
         PDERROR_DUMB_USES => '@uses can only link to string data',
         PDERROR_UL_IN_UL => 'ul/ol tags cannot be directly nested inside ul/ol, nest inside li',
+        PDERROR_INVALID_VALUES => 'command %s was passed "%s" but must be one of %s',
         );
 
 /**

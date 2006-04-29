@@ -79,6 +79,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 977674 ] Parser error
  [ 989258 ] wrong interfaces parsing
  [ 1016927 ] no highlight for paramtype in header of function
+ [ 1043330 ] Make Command Line Parser support shorter syntax
  [ 1044486 ] duplicate parameters
  [ 1051941 ] private variables on same line not recognized
  [ 1079637 ] Use of realpath() leads to empty $dir
