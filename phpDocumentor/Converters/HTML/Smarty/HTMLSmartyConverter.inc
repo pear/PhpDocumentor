@@ -173,7 +173,7 @@ class HTMLSmartyConverter extends Converter
         phpDocumentor_out("\n");
         $this->writefile('exsource_'.$path.'.html',$templ->fetch('examplesource.tpl'));
     }
-    
+
     function getExampleLink($path, $title)
     {
         return $this->returnLink('{$subdir}__examplesource' . PATH_DELIMITER . 'exsource_'.$path.'.html',$title);
@@ -181,8 +181,28 @@ class HTMLSmartyConverter extends Converter
     
     function getSourceLink($path)
     {
-        return $this->returnLink($this->getFileSourcePath('{$subdir}') .
-        PATH_DELIMITER . $this->getFileSourceName($path).'.html','Source Code for this file');
+        return $this->returnLink('{$subdir}__filesource/' .
+        $this->getFileSourceName($path).'.html','Source Code for this file');
+    }
+
+    /**
+     * Retrieve a Converter-specific anchor to a segment of a source code file
+     * parsed via a {@tutorial tags.filesource.pkg} tag.
+     * @param string full path to source file
+     * @param string name of anchor
+     * @param string link text, if this is a link
+     * @param boolean returns either a link or a destination based on this
+     *                parameter
+     * @return string link to an anchor, or the anchor
+     */
+    function getSourceAnchor($sourcefile,$anchor,$text = '',$link = false)
+    {
+        if ($link) {
+            return $this->returnLink('{$subdir}__filesource/' .
+                $this->getFileSourceName($sourcefile) . '.html#a' . $anchor, $text);
+        } else {
+            return '<a name="a'.$anchor.'"></a>';
+        }
     }
 
     /**
@@ -249,25 +269,6 @@ class HTMLSmartyConverter extends Converter
         $example = $this->template_options['desctranslate']['code'] . $example;
         if (!isset($this->template_options['desctranslate']['/code'])) return $example;
         return $example . $this->template_options['desctranslate']['/code'];
-    }
-    
-    /**
-     * Retrieve a Converter-specific anchor to a segment of a source code file
-     * parsed via a {@tutorial tags.filesource.pkg} tag.
-     * @param string full path to source file
-     * @param string name of anchor
-     * @param string link text, if this is a link
-     * @param boolean returns either a link or a destination based on this
-     *                parameter
-     * @return string link to an anchor, or the anchor
-     */
-    function getSourceAnchor($sourcefile,$anchor,$text = '',$link = false)
-    {
-        if ($link)
-        return $this->returnLink($this->getFileSourcePath('{$subdir}') .
-        PATH_DELIMITER . $this->getFileSourceName($sourcefile).'.html#a'.$anchor, $text);
-        else
-        return '<a name="a'.$anchor.'"></a>';
     }
     
     function getCurrentPageLink()

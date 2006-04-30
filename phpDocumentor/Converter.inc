@@ -1061,7 +1061,7 @@ class Converter
      */
     function getFileSourcePath($base)
     {
-        if (substr($base, strlen($base) - 1) != PATH_SEPARATOR) {
+        if (substr($base, strlen($base) - 1) != PATH_DELIMITER) {
             $base .= PATH_DELIMITER;
         }
         return $base . '__filesource';
