@@ -142,6 +142,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
  [ 952217 ] HTML:frames:earthli
  [ 962319 ] Define : don&apos;t show the assigned value
+ [ 964248 ] Convert invalid characters in package/subpackage names to _
  [ 977674 ] Parser error
  [ 989258 ] wrong interfaces parsing
  [ 1016927 ] no highlight for paramtype in header of function
@@ -2477,6 +2478,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
  [ 952217 ] HTML:frames:earthli
  [ 962319 ] Define : don&apos;t show the assigned value
+ [ 964248 ] Convert invalid characters in package/subpackage names to _
  [ 977674 ] Parser error
  [ 989258 ] wrong interfaces parsing
  [ 1016927 ] no highlight for paramtype in header of function

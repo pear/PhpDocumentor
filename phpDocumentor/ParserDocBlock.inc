@@ -729,23 +729,7 @@ class parserDocBlock
                         $rest = implode($rest,"\t");
                     } else $value = $value[0];
                 }
-                preg_match("/^([^`~!@#$%^&*(){}|<>,;]+)$/",$value,$match);
-                if (!isset($match[0]))
-                {
-                    // if were a single line and the only bad character is a space then will fix things for them
-                    preg_match("/^([^`~!@#$%^&*(){}|<>,;]+)$/",$value,$match);
-                    if (!isset($match[0]))
-                    {
-                        addError(PDERROR_ILLEGAL_PACKAGENAME,'package','package',$value);
-                        $value = $GLOBALS['phpDocumentor_DefaultPackageName'];
-                    }
-                    else
-                    {
-                        $value = 
-                            str_replace(array(" ","/","\\",":"),"_",
-                                trim($value));
-                    }
-                }
+                $value = preg_replace('/[^\[\]0-9\-a-zA-Z_\x7f-\xff]/', '-', $value);
                 $this->packagedescrip = $this->package = trim($value);
                 if (!empty($rest)) $this->packagedescrip = $rest;
             } else
@@ -782,23 +766,7 @@ class parserDocBlock
                 }
                 if (!empty($value))
                 {
-                    preg_match("/^([^`~!@#$%^&*(){}|<>,;]+)$/",$value,$match);
-                    if (!isset($match[0]))
-                    {
-                        // if were a single line and the only bad character is a space then will fix things for them
-                        preg_match("/^([^`~!@#$%^&*(){}|<>,;]+)$/",$value,$match);
-                        if (!isset($match[0]))
-                        {
-                            addError(PDERROR_ILLEGAL_PACKAGENAME,'subpackage','subpackage',$value);
-                            $value = '';
-                        }
-                        else
-                        {
-                            $value = 
-                                str_replace(array(" ","/","\\",":"),"_",
-                                    trim($value));
-                        }
-                    }
+                    $value = preg_replace('/[^\[\]0-9\-a-zA-Z_\x7f-\xff]/', '-', $value);
                 }
                 $this->subpackage = trim($value);
                 if (!empty($rest)) $this->subpackagedescrip = $rest;
@@ -815,6 +783,7 @@ class parserDocBlock
             {
                 if (!is_string($value))
                 $value = $value->getString();
+                $value = preg_replace('/[^\[\]0-9\-a-zA-Z_\x7f-\xff]/', '-', $value);
                 $this->category = $value;
             } else
             {
