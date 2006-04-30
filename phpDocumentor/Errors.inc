@@ -351,6 +351,10 @@ define("PDERROR_UL_IN_UL", 74);
  * warning triggered if a command line option does not have a valid value passed in
  */
 define("PDERROR_INVALID_VALUES", 75);
+/**
+ * warning triggered when {@}internal}} is nested inside another {@}internal}}
+ */
+define("PDERROR_NESTED_INTERNAL", 76);
 
 /**
  * Error messages for phpDocumentor parser warnings
@@ -449,6 +453,7 @@ $GLOBALS['phpDocumentor_error_descrip'] =
         PDERROR_DUMB_USES => '@uses can only link to string data',
         PDERROR_UL_IN_UL => 'ul/ol tags cannot be directly nested inside ul/ol, nest inside li',
         PDERROR_INVALID_VALUES => 'command %s was passed "%s" but must be one of %s',
+        PDERROR_NESTED_INTERNAL => '{@internal}} cannot be nested inside {@internal}}',
         );
 
 /**

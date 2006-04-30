@@ -80,6 +80,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 964248 ] Convert invalid characters in package/subpackage names to _
  [ 977674 ] Parser error
  [ 989258 ] wrong interfaces parsing
+ [ 995731 ] {@internal}}-tag shows }} in HTML-doc
  [ 1016927 ] no highlight for paramtype in header of function
  [ 1043330 ] Make Command Line Parser support shorter syntax
  [ 1044486 ] duplicate parameters

@@ -1654,27 +1654,24 @@ class phpDocumentorTParser extends Parser
         $save = $value;
         $value = explode('{@',$value);
         $newval = array();
-        $a->add($value[0]);
+        if ($priv || (!$priv && !$this->_pf_internal)) {
+            // ignore anything between {@internal and }}
+            $a->add($value[0]);
+        }
         for($i=1;$i<count($value);$i++)
         {
-            if (!$priv && $this->_pf_internal)
-            { // ignore anything between {@internal and }}
-                if (strpos($value[$i],'}}') !== false)
-                {
-                    $x = strrpos($value[$i],'}}');
-                    $value[$i] = substr($value[$i],$x + 1);
-                    $this->_pf_internal = false;
-                    if (!$value[$i]) continue;
-                    $a->add($value[$i]);
-                    continue;
-                } else continue;
-            }
             if (substr($value[$i],0,1) == '}')
             {
-                $a->add('{@'.substr($value[$i],1));
+                if ($priv || (!$priv && !$this->_pf_internal)) {
+                    // ignore anything between {@internal and }}
+                    $a->add('{@'.substr($value[$i],1));
+                }
             } elseif (substr($value[$i],0,2) == '*}')
             { // used for inserting */ in code examples
-                $a->add('*/'.substr($value[$i],2));
+                if ($priv || (!$priv && !$this->_pf_internal)) {
+                    // ignore anything between {@internal and }}
+                    $a->add('*/'.substr($value[$i],2));
+                }
             } else
             {
                 $save = $value[$i];
@@ -1683,20 +1680,30 @@ class phpDocumentorTParser extends Parser
                 $val = join(' ',$value[$i]);
                 if (trim($word) == 'internal')
                 {
+                    if ($this->_pf_internal) {
+                        addErrorDie(PDERROR_NESTED_INTERNAL);
+                    }
                     $this->_pf_internal = true;
                     $value[$i] = substr($save,strlen('internal') + 1);
+                    if (!$value[$i]) {
+                        $value[$i] = ''; // substr can set this to false
+                    }
                     if (strpos($value[$i],'}}') !== false)
                     {
                         $x = strrpos($value[$i],'}}');
                         // strip internal and cycle as if it were normal text.
                         $startval = substr($value[$i],0,$x - 1);
-                        if ($priv) $a->add($startval);
+                        if ($priv) {
+                            $a->add($startval);
+                        }
                         $value[$i] = substr($value[$i],$x + 1);
                         if (!$value[$i]) $value[$i] = '';
                         $this->_pf_internal = false;
                         $a->add($value[$i]);
                         continue;
-                    } elseif ($priv) $a->add($value[$i]);
+                    } elseif ($priv) {
+                        $a->add($value[$i]);
+                    }
                     continue;
                 }
                 if (in_array(str_replace('}','',trim($word)),$this->allowableInlineTags))
@@ -1707,9 +1714,12 @@ class phpDocumentorTParser extends Parser
                         $word = str_replace('}','',trim($word));
                         $val = $res.$val;
                     }
-                    if ($word == 'source')
-                    {
-                        $this->_pf_get_source = true;
+                    if ($priv || (!$priv && !$this->_pf_internal)) {
+                        // ignore anything between {@internal and }}
+                        if ($word == 'source')
+                        {
+                            $this->_pf_get_source = true;
+                        }
                     }
                     $val = explode('}',$val);
                     if (count($val) == 1)
@@ -1719,30 +1729,51 @@ class phpDocumentorTParser extends Parser
                     $rest = $val;
                     $val = array_shift($rest);
                     $rest = join('}',$rest);
-                    if (isset($this->inlineTagHandlers[$word]))
-                    $handle = $this->inlineTagHandlers[$word];
-                    else
-                    $handle = $this->inlineTagHandlers['*'];
+                    if (isset($this->inlineTagHandlers[$word])) {
+                        $handle = $this->inlineTagHandlers[$word];
+                    } else {
+                        $handle = $this->inlineTagHandlers['*'];
+                    }
                     $val = $this->$handle($word,$val);
-                    $a->add($val);
+                    if ($priv || (!$priv && !$this->_pf_internal)) {
+                        // ignore anything between {@internal and }}
+                        $a->add($val);
+                    }
                     if ($this->_pf_internal)
                     {
-                        if (strpos($rest,'}}') !== false)
+                        if (($x = strpos($rest,'}}')) !== false)
                         {
                             $value[$i] = $rest;
-                            $x = strrpos($value[$i],'}}');
-                            $startval = substr($value[$i],0,$x - 1);
-                            if ($priv) $a->add($startval);
-                            $value[$i] = substr($value[$i],$x + 1);
-                            if (!$value[$i]) $value[$i] = '';
+                            $startval = substr($value[$i],0,$x);
+                            if ((false !== $startval) && $priv) {
+                                $a->add($startval);
+                            }
+                            $value[$i] = substr($value[$i],$x + 2);
+                            if (!$value[$i]) {
+                                $value[$i] = '';
+                            }
                             $this->_pf_internal = false;
                             $a->add($value[$i]);
-                        } else $a->add($rest);
-                    } else $a->add($rest);
+                        } else {
+                            $rest = explode('}}', $rest);
+                            if ($priv) {
+                                $a->add(array_shift($rest));
+                            }
+                            $this->_pf_internal = false;
+                            // try this line again without internal
+                            $value[$i--] = join('}}', $rest);
+                            continue;
+                        }
+                    } else {
+                        $a->add($rest);
+                    }
                 } else
                 {
                     $val = $word.' '.$val;
-                    $a->add('{@'.$val);
+                    if ($priv || (!$priv && !$this->_pf_internal)) {
+                        // ignore anything between {@internal and }}
+                        $a->add('{@'.$val);
+                    }
                 }
             }
         }
