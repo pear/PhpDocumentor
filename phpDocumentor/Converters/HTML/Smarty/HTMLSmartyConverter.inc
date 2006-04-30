@@ -292,6 +292,10 @@ class HTMLSmartyConverter extends Converter
      */
     function postProcess($text)
     {
+        if ($this->highlightingSource) {
+            return str_replace(array(' ',"\t"), array('&nbsp;', '&nbsp;&nbsp;&nbsp;'),
+                htmlspecialchars($text));
+        }
         return htmlspecialchars($text);
     }
     

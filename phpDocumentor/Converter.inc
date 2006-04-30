@@ -306,6 +306,12 @@ class Converter
     var $classes;
 
     /**
+     * Flag used to help converters determine whether to do special source highlighting
+     * @var boolean
+     */
+    var $highlightingSource = false;
+
+    /**
      * Hierarchy of packages
      *
      * Every package that contains classes may have parent or child classes
@@ -758,6 +764,7 @@ class Converter
     function ProgramExample($example, $tutorial = false, $inlinesourceparse = null/*false*/,
                             $class = null/*false*/, $linenum = null/*false*/, $filesourcepath = null/*false*/)
     {
+        $this->highlightingSource = true;
         if (tokenizer_ext)
         {
             $e = $example;
@@ -812,6 +819,7 @@ class Converter
         {
             $example = $this->postProcess($example);
         }
+        $this->highlightingSource = false;
 
         if ($tutorial)
         {
@@ -830,8 +838,11 @@ class Converter
      */
     function TutorialExample($example)
     {
+        $this->highlightingSource = true;
         $parse = new phpDocumentor_TutorialHighlightParser;
-        return $parse->parse($example, $this);
+        $x = $parse->parse($example, $this);
+        $this->highlightingSource = false;
+        return $x;
     }
 
     /**
@@ -1050,6 +1061,9 @@ class Converter
      */
     function getFileSourcePath($base)
     {
+        if (substr($base, strlen($base) - 1) != PATH_SEPARATOR) {
+            $base .= PATH_DELIMITER;
+        }
         return $base . '__filesource';
     }
 

@@ -127,3 +127,4 @@ LI.tute	{
 .tute-entity { font-weight: bold; }
 .tute-comment { font-style: italic }
 .tute-inline-tag { color: #636311; font-weight: bold }
+.src-code { font-family: 'Courier New', Courier, monospace; font-weight: normal; }

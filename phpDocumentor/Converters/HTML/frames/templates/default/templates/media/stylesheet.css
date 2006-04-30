@@ -93,7 +93,7 @@ dd { margin-left: 0px; padding-left: 1em; }
 /* Syntax highlighting */
 
 .src-code {  border: 1px solid #336699; padding: 1em; background-color: #EEEEEE; }
-*[class="src-code"] {	line-height : 0.5em }
+.src-line {  font-family: 'Courier New', Courier, monospace; font-weight: normal; }
 
 .src-comm { color: green; }
 .src-id {  }

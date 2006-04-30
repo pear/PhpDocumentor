@@ -68,7 +68,7 @@ http://localhost/pear/PhpDocumentor is the web interface
   </maintainers>
  <release>
   <version>1.3.0RC6</version>
-  <date>2006-04-28</date>
+  <date>2006-04-29</date>
   <license>PHP License</license>
   <state>beta</state>
   <notes>PHP 5 support and more, fix bugs
@@ -137,6 +137,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 893186 ] HTMLframes converter sometimes misses package level docs
  [ 896444 ] Bad line numbers
  [ 907734 ] Exception Class is builtin to PHP5
+ [ 924760 ] source rendering in FireFox contains extra newlines
  [ 937235 ] duplicated /** after abstract method declaration
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
  [ 952217 ] HTML:frames:earthli
@@ -2402,7 +2403,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
    </release>
    <release>
     <version>1.3.0RC6</version>
-    <date>2006-04-28</date>
+    <date>2006-04-29</date>
     <license>PHP License</license>
     <state>beta</state>
     <notes>PHP 5 support and more, fix bugs
@@ -2471,6 +2472,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 893186 ] HTMLframes converter sometimes misses package level docs
  [ 896444 ] Bad line numbers
  [ 907734 ] Exception Class is builtin to PHP5
+ [ 924760 ] source rendering in FireFox contains extra newlines
  [ 937235 ] duplicated /** after abstract method declaration
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
  [ 952217 ] HTML:frames:earthli

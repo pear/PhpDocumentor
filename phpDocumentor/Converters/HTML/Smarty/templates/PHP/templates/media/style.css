@@ -1,10 +1,7 @@
 .php {
 	padding: 1em;
 }
-/* This will not be executed by IE, so now we have a fix! */
-*[class="php-src"], *[class="php"], *[class="listing"] {
-	line-height:    0px;
-}
+.php-src { font-family: 'Courier New', Courier, monospace; font-weight: normal; }
 
 body
 {
@@ -147,8 +144,9 @@ ul {
 }
 /* Syntax highlighting */
 
-.src-code { background-color: #f5f5f5; border: 1px solid #ccc9a4; padding: 0px; margin : 0px}
-/*.src-code pre {	}*/
+.src-code { background-color: #f5f5f5; border: 1px solid #ccc9a4; padding: 0px; margin : 0px;
+            font-family: 'Courier New', Courier, monospace; font-weight: normal; }
+.src-line {  font-family: 'Courier New', Courier, monospace; font-weight: normal; }
 
 .src-comm { color: green; }
 .src-id {  }

@@ -209,9 +209,9 @@ class HTMLframesConverter extends Converter
         }
         if ($path)
         {
-            return '<li>' . $this->getSourceAnchor($path, $linenumber) .
+            return '<li><div class="src-line">' . $this->getSourceAnchor($path, $linenumber) .
                    str_replace("\n",'',$line) . $extra .
-                   "</li>\n";
+                   "</div></li>\n";
         } else
         {
             return '<li>' . str_replace("\n",'',$line) . "$extra</li>\n";
@@ -227,8 +227,8 @@ class HTMLframesConverter extends Converter
     function ProgramExample($example, $tutorial = false, $inlinesourceparse = null/*false*/,
                             $class = null/*false*/, $linenum = null/*false*/, $filesourcepath = null/*false*/)
     {
-        return '<pre><ol>' . parent::ProgramExample($example, $tutorial, $inlinesourceparse, $class, $linenum, $filesourcepath)
-               .'</ol></pre>';
+        return '<div class="src-code"><ol>' . parent::ProgramExample($example, $tutorial, $inlinesourceparse, $class, $linenum, $filesourcepath)
+               .'</ol></div>';
     }
     
     /**
@@ -277,6 +277,10 @@ class HTMLframesConverter extends Converter
      */
     function postProcess($text)
     {
+        if ($this->highlightingSource) {
+            return str_replace(array(' ',"\t"), array('&nbsp;', '&nbsp;&nbsp;&nbsp;'),
+                htmlspecialchars($text));
+        }
         return htmlspecialchars($text);
     }
     

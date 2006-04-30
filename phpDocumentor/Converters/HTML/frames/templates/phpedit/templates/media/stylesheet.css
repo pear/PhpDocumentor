@@ -44,16 +44,15 @@ div.maintutorial {
   border-color: #0066ff;
 }
 
-.source {
+.source, .src-code {
   border-width: thin;
   border-style: dashed;
   border-color: #8899dd;
   margin: 1em;
   padding: 0.5em;
+  font-family: 'Courier New', Courier, monospace; font-weight: normal;
 }
-
-*[class="src-code"], *[class="listing"], *[class="php"] { line-height : 0.5em }
-
+.src-line {  font-family: 'Courier New', Courier, monospace; font-weight: normal; }
 
 .var-type {
   font-style : italic;

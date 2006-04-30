@@ -72,6 +72,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 893186 ] HTMLframes converter sometimes misses package level docs
  [ 896444 ] Bad line numbers
  [ 907734 ] Exception Class is builtin to PHP5
+ [ 924760 ] source rendering in FireFox contains extra newlines
  [ 937235 ] duplicated /** after abstract method declaration
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
  [ 952217 ] HTML:frames:earthli
