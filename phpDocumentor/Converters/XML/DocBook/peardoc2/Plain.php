@@ -19,7 +19,6 @@
 /**
  * XML/Beautifier/Renderer/Plain.php
  *
- * @category XML
  * @package  XML_Beautifier
  * @author   Stephan Schmidt <schst@php.net>
  */
@@ -37,7 +36,6 @@ require_once 'XML/Beautifier/Renderer.php';
 /**
  * Basic XML Renderer for XML Beautifier
  *
- * @category XML
  * @package  XML_Beautifier
  * @author   Stephan Schmidt <schst@php.net>
  * @todo     option to specify inline tags

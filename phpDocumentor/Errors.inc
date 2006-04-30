@@ -25,7 +25,6 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @category   documentation
  * @package    phpDocumentor
  * @subpackage Errors
  * @author     Greg Beaver <cellog@php.net>
@@ -360,7 +359,7 @@ define("PDERROR_CANNOT_EXTEND_SELF", 72);
  */
 define("PDERROR_DUMB_USES",73);
 /**
- * warning triggered if <ul> is nested inside <ul> and not <li>
+ * warning triggered if <<ul>> is nested inside <<ul>> and not <<li>>
  */
 define("PDERROR_UL_IN_UL", 74);
 /**

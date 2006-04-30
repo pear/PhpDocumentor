@@ -25,7 +25,6 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @category   documentation
  * @package    phpDocumentor
  * @subpackage ParserData
  * @author     Gregory Beaver <cellog@php.net>
@@ -73,6 +72,13 @@ class parserPage
      * @var string
      */
     var $name = '';
+    /**
+     * original phpdoc-safe name (only letters, numbers and _)
+     * 
+     * This fixes [ 1391432 ] Too many underscores in include links.
+     * @var string
+     */
+    var $origName = '';
     /**
      * @var string
      */
@@ -205,6 +211,8 @@ class parserPage
      */
     function setName($name)
     {
+        var_dump($name);
+        $this->origName = $name;
         $this->name = $name;
     }
     

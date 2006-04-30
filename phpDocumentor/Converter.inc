@@ -2420,7 +2420,9 @@ class Converter
         foreach($this->todoList as $package => $r) {
             usort($this->todoList[$package], array('Converter', '_sortTodoPackage'));
             foreach ($r as $a => $sub) {
-                usort($this->todoList[$package][$a][1],array('Converter', '_sortTodos'));
+                if (is_array($this->todoList[$package][$a][1])) {
+                    usort($this->todoList[$package][$a][1],array('Converter', '_sortTodos'));
+                }
             }
         }
         phpDocumentor_out("done\n");
@@ -2435,6 +2437,9 @@ class Converter
     /** @access private */
     function _sortTodos($a, $b)
     {
+        if (!is_object($a)) {
+            var_dump($a);
+        }
         return strnatcasecmp($a->getString(), $b->getString());
     }
 

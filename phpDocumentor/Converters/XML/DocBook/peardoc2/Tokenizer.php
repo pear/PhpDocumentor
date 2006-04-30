@@ -27,7 +27,6 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @category   documentation
  * @package    phpDocumentor
  * @subpackage Parsers
  * @author     Greg Beaver <cellog@php.net>
@@ -387,6 +386,7 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
         $this->_curthing .= $word;
     }
 
+    /**#@-*/
     /**
      * Handler for character data
      *

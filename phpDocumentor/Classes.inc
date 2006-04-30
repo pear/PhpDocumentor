@@ -25,7 +25,6 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @category   documentation
  * @package    phpDocumentor
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  2001-2006 Gregory Beaver
@@ -1078,7 +1077,7 @@ class Classes
         if (!$all) {
             foreach ($this->specialRoots as $package => $root) {
                 foreach ($root as $parent => $info) {
-                    $temproots[$info[0]] = $info[1];
+                    $temproots[$info[0]][] = $info[1];
                 }
             }
         }

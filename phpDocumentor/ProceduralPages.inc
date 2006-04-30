@@ -27,7 +27,6 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @category   documentation
  * @package    phpDocumentor
  * @author     Gregory Beaver <cellog@php.net>
  * @copyright  2002-2006 Gregory Beaver
@@ -208,6 +207,8 @@ class ProceduralPages
         $info = array();
         if (!isset($this->pathpages[$path])) return false;
         $p = $this->pages[$this->pathpages[$path]][$path];
+        // fixes [ 1391432 ] Too many underscores in include links.
+        $p->name = $p->origName;
         $p->name = $c->getPageName($p);
         $info['package'] = $p->package;
         $info['subpackage'] = $p->subpackage;
