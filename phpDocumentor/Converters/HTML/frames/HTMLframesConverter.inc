@@ -234,7 +234,8 @@ class HTMLframesConverter extends Converter
                    "</div></li>\n";
         } else
         {
-            return '<li>' . str_replace("\n",'',$line) . "$extra</li>\n";
+            return '<li><div class="src-line">' . str_replace("\n",'',$line) .
+                "$extra</div></li>\n";
         }
     }
     

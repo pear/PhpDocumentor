@@ -215,6 +215,36 @@ class CHMdefaultConverter extends Converter
         }
     }
     
+
+    /**
+     * Return a line of highlighted source code with formatted line number
+     *
+     * If the $path is a full path, then an anchor to the line number will be
+     * added as well
+     * @param integer line number
+     * @param string highlighted source code line
+     * @param false|string full path to @filesource file this line is a part of,
+     *        if this is a single line from a complete file.
+     * @return string formatted source code line with line number
+     */
+    function sourceLine($linenumber, $line, $path = false)
+    {
+        $extra = '';
+        if (strlen(str_replace("\n", '', $line)) == 0) {
+            $extra = '&nbsp;';
+        }
+        if ($path)
+        {
+            return '<li><div class="src-line">' . $this->getSourceAnchor($path, $linenumber) .
+                   str_replace("\n",'',$line) . $extra .
+                   "</div></li>\n";
+        } else
+        {
+            return '<li><div class="src-line">' . str_replace("\n",'',$line) .
+                "$extra</div></li>\n";
+        }
+    }
+
     /**
      * Used to convert the <<code>> tag in a docblock
      * @param string

@@ -224,12 +224,12 @@ class HTMLSmartyConverter extends Converter
         }
         if ($path)
         {
-            return '<li>' . $this->getSourceAnchor($path, $linenumber) .
+            return '<li><div class="src-line">' . $this->getSourceAnchor($path, $linenumber) .
                    str_replace("\n",'',$line) . $extra .
-                   "</li>\n";
+                   "</div></li>\n";
         } else
         {
-            return '<li>' . str_replace("\n",'',$line) . "$extra</li>\n";
+            return '<li><div class="src-line">' . str_replace("\n",'',$line) . "$extra</div></li>\n";
         }
     }
     

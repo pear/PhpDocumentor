@@ -1939,12 +1939,12 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
             $this->_flush_save();
             if (is_string($word) && trim($word) == '')
             {
-                $this->_line .= $word;
+                $this->_line .= $this->_converter->postProcess($word);
                 return;
             }
             if (is_array($word) && trim($word[1]) == '')
             {
-                $this->_line .= $word[1];
+                $this->_line .= $this->_converter->postProcess($word[1]);
                 return;
             }
             if (is_array($word)) 
