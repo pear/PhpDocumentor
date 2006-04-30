@@ -29,7 +29,6 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @category   documentation
  * @package    phpDocumentor
  * @subpackage Parsers
  * @author     Gregory Beaver <cellog@php.net>
@@ -848,7 +847,8 @@ class parserDescParser extends Parser
                     // item text
                     if (isset($this->p_vars['list_item'][$this->p_vars['list_count']]))
                     {
-                        if ($word == ' ' && $this->p_vars['last_word'] == ' ') return;
+                        if (is_string($word) && $word == ' ' &&
+                              $this->p_vars['last_word'] == ' ') return;
                         $this->p_vars['list_item'][$this->p_vars['list_count']]->add($word);
                     }
                 } else

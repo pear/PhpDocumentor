@@ -25,7 +25,6 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @category   documentation
  * @package    phpDocumentor
  * @subpackage Parsers
  * @author     Gregory Beaver <cellog@php.net>
@@ -366,7 +365,7 @@ class XMLPackagePageParser extends Parser
         {
             $this->curtag->startCData();
             $this->p_flags['in_cdata'] = true;
-        } elseif ($this->p_flags['in_cdata'] && $word == ']]>')
+        } elseif ($this->p_flags['in_cdata'] && is_string($word) && $word == ']]>')
         {
             $this->curtag->endCData();
             $this->p_flags['in_cdata'] = false;
