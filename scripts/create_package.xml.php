@@ -79,6 +79,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 962319 ] Define : don\'t show the assigned value
  [ 964248 ] Convert invalid characters in package/subpackage names to _
  [ 977674 ] Parser error
+ [ 986622 ] parserClass::setModifiers is incorrecrly documented
  [ 989258 ] wrong interfaces parsing
  [ 995731 ] {@internal}}-tag shows }} in HTML-doc
  [ 1016927 ] no highlight for paramtype in header of function

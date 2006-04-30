@@ -63,8 +63,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>drewish@php.net</email>
   <active>yes</active>
  </developer>
- <date>2006-04-29</date>
- <time>22:41:21</time>
+ <date>2006-04-30</date>
+ <time>00:19:14</time>
  <version>
   <release>1.3.0RC6</release>
   <api>1.3.0</api>
@@ -147,6 +147,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 962319 ] Define : don&apos;t show the assigned value
  [ 964248 ] Convert invalid characters in package/subpackage names to _
  [ 977674 ] Parser error
+ [ 986622 ] parserClass::setModifiers is incorrecrly documented
  [ 989258 ] wrong interfaces parsing
  [ 995731 ] {@internal}}-tag shows }} in HTML-doc
  [ 1016927 ] no highlight for paramtype in header of function
@@ -2579,7 +2580,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2006-04-29</date>
+   <date>2006-04-30</date>
    <license uri="http://www.php.net/license">PHP License</license>
    <notes>PHP 5 support and more, fix bugs
 
@@ -2654,6 +2655,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 962319 ] Define : don&apos;t show the assigned value
  [ 964248 ] Convert invalid characters in package/subpackage names to _
  [ 977674 ] Parser error
+ [ 986622 ] parserClass::setModifiers is incorrecrly documented
  [ 989258 ] wrong interfaces parsing
  [ 995731 ] {@internal}}-tag shows }} in HTML-doc
  [ 1016927 ] no highlight for paramtype in header of function

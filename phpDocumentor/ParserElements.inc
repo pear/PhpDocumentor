@@ -717,17 +717,19 @@ class parserClass extends parserElement
     var $tutorial = false;
     
     /**
-     * Return name of the class that contains this method
-     * @return string
+     * Get the PHP5+ modifiers for this class
+     * (abstract/final/static/private/protected/public)
+     * @return array|false
      */
     function getModifiers()
     {
         return $this->_modifiers;
     }
-    
+
     /**
-     * Return name of the class that contains this method
-     * @return string
+     * Set the PHP5+ modifiers for this class
+     * (abstract/final/static/private/protected/public)
+     * @param string $m
      */
     function setModifiers($m)
     {
