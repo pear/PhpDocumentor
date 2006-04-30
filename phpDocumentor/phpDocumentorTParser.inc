@@ -205,9 +205,9 @@ class phpDocumentorTParser extends Parser
         $this->publishEvent(PHPDOCUMENTOR_EVENT_NEWFILE,basename($path));
         //$name = str_replace("/","_",dirname($path)) . "_" . array_shift(explode(".",$page->getFile()));
         // fc@fc.clever-soft.com 11/29/2001
-        $name = str_replace(PATH_DELIMITER,"_",dirname($path)) . "_" .  str_replace(".","_",$page->getFile());
-        $tmp = explode("_",$name);
-        $name = str_replace(':','_',implode("_",array_slice($tmp,$base)));
+        $name = str_replace( ':', '', dirname($path) . PATH_DELIMITER . $page->getFile() );
+        $tmp = explode( PATH_DELIMITER, $name );
+        $name = implode( "---", array_slice( $tmp, $base ) );
         // if base is '', drive letter is present in windows
 
         $page->setName($name);
