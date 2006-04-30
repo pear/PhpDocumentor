@@ -8,8 +8,8 @@ $test = new PEAR_PackageFileManager;
 $packagedir = dirname(dirname(__FILE__));
 $notes = 'PHP 5 support and more, fix bugs
 
-This release fixes the broken "phpdoc" script in unix, and is
-otherwise functionally identical to 1.3.0RC4
+This release fixes a large number of bugs, and switches
+to the LGPL license instead of the PHP License.
 
 This will be the last release in the 1.x series.  2.0 is next
 
@@ -156,7 +156,7 @@ $options = array(
         'index.html' => 'data',
         'README' => 'doc',
         'ChangeLog' => 'doc',
-        'PHPLICENSE.txt' => 'doc',
+        'LICENSE' => 'doc',
         'poweredbyphpdoc.gif' => 'data',
         'INSTALL' => 'doc',
         'FAQ' => 'doc',
@@ -182,11 +182,7 @@ $options = array(
 'ignore' =>
     array('package.xml',
           'package2.xml',
-          'LICENSE',
           '*templates/PEAR/*',
-          'phpDocumentor/Smarty-2.5.0/*',
-          '*CSV*',
-          'makedocs.ini',
           'publicweb-PEAR-1.2.1.patch.txt',
           ),
 'installexceptions' => array('pear-phpdoc' => '/', 'pear-phpdoc.bat' => '/', 'scripts/makedoc.sh' => '/'),
@@ -201,6 +197,7 @@ array('installas' =>
           ),
 )));
 $pfm2->setReleaseVersion($version);
+$pfm2->setLicense('LGPL', 'http://www.opensource.org/licenses/lgpl-license.php');
 $pfm2->setNotes($notes);
 $pfm2->clearDeps();
 $pfm2->setPhpDep('4.2.0');
@@ -240,6 +237,7 @@ $pfm2->setOsInstallCondition('windows');
 // without installing via "pear install blah"
 $pfm2->addIgnoreToRelease("phpdoc");
 $pfm2->addIgnoreToRelease('phpdoc.bat');
+$pfm2->addIgnoreToRelease('user/makedocs.ini');
 $pfm2->addIgnoreToRelease('pear-phpdoc');
 $pfm2->addIgnoreToRelease('scripts/makedoc.sh');
 $pfm2->addInstallAs('pear-phpdoc.bat', 'phpdoc.bat');
@@ -249,6 +247,7 @@ $pfm2->addRelease();
 // without installing via "pear install blah"
 $pfm2->addIgnoreToRelease("phpdoc");
 $pfm2->addIgnoreToRelease('phpdoc.bat');
+$pfm2->addIgnoreToRelease('user/makedocs.ini');
 $pfm2->addIgnoreToRelease('pear-phpdoc.bat');
 $pfm2->addInstallAs('pear-phpdoc', 'phpdoc');
 $pfm2->addInstallAs('user/pear-makedocs.ini', 'user/makedocs.ini');
