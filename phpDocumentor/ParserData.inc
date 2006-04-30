@@ -211,7 +211,6 @@ class parserPage
      */
     function setName($name)
     {
-        var_dump($name);
         $this->origName = $name;
         $this->name = $name;
     }
