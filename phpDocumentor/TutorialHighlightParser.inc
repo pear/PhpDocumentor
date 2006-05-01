@@ -280,7 +280,7 @@ class phpDocumentor_TutorialHighlightParser extends Parser
             $this->_line .= $this->_converter->highlightTutorialSource($type[$a], $word);
         } else {
             $this->_line .= $this->_converter->flushHighlightCache();
-            $this->_line .= $word;
+            $this->_line .= $this->_converter->postProcess($word);
         }
     }
     /**#@-*/

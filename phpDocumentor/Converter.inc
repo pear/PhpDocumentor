@@ -703,7 +703,7 @@ class Converter
     }
 
     /**
-     * Used to allow converters to format the source code of DocBlocks the way
+     * Used to allow converters to format the source code of Tutorial XML the way
      * they'd like.
      *
      * default returns it unchanged.  Mainly used by the {@link HighlightParser}
