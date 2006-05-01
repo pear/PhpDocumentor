@@ -1386,7 +1386,8 @@ class HTMLSmartyConverter extends Converter
             else
             {
 //                        debug("parent ".$this->returnSee($tree[$cur]['parent'])." in other package");
-                $root = $this->classes->getClassByPackage($tree[$cur]['parent'], $package);
+                $root = $this->classes->getClassByPackage($tree[$cur]['parent']->name,
+                    $package);
                 $my_tree .= '<li>' . $this->returnSee($tree[$cur]['parent']);
                 if ($tree[$cur]['parent']->package != $package) $my_tree .= ' <b>(Different package)</b><ul>';
             }
