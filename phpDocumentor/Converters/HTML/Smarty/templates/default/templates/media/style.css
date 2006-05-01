@@ -160,10 +160,6 @@ code {
 	background-color:	#dddddd;
 	font-family: 'Courier New', Courier, monospace; font-weight: normal;
 }
-/* This will not be executed by IE, so now we have a fix! */
-*[class="php-src"], *[class="php"], *[class="listing"] {
-	line-height:    0px;
-}
 DIV#nav DL {
 	margin:			0px;
 	padding:		0px;
