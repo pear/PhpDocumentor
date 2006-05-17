@@ -53,7 +53,7 @@ define('PATH_DELIMITER', '/' ); // set the correct path delimiter
 define('PHPDOCUMENTOR_WINDOWS',substr(PHP_OS, 0, 3) == 'WIN');
 define('_IN_PHP5', phpversion() == '5.0.0RC1-dev' || phpversion() == '5.0.0RC2-dev' ||
     version_compare(phpversion(), '5.0.0', 'ge'));
-if (/*@donotremove@*/0)
+if ('@VER@' != '@'.'VER@')
 {
     if (_IN_PHP5) {
         require_once 'PhpDocumentor/phpDocumentor/clone5.inc.php';
