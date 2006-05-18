@@ -611,6 +611,7 @@ class phpDocumentorTParser extends Parser
         {
             $this->_wp->setWhiteSpace(true);
         } elseif ($e1 == PARSER_EVENT_FUNCTION_PARAM_VAR) {
+            if (!isset($this->_pv_function_param)) $this->_pv_function_param = '';
             // we just got the $var part of the param
             $this->_pv_function_param .= $word[1];
         }

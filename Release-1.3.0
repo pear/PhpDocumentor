@@ -149,6 +149,7 @@ The following bugs are fixed in version 1.3.0
  Bug #6844: phpDocumentor doesn't show classes in file
  Bug #6848: Reference Patch
  Bug #6952: Update Install docs to tell correct package.xml location
+ Bug #7577: Notice error for undefined _pv_function_param property
 
 There of course were other small bugs fixed, these were just the bugs with 
 entries in source forge.  You can view the bug details or reopen it if
