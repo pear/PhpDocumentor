@@ -68,6 +68,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
   of private/public/static/etc. access modifiers
 - fixed these bugs since 1.3.0RC6:
  [ 1223413 ] improper load sequence when using custom templatebase
+ [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
  Bug #6844: phpDocumentor doesn\'t show classes in file
 - fixed these bugs since 1.2.3.1:
  [ not entered ] phpdoc script broken on unix
@@ -157,6 +158,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1462690 ] PHP Notices
  [ 1466205 ] more usedby than uses
  [ 1473272 ] Update references of phpdoc to pear-phpdoc
+ [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
