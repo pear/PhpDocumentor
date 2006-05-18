@@ -430,6 +430,14 @@ class Converter
     var $todoList = array();
 
     /**
+     * Directory where compiled templates go - will be deleted on exit
+     *
+     * @var string
+     * @access private
+     */
+     var $_compiledDir = array();
+
+    /**
      * Initialize Converter data structures
      * @param array {@link $all_packages} value
      * @param array {@link $package_parents} value
@@ -5003,6 +5011,8 @@ class Converter
         $templ->template_dir = realpath($this->smarty_dir . PATH_DELIMITER . 'templates');
         $templatename = get_class($this) . $this->templateName;
         if (!file_exists($this->targetDir . DIRECTORY_SEPARATOR . md5($templatename))) {
+            // we'll delete this on finishing conversion
+            $this->_compiledDir[$this->targetDir . DIRECTORY_SEPARATOR . md5($templatename)] = 1;
             mkdir($this->targetDir . DIRECTORY_SEPARATOR . md5($templatename),0775);
         }
         $templ->compile_dir = realpath($this->targetDir . PATH_DELIMITER . md5($templatename));
@@ -5015,6 +5025,39 @@ class Converter
         $templ->assign("subpackage",$this->subpackage);
         if (method_exists($this,'SmartyInit')) return $this->SmartyInit($templ);
         return $templ;
+    }
+
+    /**
+     * Finish up parsing/cleanup directories
+     */
+    function cleanup()
+    {
+        foreach ($this->_compiledDir as $dir => $one) {
+            $this->_rmdir($dir);
+        }
+    }
+
+    /**
+     * Completely remove a directory and its contents
+     *
+     * @param string $directory
+     */
+    function _rmdir($directory)
+    {
+        $handle = @opendir($directory);
+        if ($handle) {
+            while (false !== ($file = readdir($handle))) {
+                if ($file == '.' || $file == '..') {
+                    continue;
+                }
+                if (is_dir($directory . DIRECTORY_SEPARATOR . $file)) {
+                    $this->_rmdir($directory . DIRECTORY_SEPARATOR . $file);
+                }
+                @unlink($directory . DIRECTORY_SEPARATOR . $file);
+            }
+            closedir($handle);
+            @rmdir($directory);
+        }
     }
 
     /**

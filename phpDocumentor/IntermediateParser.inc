@@ -1586,6 +1586,7 @@ class phpDocumentor_IntermediateParser
     {
         $converter->walk($this->pages, $this->package_pages);
         $converter->Output($title);
+        $converter->cleanup();
     }
     
     /**
