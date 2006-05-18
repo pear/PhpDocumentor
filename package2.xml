@@ -64,7 +64,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2006-05-17</date>
- <time>22:18:06</time>
+ <time>23:10:14</time>
  <version>
   <release>1.3.0</release>
   <api>1.3.0</api>
@@ -137,6 +137,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
 - fixed these bugs since 1.3.0RC6:
  [ 1223413 ] improper load sequence when using custom templatebase
  [ 1481118 ] Tags with more than one attribute keep only the first one.
+ [ 1486304 ] unexpected parameter type mixed
  [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
  Bug #6844: phpDocumentor doesn&apos;t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
@@ -230,6 +231,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1466205 ] more usedby than uses
  [ 1473272 ] Update references of phpdoc to pear-phpdoc
  [ 1481118 ] Tags with more than one attribute keep only the first one.
+ [ 1486304 ] unexpected parameter type mixed
  [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
@@ -2838,6 +2840,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
 - fixed these bugs since 1.3.0RC6:
  [ 1223413 ] improper load sequence when using custom templatebase
  [ 1481118 ] Tags with more than one attribute keep only the first one.
+ [ 1486304 ] unexpected parameter type mixed
  [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
  Bug #6844: phpDocumentor doesn&apos;t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
@@ -2931,6 +2934,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1466205 ] more usedby than uses
  [ 1473272 ] Update references of phpdoc to pear-phpdoc
  [ 1481118 ] Tags with more than one attribute keep only the first one.
+ [ 1486304 ] unexpected parameter type mixed
  [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number

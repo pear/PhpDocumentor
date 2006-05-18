@@ -659,9 +659,9 @@ class phpDocumentor_IntermediateParser
         {
             $this->last->setSource($data->getSource(), $data->getClass());
         }
-        foreach($data->listParams() as $param)
+        foreach($data->listParams() as $key => $param)
         {
-            $update_params[] = $param;
+            $update_params[$key] = $param;
         }
         foreach($data->listGlobals() as $param)
         {
@@ -760,9 +760,9 @@ class phpDocumentor_IntermediateParser
         }
         $this->last->overridePackage($this->category,$this->package,$this->subpackage,$data->getName(),'function');
 
-        foreach($data->listParams() as $param)
+        foreach($data->listParams() as $key => $param)
         {
-            $update_params[] = $param;
+            $update_params[$key] = $param;
         }
         foreach($data->listGlobals() as $param)
         {

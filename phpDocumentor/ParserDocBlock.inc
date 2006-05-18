@@ -532,6 +532,9 @@ class parserDocBlock
      */
     function changeParam($index, $name, $type)
     {
+        if ($name === $index) {
+            return;
+        }
         $this->params[$name] = $this->params[$index];
         unset($this->params[$index]);
     }

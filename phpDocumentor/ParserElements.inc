@@ -492,7 +492,7 @@ class parserFunction extends parserElement
                     {
                         $arr[2] = $val[2];
                     }
-                    $ret[] = $arr;
+                    $ret[$key] = $arr;
                 } else
                 {
                     $arr = array($key,false);
@@ -500,7 +500,7 @@ class parserFunction extends parserElement
                     {
                         $arr[2] = $val[2];
                     }
-                    $ret[] = $arr;
+                    $ret[$key] = $arr;
                 }
             }
             return $ret;

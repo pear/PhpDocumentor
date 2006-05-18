@@ -69,6 +69,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
 - fixed these bugs since 1.3.0RC6:
  [ 1223413 ] improper load sequence when using custom templatebase
  [ 1481118 ] Tags with more than one attribute keep only the first one.
+ [ 1486304 ] unexpected parameter type mixed
  [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
  Bug #6844: phpDocumentor doesn\'t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
@@ -162,6 +163,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1466205 ] more usedby than uses
  [ 1473272 ] Update references of phpdoc to pear-phpdoc
  [ 1481118 ] Tags with more than one attribute keep only the first one.
+ [ 1486304 ] unexpected parameter type mixed
  [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
