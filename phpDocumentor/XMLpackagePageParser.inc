@@ -487,9 +487,9 @@ class XMLPackagePageParser extends Parser
         $this->_cursection = 0;
         if (isset($this->p_vars['toc'])) unset($this->p_vars['toc']);
         
-        $this->tokens[STATE_NOEVENTS]                     = array('</','<!--','<?','<');
+        $this->tokens[STATE_NOEVENTS]                     = array('</','<!--','<!','<?','<');
         $this->tokens[STATE_COMMENTBLOCK]                 = array('-->');
-        $this->tokens[STATE_OUTPHP]                       = array('?>');
+        $this->tokens[STATE_OUTPHP]                       = array('?>','>');
         $this->tokens[STATE_QUOTE]                        = array("\\\"","\\\\","\"",'>');
         $this->tokens[STATE_ESCAPE]                       = false;// this tells the word parser to just cycle
         $this->tokens[PHPDOCUMENTOR_PDP_STATE_TAG]        = array('>',' ','/>');
@@ -501,6 +501,7 @@ class XMLPackagePageParser extends Parser
         $this->pushEvent[PARSER_EVENT_NOEVENTS] = 
             array(
                 '<!--' => PARSER_EVENT_COMMENTBLOCK,
+                '<!' => PARSER_EVENT_OUTPHP,
                 "</" => PHPDOCUMENTOR_PDP_EVENT_TAG,
                 '<?' => PARSER_EVENT_OUTPHP,
                 "<" => PHPDOCUMENTOR_PDP_EVENT_TAG,
@@ -532,7 +533,7 @@ class XMLPackagePageParser extends Parser
         $this->popEvent[PARSER_EVENT_QUOTE] = array("\"");
 ##########################
 
-        $this->popEvent[PARSER_EVENT_OUTPHP] = array("?>");
+        $this->popEvent[PARSER_EVENT_OUTPHP] = array("?>",">");
 ##########################
 
         $this->popEvent[PHPDOCUMENTOR_PDP_EVENT_ENTITY] = array(";");
