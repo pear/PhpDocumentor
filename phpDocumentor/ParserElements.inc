@@ -1721,7 +1721,7 @@ class parserMethod extends parserFunction
         if (!is_object($par)) {
             if (is_a($class->getExtends(true), 'ReflectionClass')) {
                 $pare = $class->getExtends(true);
-                if ($pare->hasMethod($this->name)) {
+                if (method_exists($pare, 'hasMethod') && $pare->hasMethod($this->name)) {
                     $par = $pare;
                     $method = $par->getMethod($this->name);
                     $var = new parserMethod($par->getName());
@@ -1841,7 +1841,7 @@ class parserMethod extends parserFunction
             if (class_exists('ReflectionClass')) {
                 if (interface_exists($interface)) {
                     $info = new ReflectionClass($interface);
-                    if ($info->hasMethod($this->name)) {
+                    if (method_exists($info, 'hasMethod') && $info->hasMethod($this->name)) {
                         $par = $info;
                         $method = $par->getMethod($this->name);
                         $var = new parserMethod($par->getName());

@@ -70,6 +70,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1223413 ] improper load sequence when using custom templatebase
  [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
  Bug #6844: phpDocumentor doesn\'t show classes in file
+ Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
 - fixed these bugs since 1.2.3.1:
  [ not entered ] phpdoc script broken on unix
@@ -172,6 +173,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  Bug #6844: phpDocumentor doesn\'t show classes in file
  Bug #6848: Reference Patch
  Bug #6952: Update Install docs to tell correct package.xml location
+ Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
 ';
 $version = '1.3.0';
