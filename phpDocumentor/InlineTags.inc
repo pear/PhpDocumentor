@@ -364,10 +364,10 @@ class parserSourceInlineTag extends parserInlineTag
     function parserSourceInlineTag($value)
     {
         parserInlineTag::parserInlineTag('source','');
-        preg_match('/^([0-9]*)\W([0-9]*)$/',trim($value), $match);
+        preg_match('/^([0-9]+)\W([0-9]*)$/',trim($value), $match);
         if (!count($match))
         {
-            preg_match('/^([0-9]*)$/',trim($value),$match);
+            preg_match('/^([0-9]+)$/',trim($value),$match);
             if (count($match))
             {
                 $this->start = (int) $match[1];
@@ -376,6 +376,10 @@ class parserSourceInlineTag extends parserInlineTag
         {
             $this->start = (int) $match[1];
             $this->end = (int) $match[2];
+            if ($this->start > $this->end) {
+                unset($this->start);
+                unset($this->end);
+            }
         }
     }
     
