@@ -66,12 +66,46 @@ segfaults with the simplest of files.  Generation still works great in PHP4
 - Switched to Smarty 2.6.0, now it will work in PHP 5.  Other
   changes made to the code to make it work in PHP 5, including parsing
   of private/public/static/etc. access modifiers
-- fixed these bugs:
+- fixed these bugs since 1.3.0RC6:
+ [ 1223413 ] improper load sequence when using custom templatebase
+ Bug #6844: phpDocumentor doesn\'t show classes in file
+- fixed these bugs since 1.2.3.1:
  [ not entered ] phpdoc script broken on unix
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
  [ 893186 ] HTMLframes converter sometimes misses package level docs
+ [ 834941 ] inline @link doesn\'t work within <b>
+ [ 839092 ] CHM:default:default produces bad links
+ [ 839466 ] {$array[\'Key\']} in heredoc
+ [ 840792 ] File Missing XML:DocBook/peardoc2:default "errors.tpl"
+ [ 850731 ] No DocBlock template after page-level DocBlock?
+ [ 850767 ] MHW Reference wrong
+ [ 854321 ] web interface errors with template directory
+ [ 856310 ] HTML:frames:DOM/earthli missing Class_logo.png image
+ [ 865126 ] CHM files use hard paths
+ [ 869803 ] bad md5sum
+ [ 871764 ] @global doesn\'t work properly with whitespace after the $var
+ [ 875525 ] <li> escapes <pre> and ignores paragraphs
+ [ 876674 ] first line of pre and code gets left trimmed
+ [ 877229 ] PHP 5 incompatibilities bork tutorial parsing
+ [ 877233 ] PHP 5 incompatibilities bork docblock source highlighting
+ [ 878911 ] [PHP 5 incompatibility] argv
+ [ 879068 ] var arrays tripped up by comments
+ [ 879151 ] HTML:frames:earthli Top row too small for IE
+ [ 880070 ] PHP5 visability for member variables not working
+ [ 880488 ] \'0\' file stops processing
+ [ 884863 ] Multiple authors get added in wrong order.
+ [ 884869 ] Wrong highligthing of object type variables
+ [ 892305 ] peardoc2: summary require_once Path/File.php is PathFile.php
+ [ 892306 ] peardoc2: @see of method not working
+ [ 892479 ] {@link} in // comment is escaped
+ [ 893470 ] __clone called directly in PackagePageElements.inc
+ [ 895656 ] initialized private variables not recognized as private
  [ 896444 ] Bad line numbers
+ [ 904823 ] IntermediateParser fatal error
  [ 907734 ] Exception Class is builtin to PHP5
+ [ 910676 ] Fatal error: Smarty error: unable to write to $compile_dir
+ [ 915770 ] Classes in file not showing
+ [ 924313 ] Objec access on array
  [ 924760 ] source rendering in FireFox contains extra newlines
  [ 937235 ] duplicated /** after abstract method declaration
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
@@ -87,7 +121,6 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1044486 ] duplicate parameters
  [ 1046856 ] Small filesource link bug under windows
  [ 1051941 ] private variables on same line not recognized
- [ 1079637 ] Use of realpath() leads to empty $dir
  [ 1081396 ] Display of inline {@link} tags with PHP functions
  [ 1090009 ] @uses doesn\'t generate @usedby link when linking to file.ext
  [ 1108018 ] Bad source code after /**#@-*/
@@ -106,6 +139,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1202772 ] missing parentheses in Parser.inc line 946
  [ 1203445 ] Call to a member function on a non-object in Parser.inc
  [ 1203451 ] array to string conversion notice in InlineTags.inc
+ [ 1223413 ] improper load sequence when using custom templatebase
  [ 1224317 ] functions refers to wrong line
  [ 1230004 ] Undefined index in class phpDocumentorTParser
  [ 1255692 ] Support for "--" argument
@@ -132,10 +166,11 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  Bug #6306: Tokenizer doesn\'t read "....<%{$key}>..." properly
  Bug #6389: Private classes are not used during grouping for class trees
  Bug #6805: Rendering bug for verbatim HTML tags
+ Bug #6844: phpDocumentor doesn\'t show classes in file
  Bug #6848: Reference Patch
  Bug #6952: Update Install docs to tell correct package.xml location
 ';
-$version = '1.3.0RC6';
+$version = '1.3.0';
 $options = array(
 'baseinstalldir' => 'PhpDocumentor',
 'version' => $version,

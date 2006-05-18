@@ -1350,9 +1350,9 @@ class phpDocumentor_IntermediateParser
                 $this->proceduralpages->addPage($par);
             }
         }
-        if (isset($_phpDocumentor_setting['packageoutput']))
+        if (!empty($_phpDocumentor_setting['packageoutput']))
             $packages = explode(',',$_phpDocumentor_setting['packageoutput']);
-        if (isset($_phpDocumentor_setting['packageoutput']) &&
+        if (!empty($_phpDocumentor_setting['packageoutput']) &&
             $this->pages[$path]->parent->package != $class->docblock->package &&
             !in_array($this->pages[$path]->parent->package,$packages))
         {
@@ -1641,21 +1641,24 @@ class phpDocumentor_IntermediateParser
      */
     function addConverter($output,$name,$template)
     {
+        if ($this->templateBase) {
+            $templateBase = str_replace('\\','/', $this->templateBase) . '/Converters';
+        } else {
+            if ('@VER@' != '@'.'VER@') {
+                $templateBase = 'PhpDocumentor/phpDocumentor/Converters';
+            } else {
+                $templateBase = str_replace('\\','/',$GLOBALS['_phpDocumentor_install_dir']) . '/phpDocumentor/Converters';
+            }
+        }
         if (strpos($name,PATH_DELIMITER))
         {
+            // include the parent template
             $parent = explode(PATH_DELIMITER,$name);
             $parent = $parent[0];
-            if ('@VER@' != '@'.'VER@') {
-                $filename = 'PhpDocumentor/phpDocumentor/Converters' .
-                    PATH_DELIMITER . $output . PATH_DELIMITER . $parent . PATH_DELIMITER . $output . $parent . "Converter" . ".inc";
+            if (!class_exists($output . $parent . 'Converter')) {
+                $filename = $templateBase . '/' . $output . '/' . $parent . '/' . $output
+                    . $parent . 'Converter.inc';
                 if (Io::isIncludeable($filename))
-                {
-                    include_once($filename);
-                }
-            } else {
-                $filename = str_replace('\\','/',$GLOBALS['_phpDocumentor_install_dir']) . '/phpDocumentor/Converters' .
-                    PATH_DELIMITER . $output . PATH_DELIMITER . $parent . PATH_DELIMITER . $output . $parent . "Converter" . ".inc";
-                if (file_exists($filename) && is_readable($filename))
                 {
                     include_once($filename);
                 }
@@ -1665,10 +1668,10 @@ class phpDocumentor_IntermediateParser
                 addError(PDERROR_CONVERTER_NOT_FOUND,"parent Converter ".$output . $parent . "Converter of child Converter ".$output . str_replace(PATH_DELIMITER,'',$name) . "Converter");
             }
         }
-        $filename = str_replace('\\', '/', $GLOBALS['_phpDocumentor_install_dir']) . '/phpDocumentor/Converters' .
+        $filename = $templateBase .
              PATH_DELIMITER . $output . PATH_DELIMITER . $name . PATH_DELIMITER . $output .
              str_replace(PATH_DELIMITER, '', $name) . "Converter" . ".inc";
-        if (file_exists($filename) && is_readable($filename))
+        if (Io::isIncludeable($filename))
         {
             include_once($filename);
         }

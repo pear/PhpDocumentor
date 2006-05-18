@@ -350,11 +350,11 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         // Setup the different classes
         if (isset($_phpDocumentor_setting['templatebase']))
         {
-            $this->render->setTemplateBase($_phpDocumentor_setting['templatebase']);
+            $this->render->setTemplateBase(trim($_phpDocumentor_setting['templatebase']));
         }
         if (isset($_phpDocumentor_setting['target']) && !empty($_phpDocumentor_setting['target']))
         {
-            $this->render->setTargetDir($_phpDocumentor_setting['target']);
+            $this->render->setTargetDir(trim($_phpDocumentor_setting['target']));
         }
         else
         {
@@ -363,16 +363,18 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         }
         if (!empty($_phpDocumentor_setting['packageoutput']))
         {
-            $this->packages = explode(",",$_phpDocumentor_setting['packageoutput']);
+            $this->packages = explode(",",trim($_phpDocumentor_setting['packageoutput']));
             foreach($this->packages as $p => $v)
             {
                 $this->packages[$p] = trim($v);
             }
         }
-        if (!empty($_phpDocumentor_setting['filename']))
-        $this->files = $_phpDocumentor_setting['filename'];
-        if (!empty($_phpDocumentor_setting['directory']))
-        $this->dirs = $_phpDocumentor_setting['directory'];
+        if (!empty($_phpDocumentor_setting['filename'])) {
+            $this->files = trim($_phpDocumentor_setting['filename']);
+        }
+        if (!empty($_phpDocumentor_setting['directory'])) {
+            $this->dirs = trim($_phpDocumentor_setting['directory']);
+        }
     }
     
     function checkIgnoreTag($tagname, $inline = false)
@@ -391,7 +393,7 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
     
     function setParsePrivate()
     {
-        $this->render->setParserPrivate(true);
+        $this->render->setParsePrivate(true);
     }
     
     function setQuietMode()
@@ -412,6 +414,7 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
     function setPackageOutput($po)
     {
         $this->packages = explode(",",$po);
+        array_map('trim', $this->packages);
     }
     
     function setTitle($ti)
@@ -495,7 +498,7 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
                     }
                 } else
                 {
-                    $dir = realpath(dirname(realpath($file)));
+                    $dir = dirname(realpath($file));
                     $dir = strtr($dir, "\\", "/");
                     $dir = str_replace('//','/',$dir);
                     // strip trailing directory seperator

@@ -118,6 +118,7 @@ The following bugs are fixed in version 1.3.0
  [ 1202772 ] missing parentheses in Parser.inc line 946
  [ 1203445 ] Call to a member function on a non-object in Parser.inc
  [ 1203451 ] array to string conversion notice in InlineTags.inc
+ [ 1223413 ] improper load sequence when using custom templatebase
  [ 1224317 ] functions refers to wrong line
  [ 1230004 ] Undefined index in class phpDocumentorTParser
  [ 1255692 ] Support for "--" argument
@@ -144,6 +145,7 @@ The following bugs are fixed in version 1.3.0
  Bug #6306: Tokenizer doesn't read "....<%{$key}>..." properly
  Bug #6389: Private classes are not used during grouping for class trees
  Bug #6805: Rendering bug for verbatim HTML tags
+ Bug #6844: phpDocumentor doesn't show classes in file
  Bug #6848: Reference Patch
  Bug #6952: Update Install docs to tell correct package.xml location
 

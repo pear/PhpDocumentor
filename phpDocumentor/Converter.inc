@@ -4545,7 +4545,7 @@ class Converter
         $classes = array();
         foreach($a as $package => $clas)
         {
-            if (isset($_phpDocumentor_setting['packageoutput']))
+            if (!empty($_phpDocumentor_setting['packageoutput']))
             {
                 $packages = explode(',',$_phpDocumentor_setting['packageoutput']);
                 if (!in_array($package, $packages)) continue;
