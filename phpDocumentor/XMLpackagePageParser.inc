@@ -458,11 +458,15 @@ class XMLPackagePageParser extends Parser
                     }
                     $this->curtag->addAttribute($this->p_vars['attrname'],$value);
                     unset($this->p_vars['attrname']);
-                    if (!$this->checkEventPop($word, $pevent)) {
+                    if (is_string($word) && $this->checkEventPop($word, $pevent))
+                    {
+                        $this->p_flags['start_attr'] = true;
+                        $this->p_flags['end_attr'] = false;
+                        $this->wp->setPos($this->wp->getPos() - strlen($word));
+                    } else {
                         $this->wp->setPos($this->wp->getPos() - strlen($word));
                     }
-                    $this->p_flags['end_attr'] = false;
-                    $this->p_flags['start_attr'] = true;
+                    return;
                 }
             }
         }

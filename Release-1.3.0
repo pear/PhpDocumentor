@@ -87,6 +87,7 @@ The following bugs are fixed in version 1.3.0
  [ 924313 ] Objec access on array
  [ 924760 ] source rendering in FireFox contains extra newlines
  [ 937235 ] duplicated /** after abstract method declaration
+ [ 941146 ] Repeated sub-tutorials
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
  [ 952217 ] HTML:frames:earthli
  [ 962319 ] Define : don\'t show the assigned value

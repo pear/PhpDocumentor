@@ -42,37 +42,14 @@ function element()
    ]]>
    </programlisting>
   </para>
-  <para>Parses as (with -o HTML:default:default):</para>
-  <para>
-   <programlisting role="tutorial">
-   <![CDATA[
-<H3>element</H3>
-<P><B>element ( )</B></P>
-<!-- ========== Info from phpDoc block ========= -->
-<b></b>
-<pre>
-Text with a normal tag, @copyright
-</pre>
-<DL>
-	<DT>Function Parameters:</DT>
-	
-
-	<DT>Function Info:</DT>
-	<DD><b>Copyright</b> - <CODE>Copyright 2002, Greg Beaver</CODE></DD>
-	
-</DL>
-
-<HR>
-  ]]>
-   </programlisting>
-  <para>
-  <para>This DocBlock:
-  </para>
+  <para>will display normal documentation.</para>
+  <para>This DocBlock:</para>
   <para>
    <programlisting role="php">
    <![CDATA[
 /**
  * Text with an inline source tag:
+ *
  * {@}source}
  * displays without a break in the flow
  */
@@ -86,44 +63,34 @@ function element($pages)
    ]]>
    </programlisting>
   </para>
-  <para>Parses as (with -o HTML:default:default):</para>
+  <para>will display the complete source inside the documentation as if we had typed it out</para>
   <para>
-   <programlisting role="tutorial">
-   <![CDATA[
-<H3>element</H3>
-<P><B>void element ( $pages )</B></P>
-<P></P>
-<!-- ========== Info from phpDoc block ========= -->
-<b>Text with an inline source tag:</b>
-<pre>
-<pre><font color="#006600">function </font><font color="#0000CC">element</font><font color="#006600">(</font><font color="#0000CC">$pages</font><font color="#006600">)
-{
-    if (empty(</font><font color="#0000CC">$pages</font><font color="#006600">))
-    {
-        die(</font><font color="#CC0000">&quot;<b>ERROR</b>: nothing parsed&quot;</font><font color="#006600">);
-    }
-}</font></pre>
-</font>
-</pre>
-displays without a break in the flow
-</pre>
-<DL>
-	<DT>Function Parameters:</DT>
-	
-
-	<DT>Function Info:</DT>
-	
-</DL>
-
-<HR>
-   ]]>
-   </programlisting>
-  </para>
-  <para>The {@}source tag has two optional parameters, the starting line number to display and the ending line number to display.  If only the first parameter is present, {@}source} will print the source code starting on that line number to the end of the function source code.  If both parameters are present, {@}source} will print an excerpt of the source code beginning on the starting line number, and concluding with the ending line number.</para>
    <programlisting role="php">
    <![CDATA[
 /**
  * Text with an inline source tag:
+ *
+ * <code>
+ * function element($pages)
+ * {
+ *     if (empty($pages))
+ *     {
+ *         die("<b>ERROR</b>: nothing parsed");
+ *     }
+ * }
+ * </code>
+ * displays without a break in the flow
+ */
+   ]]>
+   </programlisting>
+  </para>
+  <para>The {@}source tag has two optional parameters, the starting line number to display and the ending line number to display.  If only the first parameter is present, {@}source} will print the source code starting on that line number to the end of the function source code.  If both parameters are present, {@}source} will print an excerpt of the source code beginning on the starting line number, and concluding with the ending line number.</para>
+  <para>
+   <programlisting role="php">
+   <![CDATA[
+/**
+ * Text with an inline source tag:
+ *
  * {@}source 3}
  * displays without a break in the flow
  */
@@ -141,40 +108,30 @@ function element($pages)
    ]]>
    </programlisting>
   </para>
+  <para>Parses as if we had coded:</para>
   <para>
-   <para>Parses as (with -o HTML:default:default):</para>
-   <programlisting role="tutorial">
+   <programlisting role="php">
    <![CDATA[
-<H3>element</H3>
-<P><B>void element ( $pages )</B></P>
-<P></P>
-<!-- ========== Info from phpDoc block ========= -->
-<b>Text with an inline source tag:</b>
-<pre>
-<pre>    <font color="#006600">{
-        die(</font><font color="#CC0000">&quot;<b>ERROR</b>: nothing parsed&quot;</font><font color="#006600">);
-    }
-    foreach(</font><font color="#0000CC">$test </font><font color="#006600">as </font><font color="#0000CC">$hello</font><font color="#006600">)
-    {
-        echo </font><font color="#CC0000">&quot;I love $hello&quot;</font><font color="#006600">;
-    }
-}</font></pre>
-</font>
-</pre>
-displays without a break in the flow
-</pre>
-<DL>
-	<DT>Function Parameters:</DT>
-	
-
-	<DT>Function Info:</DT>
-	
-</DL>
-
-<HR>
+/**
+ * Text with an inline source tag:
+ *
+ * <code>
+ *     if (empty($pages))
+ *     {
+ *         die("<b>ERROR</b>: nothing parsed");
+ *     }
+ *     foreach($test as $hello)
+ *     {
+ *         echo "I love $hello";
+ *     }
+ * }
+ * </code>
+ * displays without a break in the flow
+ */
    ]]>
    </programlisting>
   </para>
+  <para>
    <programlisting role="php">
    <![CDATA[
 /**
@@ -196,29 +153,18 @@ function element($pages)
    ]]>
    </programlisting>
   </para>
-  <para>Parses as (with -o HTML:frames:default):</para>
+  <para>Parses as if we had coded:</para>
   <para>
-   <programlisting role="tutorial">
+   <programlisting role="php">
    <![CDATA[
-<H3>element</H3>
-<P><B>void element ( $pages )</B></P>
-<P></P>
-<!-- ========== Info from phpDoc block ========= -->
-<b>Text with an inline source tag:</b>
-<pre>
-<pre>    <font color="#006600">if (empty(</font><font color="#0000CC">$pages</font><font color="#006600">))
-</pre>
-displays without a break in the flow
-</pre>
-<DL>
-	<DT>Function Parameters:</DT>
-	
-
-	<DT>Function Info:</DT>
-	
-</DL>
-
-<HR>
+/**
+ * Text with an inline source tag:
+ *
+ * <code>
+ *     if (empty($pages))
+ * </code>
+ * displays without a break in the flow
+ */
    ]]>
    </programlisting>
   </para>

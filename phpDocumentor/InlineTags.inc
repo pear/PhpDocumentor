@@ -376,10 +376,6 @@ class parserSourceInlineTag extends parserInlineTag
         {
             $this->start = (int) $match[1];
             $this->end = (int) $match[2];
-            if ($this->start > $this->end) {
-                unset($this->start);
-                unset($this->end);
-            }
         }
     }
     
@@ -849,21 +845,23 @@ class parserTocInlineTag extends parserInlineTag
     function Convert(&$c)
     {
         $newtoc = array();
-        foreach($this->toc as $i => $toc)
-        {
-            if (isset($toc['title']))
-            $toc['tag']->setTitle($toc['title']);
-            else
-            $toc['tag']->setTitle(new parserStringWithInlineTags);
-            $newtoc[$i]['tagname'] = $toc['tag']->name;
-            $l = new tutorialLink;
-            if (!isset($toc['title'])) $title = 'section '.$toc['id']->id;
-            else
-            $title = $toc['title']->Convert($c);
-            $l->addLink($toc['id']->id,$this->_path,basename($this->_path),$toc['id']->package, $toc['id']->subpackage, strip_tags($title));
-            $newtoc[$i]['link'] = $c->returnSee($l);
-            $newtoc[$i]['id'] = $c->getTutorialId($toc['id']->package, $toc['id']->subpackage, basename($this->_path), $toc['id']->id, $toc['id']->category);
-            $newtoc[$i]['title'] = $title;
+        if (isset($this->toc) && is_array($this->toc)) {
+            foreach($this->toc as $i => $toc)
+            {
+                if (isset($toc['title']))
+                $toc['tag']->setTitle($toc['title']);
+                else
+                $toc['tag']->setTitle(new parserStringWithInlineTags);
+                $newtoc[$i]['tagname'] = $toc['tag']->name;
+                $l = new tutorialLink;
+                if (!isset($toc['title'])) $title = 'section '.$toc['id']->id;
+                else
+                $title = $toc['title']->Convert($c);
+                $l->addLink($toc['id']->id,$this->_path,basename($this->_path),$toc['id']->package, $toc['id']->subpackage, strip_tags($title));
+                $newtoc[$i]['link'] = $c->returnSee($l);
+                $newtoc[$i]['id'] = $c->getTutorialId($toc['id']->package, $toc['id']->subpackage, basename($this->_path), $toc['id']->id, $toc['id']->category);
+                $newtoc[$i]['title'] = $title;
+            }
         }
         return $c->formatTutorialTOC($newtoc);
     }

@@ -67,6 +67,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
   changes made to the code to make it work in PHP 5, including parsing
   of private/public/static/etc. access modifiers
 - fixed these bugs since 1.3.0RC6:
+ [ 941146 ] Repeated sub-tutorials
  [ 1223413 ] improper load sequence when using custom templatebase
  [ 1481118 ] Tags with more than one attribute keep only the first one.
  [ 1485448 ] Mixing {@toc} and DOCTYPE for DocBook gives PHP fatal error
@@ -114,6 +115,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 924313 ] Objec access on array
  [ 924760 ] source rendering in FireFox contains extra newlines
  [ 937235 ] duplicated /** after abstract method declaration
+ [ 941146 ] Repeated sub-tutorials
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
  [ 952217 ] HTML:frames:earthli
  [ 962319 ] Define : don\'t show the assigned value

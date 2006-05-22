@@ -279,13 +279,13 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
         {
             foreach($this->value as $tag)
             {
-                if (is_object($tag) && $tag->name == 'refname')
+                if (is_object($tag) && is_a($tag, 'parserXMLDocBookTag') && $tag->name == 'refname')
                 {
                     $t = new parserStringWithInlineTags;
                     foreach($tag->value as $val) $t->add($val);
                     $this->_title = $t;
                 }
-                if (is_object($tag) && $tag->name == 'refpurpose')
+                if (is_object($tag) && is_a($tag, 'parserXMLDocBookTag') && $tag->name == 'refpurpose')
                 {
                     $t = new parserStringWithInlineTags;
                     foreach($tag->value as $val) $t->add($val);
@@ -295,9 +295,14 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
         }
         if (isset($this->_title))
         return $this->_title->Convert($c);
-        if (is_object($this->value[0])) return $this->value[0]->getTitle($c);
-        if (isset($this->value[1]))
-        if (is_object($this->value[1])) return $this->value[1]->getTitle($c);
+        if (is_object($this->value[0]) && is_a($tag, 'parserXMLDocBookTag')) {
+            return $this->value[0]->getTitle($c);
+        }
+        if (isset($this->value[1])) {
+            if (is_object($this->value[1]) && is_a($tag, 'parserXMLDocBookTag')) {
+                return $this->value[1]->getTitle($c);
+            }
+        }
         return '';
     }
     

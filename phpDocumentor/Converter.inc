@@ -1961,11 +1961,12 @@ class Converter
     {
         if (is_object($tutorial))
         {
-						$path = $tutorial->package . '/' . $tutorial->subpackage . '/' . $tutorial->name;
-            if (isset($this->tutorial_tree[$path]))
-								$tutorial = $this->tutorial_tree[$path];
-            else
-								return false;
+            $path = $this->_tutorial_path($tutorial,$tutorial,$tutorial);
+            if (isset($this->tutorial_tree[$path])) {
+                $tutorial = $this->tutorial_tree[$path];
+            } else {
+                return false;
+            }
         }
         $tree = array();
         if (isset($tutorial['tutorial']))
@@ -1975,7 +1976,7 @@ class Converter
             {
                 foreach($tutorial['child'] as $a => $b)
                 {
-										$btut = $b['tutorial'];
+                    $btut = $b['tutorial'];
                     $res['tutorial'] = $this->tutorials[$btut->package][$btut->subpackage][$btut->tutorial_type][$btut->name];
                     if (isset($b['child']))
                     {
@@ -2148,21 +2149,21 @@ class Converter
                 }
 
                 if (!$tute) {
-                    return $tree;
+                    continue;
                 }
                 $child_path = $this->_tutorial_path($parent,$parent,$tute);
                 if (isset($this->processed_tutorials[$child_path])) {
-                    return $tree;
+                    continue;
                 }
                 $this->processed_tutorials[$child_path] = $tute;
                 if ($tute->name != $child . '.' . $parent->tutorial_type) {
-                    return $tree;
+                    continue;
                 }
                 //echo "Adding [$child_path] to [$parent_path]<br>";
                 $tree[$parent_path]['child'][$this->_tutorial_path($parent,$parent,$tute)]['tutorial']
                     = $tute;
                 if (!$tute->ini) {
-                    return $tree;
+                    continue;
                 }
                 // add all the child's child tutorials to the list
                 if (!isset($tree[$parent_path]['child'])) {

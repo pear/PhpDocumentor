@@ -63,8 +63,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>drewish@php.net</email>
   <active>yes</active>
  </developer>
- <date>2006-05-17</date>
- <time>23:21:18</time>
+ <date>2006-05-21</date>
+ <time>21:05:06</time>
  <version>
   <release>1.3.0</release>
   <api>1.3.0</api>
@@ -135,6 +135,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
   changes made to the code to make it work in PHP 5, including parsing
   of private/public/static/etc. access modifiers
 - fixed these bugs since 1.3.0RC6:
+ [ 941146 ] Repeated sub-tutorials
  [ 1223413 ] improper load sequence when using custom templatebase
  [ 1481118 ] Tags with more than one attribute keep only the first one.
  [ 1485448 ] Mixing {@toc} and DOCTYPE for DocBook gives PHP fatal error
@@ -182,6 +183,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 924313 ] Objec access on array
  [ 924760 ] source rendering in FireFox contains extra newlines
  [ 937235 ] duplicated /** after abstract method declaration
+ [ 941146 ] Repeated sub-tutorials
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
  [ 952217 ] HTML:frames:earthli
  [ 962319 ] Define : don&apos;t show the assigned value
@@ -2777,7 +2779,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2006-05-17</date>
+   <date>2006-05-21</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>PHP 5 support and more, fix bugs
 
@@ -2840,6 +2842,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
   changes made to the code to make it work in PHP 5, including parsing
   of private/public/static/etc. access modifiers
 - fixed these bugs since 1.3.0RC6:
+ [ 941146 ] Repeated sub-tutorials
  [ 1223413 ] improper load sequence when using custom templatebase
  [ 1481118 ] Tags with more than one attribute keep only the first one.
  [ 1485448 ] Mixing {@toc} and DOCTYPE for DocBook gives PHP fatal error
@@ -2887,6 +2890,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 924313 ] Objec access on array
  [ 924760 ] source rendering in FireFox contains extra newlines
  [ 937235 ] duplicated /** after abstract method declaration
+ [ 941146 ] Repeated sub-tutorials
  [ 944149 ] Apostrophe in DocBook name breaks DOM/earthli tree index
  [ 952217 ] HTML:frames:earthli
  [ 962319 ] Define : don&apos;t show the assigned value
