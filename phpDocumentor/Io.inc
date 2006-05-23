@@ -589,6 +589,9 @@ class Io
                 {
                     phpDocumentor_out(" -- Parsing file\n");
                     flush();
+                    if (function_exists('file_get_contents')) {
+                        return file_get_contents($path);
+                    }
                     $fp = fopen($path,"r");
                     $ret = fread($fp,filesize($path));
                     fclose($fp);
@@ -597,9 +600,13 @@ class Io
                 { 
                     phpDocumentor_out(" CVS file [EXPERIMENTAL]\n"); 
                     flush();
-                    $fp = fopen($path,"r"); 
-                    $ret = fread($fp,filesize($path)); 
-                    fclose($fp); 
+                    if (function_exists('file_get_contents')) {
+                        $ret = file_get_contents($path);
+                    } else {
+                        $fp = fopen($path,"r"); 
+                        $ret = fread($fp,filesize($path)); 
+                        fclose($fp); 
+                    }
                     $ret = strstr($ret,"<?");
                     $ret = substr($ret,0,strpos($ret,"@\n"));
                     $ret = str_replace("@@","@",$ret); 

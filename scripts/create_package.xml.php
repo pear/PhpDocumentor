@@ -73,6 +73,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1485448 ] Mixing {@toc} and DOCTYPE for DocBook gives PHP fatal error
  [ 1486304 ] unexpected parameter type mixed
  [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
+ [ 1492100 ] Warning: fread(): Length parameter must be greater than 0
  Bug #6844: phpDocumentor doesn\'t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
@@ -170,6 +171,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1485448 ] Mixing {@toc} and DOCTYPE for DocBook gives PHP fatal error
  [ 1486304 ] unexpected parameter type mixed
  [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
+ [ 1492100 ] Warning: fread(): Length parameter must be greater than 0
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
