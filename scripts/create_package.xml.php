@@ -75,6 +75,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
  [ 1491119 ] Inexistant --directory leads to obscure error message
  [ 1492100 ] Warning: fread(): Length parameter must be greater than 0
+ [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  Bug #6844: phpDocumentor doesn\'t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
@@ -174,6 +175,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
  [ 1491119 ] Inexistant --directory leads to obscure error message
  [ 1492100 ] Warning: fread(): Length parameter must be greater than 0
+ [ 1492101 ] Object of class parserLinkInlineTag could not be converted
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
