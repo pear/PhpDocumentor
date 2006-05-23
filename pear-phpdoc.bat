@@ -13,7 +13,7 @@
 ::       E.g. for PHP 4.2 C:\phpdev\php-4.2-Win32\php-cli.exe
 ::            for PHP 4.3 C:\phpdev\php-4.3-Win32\cli\php.exe
   
-  SET phpCli=@PHP-BIN@
+  SET phpCli="@PHP-BIN@"
 
 
 
@@ -57,7 +57,7 @@ IF EXIST "%phpCli%" (
 IF '%1'=='' (
   SET doNothing=
 ) ELSE (
-  "%phpCli%" "@BIN-DIR@\phpdoc" %*
+  "%phpCli%" -d include_path="@PEAR-DIR@" "@BIN-DIR@\phpdoc" %*
   GOTO :EOF
 )
 
@@ -138,7 +138,7 @@ GOTO :PAUSE_END
 SET found=1
 ECHO Starting: "%phpCli%" "@BIN-DIR@\phpdoc" -c "%iniFile%"
 ECHO.
-"%phpCli%" "@BIN-DIR@\phpdoc" -c "%iniFile%"
+"%phpCli%"  -d include_path="@PEAR-DIR@" "@BIN-DIR@\phpdoc" -c "%iniFile%"
 GOTO :EOF
 
 :PAUSE_END
