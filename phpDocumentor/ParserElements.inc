@@ -280,6 +280,7 @@ class parserGlobal extends parserElement
         $converted_datatype = $this->datatype;
         if (strpos($this->datatype,'|'))
         {
+            $my_types = '';
             $types = explode('|',$this->datatype);
             foreach($types as $returntype)
             {
