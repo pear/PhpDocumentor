@@ -1,4 +1,4 @@
-<?php
+G<?php
 /**
  * This was all in {@link phpdoc.inc}, and now encapsulates the complexity
  * 
@@ -527,11 +527,12 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
             foreach($dirs as $dir)
             {
                 $olddir = $dir;
-                $dir = trim(realpath($dir));
+                $dir = realpath($dir);
                 if (!$dir) {
                     phpDocumentor_out('ERROR: "' . $olddir . '" does not exist, skipping');
                     continue;
                 }
+                $dir = trim($dir);
                 $dir = strtr($dir, "\\", "/");
                 $dir = str_replace('//','/',$dir);
                 // strip trailing directory seperator

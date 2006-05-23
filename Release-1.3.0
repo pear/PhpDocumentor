@@ -141,6 +141,7 @@ The following bugs are fixed in version 1.3.0
  [ 1485448 ] Mixing {@toc} and DOCTYPE for DocBook gives PHP fatal error
  [ 1486304 ] unexpected parameter type mixed
  [ 1490000 ] Javascript in header.tpl cause httpd log: File not found
+ [ 1491119 ] Inexistant --directory leads to obscure error message
  [ 1492100 ] Warning: fread(): Length parameter must be greater than 0
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
