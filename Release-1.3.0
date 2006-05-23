@@ -144,6 +144,7 @@ The following bugs are fixed in version 1.3.0
  [ 1491119 ] Inexistant --directory leads to obscure error message
  [ 1492100 ] Warning: fread(): Length parameter must be greater than 0
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
+ [ 1492538 ] ERROR: Converter X specified by ... is not a class
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"

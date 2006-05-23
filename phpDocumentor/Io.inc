@@ -221,6 +221,10 @@ class Io
      */
     function isIncludeable($filename)
     {
+        $test = realpath($filename);
+        if ($test && is_readable($test)) {
+            return true; // for absolute paths
+        }
         $ip = get_include_path();
         if (PHPDOCUMENTOR_WINDOWS)
         {
