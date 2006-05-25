@@ -1995,7 +1995,9 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
         {
             $this->_save .= $this->_converter->flushHighlightCache();
             // clear the existing cache, reset it to the old value
-            $this->_converter->_setHighlightCache($this->_save_highlight_state[0], $this->_save_highlight_state[1]);
+            if (isset($this->_save_highlight_state)) {
+                $this->_converter->_setHighlightCache($this->_save_highlight_state[0], $this->_save_highlight_state[1]);
+            }
             $this->_line .= $this->_converter->highlightSource(T_CONSTANT_ENCAPSED_STRING, $this->_save, true);
             $this->_save = '';
         }

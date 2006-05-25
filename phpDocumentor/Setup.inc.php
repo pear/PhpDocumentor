@@ -1,4 +1,4 @@
-G<?php
+<?php
 /**
  * This was all in {@link phpdoc.inc}, and now encapsulates the complexity
  * 

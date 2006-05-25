@@ -2668,7 +2668,9 @@ class Converter
             $a = $element->docblock->getKeyword('todo');
             if ($a)
             {
-                $this->addTodoLink($this->addLink($element),$a);
+                if ($element->type != 'include') {
+                    $this->addTodoLink($this->addLink($element),$a);
+                }
             }
         }
         $i = 0;

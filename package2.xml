@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.5.0a1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.4.9" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>PhpDocumentor</name>
  <channel>pear.php.net</channel>
  <summary>The phpDocumentor package provides automatic documenting of php api directly from the source.</summary>
@@ -63,8 +63,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>drewish@php.net</email>
   <active>yes</active>
  </developer>
- <date>2006-05-23</date>
- <time>08:14:33</time>
+ <date>2006-05-25</date>
+ <time>11:20:41</time>
  <version>
   <release>1.3.0</release>
   <api>1.3.0</api>
@@ -145,6 +145,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492100 ] Warning: fread(): Length parameter must be greater than 0
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
+ [ 1492608 ] PHP Notices in current CVS
  Bug #6844: phpDocumentor doesn&apos;t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
@@ -246,6 +247,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492100 ] Warning: fread(): Length parameter must be greater than 0
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
+ [ 1492608 ] PHP Notices in current CVS
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
@@ -1711,12 +1713,12 @@ segfaults with the simplest of files.  Generation still works great in PHP4
    </os>
   </installconditions>
   <filelist>
+   <install as="phpdoc" name="pear-phpdoc" />
    <install as="phpdoc.bat" name="pear-phpdoc.bat" />
    <install as="user/makedocs.ini" name="user/pear-makedocs.ini" />
    <ignore name="phpdoc" />
    <ignore name="phpdoc.bat" />
    <ignore name="user/makedocs.ini" />
-   <ignore name="pear-phpdoc" />
    <ignore name="scripts/makedoc.sh" />
   </filelist>
  </phprelease>
@@ -2789,7 +2791,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2006-05-23</date>
+   <date>2006-05-25</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>PHP 5 support and more, fix bugs
 
@@ -2862,6 +2864,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492100 ] Warning: fread(): Length parameter must be greater than 0
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
+ [ 1492608 ] PHP Notices in current CVS
  Bug #6844: phpDocumentor doesn&apos;t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
@@ -2963,6 +2966,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492100 ] Warning: fread(): Length parameter must be greater than 0
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
+ [ 1492608 ] PHP Notices in current CVS
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;

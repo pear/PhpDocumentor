@@ -77,6 +77,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492100 ] Warning: fread(): Length parameter must be greater than 0
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
+ [ 1492608 ] PHP Notices in current CVS
  Bug #6844: phpDocumentor doesn\'t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
@@ -178,6 +179,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492100 ] Warning: fread(): Length parameter must be greater than 0
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
+ [ 1492608 ] PHP Notices in current CVS
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
@@ -298,8 +300,8 @@ $pfm2->setOsInstallCondition('windows');
 $pfm2->addIgnoreToRelease("phpdoc");
 $pfm2->addIgnoreToRelease('phpdoc.bat');
 $pfm2->addIgnoreToRelease('user/makedocs.ini');
-$pfm2->addIgnoreToRelease('pear-phpdoc');
 $pfm2->addIgnoreToRelease('scripts/makedoc.sh');
+$pfm2->addInstallAs('pear-phpdoc', 'phpdoc');
 $pfm2->addInstallAs('pear-phpdoc.bat', 'phpdoc.bat');
 $pfm2->addInstallAs('user/pear-makedocs.ini', 'user/makedocs.ini');
 $pfm2->addRelease();

@@ -1071,6 +1071,7 @@ class phpDocumentor_IntermediateParser
         $this->category = $this->data->parent->category = $data->category;
         $this->packagecategories[$this->package] = $this->category;
         $this->subpackage = $this->data->parent->subpackage = $data->subpackage;
+        $this->data->setDocBlock($data);
         if ($data->getKeyword('ignore'))
         {
             $this->proceduralpages->ignorePage($this->data->parent);
@@ -1080,7 +1081,6 @@ class phpDocumentor_IntermediateParser
             unset($this->pages[$this->data->parent->getPath()]);
             return;
         }
-        $this->data->setDocBlock($data);
         $this->package = $this->data->parent->package = $data->package;
         $this->subpackage = $this->data->parent->subpackage = $data->subpackage;
         $this->proceduralpages->addPagePackage($this->data->parent->getPath(),$this->package,$this->subpackage);
