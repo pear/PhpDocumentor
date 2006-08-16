@@ -1486,7 +1486,8 @@ class parserVar extends parserElement
         if (!is_object($par)) {
             if (is_a($class->getExtends(true), 'ReflectionClass')) {
                 $pare = $class->getExtends(true);
-                if ($pare->hasProperty(substr($this->name, 1))) {
+                if (method_exists($pare, 'hasProperty') &&
+                      $pare->hasProperty(substr($this->name, 1))) {
                     $par = $pare;
                     $property = $par->getProperty(substr($this->name, 1));
                     $ret = new parserVar($par->getName());

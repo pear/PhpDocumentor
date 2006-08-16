@@ -3,7 +3,6 @@ set_time_limit(0);
 require_once('PEAR/PackageFileManager.php');
 require_once('PEAR/PackageFileManager2.php');
 PEAR::setErrorHandling(PEAR_ERROR_DIE);
-$test = new PEAR_PackageFileManager;
 
 $packagedir = dirname(dirname(__FILE__));
 $notes = 'PHP 5 support and more, fix bugs
@@ -197,6 +196,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  Bug #7577: Notice error for undefined _pv_function_param property
  Bug #7686: phpdoc not run in dos box
  Bug #7938: @todo does not work on include elements
+ Bug #8111: Fatal error: ReflectionClass::hasProperty()
 ';
 $version = '1.3.0';
 $options = array(
@@ -252,14 +252,7 @@ $options = array(
 'installexceptions' => array('pear-phpdoc' => '/', 'pear-phpdoc.bat' => '/', 'scripts/makedoc.sh' => '/'),
 );
 $pfm2 = PEAR_PackageFileManager2::importOptions(dirname(dirname(__FILE__))
-    . DIRECTORY_SEPARATOR . 'package2.xml', array_merge($options, array('packagefile' => 'package2.xml')));
-$e = $test->setOptions(array_merge($options,
-array('installas' =>
-    array('pear-phpdoc' => 'phpdoc',
-          'pear-phpdoc.bat' => 'phpdoc.bat',
-          'user/pear-makedocs.ini' => 'user/makedocs.ini',
-          ),
-)));
+    . DIRECTORY_SEPARATOR . 'package.xml', array_merge($options, array('packagefile' => 'package.xml')));
 $pfm2->setReleaseVersion($version);
 $pfm2->setLicense('LGPL', 'http://www.opensource.org/licenses/lgpl-license.php');
 $pfm2->setNotes($notes);
@@ -315,40 +308,10 @@ $pfm2->addIgnoreToRelease('user/makedocs.ini');
 $pfm2->addIgnoreToRelease('pear-phpdoc.bat');
 $pfm2->addInstallAs('pear-phpdoc', 'phpdoc');
 $pfm2->addInstallAs('user/pear-makedocs.ini', 'user/makedocs.ini');
-
-$test->addPlatformException('pear-phpdoc.bat', 'windows');
-$test->addDependency('php', '4.2.0', 'ge', 'php');
-// optional dep for peardoc2 converter
-$test->addDependency('XML_Beautifier', '1.1', 'ge', 'pkg', true);
-// replace @PHP-BIN@ in this file with the path to php executable!  pretty neat
-$test->addReplacement('pear-phpdoc', 'pear-config', '@PHP-BIN@', 'php_bin');
-$test->addReplacement('pear-phpdoc.bat', 'pear-config', '@PHP-BIN@', 'php_bin');
-$test->addReplacement('pear-phpdoc.bat', 'pear-config', '@BIN-DIR@', 'bin_dir');
-$test->addReplacement('pear-phpdoc.bat', 'pear-config', '@PEAR-DIR@', 'php_dir');
-$test->addReplacement('pear-phpdoc.bat', 'pear-config', '@DATA-DIR@', 'data_dir');
-$test->addReplacement('docbuilder/includes/utilities.php', 'pear-config', '@DATA-DIR@', 'data_dir');
-$test->addReplacement('docbuilder/builder.php', 'pear-config', '@DATA-DIR@', 'data_dir');
-$test->addReplacement('docbuilder/file_dialog.php', 'pear-config', '@DATA-DIR@', 'data_dir');
-$test->addReplacement('docbuilder/file_dialog.php', 'pear-config', '@WEB-DIR@', 'data_dir');
-$test->addReplacement('docbuilder/actions.php', 'pear-config', '@WEB-DIR@', 'data_dir');
-$test->addReplacement('docbuilder/top.php', 'pear-config', '@DATA-DIR@', 'data_dir');
-$test->addReplacement('docbuilder/config.php', 'pear-config', '@DATA-DIR@', 'data_dir');
-$test->addReplacement('docbuilder/config.php', 'pear-config', '@WEB-DIR@', 'data_dir');
-$test->addReplacement('phpDocumentor/Setup.inc.php', 'pear-config', '@DATA-DIR@', 'data_dir');
-$test->addReplacement('phpDocumentor/Converter.inc', 'pear-config', '@DATA-DIR@', 'data_dir');
-$test->addReplacement('phpDocumentor/common.inc.php', 'package-info', '@VER@', 'version');
-$test->addReplacement('phpDocumentor/IntermediateParser.inc', 'package-info', '@VER@', 'version');
-$test->addReplacement('user/pear-makedocs.ini', 'pear-config', '@PEAR-DIR@', 'php_dir');
-$test->addReplacement('user/pear-makedocs.ini', 'pear-config', '@DOC-DIR@', 'doc_dir');
-$test->addReplacement('user/pear-makedocs.ini', 'package-info', '@VER@', 'version');
-$test->addRole('inc', 'php');
-$test->addRole('sh', 'script');
 if (isset($_GET['make']) || (isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] == 'make')) {
     $pfm2->writePackageFile();
-    $test->writePackageFile();
 } else {
     $pfm2->debugPackageFile();
-    $test->debugPackageFile();
 }
 if (!isset($_GET['make']) && !(isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] == 'make')) {
     echo '<a href="' . $_SERVER['PHP_SELF'] . '?make=1">Make this file</a>';

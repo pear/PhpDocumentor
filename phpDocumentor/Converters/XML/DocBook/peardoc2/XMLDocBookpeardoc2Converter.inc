@@ -483,6 +483,8 @@ class XMLDocBookpeardoc2Converter extends Converter
                 if ($element->type == 'define') $eltext .= '</constant>';
                 break;
             }
+        } elseif (!is_object($element)) {
+            return false;
         } elseif ($element->type == 'method')
         {
             $eltext = str_replace($element->name . '()', $element->name, $eltext);
