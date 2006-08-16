@@ -64,7 +64,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2006-08-16</date>
- <time>12:15:02</time>
+ <time>12:37:44</time>
  <version>
   <release>1.3.0</release>
   <api>1.3.0</api>
@@ -266,6 +266,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  Bug #7686: phpdoc not run in dos box
  Bug #7938: @todo does not work on include elements
  Bug #8111: Fatal error: ReflectionClass::hasProperty()
+ Bug #8290: @param bug when description is on its own line
  </notes>
  <contents>
   <dir baseinstalldir="PhpDocumentor" name="/">
@@ -2984,6 +2985,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  Bug #7686: phpdoc not run in dos box
  Bug #7938: @todo does not work on include elements
  Bug #8111: Fatal error: ReflectionClass::hasProperty()
+ Bug #8290: @param bug when description is on its own line
    </notes>
   </release>
  </changelog>

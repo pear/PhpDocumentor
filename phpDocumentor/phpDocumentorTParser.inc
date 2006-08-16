@@ -2098,7 +2098,7 @@ class phpDocumentorTParser extends Parser
             }
             if ($value[0]{0} == '$' || substr($value[0],0,2) == '&$')
             { // was just passed "object" and the next thing is a variable name
-                $result['var'] = $value[0];
+                $result['var'] = trim($value[0]);
                 $result['type'] = 'object';
                 array_shift($value);
                 $result['desc'] = join(' ', $value);
@@ -2126,7 +2126,7 @@ class phpDocumentorTParser extends Parser
                 array_shift($value);
                 if (isset ($value[0]) && strlen($value[0]) && ($value[0]{0} == '$' || substr($value[0],0,2) == '&$'))
                 { // was just passed "object" and the next thing is a variable name
-                    $result['var'] = $value[0];
+                    $result['var'] = trim($value[0]);
                     $result['type'] = $types;
                     array_shift($value);
                     $result['desc'] = join(' ', $value);
@@ -2150,7 +2150,7 @@ class phpDocumentorTParser extends Parser
             {
                 if (substr($value[0],0,1) == '$' || substr($value[0],0,2) == '&$')
                 {
-                    $result['var'] = $value[0];
+                    $result['var'] = trim($value[0]);
                     array_shift($value);
                 } else $result['var'] = false;
             }

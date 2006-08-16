@@ -197,6 +197,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  Bug #7686: phpdoc not run in dos box
  Bug #7938: @todo does not work on include elements
  Bug #8111: Fatal error: ReflectionClass::hasProperty()
+ Bug #8290: @param bug when description is on its own line
 ';
 $version = '1.3.0';
 $options = array(
