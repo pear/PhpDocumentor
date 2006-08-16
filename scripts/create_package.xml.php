@@ -82,6 +82,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
  Bug #7686: phpdoc not run in dos box
+ Bug #7773: "nothing parsed" error when parsing in a directory under "tutorials"
 - fixed these bugs since 1.2.3.1:
  [ not entered ] phpdoc script broken on unix
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
@@ -195,6 +196,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
  Bug #7686: phpdoc not run in dos box
+ Bug #7938: @todo does not work on include elements
 ';
 $version = '1.3.0';
 $options = array(
@@ -315,7 +317,7 @@ $pfm2->addInstallAs('pear-phpdoc', 'phpdoc');
 $pfm2->addInstallAs('user/pear-makedocs.ini', 'user/makedocs.ini');
 
 $test->addPlatformException('pear-phpdoc.bat', 'windows');
-$test->addDependency('php', '4.1.0', 'ge', 'php');
+$test->addDependency('php', '4.2.0', 'ge', 'php');
 // optional dep for peardoc2 converter
 $test->addDependency('XML_Beautifier', '1.1', 'ge', 'pkg', true);
 // replace @PHP-BIN@ in this file with the path to php executable!  pretty neat

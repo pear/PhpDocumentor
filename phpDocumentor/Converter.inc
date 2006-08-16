@@ -2670,6 +2670,9 @@ class Converter
             {
                 if ($element->type != 'include') {
                     $this->addTodoLink($this->addLink($element),$a);
+                } else {
+                    addWarning(PDERROR_NOTODO_INCLUDE, $element->getLineNumber(),
+                        $element->getPath());
                 }
             }
         }

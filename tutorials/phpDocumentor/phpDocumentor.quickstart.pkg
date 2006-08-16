@@ -150,7 +150,8 @@ $ pear config-set data_dir /path/to/document_root/pear
    Before you begin, you may wish to download the sample documentation project and
    try running phpDocumentor on them as you read along, found at
    {@tutorial sample1.pkg}, {@tutorial sample2.pkg}, {@tutorial sample3.pkg} or found
-   bundled in the tutorials/ directory of your phpDocumentor distribution.
+   bundled in the tutorials/ directory of your phpDocumentor distribution.  Before parsing,
+   copy the examples to another directory.
   </para>
   <para>
    First of all, run phpDocumentor on the blank file sample1.php.  If you are using the command-line interface, run this command from the tutorials/sample directory:

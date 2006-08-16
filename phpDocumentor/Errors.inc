@@ -370,6 +370,10 @@ define("PDERROR_INVALID_VALUES", 75);
  * warning triggered when {@}internal}} is nested inside another {@}internal}}
  */
 define("PDERROR_NESTED_INTERNAL", 76);
+/**
+ * warning triggered when @todo is used on an include element
+ */
+define("PDERROR_NOTODO_INCLUDE", 77);
 
 /**
  * Error messages for phpDocumentor parser warnings
@@ -405,6 +409,7 @@ $GLOBALS['phpDocumentor_warning_descrip'] =
         PDERROR_DOCBLOCK_GOES_CLASS => 'DocBlock would be page-level, but precedes class "%s", use another DocBlock to document the file',
         PDERROR_NO_DOCBOOK_ID => 'Tutorial section %s "%s" has no id="{@id subsection}" tag ({@id} for refentry)',
         PDERROR_BEAUTIFYING_FAILED => 'Beautifying failed: %s',
+        PDERROR_NOTODO_INCLUDE => '@todo on an include element is ignored (line %s, file %s)',
         );
 
 

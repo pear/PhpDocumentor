@@ -161,7 +161,8 @@ The following bugs are fixed in version 1.3.0
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
  Bug #7686: phpdoc not run in dos box
-
+ Bug #7773: "nothing parsed" error when parsing in a directory under "tutorials"
+ Bug #7938: @todo does not work on include elements
 There of course were other small bugs fixed, these were just the bugs with 
 entries in source forge.  You can view the bug details or reopen it if
 you think it's not totally fixed at:
