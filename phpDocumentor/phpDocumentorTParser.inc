@@ -773,6 +773,21 @@ class phpDocumentorTParser extends Parser
             unset($this->_pv_include_name);
             unset($this->_pv_include_value);
             unset($this->_pv_include_params_data);
+        } elseif ($this->_last_pevent == PARSER_EVENT_INCLUDE_PARAMS) {
+            // include is part of a larger statement
+            // force ending of include
+            $this->_event_stack->popEvent();
+            $this->_pv_include = new parserInclude;
+            $this->_pv_include->setLineNumber($this->_pv_linenum + 1);
+            $this->_pf_in_include = false;
+            $this->_pv_include->setName($this->_pv_include_name);
+            $this->_pv_include->setValue($this->_pv_include_value);
+            $this->publishEvent(PHPDOCUMENTOR_EVENT_INCLUDE,$this->_pv_include);
+            $this->_pf_includename_isset = false;
+            unset($this->_pv_include);
+            unset($this->_pv_include_name);
+            unset($this->_pv_include_value);
+            unset($this->_pv_include_params_data);
         }
     }
     

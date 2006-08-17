@@ -149,6 +149,7 @@ The following bugs are fixed in version 1.3.0
  [ 1533361 ] trailing comments stop phpdoc on source generation
  [ 1532841 ] '%' in function parameter default value causes errors
  [ 1528752 ] Trivial typo in "phpDocumentor Inline tags" documentation
+ [ 1524102 ] Weird include documentation
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
