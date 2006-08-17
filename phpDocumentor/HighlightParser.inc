@@ -144,6 +144,9 @@ class phpDocumentor_HighlightWordParser extends phpDocumentorTWordParser
      */
     function backupPos($last_token, $is_pos = false)
     {
+        if (!$last_token) {
+            return;
+        }
         if ($is_pos)
         {
             $this->linenum = $last_token[0];
@@ -425,7 +428,7 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
                 echo "-------------------\n\n\n";
                 flush();
             }
-            if (isset($this->eventHandlers[$pevent]))
+            if ($word !== false && isset($this->eventHandlers[$pevent]))
             {
                 $handle = $this->eventHandlers[$pevent];
                 $this->$handle($word, $pevent);

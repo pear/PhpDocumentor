@@ -77,11 +77,15 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
  [ 1492608 ] PHP Notices in current CVS
+ [ 1533361 ] trailing comments stop phpdoc on source generation
  Bug #6844: phpDocumentor doesn\'t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
  Bug #7686: phpdoc not run in dos box
  Bug #7773: "nothing parsed" error when parsing in a directory under "tutorials"
+ Bug #7938: @todo does not work on include elements
+ Bug #8111: Fatal error: ReflectionClass::hasProperty()
+ Bug #8290: @param bug when description is on its own line
 - fixed these bugs since 1.2.3.1:
  [ not entered ] phpdoc script broken on unix
  [ not entered ] XMLDocBookpeardoc2 beautifier removes comments
@@ -180,6 +184,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
  [ 1492608 ] PHP Notices in current CVS
+ [ 1533361 ] trailing comments stop phpdoc on source generation
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
@@ -195,6 +200,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
  Bug #7686: phpdoc not run in dos box
+ Bug #7773: "nothing parsed" error when parsing in a directory under "tutorials"
  Bug #7938: @todo does not work on include elements
  Bug #8111: Fatal error: ReflectionClass::hasProperty()
  Bug #8290: @param bug when description is on its own line
