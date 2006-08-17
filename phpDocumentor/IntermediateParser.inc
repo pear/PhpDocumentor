@@ -877,7 +877,9 @@ class phpDocumentor_IntermediateParser
                 }
                 $this->data->setDocBlock($doc);
                 unset($doc);
-                $this->last->cantSource();
+                if ($this->last) {
+                    $this->last->cantSource();
+                }
             }
         }
         $this->_lastDocBlockWasPageLevel =

@@ -78,11 +78,12 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
  [ 1492608 ] PHP Notices in current CVS
  [ 1497452 ] Fatal error: Call to undefined method parserFunction::setMo
- [ 1533361 ] trailing comments stop phpdoc on source generation
- [ 1532841 ] \'%\' in function parameter default value causes errors
+ [ 1512969 ] Call to a member function cantSource() on a non-object
  [ 1516781 ] Use of undefined constant T_ML_COMMENT - assumed \'T_ML_COMME
  [ 1524102 ] Weird include documentation
  [ 1528752 ] Trivial typo in "phpDocumentor Inline tags" documentation
+ [ 1533361 ] trailing comments stop phpdoc on source generation
+ [ 1532841 ] \'%\' in function parameter default value causes errors
  Bug #6844: phpDocumentor doesn\'t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
@@ -190,11 +191,12 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
  [ 1492608 ] PHP Notices in current CVS
  [ 1497452 ] Fatal error: Call to undefined method parserFunction::setMo
- [ 1533361 ] trailing comments stop phpdoc on source generation
- [ 1532841 ] \'%\' in function parameter default value causes errors
+ [ 1512969 ] Call to a member function cantSource() on a non-object
  [ 1516781 ] Use of undefined constant T_ML_COMMENT - assumed \'T_ML_COMME
  [ 1524102 ] Weird include documentation
  [ 1528752 ] Trivial typo in "phpDocumentor Inline tags" documentation
+ [ 1533361 ] trailing comments stop phpdoc on source generation
+ [ 1532841 ] \'%\' in function parameter default value causes errors
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"
