@@ -651,7 +651,7 @@ class parserFunction extends parserElement
                 }
             }
             $b['name'] = $param[0];
-            $b['default'] = $param[1];
+            $b['default'] = $converter->postProcess($param[1]);
             $b['hasdefault'] = ($param[1] !== false);
             $a['params'][] = $b;
         }
