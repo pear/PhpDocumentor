@@ -64,7 +64,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2006-08-16</date>
- <time>22:07:13</time>
+ <time>22:13:06</time>
  <version>
   <release>1.3.0</release>
   <api>1.3.0</api>
@@ -146,6 +146,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
  [ 1492608 ] PHP Notices in current CVS
+ [ 1497452 ] Fatal error: Call to undefined method parserFunction::setMo
  [ 1533361 ] trailing comments stop phpdoc on source generation
  [ 1532841 ] &apos;%&apos; in function parameter default value causes errors
  [ 1528752 ] Trivial typo in &quot;phpDocumentor Inline tags&quot; documentation
@@ -256,6 +257,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
  [ 1492608 ] PHP Notices in current CVS
+ [ 1497452 ] Fatal error: Call to undefined method parserFunction::setMo
  [ 1533361 ] trailing comments stop phpdoc on source generation
  [ 1532841 ] &apos;%&apos; in function parameter default value causes errors
  [ 1528752 ] Trivial typo in &quot;phpDocumentor Inline tags&quot; documentation
@@ -2877,6 +2879,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
  [ 1492608 ] PHP Notices in current CVS
+ [ 1497452 ] Fatal error: Call to undefined method parserFunction::setMo
  [ 1533361 ] trailing comments stop phpdoc on source generation
  [ 1532841 ] &apos;%&apos; in function parameter default value causes errors
  [ 1528752 ] Trivial typo in &quot;phpDocumentor Inline tags&quot; documentation
@@ -2987,6 +2990,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492101 ] Object of class parserLinkInlineTag could not be converted
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
  [ 1492608 ] PHP Notices in current CVS
+ [ 1497452 ] Fatal error: Call to undefined method parserFunction::setMo
  [ 1533361 ] trailing comments stop phpdoc on source generation
  [ 1532841 ] &apos;%&apos; in function parameter default value causes errors
  [ 1528752 ] Trivial typo in &quot;phpDocumentor Inline tags&quot; documentation

@@ -488,6 +488,7 @@ class phpDocumentorTParser extends Parser
             } else
             {
                 $this->_pv_func = new parserFunction;
+                unset($this->_accessModifiers);
             }
             if (isset($this->_accessModifiers))
             {
