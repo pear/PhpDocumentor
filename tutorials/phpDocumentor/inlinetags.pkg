@@ -15,7 +15,7 @@
  <refsect1 id="{@id manual}">
   <title>Inline Tags Manual</title>
   <para>Welcome to the phpDocumentor Inline Tags Manual</para>
-  <para>Unline regular tags (see {@tutorial tags.pkg}), Inline tags display in the text flow where they appear.  As of version 1.2, there are several inline tags.  The allowed inline tag list is different for tutorials and regular in-code documentation.</para>
+  <para>Unlike regular tags (see {@tutorial tags.pkg}), Inline tags display in the text flow where they appear.  As of version 1.2, there are several inline tags.  The allowed inline tag list is different for tutorials and regular in-code documentation.</para>
   <para>Inline tags allowed in both tutorials and DocBlocks include:
    <itemizedlist>
     <listitem><para>{@tutorial tags.inlinelink.pkg}</para></listitem>
