@@ -168,7 +168,10 @@ class phpDocumentor_setup
         {
             phpDocumentor_out("time_limit cannot be set since your in safe_mode, please edit time_limit in your php.ini to allow enough time for phpDocumentor to run"); 
         }
-        ini_set("memory_limit","256M");
+        $x = str_replace('M', '', ini_get('memory_limit'));
+        if ($x < 256) {
+            ini_set("memory_limit","256M");
+        }
 
         $phpver = phpversion();
         $phpdocver = PHPDOCUMENTOR_VER;
