@@ -432,7 +432,7 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
             {
                 $handle = $this->eventHandlers[$pevent];
                 $this->$handle($word, $pevent);
-            } else
+            } elseif ($word !== false)
             {
                 debug('WARNING: possible error, no handler for event number '.$pevent);
                 if ($endrecur++ == 25)
