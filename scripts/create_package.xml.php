@@ -78,6 +78,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
  [ 1492608 ] PHP Notices in current CVS
  [ 1497452 ] Fatal error: Call to undefined method parserFunction::setMo
+ [ 1503927 ] Wrong \'--\' suffix on some files
  [ 1512969 ] Call to a member function cantSource() on a non-object
  [ 1516781 ] Use of undefined constant T_ML_COMMENT - assumed \'T_ML_COMME
  [ 1524102 ] Weird include documentation
@@ -192,6 +193,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1492538 ] ERROR: Converter X specified by ... is not a class
  [ 1492608 ] PHP Notices in current CVS
  [ 1497452 ] Fatal error: Call to undefined method parserFunction::setMo
+ [ 1503927 ] Wrong \'--\' suffix on some files
  [ 1512969 ] Call to a member function cantSource() on a non-object
  [ 1516781 ] Use of undefined constant T_ML_COMMENT - assumed \'T_ML_COMME
  [ 1524102 ] Weird include documentation

@@ -732,7 +732,7 @@ class parserDocBlock
                 if (count($value) - 1)
                 {
                     $rest = $value;
-                    $value = $value[0];
+                    $value = trim($value[0]);
                     unset($rest[0]);
                     $rest = implode($rest,' ');
                 } else
@@ -741,10 +741,10 @@ class parserDocBlock
                     if (count($value) - 1)
                     {
                         $rest = $value;
-                        $value = $value[0];
+                        $value = trim($value[0]);
                         unset($rest[0]);
                         $rest = implode($rest,"\t");
-                    } else $value = $value[0];
+                    } else $value = trim($value[0]);
                 }
                 $value = preg_replace('/[^\[\]0-9\-a-zA-Z_\x7f-\xff]/', '-', $value);
                 $this->packagedescrip = $this->package = trim($value);
