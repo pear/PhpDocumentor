@@ -81,6 +81,7 @@ class phpDocumentorTParser extends Parser
     var $_pv_docblock;
     var $_pv_dtemplate;
     var $_pv_func;
+    var $_pv_func_param;
     var $_pv_findglobal;
     var $_pv_global_name;
     var $_pv_global_val;
