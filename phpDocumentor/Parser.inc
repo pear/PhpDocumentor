@@ -316,6 +316,10 @@ if (!defined('T_INTERFACE'))
     define('T_FINAL', 'foo');
     define('T_IMPLEMENTS', 'foo');
 }
+if (!defined('T_ML_COMMENT'))
+{
+    define('T_ML_COMMENT', T_COMMENT);
+}
 if (!defined('T_DOC_COMMENT'))
 {
     define('T_DOC_COMMENT', T_ML_COMMENT);
