@@ -84,6 +84,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1528752 ] Trivial typo in "phpDocumentor Inline tags" documentation
  [ 1533361 ] trailing comments stop phpdoc on source generation
  [ 1532841 ] \'%\' in function parameter default value causes errors
+ [ 1540233 ] memory exshausted
  Bug #6844: phpDocumentor doesn\'t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
@@ -197,6 +198,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1528752 ] Trivial typo in "phpDocumentor Inline tags" documentation
  [ 1533361 ] trailing comments stop phpdoc on source generation
  [ 1532841 ] \'%\' in function parameter default value causes errors
+ [ 1540233 ] memory exshausted
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in "Files to ignore"

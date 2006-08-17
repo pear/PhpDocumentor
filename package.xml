@@ -64,7 +64,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2006-08-16</date>
- <time>22:26:29</time>
+ <time>22:38:53</time>
  <version>
   <release>1.3.0</release>
   <api>1.3.0</api>
@@ -153,6 +153,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1528752 ] Trivial typo in &quot;phpDocumentor Inline tags&quot; documentation
  [ 1533361 ] trailing comments stop phpdoc on source generation
  [ 1532841 ] &apos;%&apos; in function parameter default value causes errors
+ [ 1540233 ] memory exshausted
  Bug #6844: phpDocumentor doesn&apos;t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
@@ -266,6 +267,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1528752 ] Trivial typo in &quot;phpDocumentor Inline tags&quot; documentation
  [ 1533361 ] trailing comments stop phpdoc on source generation
  [ 1532841 ] &apos;%&apos; in function parameter default value causes errors
+ [ 1540233 ] memory exshausted
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
@@ -2890,6 +2892,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1528752 ] Trivial typo in &quot;phpDocumentor Inline tags&quot; documentation
  [ 1533361 ] trailing comments stop phpdoc on source generation
  [ 1532841 ] &apos;%&apos; in function parameter default value causes errors
+ [ 1540233 ] memory exshausted
  Bug #6844: phpDocumentor doesn&apos;t show classes in file
  Bug #7554: Call to undefined method ReflectionClass::hasMethod()
  Bug #7577: Notice error for undefined _pv_function_param property
@@ -3003,6 +3006,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
  [ 1528752 ] Trivial typo in &quot;phpDocumentor Inline tags&quot; documentation
  [ 1533361 ] trailing comments stop phpdoc on source generation
  [ 1532841 ] &apos;%&apos; in function parameter default value causes errors
+ [ 1540233 ] memory exshausted
 - fixed these bugs reported in PEAR:
  Bug #2122: No tree menu for file identifier begining with a number
  Bug #2288: Webfrontend ignores more than one dir in &quot;Files to ignore&quot;
