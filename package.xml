@@ -63,8 +63,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>drewish@php.net</email>
   <active>yes</active>
  </developer>
- <date>2006-08-16</date>
- <time>22:46:24</time>
+ <date>2006-08-17</date>
+ <time>21:30:53</time>
  <version>
   <release>1.3.0</release>
   <api>1.3.0</api>
@@ -2813,7 +2813,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2006-08-16</date>
+   <date>2006-08-17</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>PHP 5 support and more, fix bugs
 
