@@ -751,11 +751,7 @@ class parserFileSourceTag extends parserTag
      */
     function Convert(&$c)
     {
-        if (!isset($this->_converted[$c->name]))
-        {
-            $this->ConvertSource($c);
-            $this->_converted[$c->name] = true;
-        }
+        $this->ConvertSource($c);
         return $this->getSourceLink($c);
     }
 
