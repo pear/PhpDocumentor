@@ -38,11 +38,11 @@
  * @since      1.0rc1
  */
 /** phpDocumentor version */
-if ('@VER@' != '@'.'VER@')
+if ('@PEAR-DIR@' != '@'.'PEAR-DIR@')
 {
     define("PHPDOCUMENTOR_VER","@VER@");
 } else {
-    define("PHPDOCUMENTOR_VER","1.3.0RC6");
+    define("PHPDOCUMENTOR_VER","1.3.1");
 }
 /** phpDocumentor version */
 define("PHPDOCUMENTOR_WEBSITE","http://www.phpdoc.org");
