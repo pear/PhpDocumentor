@@ -6,6 +6,8 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
 $packagedir = dirname(dirname(__FILE__));
 $notes = '
+ - fixed these bugs reported at sourceforge
+ [ 1545927 ] HTMLSmartyConverter logo not in package
  - fixed these bugs reported in PEAR:
   Bug #8533: require() broken in a lot of places - cannot run!
   Bug #8539: Parser error in create_examples.php
@@ -47,6 +49,7 @@ $options = array(
         'Release-1.2.3' => 'doc',
         'Release-1.2.3.1' => 'doc',
         'Release-1.3.0' => 'doc',
+        'Release-1.3.1' => 'doc',
         'pear-phpdoc' => 'script',
         'pear-phpdoc.bat' => 'script',
         'HTML_TreeMenu-1.1.2/TreeMenu.php' => 'php',
