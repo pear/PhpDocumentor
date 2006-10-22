@@ -11,6 +11,7 @@ $notes = '
  - fixed these bugs reported in PEAR:
   Bug #8533: require() broken in a lot of places - cannot run!
   Bug #8539: Parser error in create_examples.php
+  Bug #8773: PDF Convertor fails due to being unable to find fonts
 ';
 $version = '1.3.1';
 $options = array(

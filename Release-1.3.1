@@ -19,9 +19,6 @@ use of the tokenizer extension if php 4.3.0 is installed for a tremendous
 increase in parsing speed.  PHP version 5.1.0 or newer is recommended to take
 advantage of PHP5-only features.
 ------
-WARNING: The PDF Converter will not work in PHP5.  The PDF library that it relies upon
-segfaults with the simplest of files.  Generation still works great in PHP4
-------
 
 Speaking of speed, do NOT run the PDF Converter with --sourcecode = on for any
 medium to large sized projects.  I had to kill a PDF generation after 36 hours
@@ -30,8 +27,6 @@ library is tremendously inefficient, probably on the order of O(n^2).  I'd fix
 this if I knew anything about PDF.  If there are any users out there with the
 time and expertise to look into the algorithms used by CPdf, we would all
 appreciate it.
-
-This version removes the unmaintained and not very useful dia2codeConverter
 
 A full listing of all closed bugs and feature requests can be found in the 
 next section of the notes
@@ -48,6 +43,7 @@ The following bugs are fixed in version 1.3.1
  - fixed these bugs reported in PEAR:
   Bug #8533: require() broken in a lot of places - cannot run!
   Bug #8539: Parser error in create_examples.php
+  Bug #8773: PDF Convertor fails due to being unable to find fonts
 
 You can view the bug details or reopen one if
 you think it's not totally fixed at:

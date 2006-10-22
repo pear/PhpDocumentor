@@ -5123,7 +5123,7 @@ class Converter
      */
     function getConverterDir()
     {
-        if (/*@donotremove*/0) {
+        if ('@DATA-DIR@' != '@' . 'DATA-DIR@') {
             return str_replace('\\', '/', "@DATA-DIR@/PhpDocumentor/phpDocumentor/Converters/") . $this->outputformat . "/" . $this->name;
         } else {
             return str_replace('\\','/',$GLOBALS['_phpDocumentor_install_dir']) ."/phpDocumentor/Converters/" . $this->outputformat . "/" . $this->name;
