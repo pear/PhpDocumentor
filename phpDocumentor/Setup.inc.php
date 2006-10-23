@@ -152,13 +152,24 @@ class phpDocumentor_setup
      */
     function phpDocumentor_setup()
     {
-        global $_phpDocumentor_cvsphpfile_exts;
+        global $_phpDocumentor_cvsphpfile_exts, $_phpDocumentor_setting;
         if (!function_exists('is_a'))
         {
             print "phpDocumentor requires PHP version 4.2.0 or greater to function";
             exit;
         }
-	
+
+        $this->setup = new Io;
+        if (!isset($interface) && !isset($_GET['interface']) && !isset($_phpDocumentor_setting))
+        {
+            // Parse the argv settings
+            $_phpDocumentor_setting = $this->setup->parseArgv();
+        }
+        if (isset($_phpDocumentor_setting['useconfig']) &&
+             !empty($_phpDocumentor_setting['useconfig'])) {
+            $this->readConfigFile($_phpDocumentor_setting['useconfig']);
+        }
+
         // set runtime to a large value since this can take quite a while
         // we can only set_time_limit when not in safe_mode bug #912064
         if (!ini_get('safe_mode'))
@@ -183,8 +194,7 @@ class phpDocumentor_setup
         phpDocumentor_out("phpDocumentor version $phpdocver\n\n");
 
         $this->parseIni();
-        // create new classes
-        $this->setup = new Io;
+
         if (tokenizer_ext)
         {
             phpDocumentor_out("using tokenizer Parser\n");
@@ -230,7 +240,6 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         }
         // don't want a loop condition!
         unset($_phpDocumentor_setting['useconfig']);
-        $this->readCommandLineSettings();
     }
     
     /**
@@ -240,12 +249,6 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
     {
         global $_phpDocumentor_setting,$interface,$_phpDocumentor_RIC_files;
         // subscribe $render class to $parse class events
-        if (!isset($interface) && !isset($_GET['interface']) && !isset($_phpDocumentor_setting))
-        {
-            // Parse the argv settings
-            $_phpDocumentor_setting = $this->setup->parseArgv();
-        }
-        if (isset($_phpDocumentor_setting['useconfig']) && !empty($_phpDocumentor_setting['useconfig'])) return $this->readConfigFile($_phpDocumentor_setting['useconfig']);
         if (!isset($_phpDocumentor_setting['junk'])) $_phpDocumentor_setting['junk'] = '';
         if (!isset($_phpDocumentor_setting['title'])) $_phpDocumentor_setting['title'] = 'Generated Documentation';
         $temp_title = $_phpDocumentor_setting['title'];
