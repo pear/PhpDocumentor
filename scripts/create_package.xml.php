@@ -8,6 +8,7 @@ $packagedir = dirname(dirname(__FILE__));
 $notes = '
  - fixed these bugs reported at sourceforge
  [ 1545927 ] HTMLSmartyConverter logo not in package
+ [ 1581487 ] subdirectory include another subdirectory doc error.
  - fixed these bugs reported in PEAR:
   Bug #8533: require() broken in a lot of places - cannot run!
   Bug #8539: Parser error in create_examples.php

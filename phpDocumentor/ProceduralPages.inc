@@ -217,6 +217,7 @@ class ProceduralPages
         $x = new pageLink;
         $x->addLink($p->path,$p->name,$p->file,$p->package, $p->subpackage);
         $info['docs'] = $c->returnSee($x);
+        $p->name = $p->origName;
         return $info;
     }
     
