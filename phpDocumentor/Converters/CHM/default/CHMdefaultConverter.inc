@@ -1759,8 +1759,8 @@ class CHMdefaultConverter extends Converter
     
     function addTOC($name,$file,$package,$subpackage,$class = false,$tutorial = false)
     {
-        $file = str_replace($this->base_dir . PATH_DELIMITER, '', $this->targetDir)
-             . PATH_DELIMITER . $file . '.html';
+        $file = str_replace($this->base_dir . PATH_DELIMITER, '', $this->targetDir . PATH_DELIMITER)
+             . $file . '.html';
         $file = str_replace('\\',PATH_DELIMITER,$file);
         $file = str_replace('//',PATH_DELIMITER,$file);
         $file = str_replace(PATH_DELIMITER,'\\',$file);
