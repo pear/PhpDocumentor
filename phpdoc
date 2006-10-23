@@ -1,6 +1,6 @@
 #!/bin/sh
 PHP=`which php`
-exec $PHP -C -q -d output_buffering=1 $0 $@
+exec $PHP -C -q -d output_buffering=1 "$0" "$@"
 <?php
 //
 // PhpDoc, a program for creating javadoc style documentation from php code

@@ -7,6 +7,7 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 $packagedir = dirname(dirname(__FILE__));
 $notes = '
  - fixed these bugs reported at sourceforge
+ [ 1544977 ] Command line arguments split by spaces (fix included)
  [ 1545927 ] HTMLSmartyConverter logo not in package
  [ 1573807 ] CHM Convertor does not strip full path for all TOC entries
  [ 1575145 ] \'-q on\' quiet mode not fully quiet

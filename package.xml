@@ -64,7 +64,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2006-10-22</date>
- <time>22:45:53</time>
+ <time>22:55:25</time>
  <version>
   <release>1.3.1</release>
   <api>1.3.0</api>
@@ -76,6 +76,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
  <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
  <notes>
  - fixed these bugs reported at sourceforge
+ [ 1544977 ] Command line arguments split by spaces (fix included)
  [ 1545927 ] HTMLSmartyConverter logo not in package
  [ 1573807 ] CHM Convertor does not strip full path for all TOC entries
  [ 1575145 ] &apos;-q on&apos; quiet mode not fully quiet
@@ -2846,6 +2847,7 @@ segfaults with the simplest of files.  Generation still works great in PHP4
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>
  - fixed these bugs reported at sourceforge
+ [ 1544977 ] Command line arguments split by spaces (fix included)
  [ 1545927 ] HTMLSmartyConverter logo not in package
  [ 1573807 ] CHM Convertor does not strip full path for all TOC entries
  [ 1575145 ] &apos;-q on&apos; quiet mode not fully quiet
