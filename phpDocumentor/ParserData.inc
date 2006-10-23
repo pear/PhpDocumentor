@@ -497,7 +497,8 @@ class parserData
     
     function &getLink(&$c, $text = false)
     {
-        return $c->getPageLink($this->parent->file, $this->docblock->package, $this->parent->path, $text);
+        $a = $c->getPageLink($this->parent->file, $this->docblock->package, $this->parent->path, $text);
+        return $a;
     }
     
     /**
