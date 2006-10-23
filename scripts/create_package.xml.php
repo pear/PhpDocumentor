@@ -15,6 +15,7 @@ $notes = '
  - fixed these bugs reported in PEAR:
   Bug #8533: require() broken in a lot of places - cannot run!
   Bug #8539: Parser error in create_examples.php
+  Bug #8746: XML:DocBook generates warning with function/parameters without @param tag
   Bug #8773: PDF Convertor fails due to being unable to find fonts
   Bug #8914: returning non varibale reference ParserData.inc#500
 ';
