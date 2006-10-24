@@ -19,6 +19,9 @@ $notes = '
   Bug #8746: XML:DocBook generates warning with function/parameters without @param tag
   Bug #8773: PDF Convertor fails due to being unable to find fonts
   Bug #8914: returning non varibale reference ParserData.inc#500
+
+  The peardoc2 converter no longer uses funky PHP source highlighting, leaving
+that to the peardoc build instead.
 ';
 $version = '1.3.1';
 $options = array(
