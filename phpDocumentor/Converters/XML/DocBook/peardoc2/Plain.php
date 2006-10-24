@@ -106,7 +106,6 @@ class PHPDoc_XML_Beautifier_Renderer_Plain extends XML_Beautifier_Renderer {
                 switch ($token["contains"]) {
                     
                     // contains only CData or is empty
-                    case    PHPDOC_PROGRAMLISTING_CDATA:
                     case    XML_BEAUTIFIER_CDATA:
                     case    XML_BEAUTIFIER_EMPTY:
                         if (sizeof($token["children"]) >= 1) {
@@ -115,7 +114,7 @@ class PHPDoc_XML_Beautifier_Renderer_Plain extends XML_Beautifier_Renderer {
                             $data = '';
                         }
 
-                        if( strstr( $data, "\n" ) && $token['contains'] != PHPDOC_PROGRAMLISTING_CDATA)
+                        if( strstr( $data, "\n" ) && $token['contains'] != PHPDOC_BEAUTIFIER_CDATA)
                         {
                             $data   =   "\n" . $this->_indentTextBlock( $data, $token['depth']+1, true );
                         } 
@@ -138,7 +137,14 @@ class PHPDoc_XML_Beautifier_Renderer_Plain extends XML_Beautifier_Renderer {
                     break;
                 }
                 break;
-            
+
+            /*
+            * serialize <![CDATA
+            */
+            case PHPDOC_BEAUTIFIER_CDATA:
+                $xml = $token['data'] . $this->_options['linebreak'];
+                break;
+
             /*
             * serialize CData
             */

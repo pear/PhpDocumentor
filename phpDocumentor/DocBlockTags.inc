@@ -948,6 +948,7 @@ class parserExampleTag extends parserFileSourceTag
                     $obj = new phpDocumentorTWordParser;
                     $obj->setup($example);
                     $this->source = $obj->getFileSource();
+                    $this->origsource = $example;
                     unset($obj);
                 } else
                 {
@@ -964,7 +965,8 @@ class parserExampleTag extends parserFileSourceTag
      */
     function ConvertSource(&$c)
     {
-        $this->writeSource($c, $c->ProgramExample($this->source, true));
+        $this->writeSource($c, $c->ProgramExample($this->source, true, null,
+                            null, null, null, $this->origsource));
         return;
         $parser = new phpDocumentor_HighlightParser;
         $return = '';

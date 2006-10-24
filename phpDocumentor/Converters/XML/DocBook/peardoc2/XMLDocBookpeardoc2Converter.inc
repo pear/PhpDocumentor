@@ -276,7 +276,8 @@ class XMLDocBookpeardoc2Converter extends Converter
     function exampleProgramExample($example, $tutorial = false, $inlinesourceparse = null/*false*/,
                             $class = null/*false*/, $linenum = null/*false*/, $filesourcepath = null/*false*/)
     {
-        return '<example><title>Example</title>' .
+        return '<example><title>Example</title><programlisting role="php"><![CDATA[' .
+         $example . ']]></programlisting></example>';
         $this->ProgramExample($example, $tutorial, $inlinesourceparse, $class, $linenum, $filesourcepath)
         . '</example>';
     }
@@ -684,16 +685,20 @@ class XMLDocBookpeardoc2Converter extends Converter
 
     function getCData($value)
     {
-        return '<!CDATA['.$value.']]>';
+        return '<![CDATA['.$value.']]>';
     }
     
     function ProgramExample($listing, $tutorial = false, $inlinesourceparse = null/*false*/,
-                            $class = null/*false*/, $linenum = null/*false*/, $filesourcepath = null/*false*/)
+                            $class = null/*false*/, $linenum = null/*false*/, $filesourcepath = null/*false*/, $origsource = null)
     {
+        if ($origsource !== null) {
+            $listing = $origsource;
+        }
         if (!tokenizer_ext)
         {
             $listing = $this->getCData($listing);
         }
+        return '<programlisting role="php">' . $this->getCData($listing) . '</programlisting>';
         return parent::ProgramExample($listing, false, $inlinesourceparse, $class, $linenum, $filesourcepath);
     }
     
@@ -1051,7 +1056,7 @@ class XMLDocBookpeardoc2Converter extends Converter
             $value = $this->ProgramExample($value);
         } else
         {
-            $value = $this->getGlobalValue('<!CDATA[' .$element->getValue() . ']]>');
+            $value = $this->getGlobalValue('<![CDATA[' .$element->getValue() . ']]>');
         }
         $this->_appendGlobals(array('sdesc' => $docblock['sdesc'],
                                    'desc' => $docblock['desc'],

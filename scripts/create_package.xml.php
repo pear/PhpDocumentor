@@ -13,6 +13,7 @@ $notes = '
  [ 1575145 ] \'-q on\' quiet mode not fully quiet
  [ 1581487 ] subdirectory include another subdirectory doc error.
  - fixed these bugs reported in PEAR:
+  Bug #8520: Broken XML when XML_Beautifier is installed
   Bug #8533: require() broken in a lot of places - cannot run!
   Bug #8539: Parser error in create_examples.php
   Bug #8746: XML:DocBook generates warning with function/parameters without @param tag

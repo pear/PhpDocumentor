@@ -67,7 +67,7 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
                                 PHPDOC_XMLTOKEN_EVENT_PI => 'parsePiHandler',
                                 PHPDOC_XMLTOKEN_EVENT_ATTRIBUTE => 'attrHandler',
                                 PHPDOC_XMLTOKEN_EVENT_OPENTAG => 'tagHandler',
-                                PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING => 'tagHandler',
+                                PHPDOC_XMLTOKEN_EVENT_IN_CDATA => 'realcdataHandler',
                                 PHPDOC_XMLTOKEN_EVENT_DEF => 'defHandler',
                                 PHPDOC_XMLTOKEN_EVENT_CLOSETAG => 'closetagHandler',
                                 PHPDOC_XMLTOKEN_EVENT_ENTITY => 'entityHandler',
@@ -75,7 +75,6 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
                                 PHPDOC_XMLTOKEN_EVENT_SINGLEQUOTE => 'stringHandler',
                                 PHPDOC_XMLTOKEN_EVENT_DOUBLEQUOTE => 'stringHandler',
                                 PHPDOC_XMLTOKEN_EVENT_CDATA => 'parseCdataHandler',
-                                PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING_CDATA => 'parseCdataHandler',
     );
 
     /**
@@ -254,6 +253,18 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
     }
 
     /**
+     * handle <![CDATA[ unescaped text ]]>
+     */
+    function realcdataHandler($word, $pevent)
+    {
+        $this->_curthing .= $word;
+        if ($this->checkEventPop($word, $pevent)) {
+            $this->_addoutput($pevent);
+            $this->_curthing = '';
+        }
+    }
+
+    /**
      * handle <tags>
      */
     function tagHandler($word, $pevent)
@@ -273,9 +284,7 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
             $this->_tag = null;
             $this->_attrs = null;
             if ($word == '>') {
-                $event = ($pevent == PHPDOC_XMLTOKEN_EVENT_OPENTAG) ?
-                    PHPDOC_XMLTOKEN_EVENT_CDATA : PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING_CDATA;
-                $this->_event_stack->pushEvent($event);
+                $this->_event_stack->pushEvent(PHPDOC_XMLTOKEN_EVENT_CDATA);
                 return;
             }
         }
@@ -387,29 +396,29 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
     }
 
     /**#@-*/
+
     /**
-     * Handler for character data
+     * Handler for real character data
      *
      * @access protected
      * @param  object XML parser object
      * @param  string CDATA
      * @return void
      */
-    function programlistingCdataHandler($parser, $cdata)
+    function incdataHandler($parser, $cdata)
     {
         if ((string)$cdata === '') {
             return true;
         }
 
         $struct = array(
-                         "type"  => PHPDOC_PROGRAMLISTING_CDATA,
+                         "type"  => PHPDOC_BEAUTIFIER_CDATA,
                          "data"  => $cdata,
                          "depth" => $this->_depth
                        );
 
         $this->_appendToParent($struct);
     }
-    
     /**#@+
      * Output Methods
      * @access private
@@ -432,10 +441,9 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
             PHPDOC_XMLTOKEN_EVENT_PI => 'parsePiHandler',
             PHPDOC_XMLTOKEN_EVENT_XML => '_handleXMLDefault',
             PHPDOC_XMLTOKEN_EVENT_OPENTAG => 'startHandler',
-            PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING => 'startHandler',
             PHPDOC_XMLTOKEN_EVENT_COMMENT => '_handleXMLDefault',
             PHPDOC_XMLTOKEN_EVENT_CDATA => 'cdataHandler',
-            PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING_CDATA => 'programlistingCdataHandler',
+            PHPDOC_XMLTOKEN_EVENT_IN_CDATA => 'incdataHandler',
         );
         $method = $type[$event];
         switch ($event) {
@@ -444,7 +452,6 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
                 $this->$method(false, $this->_curthing);
             break;
             case PHPDOC_XMLTOKEN_EVENT_OPENTAG :
-            case PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING :
 //                echo "open tag: $this->_tag\n";
 //                var_dump($this->_attrs);
                 $this->$method(false, $this->_tag, $this->_attrs);
@@ -474,7 +481,7 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
                 $this->$method(false, $this->_curthing, $this->_attrs);
             break;
             case PHPDOC_XMLTOKEN_EVENT_CDATA :
-            case PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING_CDATA :
+            case PHPDOC_XMLTOKEN_EVENT_IN_CDATA :
 //                echo "cdata: $this->_curthing\n";
                 $this->$method(false, $this->_curthing);
             break;
@@ -563,12 +570,11 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
     function phpDocumentor_XML_Beautifier_Tokenizer()
     {
         $this->tokens[STATE_XMLTOKEN_CDATA] =
-        $this->tokens[STATE_XMLTOKEN_NOEVENTS]        = array('<?xml', '<!--', '<!', '</', '<?', '<programlisting', '<');//, '&');
-        $this->tokens[STATE_XMLTOKEN_PROGRAMLISTING_CDATA] = array('</programlisting>');
-        $this->tokens[STATE_XMLTOKEN_PROGRAMLISTING] =
+        $this->tokens[STATE_XMLTOKEN_NOEVENTS]        = array('<?xml', '<!--', '<![CDATA[', '<!', '</', '<?', '<');//, '&');
         $this->tokens[STATE_XMLTOKEN_OPENTAG]        = array("\n","\t"," ", '>', '/>');
         $this->tokens[STATE_XMLTOKEN_XML] =
         $this->tokens[STATE_XMLTOKEN_PI]        = array("\n","\t"," ", '?>');
+        $this->tokens[STATE_XMLTOKEN_IN_CDATA]        = array(']]>');
         $this->tokens[STATE_XMLTOKEN_CLOSETAG]        = array("\n",'>');
         $this->tokens[STATE_XMLTOKEN_COMMENT]        = array("\n",'-->');
         $this->tokens[STATE_XMLTOKEN_DEF]        = array("\n",']>','>');
@@ -580,12 +586,12 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
 
         $this->pushEvent[PHPDOC_XMLTOKEN_EVENT_NOEVENTS] = 
             array(
-                '<programlisting' => PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING,
                 '<' => PHPDOC_XMLTOKEN_EVENT_OPENTAG,
                 '<?' => PHPDOC_XMLTOKEN_EVENT_PI,
                 '<?xml' => PHPDOC_XMLTOKEN_EVENT_XML,
                 '</' => PHPDOC_XMLTOKEN_EVENT_CLOSETAG,
 //                '&' => PHPDOC_XMLTOKEN_EVENT_ENTITY,
+                '<![cdata[' => PHPDOC_XMLTOKEN_EVENT_IN_CDATA,
                 '<!--' => PHPDOC_XMLTOKEN_EVENT_COMMENT,
                 '<!' => PHPDOC_XMLTOKEN_EVENT_DEF,
             );
@@ -605,17 +611,17 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
             );
 /**************************************************************/
 
-        $this->popEvent[PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING_CDATA] = array('</programlisting>');
+        $this->popEvent[PHPDOC_XMLTOKEN_EVENT_IN_CDATA] = array(']]>');
 /**************************************************************/
 
         $this->pushEvent[PHPDOC_XMLTOKEN_EVENT_CDATA] =
             array(
-                '<programlisting' => PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING,
                 '<' => PHPDOC_XMLTOKEN_EVENT_OPENTAG,
                 '<?' => PHPDOC_XMLTOKEN_EVENT_PI,
 //                '&' => PHPDOC_XMLTOKEN_EVENT_ENTITY,
                 '<!--' => PHPDOC_XMLTOKEN_EVENT_COMMENT,
                 '<!' => PHPDOC_XMLTOKEN_EVENT_DEF,
+                '<![cdata[' => PHPDOC_XMLTOKEN_EVENT_IN_CDATA,
             );
 /**************************************************************/
 
@@ -633,9 +639,6 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
 /**************************************************************/
 
         $this->popEvent[PHPDOC_XMLTOKEN_EVENT_OPENTAG] = array('>', '/>');
-/**************************************************************/
-
-        $this->popEvent[PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING] = array('>');
 /**************************************************************/
 
         $this->popEvent[PHPDOC_XMLTOKEN_EVENT_CLOSETAG] = array('>');
@@ -670,8 +673,7 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
             PHPDOC_XMLTOKEN_EVENT_CDATA => 'PHPDOC_XMLTOKEN_EVENT_CDATA',
             PHPDOC_XMLTOKEN_EVENT_DEF => 'PHPDOC_XMLTOKEN_EVENT_DEF',
             PHPDOC_XMLTOKEN_EVENT_XML => 'PHPDOC_XMLTOKEN_EVENT_XML',
-            PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING_CDATA => 'PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING_CDATA',
-            PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING => 'PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING',
+            PHPDOC_XMLTOKEN_EVENT_IN_CDATA => 'PHPDOC_XMLTOKEN_EVENT_IN_CDATA',
         );
         if (isset($lookup[$value]))
         return $lookup[$value];
@@ -740,20 +742,11 @@ define("PHPDOC_XMLTOKEN_EVENT_XML"    ,    12);
 /** currently parsing a <?xml */
 define("STATE_XMLTOKEN_XML"    ,    112);
 
-/** used when a <programlisting> section is found */
-define('PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING', 13);
-/** currently parsing a <programlisting> */
-define('STATE_XMLTOKEN_PROGRAMLISTING', 113);
+/** used when a <![CDATA[ section is found */
+define('PHPDOC_XMLTOKEN_EVENT_IN_CDATA', 13);
+/** currently parsing a <![CDATA[ ]]> */
+define('STATE_XMLTOKEN_IN_CDATA', 113);
 
-/** used when a <programlisting> section is found */
-define('PHPDOC_XMLTOKEN_EVENT_PROGRAMLISTING_CDATA', 14);
-/** currently parsing a <programlisting> */
-define('STATE_XMLTOKEN_PROGRAMLISTING_CDATA', 114);
-define('PHPDOC_PROGRAMLISTING_CDATA', 10000);
-//require_once 'PhpDocumentor/phpDocumentor/WordParser.inc';
-//require_once 'PhpDocumentor/phpDocumentor/EventStack.inc';
-//require_once 'XML/Beautifier.php';
-//$a = new phpDocumentor_XML_Beautifier_Tokenizer();
-//$a->setInputFile('c:\web pages\chiara\phpdoc\package.xml');
-//$a->parse();
+/** do not remove, needed in plain renderer */
+define('PHPDOC_BEAUTIFIER_CDATA', 100000);
 ?>
