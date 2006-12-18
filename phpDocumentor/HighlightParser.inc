@@ -385,7 +385,7 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
             $dbg_linenum = $this->_wp->linenum;
             $dbg_pos = $this->_wp->getPos();
             $word = $this->_wp->getWord();
-            if (is_array($word) && $word[0] == T_WHITESPACE  && $pevent != PARSER_EVENT_CLASS_MEMBER)
+            if (is_array($word) && ($word[0] == T_WHITESPACE || $word[0] == T_COMMENT) && $pevent != PARSER_EVENT_CLASS_MEMBER)
             {
 //                debug("added ".$this->_wp->linenum.'-'.$this->_wp->pos);
                 $this->_addoutput($word);
