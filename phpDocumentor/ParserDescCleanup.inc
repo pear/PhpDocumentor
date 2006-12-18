@@ -1109,7 +1109,7 @@ class parserDescParser extends Parser
         } else
         {// if the <p> is not at the beginning of the desc, then it is not
          // possible to parse into paragraphs using this tag
-            if (is_string($word) && $word == ' ' && $this->p_vars['last_word'] == ' ') return;
+            if ($word === ' ' && $this->p_vars['last_word'] === ' ') return;
             $this->addText($word);
         }
     }
