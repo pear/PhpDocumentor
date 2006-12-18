@@ -30,7 +30,6 @@
  </refsect1>
  <refsect1 id="{@id example}">
   <title>Example</title>
-  <para>phpDocumentor displays a @version string without modification, so it may be used in any way you'd like:</para>
   <para>
    <programlisting role="php">
    <![CDATA[

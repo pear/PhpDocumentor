@@ -191,7 +191,7 @@ function foo($param = me)
    </para>
    <para>phpDocumentor will convert all whitespace into a single space in the
     long description, use paragraph breaks to define newlines, or &lt;pre&gt;,
-    as discussed in the next sectio</para>
+    as discussed in the next section.</para>
   </refsect2>
   <refsect2 id="{@id desc}">
    <title>DocBlock Description details</title>
