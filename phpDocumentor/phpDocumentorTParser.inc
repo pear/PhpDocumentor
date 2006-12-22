@@ -1299,6 +1299,11 @@ class phpDocumentorTParser extends Parser
             $lines[$i] = substr(trim($lines[$i]),1); // remove leading "* "
         }
         // remove empty lines
+        if( $lines == array(false) )
+        { 
+            // prevent PHP 5.2 segfault (see http://bugs.php.net/bug.php?id=39350)
+            $lines = array('');
+        }
         $lines = explode("\n",trim(join("\n",$lines)));
         for($i = 0;$i<count($lines);$i++)
         {
