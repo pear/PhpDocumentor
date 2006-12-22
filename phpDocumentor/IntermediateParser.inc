@@ -377,7 +377,7 @@ class phpDocumentor_IntermediateParser
     }
     
     /**
-     * handles post-parsing of include/require/include_once/include_once
+     * handles post-parsing of include/require/include_once/require_once
      *
      * This function sets {@link $data}->clean to false to tell the
      * phpDocumentor_IntermediateParser that a page-level DocBlock can't be
@@ -391,7 +391,7 @@ class phpDocumentor_IntermediateParser
     {
         if ($this->_lastDocBlockWasPageLevel)
         {
-            addWarning(PDERROR_DOCBLOCK_CONFLICT, $data->getName(), $data->getFile());
+            addWarning(PDERROR_DOCBLOCK_CONFLICT, $data->getName(), $data->getValue());
             if (!$this->_oldPageLevel)
             {
                 unset($this->last);
