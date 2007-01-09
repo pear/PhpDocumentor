@@ -726,8 +726,8 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         phpDocumentor_out("\ndone\n");
         flush();
         /** Debug Constant */
-        define("PHPDOCUMENTOR_DEBUG",$options['DEBUG']['PHPDOCUMENTOR_DEBUG']);
-        define("PHPDOCUMENTOR_KILL_WHITESPACE",$options['DEBUG']['PHPDOCUMENTOR_KILL_WHITESPACE']);
+        if (!defined('PHPDOCUMENTOR_DEBUG')) define("PHPDOCUMENTOR_DEBUG",$options['DEBUG']['PHPDOCUMENTOR_DEBUG']);
+        if (!defined('PHPDOCUMENTOR_KILL_WHITESPACE')) define("PHPDOCUMENTOR_KILL_WHITESPACE",$options['DEBUG']['PHPDOCUMENTOR_KILL_WHITESPACE']);
         $GLOBALS['_phpDocumentor_cvsphpfile_exts'] = $GLOBALS['_phpDocumentor_phpfile_exts'];
         foreach($GLOBALS['_phpDocumentor_cvsphpfile_exts'] as $key => $val)
         {
@@ -747,6 +747,15 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         }
     }
     
+
+    function cleanConverterNamePiece($name, $extra_characters_to_allow = '')
+    {
+        $name = str_replace("\\", "/", $name);
+        // security:  ensure no opportunity exists to use "../.." pathing in this value
+        $name = preg_replace('/[^a-zA-Z0-9' . $extra_characters_to_allow . '_]/', "", $name);
+        return $name;
+    }
+    
     function setupConverters($output = false)
     {
         global $_phpDocumentor_setting;
@@ -761,22 +770,33 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
             {
                 $c[$i] = explode(':',$c[$i]);
                 $a = $c[$i][0];
-                $b = false;
-                $d = 'default/';
-                if (count($c[$i]) > 1)
+                if (isset($c[$i][0]))
                 {
-                    $a = $c[$i][0];
-                    $b = $c[$i][1];
-                    if (isset($c[$i][2]))
+                    $a = $this->cleanConverterNamePiece($c[$i][0]);
+                }
+                else
+                {
+                    $a = false;
+                }
+                if (isset($c[$i][1]))
+                {
+                    $b = $this->cleanConverterNamePiece($c[$i][1], '\/');  // must allow "/" due to options like "DocBook/peardoc2"
+                }
+                else
+                {
+                    $b = false;
+                }
+                if (isset($c[$i][2]))
+                {
+                    $d = $this->cleanConverterNamePiece($c[$i][2], '.');  // must allow "." due to options like "phpdoc.de"
+                    if (substr($d,-1) != "/")
                     {
-                        $d = $c[$i][2];
-                        $d = str_replace("\\","/",$d);
-                        if (substr($d,-1) != "/")
-                        {
-                            $d .= "/";
-                        }
+                        $d .= "/";
                     }
-                    else $d = 'default/';
+                    else 
+                    {
+                        $d = 'default/';
+                    }
                 }
                 if (strtoupper(trim($a)) == 'HTML' && (trim($b) == 'default'))
                 {
