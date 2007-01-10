@@ -179,11 +179,7 @@ class phpDocumentor_setup
         {
             phpDocumentor_out("time_limit cannot be set since your in safe_mode, please edit time_limit in your php.ini to allow enough time for phpDocumentor to run"); 
         }
-        $x = str_replace('M', '', ini_get('memory_limit'));
-        if ($x < 256) {
-            ini_set("memory_limit","256M");
-        }
-
+  
         $phpver = phpversion();
         $phpdocver = PHPDOCUMENTOR_VER;
         if (isset($_GET['interface'])) {
@@ -194,6 +190,7 @@ class phpDocumentor_setup
         phpDocumentor_out("phpDocumentor version $phpdocver\n\n");
 
         $this->parseIni();
+        $this->setMemoryLimit();
 
         if (tokenizer_ext)
         {
@@ -390,6 +387,25 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         if (!isset($_phpDocumentor_setting['ignoretags'])) return false;
         if ($inline) $tagname = '{'.$tagname.'}';
         return in_array($tagname, $_phpDocumentor_setting['ignoretags']);
+    }
+
+    /**
+     * Allow a memory_limit setting in phpDocumentor.ini to override php.ini or default memory limit
+     */    
+    function setMemoryLimit() {
+        global $_phpDocumentor_options;
+        $DEFAULT_MEMORY_SIZE_MINIMUM = 256;
+        
+        if (isset($_phpDocumentor_options['memory_limit'])) {
+            // PhpDoc memory_limit from phpDocumentor.ini overrides all other considerations
+            $memory_setting_to_use = str_replace('M', '', $_phpDocumentor_options['memory_limit']);
+        } else {
+            // PHP memory_limit from php.ini must be at least the default minimum
+            $php_ini_setting = str_replace('M', '', ini_get('memory_limit'));
+            $memory_setting_to_use = ($php_ini_setting > $DEFAULT_MEMORY_SIZE_MINIMUM) ? $php_ini_setting : $DEFAULT_MEMORY_SIZE_MINIMUM;            
+        }
+        ini_set("memory_limit", $memory_setting_to_use . "M");
+        phpDocumentor_out("Maximum memory usage set at " . $memory_setting_to_use . "M...\n");
     }
     
     function setJavadocDesc()
