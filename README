@@ -40,19 +40,19 @@ directory that you choose.  Again, your web server documentation has detailed
 information on how to do this.  The command-line interface will not have problems
 with access.
 
-If you need more detailed help, check out INSTALL
+If you need more detailed help, check out INSTALL.
 
 ################################################################################
 Release Notes
 ################################################################################
 
-Release notes for the newest version are in Release-1.3.0
+Release notes for the newest version are in Release-1.3.1.
 
-1.3.0 is out, a STABLE release
+1.3.1 is out, a STABLE release.
 
-To learn howto write PHPDoc-style documentation run phpDocumentor on itself, with
+To learn how to write PHPDoc-style documentation run, phpDocumentor on itself, with
 ./phpdoc -c makedocs.  Before you do, modify users/makedocs.ini to contain the
-proper path values
+proper path values.
 
 If you find a bug please post it at:
 http://sourceforge.net/tracker/?func=add&group_id=11194&atid=111194
@@ -61,7 +61,7 @@ http://sourceforge.net/tracker/?func=add&group_id=11194&atid=111194
 General Notes
 ################################################################################
 phpDocumentor is hosted at phpdoc.org, with downloads and mailing list through 
-sourceforge.net
+sourceforge.net.
 
 webpage: 	http://phpdoc.org/
 documentation:      http://phpdoc.org/manual.php
@@ -69,16 +69,16 @@ mirror: 	http://phpdocu.sourceforge.net
 projectpage: 	http://www.phpdoc.org
 
 For a list of people who have helped work on this project please read the 
-Authors file
+Authors file.
 
-phpDocumentor 1.3.0 is released under the LGPL version 2.1, text is in
-LICENSE
+phpDocumentor 1.3.1 is released under the LGPL version 2.1, text is in
+LICENSE.
 
 ################################################################################
 Feature Notes
 ################################################################################
 
-phpDocumentor is a JavaDoc-like automatic documentation generator for PHP
+phpDocumentor is a JavaDoc-like automatic documentation generator for PHP,
 written in PHP.  It is the most versatile tool for documenting PHP.
 
 For users new to phpDocumentor, phpDocumentor uses an event-driven parser
@@ -95,14 +95,14 @@ automatic documentors for PHP cannot achieve:
 	documentation
   --extensive documentation of the package, including a detailed specification
 	for tags and templates
-  --PHP License
+  --LGPL License
   
-New in version 1.3.0:
+New since version 1.3.0:
   --PHP 5 Parsing
   --hundreds of bugfixes from version 1.2.3
 
 If something is missing from this list make sure sure to file
-a feature request on sourceforge
+a feature request on sourceforge:
 
 http://sourceforge.net/tracker/?func=add&group_id=11194&atid=361194
 
@@ -110,8 +110,9 @@ If you want to help code that new feature and get it just right, please let us k
 Any help is greatly appreciated, just contact the 
 phpDocumentor team for information on getting started.
 
-phpDocumentor needs php 4.2.0 or greater, but you'll see the best performance
-in the newest version.  The recommended version for 1.3.0 is 5.1.3 or newer.
+phpDocumentor needs php 4.1.0 or greater, but you'll see the best performance
+in the newest version.  The recommended version for phpDocumentor 1.3.0 and up 
+is PHP 5.1.3 or newer.
 
 ################################################################################
 Command Line notes
@@ -124,26 +125,26 @@ You can also generate documentation from the source using:
 
 phpdoc -c makedocs
 
-run this command from the installation directory, and make sure you have full
-write and directory creation permissions or it will not work
+Run this command from the installation directory, and make sure you have full
+write and directory creation permissions or it will not work.
 
 Generated documentation is accessible via Documentation/new/index.html
 
 ################################################################################
 
-if you run phpdoc and get :
+If you run phpdoc and get :
 bash: ./phpdoc: No such file or directory
 
-Then you haven't installed the cgi version of php
-goto your php src dir and try
+Then you haven't installed the cgi version of php.
+Go to your php src dir and try
 make clean
 ./configure
 make
 make install
 
-phpdoc should work now
+phpdoc should work now.
 
-If your using php 4.2.0 or higher you will want to use the cli version
+If you're using php 4.2.0 or higher you will want to use the cli version
 instead of the cgi.  Checkout php.net for details on these changes
 
 
@@ -156,30 +157,30 @@ to write files to disk is a serious security risk, and phpDocumentor is not
 designed to work on insecure systems.  Setup php on a development machine
 that has a firewall or no internet connection, and run phpDocumentor from there.
 
-Make sure you webserver can write to where ever you specify as a target or you
-will get lots of errors
+Make sure your webserver can write to whereever you specify as a target or you
+will get lots of errors.
 
 ################################################################################
 Thanks
 ################################################################################
-Thanks to Sam Blum for his assistance with @example and other enhancements
-Thanks to William K. Hardeman for his HTML:Smarty:HandS design
+Thanks to Sam Blum for his assistance with @example and other enhancements.
+Thanks to William K. Hardeman for his HTML:Smarty:HandS design.
 Thanks to Marco von Ballmoos for transforming the HTML:frames converter and
-    templates into a magnificent work of art
-Thanks to Andrew Eddie for docbuilder and the CHM Converter enhancements
+    templates into a magnificent work of art.
+Thanks to Andrew Eddie for docbuilder and the CHM Converter enhancements.
 Thanks to Darren Cook for suggesting exciting new features, and making sure that
-    they worked when implemented
+    they worked when implemented.
 Thanks to Marko Kaening, Dan Convissor for policing the source and finding bugs
-    that would have otherwise gone undetected
+    that would have otherwise gone undetected.
 Thanks to Juan Pablo Morales for the web interface.
-Thanks to whoever sent me the patch to make phpdocumentor work better in NT
-	I have your diff and patched the program but i seem to have lost your
-	name if you send it to me i'll add it to the Authors file
-Thanks to Florian Clever for the newest set of win32 patches they seem to have
+Thanks to whoever sent me the patch to make phpDocumentor work better in NT...
+	I have your diff and patched the program but i seem to have lost your name...
+	if you send it to me i'll add it to the Authors file.
+Thanks to Florian Clever for the newest set of win32 patches... they seem to have
 	fixed the last of the problems.
     
     Thanks to EVERYONE who has provided ideas and input, without you,
-                     phpDocumentor would be nothing
+                     phpDocumentor would be nothing.
 
 ################################################################################
 ################################################################################

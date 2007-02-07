@@ -42,17 +42,17 @@ Q: There is no package.xml in the release, where is it?
 
 A: this problem occurs when one does the faulty steps of:
 
-$ tar xvf PhpDocumentor-1.3.0RC6.tgz
+$ tar xvf PhpDocumentor-1.3.1.tgz
 $ pear install package.xml
 
    instead, the user should simply run:
 
-$ pear install PhpDocumentor-1.3.0RC6.tgz
+$ pear install PhpDocumentor-1.3.1.tgz
 
    or, if the zlib extension is not enabled:
 
-$ gunzip PhpDocumentor-1.3.0RC6.tgz
-$ pear install PhpDocumentor-1.3.0RC6.tar
+$ gunzip PhpDocumentor-1.3.1.tgz
+$ pear install PhpDocumentor-1.3.1.tar
 
 ################################################################################
 Documentation Errors
@@ -105,7 +105,7 @@ Q: I keep getting a warning that there is no @package tag in file xxx.php, but
    there is a @package tag in the class definition, doesn't this apply to the
    file?
 
-A: No.  this example does not have a page-level DocBlock:
+A: No.  This example does not have a page-level DocBlock:
 
    <?php
    /**

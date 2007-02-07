@@ -63,6 +63,12 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>drewish@php.net</email>
   <active>yes</active>
  </developer>
+ <developer>
+  <name>Chuck Burgess</name>
+  <user>ashnazg</user>
+  <email>ashnazg@php.net</email>
+  <active>yes</active>
+ </developer>
  <date>2006-10-24</date>
  <time>21:17:55</time>
  <version>
