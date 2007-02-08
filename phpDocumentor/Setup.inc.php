@@ -750,13 +750,15 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
      */
     function parseIni()
     {
-        phpDocumentor_out("Parsing configuration file phpDocumentor.ini...");
+        phpDocumentor_out("Parsing configuration file phpDocumentor.ini...\n");
         flush();
         if ('@DATA-DIR@' != '@'.'DATA-DIR@')
         {
             $options = phpDocumentor_parse_ini_file(str_replace('\\','/', '@DATA-DIR@/PhpDocumentor') . PATH_DELIMITER . 'phpDocumentor.ini',true);
+            phpDocumentor_out("   (found in " . '@DATA-DIR@/PhpDocumentor' . PATH_DELIMITER . ")...\n");
         } else {
             $options = phpDocumentor_parse_ini_file(str_replace('\\','/',$GLOBALS['_phpDocumentor_install_dir']) . PATH_DELIMITER . 'phpDocumentor.ini',true);
+            phpDocumentor_out("   (found in " . $GLOBALS['_phpDocumentor_install_dir'] . PATH_DELIMITER . ")...\n");
         }
 
         if (!$options)
