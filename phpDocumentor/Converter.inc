@@ -2676,7 +2676,7 @@ class Converter
                 }
             }
         }
-        $i = 0;
+        $startPositionOfElementName = 0;    // which character of the element name actually starts its textual name
         switch($element->type)
         {
             case 'page' :
@@ -2723,7 +2723,7 @@ class Converter
                     $this->package_elements[$element->docblock->package][$element->docblock->subpackage]['page'][$curpath][] = $element;
                 }
                 $link = $this->addLink($element);
-                $i++;
+                $startPositionOfElementName = 1;    // lose the leading "$" character
                 if ($this->leftindex['globals'])
                 $this->global_elements[$element->docblock->package][$element->docblock->subpackage][] = $link;
                 $this->page_contents[$element->docblock->package][$element->docblock->subpackage][$curpath][] = $link;
@@ -2734,7 +2734,7 @@ class Converter
                     $this->package_elements[$element->docblock->package][$element->docblock->subpackage]['class'][$this->class][] = $element;
                 }
                 $link = $this->addLink($element);
-                $i++;
+                $startPositionOfElementName = 1;    // lose the leading "$" character
                 $this->class_contents[$element->docblock->package][$element->docblock->subpackage][$this->class][] = $link;
             break;
             case 'const' :
@@ -2743,7 +2743,6 @@ class Converter
                     $this->package_elements[$element->docblock->package][$element->docblock->subpackage]['class'][$this->class][] = $element;
                 }
                 $link = $this->addLink($element);
-                $i++;
                 $this->class_contents[$element->docblock->package][$element->docblock->subpackage][$this->class][] = $link;
             break;
             case 'method' :
@@ -2788,12 +2787,12 @@ class Converter
         }
         if ($element->type == 'page')
         {
-            $this->elements[substr(strtolower($element->getFile()),$i,1)][] = $element;
-            $this->pkg_elements[$this->package][$this->subpackage][substr(strtolower($element->getFile()),$i,1)][] = $element;
+            $this->elements[substr(strtolower($element->getFile()),$startPositionOfElementName,1)][] = $element;
+            $this->pkg_elements[$this->package][$this->subpackage][substr(strtolower($element->getFile()),$startPositionOfElementName,1)][] = $element;
         } else
         {
-            $this->elements[substr(strtolower($element->getName()),$i,1)][] = $element;
-            $this->pkg_elements[$this->package][$this->subpackage][substr(strtolower($element->getName()),$i,1)][] = $element;
+            $this->elements[substr(strtolower($element->getName()),$startPositionOfElementName,1)][] = $element;
+            $this->pkg_elements[$this->package][$this->subpackage][substr(strtolower($element->getName()),$startPositionOfElementName,1)][] = $element;
         }
     }
 
