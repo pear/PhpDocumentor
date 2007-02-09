@@ -255,15 +255,13 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
             echo $this->setup->displayHelpMsg();
             die();
         }
-        
-        if (isset($_phpDocumentor_setting['hidden'])) $this->hidden = true;
+
+        // set to parse hidden files
+        $this->hidden = (isset($_phpDocumentor_setting['hidden'])) ? decideOnOrOff($_phpDocumentor_setting['hidden']) : false;
         
         // set to parse elements marked private with @access private
-        if (isset($_phpDocumentor_setting['parseprivate']) && $_phpDocumentor_setting['parseprivate'] == 'on')
-        {
-            $this->render->setParsePrivate(true);
-        }
-        
+        $this->render->setParsePrivate((isset($_phpDocumentor_setting['parseprivate'])) ? decideOnOrOff($_phpDocumentor_setting['parseprivate']) : false);
+
         if (isset($_phpDocumentor_setting['ignoretags']))
         {
             $ignoretags = explode(',', $_phpDocumentor_setting['ignoretags']);
@@ -343,13 +341,8 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         }
         
         // set the mode (quiet or verbose)
-        if ( isset($_phpDocumentor_setting['quiet']) || strcasecmp($_phpDocumentor_setting['junk'], "-q") == 0 || strcasecmp($_phpDocumentor_setting['junk'], "--quiet") == 0) 
-        {
-            if (isset($_phpDocumentor_setting['quiet']) && $_phpDocumentor_setting['quiet'] != 'on');
-            else
-            $this->render->setQuietMode(true);
-        }
-        
+        $this->render->setQuietMode((isset($_phpDocumentor_setting['quiet'])) ? decideOnOrOff($_phpDocumentor_setting['quiet']) : false);
+
         // Setup the different classes
         if (isset($_phpDocumentor_setting['templatebase']))
         {
@@ -450,14 +443,14 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
            $this->parse->eventHandlers[PARSER_EVENT_DOCBLOCK] = 'JavaDochandleDocblock';
     }
     
-    function setParsePrivate()
+    function setParsePrivate($flag = true)
     {
-        $this->render->setParsePrivate(true);
+        $this->render->setParsePrivate($flag);
     }
     
-    function setQuietMode()
+    function setQuietMode($flag = true)
     {
-        $this->render->setQuietMode(true);
+        $this->render->setQuietMode($flag);
     }
     
     function setTargetDir($target)
@@ -491,9 +484,9 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         $this->dirs = $dirs;
     }
     
-    function parseHiddenFiles()
+    function parseHiddenFiles($flag = true)
     {
-        $this->hidden = true;
+        $this->hidden = $flag;
     }
     
     function setIgnore($ig)
@@ -872,12 +865,35 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
 }
 
 /**
+ * Fuzzy logic to interpret the boolean args' intent
+ * @param string the command-line option to analyze
+ * @return boolean our best guess of the value's boolean intent
+ */
+function decideOnOrOff($value_to_guess = 'NO VALUE WAS PASSED')
+{
+    $these_probably_mean_yes = array(
+        '',             // "--hidden" with no value 
+        'on',           // "--hidden on"
+        'y', 'yes',     // "--hidden y"
+        'true',         // "--hidden true"
+        '1'             // "--hidden 1"
+    );
+    $best_guess = false;    // default to "false", "off", "no", "take a hike"
+
+    if (in_array(strtolower(trim($value_to_guess)), $these_probably_mean_yes))
+    {
+        $best_guess = true;
+    }
+    return $best_guess;
+}
+
+/**
  * Print parse information if quiet setting is off
  */
 function phpDocumentor_out($string)
 {
     global $_phpDocumentor_setting;
-    if (!isset($_phpDocumentor_setting['quiet']) || !$_phpDocumentor_setting['quiet'])
+    if ((isset($_phpDocumentor_setting['quiet'])) ? !decideOnOrOff($_phpDocumentor_setting['quiet']) : true)
     {
         print $string;
     }
