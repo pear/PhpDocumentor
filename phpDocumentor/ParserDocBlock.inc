@@ -1094,95 +1094,81 @@ class parserDocBlock
 }
 
 /**
+ * Determines the arbitrary tag rank value for a given tag
  * @access private
  */
-function tagsort($a, $b)
+function getTagRanking($tag)
 {
-    switch(phpDocumentor_get_class($a))
+    switch(phpDocumentor_get_class($tag))
     {
-        case 'parsertag' :
-            switch ($a->keyword)
-            {
-                case 'author' :
-                    $o = 3;
-                    break;
-                case 'version' :
-                    $o = 4;
-                    break;
-                case 'deprecated' :
-                case 'deprec' :
-                    $o = 7;
-                    break;
-                case 'todo' :
-                case 'TODO' :
-                    $o = 8;
-                    break;
-                case 'abstract' :
-                    $o = 9;
-                    break;
-            }
-        case 'parseraccesstag' :
-            $o = 10;
-            break;
-        case 'parsernametag' :
-            $o = 11;
-            break;
-        case 'parserseetag' :
-            $o = 5;
-            break;
-        case 'parserlinktag' :
-            $o = 6;
-            break;
         case 'parserreturntag' :
             $o = 0;
             break;
         case 'parservartag' :
             $o = 1;
             break;
-        case 'parserstaticvartag' :
+        case 'parsertutorialtag' :
             $o = 2;
             break;
-        default :
-            $o = 12;
+        case 'parserstaticvartag' :
+            $o = 3;
             break;
-    }
-    switch(phpDocumentor_get_class($b))
-    {
+        case 'parserseetag' :
+            $o = 10;
+            break;
+        case 'parserlinktag' :
+            $o = 11;
+            break;
         case 'parsertag' :
-            switch ($b->keyword)
+            switch ($tag->keyword)
             {
                 case 'author' :
-                    $p = 3;
+                    $o = 4;
+                    break;
                 case 'version' :
-                    $p = 4;
+                    $o = 5;
+                    break;
+                case 'copyright' :
+                    $o = 6;
+                    break;
                 case 'deprecated' :
                 case 'deprec' :
-                    $p = 7;
+                    $o = 12;
+                    break;
                 case 'todo' :
                 case 'TODO' :
-                    $p = 8;
+                    $o = 13;
+                    break;
                 case 'abstract' :
-                    $p = 9;
+                    $o = 14;
+                    break;
+                default :
+                    $o = 15;
+                    break;
             }
+            break;
         case 'parseraccesstag' :
-            $p = 10;
+            $o = 18;
+            break;
         case 'parsernametag' :
-            $p = 11;
-        case 'parserseetag' :
-            $p = 5;
-        case 'parserlinktag' :
-            $p = 6;
-        case 'parserreturntag' :
-            $p = 0;
-        case 'parservartag' :
-            $p = 1;
-        case 'parsertutorialtag' :
-            $p = 1;
-        case 'parserstaticvartag' :
-            $p = 2;
+            $o = 19;
+            break;
         default :
-            $p = 12;
+            $o = 20;
+            break;
     }
+    return $o;
+}
+
+/**
+ * Utilizes the getTagRanking method to determine tag sort order of two given tags
+ * @access private
+ */
+function tagsort($a, $b)
+{
+    $returnval = 0;
+    $o = getTagRanking($a);
+    $p = getTagRanking($b);
     if ($o == $p) return 0;
     if ($o < $p) return -1;
     if ($o > $p) return 1;
