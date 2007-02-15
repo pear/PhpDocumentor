@@ -1557,6 +1557,7 @@ class HTMLframesConverter extends Converter
     
     function copyMediaRecursively($media,$targetdir,$subdir = '')
     {
+        $versionControlDirectories = array ('media/CVS', 'media\\CVS', 'media/.svn', 'media\\.svn');
         if (!is_array($media)) {
             return;
         }
@@ -1567,17 +1568,20 @@ class HTMLframesConverter extends Converter
                 $this->copyMediaRecursively($files,$targetdir);
             } else
             {
-                if (!is_numeric($dir))
+                if (!is_numeric($dir) && !in_array($dir, $versionControlDirectories))
                 {
                     // create the subdir
-                    phpDocumentor_out("creating $targetdir/$dir\n");
+                    phpDocumentor_out("creating $targetdir" . PATH_DELIMITER . "$dir\n");
                     Converter::setTargetDir($targetdir . PATH_DELIMITER . $dir);
-                    if (!empty($subdir)) $subdir .= PATH_DELIMITER;
+                    if (!empty($subdir)) 
+                    {
+                        $subdir .= PATH_DELIMITER;
+                    }
                     $this->copyMediaRecursively($files,"$targetdir/$dir",$subdir . $dir);
                 } else
                 {
                     // copy the file
-                    phpDocumentor_out("copying $targetdir/".$files['file']."\n");
+                    phpDocumentor_out("copying $targetdir" . PATH_DELIMITER . $files['file']."\n");
                     $this->copyFile($files['file'],$subdir);
                 }
             }
