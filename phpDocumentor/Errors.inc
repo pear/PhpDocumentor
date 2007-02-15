@@ -374,7 +374,10 @@ define("PDERROR_NESTED_INTERNAL", 76);
  * warning triggered when @todo is used on an include element
  */
 define("PDERROR_NOTODO_INCLUDE", 77);
-
+/**
+ *	warning triggered when a class or method hasn't got docblock
+ */
+define("PDERROR_UNDOCUMENTED_ELEMENT", 78);
 /**
  * Error messages for phpDocumentor parser warnings
  * @global array $GLOBALS['phpDocumentor_warning_descrip']
@@ -410,6 +413,7 @@ $GLOBALS['phpDocumentor_warning_descrip'] =
         PDERROR_NO_DOCBOOK_ID => 'Tutorial section %s "%s" has no id="{@id subsection}" tag ({@id} for refentry)',
         PDERROR_BEAUTIFYING_FAILED => 'Beautifying failed: %s',
         PDERROR_NOTODO_INCLUDE => '@todo on an include element is ignored (line %s, file %s)',
+        PDERROR_UNDOCUMENTED_ELEMENT => '%s "%s" has no %s-level DocBlock.',
         );
 
 

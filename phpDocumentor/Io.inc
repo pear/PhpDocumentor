@@ -61,7 +61,17 @@ class Io
      * @var false|array
      */
     var $ignore = false;
-
+    /**
+     * A specific array of values that boolean-based arguments can understand,
+     * aided by the {@link decideOnOrOff()} helper method.
+     * @var array 
+     */
+    var $valid_booleans = array
+    (
+        '', ' ', 'on', 'On', 'ON', 'y', 'Y', 'yes', 'Yes', 'YES', 'true', 'True', 'TRUE', '1', 
+        'off', 'Off', 'OFF', 'n', 'N', 'no', 'No', 'NO', 'false', 'False', 'FALSE', '0'
+    );
+    
     /**
      * creates an array $this->phpDocOptions and sets program options in it.
      * Array is in the format of:
@@ -104,12 +114,17 @@ class Io
         $this->phpDocOptions['hidden']['tag'] = array("-dh", "--hidden");
         $this->phpDocOptions['hidden']['desc'] = "set equal to on (-dh on) to descend into hidden directories (directories starting with '.'), default is off";
         $this->phpDocOptions['hidden']['type'] = "set";
-        $this->phpDocOptions['hidden']['validvalues'] = array('on', 'off');
+        $this->phpDocOptions['hidden']['validvalues'] = $this->valid_booleans;
 
         $this->phpDocOptions['quiet']['tag'] = array("-q", "--quiet");
         $this->phpDocOptions['quiet']['desc'] = "do not display parsing/conversion messages.  Useful for cron jobs on/off default off";
         $this->phpDocOptions['quiet']['type'] = "set";
-        $this->phpDocOptions['quiet']['validvalues'] = array('on', 'off');
+        $this->phpDocOptions['quiet']['validvalues'] = $this->valid_booleans;
+
+        $this->phpDocOptions['undocumentedelements']['tag'] = array("-ue", "--undocumentedelements");
+        $this->phpDocOptions['undocumentedelements']['desc'] = "Control whether or not warnings will be shown for undocumented elements. Useful for identifying classes and methods that haven't yet been documented on/off default off";
+        $this->phpDocOptions['undocumentedelements']['type'] = "set";
+        $this->phpDocOptions['undocumentedelements']['validvalues'] = $this->valid_booleans;
 
         $this->phpDocOptions['title']['tag'] = array("-ti","--title");
         $this->phpDocOptions['title']['desc'] = "title of generated documentation, default is 'Generated Documentation'";

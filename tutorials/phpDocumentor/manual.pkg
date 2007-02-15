@@ -102,6 +102,12 @@
      {@link mailto:william_hardeman@hands-solutions.com william_hardeman@hands-solutions.com}
     </authorblurb>
    </author>
+   <author>
+    Chuck Burgess
+    <authorblurb>
+     {@link mailto:ashnazg@php.net ashnazg@php.net}
+    </authorblurb>
+   </author>
   </authorgroup>
  </refsynopsisdiv>
  <refsect1 id="{@id intro}">
