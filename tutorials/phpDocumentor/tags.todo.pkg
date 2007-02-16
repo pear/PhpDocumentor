@@ -21,8 +21,8 @@
  </refsynopsisdiv>
  <refsect1 id="{@id description}">
   <title>Description</title>
-  <para>The @todo tag may be used to document future changes to any element that can be documented (global variable, include, constant, function, define, class, variable, method, page).  phpDocumentor will display the information string unaltered.</para>
-  <para>Use @todo to document planned changes to an element that have not been implemented</para>
+  <para>Use @todo to document planned changes to an element that have not been implemented.  phpDocumentor will display the information string unaltered.</para>
+  <para>The @todo tag may be used to document future changes to almost any element that can be documented (global variable, constant, function, define, class, variable, method, page).  <emphasis>Since v1.3.0,</emphasis> @todo can no longer be used on an "include" element.</para>
  </refsect1>
  <refsect1 id="{@id example}">
   <title>Example</title>
