@@ -39,10 +39,14 @@ $base_package = "phpDocumentor";
 */
 $title = "phpDocumentor Generated Documentation";
 /**
-* location of the files to parse.  Change to a location on your computer
+* location of the files to parse.  Change to a location on your computer.
+* Example:
+* <code>
+* $parse_directory = "/home/jeichorn/phpdoc";
+* </code>
 * @global	string	$parse_directory
 */
-$parse_directory = "/home/jeichorn/phpdoc";
+$parse_directory = "/you-MUST/change-me/to-fit/your-environment";
 
 /**
 * directories to output examples into.
