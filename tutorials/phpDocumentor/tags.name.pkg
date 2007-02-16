@@ -32,7 +32,7 @@
 /**
  * Now, when @global is used in a function, it will link to $baz
  * @name $baz
- * @global $GLOBALS['baz']
+ * @global array $GLOBALS['baz']
  */
 $GLOBALS['baz'] = array('foo','bar');
 
