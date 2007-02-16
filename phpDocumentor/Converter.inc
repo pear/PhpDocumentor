@@ -1381,7 +1381,7 @@ class Converter
      */
     function ConvertTitle($tag,$attr,$title,$cdata)
     {
-        if (!isset($this->template_options[$tag.'_title'])) return array($attr,$title.$cdata);
+        if (!isset($this->template_options[$tag.'_title'])) return array($attr,$cdata);
         if (isset($this->template_options[$tag.'_title']['tag_attr']))
         {
             $attr[$this->template_options[$tag.'_title']['tag_attr']] = urlencode($cdata);
