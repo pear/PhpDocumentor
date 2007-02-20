@@ -395,7 +395,7 @@ class PDFdefaultConverter extends Converter
         else
         $template->assign('slink',false);
         $ret = 'void';
-        if (isset($element->docblock->return))
+        if ($element->docblock->return)
         {
             $ret = $element->docblock->return->returnType;
         }
