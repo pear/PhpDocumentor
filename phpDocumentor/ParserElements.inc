@@ -1732,7 +1732,7 @@ class parserMethod extends parserFunction
                     }
                     $doc = new parserDocBlock;
                     foreach ($method->getParameters() as $param) {
-                        $value = $param->isOptional() ? var_export($param->getDefaultValue(), true) : null;
+                        $value = ($param->isOptional() && !$method->isInternal()) ? var_export($param->getDefaultValue(), true) : null;
                         if ($param->isPassedByReference()) {
                             $var->addParam('&$' . $param->getName(), $value, $param->isOptional(),
                                 $param->getClass());
