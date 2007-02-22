@@ -116,6 +116,7 @@ class phpDocumentorTParser extends Parser
     var $_pf_in_global = false;
     var $_pf_in_include = false;
     var $_pf_in_var = false;
+    var $_pf_interface = false;
     var $_pf_funcparam_val = false;
     var $_pf_quote_active = false;
     var $_pf_reset_quote_data = true;
