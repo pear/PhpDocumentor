@@ -47,8 +47,8 @@
 {if count($methods[methods].ifunction_call.params)}
 {section name=params loop=$methods[methods].ifunction_call.params}
 {if $smarty.section.params.iteration != 1}, {/if}
-{if $methods[methods].ifunction_call.params[params].default != ''}[{/if}{$methods[methods].ifunction_call.params[params].type}
-{$methods[methods].ifunction_call.params[params].name}{if $methods[methods].ifunction_call.params[params].default != ''} = {$methods[methods].ifunction_call.params[params].default}]{/if}
+{if $methods[methods].ifunction_call.params[params].hasdefault}[{/if}{$methods[methods].ifunction_call.params[params].type}
+{$methods[methods].ifunction_call.params[params].name}{if $methods[methods].ifunction_call.params[params].hasdefault} = {$methods[methods].ifunction_call.params[params].default}]{/if}
 {/section}
 {/if})</strong></h4>
 {if $methods[methods].descmethod}
@@ -90,8 +90,8 @@
 {if count($methods[methods].ifunction_call.params)}
 {section name=params loop=$methods[methods].ifunction_call.params}
 {if $smarty.section.params.iteration != 1}, {/if}
-{if $methods[methods].ifunction_call.params[params].default != ''}[{/if}{$methods[methods].ifunction_call.params[params].type}
-{$methods[methods].ifunction_call.params[params].name}{if $methods[methods].ifunction_call.params[params].default != ''} = {$methods[methods].ifunction_call.params[params].default}]{/if}
+{if $methods[methods].ifunction_call.params[params].hasdefault}[{/if}{$methods[methods].ifunction_call.params[params].type}
+{$methods[methods].ifunction_call.params[params].name}{if $methods[methods].ifunction_call.params[params].hasdefault} = {$methods[methods].ifunction_call.params[params].default}]{/if}
 {/section}
 {/if})</strong></h4>
 {if $methods[methods].descmethod}

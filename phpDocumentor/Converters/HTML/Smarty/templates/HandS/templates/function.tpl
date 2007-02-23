@@ -12,7 +12,7 @@
 		<code>{$functions[func].function_return} {if $functions[func].ifunction_call.returnsref}&amp;{/if}{$functions[func].function_name}(
 {if count($functions[func].ifunction_call.params)}
 {section name=params loop=$functions[func].ifunction_call.params}
-{if $smarty.section.params.iteration != 1}, {/if}{if $functions[func].ifunction_call.params[params].default != ''}[{/if}{$functions[func].ifunction_call.params[params].type} {$functions[func].ifunction_call.params[params].name}{if $functions[func].ifunction_call.params[params].default != ''} = {$functions[func].ifunction_call.params[params].default|escape:"html"}]{/if}
+{if $smarty.section.params.iteration != 1}, {/if}{if $functions[func].ifunction_call.params[params].hasdefault}[{/if}{$functions[func].ifunction_call.params[params].type} {$functions[func].ifunction_call.params[params].name}{if $functions[func].ifunction_call.params[params].hasdefault} = {$functions[func].ifunction_call.params[params].default|escape:"html"}]{/if}
 {/section}
 &nbsp;
 {/if})</code>
