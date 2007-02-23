@@ -975,7 +975,7 @@ class nopackage
    </refsect3>
    <refsect3 id="{@id ignore}">
     <title>-i, --ignore</title>
-    <para>Use the -i option to exclude files and directories from parsing.  The -i option recognizes the * and ? wildcards, like -f does.  In addition, it is possible to ignore a subdirectory of any directory using &quot;dirname/&quot;</para>
+    <para>Use the -i option to exclude files and directories from parsing.  The -i option recognizes the * and ? wildcards, like -f does.  In addition, it is possible to ignore a subdirectory of any directory using &quot;dirname/&quot;.</para>
     <para>
      <itemizedlist>
       <listitem><para>phpdoc -i tests/ will ignore /path/to/here/tests/* and /path/tests/*</para></listitem>
@@ -983,6 +983,13 @@ class nopackage
       <listitem><para>phpdoc -i *path/to/* will ignore /path/path/to/my/* as well as /path/to/*</para></listitem>
       <listitem><para>phpdoc -i *test* will ignore /path/tests/* and /path/here/my_test.php</para></listitem>
      </itemizedlist>
+    </para>
+    <para>Since v1.3.2, the value or pattern you provide will be case-sensitive (OS permitting, anyway), and will be applied relative to the top-level directory in the -d argument.</para>
+    <para>
+     <itemizedlist>
+      <listitem><para>phpdoc -i CVS/ will ignore /path/to/CVS/* but will not ignore /path/to/cvs</para></listitem>
+      <listitem><para>phpdoc -d /home/myhome/cvs/myproject -i cvs/ will ignore /home/myhome/cvs/myproject/files/cvs/* but will not ignore /home/myhome/cvs/*</para></listitem>
+     </itemizedlist>    
     </para>
    </refsect3>
    <refsect3 id="{@id ignore-tags}">

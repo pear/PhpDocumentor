@@ -60,7 +60,7 @@ class Io
      * regexp-ready string to search for basename of ignore strings),...)
      * @var false|array
      */
-    var $ignore = false;
+    var $ignore;
     /**
      * A specific array of values that boolean-based arguments can understand,
      * aided by the {@link decideOnOrOff()} helper method.
@@ -516,7 +516,7 @@ class Io
         $struc = array();
         foreach($allfiles as $file)
         {
-            if ($this->checkIgnore(basename($file),dirname($file),$ignore)) continue;
+            if ($this->checkIgnore(basename($file),dirname(realpath($file)),$ignore)) continue;
             $path = substr(dirname($file),strlen(str_replace('\\','/',realpath($base_dir)))+1);
             if (!$path) $path = '/';
             $parts = pathinfo($file);
@@ -652,27 +652,30 @@ class Io
      * @author Greg Beaver <cellog@users.sourceforge.net>
      * @param    string  $file    just the file name of the file or directory,
      *                          in the case of directories this is the last dir
-     * @param    string  $path    the full path
+     * @param    string  $path    the path to consider (should be checked by
+     *                            realpath() before, and may be relative)
      * @param    array   $ignore
      * @return   bool    true if $path should be ignored, false if it should not
      */
     function checkIgnore($file,$path,$ignore,$ignore_no_ext = true)
     {
         global $_phpDocumentor_RIC_files;
-        $path = realpath($path);
+
         if (!count($ignore)) return false;
+
+        if (!isset($this->ignore))
+        {
+            $this->_setupIgnore($ignore);
+        }
+        if (!$this->ignore)
+        {
+            return false;
+        }
+
         if ($ignore_no_ext && 
             !in_array(strtoupper($file), $_phpDocumentor_RIC_files))
         {
             if (!is_numeric(strpos($file,'.'))) return true;
-        }
-        if (!isset($this->ignore) || !$this->ignore)
-        {
-            $this->_setupIgnore($ignore);
-            if (!$this->ignore)
-            {
-                return false;
-            }
         }
         if (is_array($this->ignore))
         {
@@ -734,29 +737,31 @@ class Io
     function _setupIgnore($ignore)
     {
         $ig = array();
-        if (is_array($ignore))
+        if ( ! is_array($ignore))
         {
-            for($i=0; $i<count($ignore);$i++)
-            {
-                $ignore[$i] = strtr($ignore[$i], "\\", "/");
-                $ignore[$i] = str_replace('//','/',$ignore[$i]);
+            $this->ignore = false;
+            return;
+        }
+        for($i=0; $i<count($ignore);$i++)
+        {
+            if (empty($ignore[$i]))
+                continue;
 
-                if (!empty($ignore[$i]))
-                {
-                    if (!is_numeric(strpos($ignore[$i],PATH_DELIMITER)))
-                    {
-                        $ig[] = $this->getRegExpableSearchString($ignore[$i]);
-                    } else
-                    {
-                        if (basename($ignore[$i]) . PATH_DELIMITER == $ignore[$i])
-                        $ig[] = $this->getRegExpableSearchString($ignore[$i]);
-                        else
-                        $ig[] = array($this->getRegExpableSearchString($ignore[$i]),$this->getRegExpableSearchString(basename($ignore[$i])));
-                    }
-                }
+            $ignore[$i] = strtr($ignore[$i], '\\', '/');
+            $ignore[$i] = str_replace('//','/',$ignore[$i]);
+
+            if (!is_numeric(strpos($ignore[$i],PATH_DELIMITER)))
+            {
+                $ig[] = $this->getRegExpableSearchString($ignore[$i]);
+            } else
+            {
+                if (basename($ignore[$i]) . PATH_DELIMITER == $ignore[$i])
+                $ig[] = $this->getRegExpableSearchString($ignore[$i]);
+                else
+                $ig[] = array($this->getRegExpableSearchString($ignore[$i]),$this->getRegExpableSearchString(basename($ignore[$i])));
             }
-            if (count($ig)) $this->ignore = $ig;
-        } else $this->ignore = false;
+        }
+        if (count($ig)) $this->ignore = $ig;
     }
     
     /**
