@@ -1,6 +1,8 @@
 #!/bin/sh
-PHP=`which php`
-exec $PHP -C -q -d output_buffering=1 "$0" "$@"
+if [ -z "$PHP" ]; then
+   PHP=`which php`
+fi
+(exec $PHP -C -q -d output_buffering=1 "$0" "$@") 2>/dev/null || echo "FAILED:  Bad environment variable \$PHP (set to \"$PHP\")" ; exit 1
 <?php
 //
 // PhpDoc, a program for creating javadoc style documentation from php code
@@ -33,7 +35,8 @@ ob_end_clean(); // make output from autofind php code disapear
 
 /** 
  * PHP auto documentor, like javadoc
- * If you get an error uses this as a shell script then its been dosified
+ * If you get an error uses this as a shell script then its been dosified...
+ * fix it with "dos2unix" command.
  * @author Joshua Eichorn
  * @version 1.3.0
  * @copyright Joshua Eichorn
