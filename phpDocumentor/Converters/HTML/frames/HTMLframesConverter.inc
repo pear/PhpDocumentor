@@ -1568,17 +1568,25 @@ class HTMLframesConverter extends Converter
                 $this->copyMediaRecursively($files,$targetdir);
             } else
             {
-                if (!is_numeric($dir) && !in_array($dir, $versionControlDirectories))
+                if (!is_numeric($dir))
                 {
-                    // create the subdir
-                    phpDocumentor_out("creating $targetdir" . PATH_DELIMITER . "$dir\n");
-                    Converter::setTargetDir($targetdir . PATH_DELIMITER . $dir);
-                    if (!empty($subdir)) 
+                    if (in_array($dir, $versionControlDirectories))
                     {
-                        $subdir .= PATH_DELIMITER;
+                        // skip it entirely
                     }
-                    $this->copyMediaRecursively($files,"$targetdir/$dir",$subdir . $dir);
-                } else
+                    else
+                    {
+                        // create the subdir
+                        phpDocumentor_out("creating $targetdir" . PATH_DELIMITER . "$dir\n");
+                        Converter::setTargetDir($targetdir . PATH_DELIMITER . $dir);
+                        if (!empty($subdir)) 
+                        {
+                            $subdir .= PATH_DELIMITER;
+                        }
+                        $this->copyMediaRecursively($files,"$targetdir/$dir",$subdir . $dir);
+                    }
+                } 
+                else
                 {
                     // copy the file
                     phpDocumentor_out("copying $targetdir" . PATH_DELIMITER . $files['file']."\n");
