@@ -1610,7 +1610,7 @@ class HTMLSmartyConverter extends Converter
     
     function copyMediaRecursively($media,$targetdir,$subdir = '')
     {
-        $versionControlDirectories = array ('media/CVS', 'media\\CVS', 'media/.svn', 'media\\.svn');
+        $versionControlDirectories = array ('CVS', 'media/CVS', 'media\\CVS', '.svn', 'media/.svn', 'media\\.svn');
         if (!is_array($media)) {
             return;
         }
