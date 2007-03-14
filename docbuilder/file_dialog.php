@@ -49,10 +49,10 @@ if ('@WEB-DIR@' != '@'.'WEB-DIR@')
     require_once 'PhpDocumentor/HTML_TreeMenu-1.1.2/TreeMenu.php';
     require_once( '@WEB-DIR@' . PATH_DELIMITER . 'PhpDocumentor/docbuilder/includes/utilities.php' );
 
-    $root_dir = 'PhpDocumentor';
+    define(PHPDOC_WEBROOT_DIR, 'PhpDocumentor');
 
     // set up include path so we can find all files, no matter what
-    $GLOBALS['_phpDocumentor_install_dir'] = $root_dir;
+    $GLOBALS['_phpDocumentor_install_dir'] = PHPDOC_WEBROOT_DIR;
 
     // find the .ini directory by parsing phpDocumentor.ini and extracting _phpDocumentor_options[userdir]
     $ini = phpDocumentor_parse_ini_file('@DATA-DIR@' . PATH_DELIMITER . 'PhpDocumentor/phpDocumentor.ini', true);
@@ -63,13 +63,13 @@ if ('@WEB-DIR@' != '@'.'WEB-DIR@')
     }
 } else {
 
-    $root_dir = dirname(dirname(__FILE__));
+    define(PHPDOC_WEBROOT_DIR, dirname(dirname(__FILE__)));
     /**
     * common file information
     */
-    include_once("$root_dir/phpDocumentor/common.inc.php");
-	include_once("$root_dir/HTML_TreeMenu-1.1.2/TreeMenu.php");
-	include_once("$root_dir/docbuilder/includes/utilities.php" );
+    include_once(PHPDOC_WEBROOT_DIR . "/phpDocumentor/common.inc.php");
+	include_once(PHPDOC_WEBROOT_DIR . "/HTML_TreeMenu-1.1.2/TreeMenu.php");
+	include_once(PHPDOC_WEBROOT_DIR . "/docbuilder/includes/utilities.php" );
 
     // set up include path so we can find all files, no matter what
     $GLOBALS['_phpDocumentor_install_dir'] = dirname(dirname( realpath( __FILE__ ) ));
