@@ -545,16 +545,12 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
                     foreach($files as $file)
                     {
                         // Make sure the file isn't a hidden file
-                        $file = strtr($file, '\\', '/');
+                        $file = strtr($file, "\\", "/");
                         if (substr(basename($file),0,1) != ".")
                         {
-                            // file's subpath, relative to $dir
-                            $file_subpath = str_replace('\\', '/', realpath(dirname($file)));
-                            $file_subpath = preg_replace('~^' . preg_quote($dir, '~') . '~', '', $file_subpath);
-                            
-                            if (!$this->setup->checkIgnore(basename($file), $file_subpath, $this->ignore_files))
+                            if (!$this->setup->checkIgnore(basename($file),str_replace('\\','/',dirname($file)),$this->ignore_files))
                             {
-                                $filelist[] = $file;
+                                $filelist[] = str_replace('\\','/',$file);
                             } else {
                                 phpDocumentor_out("File $file Ignored\n");
                                 flush();
