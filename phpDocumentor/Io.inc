@@ -121,11 +121,6 @@ class Io
         $this->phpDocOptions['quiet']['type'] = "set";
         $this->phpDocOptions['quiet']['validvalues'] = $this->valid_booleans;
 
-        $this->phpDocOptions['undocumentedelements']['tag'] = array("-ue", "--undocumentedelements");
-        $this->phpDocOptions['undocumentedelements']['desc'] = "Control whether or not warnings will be shown for undocumented elements. Useful for identifying classes and methods that haven't yet been documented on/off default off";
-        $this->phpDocOptions['undocumentedelements']['type'] = "set";
-        $this->phpDocOptions['undocumentedelements']['validvalues'] = $this->valid_booleans;
-
         $this->phpDocOptions['title']['tag'] = array("-ti","--title");
         $this->phpDocOptions['title']['desc'] = "title of generated documentation, default is 'Generated Documentation'";
         $this->phpDocOptions['title']['type'] = "value";

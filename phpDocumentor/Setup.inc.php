@@ -265,9 +265,6 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         // set to parse elements marked private with @access private
         $this->render->setParsePrivate((isset($_phpDocumentor_setting['parseprivate'])) ? decideOnOrOff($_phpDocumentor_setting['parseprivate']) : false);
 
-        // set to print warnings when undocumented elements are spotted
-        $this->render->setUndocumentedElementWarningsMode((isset($_phpDocumentor_setting['undocumentedelements'])) ? decideOnOrOff($_phpDocumentor_setting['undocumentedelements']) : false);
-
         if (isset($_phpDocumentor_setting['ignoretags']))
         {
             $ignoretags = explode(',', $_phpDocumentor_setting['ignoretags']);
@@ -402,12 +399,7 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
     {
         $this->render->setQuietMode($flag);
     }
-
-    function setUndocumentedElementWarnings($flag = true)
-    {
-        $this->render->setUndocumentedElementWarnings($flag);
-    }
-    
+ 
     function setTargetDir($target)
     {
         $this->render->setTargetDir($target);

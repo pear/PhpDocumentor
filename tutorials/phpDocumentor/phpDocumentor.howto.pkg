@@ -827,14 +827,13 @@ C:\>php-cli C:\path\to\phpdoc\phpdoc [commandline]
       <entry>-pp</entry>
       <entry>--parseprivate</entry>
       <entry>parse elements marked private with @access.  Valid options are &quot;on&quot;
-       and &quot;off&quot; default value is &quot;off&quot;
+       and &quot;offn&quot; default value is &quot;off&quot;
       </entry>
      </row>
      <row>
       <entry>-q</entry>
       <entry>--quiet</entry>
-      <entry>do not display parsing/conversion messages.  Useful for cron jobs.  Valid options are &quot;on&quot;
-       and &quot;off&quot; default value is &quot;off&quot;</entry>
+      <entry>do not display parsing/conversion messages.  Useful for cron jobs</entry>
      </row>
      <row>
       <entry>-ric</entry>
@@ -864,12 +863,6 @@ C:\>php-cli C:\path\to\phpdoc\phpdoc [commandline]
        and the /path/to/here/Converters/HTML/frames/templates/default/templates_c directory must
        exist, or Smarty will bail on attempting to compile the templates.
       </entry>
-     </row>
-     <row>
-      <entry>-ue</entry>
-      <entry>--undocumentedelements</entry>
-      <entry>Enable warnings for undocumented elements. Useful for identifying classes and methods that haven't yet been documented.
-      Valid options are &quot;on&quot; and &quot;offn&quot; default value is &quot;off&quot;</entry>
      </row>
     </tbody>
     </tgroup>
@@ -907,10 +900,6 @@ C:\>php-cli C:\path\to\phpdoc\phpdoc [commandline]
     <para>without raising any errors, and include the tags in the known tags list for the
      template to handle.  Note that in version 1.2.0+, the unknown_tags array is passed to templates.
     </para>
-   </refsect3>
-   <refsect3 id="{@id hidden}">
-    <title>-dh, --hidden</title>
-    <para>Use this option to tell phpDocumentor to parse files that begin with a period (.)</para>
    </refsect3>
    <refsect3 id="{@id defaultcategoryname}">
     <title>-dn, --defaultcategoryname</title>
@@ -972,6 +961,10 @@ class nopackage
       <listitem><para>phpdoc -f file?.php will match file1.php, file2.php and will not match file10.php</para></listitem>
      </itemizedlist>
     </para>
+   </refsect3>
+   <refsect3 id="{@id hidden}">
+    <title>-h, --hidden</title>
+    <para>Use this option to tell phpDocumentor to parse files that begin with a period (.)</para>
    </refsect3>
    <refsect3 id="{@id ignore}">
     <title>-i, --ignore</title>
@@ -1116,10 +1109,6 @@ class nopackage
    <refsect3 id="{@id title}">
     <title>-ti, --title</title>
     <para>Set the global title of the generated documentation</para>
-   </refsect3>
-   <refsect3 id="{@id undocumentedelements}">
-    <title>-ue, --undocumentedelements</title>
-    <para>This option tells phpDocumentor whether or not to suppress warnings about certain objects (classes, methods) that are not documented via a DocBlock comment.  Use this to help identify objects that you still need to write documentation for.</para>
    </refsect3>
   </refsect2>
   <refsect2 id="{@id config-files}">

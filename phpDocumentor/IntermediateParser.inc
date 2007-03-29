@@ -246,19 +246,6 @@ class phpDocumentor_IntermediateParser
      * @tutorial phpDocumentor.howto.pkg#using.command-line.quiet
      */
     var $quietMode = false;
-
-    /**
-     * set in {@link Setup.inc.php} to the value of the undocumentedElementWarnings commandline
-     * option.
-     *
-     * If this option is true, warnings about certain elements (classes, methods) 
-     * that are not documented with DocBlocks will be shown while parsing,
-     * and will also be displayed in the errors.html page 
-     * (other documentation is unaffected)
-     * @var boolean
-     * @tutorial phpDocumentor.howto.pkg#using.command-line.undocumentedelements
-     */
-    var $undocumentedElementWarnings = false;
         
     /**
      * used to keep track of inheritance at the smartest level possible for a
@@ -667,10 +654,6 @@ class phpDocumentor_IntermediateParser
 
         if (empty($this->last))
         {
-			if ($this->undocumentedElementWarnings)
-            {
-                addWarning(PDERROR_UNDOCUMENTED_ELEMENT,'Method',$data->getName(),'method');
-            }        	
             if (isset($this->db_template))
             {
                 // use the docblock template
@@ -937,10 +920,6 @@ class phpDocumentor_IntermediateParser
         $this->data->clean = false;
         if (empty($this->last))
         {
-            if ($this->undocumentedElementWarnings)
-            {
-                addWarning(PDERROR_UNDOCUMENTED_ELEMENT,'Class',$data->getName(),'Class');
-            }
             if (isset($this->db_template))
             {
                 // use the docblock template
@@ -1902,18 +1881,6 @@ class phpDocumentor_IntermediateParser
     function setQuietMode($quietMode)
     {
         $this->quietMode = $quietMode;
-    }
-
-    /**
-     * show warnings for undocumented elements
-     *
-     * If set to false, no warnings will be shown for undocumented elements.
-     * Useful for identifying classes and methods that haven't yet been documented.
-     * @param    bool $undocumentedElementWarnings
-     */
-    function setUndocumentedElementWarningsMode($undocumentedElementWarnings)
-    {
-        $this->undocumentedElementWarnings = $undocumentedElementWarnings;
     }
     
     /**
