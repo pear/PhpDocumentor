@@ -185,7 +185,11 @@ class phpDocumentor_setup
         {
             phpDocumentor_out("time_limit cannot be set since your in safe_mode, please edit time_limit in your php.ini to allow enough time for phpDocumentor to run"); 
         }
-  
+        $x = str_replace('M', '', ini_get('memory_limit'));
+        if ($x < 256) {
+            ini_set("memory_limit","256M");
+        }
+
         $phpver = phpversion();
         $phpdocver = PHPDOCUMENTOR_VER;
         if (isset($_GET['interface'])) {
@@ -196,7 +200,6 @@ class phpDocumentor_setup
         phpDocumentor_out("phpDocumentor version $phpdocver\n\n");
 
         $this->parseIni();
-        $this->setMemoryLimit();
 
         if (tokenizer_ext)
         {
@@ -394,63 +397,7 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         return in_array($tagname, $_phpDocumentor_setting['ignoretags']);
     }
 
-    /**
-     * Allow a memory_limit setting in phpDocumentor.ini to override php.ini or default memory limit
-     * @todo recognize "K" and "G" in memory_limit settings, rather than just "M"
-     */
-    function setMemoryLimit() {
-        global $_phpDocumentor_options;
-        $DEFAULT_MEMORY_SIZE_MINIMUM = 256;
-        
-        // PhpDoc memory_limit from phpDocumentor.ini overrides all other considerations
-        if (isset($_phpDocumentor_options['memory_limit'])) {
-            $phpdoc_ini_setting = str_replace('M', '', $_phpDocumentor_options['memory_limit']);
-
-            // allow phpdoc.ini to DISABLE the setting via "= -1"
-            if ($phpdoc_ini_setting == -1)
-            {
-                $memory_setting_to_use = $phpdoc_ini_setting;
-                $max_mem_log_message = "setting disabled by phpDocumentor.ini...\n";
-            }
-            else
-            {
-                $memory_setting_to_use = $phpdoc_ini_setting . "M";
-                $max_mem_log_message = "set at " . $memory_setting_to_use . " by phpDocumentor.ini...\n";
-            }
-        } else {
-            $php_ini_setting = str_replace('M', '', ini_get('memory_limit'));
-
-            // allow php.ini to DISABLE the setting via "= -1"
-            if ($php_ini_setting == -1)
-            {
-                // allow it to remain disabled
-                $memory_setting_to_use = $php_ini_setting;
-                $max_mem_log_message = "setting disabled by php.ini...\n";
-            }
-            else
-            {
-                // memory_limit from php.ini must be at least the default minimum
-                $memory_setting_to_use = ($php_ini_setting > $DEFAULT_MEMORY_SIZE_MINIMUM) ? $php_ini_setting . "M" : $DEFAULT_MEMORY_SIZE_MINIMUM . "M";
-                $max_mem_log_message = "set at " . $memory_setting_to_use . " after considering php.ini...\n";                
-            }
-        }
-        if (ini_set("memory_limit", $memory_setting_to_use))
-        {
-            // PHP had to have been compiled with "--enable-memory-limit" to allow setting the value explicitly
-            phpDocumentor_out("Maximum memory usage " . $max_mem_log_message);
-        }
-        else
-        {
-            // PHP must not have been compiled with "--enable-memory-limit", so we cannot modify it...
-            // no need to notify user of this unless they tried using memory_limit in their phpDocumentor.ini...
-            if (isset($phpdoc_ini_setting))
-            {
-                phpDocumentor_out("Unable to alter memory_limit via your phpDocumentor.ini... perhaps PHP wasn't compiled with \"--enable-memory-limit\"?\n");
-            }
-        }
-    }
-    
-    function setJavadocDesc()
+     function setJavadocDesc()
     {
            $this->parse->eventHandlers[PARSER_EVENT_DOCBLOCK] = 'JavaDochandleDocblock';
     }
