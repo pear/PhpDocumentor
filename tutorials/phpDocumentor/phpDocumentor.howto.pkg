@@ -799,12 +799,6 @@ C:\>php-cli C:\path\to\phpdoc\phpdoc [commandline]
       <entry>file(s) that will be ignored, multiple separated by ','.  Wildcards * and ? are ok</entry>
      </row>
      <row>
-      <entry>-is</entry>
-      <entry>--ignoresymlinks</entry>
-      <entry>Explicitly ignore symlinks, both symlinked directories and symlinked files.
-      Valid options are &quot;on&quot; and &quot;offn&quot; default value is &quot;off&quot;</entry>
-     </row>
-     <row>
       <entry>-it</entry>
       <entry>--ignore-tags</entry>
       <entry>tags to ignore for this parse.  @package, @subpackage, @access and @ignore may not be ignored.</entry>
@@ -916,7 +910,7 @@ C:\>php-cli C:\path\to\phpdoc\phpdoc [commandline]
    </refsect3>
    <refsect3 id="{@id hidden}">
     <title>-dh, --hidden</title>
-    <para>Use this option to tell phpDocumentor to parse files and directories that begin with a period (.)</para>
+    <para>Use this option to tell phpDocumentor to parse files that begin with a period (.)</para>
    </refsect3>
    <refsect3 id="{@id defaultcategoryname}">
     <title>-dn, --defaultcategoryname</title>
@@ -997,11 +991,6 @@ class nopackage
       <listitem><para>phpdoc -d /home/myhome/cvs/myproject -i cvs/ will ignore /home/myhome/cvs/myproject/files/cvs/* but will not ignore /home/myhome/cvs/*</para></listitem>
      </itemizedlist>    
     </para>
-   </refsect3>
-   <refsect3 id="{@id ignore-symlinks}">
-    <title>-is, --ignoresymlinks</title>
-    <para>Use the -is option to explicitly ignore any symlinks, whether they be links to directories or links to files.</para>
-	<para>This only works on a Unix/Linux environment, since Windows doesn't have symlinks.</para>
    </refsect3>
    <refsect3 id="{@id ignore-tags}">
     <title>-it, --ignore-tags</title>

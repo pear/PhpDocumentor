@@ -107,11 +107,6 @@ class Io
         $this->phpDocOptions['ignore']['desc'] = "file(s) that will be ignored, multiple separated by ','.  Wildcards * and ? are ok";
         $this->phpDocOptions['ignore']['type'] = "path";
 
-        $this->phpDocOptions['ignoresymlinks']['tag'] = array("-is", "--ignoresymlinks");
-        $this->phpDocOptions['ignoresymlinks']['desc'] = "ignore symlinks to other files or directories, default is off";
-        $this->phpDocOptions['ignoresymlinks']['type'] = "set";
-        $this->phpDocOptions['ignoresymlinks']['validvalues'] = $this->valid_booleans;
-
         $this->phpDocOptions['ignoretags']['tag'] = array("-it", "--ignore-tags");
         $this->phpDocOptions['ignoretags']['desc'] = "tags to ignore for this parse.  @package, @subpackage, @access and @ignore may not be ignored.";
         $this->phpDocOptions['ignoretags']['type'] = "value";
@@ -275,7 +270,6 @@ class Io
         global $argv;
         // defaults for setting
         $setting['hidden'] = "off";
-        $setting['ignoresymlinks'] = 'off';
         $setting['template'] = 'templates' . PATH_DELIMITER .'default' . PATH_DELIMITER;
 
         $valnext = "junk";
@@ -327,12 +321,11 @@ class Io
             echo "Please use php-cli.exe in windows, or set register_argc_argv On";
             die;
         }
-        /* $setting will always have at least 3 elements
+        /* $setting will always have at least 2 elements
         [hidden] => off
-        [ignoresymlinks] => 'off'
         [template] => templates/default
          */
-        if (count($setting) < 4) {
+        if (count($setting) < 3) {
             echo $this->displayhelpMsg();
             die();
         }
@@ -343,57 +336,51 @@ class Io
     /**
      * @return array list of files in a directory
      * @param string $directory full path to the directory you want the list of
-     * @param bool whether to list files that begin with . like .bash_history
-     * @param bool whether to ignore symlinks
+     * @param off|on whether to list files that begin with . like .bash_history
      */
-    function dirList($orig_directory, $hidden = false, $ignore_symlinks = false)
+    function dirList($directory, $hidden = "off")
     {
-        $directory = realpath($orig_directory);
+        $directory = realpath($directory);
         $ret = false;
-        if (! @is_dir($directory))
+        if (@is_dir($directory))
         {
-            die("directory: '$directory'  not found\n");
-        }
-        $ret = array();
-        $d = @dir($directory); // thanks to Jason E Sweat (jsweat@users.sourceforge.net) for fix
-        while($d && ($entry=$d->read()) !== false) {
-            if (strcmp($entry,".") == 0 || strcmp($entry,"..") == 0) {
-                continue;
-            }
-
-            // skip hidden files, if we're supposed to
-            if (!$hidden)
-            {
-                if (substr($entry,0,1) == ".")
+            $ret = array();
+            $d = @dir($directory); // thanks to Jason E Sweat (jsweat@users.sourceforge.net) for fix
+            while($d && ($entry=$d->read()) !== false) {
+                if (strcmp($entry,".") != 0 && strcmp($entry,"..") != 0) {
+                if ($hidden == "off")
                 {
-                    phpDocumentor_out("Hidden " . $directory . PATH_DELIMITER . $entry . " Ignored\n");
-                    continue;
+                    if (substr($entry,0,1) == ".")
+                    {
+                        $getentry = false;
+                    } else {
+                        $getentry = true;
+                    }
+        
+                } else {
+                    $getentry = true;
                 }
-            }
-
-            // skip symlink files, if we're supposed to
-            if ($ignore_symlinks)
-            {
-                if (is_link($directory . PATH_DELIMITER . $entry))
+                
+                if ($getentry == true)
                 {
-                    phpDocumentor_out("Symlink " . $directory . PATH_DELIMITER . $entry . " Ignored\n");
-                    continue;
-                }
-            }
-            
-            if (is_file($directory . PATH_DELIMITER . $entry)) {
-                $ret[] = $directory . PATH_DELIMITER . $entry;
-            }
-            if (is_dir($directory . PATH_DELIMITER . $entry)) {
-                $tmp = $this->dirList($directory . PATH_DELIMITER . $entry, $hidden, $ignore_symlinks);
-                if (is_array($tmp)) {
-                    foreach($tmp as $ent) {
-                        $ret[] = $ent;
+                    if (is_file($directory . PATH_DELIMITER . $entry)) {
+                        $ret[] = $directory . PATH_DELIMITER . $entry;
+                    }
+                    if (is_dir($directory . PATH_DELIMITER . $entry)) {
+                        $tmp = $this->dirList($directory . PATH_DELIMITER . $entry, $hidden);
+                        if (is_array($tmp)) {
+                            foreach($tmp as $ent) {
+                                $ret[] = $ent;
+                            }
+                        }
                     }
                 }
             }
         }
         if ($d) $d->close();
+        } else {
+            die("directory: '$directory'  not found\n");
+        }
         return $ret;
     }
 
@@ -522,24 +509,14 @@ class Io
         }
         return array($list,$ric);
     }
-
-    /**
-     * @param string directory
-     * @param string base directory
-     * @param array array of ignored items
-     * @param boolean the "hidden" flag
-     * @param boolean the "ignoresymlinks" flag
-     * @uses dirList
-     * @uses checkIgnore
-     * @uses setup_dirs
-     */    
-    function getDirTree($dir, $base_dir, $ignore = array(), $hidden = false, $ignoresymlinks = false)
+  
+    function getDirTree($dir, $base_dir, $ignore = array(), $hidden="off")
     {
-        $allfiles = $this->dirList($dir,$hidden,$ignoresymlinks);
+        $allfiles = $this->dirList($dir,$hidden);
         $struc = array();
         foreach($allfiles as $file)
         {
-            if ($this->checkIgnore(basename($file),dirname(realpath($file)),$ignore,$ignoresymlinks)) continue;
+            if ($this->checkIgnore(basename($file),dirname(realpath($file)),$ignore)) continue;
             $path = substr(dirname($file),strlen(str_replace('\\','/',realpath($base_dir)))+1);
             if (!$path) $path = '/';
             $parts = pathinfo($file);
@@ -678,16 +655,12 @@ class Io
      * @param    string  $path    the path to consider (should be checked by
      *                            realpath() before, and may be relative)
      * @param    array   $ignore
-     * @param    bool
-     * @param    bool    Ignore symlinks?
      * @return   bool    true if $path should be ignored, false if it should not
      */
-    function checkIgnore($file,$path,$ignore,$ignore_no_ext = true,$ignoresymlinks = false)
+    function checkIgnore($file,$path,$ignore,$ignore_no_ext = true)
     {
         global $_phpDocumentor_RIC_files;
 
-        if ($ignoresymlinks && is_link($path . PATH_DELIMITER . $file)) return false;
-        
         if (!count($ignore)) return false;
 
         if (!isset($this->ignore))
@@ -850,8 +823,6 @@ class Io
      * @return mixed if $file contains wildcards, returns an array of matching
      *               files, otherwise returns false
      * @author Greg Beaver <cellog@users.sourceforge.net>
-     * @uses dirList
-     * @uses removeNonMatches
      */
     function getAllFiles($file)
     {

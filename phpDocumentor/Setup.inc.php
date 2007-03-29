@@ -146,12 +146,6 @@ class phpDocumentor_setup
      */
     var $ignore_files = array();
     /**
-     * contents of --ignoresymlinks commandline
-     * @var boolean
-     */
-    var $ignoresymlinks = false;
-
-    /**
      * Checks PHP version, makes sure it is 4.2.0+, and chooses the
      * phpDocumentorTParser if version is 4.3.0+
      * @uses parseIni()
@@ -268,9 +262,6 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         // set to parse hidden files
         $this->hidden = (isset($_phpDocumentor_setting['hidden'])) ? decideOnOrOff($_phpDocumentor_setting['hidden']) : false;
 
-        // set to parse through symlinks
-        $this->ignoresymlinks = (isset($_phpDocumentor_setting['ignoresymlinks'])) ? decideOnOrOff($_phpDocumentor_setting['ignoresymlinks']) : false;
-        
         // set to parse elements marked private with @access private
         $this->render->setParsePrivate((isset($_phpDocumentor_setting['parseprivate'])) ? decideOnOrOff($_phpDocumentor_setting['parseprivate']) : false);
 
@@ -504,7 +495,7 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
                         $file = strtr(realpath($file), "\\", "/");
                         $file = str_replace('//','/',$file);
 
-                        if (!$this->setup->checkIgnore(basename($file),dirname($file),$this->ignore_files,true,$this->ignoresymlinks))
+                        if (!$this->setup->checkIgnore(basename($file),dirname($file),$this->ignore_files))
                         {
                             $filelist[] = str_replace('\\','/',$file);
                         } else {
@@ -527,7 +518,7 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
                     $file = str_replace('//','/',$file);
                     flush();
 
-                    if (!$this->setup->checkIgnore(basename($file),dirname($file),$this->ignore_files,true,$this->ignoresymlinks))
+                    if (!$this->setup->checkIgnore(basename($file),dirname($file),$this->ignore_files))
                     {
                         $filelist[] = str_replace('\\','/',$file);
                     } else {
@@ -556,22 +547,26 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
                 {
                     $dir = substr($dir,0,-1);
                 }
-                $files = $this->setup->dirList($dir,$this->hidden,$this->ignoresymlinks);
+                $files = $this->setup->dirList($dir,$this->hidden);
                 if (is_array($files))
                 {
                     foreach($files as $file)
                     {
+                        // Make sure the file isn't a hidden file
                         $file = strtr($file, '\\', '/');
-                        // file's subpath, relative to $dir
-                        $file_subpath = str_replace('\\', '/', realpath(dirname($file)));
-                        $file_subpath = preg_replace('~^' . preg_quote($dir, '~') . '~', '', $file_subpath);
-
-                        if (!$this->setup->checkIgnore(basename($file), $file_subpath, $this->ignore_files,true,$this->ignoresymlinks))
+                        if (substr(basename($file),0,1) != ".")
                         {
-                            $filelist[] = $file;
-                        } else {
-                            phpDocumentor_out("File $file Ignored\n");
-                            flush();
+                            // file's subpath, relative to $dir
+                            $file_subpath = str_replace('\\', '/', realpath(dirname($file)));
+                            $file_subpath = preg_replace('~^' . preg_quote($dir, '~') . '~', '', $file_subpath);
+                            
+                            if (!$this->setup->checkIgnore(basename($file), $file_subpath, $this->ignore_files))
+                            {
+                                $filelist[] = $file;
+                            } else {
+                                phpDocumentor_out("File $file Ignored\n");
+                                flush();
+                            }
                         }
                     }
                 }
@@ -698,7 +693,7 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
             flush();
         } else
         {
-            print "\nERROR: nothing parsed\n";
+            print "ERROR: nothing parsed";
             exit;
         }
     }
