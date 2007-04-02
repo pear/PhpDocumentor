@@ -30,7 +30,7 @@
 /**
  * Page-Level DocBlock example.
  * @author Gregory Beaver <cellog@php.net>
- * @copyright Copyright &copy; 2002, Gregory Beaver
+ * @copyright Copyright (c) 2002, Gregory Beaver
  */
 /**
  * function datafunction
