@@ -844,4 +844,22 @@ function phpDocumentor_out($string)
     }
 
 }
+
+/**
+ * Crash in case of known, dangerous bug condition
+ * 
+ * Checks the PHP version that is executing PhpDocumentor,
+ * in case a known PHP/PEAR bug condition could be triggered
+ * by the PhpDocumentor execution.
+ * @param string $php_version the PHP version that contains the bug
+ * @param string $php_bug_number the PHP bug number (if any)
+ * @param string $pear_bug_number the PEAR bug number (if any)
+ */
+function checkForBugCondition($php_version, $php_bug_number = 'none', $pear_bug_number = 'none')
+{
+    if (version_compare(phpversion(), $php_version) == 0)
+    {
+        addErrorDie(PDERROR_DANGEROUS_PHP_BUG_EXISTS, $php_version, $php_bug_number, $pear_bug_number);
+    }
+}
 ?>

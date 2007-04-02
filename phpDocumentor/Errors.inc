@@ -374,6 +374,10 @@ define("PDERROR_NESTED_INTERNAL", 76);
  * warning triggered when @todo is used on an include element
  */
 define("PDERROR_NOTODO_INCLUDE", 77);
+/**
+ * warning triggered when the PHP version being used has dangerous bug/behavior
+ */
+ define("PDERROR_DANGEROUS_PHP_BUG_EXISTS", 80);
 
 /**
  * Error messages for phpDocumentor parser warnings
@@ -474,6 +478,7 @@ $GLOBALS['phpDocumentor_error_descrip'] =
         PDERROR_UL_IN_UL => 'ul/ol tags cannot be directly nested inside ul/ol, nest inside li',
         PDERROR_INVALID_VALUES => 'command %s was passed "%s" but must be one of %s',
         PDERROR_NESTED_INTERNAL => '{@internal}} cannot be nested inside {@internal}}',
+        PDERROR_DANGEROUS_PHP_BUG_EXISTS => 'Dangerous PHP Bug exists in PHP version %s that can be triggered by this parse (see PHP Bug #%s and PEAR Bug #%s)',
         );
 
 /**
