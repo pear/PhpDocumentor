@@ -69,8 +69,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>ashnazg@php.net</email>
   <active>yes</active>
  </developer>
- <date>2007-03-20</date>
- <time>16:50:00</time>
+ <date>2007-04-02</date>
+ <time>11:50:00</time>
  <version>
   <release>1.3.2</release>
   <api>1.3.0</api>
@@ -196,6 +196,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
      <file name="Release-1.2.3" role="doc" />
      <file name="Release-1.2.3.1" role="doc" />
      <file name="Release-1.3.0" role="doc" />
+     <file name="Release-1.3.1" role="doc" />
     </dir> <!-- /Documentation/Release-old -->
     <dir name="tests">
      <dir name="bug-557861">
@@ -218,6 +219,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
       <file name="test_tags.phpt" role="test" />
       <file name="test_twoline.phpt" role="test" />
      </dir> <!-- /Documentation/tests/DocBlock_Lexer -->
+     <file name="bug1602961.php" role="test" />
+     <file name="bug1620470.php" role="test" />
      <file name="bug-441275.php" role="test" />
      <file name="bug-441278.php" role="test" />
      <file name="bug-441287.php" role="test" />
@@ -2908,7 +2911,7 @@ that to the peardoc build instead.
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-03-20</date>
+   <date>2007-04-02</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>
  - fixed these bugs reported in Sourceforge:
