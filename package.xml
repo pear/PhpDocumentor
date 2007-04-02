@@ -110,6 +110,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
  [ 1543686 ] Doesn't treat interface level docblock like class level docb
  [ 1525150 ] tag information displayed in random order
  [ 1518565 ] "-q off" different then not passing it
+ [ 1348589 ] @copyright bug?
 
  - fixed these bugs reported in PEAR:
   Bug # 9151:  ReflectionException when documenting classes derived from PHP internal classes
@@ -2943,6 +2944,7 @@ that to the peardoc build instead.
  [ 1543686 ] Doesn't treat interface level docblock like class level docb
  [ 1525150 ] tag information displayed in random order
  [ 1518565 ] "-q off" different then not passing it
+ [ 1348589 ] @copyright bug?
 
  - fixed these bugs reported in PEAR:
   Bug # 9151:  ReflectionException when documenting classes derived from PHP internal classes
