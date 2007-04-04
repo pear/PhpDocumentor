@@ -6,24 +6,48 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
 $packagedir = dirname(dirname(__FILE__));
 $notes = '
- - fixed these bugs reported at sourceforge
- [ 1544977 ] Command line arguments split by spaces (fix included)
- [ 1545927 ] HTMLSmartyConverter logo not in package
- [ 1573807 ] CHM Convertor does not strip full path for all TOC entries
- [ 1575145 ] \'-q on\' quiet mode not fully quiet
- [ 1581487 ] subdirectory include another subdirectory doc error.
- - fixed these bugs reported in PEAR:
-  Bug #8520: Broken XML when XML_Beautifier is installed
-  Bug #8533: require() broken in a lot of places - cannot run!
-  Bug #8539: Parser error in create_examples.php
-  Bug #8746: XML:DocBook generates warning with function/parameters without @param tag
-  Bug #8773: PDF Convertor fails due to being unable to find fonts
-  Bug #8914: returning non varibale reference ParserData.inc#500
+ - fixed these bugs reported in Sourceforge:
+ [ 1667333 ] Mishandled Param = 0 Default in Converters
+ [ 1656902 ] Error when converting class that extends Exception
+ [ 1640392 ] docBuilder user directory
+ [ 1634369 ] @global syntax in @name example
+ [ 1633275 ] Update TODO Links to SF/PEAR Buglists
+ [ 1631553 ] Docs Say TODO on INCLUDE Is OK
+ [ 1620470 ] Ensure No Pathing Given in Output Converter Name
+ [ 1620396 ] INSTALL is wrong and outdated
+ [ 1614286 ] Fix Indexing of Constants
+ [ 1611861 ] Fix --hidden flag handling
+ [ 1611847 ] Fix PEAR Bug #9366
+ [ 1602961 ] "--hidden off" / "-dh off" results in hidden=true
+ [ 1590240 ] Double Tab-Count after Shell # Comment in SourceCode
+ [ 1589650 ] Segfault with PHP 5.2
+ [ 1588175 ] const elements sorting incorrectly
+ [ 1586917 ] Object of class parserLinkInlineTag could not be converted
+ [ 1585879 ] Fix the error text for Includes without docblock
+ [ 1585875 ] Error text for Includes without docblock is incorrect
+ [ 1583877 ] tagsort corrections in ParserDocBlock.inc
+ [ 1583850 ] "Created by PhpDoc", not "Somesite"
+ [ 1573816 ] CHM default template does not set help file title
+ [ 1570942 ] Grammar/Typo Corrections in Tutorial
+ [ 1548910 ] Do not copy \\\".svn\\\" and \\\"CVS\\\" dirs from media fol
+ [ 1545418 ] Duplicated title in generated tutorials (docbook)
+ [ 1544661 ] bteer line number alignment in smarty::php html template
+ [ 1543686 ] Doesn\'t treat interface level docblock like class level docb
+ [ 1525150 ] tag information displayed in random order
+ [ 1518565 ] "-q off" different then not passing it
+ [ 1348589 ] @copyright bug?
 
-  The peardoc2 converter no longer uses funky PHP source highlighting, leaving
-that to the peardoc build instead.
+ - fixed these bugs reported in PEAR:
+  Bug # 9151:  ReflectionException when documenting classes derived from PHP internal classes
+  Bug # 9366:  Last line with comment in &lt;code&gt; disappears
+  Bug # 9673:  potential major security issue
+  Bug # 9915:  PHP Notice in PDF Converter
+  Bug # 9937:  Security Exploit CVE-2005-4593
+  Bug #10266:  List in @todo tags not processed correctly
+  Bug #10289:  Hangs at "Converting tutorials"
+
 ';
-$version = '1.3.1';
+$version = '1.3.2';
 $options = array(
 'baseinstalldir' => 'PhpDocumentor',
 'version' => $version,
@@ -61,6 +85,7 @@ $options = array(
         'Release-1.2.3.1' => 'doc',
         'Release-1.3.0' => 'doc',
         'Release-1.3.1' => 'doc',
+        'Release-1.3.2' => 'doc',
         'pear-phpdoc' => 'script',
         'pear-phpdoc.bat' => 'script',
         'HTML_TreeMenu-1.1.2/TreeMenu.php' => 'php',
