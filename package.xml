@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.5.0a2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.5.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>PhpDocumentor</name>
  <channel>pear.php.net</channel>
  <summary>The phpDocumentor package provides automatic documenting of php api directly from the source.</summary>
@@ -69,8 +69,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>ashnazg@php.net</email>
   <active>yes</active>
  </developer>
- <date>2007-04-02</date>
- <time>11:50:00</time>
+ <date>2007-04-04</date>
+ <time>10:13:39</time>
  <version>
   <release>1.3.2</release>
   <api>1.3.0</api>
@@ -93,7 +93,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
  [ 1614286 ] Fix Indexing of Constants
  [ 1611861 ] Fix --hidden flag handling
  [ 1611847 ] Fix PEAR Bug #9366
- [ 1602961 ] "--hidden off" / "-dh off" results in hidden=true
+ [ 1602961 ] &quot;--hidden off&quot; / &quot;-dh off&quot; results in hidden=true
  [ 1590240 ] Double Tab-Count after Shell # Comment in SourceCode
  [ 1589650 ] Segfault with PHP 5.2
  [ 1588175 ] const elements sorting incorrectly
@@ -101,26 +101,25 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
  [ 1585879 ] Fix the error text for Includes without docblock
  [ 1585875 ] Error text for Includes without docblock is incorrect
  [ 1583877 ] tagsort corrections in ParserDocBlock.inc
- [ 1583850 ] "Created by PhpDoc", not "Somesite"
+ [ 1583850 ] &quot;Created by PhpDoc&quot;, not &quot;Somesite&quot;
  [ 1573816 ] CHM default template does not set help file title
  [ 1570942 ] Grammar/Typo Corrections in Tutorial
- [ 1548910 ] Do not copy \\\".svn\\\" and \\\"CVS\\\" dirs from media fol
+ [ 1548910 ] Do not copy \\&quot;.svn\\&quot; and \\&quot;CVS\\&quot; dirs from media fol
  [ 1545418 ] Duplicated title in generated tutorials (docbook)
  [ 1544661 ] bteer line number alignment in smarty::php html template
- [ 1543686 ] Doesn't treat interface level docblock like class level docb
+ [ 1543686 ] Doesn&apos;t treat interface level docblock like class level docb
  [ 1525150 ] tag information displayed in random order
- [ 1518565 ] "-q off" different then not passing it
+ [ 1518565 ] &quot;-q off&quot; different then not passing it
  [ 1348589 ] @copyright bug?
 
  - fixed these bugs reported in PEAR:
   Bug # 9151:  ReflectionException when documenting classes derived from PHP internal classes
-  Bug # 9366:  Last line with comment in &lt;code&gt; disappears
+  Bug # 9366:  Last line with comment in &amp;lt;code&amp;gt; disappears
   Bug # 9673:  potential major security issue
   Bug # 9915:  PHP Notice in PDF Converter
   Bug # 9937:  Security Exploit CVE-2005-4593
   Bug #10266:  List in @todo tags not processed correctly
-  Bug #10289:  Hangs at "Converting tutorials"
-
+  Bug #10289:  Hangs at &quot;Converting tutorials&quot;
  </notes>
  <contents>
   <dir baseinstalldir="PhpDocumentor" name="/">
@@ -220,8 +219,6 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
       <file name="test_tags.phpt" role="test" />
       <file name="test_twoline.phpt" role="test" />
      </dir> <!-- /Documentation/tests/DocBlock_Lexer -->
-     <file name="bug1602961.php" role="test" />
-     <file name="bug1620470.php" role="test" />
      <file name="bug-441275.php" role="test" />
      <file name="bug-441278.php" role="test" />
      <file name="bug-441287.php" role="test" />
@@ -277,6 +274,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
      <file name="bug-pageleveldocsblocks.php" role="test" />
      <file name="bug-quote_new_parser.php" role="test" />
      <file name="bug-shortdesc.php" role="test" />
+     <file name="bug1602961.php" role="test" />
+     <file name="bug1620470.php" role="test" />
      <file name="phpt_test.php.inc" role="test" />
     </dir> <!-- /Documentation/tests -->
     <file name="RoadMap" role="doc" />
@@ -2884,24 +2883,22 @@ segfaults with the simplest of files.  Generation still works great in PHP4
    </stability>
    <date>2006-10-24</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
-   <notes>
- - fixed these bugs reported at sourceforge
- [ 1544977 ] Command line arguments split by spaces (fix included)
- [ 1545927 ] HTMLSmartyConverter logo not in package
- [ 1573807 ] CHM Convertor does not strip full path for all TOC entries
- [ 1575145 ] &apos;-q on&apos; quiet mode not fully quiet
- [ 1581487 ] subdirectory include another subdirectory doc error.
- - fixed these bugs reported in PEAR:
-  Bug #8520: Broken XML when XML_Beautifier is installed
-  Bug #8533: require() broken in a lot of places - cannot run!
-  Bug #8539: Parser error in create_examples.php
-  Bug #8746: XML:DocBook generates warning with function/parameters without @param tag
-  Bug #8773: PDF Convertor fails due to being unable to find fonts
-  Bug #8914: returning non varibale reference ParserData.inc#500
-
-  The peardoc2 converter no longer uses funky PHP source highlighting, leaving
-that to the peardoc build instead.
-   </notes>
+   <notes>- fixed these bugs reported at sourceforge
+[ 1544977 ] Command line arguments split by spaces (fix included)
+[ 1545927 ] HTMLSmartyConverter logo not in package
+[ 1573807 ] CHM Convertor does not strip full path for all TOC entries
+[ 1575145 ] &apos;-q on&apos; quiet mode not fully quiet
+[ 1581487 ] subdirectory include another subdirectory doc error.
+- fixed these bugs reported in PEAR:
+ Bug #8520: Broken XML when XML_Beautifier is installed
+ Bug #8533: require() broken in a lot of places - cannot run!
+ Bug #8539: Parser error in create_examples.php
+ Bug #8746: XML:DocBook generates warning with function/parameters without @param tag
+ Bug #8773: PDF Convertor fails due to being unable to find fonts
+ Bug #8914: returning non varibale reference ParserData.inc#500
+ 
+The peardoc2 converter no longer uses funky PHP source highlighting, leaving
+that to the peardoc build instead.</notes>
   </release>
   <release>
    <version>
@@ -2912,7 +2909,7 @@ that to the peardoc build instead.
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-04-02</date>
+   <date>2007-04-04</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>
  - fixed these bugs reported in Sourceforge:
@@ -2927,7 +2924,7 @@ that to the peardoc build instead.
  [ 1614286 ] Fix Indexing of Constants
  [ 1611861 ] Fix --hidden flag handling
  [ 1611847 ] Fix PEAR Bug #9366
- [ 1602961 ] "--hidden off" / "-dh off" results in hidden=true
+ [ 1602961 ] &quot;--hidden off&quot; / &quot;-dh off&quot; results in hidden=true
  [ 1590240 ] Double Tab-Count after Shell # Comment in SourceCode
  [ 1589650 ] Segfault with PHP 5.2
  [ 1588175 ] const elements sorting incorrectly
@@ -2935,26 +2932,25 @@ that to the peardoc build instead.
  [ 1585879 ] Fix the error text for Includes without docblock
  [ 1585875 ] Error text for Includes without docblock is incorrect
  [ 1583877 ] tagsort corrections in ParserDocBlock.inc
- [ 1583850 ] "Created by PhpDoc", not "Somesite"
+ [ 1583850 ] &quot;Created by PhpDoc&quot;, not &quot;Somesite&quot;
  [ 1573816 ] CHM default template does not set help file title
  [ 1570942 ] Grammar/Typo Corrections in Tutorial
- [ 1548910 ] Do not copy \\\".svn\\\" and \\\"CVS\\\" dirs from media fol
+ [ 1548910 ] Do not copy \\&quot;.svn\\&quot; and \\&quot;CVS\\&quot; dirs from media fol
  [ 1545418 ] Duplicated title in generated tutorials (docbook)
  [ 1544661 ] bteer line number alignment in smarty::php html template
- [ 1543686 ] Doesn't treat interface level docblock like class level docb
+ [ 1543686 ] Doesn&apos;t treat interface level docblock like class level docb
  [ 1525150 ] tag information displayed in random order
- [ 1518565 ] "-q off" different then not passing it
+ [ 1518565 ] &quot;-q off&quot; different then not passing it
  [ 1348589 ] @copyright bug?
 
  - fixed these bugs reported in PEAR:
   Bug # 9151:  ReflectionException when documenting classes derived from PHP internal classes
-  Bug # 9366:  Last line with comment in &lt;code&gt; disappears
+  Bug # 9366:  Last line with comment in &amp;lt;code&amp;gt; disappears
   Bug # 9673:  potential major security issue
   Bug # 9915:  PHP Notice in PDF Converter
   Bug # 9937:  Security Exploit CVE-2005-4593
   Bug #10266:  List in @todo tags not processed correctly
-  Bug #10289:  Hangs at "Converting tutorials"
-
+  Bug #10289:  Hangs at &quot;Converting tutorials&quot;
    </notes>
   </release>
  </changelog>
