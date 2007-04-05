@@ -746,6 +746,9 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         $name = str_replace("\\", "/", $name);
         // security:  ensure no opportunity exists to use "../.." pathing in this value
         $name = preg_replace('/[^a-zA-Z0-9' . $extra_characters_to_allow . '_]/', "", $name);
+        
+        // absolutely positively do NOT allow two consecutive dots ".."
+        if (strpos($name, '..') > -1) $name = false;
         return $name;
     }
     
@@ -781,7 +784,11 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
                 }
                 if (isset($c[$i][2]))
                 {
-                    $d = $this->cleanConverterNamePiece($c[$i][2], '.');  // must allow "." due to options like "phpdoc.de"
+                    /**
+                     * must allow "." due to options like "phpdoc.de"
+                     * must allow "/" due to options like "DOM/default"
+                     */
+                    $d = $this->cleanConverterNamePiece($c[$i][2], '.\/');
                     if (substr($d,-1) != "/")
                     {
                         $d .= "/";
