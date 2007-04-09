@@ -312,6 +312,70 @@ function foo($param = me)
     ]]>
     </programlisting>
    </para>
+   <para>Again, you must line up the list iterators in the same vertical column
+     in order for those list items to be considered &quot;on the same list&quot;.
+     Also, you cannot create nested lists using the simple list iterators...
+     doing so means it's no longer a &quot;simple&quot; list!  Varying the spacing
+     of the list iterators does not create nesting of the lists... it only starts up
+     new simple lists.  If you specifically need a nested list, you must use the list
+     tags (&lt;ol&gt;, &lt;ul&gt;):
+   </para>
+   <para>
+    <programlisting role="php">
+    <![CDATA[
+/**
+ * DocBlock with nested lists
+ *
+ * Here's the "complex" list:
+ * <ul>
+ * <li>outer item 1</li>
+ * <li>outer item 2, this one
+ *   is multi-line</li>
+ * <li>item 3 is a nested inner list
+ * <ul>
+ * <li>inner item 1</li>
+ * <li>inner item 2</li>
+ * </ul>
+ * <li>outer item 4</li>
+ * </ul>
+ */
+    ]]>
+    </programlisting>
+   </para>
+   <para>In some cases, the text description in a doc tag can contain a list, be it simple
+     or complex.  Notice that a title line is needed, with the list items themselves 
+     beginning on the next line:
+   </para>
+   <para>
+    <programlisting role="php">
+    <![CDATA[
+/**
+ * DocBlock with nested lists
+ * in the tag descriptions
+ * @todo My Simple TODO List
+ *    - item 1
+ *    - item 2
+ *    - item 3
+ * @todo My Complex TODO List
+ *    <ol>
+ *      <li>item 1.0</li>
+ *      <li>item 2.0</li>
+ *      <li>item 3.0</li>
+ *        <ol>
+ *          <li>item 3.1</li>
+ *          <li>item 3.2</li>
+ *        </ol>
+ *      <li>item 4.0</li>
+ *    </ol>
+ */
+    ]]>
+    </programlisting>
+   </para>
+   <para>Tagged lists are always a more robust and predictable option for you to
+     use.  Simple lists are convenient, but if you find yourself trying to bend
+     a simple list into displaying a certain way in your generated docs, you may
+     be better served by switching to a tagged list instead.
+   </para>
    <para>For in-depth information on how phpDocumentor parses the description
     field, see {@link ParserDescCleanup.inc}
    </para>
