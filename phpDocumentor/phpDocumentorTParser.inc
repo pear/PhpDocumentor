@@ -2079,6 +2079,24 @@ class phpDocumentorTParser extends Parser
         $dtype = $this->_pv_dtype;
         $this->$dtype->addVar($type,$this->getInlineTags($desc));
     }
+    
+    /**
+     * Handles @property(-read or -write) and @method magic tags
+     */
+    function propertyTagHandler( $name, $value )
+    {
+        $info = $this->retrieveType( $value, true );
+        if ( !$info )
+            addErrorDie( PDERROR_MALFORMED_TAG, $name );
+
+        $type = $info['type'];
+        $var = $info['var'];
+        $desc = $info['desc'];
+
+        $dtype = $this->_pv_dtype;
+        $this->$dtype->addProperty( $name, $var, $type, $this->getInlineTags( $desc ) );
+    }
+    
     /**#@-*/
     /**#@+
      * @access private
@@ -2171,7 +2189,9 @@ class phpDocumentorTParser extends Parser
                 $result['var'] = false;
             } else
             {
-                if (substr($value[0],0,1) == '$' || substr($value[0],0,2) == '&$')
+                if (substr($value[0],0,1) == '$'        // variable name ($) 
+                    || substr($value[0],0,2) == '&$'    // var passed by reference (&$)
+                    || substr($value[0],-2,2) == '()')  // method name (only used by magic method)
                 {
                     $result['var'] = trim($value[0]);
                     array_shift($value);

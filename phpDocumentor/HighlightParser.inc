@@ -276,6 +276,10 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
                                 'uses' => 'coreTagHandler',
                                 'var' => 'varTagHandler',
                                 'version' => 'coreTagHandler',
+                                'property' => 'propertyTagHandler',
+                                'property-read' => 'propertyTagHandler',
+                                'property-write' => 'propertyTagHandler',
+                                'method' => 'propertyTagHandler'
                             );
     /**#@-*/
     
@@ -1617,6 +1621,15 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
     {
         $this->paramTagHandler($name, $value, false);
     }
+
+    /**
+     * Handles @property(-read or -write) and @method magic tags
+     */
+    function propertyTagHandler( $name, $value )
+    {
+        return $this->paramTagHandler( $name, $value, true );
+    }
+
     /**#@-*/
     
     /**

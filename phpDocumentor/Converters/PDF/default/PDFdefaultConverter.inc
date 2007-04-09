@@ -287,6 +287,12 @@ class PDFdefaultConverter extends Converter
             $a = $val->Convert($this);
             $tags[] = array('keyword' => 'Static Variable Used','data' => $val->converted_returnType.' '.$static.': '.$a);
         }
+        if ($element->docblock->properties)
+        foreach($element->docblock->properties as $property => $val)
+        {
+            $a = $val->Convert($this);
+            $tags[] = array('keyword' => ucfirst($val->keyword),'data' => $val->converted_returnType.' '.$property.': '.$a);
+        }
         foreach($tagses as $tag)
         {
             if (isset($names[$tag->keyword])) $tag->keyword = $names[$tag->keyword];

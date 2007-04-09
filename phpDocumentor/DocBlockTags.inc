@@ -359,6 +359,82 @@ class parserReturnTag extends parserTag
 }
 
 /**
+ * represents "@property" tag
+ * @package phpDocumentor
+ * @subpackage DocBlockTags
+ */
+class parserPropertyTag extends parserReturnTag
+{
+    /**
+     * always 'property'
+     * @var string
+     */
+    var $keyword = 'property';
+    /**
+     * the type a property has
+     * @var string
+     */
+    var $returnType = 'mixed';
+
+    /**
+     * @param string
+     * @param parserStringWithInlineTags
+     */
+    function parserPropertyTag( $returnType, $value )
+    {
+        $this->returnType = $returnType;
+        parent::parserTag( $this->keyword, $value );
+    }
+}
+
+/**
+ * represents "@property-read" tag
+ * @package phpDocumentor
+ * @subpackage DocBlockTags
+ */
+class parserPropertyReadTag extends parserPropertyTag
+{
+    /**
+     * always 'property-read'
+     * @var string
+     */
+    var $keyword = 'property-read';
+}
+
+/**
+ * represents "@property-write" tag
+ * @package phpDocumentor
+ * @subpackage DocBlockTags
+ */
+class parserPropertyWriteTag extends parserPropertyTag
+{
+    /**
+     * always 'property-write'
+     * @var string
+     */
+    var $keyword = 'property-write';
+}
+
+/**
+ * represents "@method" tag
+ * @package phpDocumentor
+ * @subpackage DocBlockTags
+ */
+class parserMethodTag extends parserPropertyTag
+{
+    /**
+     * always 'method'
+     * @var string
+     */
+    var $keyword = 'method';
+    /**
+     * the return type a method has
+     * @var string
+     */
+    var $returnType = 'void';
+}
+
+/**
  * represents "@var"
  * @tutorial tags.var.pkg
  * @package phpDocumentor

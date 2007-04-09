@@ -379,6 +379,10 @@ define("PDERROR_NOTODO_INCLUDE", 77);
  */
 define("PDERROR_UNDOCUMENTED_ELEMENT", 78);
 /**
+ * warning triggered when any of {@}property}}, {@}property-read}}, {@}property-write}}, or {@}method}} tag does not have name
+ */
+define("PDERROR_MISSING_PROPERTY_TAG_NAME", 79);
+/**
  * Error messages for phpDocumentor parser warnings
  * @global array $GLOBALS['phpDocumentor_warning_descrip']
  * @name $phpDocumentor_warning_descrip
@@ -414,6 +418,7 @@ $GLOBALS['phpDocumentor_warning_descrip'] =
         PDERROR_BEAUTIFYING_FAILED => 'Beautifying failed: %s',
         PDERROR_NOTODO_INCLUDE => '@todo on an include element is ignored (line %s, file %s)',
         PDERROR_UNDOCUMENTED_ELEMENT => '%s "%s" has no %s-level DocBlock.',
+        PDERROR_MISSING_PROPERTY_TAG_NAME => '@%s magic tag does not have name, illegal. Ignoring tag "@%s %s %s"'
         );
 
 

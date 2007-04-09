@@ -192,6 +192,10 @@ class parserDocBlock
      */
     var $statics = array();
     /**
+     * array of {@link parserPropertyTag}, {@link parserPropertyReadTag}, {@link parserPropertyWriteTag}, {@link parserMethodTag} magic tags
+     */
+    var $properties = array();
+    /**
      * This is either a {@link parserReturnTag} or false if no return tag is present
      * @var mixed
      */
@@ -1022,6 +1026,35 @@ class parserDocBlock
     }
 
     /**
+     * Adds a @property(-read or -write) or @method magic tag to the DocBlock
+     */
+    function addProperty( $tagName, $propertyName, $propertyType, $value )
+    {
+        if ( empty( $propertyName ) )
+        {
+            addWarning ( PDERROR_MISSING_PROPERTY_TAG_NAME, $tagName, $tagName, $propertyType, $value->getString() );
+        }
+        else
+        {
+            switch ( $tagName )
+            {
+            case 'property':
+                $this->properties[ $propertyName ] = new parserPropertyTag( $propertyType, $value );
+                break;
+            case 'property-read':
+                $this->properties[ $propertyName ] = new parserPropertyReadTag( $propertyType, $value );
+                break;
+            case 'property-write':
+                $this->properties[ $propertyName ] = new parserPropertyWriteTag( $propertyType, $value );
+                break;
+            case 'method':
+                $this->properties[ $propertyName ] = new parserMethodTag( $propertyType, $value );
+                break;
+            }
+        }
+    }
+
+    /**
      * Custom sorting function for sorting @uses tags
      *
      * @param parserTag $a
@@ -1066,6 +1099,22 @@ class parserDocBlock
         } else {
             return array();
         }
+    }
+
+    /**
+     * @return array Format: array('var' => tag name, 'data' => unconverted tag value)
+     */
+    function listProperties()
+    {
+        $ret = array();
+        if (isset($this->properties))
+        {
+            foreach($this->properties as $key => $val)
+            {
+                $ret[] = array("var" => ucfirst($key),"data" => $val);
+            }
+        }
+        return $ret;
     }
     
     /**
