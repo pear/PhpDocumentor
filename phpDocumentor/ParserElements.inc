@@ -2188,10 +2188,19 @@ class parserTutorial extends parserPackagePage
     }
     
     /**
-     * @param array array of parserTutorials that have child tutorials
+     * Determine if this parserTutorial object is a child of another
+     * 
+     * WARNING:  This method can enter an infinite loop when run on PHP v5.2.1...
+     * see {@link http://bugs.php.net/bug.php?id=40608 PHP Bug #40608}
+     * and {@link http://pear.php.net/bugs/bug.php?id=10289 PEAR Bug #10289}
+     * @param array $parents array of parserTutorials that have child tutorials
+     * @return boolean whether or not this tutorial is a child of the any of the parents
      */
     function isChildOf($parents)
     {
+        // avoid infinite loop PHP bug #40608 in PHP v5.2.1, see PEAR #10289
+        checkForBugCondition('5.2.1', '40608', '10289');
+
         foreach($parents as $i => $parent)
         {
             if ($parent->path == $this->path) continue;
