@@ -10,7 +10,7 @@
     <authorblurb>Tag Documentation written by {@link mailto:cellog@php.net cellog@php.net}</authorblurb>
    </author>
    <copyright>Copyright 2004, Gregory Beaver</copyright>
-   <releaseinfo>phpDocumentor 1.3.1</releaseinfo>
+   <releaseinfo>phpDocumentor 1.3.2</releaseinfo>
   </refsynopsisdivinfo>
   <cmdsynopsis>
    <command>{@}example</command>

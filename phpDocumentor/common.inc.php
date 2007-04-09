@@ -42,7 +42,7 @@ if ('@PEAR-DIR@' != '@'.'PEAR-DIR@')
 {
     define("PHPDOCUMENTOR_VER","@VER@");
 } else {
-    define("PHPDOCUMENTOR_VER","1.3.1");
+    define("PHPDOCUMENTOR_VER","1.3.2");
 }
 /** phpDocumentor version */
 define("PHPDOCUMENTOR_WEBSITE","http://www.phpdoc.org");
