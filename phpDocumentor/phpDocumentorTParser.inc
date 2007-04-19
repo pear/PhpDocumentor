@@ -1975,7 +1975,7 @@ class phpDocumentorTParser extends Parser
     function globalTagHandler($name, $value)
     {
         $info = $this->retrieveType($value, true);
-        if (!$info) addErrorDie(PDERROR_MALFORMED_TAG, '@global');
+        if (!$info) addError(PDERROR_MALFORMED_TAG, '@global');
         $type = $info['type'];
         $var = $info['var'];
         $desc = $info['desc'];
@@ -2006,7 +2006,7 @@ class phpDocumentorTParser extends Parser
     function staticvarTagHandler($name, $value)
     {
         $info = $this->retrieveType($value, true);
-        if (!$info) addErrorDie(PDERROR_MALFORMED_TAG, '@staticvar');
+        if (!$info) addError(PDERROR_MALFORMED_TAG, '@staticvar');
         $type = $info['type'];
         $var = $info['var'];
         $desc = $info['desc'];
@@ -2032,7 +2032,6 @@ class phpDocumentorTParser extends Parser
     function paramTagHandler($name, $value)
     {
         $info = $this->retrieveType($value, true);
-        //if (!$info) addErrorDie(PDERROR_MALFORMED_TAG, '@param');
 	    if (!$info) { addError(PDERROR_MALFORMED_TAG, '@param'); return; }
         $type = $info['type'];
         $var = $info['var'];
@@ -2059,7 +2058,6 @@ class phpDocumentorTParser extends Parser
     function returnTagHandler($name, $value)
     {
         $info = $this->retrieveType($value, true);
-        //if (!$info) addErrorDie(PDERROR_MALFORMED_TAG, '@return');
         if (!$info) { addError(PDERROR_MALFORMED_TAG, '@return'); return; }
         $type = $info['type'];
         $desc = $info['desc'];
@@ -2073,7 +2071,7 @@ class phpDocumentorTParser extends Parser
     function varTagHandler($name, $value)
     {
         $info = $this->retrieveType($value, true);
-        if (!$info) addErrorDie(PDERROR_MALFORMED_TAG, '@var');
+        if (!$info) addError(PDERROR_MALFORMED_TAG, '@var');
         $type = $info['type'];
         $desc = $info['desc'];
         $dtype = $this->_pv_dtype;
@@ -2087,7 +2085,7 @@ class phpDocumentorTParser extends Parser
     {
         $info = $this->retrieveType( $value, true );
         if ( !$info )
-            addErrorDie( PDERROR_MALFORMED_TAG, $name );
+            addError(PDERROR_MALFORMED_TAG, '@' . $name );
 
         $type = $info['type'];
         $var = $info['var'];

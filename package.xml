@@ -92,8 +92,8 @@ Includes these Sourceforge items:
 - [1540666] patch for @property, @property-read and @property-write tags
 - [1044752] List undocumented classes/functions
 
- - fixed these bugs reported in PEAR:
- 
+Includes these PEAR items:
+Req #10670: Don't Die on Empty Tag Descriptions
  </notes>
  <contents>
   <dir baseinstalldir="PhpDocumentor" name="/">
@@ -2924,8 +2924,8 @@ that to the peardoc build instead.</notes>
  Bug #9673:  potential major security issue
  Bug #9915:  PHP Notice in PDF Converter
  Bug #9937:  Security Exploit CVE-2005-4593
- Bug #10266:  List in @todo tags not processed correctly
- Bug #10289:  Hangs at &quot;Converting tutorials&quot;</notes>
+ Bug #10266: List in @todo tags not processed correctly
+ Bug #10289: Hangs at &quot;Converting tutorials&quot;</notes>
   </release>
   <release>
    <version>
@@ -2950,8 +2950,8 @@ Includes these Sourceforge items:
 - [1540666] patch for @property, @property-read and @property-write tags
 - [1044752] List undocumented classes/functions
 
- - fixed these bugs reported in PEAR:
-
+Includes these PEAR items:
+Req #10670: Don't Die on Empty Tag Descriptions
    </notes>
   </release>
  </changelog>
