@@ -58,8 +58,8 @@ There are no PEAR items included in 1.4.0.
 
 You can view the bug details or reopen one if
 you think it's not totally fixed at:
-http://sourceforge.net/tracker/?group_id=11194&atid=111194
 http://pear.php.net/bugs/search.php?cmd=display&package_name%5B%5D=PhpDocumentor
+http://sourceforge.net/tracker/?group_id=11194&atid=111194
 
 ################################################################################
 
@@ -68,13 +68,16 @@ http://www.phpdoc.org/docs
 or in the distribution in the spec directory
 
 The changelog is available in the tarball, or online at 
-http://cvs.php.net/viewvc.cgi/pear/PhpDocumentor/ChangeLog?view=markup
+http://pear.php.net/package/PhpDocumentor/download/
 
 You can download the newest version from 
-http://phpdocu.sourceforge.net/downloads.php
+http://pear.php.net/package/PhpDocumentor/download/ 
+and http://phpdocu.sourceforge.net/downloads.php
 
-And of course you can reach the webpage at http://phpdocu.sourceforge.net/ or 
-http://phpdoc.org/ 
+And of course you can reach the webpage at
+http://pear.php.net/package/PhpDocumentor/ or
+http://phpdocu.sourceforge.net/ or
+http://phpdoc.org/
 
 enjoy
 -gregory beaver <cellog@users.sourceforge.net>

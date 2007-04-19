@@ -644,9 +644,9 @@ There is only 1 template for all other Converters, <b>default</b>
          "mailto:cellog@users.sourceforge.net">cellog@users.sourceforge.net</a>
       </p>
       <p>
-         If you have any problems with phpDocumentor, please visit the website: <a
-         href='http://phpdocu.sourceforge.net'>phpdocu.sourceforge.net</a> and
-         submit a bug
+         If you have any problems with phpDocumentor, please visit the website: 
+         <a href='http://pear.php.net/package/PhpDocumentor'>pear.php.net/package/PhpDocumentor</a>
+         and submit a bug
       </p>
       <!-- Created: Tue Jun 26 18:52:40 MEST 2001 -->
       <!-- hhmts start -->

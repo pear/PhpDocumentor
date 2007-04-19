@@ -51,16 +51,16 @@
   <title>Installation</title>
   <para>
    There are two official installation methods for phpDocumentor.  The first is through
-   downloading and extracting one of the available archives downloadable through
-   sourceforge.net, and the other is through the PEAR installer.  There is planning for
+   downloading and extracting one of the available archives downloadable through pear.php.net
+   and sourceforge.net, and the other is through the PEAR installer.  There is planning for
    a {@link http://www.phing.org Phing} task and for distribution through other
    new and promising installation frameworks like the {@link http://www.zzoss.com ZZ/OSS installer}.
    However, only the two official installation methods are supported by phpDocumentor's developers.
   </para>
   <refsect2 id="{@id sf}">
-   <title>Download from Sourceforge.net</title>
+   <title>Download from Pear.Php.net or Sourceforge.net</title>
    <para>
-    To install phpDocumentor from a .zip or tarball downloaded directly from
+    To install phpDocumentor from a .zip or tarball downloaded directly from pear.php.net or
     sourceforge.net, first determine whether you will be using phpDocumentor's web or command-line
     interface (see the {@tutorial phpDocumentor.quickstart.pkg#basicusage} section for
     help in making this decision).

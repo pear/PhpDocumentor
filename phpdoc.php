@@ -451,9 +451,9 @@ Could have been implemented a lot easier with replace but it's not very backward
          "mailto:cellog@users.sourceforge.net">cellog@users.sourceforge.net</a>, all post-0.3.0 modifications
       </p>
       <p>
-         If you have any problems with phpDocumentor, please visit the website: <a
-         href='http://phpdocu.sourceforge.net'>phpdocu.sourceforge.net</a> and
-         submit a bug
+         If you have any problems with phpDocumentor, please visit the website: 
+         <a href='http://pear.php.net/package/PhpDocumentor'>pear.php.net/package/PhpDocumentor</a>
+         and submit a bug
       </p>
       <!-- Created: Tue Jun 26 18:52:40 MEST 2001 -->
       <!-- hhmts start -->

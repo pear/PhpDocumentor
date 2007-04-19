@@ -1,6 +1,6 @@
 <refentry id="{@id}">
  <refnamediv>
-  <refname>{@link http://phpdocu.sourceforge.net phpDocumentor 1.4.0a1} Manual</refname>
+  <refname>{@link http://pear.php.net/package/PhpDocumentor phpDocumentor 1.4.0a1} Manual</refname>
   <refpurpose>Introduction to phpDocumentor</refpurpose>
  </refnamediv>
  <refsynopsisdiv>
@@ -118,8 +118,8 @@
   </refsect2>
   <refsect2 id="{@id bug-reporting}">
    <title>Bugs and Features (guaranteed to be separate entities...)</title>
-   <para>If you think you've found a bug in phpDocumentor, please check our bug tracker online at {@link http://sourceforge.net/tracker/?func=browse&group_id=11194&atid=111194 http://sourceforge.net/tracker/?func=browse&group_id=11194&atid=111194}, the bug may have already been fixed (we develop at a rapid rate).  If you don't find it, please submit a bug, and we will attempt to fix it as quickly as possible.</para>
-   <para>If there is a feature you're dying to have, check our feature tracker at {@link http://sourceforge.net/tracker/?func=browse&group_id=11194&atid=361194 http://sourceforge.net/tracker/?func=browse&group_id=11194&atid=361194}.  Please don't hesitate to look right at the source code and help apply your feature.  We love that, and can easily give you access to the cvs.</para>
+   <para>If you think you've found a bug in phpDocumentor, please check our bug trackers online at {@link http://pear.php.net/bugs/search.php?cmd=display&package_name%5B%5D=PhpDocumentor PEAR} and {@link http://sourceforge.net/tracker/?func=browse&group_id=11194&atid=111194 http://sourceforge.net/tracker/?func=browse&group_id=11194&atid=111194 Sourceforge}, the bug may have already been fixed (we develop at a rapid rate).  If you don't find it, please submit a bug (preferably at PEAR), and we will attempt to fix it as quickly as possible.</para>
+   <para>If there is a feature you're dying to have, check our feature tracker at {@link http://pear.php.net/bugs/search.php?cmd=display&package_name%5B%5D=PhpDocumentor PEAR} and {@link http://sourceforge.net/tracker/?func=browse&group_id=11194&atid=361194 http://sourceforge.net/tracker/?func=browse&group_id=11194&atid=361194 Sourceforge}.  Please don't hesitate to look right at the source code and help apply your feature.  We love that, and can easily give you access to the cvs.</para>
   </refsect2>
   <refsect2 id="{@id helping-out}">
    <title>How to Help Out</title>

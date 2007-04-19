@@ -7,7 +7,7 @@
 // | Email         jeichorn@phpdoc.org, cellog@phpdoc.org                   |
 // | Web           http://www.phpdoc.org                                    |
 // | Mirror        http://phpdocu.sourceforge.net/                          |
-// | PEAR          http://pear.php.net/package-info.php?pacid=137           |
+// | PEAR          http://pear.php.net/package/PhpDocumentor                |
 // +------------------------------------------------------------------------+
 // | This source file is subject to version 3.00 of the PHP License,        |
 // | that is available at http://www.php.net/license/3_0.txt.               |

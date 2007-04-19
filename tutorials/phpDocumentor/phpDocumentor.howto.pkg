@@ -1,6 +1,6 @@
 <refentry id="{@id}">
  <refnamediv>
-  <refname>{@link http://phpdocu.sourceforge.net phpDocumentor 1.4.0a1} Tutorial</refname>
+  <refname>{@link http://pear.php.net/package/PhpDocumentor phpDocumentor 1.4.0a1} Tutorial</refname>
   <refpurpose>An in-depth look at using phpDocumentor to document PHP Source Code, and phpDocumentor internals</refpurpose>
  </refnamediv>
  <refsynopsisdiv>

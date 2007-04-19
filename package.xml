@@ -94,6 +94,7 @@ Includes these Sourceforge items:
 
 Includes these PEAR items:
 Req #10670: Don't Die on Empty Tag Descriptions
+Doc #10730: Replace Sourceforge Trackers with PEAR
  </notes>
  <contents>
   <dir baseinstalldir="PhpDocumentor" name="/">
@@ -2952,6 +2953,7 @@ Includes these Sourceforge items:
 
 Includes these PEAR items:
 Req #10670: Don't Die on Empty Tag Descriptions
+Doc #10730: Replace Sourceforge Trackers with PEAR
    </notes>
   </release>
  </changelog>

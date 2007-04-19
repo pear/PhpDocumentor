@@ -12,7 +12,7 @@
   </author>
  </refsynopsisdiv>
  <refsect1 id="{@id intro}">
-  <title>{@link http://phpdocu.sourceforge.net phpDocumentor 1.4.0a1} Converters Documentation</title>
+  <title>{@link http://pear.php.net/package/PhpDocumentor phpDocumentor 1.4.0a1} Converters Documentation</title>
   <para>Detailed Documentation of the tag specification is available at {@tutorial phpDocumentor/tags.pkg}.  Detailed information on phpDocumentor and a tutorial on basic usage is at: {@tutorial phpDocumentor/phpDocumentor.howto.pkg}</para>
   <para>If you are wondering how to extend the capabilities of phpDocumentor's output, this is the documentation you need.  This documentation does not discuss how to document your code or project, and only deals with the specific requirements of extending phpDocumentor.</para>
  </refsect1>

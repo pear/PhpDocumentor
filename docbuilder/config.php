@@ -605,7 +605,10 @@ var screenShots = new Array();
 		"mailto:eddieajau@users.sourceforge.net">eddieajau@users.sourceforge.net</a>
 		</p>
 		<p>
-		If you have any problems with phpDocumentor, please visit the website: <a href='http://phpdocu.sourceforge.net'>phpdocu.sourceforge.net</a> and submit a bug
+		If you have any problems with phpDocumentor, please visit the website: 
+        <a href='http://phpdoc.org'>phpdoc.org</a>, or 
+        <a href="http://pear.php.net/bugs/search.php?cmd=display&package_name[]=PhpDocumentor&status=Open">
+        submit a bug at PEAR</a>.
 		</p>
 		<!-- Created: Tue Jun 26 18:52:40 MEST 2001 -->
 		<!-- hhmts start -->
@@ -618,6 +621,7 @@ var screenShots = new Array();
 		<h2 class="tab">Links</h2>
 		<ul>
 			<li><a target="_top" href="http://www.phpdoc.org/manual.php">phpDocumentor manual</a> - Learn how to use phpDocumentor to document your PHP source code</li>
+            <li><a target="_top" href="http://pear.php.net/package/PhpDocumentor/">phpDocumentor homepage</a> on PEAR</li>
 			<li><a target="_top" href="http://phpdocu.sourceforge.net/">phpDocumentor homepage</a> on SourceForge</li>
 			<li><a target="_top" href="http://freshmeat.net/projects/phpdocu">Freshmeat record</a> - subscribe here</li>
 		</ul>
