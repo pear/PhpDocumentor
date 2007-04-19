@@ -600,7 +600,7 @@ var screenShots = new Array();
 		<br>Juan Pablo Morales <a href=
 		"mailto:ju-moral@uniandes.edu.co">ju-moral@uniandes.edu.co</a>
 		<br>Gregory Beaver <a href=
-		"mailto:cellog@users.sourceforge.net">cellog@users.sourceforge.net</a>
+		"mailto:cellog@php.net">cellog@php.net</a>
 		<br>Andrew Eddie <a href=
 		"mailto:eddieajau@users.sourceforge.net">eddieajau@users.sourceforge.net</a>
 		</p>

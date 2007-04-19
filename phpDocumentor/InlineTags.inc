@@ -41,7 +41,7 @@
  * @see parserStringWithInlineTags
  * @package phpDocumentor
  * @subpackage InlineTags
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Revision$
  * @tutorial inlinetags.pkg
@@ -107,7 +107,7 @@ class parserInlineTag extends parserBase
  * @tutorial tags.inlinelink.pkg
  * @package phpDocumentor
  * @subpackage InlineTags
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  */
 class parserLinkInlineTag extends parserInlineTag

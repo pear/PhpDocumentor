@@ -46,7 +46,7 @@
  * @package Converters
  * @subpackage HTMLframes
  * @see parserDocBlock, parserInclude, parserPage, parserClass, parserDefine, parserFunction, parserMethod, parserVar
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.2
  * @version $Id$
  */

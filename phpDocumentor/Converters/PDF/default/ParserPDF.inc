@@ -62,7 +62,7 @@ define('PHPDOCUMENTOR_PDF_STATE_PDFFUNCTION', 704);
 /**
  * @package Converters
  * @subpackage PDFdefault
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.2
  */
 class PDFParser extends Parser

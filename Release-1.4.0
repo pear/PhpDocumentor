@@ -3,7 +3,7 @@ $Id$
 PhpDocumentor Version 1.4.0
 ################################################################################
 http://www.phpdoc.org
-Gregory Beaver cellog@users.sourceforge.net
+Gregory Beaver cellog@php.net
 Joshua Eichorn jeichorn@phpdoc.org
 ################################################################################
 ################################################################################
@@ -80,7 +80,7 @@ http://phpdocu.sourceforge.net/ or
 http://phpdoc.org/
 
 enjoy
--gregory beaver <cellog@users.sourceforge.net>
+-gregory beaver <cellog@php.net>
 -joshua eichorn <jeichorn@phpdoc.org>
 
 

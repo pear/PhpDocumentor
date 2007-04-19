@@ -45,7 +45,7 @@
  * using inherited functions
  * @package phpDocumentor
  * @subpackage DocBlockTags
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -271,7 +271,7 @@ class parserAccessTag extends parserTag
  * @tutorial tags.return.pkg
  * @package phpDocumentor
  * @subpackage DocBlockTags
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -439,7 +439,7 @@ class parserMethodTag extends parserPropertyTag
  * @tutorial tags.var.pkg
  * @package phpDocumentor
  * @subpackage DocBlockTags
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -492,7 +492,7 @@ class parserStaticvarTag extends parserParamTag
  * @tutorial tags.link.pkg
  * @package phpDocumentor
  * @subpackage DocBlockTags
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -528,7 +528,7 @@ class parserLinkTag extends parserTag
  * @tutorial tags.see.pkg
  * @package phpDocumentor
  * @subpackage DocBlockTags
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */

@@ -4,7 +4,7 @@
 */
 /** 
 this invalid docblock 
-fails at cellog@users.sourceforge.net 
+fails at cellog@php.net 
 on the @sign 
 **/
 define('one','two');

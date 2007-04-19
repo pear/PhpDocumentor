@@ -51,7 +51,7 @@
  * DocBook converter.
  * @package Converters
  * @subpackage XMLDocBook
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.2
  * @version $Id$
  */

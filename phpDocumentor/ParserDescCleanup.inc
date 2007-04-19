@@ -124,7 +124,7 @@ define('PHPDOCUMENTOR_PDP_STATE_SIMLIST',714);
 * {@link parserInlineTag}s
 * @package phpDocumentor
 * @subpackage WordParsers
-* @author Greg Beaver <cellog@users.sourceforge.net>
+* @author Greg Beaver <cellog@php.net>
 * @since 1.2
 */
 class ObjectWordParser extends WordParser
@@ -292,7 +292,7 @@ class ObjectWordParser extends WordParser
  * @tutorial phpDocumentor.howto.pkg#basics.desc
  * @package phpDocumentor
  * @subpackage Parsers
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.2
  */
 class parserDescParser extends Parser

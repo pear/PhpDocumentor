@@ -38,7 +38,7 @@
 /**
  * Like WordParser, but expects an array of tokens from the tokenizer instead
  * of a string.
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @package phpDocumentor
  * @subpackage WordParsers
  * @since 1.2

@@ -39,7 +39,7 @@
  * Tokenizer-based parser for PHP source code
  * @package phpDocumentor
  * @subpackage Parsers
- * @author Gregory Beaver <cellog@users.sourceforge.net>
+ * @author Gregory Beaver <cellog@php.net>
  * @version $Revision$
  */
 class phpDocumentorTParser extends Parser

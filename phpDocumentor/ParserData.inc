@@ -40,7 +40,7 @@
  * together.
  * @package phpDocumentor
  * @subpackage ParserData
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -280,7 +280,7 @@ class parserPage
  * and {@link Converter})
  * @package phpDocumentor
  * @subpackage ParserData
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -559,7 +559,7 @@ class parserData
  * @package phpDocumentor
  * @subpackage ParserData
  * @abstract
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -608,7 +608,7 @@ class parserBase
  * Used to represent strings that contain inline tags, so that they can be properly parsed at link time
  * @package phpDocumentor
  * @subpackage ParserData
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */

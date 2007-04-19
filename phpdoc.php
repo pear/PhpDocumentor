@@ -12,7 +12,7 @@
 // An HTML interface for Joshua Eichorn's phpDocumentor
 // Author: Juan Pablo Morales  <ju-moral@uniandes.edu.co>
 //    Joshua Eichorn <jeichorn@phpdoc.org>
-//    Gregory Beaver <cellog@users.sourceforge.net>
+//    Gregory Beaver <cellog@php.net>
 //
 // phpDocumentor, a program for creating javadoc style documentation from php code
 // Copyright (C) 2000-2002 Joshua Eichorn
@@ -448,7 +448,7 @@ Could have been implemented a lot easier with replace but it's not very backward
          "mailto:ju-moral@uniandes.edu.co">ju-moral@uniandes.edu.co</a><br>
          Gregory Beaver<br>
          <a href=
-         "mailto:cellog@users.sourceforge.net">cellog@users.sourceforge.net</a>, all post-0.3.0 modifications
+         "mailto:cellog@php.net">cellog@php.net</a>, all post-0.3.0 modifications
       </p>
       <p>
          If you have any problems with phpDocumentor, please visit the website: 

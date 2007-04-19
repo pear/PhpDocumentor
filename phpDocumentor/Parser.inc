@@ -329,7 +329,7 @@ if (!defined('T_DOC_COMMENT'))
  *
  * This parser is slower than the tokenizer-based parser, and is deprecated.
  * @author    Joshua Eichorn <jeichorn@phpdoc.org>
- * @author    Gregory Beaver <cellog@users.sourceforge.net>
+ * @author    Gregory Beaver <cellog@php.net>
  * @version    $Id$
  * @package     phpDocumentor
  * @subpackage Parsers

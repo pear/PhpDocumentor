@@ -61,7 +61,7 @@ define('PHPDOCUMENTOR_PDP_STATE_ENTITY', 704);
  * Used to parse XML DocBook-based tutorials
  * @package phpDocumentor
  * @subpackage Parsers
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.2
  */
 class XMLPackagePageParser extends Parser

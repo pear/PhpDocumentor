@@ -81,6 +81,10 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
  </stability>
  <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
  <notes>
+Includes these PEAR items:
+Req #10670: Don't Die on Empty Tag Descriptions
+Doc #10730: Replace Sourceforge Trackers with PEAR
+
 Includes these Sourceforge items:
 - [1647423] memory_limit: bad if-clause
 - [1622538] List undocumented classes/functions
@@ -91,10 +95,6 @@ Includes these Sourceforge items:
 - [1543287] Use predefined PHP env var in phpdoc script
 - [1540666] patch for @property, @property-read and @property-write tags
 - [1044752] List undocumented classes/functions
-
-Includes these PEAR items:
-Req #10670: Don't Die on Empty Tag Descriptions
-Doc #10730: Replace Sourceforge Trackers with PEAR
  </notes>
  <contents>
   <dir baseinstalldir="PhpDocumentor" name="/">
@@ -2940,6 +2940,10 @@ that to the peardoc build instead.</notes>
    <date>2007-04-09</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>
+Includes these PEAR items:
+Req #10670: Don't Die on Empty Tag Descriptions
+Doc #10730: Replace Sourceforge Trackers with PEAR
+
 Includes these Sourceforge items:
 - [1647423] memory_limit: bad if-clause
 - [1622538] List undocumented classes/functions
@@ -2951,9 +2955,6 @@ Includes these Sourceforge items:
 - [1540666] patch for @property, @property-read and @property-write tags
 - [1044752] List undocumented classes/functions
 
-Includes these PEAR items:
-Req #10670: Don't Die on Empty Tag Descriptions
-Doc #10730: Replace Sourceforge Trackers with PEAR
    </notes>
   </release>
  </changelog>

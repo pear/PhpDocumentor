@@ -49,7 +49,7 @@
  * @link http://www.microsoft.com/downloads/release.asp?releaseid=33071 MS HTML Help Workshop download
  * @package Converters
  * @subpackage CHMdefault
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Revision$
  */

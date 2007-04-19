@@ -23,7 +23,7 @@
  * @package Converters
  * @subpackage XMLDocBook
  * @see parserDocBlock, parserInclude, parserPage, parserClass, parserDefine, parserFunction, parserMethod, parserVar
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0
  * @version $Id$
  */
@@ -34,7 +34,7 @@
  * @package Converters
  * @subpackage XMLDocBook
  * @see parserDocBlock, parserInclude, parserPage, parserClass, parserDefine, parserFunction, parserMethod, parserVar
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0
  * @version $Id$
  * @todo indexes for other DocBook converters not based on peardoc

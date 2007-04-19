@@ -54,7 +54,7 @@
  * method is the meat of the class, and processes the class trees from root to
  * branch, ensuring that parsing order is unimportant.}}
  * @package phpDocumentor
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */

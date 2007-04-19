@@ -15,7 +15,7 @@ to the output directory.  PHPDocumentor ships with 2 different templates, the
 default one, which uses a table layout, and looks like JavaDoc, and non tabled
 version template called l0l33t@ to use it just add -td templates/l0l33t/.
 
-Thanks to Gregory Beaver <cellog@users.sourceforge.net> for writing the linking
+Thanks to Gregory Beaver <cellog@php.net> for writing the linking
 stage, parse so @see tags work, and for updating the howto.php
 
 

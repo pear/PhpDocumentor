@@ -12,7 +12,7 @@
 // An HTML interface for Joshua Eichorn's phpDocumentor
 // Author: Juan Pablo Morales  <ju-moral@uniandes.edu.co>
 //    Joshua Eichorn <jeichorn@phpdoc.org>
-//    Gregory Beaver <cellog@users.sourceforge.net>
+//    Gregory Beaver <cellog@php.net>
 //
 // phpDocumentor, a program for creating javadoc style documentation from php code
 // Copyright (C) 2000-2002 Joshua Eichorn
@@ -641,7 +641,7 @@ There is only 1 template for all other Converters, <b>default</b>
          Juan Pablo Morales <a href=
          "mailto:ju-moral@uniandes.edu.co">ju-moral@uniandes.edu.co</a><br>
          Gregory Beaver <a href=
-         "mailto:cellog@users.sourceforge.net">cellog@users.sourceforge.net</a>
+         "mailto:cellog@php.net">cellog@php.net</a>
       </p>
       <p>
          If you have any problems with phpDocumentor, please visit the website: 

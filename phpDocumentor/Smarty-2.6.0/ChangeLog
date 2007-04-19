@@ -1459,7 +1459,7 @@
       fix example text
 
 
-2003-04-20  Greg Beaver <cellog@users.sourceforge.net>
+2003-04-20  Greg Beaver <cellog@php.net>
     * plugins/*
       Smarty.class.php
       Smarty_Compiler.class.php

@@ -47,7 +47,7 @@ include_once('phpDocumentor/Converters/PDF/default/class.phpdocpdf.php');
  *
  * @package Converters
  * @subpackage PDFdefault
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.1
  * @version $Id$
  * @todo Implement links to conflicts/inheritance

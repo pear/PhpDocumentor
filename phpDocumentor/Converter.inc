@@ -68,7 +68,7 @@ include_once("phpDocumentor/Smarty-2.6.0/libs/Smarty.class.php");
  *
  * @package Converters
  * @abstract
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */

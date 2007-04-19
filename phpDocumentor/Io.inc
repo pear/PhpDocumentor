@@ -672,7 +672,7 @@ class Io
      * Tell whether to ignore a file or a directory
      * allows * and ? wildcards
      *
-     * @author Greg Beaver <cellog@users.sourceforge.net>
+     * @author Greg Beaver <cellog@php.net>
      * @param    string  $file    just the file name of the file or directory,
      *                          in the case of directories this is the last dir
      * @param    string  $path    the path to consider (should be checked by
@@ -757,7 +757,7 @@ class Io
     
     /**
      * Construct the {@link $ignore} array
-     * @author Greg Beaver <cellog@users.sourceforge.net>
+     * @author Greg Beaver <cellog@php.net>
      * @param array strings of files/paths/wildcards to ignore
      * @access protected
      */
@@ -794,7 +794,7 @@ class Io
     /**
      * Converts $s into a string that can be used with preg_match
      * @param string $s string with wildcards ? and *
-     * @author Greg Beaver <cellog@users.sourceforge.net>
+     * @author Greg Beaver <cellog@php.net>
      * @return string converts * to .*, ? to ., etc.
      */
     function getRegExpableSearchString($s)
@@ -820,7 +820,7 @@ class Io
      * $match
      * @param array $dir array of filenames (full path)
      * @param string $match search string with wildcards
-     * @author Greg Beaver <cellog@users.sourceforge.net>
+     * @author Greg Beaver <cellog@php.net>
      * @return string|array listing of every file in a directory that matches
      *                      the search string
      */
@@ -849,7 +849,7 @@ class Io
      * potential * and ? wildcards.
      * @return mixed if $file contains wildcards, returns an array of matching
      *               files, otherwise returns false
-     * @author Greg Beaver <cellog@users.sourceforge.net>
+     * @author Greg Beaver <cellog@php.net>
      * @uses dirList
      * @uses removeNonMatches
      */

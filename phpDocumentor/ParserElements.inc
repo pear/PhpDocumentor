@@ -42,7 +42,7 @@
  * @abstract
  * @package phpDocumentor
  * @subpackage ParserElements
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -195,7 +195,7 @@ class parserElement extends parserBase
 /**
  * @package phpDocumentor
  * @subpackage ParserElements
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -211,7 +211,7 @@ class parserInclude extends parserElement
 /**
  * @package phpDocumentor
  * @subpackage ParserElements
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.1
  * @version $Id$
  */
@@ -315,7 +315,7 @@ class parserGlobal extends parserElement
 /**
  * @package phpDocumentor
  * @subpackage ParserElements
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -676,7 +676,7 @@ class parserFunction extends parserElement
 /**
  * @package phpDocumentor
  * @subpackage ParserElements
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -1408,7 +1408,7 @@ class parserClass extends parserElement
 /**
  * @package phpDocumentor
  * @subpackage ParserElements
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -1572,7 +1572,7 @@ class parserVar extends parserElement
 /**
  * @package phpDocumentor
  * @subpackage ParserElements
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.2.4
  */
 class parserConst extends parserElement
@@ -1621,7 +1621,7 @@ class parserConst extends parserElement
 /**
  * @package phpDocumentor
  * @subpackage ParserElements
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -1976,7 +1976,7 @@ class parserMethod extends parserFunction
 /**
  * @package phpDocumentor
  * @subpackage ParserElements
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -2020,7 +2020,7 @@ class parserDefine extends parserElement
 /**
  * @package phpDocumentor
  * @subpackage ParserElements
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */

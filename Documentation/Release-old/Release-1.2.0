@@ -4,7 +4,7 @@ PhpDocumentor Version 1.2.0 RELEASE CANDIDATE 2
 ################################################################################
 http://www.phpdoc.org
 Joshua Eichorn jeichorn@phpdoc.org
-Gregory Beaver cellog@users.sourceforge.net
+Gregory Beaver cellog@php.net
 ################################################################################
 ################################################################################
 
@@ -330,7 +330,7 @@ http://phpdoc.org/
 
 enjoy
 -joshua eichorn <jeichorn@phpdoc.org>
--gregory beaver <cellog@users.sourceforge.net>
+-gregory beaver <cellog@php.net>
 
 
 vim: set expandtab :

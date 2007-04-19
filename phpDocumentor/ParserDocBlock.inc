@@ -40,7 +40,7 @@
  * represents a short or long description in a DocBlock ({@link parserDocBlock})
  * @package phpDocumentor
  * @subpackage ParserDocBlock
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
@@ -122,7 +122,7 @@ class parserDesc extends parserStringWithInlineTags
  * Represents a docblock and its components, {@link $desc}, {@link $sdesc}, {@link $tags}, and also {@link $params} for functions
  * @package phpDocumentor
  * @subpackage ParserDocBlock
- * @author Greg Beaver <cellog@users.sourceforge.net>
+ * @author Greg Beaver <cellog@php.net>
  * @since 1.0rc1
  * @version $Id$
  */
