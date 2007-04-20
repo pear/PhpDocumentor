@@ -38,8 +38,6 @@ class Documentation_tests_bug1602961 extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         $GLOBALS['_phpDocumentor_install_dir'] = ".";
         $GLOBALS['_phpDocumentor_setting']['quiet'] = "true";
-//        $this->ps = new phpDocumentor_setup;
-//        setTitle("Unit Testing");    // this step is necessary to ensure ps->render is instantiated
     }
 
     /**
