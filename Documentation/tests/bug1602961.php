@@ -85,7 +85,7 @@ class Documentation_tests_bug1602961 extends PHPUnit_Framework_TestCase {
         $this->assertTrue(decideOnOrOff('true'));
         $this->assertTrue(decideOnOrOff('True'));
         $this->assertTrue(decideOnOrOff('TRUE'));
-        $this->assertFalse(decideOnOrOff(1));
+        $this->assertTrue(decideOnOrOff(1));
                 
         // unexpected
         $this->assertTrue(decideOnOrOff('  '));
