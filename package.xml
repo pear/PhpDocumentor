@@ -54,7 +54,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
  <lead>
   <name>Joshua Eichorn</name>
   <user>jeichorn</user>
-  <email>jeichorn@php.net</email>
+  <email>jeichorn@phpdoc.org</email>
   <active>yes</active>
  </lead>
  <developer>
@@ -91,6 +91,7 @@ Includes these Sourceforge items:
 - [1602988] Added --ignore-symlinks option
 - [1588942] Allow memory_limit setting in phpdoc.ini
 - [1588936] Show INI Path at Startup
+- [1574043] Refactored RETURNs #1
 - [1543289] Apply ignore patterns to subdir of dir, instead of full path
 - [1543287] Use predefined PHP env var in phpdoc script
 - [1540666] patch for @property, @property-read and @property-write tags
@@ -250,6 +251,8 @@ Includes these Sourceforge items:
      <file name="bug-pageleveldocsblocks.php" role="test" />
      <file name="bug-quote_new_parser.php" role="test" />
      <file name="bug-shortdesc.php" role="test" />
+     <file name="bug1574043.php" role="test" />
+     <file name="bug1574047.php" role="test" />
      <file name="bug1602961.php" role="test" />
      <file name="bug1620470.php" role="test" />
      <file name="phpt_test.php.inc" role="test" />
@@ -2950,6 +2953,7 @@ Includes these Sourceforge items:
 - [1602988] Added --ignore-symlinks option
 - [1588942] Allow memory_limit setting in phpdoc.ini
 - [1588936] Show INI Path at Startup
+- [1574043] Refactored RETURNs #1
 - [1543289] Apply ignore patterns to subdir of dir, instead of full path
 - [1543287] Use predefined PHP env var in phpdoc script
 - [1540666] patch for @property, @property-read and @property-write tags

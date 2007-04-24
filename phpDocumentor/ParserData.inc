@@ -236,26 +236,34 @@ class parserPage
     * @param Converter
     * @param boolean if this parameter is true, it will truncate the source location to the
     * subdirectory of pear
-     * @return string path of this file relative to program root
-     */
+    * @return string path of this file relative to program root
+    * @todo determine if the str_replace in the 'pear/' ELSE branch should be removed 
+    *       (see Documentation/tests/bug1574043.php).  It does NOT exist in the similar
+    *       function parserClass->getSourceLocation() in ParserElements.inc.
+    */
     function getSourceLocation ($c,$pearize = false)
     {
         global $_phpDocumentor_options;
-        if (!isset($this->sourceLocation)) return false;
-        if ($pearize)
+        if (!isset($this->sourceLocation)) 
+        {
+            $sl = false;   
+        }
+        else 
         {
             $sl = $this->sourceLocation;
-            if (strpos($sl,'pear/'))
+            if ($pearize)
             {
-                $sl = substr($sl,strpos($sl,'pear/') + 5);
-                return $sl;
-            } else
-            {
-                return str_replace($_phpDocumentor_options['Program_Root'] . PATH_DELIMITER,'',$sl);
+                if (strpos($sl,'pear/'))
+                {
+                    $sl = substr($sl,strpos($sl,'pear/') + 5);
+                } 
+                else
+                {
+                    $sl = str_replace($_phpDocumentor_options['Program_Root'] . PATH_DELIMITER,'',$sl);
+                }
             }
-            return $sl;
         }
-        return $this->sourceLocation;
+        return $sl;
     }
     /**
      * Not implemented in this version
