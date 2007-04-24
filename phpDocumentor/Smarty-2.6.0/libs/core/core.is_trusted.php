@@ -5,7 +5,7 @@
  * @subpackage plugins
  */
 
-/**#@+
+/**
  * @access private
  */
 /**

@@ -84,6 +84,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
 Includes these PEAR items:
 Req #10670: Don't Die on Empty Tag Descriptions
 Doc #10730: Replace Sourceforge Trackers with PEAR
+Doc #10675: Clear some errors.html items
 
 Includes these Sourceforge items:
 - [1647423] memory_limit: bad if-clause
@@ -2947,6 +2948,7 @@ that to the peardoc build instead.</notes>
 Includes these PEAR items:
 Req #10670: Don't Die on Empty Tag Descriptions
 Doc #10730: Replace Sourceforge Trackers with PEAR
+Doc #10675: Clear some errors.html items
 
 Includes these Sourceforge items:
 - [1647423] memory_limit: bad if-clause
