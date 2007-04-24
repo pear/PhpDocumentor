@@ -699,7 +699,6 @@ class XMLDocBookpeardoc2Converter extends Converter
             $listing = $this->getCData($listing);
         }
         return '<programlisting role="php">' . $this->getCData($listing) . '</programlisting>';
-        return parent::ProgramExample($listing, false, $inlinesourceparse, $class, $linenum, $filesourcepath);
     }
     
     /**
