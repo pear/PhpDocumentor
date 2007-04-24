@@ -1338,21 +1338,22 @@ class parserClass extends parserElement
     function getSourceLocation($c,$pearize = false)
     {
         global $_phpDocumentor_options;
-        if (!isset($this->sourceLocation)) return false;
-        if ($pearize)
+        if (!isset($this->sourceLocation)) 
+        {
+            $sl = false;   
+        }
+        else 
         {
             $sl = $this->sourceLocation;
-            if (strpos($sl,'pear/'))
+            if ($pearize)
             {
-                $sl = substr($sl,strpos($sl,'pear/') + 5);
-                return $sl;
-            } else
-            {
-                return $sl;
+                if (strpos($sl,'pear/'))
+                {
+                    $sl = substr($sl,strpos($sl,'pear/') + 5);
+                }   
             }
-            return $sl;
-        }
-        return $this->sourceLocation;
+        }        
+        return $sl;
     }
     
     /**
