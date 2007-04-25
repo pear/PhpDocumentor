@@ -6,48 +6,27 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
 $packagedir = dirname(dirname(__FILE__));
 $notes = '
- - fixed these bugs reported in Sourceforge:
- [ 1667333 ] Mishandled Param = 0 Default in Converters
- [ 1656902 ] Error when converting class that extends Exception
- [ 1640392 ] docBuilder user directory
- [ 1634369 ] @global syntax in @name example
- [ 1633275 ] Update TODO Links to SF/PEAR Buglists
- [ 1631553 ] Docs Say TODO on INCLUDE Is OK
- [ 1620470 ] Ensure No Pathing Given in Output Converter Name
- [ 1620396 ] INSTALL is wrong and outdated
- [ 1614286 ] Fix Indexing of Constants
- [ 1611861 ] Fix --hidden flag handling
- [ 1611847 ] Fix PEAR Bug #9366
- [ 1602961 ] "--hidden off" / "-dh off" results in hidden=true
- [ 1590240 ] Double Tab-Count after Shell # Comment in SourceCode
- [ 1589650 ] Segfault with PHP 5.2
- [ 1588175 ] const elements sorting incorrectly
- [ 1586917 ] Object of class parserLinkInlineTag could not be converted
- [ 1585879 ] Fix the error text for Includes without docblock
- [ 1585875 ] Error text for Includes without docblock is incorrect
- [ 1583877 ] tagsort corrections in ParserDocBlock.inc
- [ 1583850 ] "Created by PhpDoc", not "Somesite"
- [ 1573816 ] CHM default template does not set help file title
- [ 1570942 ] Grammar/Typo Corrections in Tutorial
- [ 1548910 ] Do not copy \\\".svn\\\" and \\\"CVS\\\" dirs from media fol
- [ 1545418 ] Duplicated title in generated tutorials (docbook)
- [ 1544661 ] bteer line number alignment in smarty::php html template
- [ 1543686 ] Doesn\'t treat interface level docblock like class level docb
- [ 1525150 ] tag information displayed in random order
- [ 1518565 ] "-q off" different then not passing it
- [ 1348589 ] @copyright bug?
+Includes these PEAR items:
+Req #10670: Don\'t Die on Empty Tag Descriptions
+Doc #10675: Clear some errors.html items
+Doc #10730: Replace Sourceforge Trackers with PEAR
 
- - fixed these bugs reported in PEAR:
-  Bug # 9151:  ReflectionException when documenting classes derived from PHP internal classes
-  Bug # 9366:  Last line with comment in &lt;code&gt; disappears
-  Bug # 9673:  potential major security issue
-  Bug # 9915:  PHP Notice in PDF Converter
-  Bug # 9937:  Security Exploit CVE-2005-4593
-  Bug #10266:  List in @todo tags not processed correctly
-  Bug #10289:  Hangs at "Converting tutorials"
+Includes these Sourceforge items:
+- [1647423] memory_limit: bad if-clause
+- [1622538] List undocumented classes/functions
+- [1602988] Added --ignore-symlinks option
+- [1588942] Allow memory_limit setting in phpdoc.ini
+- [1588936] Show INI Path at Startup
+- [1585840] Refactored RETURNs #3
+- [1574047] Refactored RETURNs #2
+- [1574043] Refactored RETURNs #1
+- [1543289] Apply ignore patterns to subdir of dir, instead of full path
+- [1543287] Use predefined PHP env var in phpdoc script
+- [1540666] patch for @property, @property-read and @property-write tags
+- [1044752] List undocumented classes/functions
 
 ';
-$version = '1.3.2';
+$version = '1.4.0a1';
 $options = array(
 'baseinstalldir' => 'PhpDocumentor',
 'version' => $version,
@@ -86,6 +65,7 @@ $options = array(
         'Release-1.3.0' => 'doc',
         'Release-1.3.1' => 'doc',
         'Release-1.3.2' => 'doc',
+        'Release-1.4.0' => 'doc',
         'pear-phpdoc' => 'script',
         'pear-phpdoc.bat' => 'script',
         'HTML_TreeMenu-1.1.2/TreeMenu.php' => 'php',
