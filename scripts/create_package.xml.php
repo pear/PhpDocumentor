@@ -27,6 +27,9 @@ Includes these Sourceforge items:
 
 ';
 $version = '1.4.0a1';
+$release_stability = 'alpha';
+$api = '1.4.0';
+$api_stability = 'alpha';
 $options = array(
 'baseinstalldir' => 'PhpDocumentor',
 'version' => $version,
@@ -84,7 +87,9 @@ $options = array(
 $pfm2 = PEAR_PackageFileManager2::importOptions(dirname(dirname(__FILE__))
     . DIRECTORY_SEPARATOR . 'package.xml', array_merge($options, array('packagefile' => 'package.xml')));
 $pfm2->setReleaseVersion($version);
-$pfm2->setReleaseStability('stable');
+$pfm2->setReleaseStability($release_stability);
+$pfm2->setAPIVersion($api);
+$pfm2->setAPIStability($api_stability);
 $pfm2->setLicense('LGPL', 'http://www.opensource.org/licenses/lgpl-license.php');
 $pfm2->setNotes($notes);
 $pfm2->clearDeps();
