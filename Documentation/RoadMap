@@ -1,53 +1,21 @@
-Notes on Specific Features:
+Roadmaps for future releases can be found
+on the PEAR website area for PhpDocumentor,
+at http://pear.php.net/bugs/roadmap.php?package=PhpDocumentor.
 
-You can get information about specific features from the sf.net feature tracker.
-The url is: https://sourceforge.net/tracker/index.php?group_id=11194&atid=361194
-The group field contains the version of phpDocumentor that the item will be
-finished for.
-
-Release Plan with Dates:
-
-DATE		VERSION
--------------------------
-April 27	1.2.0rc2
-
-May  10		1.2.0
-	  	|
-		|-- 1.2.1
-		\-- 1.2.2 (more bug-fix releases if needed)
-
-Sep  1   	2.0.0alpha1
-
-
- 
-General Notes:
-goals:
-
-Greg:
-rework packaging to be more strict
--require 1 package per file
--no guessing of package
--halt parsing on name conflict
--path-based left indexing for files
-incremental parsing (makefile?)
-better abstract class representation
--bundle sub-elements in parent (vars/methods in class)
-PHP 5 support
--namespaces
--private/protected/final/abstract
--interfaces
--etc.
-better code design
--separation of elements
--use Publisher more, less $this->parent = &$that
-
-Josh:
-wsdl converter
-xml/url converter
-phpdocXML dtd
-
-Marco:
-
-
--joshua eichorn
-jeichorn@phpdoc.org
+Remember, roadmaps are always "works-in-progress", so
+any input you would like to provide to the direction
+of PhpDocumentor is always appreciated.  Channels for 
+providing such feedback include:
+- Bug Tracker 
+  http://pear.php.net/bugs/search.php?package_name[]=PhpDocumentor&status=Open&cmd=display
+  You can open bugs, enhancement requests, and documentation updates
+  specific to PhpDocumentor's own online manual.
+- Sourceforge Mailing List for Developers
+  phpdocu-developer@lists.sourceforge.net
+  You can communicate specifically with the PhpDocumentor developers
+  on this mailing list.
+- PEAR Mailing List for Developers
+  pear-dev@lists.php.net
+  This mailing list covers developers for ALL the PEAR packages,
+  not just PhpDocumentor, so use it as a last resort for 
+  reaching the PhpDocumentor developers.
