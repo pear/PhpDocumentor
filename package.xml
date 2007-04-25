@@ -70,7 +70,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2007-04-25</date>
- <time>10:17:20</time>
+ <time>12:37:20</time>
  <version>
   <release>1.4.0a1</release>
   <api>1.4.0</api>
@@ -1534,7 +1534,7 @@ Includes these Sourceforge items:
    <file name="phpDocumentor.ini" role="data" />
    <file name="poweredbyphpdoc.gif" role="data" />
    <file name="README" role="doc" />
-   <file name="Release-1.4.0alpha1" role="doc" />
+   <file name="Release-1.4.0a1" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
