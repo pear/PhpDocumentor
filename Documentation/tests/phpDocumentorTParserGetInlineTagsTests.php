@@ -20,7 +20,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * TestCase
  * 
  * required by PHPUnit
- * @uses PHPUnit_Framework_TestCase
  * @since 1.4.0a2
  */
 require_once "PHPUnit/Framework/TestCase.php";
@@ -28,7 +27,6 @@ require_once "PHPUnit/Framework/TestCase.php";
  * TestSuite
  * 
  * required by PHPUnit
- * @uses PHPUnit_Framework_TestSuite
  * @since 1.4.0a2
  */
 require_once "PHPUnit/Framework/TestSuite.php";
@@ -37,7 +35,6 @@ require_once "PHPUnit/Framework/TestSuite.php";
  * PhpDocumentor Setup
  * 
  * required by PhpDocumentor to instantiate the environment
- * @uses phpDocumentor_setup
  * @since 1.4.0a2 
  */
 require_once 'phpDocumentor/Setup.inc.php';
@@ -82,8 +79,6 @@ class Documentation_tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit
      * Runs the test methods of this class.
      * @access public
      * @static
-     * @uses PHPUnit_TextUI_TestRunner
-     * @uses PHPUnit_Framework_TestSuite
      * @since 1.4.0a2
      */
     public static function main() {
