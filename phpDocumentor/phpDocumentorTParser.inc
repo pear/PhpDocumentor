@@ -1728,11 +1728,11 @@ class phpDocumentorTParser extends Parser
                     {
                         $x = strrpos($value[$i],'}}');
                         // strip internal and cycle as if it were normal text.
-                        $startval = substr($value[$i],0,$x - 1);
+                        $startval = substr($value[$i],0,$x);
                         if ($priv) {
                             $a->add($startval);
                         }
-                        $value[$i] = substr($value[$i],$x + 1);
+                        $value[$i] = substr($value[$i],$x + 2);
                         if (!$value[$i]) $value[$i] = '';
                         $this->_pf_internal = false;
                         $a->add($value[$i]);
