@@ -40,14 +40,6 @@ require_once "PHPUnit/Framework/TestSuite.php";
 require_once 'phpDocumentor/Setup.inc.php';
 
 /**
- * Base directory of code being PhpDoc'd
- * 
- * Needed by some of the inline tags being tested here
- * @since 1.4.0a2
- */
-define("PHPDOCUMENTOR_BASE", '.');
-
-/**
  * Unit Testing of the phpDocumentorTParser's getInlineTags() method
  * @package tests
  * @subpackage PhpDocumentorUnitTests
