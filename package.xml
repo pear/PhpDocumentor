@@ -255,14 +255,13 @@ Includes these Sourceforge items:
      <file name="bug-pageleveldocsblocks.php" role="test" />
      <file name="bug-quote_new_parser.php" role="test" />
      <file name="bug-shortdesc.php" role="test" />
-	 <!-- Unit Testing Suites     -->
-	 <file name="AllTests.php" role="test" />
-	 <!--      phpDocumentorSetup -->
-	 <file name="phpDocumentorSetupTests.php" role="test" />
+     <!-- Unit Testing Suites     -->
+     <!--      phpDocumentorSetup -->
+     <file name="phpDocumentorSetupTests.php" role="test" />
      <file name="phpDocumentorSetupCleanConverterNamePieceTests.php" role="test" />
      <file name="phpDocumentorSetupDecideOnOrOffTests.php" role="test" />
-	 <!--      phpDocumentorTParser -->
-	 <file name="phpDocumentorTParserTests.php" role="test" />
+     <!--      phpDocumentorTParser -->
+     <file name="phpDocumentorTParserTests.php" role="test" />
      <file name="phpDocumentorTParserGetInlineTagsTests.php" role="test" />
      <!--      ParserClass -->
      <file name="ParserClassGetSourceLocationTests.php" role="test" />
