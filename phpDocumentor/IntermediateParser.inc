@@ -1435,8 +1435,18 @@ class phpDocumentor_IntermediateParser
      */
     function addPrivatePage($page, $path)
     {
+        /*
+         * if privatepages is still empty,
+         * we need to initialize it with an empty 
+         * path=>ParserData element, so that it has
+         * a top-level element... otherwise the setParent() call
+         * below will crap out.
+         */
+        if (count($this->privatepages) == 0) {
+            $this->privatepages[$path] = new ParserData();
+        }
         $this->privatepages[$path]->setParent($page);
-        if ($page->package != $GLOBALS['phpDocumentor_DefaultPackageName'])
+        if (isset($page->package) && $page->package != $GLOBALS['phpDocumentor_DefaultPackageName'])
         {
             if (!$this->privatepages[$path]->docblock)
             {
@@ -1494,11 +1504,11 @@ class phpDocumentor_IntermediateParser
      */
     function addUses($element, $path)
     {
-        if ($element->type == 'page')
+        if (isset($element->type) && $element->type == 'page')
         {
             $element = $this->pages[$element->path];
         }
-        if (!$this->parsePrivate && $element->docblock->hasaccess)
+        if (!$this->parsePrivate && isset($element->docblock->hasaccess) && $element->docblock->hasaccess)
         {
             $a =  $element->docblock->getKeyword('access');
             if (is_object($a) && $a->getString() == 'private') return;
@@ -1507,19 +1517,16 @@ class phpDocumentor_IntermediateParser
         {
             if (isset($this->pages[$path]))
             {
-//                if ($element->type == 'function' || $element->type == 'method')
+                $uses = $element->docblock->getKeyword('uses');
+                if ($uses)
                 {
-                    $uses = $element->docblock->getKeyword('uses');
-                    if ($uses)
+                    if (!is_array($uses)) $uses = array($uses);
+                    foreach($uses as $use)
                     {
-                        if (!is_array($uses)) $uses = array($uses);
-                        foreach($uses as $use)
-                        {
-                            if (!is_object($use)) continue;
-                            $el = $use->getSeeElement();
-                            $description = $use->getDescription();
-                            $this->uses[$el][] = array($element, $description);
-                        }
+                        if (!is_object($use)) continue;
+                        $el = $use->getSeeElement();
+                        $description = $use->getDescription();
+                        $this->uses[$el][] = array($element, $description);
                     }
                 }
             }
@@ -1527,19 +1534,16 @@ class phpDocumentor_IntermediateParser
         {
             if (isset($this->pages[$path]))
             {
-//                if ($element->type == 'function' || $element->type == 'method')
+                $uses = $element->docblock->getKeyword('uses');
+                if ($uses)
                 {
-                    $uses = $element->docblock->getKeyword('uses');
-                    if ($uses)
+                    if (!is_array($uses)) $uses = array($uses);
+                    foreach($uses as $use)
                     {
-                        if (!is_array($uses)) $uses = array($uses);
-                        foreach($uses as $use)
-                        {
-                            if (!is_object($use)) continue;
-                            $el = $use->getSeeElement();
-                            $description = $use->getDescription();
-                            $this->uses[$el][] = array($element, $description);
-                        }
+                        if (!is_object($use)) continue;
+                        $el = $use->getSeeElement();
+                        $description = $use->getDescription();
+                        $this->uses[$el][] = array($element, $description);
                     }
                 }
             }
