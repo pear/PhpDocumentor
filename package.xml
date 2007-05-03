@@ -263,6 +263,9 @@ Includes these Sourceforge items:
      <!--      phpDocumentorTParser -->
      <file name="phpDocumentorTParserTests.php" role="test" />
      <file name="phpDocumentorTParserGetInlineTagsTests.php" role="test" />
+     <!--      IntermediateParser -->
+     <file name="IntermediateParserTests.php" role="test" />
+     <file name="IntermediateParserAddPrivatePageTests.php" role="test" />
      <!--      ParserClass -->
      <file name="ParserClassGetSourceLocationTests.php" role="test" />
      <!--      ParserPage -->
