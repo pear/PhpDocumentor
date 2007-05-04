@@ -30,8 +30,16 @@
 	</div>
 	<div id="header2">
 		<div id="indexes">
-			[ <a href="{$subdir}classtrees_{$package}.html">Class Tree: {$package}</a> ]
-			[ <a href="{$subdir}elementindex_{$package}.html">Index: {$package}</a> ]
+	        {assign var="packagehaselements" value=false}
+	        {foreach from=$packageindex item=thispackage}
+	            {if in_array($package, $thispackage)}
+	                {assign var="packagehaselements" value=true}
+	            {/if}
+	        {/foreach}
+	        {if $packagehaselements}
+				[ <a href="{$subdir}classtrees_{$package}.html">Class Tree: {$package}</a> ]
+				[ <a href="{$subdir}elementindex_{$package}.html">Index: {$package}</a> ]
+	        {/if}
 			[ <a href="{$subdir}elementindex.html">All elements</a> ]
 		</div>
 		<form>

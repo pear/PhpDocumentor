@@ -10,9 +10,17 @@
 <body>
 <div id="header">
 	<div id="navLinks">
-		[ <a href="{$subdir}classtrees_{$package}.html">Class Tree: {$package}</a> ]
-		[ <a href="{$subdir}elementindex_{$package}.html">Index: {$package}</a> ]
-		[ <a href="{$subdir}elementindex.html">All elements</a> ]
+        {assign var="packagehaselements" value=false}
+        {foreach from=$packageindex item=thispackage}
+            {if in_array($package, $thispackage)}
+                {assign var="packagehaselements" value=true}
+            {/if}
+        {/foreach}
+        {if $packagehaselements}
+	        [ <a href="{$subdir}classtrees_{$package}.html">Class Tree: {$package}</a> ]
+            [ <a href="{$subdir}elementindex_{$package}.html">Index: {$package}</a> ]
+        {/if}
+		[ <a href="{$subdir}elementindex.html">All elements</a> ]		
 	</div>
 	<div id="packagePosition">
 		<div id="packageTitle2">{$package}</div>
