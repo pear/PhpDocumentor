@@ -151,30 +151,31 @@ if (document.getElementById) {ldelim}
 	
 		{if $info[p].hasinterfaces}
     		{if $info[p].classes}
-    			var tree_classe = new WebFXTreeItem('Interface(s)', '{$packagedoc}');
+    			var subpackagetree_classe = new WebFXTreeItem('Interface(s)', '{$packagedoc}');
     			
     			{section name=class loop=$info[p].classes}
     			    {if $info[p].classes[class].is_interface}
         				var classe = new WebFXTreeItem('{$info[p].classes[class].title|escape:"quotes"}', '{$info[p].classes[class].link|escape:"quotes"}');
-        				tree_classe.add(classe);
+        				subpackagetree_classe.add(classe);
         			{/if}
     			{/section}
 
-    			tree.add(tree_classe);
+    			subpackagetree.add(subpackagetree_classe);
     		{/if}
 		{/if}
+
 		{if $info[p].hasclasses}
     		{if $info[p].classes}
-    			var tree_classe = new WebFXTreeItem('Class(es)', '{$packagedoc}');
+    			var subpackagetree_classe = new WebFXTreeItem('Class(es)', '{$packagedoc}');
     			
     			{section name=class loop=$info[p].classes}
     			    {if $info[p].classes[class].is_class}
         				var classe = new WebFXTreeItem('{$info[p].classes[class].title|escape:"quotes"}', '{$info[p].classes[class].link|escape:"quotes"}');
-        				tree_classe.add(classe);
+        				subpackagetree_classe.add(classe);
         			{/if}
     			{/section}
     	
-    			tree.add(tree_classe);
+    			subpackagetree.add(subpackagetree_classe);
     		{/if}
 		{/if}
 
