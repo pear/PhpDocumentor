@@ -24,11 +24,23 @@
      <option>description</option>
     </arg>
    </cmdsynopsis>
+  <cmdsynopsis>
+    <command>@param</command>
+    <arg choice="req">
+     <option>datatype1|datatype2</option>
+    </arg>
+    <arg choice="opt">
+     <option>$paramname</option>
+    </arg>
+    <arg choice="opt">
+     <option>description</option>
+    </arg>
+   </cmdsynopsis>
  </refsynopsisdiv>
  <refsect1 id="{@id description}">
   <title>Description</title>
   <para>NOTE: as of 0.4.1, @param can document phpdoc.de-style, with optional $paramname</para>
-  <para>datatype should be a valid PHP type or "mixed."  You may document parameters listed or any optional paramters that will be parsed by standard PHP functions func_num_args()/get_func_arg().  Recommended name format for parameters listed with func_get_arg() is:
+  <para>datatype should be a valid PHP type or "mixed", or you can list multiple datatypes for a single parameter by delimiting them with the pipe (e.g. &quot;@param int|string $p1&quot;).  You may document parameters listed or any optional paramters that will be parsed by standard PHP functions func_num_args()/get_func_arg().  Recommended name format for parameters listed with func_get_arg() is:
    <itemizedlist>
     <listitem><para><emphasis>$paramname</emphasis> if there is only one parameter</para></listitem>
     <listitem><para><emphasis>$paramname,...</emphasis> if the number of parameters is unlimited</para></listitem>
@@ -72,11 +84,29 @@ class class1
 }
 
 /**
+ * Example of documenting multiple possible datatypes for a given parameter
+ * @param bool|string  $foo sometimes a boolean, sometimes a string (or, could have just used "mixed")
+ * @param bool|int  $bar sometimes a boolean, sometimes an int (again, could have just used "mixed")
+ */
+function function2($foo, $bar)
+{
+   if (!$foo)
+   {
+      // definitely not a string, and not a boolean TRUE... could ONLY be a boolean FALSE
+   }
+
+   if (!$bar)
+   {
+      // could ONLY be a boolean FALSE or an integer "0"
+   }
+}
+ 
+/**
  * Example of documenting undetermined function arguments
  * @param string $foo
  * @param mixed $foo_desc optional description of foo
  */
-function function2($foo)
+function function3($foo)
 {
    echo $foo;
    if (func_num_args == 2)
