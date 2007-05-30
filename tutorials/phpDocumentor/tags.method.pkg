@@ -52,6 +52,8 @@ class Magician
    ]]>
    </programlisting>
   </para>
+  <para>Using this "magic" tag will result in the tag info being listed in the &quot;infomational&quot; tag listing for the class itself.  It does NOT generate actual &quot;method&quot; or &quot;function&quot; entities in the document.</para>
+  <para>In the example above, when using PhpDocumentor with the HTML:Smarty:HandS converter, you'll see the &quot;__call()&quot; method shown in the &quot;Method Summary&quot; listing of your class methods, but you will NOT see &quot;borp()&quot; there, because the latter is not an explicitly declared method in your code.  You WILL see &quot;borp()&quot; in the class-level's &quot;API Tags&quot; listing, thanks to your &quot;@method&quot; tag in the class-level docblock.</para>
  </refsect1>
 </refentry>
 

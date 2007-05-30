@@ -71,6 +71,8 @@ class Magician
    ]]>
    </programlisting>
   </para>
+  <para>Using these "magic" tags will result in the tag info being listed in the &quot;infomational&quot; tag listing for the class itself.  It does NOT generate actual &quot;property&quot; or &quot;variable&quot; entities in the document.</para>
+  <para>In the example above, when using PhpDocumentor with the HTML:Smarty:HandS converter and the &quot;--parseprivate on&quot; setting, you'll see &quot;$_thingy&quot; and &quot;$_bar&quot; shown in the &quot;Property Summary&quot; listing of your class variables, but you will NOT see &quot;$regular&quot;, &quot;$foo&quot;, or &quot;$bar&quot; there, because the latter three are not explicitly declared variables in your code.  You WILL see &quot;$regular&quot;, &quot;$foo&quot; and &quot;$bar&quot; in the class-level's &quot;API Tags&quot; listing, thanks to your &quot;@property&quot; tags in the class-level docblock.</para>
  </refsect1>
 </refentry>
 
