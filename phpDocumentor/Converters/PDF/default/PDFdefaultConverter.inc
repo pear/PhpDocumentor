@@ -519,9 +519,9 @@ class PDFdefaultConverter extends Converter
             $a = $val->Convert($this);
             $params[$param] = array("var" => $param,"datatype" => $val->converted_returnType,"data" => $a);
         }
-        if ($element->docblock->return)
+        if (!$element->docblock->return)
         {
-            if (!$element->docblock->return->returnType) $element->docblock->return->returnType = 'void';
+            $element->docblock->return->returnType = 'void';
         }
         $template = &$this->newSmarty();
         $template->assign('dest', urlencode($element->type.$element->docblock->package.$element->name));
