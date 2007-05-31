@@ -118,11 +118,11 @@ class Documentation_tests_IntermediateParserAddPrivatePageTests extends PHPUnit_
      * @since 1.4.0a2
      */
     protected function tearDown() {
-        unset($path);
-        unset($pd);
-        unset($pp);
-        unset($ip);
-        unset($ps);
+        unset($this->path);
+        unset($this->pd);
+        unset($this->pp);
+        unset($this->ip);
+        unset($this->ps);
     }
 
 

@@ -103,8 +103,8 @@ class Documentation_tests_ParserPageGetSourceLocationTests extends PHPUnit_Frame
      * @since 1.4.0a1
      */
     protected function tearDown() {
-        unset($pp);
-        unset($ps);
+        unset($this->pp);
+        unset($this->ps);
     }
 
     /**

@@ -86,7 +86,7 @@ class Documentation_tests_phpDocumentorSetupDecideOnOrOffTests extends PHPUnit_F
      * @since 1.3.2
      */
     protected function tearDown() {
-        unset($ps);
+        unset($this->ps);
     }
 
 

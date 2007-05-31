@@ -103,8 +103,8 @@ class Documentation_tests_ParserClassGetSourceLocationTests extends PHPUnit_Fram
      * @since 1.4.0a1
      */
     protected function tearDown() {
-        unset($pc);
-        unset($ps);
+        unset($this->pc);
+        unset($this->ps);
     }
 
 

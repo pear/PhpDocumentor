@@ -109,10 +109,10 @@ class Documentation_tests_phpDocumentorSetupCleanConverterNamePieceTests extends
      * @since 1.3.2
      */
     protected function tearDown() {
-        unset($CHARACTERS_ALLOWED_IN_PRIMARY);
-        unset($CHARACTERS_ALLOWED_IN_SECONDARY);
-        unset($CHARACTERS_ALLOWED_IN_TERTIARY);
-        unset($ps);
+        unset($this->CHARACTERS_ALLOWED_IN_PRIMARY);
+        unset($this->CHARACTERS_ALLOWED_IN_SECONDARY);
+        unset($this->CHARACTERS_ALLOWED_IN_TERTIARY);
+        unset($this->ps);
     }
 
 

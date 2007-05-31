@@ -102,9 +102,9 @@ class Documentation_tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit
      * @since 1.4.0a2
      */
     protected function tearDown() {
-        unset($pswit);
-        unset($ptp);
-        unset($ps);
+        unset($this->pswit);
+        unset($this->ptp);
+        unset($this->ps);
     }
 
 
