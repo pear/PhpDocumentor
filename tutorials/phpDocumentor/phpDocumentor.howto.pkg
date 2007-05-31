@@ -227,9 +227,13 @@ function foo($param = me)
     translate that to the physical text &quot;&lt;b&gt;&quot;.
    </para>
    <note>
-    <title>Using &lt;code&gt; and &lt;pre&gt;</title>
-    Both &lt;code&gt; and &lt;pre&gt; ignore any html listed above except for their
-    closing tags &lt;/code&gt; for &lt;code&gt; and &lt;/pre&gt; for &lt;pre&gt;
+    <title>Using &lt;code&gt; &lt;kbd&gt; &lt;pre&gt;</title>
+    The &lt;code&gt;, &lt;kbd&gt;, and &lt;pre&gt; tags ignore any html listed above 
+    except for their own closing tags (&lt;/code&gt; &lt;/kbd&gt; &lt;/pre&gt;).
+    This is obviously necessary for each of those tag's behavior of controlling the appearance of the text
+    inside their tag blocks, without allowing other nested tags (like &lt;b&gt;) interfering inside them.
+    In general, other tags will allow other tags to be nested in them 
+    (i.e. &lt;samp&gt;&lt;b&gt;bold_my_sample&lt;/b&gt;&lt;/samp&gt;).
    </note>
    <para><emphasis>New 1.2.0rc1:</emphasis> If you need to use the closing comment &quot;*/&quot;
     in a DocBlock, use the special escape sequence &quot;{@*}.&quot;  Here's an example:
