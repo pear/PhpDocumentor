@@ -27,6 +27,35 @@
    <title>Where to put tutorials/extended documentation so phpDocumentor will find it</title>
    <para>To simplify linking of tutorials, all tutorials must be in a subdirectory named &quot;tutorials&quot; and must be passed in a {@tutorial phpDocumentor.howto.pkg#using.command-line.directory} or {@tutorial phpDocumentor.howto.pkg#using.command-line.filename} command-line switch.</para>
    <para>In addition, tutorials are grouped by the same packages that group documented elements (see {@tutorial phpDocumentor.howto.pkg#documenting.elements.packages} for more information).  To associate a tutorial with a package, place it in a subdirectory of tutorials/ named after the package.  A tutorial for package &quot;phpDocumentor&quot; goes in &quot;tutorials/phpDocumentor,&quot; a tutorial for subpackage &quot;CHMDefault&quot; of package &quot;Converters&quot; goes in &quot;tutorials/Converters/CHMdefault/&quot; - for an example, see the tutorials/ subdirectory of phpDocumentor.</para>
+   <para>At the bare minimum, assuming your one package is named &quot;MyApp&quot;, you should create the &quot;tutorials/MyApp/MyApp.pkg&quot; file, with this minimal content:
+    <programlisting role="tutorial">
+     <![CDATA[
+<refentry id="{@}id}">
+ <refnamediv>
+  <refname>User Guide for My Application</refname>
+  <refpurpose>To demonstrate the various tasks available in My app</refpurpose>
+ </refnamediv>
+ <refsynopsisdiv>
+  <author>
+   My Name
+   <authorblurb>
+    {@}link mailto:myself@myhost.net My Name}
+   </authorblurb>
+  </author>
+ </refsynopsisdiv>
+ {@}toc}
+ <refsect1 id="{@}id intro}">
+  <title>User Guide</title>
+  <para>
+   This will be the User Guide for My app. 
+  </para>
+ </refsect1>
+</refentry>
+     ]]>
+    </programlisting>
+   </para>
+   <para>One common &quot;gotcha&quot; here is ensuring that you name the PKG file and its parent directory with your package's exact name, as well as ensuring you have indeed used the &quot;@package MyApp&quot; tag in your codebase.  Running PhpDocumentor against this minimal tutorial file, when no PHP files use this package name, will NOT result in your tutorial being generated.</para>
+   <para>A second common &quot;gotcha&quot; is that if you attempt to run PhpDocumentor against ONLY the tutorial directory and its files, you'll get &quot;ERROR: nothing parsed&quot;... because you did not give PhpDocumentor any PHP files to process.  PhpDocumentor does need at least one &quot;code&quot; file to process, along with the tutorials, in order for any tutorials to be generated.  This is a common mistake when first trying to write tutorial docs... writing the files and then trying to run PhpDocumentor against ONLY the tutorials directory to test your tutorial files.  You will need at least one PHP file included in your test run, to avoid getting &quot;ERROR: nothing parsed&quot;.</para>
   </refsect2>
   <refsect2 id="{@id naming}">
    <title>Naming tutorials: .pkg, .cls, .proc</title>
