@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.5.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.5.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>PhpDocumentor</name>
  <channel>pear.php.net</channel>
  <summary>The phpDocumentor package provides automatic documenting of php api directly from the source.</summary>
@@ -69,10 +69,10 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>ashnazg@php.net</email>
   <active>yes</active>
  </developer>
- <date>2007-04-25</date>
- <time>12:37:20</time>
+ <date>2007-06-01</date>
+ <time>10:54:54</time>
  <version>
-  <release>1.4.0a1</release>
+  <release>1.4.0a2</release>
   <api>1.4.0</api>
  </version>
  <stability>
@@ -82,23 +82,16 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
  <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
  <notes>
 Includes these PEAR items:
-Req #10670: Don&apos;t Die on Empty Tag Descriptions
-Doc #10675: Clear some errors.html items
-Doc #10730: Replace Sourceforge Trackers with PEAR
+Bug #10864: PhpDocumentor dies when parsing illegal page-level docblock
+Bug #10870: Dead links generated with HTML:Smarty:PHP
+Bug #10871: Wrong rendering of inline {@internal}}
+Bug #10910: DOM templates create incorrect trees
+Doc #10914: Can&apos;t use nested tags inside &lt;kbd&gt; or &lt;samp&gt;
+Doc #10972: @method does not work
+Doc #11032: param type1|type2 not documented
+Doc #11143: Provide a Minimal Tutorial File Setup Example
 
-Includes these Sourceforge items:
-- [1647423] memory_limit: bad if-clause
-- [1622538] List undocumented classes/functions
-- [1602988] Added --ignore-symlinks option
-- [1588942] Allow memory_limit setting in phpdoc.ini
-- [1588936] Show INI Path at Startup
-- [1585840] Refactored RETURNs #3
-- [1574047] Refactored RETURNs #2
-- [1574043] Refactored RETURNs #1
-- [1543289] Apply ignore patterns to subdir of dir, instead of full path
-- [1543287] Use predefined PHP env var in phpdoc script
-- [1540666] patch for @property, @property-read and @property-write tags
-- [1044752] List undocumented classes/functions
+Includes no Sourceforge items.
 
  </notes>
  <contents>
@@ -178,6 +171,7 @@ Includes these Sourceforge items:
      <file name="Release-1.3.0" role="doc" />
      <file name="Release-1.3.1" role="doc" />
      <file name="Release-1.3.2" role="doc" />
+     <file name="Release-1.4.0alpha1" role="doc" />
     </dir> <!-- /Documentation/Release-old -->
     <dir name="tests">
      <dir name="bug-557861">
@@ -255,22 +249,19 @@ Includes these Sourceforge items:
      <file name="bug-pageleveldocsblocks.php" role="test" />
      <file name="bug-quote_new_parser.php" role="test" />
      <file name="bug-shortdesc.php" role="test" />
-     <!-- Unit Testing Suites     -->
-     <!--      phpDocumentorSetup -->
-     <file name="phpDocumentorSetupTests.php" role="test" />
+     <file name="HighlightParserGetInlineTagsTests.php" role="test" />
+     <file name="HighlightParserTests.php" role="test" />
+     <file name="IntermediateParserAddPrivatePageTests.php" role="test" />
+     <file name="IntermediateParserTests.php" role="test" />
+     <file name="ParserClassGetSourceLocationTests.php" role="test" />
+     <file name="ParserClassTests.php" role="test" />
+     <file name="ParserPageGetSourceLocationTests.php" role="test" />
+     <file name="ParserPageTests.php" role="test" />
      <file name="phpDocumentorSetupCleanConverterNamePieceTests.php" role="test" />
      <file name="phpDocumentorSetupDecideOnOrOffTests.php" role="test" />
-     <!--      phpDocumentorTParser -->
-     <file name="phpDocumentorTParserTests.php" role="test" />
+     <file name="phpDocumentorSetupTests.php" role="test" />
      <file name="phpDocumentorTParserGetInlineTagsTests.php" role="test" />
-     <!--      IntermediateParser -->
-     <file name="IntermediateParserTests.php" role="test" />
-     <file name="IntermediateParserAddPrivatePageTests.php" role="test" />
-     <!--      ParserClass -->
-     <file name="ParserClassGetSourceLocationTests.php" role="test" />
-     <!--      ParserPage -->
-     <file name="ParserPageGetSourceLocationTests.php" role="test" />
-     <!-- END of Unit Test Suite Lists -->
+     <file name="phpDocumentorTParserTests.php" role="test" />
      <file name="phpt_test.php.inc" role="test" />
     </dir> <!-- /Documentation/tests -->
     <file name="RoadMap" role="doc" />
@@ -1518,6 +1509,7 @@ Includes these Sourceforge items:
     </file>
     <file name="testdocbook.ini" role="data" />
    </dir> <!-- /user -->
+   <file name="AllTests.php" role="php" />
    <file name="Authors" role="doc" />
    <file name="ChangeLog" role="doc" />
    <file name="FAQ" role="doc" />
@@ -1546,7 +1538,7 @@ Includes these Sourceforge items:
    <file name="phpDocumentor.ini" role="data" />
    <file name="poweredbyphpdoc.gif" role="data" />
    <file name="README" role="doc" />
-   <file name="Release-1.4.0a1" role="doc" />
+   <file name="Release-1.4.0a2" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -2958,8 +2950,7 @@ that to the peardoc build instead.</notes>
    </stability>
    <date>2007-04-25</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
-   <notes>
-Includes these PEAR items:
+   <notes>Includes these PEAR items:
 Req #10670: Don&apos;t Die on Empty Tag Descriptions
 Doc #10675: Clear some errors.html items
 Doc #10730: Replace Sourceforge Trackers with PEAR
@@ -2976,7 +2967,31 @@ Includes these Sourceforge items:
 - [1543289] Apply ignore patterns to subdir of dir, instead of full path
 - [1543287] Use predefined PHP env var in phpdoc script
 - [1540666] patch for @property, @property-read and @property-write tags
-- [1044752] List undocumented classes/functions
+- [1044752] List undocumented classes/functions</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.4.0a2</release>
+    <api>1.4.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2007-06-01</date>
+   <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
+   <notes>
+Includes these PEAR items:
+Bug #10864: PhpDocumentor dies when parsing illegal page-level docblock
+Bug #10870: Dead links generated with HTML:Smarty:PHP
+Bug #10871: Wrong rendering of inline {@internal}}
+Bug #10910: DOM templates create incorrect trees
+Doc #10914: Can&apos;t use nested tags inside &lt;kbd&gt; or &lt;samp&gt;
+Doc #10972: @method does not work
+Doc #11032: param type1|type2 not documented
+Doc #11143: Provide a Minimal Tutorial File Setup Example
+
+Includes no Sourceforge items.
 
    </notes>
   </release>

@@ -7,26 +7,19 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 $packagedir = dirname(dirname(__FILE__));
 $notes = '
 Includes these PEAR items:
-Req #10670: Don\'t Die on Empty Tag Descriptions
-Doc #10675: Clear some errors.html items
-Doc #10730: Replace Sourceforge Trackers with PEAR
+Bug #10864: PhpDocumentor dies when parsing illegal page-level docblock
+Bug #10870: Dead links generated with HTML:Smarty:PHP
+Bug #10871: Wrong rendering of inline {@internal}}
+Bug #10910: DOM templates create incorrect trees
+Doc #10914: Can\'t use nested tags inside <kbd> or <samp>
+Doc #10972: @method does not work
+Doc #11032: param type1|type2 not documented
+Doc #11143: Provide a Minimal Tutorial File Setup Example
 
-Includes these Sourceforge items:
-- [1647423] memory_limit: bad if-clause
-- [1622538] List undocumented classes/functions
-- [1602988] Added --ignore-symlinks option
-- [1588942] Allow memory_limit setting in phpdoc.ini
-- [1588936] Show INI Path at Startup
-- [1585840] Refactored RETURNs #3
-- [1574047] Refactored RETURNs #2
-- [1574043] Refactored RETURNs #1
-- [1543289] Apply ignore patterns to subdir of dir, instead of full path
-- [1543287] Use predefined PHP env var in phpdoc script
-- [1540666] patch for @property, @property-read and @property-write tags
-- [1044752] List undocumented classes/functions
+Includes no Sourceforge items.
 
 ';
-$version = '1.4.0a1';
+$version = '1.4.0a2';
 $release_stability = 'alpha';
 $api = '1.4.0';
 $api_stability = 'alpha';
@@ -68,7 +61,8 @@ $options = array(
         'Release-1.3.0' => 'doc',
         'Release-1.3.1' => 'doc',
         'Release-1.3.2' => 'doc',
-        'Release-1.4.0a1' => 'doc',
+        'Release-1.4.0alpha1' => 'doc',
+        'Release-1.4.0a2' => 'doc',
         'pear-phpdoc' => 'script',
         'pear-phpdoc.bat' => 'script',
         'HTML_TreeMenu-1.1.2/TreeMenu.php' => 'php',

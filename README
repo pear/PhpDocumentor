@@ -46,9 +46,9 @@ If you need more detailed help, check out INSTALL.
 Release Notes
 ################################################################################
 
-Release notes for the newest version are in Release-1.4.0alpha1.
+Release notes for the newest version are in Release-1.4.0alpha2.
 
-1.4.0alpha1 is out, an ALPHA release.
+1.4.0alpha2 is out, an ALPHA release.
 
 To learn how to write PHPDoc-style documentation run, phpDocumentor on itself, with
 ./phpdoc -c makedocs.  Before you do, modify users/makedocs.ini to contain the
@@ -71,7 +71,7 @@ projectpage: 		http://www.phpdoc.org
 For a list of people who have helped work on this project please read the 
 Authors file.
 
-phpDocumentor 1.4.0alpha1 is released under the LGPL version 2.1, text is in
+phpDocumentor 1.4.0alpha2 is released under the LGPL version 2.1, text is in
 LICENSE.
 
 ################################################################################
