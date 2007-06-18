@@ -26,7 +26,7 @@
  <refsect1 id="{@id description}">
   <title>Description</title>
   <para>@access controls phpDocumentor's documentation of an element.</para>
-  <para>If @access is private, the element will not be documented unless specified by command-line switch --parseprivate</para>
+  <para>If @access is private, the element will not be documented unless specified by command-line switch --parseprivate.</para>
  </refsect1>
  <refsect1 id="{@id example}">
   <title>Example</title>
@@ -56,7 +56,7 @@ class class1
 {
    /**
     * all text in this DocBlock will be ignored, unless command-line switch or
-    * setting in phpdoc.inc enables documenting of private elements
+    * setting in a user INI file enables documenting of private elements
     * @access private
     */
    var $private_var;
