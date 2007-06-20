@@ -226,6 +226,41 @@ function foo($param = me)
     use a double delimiter as in &lt;&lt;b&gt;&gt;.  phpDocumentor will automatically
     translate that to the physical text &quot;&lt;b&gt;&quot;.
    </para>
+   <para>Similarly, if you need an actual &quot;@&quot; in your DocBlock's description parts,
+   you should be careful to either ensure it is not the first character on a line,
+   or else escape it (&quot;\@&quot;) to avoid it being interpreted as a PhpDocumentor tag marker.
+   </para>
+   <para>
+    <programlisting role="php">
+    <![CDATA[
+/**
+ * Demonstrate an @include file
+ * line in a code block:
+ *
+ * <code>
+ * \@include somefile.php
+ * </code>
+ */
+    ]]>
+    </programlisting>
+   </para>
+   <para>This will parse as if it were:</para>
+   <para>
+    <programlisting role="php">
+    <![CDATA[
+/**
+ * Demonstrate an @include file
+ * line in a code block:
+ *
+ * <code>
+ * @include somefile.php
+ * </code>
+ */
+    ]]>
+    </programlisting>
+   </para>
+   <para>
+   </para>
    <note>
     <title>Using &lt;code&gt; &lt;kbd&gt; &lt;pre&gt;</title>
     The &lt;code&gt;, &lt;kbd&gt;, and &lt;pre&gt; tags ignore any html listed above 
