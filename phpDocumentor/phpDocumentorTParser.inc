@@ -265,7 +265,7 @@ class phpDocumentorTParser extends Parser
                 }
             }
 
-            if (0)//PHPDOCUMENTOR_DEBUG == true)
+            if (PHPDOCUMENTOR_DEBUG == true)
             {
                 echo "LAST: ";
                 if (is_array($this->_pv_last_word))
