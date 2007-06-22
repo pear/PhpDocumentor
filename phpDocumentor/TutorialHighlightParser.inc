@@ -171,7 +171,7 @@ class phpDocumentor_TutorialHighlightParser extends Parser
             $this->_pv_curline = $this->_wp->linenum;
             $word = $this->_wp->getWord();
 
-            if (0)//PHPDOCUMENTOR_DEBUG == true)
+            if (PHPDOCUMENTOR_DEBUG == true)
             {
                 echo "LAST: ";
                 echo "|" . $this->_pv_last_word;

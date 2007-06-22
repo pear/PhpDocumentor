@@ -402,7 +402,7 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
             }
             // in wordparser, have to keep track of lines
 //            $this->publishEvent(PHPDOCUMENTOR_EVENT_NEWLINENUM, $this->_wp->linenum);
-            if (0)//PHPDOCUMENTOR_DEBUG == true)
+            if (PHPDOCUMENTOR_DEBUG == true)
             {
                 echo "LAST: ";
                 if (is_array($this->_pv_last_word))

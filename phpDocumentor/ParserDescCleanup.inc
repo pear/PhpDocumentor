@@ -405,7 +405,7 @@ class parserDescParser extends Parser
             $this->p_vars['last_word'] = $word;
             $word = $this->wp->getWord();
 
-            if (0)//PHPDOCUMENTOR_DEBUG == true)
+            if (PHPDOCUMENTOR_DEBUG == true)
             {
                 echo "----------------\n";
                 echo "LAST: |" . htmlentities($this->p_vars['last_word']) . "|\n";

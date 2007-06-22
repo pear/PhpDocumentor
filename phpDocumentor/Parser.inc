@@ -598,7 +598,7 @@ class Parser extends Publisher
             // in wordparser, have to keep track of lines
             $this->publishEvent(PHPDOCUMENTOR_EVENT_NEWLINENUM, $this->wp->linenum);
 
-            if (0)//PHPDOCUMENTOR_DEBUG == true)
+            if (PHPDOCUMENTOR_DEBUG == true)
             {
                 echo "\nLAST: |" . $this->p_vars['last_word'] . "|\n";
                 echo "PEVENT: " . $this->getParserEventName($pevent) . "\n";
@@ -3122,7 +3122,7 @@ class ppageParser extends Parser
             $this->p_vars['last_word'] = $word;
             $word = $this->wp->getWord();
 
-            if (0)//PHPDOCUMENTOR_DEBUG == true)
+            if (PHPDOCUMENTOR_DEBUG == true)
             {
                 echo "LAST: |" . $this->p_vars['last_word'] . "|\n";
                 echo "PEVENT: " . $this->getParserEventName($pevent) . "\n";
