@@ -196,7 +196,9 @@ class phpDocumentorTWordParser extends WordParser
                 $found = true;
                 for(;$gpos<count($this->_global_search);$gpos++,$pos++)
                 {
-                    if (!$this->tokenEquals($this->_global_search[$gpos],$this->_all[$pos])) $found = false;
+                    if (isset($this->_all[$pos])
+                        && !$this->tokenEquals($this->_global_search[$gpos],$this->_all[$pos])
+                    ) $found = false;
                 }
             }
             if ($found)
