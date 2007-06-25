@@ -7,22 +7,22 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 $packagedir = dirname(dirname(__FILE__));
 $notes = '
 Includes these PEAR items:
-Bug #10864: PhpDocumentor dies when parsing illegal page-level docblock
-Bug #10870: Dead links generated with HTML:Smarty:PHP
-Bug #10871: Wrong rendering of inline {@internal}}
-Bug #10910: DOM templates create incorrect trees
-Doc #10914: Can\'t use nested tags inside <kbd> or <samp>
-Doc #10972: @method does not work
-Doc #11032: param type1|type2 not documented
-Doc #11143: Provide a Minimal Tutorial File Setup Example
+Bug #11409: PHP Notices accompany Global Never Found errors
 
-Includes no Sourceforge items.
+Includes these Sourceforge items:
+- [1724990] @static tag example
+- [1724884] object return parameter value
+- [1720764] documentation update needed
+- [1672589] missing elements, bad links with HTML:Smarty:HandS
+- [1634153] require/include with concatenated file name
+- [1632496] {@internal}} becomes wrong on documentation
+- [1124133] <code> and @include....
 
 ';
-$version = '1.4.0a2';
-$release_stability = 'alpha';
+$version = '1.4.0RC1';
+$release_stability = 'beta';
 $api = '1.4.0';
-$api_stability = 'alpha';
+$api_stability = 'beta';
 $options = array(
 'baseinstalldir' => 'PhpDocumentor',
 'version' => $version,
@@ -62,7 +62,8 @@ $options = array(
         'Release-1.3.1' => 'doc',
         'Release-1.3.2' => 'doc',
         'Release-1.4.0alpha1' => 'doc',
-        'Release-1.4.0a2' => 'doc',
+        'Release-1.4.0alpha2' => 'doc',
+        'Release-1.4.0rc1' => 'doc',
         'pear-phpdoc' => 'script',
         'pear-phpdoc.bat' => 'script',
         'HTML_TreeMenu-1.1.2/TreeMenu.php' => 'php',
