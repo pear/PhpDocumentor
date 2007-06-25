@@ -7,38 +7,34 @@
 	<div class="info-box-title">{if $is_interface}Interface{else}Class{/if} Overview</div>
 	<div class="nav-bar">
 		{if $children || $vars || $ivars || $methods || $imethods || $consts || $iconsts}
-			<span class="disabled">{if $is_interface}Interface{else}Class{/if} Overview</span> |
+			<span class="disabled">{if $is_interface}Interface{else}Class{/if} Overview</span>
 		{/if}
 		{if $children}
-			<a href="#sec-descendents">Descendants</a>
-			{if $vars || $ivars || $methods || $imethods || $consts || $iconsts}|{/if}
+			| <a href="#sec-descendants">Descendants</a>
 		{/if}
 		
 		{if $ivars || $imethods}
-			<a href="#sec-inherited">Inherited Properties, Constants, and Methods</a>
-			{if $vars || $ivars || $methods || $imethods || $consts || $iconsts}|{/if}
+			| <a href="#sec-inherited">Inherited Properties, Constants, and Methods</a>
 		{/if}
 		{if $vars || $ivars}
 			{if $vars}
-				<a href="#sec-var-summary">Properties Summary</a> | <a href="#sec-vars">Properties Detail</a>
+				| <a href="#sec-var-summary">Property Summary</a> | <a href="#sec-vars">Properties Detail</a>
 			{else}
-				<a href="#sec-vars">Properties</a>
+				| <a href="#sec-vars">Properties</a>
 			{/if}
-			{if $methods || $imethods}|{/if}
 		{/if}
 		{if $methods || $imethods}
 			{if $methods}
-				<a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+				| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
 			{else}
-				<a href="#sec-methods">Methods</a>
+				| <a href="#sec-methods">Methods</a>
 			{/if}
-			{if $consts || $iconsts}|{/if}
 		{/if}
 		{if $consts || $iconsts}
 			{if $consts}
-				<a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
+				| <a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
 			{else}
-				<a href="#sec-consts">Constants</a>
+				| <a href="#sec-consts">Constants</a>
 			{/if}
 		{/if}
 	</div>
@@ -118,40 +114,36 @@
 </div>
 
 {if $children}
-	<a name="sec-descendents"></a>
+	<a name="sec-descendants"></a>
 	<div class="info-box">
-		<div class="info-box-title">Direct descendents</div>
+		<div class="info-box-title">Descendants</div>
 		<div class="nav-bar">
-			<a href="#sec-description">Class Overview</a> |
+			<a href="#sec-description">Class Overview</a>
 			{if $children}
-				<a href="#sec-descendents">Descendents</a>
-				{if $vars || $ivars || $methods || $imethods}|{/if}
+				| <span class="disabled">Descendants</span>
 			{/if}
 			{if $ivars || $imethods}
-				<a href="#sec-inherited">Inherited Properties and Methods</a>
-				{if $vars || $ivars || $methods || $imethods}|{/if}
+				| <a href="#sec-inherited">Inherited Properties and Methods</a>
 			{/if}
 		{if $vars || $ivars}
 			{if $vars}
-				<a href="#sec-var-summary">Properties Summary</a> | <a href="#sec-vars">Properties Detail</a>
+				| <a href="#sec-var-summary">Property Summary</a> | <a href="#sec-vars">Properties Detail</a>
 			{else}
-				<a href="#sec-vars">Properties</a>
+				| <a href="#sec-vars">Properties</a>
 			{/if}
-			{if $methods || $imethods}|{/if}
 		{/if}
 		{if $methods || $imethods}
 			{if $methods}
-				<a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+				| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
 			{else}
-				<a href="#sec-methods">Methods</a>
+				| <a href="#sec-methods">Methods</a>
 			{/if}
-            {if $consts || $iconsts}|{/if}
 		{/if}
 		{if $consts || $iconsts}
 			{if $consts}
-				<a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
+				| <a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
 			{else}
-				<a href="#sec-consts">Constants</a>
+				| <a href="#sec-consts">Constants</a>
 			{/if}
 		{/if}
 		</div>
@@ -184,34 +176,30 @@
 	<div class="info-box">
 		<div class="info-box-title">Inherited Properties, Constants, and Methods</div>
 		<div class="nav-bar">
-			<a href="#sec-description">Class Overview</a> |
+			<a href="#sec-description">Class Overview</a>
 			{if $children}
-				<a href="#sec-descendents">Descendants</a> |
+				| <a href="#sec-descendants">Descendants</a>
 			{/if}
-			{if $vars || $ivars || $methods || $imethods || $iconsts || $consts}|{/if}
-			<span class="disabled">Inherited Properties, Constants, and Methods</span>
-			{if $vars || $ivars || $methods || $imethods || $consts || $iconsts}|{/if}
+			| <span class="disabled">Inherited Properties, Constants, and Methods</span>
 			{if $vars || $ivars}
 				{if $vars}
-					<a href="#sec-var-summary">Properties Summary</a> | <a href="#sec-vars">Properties Detail</a>
+					| <a href="#sec-var-summary">Property Summary</a> | <a href="#sec-vars">Properties Detail</a>
 				{else}
-					<a href="#sec-vars">Properties</a>
+					| <a href="#sec-vars">Properties</a>
 				{/if}
-				{if $methods || $imethods}|{/if}
 			{/if}
 			{if $methods || $imethods}
 				{if $methods}
-					<a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+					| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
 				{else}
-					<a href="#sec-methods">Methods</a>
+					| <a href="#sec-methods">Methods</a>
 				{/if}
-				{if $consts || $iconsts}|{/if}
 			{/if}
     		{if $consts || $iconsts}
     			{if $consts}
-    				<a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
+    				| <a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
     			{else}
-    				<a href="#sec-consts">Constants</a>
+    				| <a href="#sec-consts">Constants</a>
     			{/if}
     		{/if}
 		</div>
@@ -286,29 +274,26 @@
 	<div class="info-box">
 		<div class="info-box-title">Constant Summary</span></div>
 		<div class="nav-bar">
-			<a href="#sec-description">Class Overview</a> |
+			<a href="#sec-description">Class Overview</a>
 			{if $children}
-				<a href="#sec-descendents">Descendants</a> |
+				| <a href="#sec-descendants">Descendants</a>
 			{/if}
 			{if $ivars || $imethods || $iconsts}
-				<a href="#sec-inherited">Inherited Properties, Constants, and Methods</a>
-				{if $vars || $ivars || $methods || $imethods || $consts || $iconsts}|{/if}
+				| <a href="#sec-inherited">Inherited Properties, Constants, and Methods</a>
 			{/if}
-			<span class="disabled">Constants Summary</span> | <a href="#sec-consts">Constants Detail</a>
+			| <span class="disabled">Constants Summary</span> | <a href="#sec-consts">Constants Detail</a>
 			{if $vars || $ivars}
 				{if $vars}
-					<a href="#sec-var-summary">Properties Summary</a> | <a href="#sec-vars">Properties Detail</a>
+					| <a href="#sec-var-summary">Property Summary</a> | <a href="#sec-vars">Properties Detail</a>
 				{else}
-					<a href="#sec-vars">Properties</a>
+					| <a href="#sec-vars">Properties</a>
 				{/if}
-				{if $methods || $imethods}|{/if}
 			{/if}
 			{if $methods || $imethods}
-				|
 				{if $methods}
-					<a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+					| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
 				{else}
-					<a href="#sec-methods">Methods</a>
+					| <a href="#sec-methods">Methods</a>
 				{/if}
 			{/if}
 		</div>
@@ -334,28 +319,26 @@
 	<div class="info-box">
 		<div class="info-box-title">Property Summary</span></div>
 		<div class="nav-bar">
-			<a href="#sec-description">Class Overview</a> |
+			<a href="#sec-description">Class Overview</a>
 			{if $children}
-				<a href="#sec-descendents">Descendents</a> |
+				| <a href="#sec-descendants">Descendants</a>
 			{/if}
 			{if $ivars || $imethods || $iconsts}
-				<a href="#sec-inherited">Inherited Properties and Methods</a>
-				{if $vars || $ivars || $methods || $imethods}|{/if}
+				| <a href="#sec-inherited">Inherited Properties and Methods</a>
 			{/if}
-			<span class="disabled">Property Summary</span> | <a href="#sec-vars">Properties Detail</a>
+			| <span class="disabled">Property Summary</span> | <a href="#sec-vars">Properties Detail</a>
 			{if $methods || $imethods}
 				{if $methods}
-					<a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+					| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
 				{else}
-					<a href="#sec-methods">Methods</a>
+					| <a href="#sec-methods">Methods</a>
 				{/if}
-				{if $consts || $iconsts}|{/if}
 			{/if}
     		{if $consts || $iconsts}
     			{if $consts}
-    				<a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
+    				| <a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
     			{else}
-    				<a href="#sec-consts">Constants</a>
+    				| <a href="#sec-consts">Constants</a>
     			{/if}
     		{/if}
 		</div>
@@ -392,30 +375,28 @@
 	<div class="info-box">
 		<div class="info-box-title">Method Summary</span></div>
 		<div class="nav-bar">
-			<a href="#sec-description">Class Overview</a> |
+			<a href="#sec-description">Class Overview</a>
 			{if $children}
-				<a href="#sec-descendents">Descendents</a> |
+				| <a href="#sec-descendants">Descendants</a>
 			{/if}
 			{if $ivars || $imethods || $iconsts}
-				<a href="#sec-inherited">Inherited Properties and Methods</a>
-				{if $vars || $ivars || $methods || $imethods}|{/if}
+				| <a href="#sec-inherited">Inherited Properties and Methods</a>
 			{/if}
 			{if $vars || $ivars}
 				{if $vars}
-					<a href="#sec-var-summary">Properties Summary</a> | <a href="#sec-vars">Properties Detail</a>
+					| <a href="#sec-var-summary">Property Summary</a> | <a href="#sec-vars">Properties Detail</a>
 				{else}
-					<a href="#sec-vars">Properties</a>
+					| <a href="#sec-vars">Properties</a>
 				{/if}
-				{if $consts || $iconsts}|{/if}
 			{/if}
     		{if $consts || $iconsts}
     			{if $consts}
-    				<a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
+    				| <a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
     			{else}
-    				<a href="#sec-consts">Constants</a>
+    				| <a href="#sec-consts">Constants</a>
     			{/if}
     		{/if}
-			<span class="disabled">Method Summary</span> | <a href="#sec-methods">Methods Detail</a>
+			| <span class="disabled">Method Summary</span> | <a href="#sec-methods">Methods Detail</a>
 		</div>
 		<div class="info-box-body">
 			<div class="method-summary">
@@ -455,34 +436,30 @@
 	<div class="info-box">
 		<div class="info-box-title">Properties</div>
 		<div class="nav-bar">
-			<a href="#sec-description">Class Overview</a> |
+			<a href="#sec-description">Class Overview</a>
 			{if $children}
-				<a href="#sec-descendents">Descendents</a> |
+				| <a href="#sec-descendants">Descendants</a>
 			{/if}
 			{if $ivars || $imethods || $iconsts}
-				<a href="#sec-inherited">Inherited Properties and Methods</a>
-				{if $vars || $ivars || $methods || $imethods}|{/if}
+				| <a href="#sec-inherited">Inherited Properties and Methods</a>
 			{/if}
 			{if $methods}
-				<a href="#sec-var-summary">Property Summary</a> | <a href="#sec-vars">Properties Detail</a>
+				| <a href="#sec-var-summary">Property Summary</a> | <span class="disabled">Properties Detail</span>
 			{else}
-				<span class="disabled">Properties</span>
+				| <span class="disabled">Properties</span>
 			{/if}
-
 			{if $methods || $imethods}
-				|
 				{if $methods}
-					<a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+					| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
 				{else}
-					<a href="#sec-methods">Methods</a>
+					| <a href="#sec-methods">Methods</a>
 				{/if}
 			{/if}
 			{if $consts || $iconsts}
-				|
 				{if $consts}
-					<a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
+					| <a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
 				{else}
-					<a href="#sec-consts">Constants</a>
+					| <a href="#sec-consts">Constants</a>
 				{/if}
 			{/if}
 		</div>
@@ -497,28 +474,25 @@
 	<div class="info-box">
 		<div class="info-box-title">Methods</div>
 		<div class="nav-bar">
-			<a href="#sec-description">Class Overview</a> |
+			<a href="#sec-description">Class Overview</a>
 			{if $children}
-				<a href="#sec-descendents">Descendents</a>
+				| <a href="#sec-descendants">Descendants</a>
 			{/if}
 			{if $ivars || $imethods || $iconsts}
-				<a href="#sec-inherited">Inherited Properties and Methods</a>
-				{if $vars || $ivars || $methods || $imethods}|{/if}
+				| <a href="#sec-inherited">Inherited Properties and Methods</a>
 			{/if}
 			{if $vars || $ivars}
-                |
 				{if $vars}
-					<a href="#sec-var-summary">Property Summary</a> | <a href="#sec-vars">Properties Detail</a>
+					| <a href="#sec-var-summary">Property Summary</a> | <a href="#sec-vars">Properties Detail</a>
 				{else}
-					<a href="#sec-vars">Properties</a>
+					| <a href="#sec-vars">Properties</a>
 				{/if}
 			{/if}
 			{if $consts || $iconsts}
-				|
 				{if $consts}
-					<a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
+					| <a href="#sec-const-summary">Constants Summary</a> | <a href="#sec-consts">Constants Detail</a>
 				{else}
-					<a href="#sec-consts">Constants</a>
+					| <a href="#sec-consts">Constants</a>
 				{/if}
 			{/if}
 			{if $methods}
@@ -538,9 +512,9 @@
 	<div class="info-box">
 		<div class="info-box-title">Constants</div>
 		<div class="nav-bar">
-			<a href="#sec-description">Class Overview</a> |
+			<a href="#sec-description">Class Overview</a>
 			{if $children}
-				<a href="#sec-descendents">Descendants</a>
+				| <a href="#sec-descendants">Descendants</a>
 			{/if}
 			{if $consts}
 				| <a href="#sec-const-summary">Constants Summary</a> | <span class="disabled">Constants Detail</span>
@@ -548,16 +522,13 @@
 				| <span class="disabled">Constants</span>
 			{/if}
 			{if $ivars || $imethods || $iconsts}
-				<a href="#sec-inherited">Inherited Properties, Constants, and Methods</a>
-				{if $vars || $ivars || $methods || $imethods || $consts || $iconsts} | {/if}
+				| <a href="#sec-inherited">Inherited Properties, Constants, and Methods</a>
 			{/if}
-
 			{if $methods || $imethods}
-				|
 				{if $methods}
-					<a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+					| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
 				{else}
-					<a href="#sec-methods">Methods</a>
+					| <a href="#sec-methods">Methods</a>
 				{/if}
 			{/if}
 		</div>
