@@ -115,6 +115,7 @@ class phpDocumentorTParser extends Parser
     var $_pf_in_define = false;
     var $_pf_in_global = false;
     var $_pf_in_include = false;
+    var $_pf_in_include_value = false;
     var $_pf_in_var = false;
     var $_pf_interface = false;
     var $_pf_funcparam_val = false;
@@ -758,9 +759,22 @@ class phpDocumentorTParser extends Parser
                 }
             } else
             {
+                if($this->_pf_in_include_value && $a == PARSER_EVENT_INCLUDE_PARAMS) {
+                    /* we're already inside the include value, 
+                     * so an open paren does NOT mean the beginning of "include parameters"...
+                     * it's just a part of the include's value string...
+                     * but we've already pushed PARSER_EVENT_INCLUDE_PARAMS onto the stack... 
+                     * we need to pop it off before handleIncludeParams gets called...
+                     */
+                    $this->_event_stack->popEvent();
+                    // also need to keep that open parens...
+                    $this->_pv_include_value .= $word;
+                }
                 $this->_pv_include_params_data = '';
             }
         }
+
+        if (!empty($this->_pv_include_value)) $this->_pf_in_include_value = true;
 
         if ($this->checkEventPop($word,$pevent))
         {
@@ -771,6 +785,7 @@ class phpDocumentorTParser extends Parser
             $this->_pv_include->setValue($this->_pv_include_value);
             $this->publishEvent(PHPDOCUMENTOR_EVENT_INCLUDE,$this->_pv_include);
             $this->_pf_includename_isset = false;
+            $this->_pf_in_include_value = false;
             unset($this->_pv_include);
             unset($this->_pv_include_name);
             unset($this->_pv_include_value);
@@ -786,6 +801,7 @@ class phpDocumentorTParser extends Parser
             $this->_pv_include->setValue($this->_pv_include_value);
             $this->publishEvent(PHPDOCUMENTOR_EVENT_INCLUDE,$this->_pv_include);
             $this->_pf_includename_isset = false;
+            $this->_pf_in_include_value = false;
             unset($this->_pv_include);
             unset($this->_pv_include_name);
             unset($this->_pv_include_value);
