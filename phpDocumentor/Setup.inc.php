@@ -811,18 +811,32 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
         }
     }
     
-
+    /**
+     * Performs character-based validation of Output Converter Template name pieces
+     * @param string the name piece (just ONE of either Output, Converter, or Template piece)
+     * @param string any extra characters to allow beyond the default character set
+     * @return string|bool the clean name, or FALSE if piece is deemed invalid
+     * @access private
+     */
     function cleanConverterNamePiece($name, $extra_characters_to_allow = '')
     {
         $name = str_replace("\\", "/", $name);
         // security:  ensure no opportunity exists to use "../.." pathing in this value
-        $name = preg_replace('/[^a-zA-Z0-9' . $extra_characters_to_allow . '_]/', "", $name);
+        $name = preg_replace('/[^a-zA-Z0-9' . $extra_characters_to_allow . '_-]/', "", $name);
 
         // absolutely positively do NOT allow two consecutive dots ".."
         if (strpos($name, '..') > -1) $name = false;
         return $name;
     }
-    
+
+    /**
+     * Figures out what output converter to use
+     * @param string Output Converter Template name
+     * @access private
+     * @global array
+     * @uses cleanConverterNamePieces
+     * @uses phpDocumentor_out
+     */    
     function setupConverters($output = false)
     {
         global $_phpDocumentor_setting;
@@ -847,7 +861,10 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
                 }
                 if (isset($c[$i][1]))
                 {
-                    $b = $this->cleanConverterNamePiece($c[$i][1], '\/');  // must allow "/" due to options like "DocBook/peardoc2"
+                    /*
+                     * must allow "/" due to options like "DocBook/peardoc2"
+                     */
+                    $b = $this->cleanConverterNamePiece($c[$i][1], '\/');
                 }
                 else
                 {
@@ -855,7 +872,7 @@ and load the tokenizer extension for faster parsing (your version is ".phpversio
                 }
                 if (isset($c[$i][2]))
                 {
-                    /**
+                    /*
                      * must allow "." due to options like "phpdoc.de"
                      * must allow "/" due to options like "DOM/default"
                      */

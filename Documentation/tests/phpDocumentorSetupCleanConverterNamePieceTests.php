@@ -332,6 +332,15 @@ class Documentation_tests_phpDocumentorSetupCleanConverterNamePieceTests extends
     public function testNormalTertiaryDomPhphtmllib() {
         $this->assertEquals("DOM/phphtmllib",   $this->ps->cleanConverterNamePiece("DOM/phphtmllib", $this->CHARACTERS_ALLOWED_IN_TERTIARY));
     }
+    /**
+     * Shows correct behavior for handling the perfect expected "b2evo.v-1-10" tertiary value
+     * (an example of a user-defined template not packaged with PhpDocumentor)
+     * when called with two args
+     * @since 1.4.0
+     */
+    public function testUserDefinedTertiaryValue() {
+        $this->assertEquals("b2evo.v-1-10",   $this->ps->cleanConverterNamePiece("b2evo.v-1-10", $this->CHARACTERS_ALLOWED_IN_TERTIARY));
+    }
 
     /**
      * END OF "demonstrate the correct behavior" --------------|
