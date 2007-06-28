@@ -1594,6 +1594,9 @@ class phpDocumentorTParser extends Parser
                 if (!$this->_pv_docblock->return) {
                     $this->_pv_docblock->return = $this->_pv_dtemplate->return;
                 }
+                if (!$this->_pv_docblock->var) {
+                    $this->_pv_docblock->var = $this->_pv_dtemplate->var;
+                }
                 $my_desc->add($this->_pv_dtemplate->sdesc);
                 $my_desc->add($this->_pv_dtemplate->desc);
             }
