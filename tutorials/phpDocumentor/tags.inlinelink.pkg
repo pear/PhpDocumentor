@@ -31,9 +31,10 @@
  </refsynopsisdiv>
  <refsect1 id="{@id description}">
   <title>Description</title>
-  <para>The inline {@}link} tag is used to document any element (page, global variable, include, class, function, define, method, variable). <emphasis>New in version 1.2:</emphasis> You can link to any defined function in the current php version using the function's name.  This linking is done using the standard php function {@link PHP_MANUAL#get_defined_functions()}, and so relies on the version of php that is used to execute phpDocumentor.  A benefit of this method is that the function highlighting will automatically upgrade with a php upgrade without any change to the underlying code.  You may also link directly to any portion of the php website using the fake package override PHP_MANUAL (as in PHP_MANUAL#get_defined_functions, or PHP_MANUAL#support.php)</para>
-  <caution>inline {@}link} displays links directly in the natural text flow of a DocBlock.  If you want to display links prominently after descriptive text, use {@tutorial tags.see.pkg} or {@tutorial tags.link.pkg}</caution>
-  <para>For parameter information, see {@tutorial tags.see.pkg} or {@tutorial tags.link.pkg}.</para>
+  <para>The inline {@}link} tag is used to document any element (page, global variable, include, class, function, define, method, variable).</para>
+  <para><emphasis>New in version 1.2:</emphasis> You can link to any defined function in the current php version using the function's name.  This linking is done using the standard php function {@link PHP_MANUAL#get_defined_functions()}, and so relies on the version of php that is used to execute phpDocumentor.  A benefit of this method is that the function highlighting will automatically upgrade with a php upgrade without any change to the underlying code.  You may also link directly to any portion of the php website using the fake package override PHP_MANUAL (as in PHP_MANUAL#get_defined_functions, or PHP_MANUAL#support.php).</para>
+  <caution>inline {@}link} displays links directly in the natural text flow of a DocBlock.  If you want to display links prominently after descriptive text, use {@tutorial tags.see.pkg} or {@tutorial tags.link.pkg}.</caution>
+  <para>For parameter information, see {@tutorial tags.see.pkg} or {@tutorial tags.link.pkg}.  The guidelines for giving the element name to inline @link are the same as outlined in the {@tutorial tags.see.pkg} manual page.</para>
  </refsect1>
  <refsect1 id="{@id example}">
   <title>Example</title>
@@ -43,7 +44,9 @@
    <![CDATA[
 /**
  * Text with a normal @see and @link tag
- * @see element
+ * (the parentheses in "element()" are only necessary
+ * because it is a function)
+ * @see element()
  * @link http://www.example.com
  */
 function element()
@@ -61,7 +64,7 @@ function element()
 <!-- ========== Info from phpDoc block ========= -->
 <b></b>
 <pre>
-Text with a normal @see and @link tag
+Text with a normal @see and @link tag (the parentheses in "element()" are only necessary because it is a function)
 </pre>
 <DL>
 	<DT>Function Parameters:</DT>
@@ -82,7 +85,9 @@ Text with a normal @see and @link tag
    <![CDATA[
 /**
  * Text with an {@}link http://www.example.com Inline Link to a Hyperlink} and an inline
- * link to {@}link element} displays without a break in the flow
+ * link to {@}link element()} displays without a break in the flow
+ * (again, the parentheses in "element()" are only necessary
+ * because it is a function)
  */
 function element()
 {
@@ -101,7 +106,8 @@ function element()
 <pre>
 Text with an <a href="http://www.example.com">Inline Link to a Hyperlink</a> and
 an inline link to <a href="../default/_fake_page_php.html#element">element()</a>
-displays without a break in the flow
+displays without a break in the flow (again, the parentheses in "element()" are only necessary
+because it is a function)
 </pre>
 <DL>
 	<DT>Function Parameters:</DT>
