@@ -2,7 +2,11 @@
 if [ -z "$PHP" ]; then
    PHP=`which php`
 fi
-(exec $PHP -C -q -d output_buffering=1 "$0" "$@") 2>/dev/null || echo "FAILED:  Bad environment variable \$PHP (set to \"$PHP\")" ; exit 1
+(exec $PHP -C -q -d output_buffering=1 "$0" "$@") 2>/dev/null
+if [ "$?" -ne "0" ]; then
+	echo "FAILED:  Bad environment variable \$PHP (set to \"$PHP\")"
+	exit 1
+fi
 <?php
 //
 // PhpDoc, a program for creating javadoc style documentation from php code
