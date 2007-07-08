@@ -1534,8 +1534,11 @@ Includes these Sourceforge items:
    <file name="phpdoc.php" role="data" />
    <file name="phpDocumentor.ini" role="data" />
    <file name="poweredbyphpdoc.gif" role="data" />
-   <file name="README" role="doc" />
-   <file name="Release-1.4.0rc1" role="doc" />
+   <file name="README" role="doc">
+    <tasks:replace from="@VER@" to="version" type="package-info" />
+    <tasks:replace from="@STABILITY@" to="state" type="package-info" />
+   </file>
+   <file name="Release-1.4.0rc2" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
