@@ -46,9 +46,9 @@ If you need more detailed help, check out INSTALL.
 Release Notes
 ################################################################################
 
-Release notes for the newest version are in Release-1.4.0RC2.
+Release notes for the newest version are in Release-@VER@.
 
-1.4.0RC2 is out, a BETA release.
+@VER@ is out, a @STABILITY@ release.
 
 To learn how to write PHPDoc-style documentation run, phpDocumentor on itself, with
 ./phpdoc -c makedocs.  Before you do, modify users/makedocs.ini to contain the
