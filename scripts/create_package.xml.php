@@ -6,20 +6,16 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
 $packagedir = dirname(dirname(__FILE__));
 $notes = '
-Includes these PEAR items:
-Bug #11409: PHP Notices accompany Global Never Found errors
+Includes no PEAR items:
 
 Includes these Sourceforge items:
-- [1724990] @static tag example
-- [1724884] object return parameter value
-- [1720764] documentation update needed
-- [1672589] missing elements, bad links with HTML:Smarty:HandS
-- [1634153] require/include with concatenated file name
-- [1632496] {@internal}} becomes wrong on documentation
-- [1124133] <code> and @include....
+- [1733938] regression: "-" not allowed anymore in converter (file)name
+- [1733936] "phpdoc" does not return with error code "0" on success
+- [1733345] inline @link tag renders wrong way
+- [1722096] DocBlock template example does not work
 
 ';
-$version = '1.4.0RC1';
+$version = '1.4.0RC2';
 $release_stability = 'beta';
 $api = '1.4.0';
 $api_stability = 'beta';
@@ -64,6 +60,7 @@ $options = array(
         'Release-1.4.0alpha1' => 'doc',
         'Release-1.4.0alpha2' => 'doc',
         'Release-1.4.0rc1' => 'doc',
+        'Release-1.4.0rc2' => 'doc',
         'pear-phpdoc' => 'script',
         'pear-phpdoc.bat' => 'script',
         'HTML_TreeMenu-1.1.2/TreeMenu.php' => 'php',

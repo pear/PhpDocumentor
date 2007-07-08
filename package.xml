@@ -69,10 +69,10 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>ashnazg@php.net</email>
   <active>yes</active>
  </developer>
- <date>2007-06-25</date>
- <time>09:46:11</time>
+ <date>2007-07-07</date>
+ <time>23:07:05</time>
  <version>
-  <release>1.4.0RC1</release>
+  <release>1.4.0RC2</release>
   <api>1.4.0</api>
  </version>
  <stability>
@@ -81,17 +81,13 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
  </stability>
  <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
  <notes>
-Includes these PEAR items:
-Bug #11409: PHP Notices accompany Global Never Found errors
+Includes no PEAR items:
 
 Includes these Sourceforge items:
-- [1724990] @static tag example
-- [1724884] object return parameter value
-- [1720764] documentation update needed
-- [1672589] missing elements, bad links with HTML:Smarty:HandS
-- [1634153] require/include with concatenated file name
-- [1632496] {@internal}} becomes wrong on documentation
-- [1124133] &lt;code&gt; and @include....
+- [1733938] regression: &quot;-&quot; not allowed anymore in converter (file)name
+- [1733936] &quot;phpdoc&quot; does not return with error code &quot;0&quot; on success
+- [1733345] inline @link tag renders wrong way
+- [1722096] DocBlock template example does not work
 
  </notes>
  <contents>
@@ -3004,8 +3000,7 @@ Includes no Sourceforge items.</notes>
    </stability>
    <date>2007-06-25</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
-   <notes>
-Includes these PEAR items:
+   <notes>Includes these PEAR items:
 Bug #11409: PHP Notices accompany Global Never Found errors
 
 Includes these Sourceforge items:
@@ -3015,7 +3010,27 @@ Includes these Sourceforge items:
 - [1672589] missing elements, bad links with HTML:Smarty:HandS
 - [1634153] require/include with concatenated file name
 - [1632496] {@internal}} becomes wrong on documentation
-- [1124133] &lt;code&gt; and @include....
+- [1124133] &lt;code&gt; and @include....</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.4.0RC2</release>
+    <api>1.4.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2007-07-07</date>
+   <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
+   <notes>
+Includes no PEAR items:
+
+Includes these Sourceforge items:
+- [1733938] regression: &quot;-&quot; not allowed anymore in converter (file)name
+- [1733936] &quot;phpdoc&quot; does not return with error code &quot;0&quot; on success
+- [1733345] inline @link tag renders wrong way
+- [1722096] DocBlock template example does not work
 
    </notes>
   </release>
