@@ -69,8 +69,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>ashnazg@php.net</email>
   <active>yes</active>
  </developer>
- <date>2007-07-07</date>
- <time>23:07:05</time>
+ <date>2007-07-08</date>
+ <time>18:00:00</time>
  <version>
   <release>1.4.0RC2</release>
   <api>1.4.0</api>
@@ -3024,7 +3024,7 @@ Includes these Sourceforge items:
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2007-07-07</date>
+   <date>2007-07-08</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>
 Includes no PEAR items:
