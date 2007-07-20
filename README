@@ -71,7 +71,7 @@ projectpage: 		http://www.phpdoc.org
 For a list of people who have helped work on this project please read the 
 Authors file.
 
-phpDocumentor 1.4.0RC2 is released under the LGPL version 2.1, text is in
+phpDocumentor @VER@ is released under the LGPL version 2.1, text is in
 LICENSE.
 
 ################################################################################
