@@ -9,9 +9,12 @@ if (!@include_once('PhpDocumentor/phpDocumentor/DocBlock/Lexer.inc')) {
 --FILE--
 <?php
 require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'setup.php.inc';
-$result = $lexer->lex('/** test <<br>> stuff
+$result = $lexer->lex('
+/** test <<br>> stuff
  * <<br />>
- * more <<<code>>> <</code>>*/');
+ * more <<<code>>> <</code>>
+ */
+');
 $phpt->assertEquals(array(
     array(PHPDOC_DOCBLOCK_TOKEN_DESC, ' test <br> stuff'),
     array(PHPDOC_DOCBLOCK_TOKEN_NEWLINE, "\n"),
