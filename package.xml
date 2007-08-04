@@ -207,23 +207,6 @@ Includes these Sourceforge items:
      <dir name="bug-557861">
       <file name="bug-557861.php" role="test" />
      </dir> <!-- /Documentation/tests/bug-557861 -->
-     <dir name="DocBlock_Lexer">
-      <file name="setup.php.inc" role="test" />
-      <file name="test_br.phpt" role="test" />
-      <file name="test_code.phpt" role="test" />
-      <file name="test_empty.phpt" role="test" />
-      <file name="test_eschtml.phpt" role="test" />
-      <file name="test_html.phpt" role="test" />
-      <file name="test_inlinetags.phpt" role="test" />
-      <file name="test_internal.phpt" role="test" />
-      <file name="test_kbd.phpt" role="test" />
-      <file name="test_pre.phpt" role="test" />
-      <file name="test_samp.phpt" role="test" />
-      <file name="test_simplelist.phpt" role="test" />
-      <file name="test_singleline.phpt" role="test" />
-      <file name="test_tags.phpt" role="test" />
-      <file name="test_twoline.phpt" role="test" />
-     </dir> <!-- /Documentation/tests/DocBlock_Lexer -->
      <file name="bug-441275.php" role="test" />
      <file name="bug-441278.php" role="test" />
      <file name="bug-441287.php" role="test" />
@@ -292,7 +275,6 @@ Includes these Sourceforge items:
      <file name="phpDocumentorSetupTests.php" role="test" />
      <file name="phpDocumentorTParserGetInlineTagsTests.php" role="test" />
      <file name="phpDocumentorTParserTests.php" role="test" />
-     <file name="phpt_test.php.inc" role="test" />
     </dir> <!-- /Documentation/tests -->
     <file name="RoadMap" role="doc" />
     <file name="TODO" role="doc" />
@@ -1293,9 +1275,6 @@ Includes these Sourceforge items:
       </dir> <!-- /phpDocumentor/Converters/XML/DocBook -->
      </dir> <!-- /phpDocumentor/Converters/XML -->
     </dir> <!-- /phpDocumentor/Converters -->
-    <dir name="DocBlock">
-     <file name="Lexer.inc" role="php" />
-    </dir> <!-- /phpDocumentor/DocBlock -->
     <dir name="Smarty-2.6.0">
      <dir name="libs">
       <dir name="core">
