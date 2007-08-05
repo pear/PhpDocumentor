@@ -39,12 +39,12 @@ require_once 'PHPUnit/TextUI/TestRunner.php';
 /*
  * You must add each additional class-level test suite file here
  */
-require_once 'Documentation/tests/phpDocumentorSetupTests.php';
-require_once 'Documentation/tests/phpDocumentorTParserTests.php';
-require_once 'Documentation/tests/IntermediateParserTests.php';
-require_once 'Documentation/tests/HighlightParserTests.php';
-require_once 'Documentation/tests/ParserClassTests.php';
-require_once 'Documentation/tests/ParserPageTests.php';
+require_once 'tests/phpDocumentorSetupTests.php';
+require_once 'tests/phpDocumentorTParserTests.php';
+require_once 'tests/IntermediateParserTests.php';
+require_once 'tests/HighlightParserTests.php';
+require_once 'tests/ParserClassTests.php';
+require_once 'tests/ParserPageTests.php';
 
 
 /**
@@ -103,12 +103,12 @@ class AllTests
         /*
          * You must add each additional class-level test suite name here
          */
-        $suite->addTest(Documentation_tests_phpDocumentorSetupTests::suite());
-        $suite->addTest(Documentation_tests_phpDocumentorTParserTests::suite());
-        $suite->addTest(Documentation_tests_IntermediateParserTests::suite());
-        $suite->addTest(Documentation_tests_HighlightParserTests::suite());
-        $suite->addTest(Documentation_tests_ParserClassTests::suite());
-        $suite->addTest(Documentation_tests_ParserPageTests::suite());
+        $suite->addTest(tests_phpDocumentorSetupTests::suite());
+        $suite->addTest(tests_phpDocumentorTParserTests::suite());
+        $suite->addTest(tests_IntermediateParserTests::suite());
+        $suite->addTest(tests_HighlightParserTests::suite());
+        $suite->addTest(tests_ParserClassTests::suite());
+        $suite->addTest(tests_ParserPageTests::suite());
         return $suite;
     }
 }

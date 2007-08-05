@@ -262,19 +262,6 @@ Includes these Sourceforge items:
      <file name="bug-pageleveldocsblocks.php" role="test" />
      <file name="bug-quote_new_parser.php" role="test" />
      <file name="bug-shortdesc.php" role="test" />
-     <file name="HighlightParserGetInlineTagsTests.php" role="test" />
-     <file name="HighlightParserTests.php" role="test" />
-     <file name="IntermediateParserAddPrivatePageTests.php" role="test" />
-     <file name="IntermediateParserTests.php" role="test" />
-     <file name="ParserClassGetSourceLocationTests.php" role="test" />
-     <file name="ParserClassTests.php" role="test" />
-     <file name="ParserPageGetSourceLocationTests.php" role="test" />
-     <file name="ParserPageTests.php" role="test" />
-     <file name="phpDocumentorSetupCleanConverterNamePieceTests.php" role="test" />
-     <file name="phpDocumentorSetupDecideOnOrOffTests.php" role="test" />
-     <file name="phpDocumentorSetupTests.php" role="test" />
-     <file name="phpDocumentorTParserGetInlineTagsTests.php" role="test" />
-     <file name="phpDocumentorTParserTests.php" role="test" />
     </dir> <!-- /Documentation/tests -->
     <file name="RoadMap" role="doc" />
     <file name="TODO" role="doc" />
@@ -1419,6 +1406,21 @@ Includes these Sourceforge items:
     <file baseinstalldir="/" name="makedoc.sh" role="script" />
     <file name="tokenizer_test.php" role="php" />
    </dir> <!-- /scripts -->
+   <dir name="tests">
+     <file name="HighlightParserGetInlineTagsTests.php" role="test" />
+     <file name="HighlightParserTests.php" role="test" />
+     <file name="IntermediateParserAddPrivatePageTests.php" role="test" />
+     <file name="IntermediateParserTests.php" role="test" />
+     <file name="ParserClassGetSourceLocationTests.php" role="test" />
+     <file name="ParserClassTests.php" role="test" />
+     <file name="ParserPageGetSourceLocationTests.php" role="test" />
+     <file name="ParserPageTests.php" role="test" />
+     <file name="phpDocumentorSetupCleanConverterNamePieceTests.php" role="test" />
+     <file name="phpDocumentorSetupDecideOnOrOffTests.php" role="test" />
+     <file name="phpDocumentorSetupTests.php" role="test" />
+     <file name="phpDocumentorTParserGetInlineTagsTests.php" role="test" />
+     <file name="phpDocumentorTParserTests.php" role="test" />
+   </dir> <!-- /tests -->
    <dir name="tutorials">
     <dir name="Converters">
      <dir name="CHMdefault">
@@ -1518,7 +1520,7 @@ Includes these Sourceforge items:
     </file>
     <file name="testdocbook.ini" role="data" />
    </dir> <!-- /user -->
-   <file name="AllTests.php" role="php" />
+   <file name="AllTests.php" role="test" />
    <file name="Authors" role="doc" />
    <file name="ChangeLog" role="doc" />
    <file name="FAQ" role="doc" />
