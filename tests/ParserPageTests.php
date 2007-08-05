@@ -7,7 +7,7 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 
 /* You must add each method-level test suite file here */
-require_once 'tests/ParserPageGetSourceLocationTests.php';
+require_once 'ParserPageGetSourceLocationTests.php';
 
 class tests_ParserPageTests
 {

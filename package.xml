@@ -1407,6 +1407,7 @@ Includes these Sourceforge items:
     <file name="tokenizer_test.php" role="php" />
    </dir> <!-- /scripts -->
    <dir name="tests">
+     <file name="AllTests.php" role="test" />
      <file name="HighlightParserGetInlineTagsTests.php" role="test" />
      <file name="HighlightParserTests.php" role="test" />
      <file name="IntermediateParserAddPrivatePageTests.php" role="test" />
@@ -1520,7 +1521,6 @@ Includes these Sourceforge items:
     </file>
     <file name="testdocbook.ini" role="data" />
    </dir> <!-- /user -->
-   <file name="AllTests.php" role="test" />
    <file name="Authors" role="doc" />
    <file name="ChangeLog" role="doc" />
    <file name="FAQ" role="doc" />

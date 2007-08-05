@@ -7,7 +7,7 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 
 /* You must add each method-level test suite file here */
-require_once 'tests/phpDocumentorTParserGetInlineTagsTests.php';
+require_once 'phpDocumentorTParserGetInlineTagsTests.php';
 
 class tests_phpDocumentorTParserTests
 {

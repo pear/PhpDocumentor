@@ -50,12 +50,12 @@ require_once 'PHPUnit/TextUI/TestRunner.php';
 /*
  * You must add each additional class-level test suite file here
  */
-require_once 'tests/phpDocumentorSetupTests.php';
-require_once 'tests/phpDocumentorTParserTests.php';
-require_once 'tests/IntermediateParserTests.php';
-require_once 'tests/HighlightParserTests.php';
-require_once 'tests/ParserClassTests.php';
-require_once 'tests/ParserPageTests.php';
+require_once 'phpDocumentorSetupTests.php';
+require_once 'phpDocumentorTParserTests.php';
+require_once 'IntermediateParserTests.php';
+require_once 'HighlightParserTests.php';
+require_once 'ParserClassTests.php';
+require_once 'ParserPageTests.php';
 
 
 /**

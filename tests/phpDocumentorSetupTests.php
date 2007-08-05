@@ -7,8 +7,8 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 
 /* You must add each method-level test suite file here */
-require_once 'tests/phpDocumentorSetupCleanConverterNamePieceTests.php';
-require_once 'tests/phpDocumentorSetupDecideOnOrOffTests.php';
+require_once 'phpDocumentorSetupCleanConverterNamePieceTests.php';
+require_once 'phpDocumentorSetupDecideOnOrOffTests.php';
 
 class tests_phpDocumentorSetupTests
 {
