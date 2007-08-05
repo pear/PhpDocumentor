@@ -37,7 +37,7 @@ require_once "PHPUnit/Framework/TestSuite.php";
  * required by PhpDocumentor to instantiate the environment
  * @since 1.4.0a2 
  */
-require_once 'phpDocumentor/Setup.inc.php';
+require_once 'PhpDocumentor/phpDocumentor/Setup.inc.php';
 
 /**
  * Unit Testing of the HighlightParser's getInlineTags() method
@@ -46,7 +46,7 @@ require_once 'phpDocumentor/Setup.inc.php';
  * @author Chuck Burgess
  * @since 1.4.0a2
  */
-class Documentation_tests_HighlightParserGetInlineTagsTests extends PHPUnit_Framework_TestCase {
+class tests_HighlightParserGetInlineTagsTests extends PHPUnit_Framework_TestCase {
 
     /**
      * phpDocumentor_setup object
@@ -70,7 +70,7 @@ class Documentation_tests_HighlightParserGetInlineTagsTests extends PHPUnit_Fram
     public static function main() {
         require_once "PHPUnit/TextUI/TestRunner.php";
 
-        $suite  = new PHPUnit_Framework_TestSuite("Documentation_tests_HighlightParserGetInlineTagsTests");
+        $suite  = new PHPUnit_Framework_TestSuite("tests_HighlightParserGetInlineTagsTests");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -168,6 +168,6 @@ class Documentation_tests_HighlightParserGetInlineTagsTests extends PHPUnit_Fram
  * @since 1.4.0a2
  */
 if (PHPUnit_MAIN_METHOD == "HighlightParserGetInlineTagsTests::main") {
-    Documentation_tests_HighlightParserGetInlineTagsTests::main();
+    tests_HighlightParserGetInlineTagsTests::main();
 }
 ?>

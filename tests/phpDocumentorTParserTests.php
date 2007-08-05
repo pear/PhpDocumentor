@@ -7,9 +7,9 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 
 /* You must add each method-level test suite file here */
-require_once 'Documentation/tests/phpDocumentorTParserGetInlineTagsTests.php';
+require_once 'tests/phpDocumentorTParserGetInlineTagsTests.php';
 
-class Documentation_tests_phpDocumentorTParserTests
+class tests_phpDocumentorTParserTests
 {
     public static function main()
     {
@@ -20,12 +20,12 @@ class Documentation_tests_phpDocumentorTParserTests
     {
         $suite = new PHPUnit_Framework_TestSuite('phpDocumentorTParser Unit Test Suites');
         /* You must add each method-level test suite name here */         
-        $suite->addTestSuite('Documentation_tests_phpDocumentorTParserGetInlineTagsTests');
+        $suite->addTestSuite('tests_phpDocumentorTParserGetInlineTagsTests');
         return $suite;
     }
 }
  
 if (PHPUnit_MAIN_METHOD == 'phpDocumentorTParserTests::main') {
-    Documentation_tests_phpDocumentorTParserTests::main();
+    tests_phpDocumentorTParserTests::main();
 }
 ?>

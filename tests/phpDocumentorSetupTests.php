@@ -7,10 +7,10 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 
 /* You must add each method-level test suite file here */
-require_once 'Documentation/tests/phpDocumentorSetupCleanConverterNamePieceTests.php';
-require_once 'Documentation/tests/phpDocumentorSetupDecideOnOrOffTests.php';
+require_once 'tests/phpDocumentorSetupCleanConverterNamePieceTests.php';
+require_once 'tests/phpDocumentorSetupDecideOnOrOffTests.php';
 
-class Documentation_tests_phpDocumentorSetupTests
+class tests_phpDocumentorSetupTests
 {
     public static function main()
     {
@@ -21,13 +21,13 @@ class Documentation_tests_phpDocumentorSetupTests
     {
         $suite = new PHPUnit_Framework_TestSuite('phpDocumentorSetup Unit Test Suites');
         /* You must add each method-level test suite name here */
-        $suite->addTestSuite('Documentation_tests_phpDocumentorSetupCleanConverterNamePieceTests');
-        $suite->addTestSuite('Documentation_tests_phpDocumentorSetupDecideOnOrOffTests');
+        $suite->addTestSuite('tests_phpDocumentorSetupCleanConverterNamePieceTests');
+        $suite->addTestSuite('tests_phpDocumentorSetupDecideOnOrOffTests');
         return $suite;
     }
 }
  
 if (PHPUnit_MAIN_METHOD == 'phpDocumentorSetupTests::main') {
-    Documentation_tests_phpDocumentorSetupTests::main();
+    tests_phpDocumentorSetupTests::main();
 }
 ?>

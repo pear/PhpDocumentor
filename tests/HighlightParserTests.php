@@ -7,9 +7,9 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 
 /* You must add each method-level test suite file here */
-require_once 'Documentation/tests/HighlightParserGetInlineTagsTests.php';
+require_once 'tests/HighlightParserGetInlineTagsTests.php';
 
-class Documentation_tests_HighlightParserTests
+class tests_HighlightParserTests
 {
     public static function main()
     {
@@ -20,12 +20,12 @@ class Documentation_tests_HighlightParserTests
     {
         $suite = new PHPUnit_Framework_TestSuite('HighlightParser Unit Test Suites');
         /* You must add each method-level test suite name here */         
-        $suite->addTestSuite('Documentation_tests_HighlightParserGetInlineTagsTests');
+        $suite->addTestSuite('tests_HighlightParserGetInlineTagsTests');
         return $suite;
     }
 }
  
 if (PHPUnit_MAIN_METHOD == 'HighlightParserTests::main') {
-    Documentation_tests_HighlightParserTests::main();
+    tests_HighlightParserTests::main();
 }
 ?>

@@ -37,7 +37,7 @@ require_once "PHPUnit/Framework/TestSuite.php";
  * required by PhpDocumentor to instantiate the environment
  * @since 1.4.0a2 
  */
-require_once 'phpDocumentor/Setup.inc.php';
+require_once 'PhpDocumentor/phpDocumentor/Setup.inc.php';
 
 /**
  * Unit Testing of the IntermediateParser's addPrivatePage() method
@@ -46,7 +46,7 @@ require_once 'phpDocumentor/Setup.inc.php';
  * @author Chuck Burgess
  * @since 1.4.0a2
  */
-class Documentation_tests_IntermediateParserAddPrivatePageTests extends PHPUnit_Framework_TestCase {
+class tests_IntermediateParserAddPrivatePageTests extends PHPUnit_Framework_TestCase {
 
     /**
      * phpDocumentor_setup object
@@ -88,7 +88,7 @@ class Documentation_tests_IntermediateParserAddPrivatePageTests extends PHPUnit_
     public static function main() {
         require_once "PHPUnit/TextUI/TestRunner.php";
 
-        $suite  = new PHPUnit_Framework_TestSuite("Documentation_tests_IntermediateParserAddPrivatePageTests");
+        $suite  = new PHPUnit_Framework_TestSuite("tests_IntermediateParserAddPrivatePageTests");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -251,6 +251,6 @@ class Documentation_tests_IntermediateParserAddPrivatePageTests extends PHPUnit_
  * @since 1.4.0a2
  */
 if (PHPUnit_MAIN_METHOD == "IntermediateParserAddPrivatePageTests::main") {
-    Documentation_tests_IntermediateParserAddPrivatePageTests::main();
+    tests_IntermediateParserAddPrivatePageTests::main();
 }
 ?>

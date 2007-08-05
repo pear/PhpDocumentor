@@ -44,7 +44,7 @@ require_once "PHPUnit/Framework/TestSuite.php";
  * required by PhpDocumentor to instantiate the environment
  * @since 1.4.0a1 
  */
-require_once 'phpDocumentor/Setup.inc.php';
+require_once 'PhpDocumentor/phpDocumentor/Setup.inc.php';
 
 /**
  * Unit Testing of the ParserPage's getSourceLocation() method
@@ -53,7 +53,7 @@ require_once 'phpDocumentor/Setup.inc.php';
  * @author Chuck Burgess
  * @since 1.4.0a1
  */
-class Documentation_tests_ParserPageGetSourceLocationTests extends PHPUnit_Framework_TestCase {
+class tests_ParserPageGetSourceLocationTests extends PHPUnit_Framework_TestCase {
 
     /**
      * phpDocumentor_setup object
@@ -77,7 +77,7 @@ class Documentation_tests_ParserPageGetSourceLocationTests extends PHPUnit_Frame
     public static function main() {
         require_once "PHPUnit/TextUI/TestRunner.php";
 
-        $suite  = new PHPUnit_Framework_TestSuite("Documentation_tests_ParserPageGetSourceLocationTests");
+        $suite  = new PHPUnit_Framework_TestSuite("tests_ParserPageGetSourceLocationTests");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -359,6 +359,6 @@ class Documentation_tests_ParserPageGetSourceLocationTests extends PHPUnit_Frame
  * @since 1.4.0a1
  */
 if (PHPUnit_MAIN_METHOD == "ParserPageGetSourceLocationTests::main") {
-    Documentation_tests_ParserPageGetSourceLocationTests::main();
+    tests_ParserPageGetSourceLocationTests::main();
 }
 ?>
