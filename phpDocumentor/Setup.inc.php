@@ -35,6 +35,10 @@
  * @since      1.2
  */
 error_reporting(E_ALL);
+
+/** ensure top-level PhpDocumentor dir is in include path */
+set_include_path(get_include_path() . PATH_SEPARATOR . dirname(dirname(__FILE__)));
+
 /** common settings */
 include_once("phpDocumentor/common.inc.php");
 
