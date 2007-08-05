@@ -22,6 +22,17 @@
 
 
 /**
+ * Check PHP version... PhpUnit v3+ requires at least PHP v5.1.4
+ */
+if (version_compare(PHP_VERSION, "5.1.4") < 0)
+{
+    // Cannnot run test suites
+    echo "Cannot run test suites... requires at least PHP v5.1.4.\n";
+    exit(1);
+}
+
+
+/**
  * Derive the "main" method name
  */
 if (!defined('PHPUnit_MAIN_METHOD')) {
