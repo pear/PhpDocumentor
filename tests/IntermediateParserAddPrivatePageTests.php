@@ -175,7 +175,7 @@ class tests_IntermediateParserAddPrivatePageTests extends PHPUnit_Framework_Test
         $this->assertEquals($this->ip->privatepages[$this->path]->tutorial, "");
         $this->assertEquals($this->ip->privatepages[$this->path]->privateclasselements, array());
         $this->assertEquals($this->ip->privatepages[$this->path]->links, array());
-        $this->assertEquals($this->ip->privatepages[$this->path]->clean, 1);
+        $this->assertEquals($this->ip->privatepages[$this->path]->clean, true);
         $this->assertEquals($this->ip->privatepages[$this->path]->docblock, "");
         $this->assertEquals($this->ip->privatepages[$this->path]->_explicitdocblock, "");
         $this->assertEquals($this->ip->privatepages[$this->path]->type, "page");
@@ -217,7 +217,7 @@ class tests_IntermediateParserAddPrivatePageTests extends PHPUnit_Framework_Test
         $this->assertEquals($this->ip->privatepages[$this->path]->tutorial, "");
         $this->assertEquals($this->ip->privatepages[$this->path]->privateclasselements, array());
         $this->assertEquals($this->ip->privatepages[$this->path]->links, array());
-        $this->assertEquals($this->ip->privatepages[$this->path]->clean, 1);
+        $this->assertEquals($this->ip->privatepages[$this->path]->clean, true);
         $this->assertEquals($this->ip->privatepages[$this->path]->docblock, "");
         $this->assertEquals($this->ip->privatepages[$this->path]->_explicitdocblock, "");
         $this->assertEquals($this->ip->privatepages[$this->path]->type, "page");
