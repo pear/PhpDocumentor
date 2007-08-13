@@ -1264,6 +1264,7 @@ phpdoc -c /full/path/to/myconfig.ini
     </screen>
    </para>
    <para>The best way to ensure your config file matches the format expected by phpDocumentor is to copy the default.ini config file, and modify it to match your needs.  Lines that begin with a semi-colon (;) are ignored, and can be used for comments.</para>
+   <note>Be sure to put in your config file all the runtime options you need, because <emphasis>all other command-line arguments are ignored</emphasis> if you use a config file.</note>
   </refsect2>
   <refsect2 id="{@id phpdocumentorini}">
    <title>phpDocumentor.ini - global configuration options</title>
