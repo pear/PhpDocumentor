@@ -59,15 +59,6 @@ require_once 'ParserPageTests.php';
 
 
 /**
- * Base directory of code being PhpDoc'd
- * 
- * Needed by some of the objects being tested in the suites
- * @since 1.4.0a2
- */
-define("PHPDOCUMENTOR_BASE", '.');
-
-
-/**
  * Master Unit Test Suite class for PhpDocumentor
  * 
  * This top-level test suite class organizes 

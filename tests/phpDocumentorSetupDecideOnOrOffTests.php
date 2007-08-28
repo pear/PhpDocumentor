@@ -32,6 +32,17 @@ require_once "PHPUnit/Framework/TestCase.php";
 require_once "PHPUnit/Framework/TestSuite.php";
 
 /**
+ * Base directory of code
+ * 
+ * Needed by some of the objects being tested in the suites.
+ * @since 1.4.1
+ */
+chdir(dirname(dirname(__FILE__)));
+if (!defined("PHPDOCUMENTOR_BASE")) {
+    define("PHPDOCUMENTOR_BASE", dirname(dirname(__FILE__)));
+}
+
+/**
  * PhpDocumentor Setup
  * 
  * required by PhpDocumentor to instantiate the environment
