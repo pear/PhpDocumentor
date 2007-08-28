@@ -99,7 +99,7 @@ class tests_ParserPageGetSourceLocationTests extends PHPUnit_Framework_TestCase 
      * @since 1.4.0a1
      */
     protected function setUp() {
-        $GLOBALS['_phpDocumentor_install_dir'] = ".";
+        $GLOBALS['_phpDocumentor_install_dir'] = PHPDOCUMENTOR_BASE;
         $GLOBALS['_phpDocumentor_setting']['quiet'] = "true";
         $this->ps = new phpDocumentor_setup;
         $this->ps->setTitle("Unit Testing");    // this step is necessary to ensure ps->render is instantiated

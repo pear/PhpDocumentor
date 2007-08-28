@@ -108,7 +108,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
      * @since 1.3.2
      */
     protected function setUp() {
-        $GLOBALS['_phpDocumentor_install_dir'] = ".";
+        $GLOBALS['_phpDocumentor_install_dir'] = PHPDOCUMENTOR_BASE;
         $GLOBALS['_phpDocumentor_setting']['quiet'] = "true";
         $this->ps = new phpDocumentor_setup;
         $this->ps->setTitle("Unit Testing");    // this step is necessary to ensure ps->render is instantiated

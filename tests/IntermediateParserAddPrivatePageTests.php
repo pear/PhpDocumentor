@@ -110,7 +110,7 @@ class tests_IntermediateParserAddPrivatePageTests extends PHPUnit_Framework_Test
      * @since 1.4.0a2
      */
     protected function setUp() {
-        $GLOBALS['_phpDocumentor_install_dir'] = ".";
+        $GLOBALS['_phpDocumentor_install_dir'] = PHPDOCUMENTOR_BASE;
         $GLOBALS['_phpDocumentor_setting']['quiet'] = "on";
 
         $this->ps = new phpDocumentor_setup();

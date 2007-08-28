@@ -86,7 +86,7 @@ class tests_phpDocumentorSetupDecideOnOrOffTests extends PHPUnit_Framework_TestC
      * @since 1.3.2
      */
     protected function setUp() {
-        $GLOBALS['_phpDocumentor_install_dir'] = ".";
+        $GLOBALS['_phpDocumentor_install_dir'] = PHPDOCUMENTOR_BASE;
         $GLOBALS['_phpDocumentor_setting']['quiet'] = "true";
     }
 
