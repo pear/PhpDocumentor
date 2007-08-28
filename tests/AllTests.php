@@ -36,7 +36,7 @@ if (version_compare(PHP_VERSION, "5.1.4") < 0)
  * Derive the "main" method name
  */
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'AllTests::main');
+    define('PHPUnit_MAIN_METHOD', 'PhpDocumentor_AllTests::main');
 }
 
 
@@ -84,7 +84,7 @@ define("PHPDOCUMENTOR_BASE", '.');
  * @link     http://pear.php.net/PhpDocumentor
  * @since    1.4.0a2
  */
-class AllTests
+class PhpDocumentor_AllTests
 {
 
     /**
@@ -127,8 +127,8 @@ class AllTests
 /**
  * Call the main method if this file is executed directly
  */
-if (PHPUnit_MAIN_METHOD == 'AllTests::main') {
-    AllTests::main();
+if (PHPUnit_MAIN_METHOD == 'PhpDocumentor_AllTests::main') {
+    PhpDocumentor_AllTests::main();
 }
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
