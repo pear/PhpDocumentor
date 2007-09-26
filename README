@@ -9,18 +9,20 @@ Installation
 
 Installation for phpDocumentor is as simple as installing PHP and a web server.
 If you need help installing a webserver or php, refer to the documentation that
-comes with the webserver or with php.  phpDocumentor also runs from the command-line,
-and only requires that PHP CLI version be installed.
+comes with the webserver or with php.  phpDocumentor also runs from the 
+command-line, and only requires that PHP CLI version be installed.
 
-All users with PEAR should either install this version directly from the package.xml
-file included in the distribution, or install via "pear install PhpDocumentor."  The
-command-line interface "phpdoc" will be in the path, you can use it immediately
-on both windows and unix.  The web interface is in a subdirectory of your
-document root, be sure to "pear config-set data_dir /path/to/my/htdocs" prior
-to installation.
+All users with PEAR should either install this version directly from the 
+package.xml file included in the distribution, or install via 
+"pear install PhpDocumentor."  
 
-To use phpDocumentor as a command-line
-tool in *nix-based systems, simply run the phpdoc script.  In windows, run
+The command-line interface "phpdoc" will be in the path, you can use it 
+immediately on both windows and unix.  The web interface is in a subdirectory of 
+your document root, be sure to "pear config-set data_dir /path/to/my/htdocs" 
+prior to installation.
+
+To use phpDocumentor as a command-line tool in *nix-based systems, simply run 
+the phpdoc script.  In windows, run
 "c:\php\php.exe phpdoc" where C:\php is the path to the cli version of php.
 The phpdoc command-line interface will not run with the ISAPI module of PHP.
 To see the command line options, use phpdoc -h or read at the bottom of this
@@ -50,9 +52,9 @@ Release notes for the newest version are in Release-@VER@.
 
 @VER@ is out, a @STABILITY@ release.
 
-To learn how to write PHPDoc-style documentation run, phpDocumentor on itself, with
-./phpdoc -c makedocs.  Before you do, modify users/makedocs.ini to contain the
-proper path values.
+To learn how to write PHPDoc-style documentation, run phpDocumentor on itself, 
+with ./phpdoc -c makedocs.  Before you do, modify users/makedocs.ini to contain 
+the proper path values.
 
 If you find a bug please post it at:
 http://pear.php.net/bugs/search.php?cmd=display&package_name%5B%5D=PhpDocumentor
@@ -61,12 +63,13 @@ http://pear.php.net/bugs/search.php?cmd=display&package_name%5B%5D=PhpDocumentor
 General Notes
 ################################################################################
 phpDocumentor is hosted at phpdoc.org, with downloads and mailing list through 
-sourceforge.net.
+sourceforge.net, and primary support at PEAR.
 
-webpage: 			http://phpdoc.org/
+webpage:            http://phpdoc.org/
 documentation:      http://phpdoc.org/manual.php
-mirror: 			http://phpdocu.sourceforge.net
-projectpage: 		http://www.phpdoc.org
+mirror:             http://phpdocu.sourceforge.net
+projectpage:        http://www.phpdoc.org
+PEAR:               http://pear.php.net/package/PhpDocumentor
 
 For a list of people who have helped work on this project please read the 
 Authors file.
@@ -156,7 +159,7 @@ to write files to disk is a serious security risk, and phpDocumentor is not
 designed to work on insecure systems.  Setup php on a development machine
 that has a firewall or no internet connection, and run phpDocumentor from there.
 
-Make sure your webserver can write to whereever you specify as a target or you
+Make sure your webserver can write to wherever you specify as a target or you
 will get lots of errors.
 
 ################################################################################
@@ -188,7 +191,7 @@ phpdocu-general@sourceforge.net.
 
 joshua eichorn jeichorn@phpdoc.org
 gregory beaver cellog@php.net
-
+chuck burgess ashnazg@php.net
 
 
 
