@@ -6,7 +6,7 @@
  * PHP versions 4 and 5
  *
  * @category   ToolsAndUtilities
- * @package    PhpDocumentor
+ * @package    PhpDocumentor2
  * @author     Juan Pablo Morales <ju-moral@uniandes.edu.co>
  * @author     Joshua Eichorn <jeichorn@phpdoc.org>
  * @author     Gregory Beaver <cellog@php.net>
