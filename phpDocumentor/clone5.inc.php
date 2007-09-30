@@ -25,21 +25,26 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @package    phpDocumentor
- * @author     Greg Beaver <cellog@php.net>
- * @copyright  2001-2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version    CVS: $Id$
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
+ * @author    Greg Beaver <cellog@php.net>
+ * @copyright 2001-2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   CVS: $Id$
  * @filesource
- * @link       http://www.phpdoc.org
- * @link       http://pear.php.net/PhpDocumentor
- * @since      1.0rc1
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     1.0rc1
+ * @todo      CS cleanup - change package to PhpDocumentor
  */
 /**
  * Clone an object in PHP 5
- * @param object
- * @return object
+ *
+ * @param object $obj the object to be cloned
+ *
+ * @return object the new clone
  * @ignore
+ * @todo CS cleanup - rename function to PhpDocumentor_clone
  */
 function phpDocumentor_clone($obj)
 {
