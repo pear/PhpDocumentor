@@ -36,13 +36,16 @@ fi
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
  * @category  ToolsAndUtilities
- * @package   PhpDocumentor2
+ * @package   phpDocumentor
  * @author    Joshua Eichorn <jeichorn@phpdoc.org>
  * @copyright 2000-2001 Joshua Eichorn
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @filesource
  * @link      http://www.phpdoc.org
  * @link      http://pear.php.net/PhpDocumentor
+ * @todo      CS cleanup - change package to PhpDocumentor
+ * @internal  find_phpdoc.php must be "included" rather than "required"
+ *            so that the "check for PEAR" code works cleanly
  */
 
 ob_end_clean(); // make output from autofind php code disapear
@@ -50,7 +53,7 @@ ob_end_clean(); // make output from autofind php code disapear
 /**
  * utility: determine whether we're in PEAR or not
  */
-$test = @require "phpDocumentor/find_phpdoc.php";
+$test = @include "phpDocumentor/find_phpdoc.php";
 if ($test == 6) { 
     // find_phpdoc.php returns 6
     include "phpDocumentor/phpdoc.inc";
