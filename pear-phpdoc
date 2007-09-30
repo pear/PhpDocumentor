@@ -28,13 +28,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
  * @category  ToolsAndUtilities
- * @package   PhpDocumentor2
+ * @package   phpDocumentor
  * @author    Joshua Eichorn <jeichorn@phpdoc.org>
  * @copyright 2000-2001 Joshua Eichorn
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @filesource
  * @link      http://www.phpdoc.org
  * @link      http://pear.php.net/PhpDocumentor
+ * @todo      CS cleanup - change package to PhpDocumentor
  */
 require "PhpDocumentor/phpDocumentor/phpdoc.inc";
 ?>

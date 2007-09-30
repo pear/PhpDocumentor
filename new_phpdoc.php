@@ -6,7 +6,7 @@
  * PHP versions 4 and 5
  *
  * @category   ToolsAndUtilities
- * @package    PhpDocumentor2
+ * @package    phpDocumentor
  * @author     Juan Pablo Morales <ju-moral@uniandes.edu.co>
  * @author     Joshua Eichorn <jeichorn@phpdoc.org>
  * @author     Gregory Beaver <cellog@php.net>
@@ -15,6 +15,7 @@
  * @link       http://pear.php.net/package/PhpDocumentor
  * @see        phpdoc.php
  * @filesource
+ * @todo       CS cleanup - change package to PhpDocumentor
  * @deprecated redirects automatically to docbuilder 
  *             (see {@link docbuilder/index.html})
  */
