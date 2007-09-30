@@ -11,21 +11,21 @@
  * PHP versions 4 and 5
  *
  * @category Tools and Utilities
- * @package  PhpDocumentor
+ * @package  phpDocumentor
  * @subpackage UnitTesting
  * @author   Chuck Burgess <ashnazg@php.net>
  * @license  http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version  CVS: $Id$
  * @link     http://pear.php.net/PhpDocumentor
  * @since    1.4.0a2
+ * @todo     CS cleanup - change package to PhpDocumentor
  */
 
 
 /**
  * Check PHP version... PhpUnit v3+ requires at least PHP v5.1.4
  */
-if (version_compare(PHP_VERSION, "5.1.4") < 0)
-{
+if (version_compare(PHP_VERSION, "5.1.4") < 0) {
     // Cannnot run test suites
     echo "Cannot run test suites... requires at least PHP v5.1.4.\n";
     exit(1);
@@ -34,6 +34,8 @@ if (version_compare(PHP_VERSION, "5.1.4") < 0)
 
 /**
  * Derive the "main" method name
+ * @internal PhpUnit would have to rename PHPUnit_MAIN_METHOD to PHPUNIT_MAIN_METHOD
+ *           to make this usage meet the PEAR CS... we cannot rename it here.
  */
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'PhpDocumentor_AllTests::main');
@@ -67,13 +69,14 @@ require_once 'ParserPageTests.php';
  * by PhpUnit or via "pear run-tests -u". 
  *
  * @category Tools and Utilities
- * @package  PhpDocumentor
+ * @package  phpDocumentor
  * @subpackage UnitTesting
  * @author   Chuck Burgess <ashnazg@php.net>
  * @license  http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version  Release: @package_version@
  * @link     http://pear.php.net/PhpDocumentor
  * @since    1.4.0a2
+ * @todo     CS cleanup - change package to PhpDocumentor
  */
 class PhpDocumentor_AllTests
 {
@@ -117,6 +120,8 @@ class PhpDocumentor_AllTests
 
 /**
  * Call the main method if this file is executed directly
+ * @internal PhpUnit would have to rename PHPUnit_MAIN_METHOD to PHPUNIT_MAIN_METHOD
+ *           to make this usage meet the PEAR CS... we cannot rename it here.
  */
 if (PHPUnit_MAIN_METHOD == 'PhpDocumentor_AllTests::main') {
     PhpDocumentor_AllTests::main();
