@@ -16,7 +16,7 @@ fi
  *
  * PHP versions 4 and 5
  *
- * Copyright (c) 2001-2006 Gregory Beaver
+ * Copyright (c) 2001-2007 Gregory Beaver
  *
  * LICENSE:
  *
@@ -38,7 +38,7 @@ fi
  * @category  ToolsAndUtilities
  * @package   phpDocumentor
  * @author    Joshua Eichorn <jeichorn@phpdoc.org>
- * @copyright 2000-2001 Joshua Eichorn
+ * @copyright 2000-2007 Joshua Eichorn
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @filesource
  * @link      http://www.phpdoc.org
