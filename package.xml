@@ -1359,6 +1359,7 @@ Includes these Sourceforge items:
      <file name="TODO" role="data" />
     </dir> <!-- /phpDocumentor/Smarty-2.6.0 -->
     <file name="Classes.inc" role="php" />
+     <tasks:replace from="@VER@" to="version" type="package-info" />
     <file name="clone.inc.php" role="php" />
     <file name="clone5.inc.php" role="php" />
     <file name="common.inc.php" role="php">
