@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.6.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.6.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>PhpDocumentor</name>
  <channel>pear.php.net</channel>
  <summary>The phpDocumentor package provides automatic documenting of php api directly from the source.</summary>
@@ -69,8 +69,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>ashnazg@php.net</email>
   <active>yes</active>
  </developer>
- <date>2007-07-19</date>
- <time>18:30:42</time>
+ <date>2007-10-10</date>
+ <time>06:26:53</time>
  <version>
   <release>1.4.0</release>
   <api>1.4.0</api>
@@ -1358,8 +1358,9 @@ Includes these Sourceforge items:
      <file name="RELEASE_NOTES" role="data" />
      <file name="TODO" role="data" />
     </dir> <!-- /phpDocumentor/Smarty-2.6.0 -->
-    <file name="Classes.inc" role="php" />
+    <file name="Classes.inc" role="php">
      <tasks:replace from="@VER@" to="version" type="package-info" />
+    </file>
     <file name="clone.inc.php" role="php" />
     <file name="clone5.inc.php" role="php" />
     <file name="common.inc.php" role="php">
@@ -1372,8 +1373,9 @@ Includes these Sourceforge items:
     <file name="DescHTML.inc" role="php" />
     <file name="DocBlockTags.inc" role="php" />
     <file name="Errors.inc" role="php" />
-    <file name="EventStack.inc" role="php" />
+    <file name="EventStack.inc" role="php">
      <tasks:replace from="@VER@" to="version" type="package-info" />
+    </file>
     <file name="find_phpdoc.php" role="php" />
     <file name="HighlightParser.inc" role="php" />
     <file name="InlineTags.inc" role="php" />
@@ -1409,20 +1411,20 @@ Includes these Sourceforge items:
     <file name="tokenizer_test.php" role="php" />
    </dir> <!-- /scripts -->
    <dir name="tests">
-     <file name="AllTests.php" role="test" />
-     <file name="HighlightParserGetInlineTagsTests.php" role="test" />
-     <file name="HighlightParserTests.php" role="test" />
-     <file name="IntermediateParserAddPrivatePageTests.php" role="test" />
-     <file name="IntermediateParserTests.php" role="test" />
-     <file name="ParserClassGetSourceLocationTests.php" role="test" />
-     <file name="ParserClassTests.php" role="test" />
-     <file name="ParserPageGetSourceLocationTests.php" role="test" />
-     <file name="ParserPageTests.php" role="test" />
-     <file name="phpDocumentorSetupCleanConverterNamePieceTests.php" role="test" />
-     <file name="phpDocumentorSetupDecideOnOrOffTests.php" role="test" />
-     <file name="phpDocumentorSetupTests.php" role="test" />
-     <file name="phpDocumentorTParserGetInlineTagsTests.php" role="test" />
-     <file name="phpDocumentorTParserTests.php" role="test" />
+    <file name="AllTests.php" role="php" />
+    <file name="HighlightParserGetInlineTagsTests.php" role="php" />
+    <file name="HighlightParserTests.php" role="php" />
+    <file name="IntermediateParserAddPrivatePageTests.php" role="php" />
+    <file name="IntermediateParserTests.php" role="php" />
+    <file name="ParserClassGetSourceLocationTests.php" role="php" />
+    <file name="ParserClassTests.php" role="php" />
+    <file name="ParserPageGetSourceLocationTests.php" role="php" />
+    <file name="ParserPageTests.php" role="php" />
+    <file name="phpDocumentorSetupCleanConverterNamePieceTests.php" role="php" />
+    <file name="phpDocumentorSetupDecideOnOrOffTests.php" role="php" />
+    <file name="phpDocumentorSetupTests.php" role="php" />
+    <file name="phpDocumentorTParserGetInlineTagsTests.php" role="php" />
+    <file name="phpDocumentorTParserTests.php" role="php" />
    </dir> <!-- /tests -->
    <dir name="tutorials">
     <dir name="Converters">
@@ -3059,7 +3061,7 @@ Includes these Sourceforge items:
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-07-19</date>
+   <date>2007-10-10</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>
 Includes these PEAR items:
