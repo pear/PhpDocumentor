@@ -44,20 +44,19 @@ fi
  * @link      http://www.phpdoc.org
  * @link      http://pear.php.net/PhpDocumentor
  * @todo      CS cleanup - change package to PhpDocumentor
- * @internal  find_phpdoc.php must be "included" rather than "required"
- *            so that the "check for PEAR" code works cleanly
  */
 
 ob_end_clean(); // make output from autofind php code disapear
 
 /**
  * utility: determine whether we're in PEAR or not
+ * @internal CS Exception- logic here necessitates using an unconditional "include"
  */
 $test = @include "phpDocumentor/find_phpdoc.php";
 if ($test == 6) { 
     // find_phpdoc.php returns 6
     include "phpDocumentor/phpdoc.inc";
 } else {
-    echo "Error: phpDocumentor not found\n";
+    echo "Error: phpDocumentor not found" . PHP_EOL;
 }
 ?>
