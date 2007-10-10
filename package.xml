@@ -1373,6 +1373,7 @@ Includes these Sourceforge items:
     <file name="DocBlockTags.inc" role="php" />
     <file name="Errors.inc" role="php" />
     <file name="EventStack.inc" role="php" />
+     <tasks:replace from="@VER@" to="version" type="package-info" />
     <file name="find_phpdoc.php" role="php" />
     <file name="HighlightParser.inc" role="php" />
     <file name="InlineTags.inc" role="php" />

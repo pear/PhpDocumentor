@@ -6,7 +6,7 @@
  * 
  * PHP versions 4 and 5
  *
- * Copyright (c) 2000-2006 Joshua Eichorn
+ * Copyright (c) 2000-2007 Joshua Eichorn
  * 
  * LICENSE:
  * 
@@ -25,22 +25,29 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @package    phpDocumentor
- * @author     Joshua Eichorn <jeichorn@phpdoc.org>
- * @copyright  2000-2006 Joshua Eichorn
- * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version    CVS: $Id$
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
+ * @author    Joshua Eichorn <jeichorn@phpdoc.org>
+ * @copyright 2000-2007 Joshua Eichorn
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   CVS: $Id$
  * @filesource
- * @link       http://www.phpdoc.org
- * @link       http://pear.php.net/PhpDocumentor
- * @since      0.1
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     0.1
+ * @todo      CS cleanup - change package to PhpDocumentor
  */
 /**
  * An event Stack
  * 
- * @author    Joshua Eichorn <jeichorn@phpdoc.org>
- * @version    $Id$
- * @package     phpDocumentor
+ * @category ToolsAndUtilities
+ * @package  phpDocumentor
+ * @author   Joshua Eichorn <jeichorn@phpdoc.org>
+ * @license  http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version  Release: @VER@
+ * @link     http://www.phpdoc.org
+ * @link     http://pear.php.net/PhpDocumentor
+ * @todo     CS cleanup - change package to PhpDocumentor
  */
 class EventStack
 {
@@ -59,17 +66,19 @@ class EventStack
     /**
      * Push an event onto the stack
      *
-     * @param    int    $event    All events must be constants
+     * @param int $event All events must be constants
+     *
+     * @return void
      */
     function pushEvent($event)
     {
-        $this->num = array_push($this->stack,$event) - 1;
+        $this->num = array_push($this->stack, $event) - 1;
     }
 
     /**
      * Pop an event from the stack
      *
-     * @return    int    An event
+     * @return int An event
      */
     function popEvent()
     {
@@ -80,7 +89,7 @@ class EventStack
     /**
      * Get the current event
      *
-     * @return    int    An event
+     * @return int An event
      */
     function getEvent()
     {
