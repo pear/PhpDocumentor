@@ -6,7 +6,7 @@
  * 
  * PHP versions 4 and 5
  *
- * Copyright (c) 2002-2006 Gregory Beaver
+ * Copyright (c) 2002-2007 Gregory Beaver
  * 
  * LICENSE:
  * 
@@ -25,21 +25,24 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @package    phpDocumentor
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage setup
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version    CVS: $Id$
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2002-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   CVS: $Id$
  * @filesource
- * @link       http://www.phpdoc.org
- * @link       http://pear.php.net/PhpDocumentor
- * @since      1.2
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     1.2
+ * @todo      CS cleanup - change package to PhpDocumentor
  */
 /**
  * Dummy value
+ * @internal CS Exception - logic here necessitates using an unconditional "include"
  */
-@include('');
+@include '';
 // value used to test whether include worked
 return 6;
 ?>
