@@ -6,7 +6,7 @@
  * 
  * PHP versions 4 and 5
  *
- * Copyright (c) 2000-2006 Kellin, Joshua Eichorn
+ * Copyright (c) 2000-2007 Kellin, Joshua Eichorn
  * 
  * LICENSE:
  * 
@@ -25,68 +25,86 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @package    phpDocumentor
- * @author     Kellin <passionplay@hotmail.com>
- * @author     Joshua Eichorn <jeichorn@phpdoc.org>
- * @copyright  2000-2006 Kellin, Joshua Eichorn
- * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version    CVS: $Id$
- * @link       http://www.phpdoc.org
- * @link       http://pear.php.net/PhpDocumentor
- * @since      0.1
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
+ * @author    Kellin <passionplay@hotmail.com>
+ * @author    Joshua Eichorn <jeichorn@phpdoc.org>
+ * @copyright 2000-2007 Kellin, Joshua Eichorn
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   CVS: $Id$
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     0.1
+ * @todo      CS cleanup - change package to PhpDocumentor
  */
 /**
  * a class for handling the publishing of data
  *
- * @author Kellin <passionplay@hotmail.com>
- * @author Joshua Eichorn <jeichorn@phpdoc.org>
- * @version	$Id$
- * @package 	phpDocumentor
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
+ * @author    Kellin <passionplay@hotmail.com>
+ * @author    Joshua Eichorn <jeichorn@phpdoc.org>
+ * @copyright 2000-2007 Kellin, Joshua Eichorn
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   Release: @VER@
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @todo      CS cleanup - change package to PhpDocumentor
  */
 class Publisher
 {
     /**#@+
      * @var array
      */
-	/**
+    /**
      * Array of references objects that have Subscribed to this publisher
      */
-	var $subscriber	=	array();
+    var $subscriber    =    array();
 
-	var $tokens	=	array();
+    var $tokens    =    array();
 
-	var $pushEvent	=	array();
-	var $popEvent	=	array();
+    var $pushEvent    =    array();
+    var $popEvent    =    array();
     /**#@-*/
 
 
-	/**
+    /**
      * Adds a subscriber to the {@link $subscriber} array().
      * if $event is '*', the publisher will use $object as the default event handler
-     * @param integer $event see {@link Parser.inc} PARSER_EVENT_* constants
-     * @param class $object any class that has a HandleEvent() method like {@link phpDocumentor_IntermediateParser::HandleEvent()} or {@link Classes::HandleEvent()}
+     *
+     * @param integer $event   see {@link Parser.inc} PARSER_EVENT_* constants
+     * @param class   &$object any class that has a HandleEvent() method like 
+     *                         {@link phpDocumentor_IntermediateParser::HandleEvent()}
+     *                         or {@link Classes::HandleEvent()}
+     *
+     * @return void
+     * @todo CS Cleanup - there's no way I can get the &$object desc under 85 chars
      */
-	function subscribe($event, &$object)
-	{
-		$this->subscriber[$event] =& $object;
-	}
+    function subscribe($event, &$object)
+    {
+        $this->subscriber[$event] =& $object;
+    }
 
-	/**
+    /**
+     * Publish an event
+     *
      * @param integer $event see {@link Parser.inc} PARSER_EVENT_* constants
-     * @param mixed $data anything the subscribed event handler is expecting
+     * @param mixed   $data  anything the subscribed event handler is expecting
+     *
+     * @return void
      */
-	function publishEvent($event,$data)
-	{
-		
-		// see if there is a specific event handler
-		if (!empty($this->subscriber[$event]))
-		{
-			$this->subscriber[$event]->HandleEvent($event,$data);
-		} 
-		 else if (isset($this->subscriber['*']) && is_object($this->subscriber['*'])) // check to see if a generic handler exists
-		{
-			$this->subscriber['*']->HandleEvent($event,$data);
-		}
-	}	
+    function publishEvent($event,$data)
+    {
+        
+        // see if there is a specific event handler
+        if (!empty($this->subscriber[$event])) {
+            $this->subscriber[$event]->HandleEvent($event, $data);
+        } else if (isset($this->subscriber['*']) 
+                   && is_object($this->subscriber['*'])) {
+            // check to see if a generic handler exists
+
+            $this->subscriber['*']->HandleEvent($event, $data);
+        }
+    }    
 }
 ?>

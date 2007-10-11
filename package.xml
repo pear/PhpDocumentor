@@ -70,7 +70,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2007-10-10</date>
- <time>21:00:08</time>
+ <time>22:00:08</time>
  <version>
   <release>1.4.0</release>
   <api>1.4.0</api>
@@ -1397,7 +1397,9 @@ Includes these Sourceforge items:
     <file name="phpDocumentorTParser.inc" role="php" />
     <file name="phpDocumentorTWordParser.inc" role="php" />
     <file name="ProceduralPages.inc" role="php" />
-    <file name="Publisher.inc" role="php" />
+    <file name="Publisher.inc" role="php">
+     <tasks:replace from="@VER@" to="version" type="package-info" />
+    </file>
     <file name="Setup.inc.php" role="php">
      <tasks:replace from="@DATA-DIR@" to="data_dir" type="pear-config" />
     </file>
