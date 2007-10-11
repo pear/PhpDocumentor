@@ -70,7 +70,7 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <active>yes</active>
  </developer>
  <date>2007-10-10</date>
- <time>06:26:53</time>
+ <time>21:00:08</time>
  <version>
   <release>1.4.0</release>
   <api>1.4.0</api>
@@ -1372,7 +1372,9 @@ Includes these Sourceforge items:
     </file>
     <file name="DescHTML.inc" role="php" />
     <file name="DocBlockTags.inc" role="php" />
-    <file name="Errors.inc" role="php" />
+    <file name="Errors.inc" role="php">
+     <tasks:replace from="@VER@" to="version" type="package-info" />
+    </file>
     <file name="EventStack.inc" role="php">
      <tasks:replace from="@VER@" to="version" type="package-info" />
     </file>

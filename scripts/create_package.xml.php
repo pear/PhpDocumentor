@@ -138,6 +138,7 @@ $pfm2->addReplacement('docbuilder/config.php', 'pear-config', '@WEB-DIR@', 'data
 $pfm2->addReplacement('phpDocumentor/Setup.inc.php', 'pear-config', '@DATA-DIR@', 'data_dir');
 $pfm2->addReplacement('phpDocumentor/Converter.inc', 'pear-config', '@DATA-DIR@', 'data_dir');
 $pfm2->addReplacement('phpDocumentor/Classes.inc', 'package-info', '@VER@', 'version');
+$pfm2->addReplacement('phpDocumentor/Errors.inc', 'package-info', '@VER@', 'version');
 $pfm2->addReplacement('phpDocumentor/EventStack.inc', 'package-info', '@VER@', 'version');
 $pfm2->addReplacement('phpDocumentor/common.inc.php', 'package-info', '@VER@', 'version');
 $pfm2->addReplacement('phpDocumentor/common.inc.php', 'pear-config', '@PEAR-DIR@', 'php_dir');
