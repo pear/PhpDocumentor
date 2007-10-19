@@ -69,8 +69,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>ashnazg@php.net</email>
   <active>yes</active>
  </developer>
- <date>2007-10-10</date>
- <time>22:00:08</time>
+ <date>2007-10-18</date>
+ <time>18:58:26</time>
  <version>
   <release>1.4.0</release>
   <api>1.4.0</api>
@@ -1405,7 +1405,9 @@ Includes these Sourceforge items:
     </file>
     <file name="TutorialHighlightParser.inc" role="php" />
     <file name="WordParser.inc" role="php" />
-    <file name="XMLpackagePageParser.inc" role="php" />
+    <file name="XMLpackagePageParser.inc" role="php">
+     <tasks:replace from="@VER@" to="version" type="package-info" />
+    </file>
    </dir> <!-- /phpDocumentor -->
    <dir name="scripts">
     <file name="add_cvs.php" role="php" />
@@ -3065,7 +3067,7 @@ Includes these Sourceforge items:
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-10-10</date>
+   <date>2007-10-18</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>
 Includes these PEAR items:
