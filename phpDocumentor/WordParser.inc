@@ -6,7 +6,7 @@
  * 
  * PHP versions 4 and 5
  *
- * Copyright (c) 2000-2006 Joshua Eichorn
+ * Copyright (c) 2000-2007 Joshua Eichorn
  * 
  * LICENSE:
  * 
@@ -25,23 +25,33 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @package    phpDocumentor
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage WordParsers
- * @author     Joshua Eichorn <jeichorn@phpdoc.org>
- * @copyright  2000-2006 Joshua Eichorn
- * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version    CVS: $Id$
- * @link       http://www.phpdoc.org
- * @link       http://pear.php.net/PhpDocumentor
- * @since      0.1
+ * @author    Joshua Eichorn <jeichorn@phpdoc.org>
+ * @copyright 2000-2007 Joshua Eichorn
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   CVS: $Id$
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     0.1
+ * @todo      CS cleanup - change package to PhpDocumentor
  */
+
 /**
  * Retrieves tokens from source code for use by the Parser
- * @see Parser
- * @author    Joshua Eichorn <jeichorn@phpdoc.org>
- * @version    $Id$
- * @package     phpDocumentor
+ *
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage WordParsers
+ * @author    Joshua Eichorn <jeichorn@phpdoc.org>
+ * @copyright 2000-2007 Joshua Eichorn
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   Release: @VER@
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @see       Parser
+ * @todo      CS cleanup - change package to PhpDocumentor
  */
 class WordParser
 {
@@ -114,39 +124,47 @@ class WordParser
 
     /**
      * Initialize the WordParser
-     * @param string source code
+     *
+     * @param string &$input source code
+     * 
+     * @return void
      */
     function setup(&$input)
     {
-        $this->size = strlen($input);
-        $this->data = & $input;
-        $this->pos = 0;
-        $this->linenum = 0;
+        $this->size       = strlen($input);
+        $this->data       = & $input;
+        $this->pos        = 0;
+        $this->linenum    = 0;
         $this->linenumpos = 0;
-        $this->cache = array();
-        //$this->run = 0;
-        //$this->word = WORD_PARSER_RET_WORD;
+        $this->cache      = array();
+        //$this->run      = 0;
+        //$this->word     = WORD_PARSER_RET_WORD;
     }
     
     /**
      * Retrieve source code for the last function/method
+     *
      * @return string
      */
     function getSource()
     {
-        $source = $this->source;
-        $this->source = '';
+        $source          = $this->source;
+        $this->source    = '';
         $this->getsource = false;
         return $source;
     }
     
     /**
      * Used to tell the WordParser to start retrieving source code
+     *
+     * @param string $word source code
+     *
+     * @return void
      * @access private
      */
     function retrievesource($word = '')
     {
-        $this->source = $word;
+        $this->source    = $word;
         $this->getsource = true;
     }
 
@@ -180,6 +198,7 @@ class WordParser
      * parsed, and {@link $pos} is the cursor, or current location within the
      * parsed data.
      * }}
+     *
      * @return string|false the next token, an empty string if there are no
      *                      token separators in the $wordseperators array,
      *                      or false if the end of input has been reached
@@ -187,41 +206,36 @@ class WordParser
     function getWord()
     {
         //$st = $this->mtime();
-        if ($this->size == $this->pos)
-        {
+        if ($this->size == $this->pos) {
             return false;
         }
 
         // assume, for starting, that the token is from $this->pos to the end
         $npos = $this->size;
-        if (is_array($this->wordseperators))
-        {
+        if (is_array($this->wordseperators)) {
             //$this->wordseperators = array();
-            foreach($this->wordseperators as $sep)
-            {
+            foreach ($this->wordseperators as $sep) {
                 // cache is set if this separator has been tested
-                if (isset($this->cache[$sep]))
-                $tpos = $this->cache[$sep];
-                else
-                $tpos = false;
-                if ($tpos < $this->pos || !is_int($tpos))
-                {
+                if (isset($this->cache[$sep])) {
+                    $tpos = $this->cache[$sep];
+                } else {
+                    $tpos = false;
+                }
+                if ($tpos < $this->pos || !is_int($tpos)) {
                     // find the position of the next token separator
-                    $tpos = strpos($this->data,$sep,$this->pos);
+                    $tpos = strpos($this->data, $sep, $this->pos);
                 }
 
-                // was a token separator found that is closer to the current
-                // location?
-                if ( ($tpos < $npos) && !($tpos === false))
-                {
+                // was a token separator found 
+                // that is closer to the current location?
+                if ( ($tpos < $npos) && !($tpos === false)) {
                     //echo trim($sep) . "=$tpos\n";
-                    // set the length of the token to be from $this->pos to
+                    // set the length of the token 
+                    // to be from $this->pos to
                     // the next token separator
-                    $npos = $tpos;
+                    $npos   = $tpos;
                     $seplen = strlen($sep);
-                } 
-                  else if (!($tpos === false))
-                {
+                } else if (!($tpos === false)) {
                     $this->cache[$sep] = $tpos;
                 }
             }
@@ -231,39 +245,34 @@ class WordParser
         }
 
         $len = $npos - $this->pos;
-        if ($len == 0)
-        {
+        if ($len == 0) {
             $len = $seplen;
         }
 
         //$st3 = $this->mtime();
-        $word = substr($this->data,$this->pos,$len);
+        $word = substr($this->data, $this->pos, $len);
         
         // Change random other os newlines to the unix one
-        if ($word == "\r" || $word == "\r\n")
-        {
+        if ($word == "\r" || $word == "\r\n") {
             $word = "\n";
         }
         
-        if ($this->linenumpos <= $this->pos)
-        {
+        if ($this->linenumpos <= $this->pos) {
             $this->linenumpos = $this->pos + $len;
-            $this->linenum += count(explode("\n",$word)) - 1;
+            $this->linenum   += count(explode("\n", $word)) - 1;
         }
 
-        if ($this->getsource)
-        {
+        if ($this->getsource) {
             $this->source .= $word;
         }
         $this->pos = $this->pos + $len;
         //$this->word = WORD_PARSER_RET_SEP;
 
-        // Things like // commenats rely on the newline to find their end so im going to have to return them
+        // Things like // commenats rely on the newline 
+        // to find their end so im going to have to return them
         // never return worthless white space /t ' '
-        if ($this->returnWhiteSpace == false)
-        {
-            if (strlen(trim($word)) == 0 && $word != "\n") 
-            {
+        if ($this->returnWhiteSpace == false) {
+            if (strlen(trim($word)) == 0 && $word != "\n") {
                 $word = $this->getWord();
             }
         }
@@ -275,6 +284,8 @@ class WordParser
 
     /**
      * Returns the current pointer position, or 1 character after the end of the word
+     *
+     * @return int the position
      */
     function getPos()
     {
@@ -285,17 +296,24 @@ class WordParser
      * Unused
      *
      * {@source}
-     * @param integer starting position
-     * @param integer length of block to retrieve
+     *
+     * @param integer $start starting position
+     * @param integer $len   length of block to retrieve
+     *
+     * @return string the requested block of characters
      */
-    function getBlock($start,$len)
+    function getBlock($start, $len)
     {
-        return substr($this->data,$start,$len);
+        return substr($this->data, $start, $len);
     }
 
     /**
+     * Sets the list of possible separator tokens
+     *
+     * @param array &$seps array of strings that separate tokens
+     *
+     * @return void
      * @uses $wordseperators
-     * @param array array of strings that separate tokens
      */
     function setSeperator(&$seps)
     {
@@ -304,7 +322,10 @@ class WordParser
 
     /**
      * Set the internal cursor within the source code
-     * @param integer
+     *
+     * @param integer $pos the position
+     *
+     * @return void
      */
     function setPos($pos)
     {
@@ -317,17 +338,24 @@ class WordParser
      *
      * Occasionally, a word will be passed to an event handler that should be
      * handled by another event handler.  This method allows that to happen.
-     * @param string token to back up to
+     *
+     * @param string $word token to back up to
+     *
+     * @return void
      */
     function backupPos($word)
     {
-        if ($this->getsource) $this->source = substr($this->source,0,strlen($this->source) - 1);
+        if ($this->getsource) $this->source = 
+            substr($this->source, 0, strlen($this->source) - 1);
         $this->pos = $this->pos - strlen($word);
     }
 
     /**
      * set parser to return or strip whitespace
-     * @param boolean
+     *
+     * @param boolean $val flag to return or strip whitespace
+     *
+     * @return void
      */
     function setWhitespace($val = false)
     {
