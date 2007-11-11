@@ -17,7 +17,7 @@
  * 
  * PHP versions 4 and 5
  *
- * Copyright (c) 2003-2006 Gregory Beaver
+ * Copyright (c) 2003-2007 Gregory Beaver
  * 
  * LICENSE:
  * 
@@ -36,22 +36,35 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @package    phpDocumentor
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage Parsers
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2003-2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version    CVS: $Id$
- * @tutorial   tags.example.pkg, tags.filesource.pkg
- * @link       http://www.phpdoc.org
- * @link       http://pear.php.net/PhpDocumentor
- * @since      1.3.0
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2003-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   CVS: $Id$
+ * @tutorial  tags.example.pkg, tags.filesource.pkg
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     1.3.0
+ * @todo      CS cleanup - change package to PhpDocumentor
+ * @todo      CS cleanup - PHPCS needs to ignore CVS Id length
  */
 
 /**
  * Highlights source code using {@link parse()}
- * @package phpDocumentor
+ *
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage Parsers
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2003-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   Release: @VER@
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @todo      CS cleanup - change package to PhpDocumentor
+ * @todo      CS cleanup - change classname to PhpDocumentor_*
  */
 class phpDocumentor_TutorialHighlightParser extends Parser
 {
@@ -80,31 +93,39 @@ class phpDocumentor_TutorialHighlightParser extends Parser
      * @var array
      */
     var $eventHandlers = array(
-                                TUTORIAL_EVENT_NOEVENTS => 'defaultHandler',
-                                TUTORIAL_EVENT_ITAG => 'defaultHandler',
-                                TUTORIAL_EVENT_ATTRIBUTE => 'attrHandler',
-                                TUTORIAL_EVENT_OPENTAG => 'defaultHandler',
-                                TUTORIAL_EVENT_CLOSETAG => 'defaultHandler',
-                                TUTORIAL_EVENT_ENTITY => 'defaultHandler',
-                                TUTORIAL_EVENT_COMMENT => 'defaultHandler',
-                                TUTORIAL_EVENT_SINGLEQUOTE => 'defaultHandler',
-                                TUTORIAL_EVENT_DOUBLEQUOTE => 'defaultHandler',
+        TUTORIAL_EVENT_NOEVENTS    => 'defaultHandler',
+        TUTORIAL_EVENT_ITAG        => 'defaultHandler',
+        TUTORIAL_EVENT_ATTRIBUTE   => 'attrHandler',
+        TUTORIAL_EVENT_OPENTAG     => 'defaultHandler',
+        TUTORIAL_EVENT_CLOSETAG    => 'defaultHandler',
+        TUTORIAL_EVENT_ENTITY      => 'defaultHandler',
+        TUTORIAL_EVENT_COMMENT     => 'defaultHandler',
+        TUTORIAL_EVENT_SINGLEQUOTE => 'defaultHandler',
+        TUTORIAL_EVENT_DOUBLEQUOTE => 'defaultHandler',
     );
     /**#@-*/
     
     /**
+     * advances output to a new line
+     *
+     * @return void
      * @uses Converter::SourceLine() encloses {@link $_line} in a
      *                               converter-specific format
      */
     function newLineNum()
     {
-        $this->_line .= $this->_converter->flushHighlightCache();
-        $this->_output .= $this->_converter->SourceLine($this->_pv_curline + 1, $this->_line, $this->_path);
-        $this->_line = '';
+        $this->_line   .= $this->_converter->flushHighlightCache();
+        $this->_output .= $this->_converter->SourceLine($this->_pv_curline + 1, 
+            $this->_line, $this->_path);
+        $this->_line    = '';
     }
     
     /**
      * Start the parsing at a certain line number
+     *
+     * @param int $num the line number
+     *
+     * @return void
      */
     function setLineNum($num)
     {
@@ -128,78 +149,82 @@ class phpDocumentor_TutorialHighlightParser extends Parser
      * hyperlinks to the documentation for source code elements that are in the
      * source code.
      *
+     * @param string        $parse_data     blah
+     * @param Converter     &$converter     blah
+     * @param false|string  $filesourcepath full path to file with @filesource tag,
+     *                                      if this is a @filesource parse
+     * @param false|integer $linenum        starting line number from
+     *                                      {@}source linenum}
+     *
+     * @staticvar integer used for recursion limiting if a handler for
+     *                    an event is not found
+     * @return    bool
      * @uses setupStates() initialize parser state variables
      * @uses configWordParser() pass $parse_data to prepare retrieval of tokens
-     * @param    string
-     * @param    Converter
-     * @param    false|string full path to file with @filesource tag, if this
-     *           is a @filesource parse
-     * @param    false|integer starting line number from {@}source linenum}
-     * @staticvar    integer    used for recursion limiting if a handler for
-     *                          an event is not found
-     * @return    bool
+     * @todo CS cleanup - unable to get function signature below 85char wide
      */
-    function parse ($parse_data, &$converter, $filesourcepath = false, $linenum = false)
+    function parse($parse_data, &$converter, $filesourcepath = false, $linenum = false)
     {
-        static $endrecur = 0;
-        $parse_data = str_replace(array("\r\n", "\t"), array("\n", '    '), $parse_data);
+        static $endrecur  = 0;
+        $parse_data       = 
+            str_replace(array("\r\n", "\t"), array("\n", '    '), $parse_data);
         $this->_converter = &$converter;
         $converter->startHighlight();
         $this->_path = $filesourcepath;
         $this->setupStates($parse_data);
 
         $this->configWordParser(TUTORIAL_EVENT_NOEVENTS);
-        if ($linenum !== false) $this->setLineNum($linenum);
+        if ($linenum !== false) {
+            $this->setLineNum($linenum);
+        }
         // initialize variables so E_ALL error_reporting doesn't complain
         $pevent = 0;
-        $word = 0;
+        $word   = 0;
 
-        do
-        {
+        do {
             $lpevent = $pevent;
-            $pevent = $this->_event_stack->getEvent();
-            if ($lpevent != $pevent)
-            {
+            $pevent  = $this->_event_stack->getEvent();
+            if ($lpevent != $pevent) {
                 $this->_last_pevent = $lpevent;
                 $this->configWordParser($pevent);
             }
             $this->_wp->setWhitespace(true);
 
-            $dbg_linenum = $this->_wp->linenum;
-            $dbg_pos = $this->_wp->getPos();
+            $dbg_linenum         = $this->_wp->linenum;
+            $dbg_pos             = $this->_wp->getPos();
             $this->_pv_last_word = $word;
-            $this->_pv_curline = $this->_wp->linenum;
-            $word = $this->_wp->getWord();
+            $this->_pv_curline   = $this->_wp->linenum;
+            $word                = $this->_wp->getWord();
 
-            if (PHPDOCUMENTOR_DEBUG == true)
-            {
+            if (PHPDOCUMENTOR_DEBUG == true) {
                 echo "LAST: ";
                 echo "|" . $this->_pv_last_word;
                 echo "|\n";
                 echo "PEVENT: " . $this->getParserEventName($pevent) . "\n";
-                echo "LASTPEVENT: " . $this->getParserEventName($this->_last_pevent) . "\n";
-//                echo "LINE: ".$this->_line."\n";
-//                echo "OUTPUT: ".$this->_output."\n";
+                echo "LASTPEVENT: " . 
+                    $this->getParserEventName($this->_last_pevent) . "\n";
+                //DEBUG echo "LINE: " . $this->_line . "\n";
+                //DEBUG echo "OUTPUT: " . $this->_output . "\n";
                 echo $dbg_linenum.'-'.$dbg_pos . ": ";
                 echo '|'.htmlspecialchars($word);
                 echo "|\n";
                 echo "-------------------\n\n\n";
                 flush();
             }
-            if (isset($this->eventHandlers[$pevent]))
-            {
+            if (isset($this->eventHandlers[$pevent])) {
                 $handle = $this->eventHandlers[$pevent];
                 $this->$handle($word, $pevent);
-            } else
-            {
-                debug('WARNING: possible error, no handler for event number '.$pevent);
-                if ($endrecur++ == 25)
-                {
+            } else {
+                debug('WARNING: possible error, no handler for event number '
+                    . $pevent);
+                if ($endrecur++ == 25) {
                     die("FATAL ERROR, recursion limit reached");
                 }
             }
         } while (!($word === false));
-        if (strlen($this->_line)) $this->newLineNum();
+        if (strlen($this->_line)) {
+            $this->newLineNum();
+        }
         return $this->_output;
     }
     
@@ -208,12 +233,17 @@ class phpDocumentor_TutorialHighlightParser extends Parser
      *
      * All Event Handlers use {@link checkEventPush()} and
      * {@link checkEventPop()} to set up the event stack and parser state.
+     *
+     * @param string|array $word   token value
+     * @param integer      $pevent parser event from {@link Parser.inc}
+     *
+     * @return void
      * @access private
-     * @param string|array token value
-     * @param integer parser event from {@link Parser.inc}
      */
     /**
      * Most tokens only need highlighting, and this method handles them
+     *
+     * @todo CS cleanup - PHPCS needs to recognize docblock template tags
      */
     function defaultHandler($word, $pevent)
     {
@@ -231,6 +261,8 @@ class phpDocumentor_TutorialHighlightParser extends Parser
 
     /**
      * Most tokens only need highlighting, and this method handles them
+     *
+     * @todo CS cleanup - PHPCS needs to recognize docblock template tags
      */
     function attrHandler($word, $pevent)
     {
@@ -239,7 +271,9 @@ class phpDocumentor_TutorialHighlightParser extends Parser
             return;
         }
         if ($e = $this->checkEventPush($word, $pevent)) {
-            if ($e == TUTORIAL_EVENT_SINGLEQUOTE || $e == TUTORIAL_EVENT_DOUBLEQUOTE) {
+            if ($e == TUTORIAL_EVENT_SINGLEQUOTE 
+                || $e == TUTORIAL_EVENT_DOUBLEQUOTE
+            ) {
                 $this->_addoutput($word);
             }
             return;
@@ -250,6 +284,7 @@ class phpDocumentor_TutorialHighlightParser extends Parser
         }
         $this->_addoutput($word);
     }
+    /**#@-*/
     
     /**#@+
      * Output Methods
@@ -260,24 +295,30 @@ class phpDocumentor_TutorialHighlightParser extends Parser
      *
      * If a string with variables like "$test this" is present, then special
      * handling is used to allow processing of the variable in context.
+     *
+     * @param string $word         the output to add
+     * @param bool   $preformatted whether or not its preformatted
+     *
+     * @return void
      * @see _flush_save()
      */
     function _addoutput($word, $preformatted = false)
     {
-        $type =
-        array(
-            TUTORIAL_EVENT_ATTRIBUTE => 'attribute',
+        $type = array(
+            TUTORIAL_EVENT_ATTRIBUTE   => 'attribute',
             TUTORIAL_EVENT_SINGLEQUOTE => 'attributevalue',
             TUTORIAL_EVENT_DOUBLEQUOTE => 'attributevalue',
-            TUTORIAL_EVENT_CLOSETAG => 'closetag',
-            TUTORIAL_EVENT_ENTITY => 'entity',
-            TUTORIAL_EVENT_ITAG => 'itag',
-            TUTORIAL_EVENT_OPENTAG => 'opentag',
-            TUTORIAL_EVENT_COMMENT => 'comment',
+            TUTORIAL_EVENT_CLOSETAG    => 'closetag',
+            TUTORIAL_EVENT_ENTITY      => 'entity',
+            TUTORIAL_EVENT_ITAG        => 'itag',
+            TUTORIAL_EVENT_OPENTAG     => 'opentag',
+            TUTORIAL_EVENT_COMMENT     => 'comment',
         );
+
         $a = $this->_event_stack->getEvent();
         if (in_array($a, array_keys($type))) {
-            $this->_line .= $this->_converter->highlightTutorialSource($type[$a], $word);
+            $this->_line .= 
+                $this->_converter->highlightTutorialSource($type[$a], $word);
         } else {
             $this->_line .= $this->_converter->flushHighlightCache();
             $this->_line .= $this->_converter->postProcess($word);
@@ -286,32 +327,43 @@ class phpDocumentor_TutorialHighlightParser extends Parser
     /**#@-*/
 
     /**
-     * tell the parser's WordParser {@link $wp} to set up tokens to parse words by.
-     * tokens are word separators.  In English, a space or punctuation are examples of tokens.
-     * In PHP, a token can be a ;, a parenthesis, or even the word "function"
-     * @param    $value integer an event number
+     * Tell the parser's WordParser {@link $wp} to set up tokens to parse words by.
+     *
+     * Tokens are word separators.  In English, a space or punctuation are
+     * examples of tokens.  In PHP, a token can be a ;, a parenthesis, or 
+     * even the word "function"
+     *
+     * @param integer $e an event number
+     *
+     * @return void
      * @see WordParser
      */
-    
     function configWordParser($e)
     {
         $this->_wp->setSeperator($this->tokens[($e + 100)]);
     }
-    /**
-     * this function checks whether parameter $word is a token for pushing a new event onto the Event Stack.
-     * @return mixed    returns false, or the event number
+
+    /**#@+
+     * @param string|array $word   token value
+     * @param integer      $pevent parser event from {@link Parser.inc}
+     *
+     * @return mixed returns false, or the event number
      */
-    
-    function checkEventPush($word,$pevent)
+    /**
+     * This function checks whether parameter $word is a token 
+     * for pushing a new event onto the Event Stack.
+     *
+     * @todo CS cleanup - PHPCS needs to recognize docblock template tags
+     */
+    function checkEventPush($word, $pevent)
     {
         $e = false;
-        if (isset($this->pushEvent[$pevent]))
-        {
-            if (isset($this->pushEvent[$pevent][strtolower($word)]))
-            $e = $this->pushEvent[$pevent][strtolower($word)];
+        if (isset($this->pushEvent[$pevent])) {
+            if (isset($this->pushEvent[$pevent][strtolower($word)])) {
+                $e = $this->pushEvent[$pevent][strtolower($word)];
+            }
         }
-        if ($e)
-        {
+        if ($e) {
             $this->_event_stack->pushEvent($e);
             return $e;
         } else {
@@ -320,39 +372,48 @@ class phpDocumentor_TutorialHighlightParser extends Parser
     }
 
     /**
-     * this function checks whether parameter $word is a token for popping the current event off of the Event Stack.
-     * @return mixed    returns false, or the event number popped off of the stack
+     * This function checks whether parameter $word is a token 
+     * for popping the current event off of the Event Stack.
+     *
+     * @todo CS cleanup - PHPCS needs to recognize docblock template tags
      */
-    
-    function checkEventPop($word,$pevent)
+    function checkEventPop($word, $pevent)
     {
-        if (!isset($this->popEvent[$pevent])) return false;
-        if (in_array(strtolower($word),$this->popEvent[$pevent]))
-        {
+        if (!isset($this->popEvent[$pevent])) {
+            return false;
+        }
+        if (in_array(strtolower($word), $this->popEvent[$pevent])) {
             return $this->_event_stack->popEvent();
         } else {
             return false;
         }
     }
+    /**#@-*/
 
     /**
      * Initialize all parser state variables
-     * @param boolean true if we are highlighting an inline {@}source} tag's
-     *                output
-     * @param false|string name of class we are going to start from
+     *
+     * @param bool|string $parsedata true if we are highlighting an inline {@}source}
+     *                               tag's output, or the name of class we are going 
+     *                               to start from
+     *
+     * @return void
      * @uses $_wp sets to a new {@link phpDocumentor_HighlightWordParser}
      */
     function setupStates($parsedata)
     {
         $this->_output = '';
-        $this->_line = '';
+        $this->_line   = '';
+
         unset($this->_wp);
         $this->_wp = new WordParser;
         $this->_wp->setup($parsedata);
+
         $this->_event_stack = new EventStack;
         $this->_event_stack->popEvent();
         $this->_event_stack->pushEvent(TUTORIAL_EVENT_NOEVENTS);
-        $this->_pv_linenum = null;
+
+        $this->_pv_linenum   = null;
         $this->_pv_next_word = false;
     }
 
@@ -361,144 +422,199 @@ class phpDocumentor_TutorialHighlightParser extends Parser
      */
     function phpDocumentor_TutorialHighlightParser()
     {
-        $this->allowableInlineTags = $GLOBALS['_phpDocumentor_inline_tutorial_tags_allowed'];
-        $this->inlineTagHandlers = array('*' => 'handleDefaultInlineTag');
-        $this->tokens[STATE_TUTORIAL_NOEVENTS]        = array("\n",'{@', '<!--', '</', '<', '&');
+        $this->allowableInlineTags                = 
+            $GLOBALS['_phpDocumentor_inline_tutorial_tags_allowed']
+        ;
+        $this->inlineTagHandlers                  = 
+            array('*' => 'handleDefaultInlineTag')
+        ;
+        $this->tokens[STATE_TUTORIAL_NOEVENTS]    = 
+            array("\n",'{@', '<!--', '</', '<', '&');
         $this->tokens[STATE_TUTORIAL_ITAG]        = array("\n","}");
-        $this->tokens[STATE_TUTORIAL_OPENTAG]        = array("\n","\t"," ", '>', '/>');
-        $this->tokens[STATE_TUTORIAL_CLOSETAG]        = array("\n",'>');
-        $this->tokens[STATE_TUTORIAL_COMMENT]        = array("\n",'-->');
-        $this->tokens[STATE_TUTORIAL_ENTITY]        = array("\n",';');
-        $this->tokens[STATE_TUTORIAL_ATTRIBUTE]        = array("\n",'"',"'",'>','/>');
-        $this->tokens[STATE_TUTORIAL_DOUBLEQUOTE]        = array("\n",'"','&','{@');
-        $this->tokens[STATE_TUTORIAL_SINGLEQUOTE]        = array("\n","'",'&','{@');
-/**************************************************************/
+        $this->tokens[STATE_TUTORIAL_OPENTAG]     = array("\n","\t"," ", '>', '/>');
+        $this->tokens[STATE_TUTORIAL_CLOSETAG]    = array("\n",'>');
+        $this->tokens[STATE_TUTORIAL_COMMENT]     = array("\n",'-->');
+        $this->tokens[STATE_TUTORIAL_ENTITY]      = array("\n",';');
+        $this->tokens[STATE_TUTORIAL_ATTRIBUTE]   = array("\n",'"',"'",'>','/>');
+        $this->tokens[STATE_TUTORIAL_DOUBLEQUOTE] = array("\n",'"','&','{@');
+        $this->tokens[STATE_TUTORIAL_SINGLEQUOTE] = array("\n","'",'&','{@');
+        /**************************************************************/
 
-        $this->pushEvent[TUTORIAL_EVENT_NOEVENTS] = 
-            array(
-                "{@" => TUTORIAL_EVENT_ITAG,
-                '<' => TUTORIAL_EVENT_OPENTAG,
-                '</' => TUTORIAL_EVENT_CLOSETAG,
-                '&' => TUTORIAL_EVENT_ENTITY,
-                '<!--' => TUTORIAL_EVENT_COMMENT,
-            );
-/**************************************************************/
+        $this->pushEvent[TUTORIAL_EVENT_NOEVENTS] = array(
+            "{@"   => TUTORIAL_EVENT_ITAG,
+            '<'    => TUTORIAL_EVENT_OPENTAG,
+            '</'   => TUTORIAL_EVENT_CLOSETAG,
+            '&'    => TUTORIAL_EVENT_ENTITY,
+            '<!--' => TUTORIAL_EVENT_COMMENT,
+        );
+        /**************************************************************/
 
-        $this->pushEvent[TUTORIAL_EVENT_OPENTAG] = 
-            array(
-                " " => TUTORIAL_EVENT_ATTRIBUTE,
-                "\n" => TUTORIAL_EVENT_ATTRIBUTE,
-            );
-/**************************************************************/
+        $this->pushEvent[TUTORIAL_EVENT_OPENTAG] = array(
+            " "  => TUTORIAL_EVENT_ATTRIBUTE,
+            "\n" => TUTORIAL_EVENT_ATTRIBUTE,
+        );
+        /**************************************************************/
 
-        $this->pushEvent[TUTORIAL_EVENT_ATTRIBUTE] = 
-            array(
-                "'" => TUTORIAL_EVENT_SINGLEQUOTE,
-                '"' => TUTORIAL_EVENT_DOUBLEQUOTE,
-            );
-/**************************************************************/
+        $this->pushEvent[TUTORIAL_EVENT_ATTRIBUTE] = array(
+            "'" => TUTORIAL_EVENT_SINGLEQUOTE,
+            '"' => TUTORIAL_EVENT_DOUBLEQUOTE,
+        );
+        /**************************************************************/
 
-        $this->pushEvent[TUTORIAL_EVENT_SINGLEQUOTE] = 
-            array(
-                '&' => TUTORIAL_EVENT_ENTITY,
-                '{@' => TUTORIAL_EVENT_ITAG,
-            );
-/**************************************************************/
+        $this->pushEvent[TUTORIAL_EVENT_SINGLEQUOTE] = array(
+            '&'  => TUTORIAL_EVENT_ENTITY,
+            '{@' => TUTORIAL_EVENT_ITAG,
+        );
+        /**************************************************************/
 
-        $this->pushEvent[TUTORIAL_EVENT_DOUBLEQUOTE] = 
-            array(
-                '&' => TUTORIAL_EVENT_ENTITY,
-                '{@' => TUTORIAL_EVENT_ITAG,
-            );
-/**************************************************************/
+        $this->pushEvent[TUTORIAL_EVENT_DOUBLEQUOTE] = array(
+            '&'  => TUTORIAL_EVENT_ENTITY,
+            '{@' => TUTORIAL_EVENT_ITAG,
+        );
+        /**************************************************************/
 
         $this->popEvent[TUTORIAL_EVENT_ENTITY] = array(';');
-/**************************************************************/
+        /**************************************************************/
 
         $this->popEvent[TUTORIAL_EVENT_SINGLEQUOTE] = array("'");
-/**************************************************************/
+        /**************************************************************/
 
         $this->popEvent[TUTORIAL_EVENT_DOUBLEQUOTE] = array('"');
-/**************************************************************/
+        /**************************************************************/
 
         $this->popEvent[TUTORIAL_EVENT_OPENTAG] = array('>', '/>');
-/**************************************************************/
+        /**************************************************************/
 
         $this->popEvent[TUTORIAL_EVENT_CLOSETAG] = array('>');
-/**************************************************************/
+        /**************************************************************/
 
         $this->popEvent[TUTORIAL_EVENT_COMMENT] = array('-->');
-/**************************************************************/
+        /**************************************************************/
 
         $this->popEvent[TUTORIAL_EVENT_ATTRIBUTE] = array('>','/>');
-/**************************************************************/
+        /**************************************************************/
 
         $this->popEvent[TUTORIAL_EVENT_ITAG] = array('}');
-/**************************************************************/
+        /**************************************************************/
     }
 
+    /**
+     * searches for a parser event name based on its number
+     *
+     * @param int $value the event number
+     *
+     * @return string|int the event name, or the original value
+     */
     function getParserEventName ($value)
     {    
         $lookup = array(
-            TUTORIAL_EVENT_NOEVENTS         => "TUTORIAL_EVENT_NOEVENTS",
-            TUTORIAL_EVENT_ITAG         => "TUTORIAL_EVENT_ITAG",
-            TUTORIAL_EVENT_OPENTAG         => "TUTORIAL_EVENT_OPENTAG",
-            TUTORIAL_EVENT_ATTRIBUTE         => "TUTORIAL_EVENT_ATTRIBUTE",
-            TUTORIAL_EVENT_CLOSETAG         => "TUTORIAL_EVENT_CLOSETAG",
-            TUTORIAL_EVENT_ENTITY         => "TUTORIAL_EVENT_ENTITY",
-            TUTORIAL_EVENT_COMMENT         => "TUTORIAL_EVENT_COMMENT",
-            TUTORIAL_EVENT_SINGLEQUOTE         => "TUTORIAL_EVENT_SINGLEQUOTE",
-            TUTORIAL_EVENT_DOUBLEQUOTE         => "TUTORIAL_EVENT_DOUBLEQUOTE",
+            TUTORIAL_EVENT_NOEVENTS    => "TUTORIAL_EVENT_NOEVENTS",
+            TUTORIAL_EVENT_ITAG        => "TUTORIAL_EVENT_ITAG",
+            TUTORIAL_EVENT_OPENTAG     => "TUTORIAL_EVENT_OPENTAG",
+            TUTORIAL_EVENT_ATTRIBUTE   => "TUTORIAL_EVENT_ATTRIBUTE",
+            TUTORIAL_EVENT_CLOSETAG    => "TUTORIAL_EVENT_CLOSETAG",
+            TUTORIAL_EVENT_ENTITY      => "TUTORIAL_EVENT_ENTITY",
+            TUTORIAL_EVENT_COMMENT     => "TUTORIAL_EVENT_COMMENT",
+            TUTORIAL_EVENT_SINGLEQUOTE => "TUTORIAL_EVENT_SINGLEQUOTE",
+            TUTORIAL_EVENT_DOUBLEQUOTE => "TUTORIAL_EVENT_DOUBLEQUOTE",
         );
-        if (isset($lookup[$value]))
-        return $lookup[$value];
-        else return $value;
+        if (isset($lookup[$value])) {
+            return $lookup[$value];
+        } else {
+            return $value;
+        }
     }
 }
 
 
-/** starting state */
-define("TUTORIAL_EVENT_NOEVENTS"    ,    1);
-/** currently in starting state */
-define("STATE_TUTORIAL_NOEVENTS"    ,    101);
+/**
+ * starting state
+ */
+define("TUTORIAL_EVENT_NOEVENTS", 1);
 
-/** used when an {@}inline tag} is found */
-define("TUTORIAL_EVENT_ITAG"    ,    2);
-/** currently parsing an {@}inline tag} */
-define("STATE_TUTORIAL_ITAG"    ,    102);
+/**
+ * currently in starting state
+ */
+define("STATE_TUTORIAL_NOEVENTS", 101);
 
-/** used when an open <tag> is found */
-define("TUTORIAL_EVENT_OPENTAG"    ,    3);
-/** currently parsing an open <tag> */
-define("STATE_TUTORIAL_OPENTAG"    ,    103);
+/**
+ * used when an {@}inline tag} is found
+ */
+define("TUTORIAL_EVENT_ITAG", 2);
 
-/** used when a <tag attr="attribute"> is found */
-define("TUTORIAL_EVENT_ATTRIBUTE"    ,    4);
-/** currently parsing an open <tag> */
-define("STATE_TUTORIAL_ATTRIBUTE"    ,    104);
+/**
+ * currently parsing an {@}inline tag}
+ */
+define("STATE_TUTORIAL_ITAG", 102);
 
-/** used when a close </tag> is found */
-define("TUTORIAL_EVENT_CLOSETAG"    ,    5);
-/** currently parsing a close </tag> */
-define("STATE_TUTORIAL_CLOSETAG"    ,    105);
+/**
+ * used when an open <tag> is found
+ */
+define("TUTORIAL_EVENT_OPENTAG", 3);
 
-/** used when an &entity; is found */
-define("TUTORIAL_EVENT_ENTITY"    ,    6);
-/** currently parsing an &entity; */
-define("STATE_TUTORIAL_ENTITY"    ,    106);
+/**
+ * currently parsing an open <tag>
+ */
+define("STATE_TUTORIAL_OPENTAG", 103);
 
-/** used when a <!-- comment --> is found */
-define("TUTORIAL_EVENT_COMMENT"    ,    7);
-/** currently parsing a <!-- comment --> */
-define("STATE_TUTORIAL_COMMENT"    ,    107);
+/**
+ * used when a <tag attr="attribute"> is found
+ */
+define("TUTORIAL_EVENT_ATTRIBUTE", 4);
 
-/** used when a <!-- comment --> is found */
-define("TUTORIAL_EVENT_SINGLEQUOTE"    ,    8);
-/** currently parsing a <!-- comment --> */
-define("STATE_TUTORIAL_SINGLEQUOTE"    ,    108);
+/**
+ * currently parsing an open <tag>
+ */
+define("STATE_TUTORIAL_ATTRIBUTE", 104);
 
-/** used when a <!-- comment --> is found */
-define("TUTORIAL_EVENT_DOUBLEQUOTE"    ,    9);
-/** currently parsing a <!-- comment --> */
-define("STATE_TUTORIAL_DOUBLEQUOTE"    ,    109);
+/**
+ * used when a close </tag> is found
+ */
+define("TUTORIAL_EVENT_CLOSETAG", 5);
+
+/**
+ * currently parsing a close </tag>
+ */
+define("STATE_TUTORIAL_CLOSETAG", 105);
+
+/**
+ * used when an &entity; is found
+ */
+define("TUTORIAL_EVENT_ENTITY", 6);
+
+/**
+ * currently parsing an &entity;
+ */
+define("STATE_TUTORIAL_ENTITY", 106);
+
+/**
+ * used when a <!-- comment --> is found
+ */
+define("TUTORIAL_EVENT_COMMENT", 7);
+
+/**
+ * currently parsing a <!-- comment -->
+ */
+define("STATE_TUTORIAL_COMMENT", 107);
+
+/**
+ * used when a <!-- comment --> is found
+ */
+define("TUTORIAL_EVENT_SINGLEQUOTE", 8);
+
+/**
+ * currently parsing a <!-- comment -->
+ */
+define("STATE_TUTORIAL_SINGLEQUOTE", 108);
+
+/**
+ * used when a <!-- comment --> is found
+ */
+define("TUTORIAL_EVENT_DOUBLEQUOTE", 9);
+
+/**
+ * currently parsing a <!-- comment -->
+ */
+define("STATE_TUTORIAL_DOUBLEQUOTE", 109);
+
 ?>
