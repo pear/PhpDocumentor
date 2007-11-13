@@ -69,8 +69,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>ashnazg@php.net</email>
   <active>yes</active>
  </developer>
- <date>2007-11-11</date>
- <time>11:45:23</time>
+ <date>2007-11-12</date>
+ <time>19:29:05</time>
  <version>
   <release>1.4.0</release>
   <api>1.4.0</api>
@@ -1396,7 +1396,9 @@ Includes these Sourceforge items:
     <file name="phpdoc.inc" role="php" />
     <file name="phpDocumentorTParser.inc" role="php" />
     <file name="phpDocumentorTWordParser.inc" role="php" />
-    <file name="ProceduralPages.inc" role="php" />
+    <file name="ProceduralPages.inc" role="php">
+     <tasks:replace from="@VER@" to="version" type="package-info" />
+    </file>
     <file name="Publisher.inc" role="php">
      <tasks:replace from="@VER@" to="version" type="package-info" />
     </file>
@@ -3071,7 +3073,7 @@ Includes these Sourceforge items:
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-11-11</date>
+   <date>2007-11-12</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>
 Includes these PEAR items:
