@@ -21,7 +21,7 @@
  * 
  * PHP versions 4 and 5
  *
- * Copyright (c) 2002-2006 Gregory Beaver
+ * Copyright (c) 2002-2007 Gregory Beaver
  * 
  * LICENSE:
  * 
@@ -39,81 +39,135 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package    phpDocumentor
+ * 
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage DescHTML
- * @author     Greg Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version    CVS: $Id$
+ * @author    Greg Beaver <cellog@php.net>
+ * @copyright 2002-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   CVS: $Id$
  * @filesource
- * @link       http://www.phpdoc.org
- * @link       http://pear.php.net/PhpDocumentor
- * @see        parserDocBlock, parserInclude, parserPage, parserClass
- * @see        parserDefine, parserFunction, parserMethod, parserVar
- * @since      1.2
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @see       parserDocBlock, parserInclude, parserPage, parserClass
+ * @see       parserDefine, parserFunction, parserMethod, parserVar
+ * @since     1.2
+ * @todo      CS cleanup - change package to PhpDocumentor
  */
 /**
  * Used for <<code>> in a description
- * @package phpDocumentor
+ *
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage DescHTML
+ * @author    Greg Beaver <cellog@php.net>
+ * @copyright 2002-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   Release: @VER@
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     1.2
+ * @todo      CS cleanup - change package to PhpDocumentor
+ * @todo      CS cleanup - rename class to ParserCode
  */
 class parserCode extends parserStringWithInlineTags
 {
     /**
-     * @param Converter
+     * performs the conversion of code tags
+     *
+     * @param Converter &$c the converter object
+     *
+     * @return string the converted code block
      * @uses Converter::ProgramExample()
+     * @todo CS cleanup - rename method to convert()
      */
     function Convert(&$c)
     {
-        if (!isset($this->value[0])) return '';
-        if (is_string($this->value[0]) && $this->value[0]{0} == "\n")
-        {
-            $this->value[0] = substr($this->value[0],1);
+        if (!isset($this->value[0])) {
+            return '';
+        }
+        if (is_string($this->value[0]) && $this->value[0]{0} == "\n") {
+            $this->value[0] = substr($this->value[0], 1);
         }
         $linktags = array();
-        foreach($this->value as $val) {
-            if (phpDocumentor_get_class($val) == 'parserlinkinlinetag' ||
-                  phpDocumentor_get_class($val) == 'parsertutorialinlinetag') {
-                $linktags[] = array($c->postProcess($val->Convert($c, false, false)), $val);
+        foreach ($this->value as $val) {
+            if (phpDocumentor_get_class($val) == 'parserlinkinlinetag'
+                || phpDocumentor_get_class($val) == 'parsertutorialinlinetag'
+            ) {
+                $linktags[] = array(
+                    $c->postProcess($val->Convert($c, false, false)), $val);
             }
         }
-        $a = $c->ProgramExample(rtrim(ltrim(parent::Convert($c, false, false), "\n\r")));
+        $a = $c->ProgramExample(rtrim(ltrim(parent::Convert($c,
+            false, false), "\n\r")));
         foreach ($linktags as $tag) {
             $a = str_replace($tag[0], $tag[1]->Convert($c, false, false), $a);
         }
         return $a;
-//        else return $c->PreserveWhiteSpace($this->getString(false));
     }
 }
 
 /**
  * Used for <<pre>> in a description
- * @package phpDocumentor
+ *
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage DescHTML
+ * @author    Greg Beaver <cellog@php.net>
+ * @copyright 2002-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   Release: @VER@
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     1.2
+ * @todo      CS cleanup - change package to PhpDocumentor
+ * @todo      CS cleanup - rename class to ParserPre
  */
 class parserPre extends parserStringWithInlineTags
 {
     /**
-     * @param Converter
+     * performs the conversion of code tags
+     *
+     * @param Converter &$c the converter object
+     *
+     * @return string the converted pre block
      * @uses Converter::PreserveWhiteSpace()
+     * @todo CS cleanup - rename method to convert()
      */
     function Convert(&$c)
     {
-        return $c->PreserveWhiteSpace(rtrim(ltrim(parent::Convert($c, false, false), "\n\r")));
+        return $c->PreserveWhiteSpace(rtrim(ltrim(parent::Convert($c,
+            false, false), "\n\r")));
     }
 }
 
 /**
  * Used for <<b>> in a description
- * @package phpDocumentor
+ *
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage DescHTML
+ * @author    Greg Beaver <cellog@php.net>
+ * @copyright 2002-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   Release: @VER@
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     1.2
+ * @todo      CS cleanup - change package to PhpDocumentor
+ * @todo      CS cleanup - rename class to ParserB
  */
 class parserB extends parserStringWithInlineTags
 {
     /**
-     * @param Converter
+     * performs the conversion of bold tags
+     *
+     * @param Converter &$c the converter object
+     *
+     * @return string the converted pre block
      * @uses Converter::Bolden()
+     * @todo CS cleanup - rename method to convert()
      */
     function Convert(&$c)
     {
@@ -123,14 +177,30 @@ class parserB extends parserStringWithInlineTags
 
 /**
  * Used for <<i>> in a description
- * @package phpDocumentor
+ *
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage DescHTML
+ * @author    Greg Beaver <cellog@php.net>
+ * @copyright 2002-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   Release: @VER@
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     1.2
+ * @todo      CS cleanup - change package to PhpDocumentor
+ * @todo      CS cleanup - rename class to ParserI
  */
 class parserI extends parserStringWithInlineTags
 {
     /**
-     * @param Converter
+     * performs the conversion of italic tags
+     *
+     * @param Converter &$c the converter object
+     *
+     * @return string the converted pre block
      * @uses Converter::Italicize()
+     * @todo CS cleanup - rename method to convert()
      */
     function Convert(&$c)
     {
@@ -140,14 +210,30 @@ class parserI extends parserStringWithInlineTags
 
 /**
  * Used for <<var>> in a description
- * @package phpDocumentor
+ *
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage DescHTML
+ * @author    Greg Beaver <cellog@php.net>
+ * @copyright 2002-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   Release: @VER@
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     1.2
+ * @todo      CS cleanup - change package to PhpDocumentor
+ * @todo      CS cleanup - rename class to ParserDescVar
  */
 class parserDescVar extends parserStringWithInlineTags
 {
     /**
-     * @param Converter
+     * performs the conversion of variable tags
+     *
+     * @param Converter &$c the converter object
+     *
+     * @return string the converted pre block
      * @uses Converter::Varize()
+     * @todo CS cleanup - rename method to convert()
      */
     function Convert(&$c)
     {
@@ -157,14 +243,30 @@ class parserDescVar extends parserStringWithInlineTags
 
 /**
  * Used for <<samp>> in a description
- * @package phpDocumentor
+ *
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage DescHTML
+ * @author    Greg Beaver <cellog@php.net>
+ * @copyright 2002-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   Release: @VER@
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     1.2
+ * @todo      CS cleanup - change package to PhpDocumentor
+ * @todo      CS cleanup - rename class to ParserSamp
  */
 class parserSamp extends parserStringWithInlineTags
 {
     /**
-     * @param Converter
+     * performs the conversion of sample tags
+     *
+     * @param Converter &$c the converter object
+     *
+     * @return string the converted pre block
      * @uses Converter::Sampize()
+     * @todo CS cleanup - rename method to convert()
      */
     function Convert(&$c)
     {
@@ -174,14 +276,30 @@ class parserSamp extends parserStringWithInlineTags
 
 /**
  * Used for <<kbd>> in a description
- * @package phpDocumentor
+ *
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage DescHTML
+ * @author    Greg Beaver <cellog@php.net>
+ * @copyright 2002-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   Release: @VER@
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     1.2
+ * @todo      CS cleanup - change package to PhpDocumentor
+ * @todo      CS cleanup - rename class to ParserKbd
  */
 class parserKbd extends parserStringWithInlineTags
 {
     /**
-     * @param Converter
+     * performs the conversion of keyboard tags
+     *
+     * @param Converter &$c the converter object
+     *
+     * @return string the converted pre block
      * @uses Converter::Kbdize()
+     * @todo CS cleanup - rename method to convert()
      */
     function Convert(&$c)
     {
@@ -191,14 +309,30 @@ class parserKbd extends parserStringWithInlineTags
 
 /**
  * Used for <<br>> in a description
- * @package phpDocumentor
+ *
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage DescHTML
+ * @author    Greg Beaver <cellog@php.net>
+ * @copyright 2002-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   Release: @VER@
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     1.2
+ * @todo      CS cleanup - change package to PhpDocumentor
+ * @todo      CS cleanup - rename class to ParserBr
  */
 class parserBr extends parserStringWithInlineTags
 {
     /**
-     * @param Converter
+     * performs the conversion of linebreak tags
+     *
+     * @param Converter &$c the converter object
+     *
+     * @return string the converted pre block
      * @uses Converter::Br()
+     * @todo CS cleanup - rename method to convert()
      */
     function Convert(&$c)
     {
@@ -208,48 +342,81 @@ class parserBr extends parserStringWithInlineTags
 
 /**
  * Used for lists <<ol>> and <<ul>>
- * @package phpDocumentor
+ *
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  * @subpackage DescHTML
+ * @author    Greg Beaver <cellog@php.net>
+ * @copyright 2002-2007 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version   Release: @VER@
+ * @link      http://www.phpdoc.org
+ * @link      http://pear.php.net/PhpDocumentor
+ * @since     1.2
+ * @todo      CS cleanup - change package to PhpDocumentor
+ * @todo      CS cleanup - rename class to ParserList
  */
 class parserList extends parserStringWithInlineTags
 {
-    /** @var boolean */
+    /**
+     * @var boolean
+     */
     var $numbered;
-    /** @var integer */
+    /**
+     * @var integer
+     */
     var $items = 0;
     /**
-     * @param integer
+     * Constructor - create a new list
+     *
+     * @param integer $numbered a reference number for the new list
      */
     function parserList($numbered)
     {
         $this->numbered = $numbered;
     }
     
-    /** @param parserStringWithInlineTags */
+    /**
+     * add an item to a list
+     *
+     * @param parserStringWithInlineTags $item the item to add
+     *
+     * @return void
+     */
     function addItem($item)
     {
         $this->value[$this->items++] = $item;
     }
     
-    /** @param parserList */
+    /**
+     * add a list
+     *
+     * @param parserList $list the list to add
+     *
+     * @return void
+     */
     function addList($list)
     {
         $this->value[$this->items++] = $list;
     }
     
     /**
+     * performs the conversion of list tags
+     *
+     * @param Converter &$c the converter object
+     *
+     * @return string the converted pre block
      * @uses Converter::ListItem() enclose each item of the list
      * @uses Converter::EncloseList() enclose the list
-     * @param Converter
+     * @todo CS cleanup - rename method to convert()
      */
     function Convert(&$c)
     {
         $list = '';
-        foreach($this->value as $item)
-        {
+        foreach ($this->value as $item) {
             $list .= $c->ListItem(trim($item->Convert($c)));
         }
-        return $c->EncloseList($list,$this->numbered);
+        return $c->EncloseList($list, $this->numbered);
     }
 }
 
