@@ -36,35 +36,35 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Parsers
- * @author    Gregory Beaver <cellog@php.net>
- * @copyright 2003-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   CVS: $Id$
- * @tutorial  tags.example.pkg, tags.filesource.pkg
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.3.0
- * @todo      CS cleanup - change package to PhpDocumentor
- * @todo      CS cleanup - PHPCS needs to ignore CVS Id length
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2003-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    CVS: $Id$
+ * @tutorial   tags.example.pkg, tags.filesource.pkg
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.3.0
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - PHPCS needs to ignore CVS Id length
  */
 
 /**
  * Highlights source code using {@link parse()}
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Parsers
- * @author    Gregory Beaver <cellog@php.net>
- * @copyright 2003-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @todo      CS cleanup - change package to PhpDocumentor
- * @todo      CS cleanup - change classname to PhpDocumentor_*
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2003-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class phpDocumentor_TutorialHighlightParser extends Parser
 {
