@@ -25,19 +25,19 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Parsers
- * @author    Gregory Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   CVS: $Id$
- * @tutorial  tutorials.pkg
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
- * @todo      CS cleanup - PHPCS needs to ignore CVS Id length
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    CVS: $Id$
+ * @tutorial   tutorials.pkg
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - PHPCS needs to ignore CVS Id length
  */
 /**
  * when <programlisting> is found
@@ -83,17 +83,17 @@ define('PHPDOCUMENTOR_PDP_STATE_ENTITY', 704);
 /**
  * Used to parse XML DocBook-based tutorials
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Parsers
- * @author    Gregory Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
  */
 class XMLPackagePageParser extends Parser
 {
