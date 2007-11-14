@@ -25,33 +25,33 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage WordParsers
- * @author    Joshua Eichorn <jeichorn@phpdoc.org>
- * @copyright 2000-2007 Joshua Eichorn
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   CVS: $Id$
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     0.1
- * @todo      CS cleanup - change package to PhpDocumentor
+ * @author     Joshua Eichorn <jeichorn@phpdoc.org>
+ * @copyright  2000-2007 Joshua Eichorn
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    CVS: $Id$
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      0.1
+ * @todo       CS cleanup - change package to PhpDocumentor
  */
 
 /**
  * Retrieves tokens from source code for use by the Parser
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage WordParsers
- * @author    Joshua Eichorn <jeichorn@phpdoc.org>
- * @copyright 2000-2007 Joshua Eichorn
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @see       Parser
- * @todo      CS cleanup - change package to PhpDocumentor
+ * @author     Joshua Eichorn <jeichorn@phpdoc.org>
+ * @copyright  2000-2007 Joshua Eichorn
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @see        Parser
+ * @todo       CS cleanup - change package to PhpDocumentor
  */
 class WordParser
 {
