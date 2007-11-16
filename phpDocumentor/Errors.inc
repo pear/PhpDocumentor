@@ -25,20 +25,20 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Errors
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2001-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   CVS: $Id$
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2001-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    CVS: $Id$
  * @filesource
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @see       parserDocBlock, parserInclude, parserPage, parserClass
- * @see       parserDefine, parserFunction, parserMethod, parserVar
- * @since     0.4
- * @todo      CS cleanup - change package to PhpDocumentor
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @see        parserDocBlock, parserInclude, parserPage, parserClass
+ * @see        parserDefine, parserFunction, parserMethod, parserVar
+ * @since      0.4
+ * @todo       CS cleanup - change package to PhpDocumentor
  */
 /**
  * warning triggered when inheritance could be from more than one class
@@ -708,16 +708,16 @@ $GLOBALS['phpDocumentor_error_descrip'] =
 /**
  * encapsulates warning information
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Errors
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2001-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @todo      CS cleanup - change package to PhpDocumentor
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2001-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
  */
 class RecordWarning
 {
@@ -805,16 +805,16 @@ class RecordWarning
 /**
  * encapsulates error information
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Errors
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2001-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @todo      CS cleanup - change package to PhpDocumentor
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2001-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
  */
 class RecordError extends RecordWarning
 {
@@ -855,17 +855,17 @@ class RecordError extends RecordWarning
 /**
  * contains all the errors/warnings
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Errors
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2001-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @todo      CS cleanup - change package to PhpDocumentor
- * @see       $errors, $warnings
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2001-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @see        $errors, $warnings
  */
 class ErrorTracker
 {
