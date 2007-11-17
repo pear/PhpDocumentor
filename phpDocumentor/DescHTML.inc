@@ -40,36 +40,36 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  * 
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DescHTML
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   CVS: $Id$
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    CVS: $Id$
  * @filesource
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @see       parserDocBlock, parserInclude, parserPage, parserClass
- * @see       parserDefine, parserFunction, parserMethod, parserVar
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @see        parserDocBlock, parserInclude, parserPage, parserClass
+ * @see        parserDefine, parserFunction, parserMethod, parserVar
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
  */
 /**
  * Used for <<code>> in a description
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DescHTML
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
- * @todo      CS cleanup - rename class to ParserCode
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - rename class to ParserCode
  */
 class parserCode extends parserStringWithInlineTags
 {
@@ -111,18 +111,18 @@ class parserCode extends parserStringWithInlineTags
 /**
  * Used for <<pre>> in a description
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DescHTML
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
- * @todo      CS cleanup - rename class to ParserPre
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - rename class to ParserPre
  */
 class parserPre extends parserStringWithInlineTags
 {
@@ -145,18 +145,18 @@ class parserPre extends parserStringWithInlineTags
 /**
  * Used for <<b>> in a description
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DescHTML
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
- * @todo      CS cleanup - rename class to ParserB
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - rename class to ParserB
  */
 class parserB extends parserStringWithInlineTags
 {
@@ -178,18 +178,18 @@ class parserB extends parserStringWithInlineTags
 /**
  * Used for <<i>> in a description
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DescHTML
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
- * @todo      CS cleanup - rename class to ParserI
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - rename class to ParserI
  */
 class parserI extends parserStringWithInlineTags
 {
@@ -211,18 +211,18 @@ class parserI extends parserStringWithInlineTags
 /**
  * Used for <<var>> in a description
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DescHTML
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
- * @todo      CS cleanup - rename class to ParserDescVar
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - rename class to ParserDescVar
  */
 class parserDescVar extends parserStringWithInlineTags
 {
@@ -244,18 +244,18 @@ class parserDescVar extends parserStringWithInlineTags
 /**
  * Used for <<samp>> in a description
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DescHTML
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
- * @todo      CS cleanup - rename class to ParserSamp
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - rename class to ParserSamp
  */
 class parserSamp extends parserStringWithInlineTags
 {
@@ -277,18 +277,18 @@ class parserSamp extends parserStringWithInlineTags
 /**
  * Used for <<kbd>> in a description
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DescHTML
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
- * @todo      CS cleanup - rename class to ParserKbd
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - rename class to ParserKbd
  */
 class parserKbd extends parserStringWithInlineTags
 {
@@ -310,18 +310,18 @@ class parserKbd extends parserStringWithInlineTags
 /**
  * Used for <<br>> in a description
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DescHTML
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
- * @todo      CS cleanup - rename class to ParserBr
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - rename class to ParserBr
  */
 class parserBr extends parserStringWithInlineTags
 {
@@ -343,18 +343,18 @@ class parserBr extends parserStringWithInlineTags
 /**
  * Used for lists <<ol>> and <<ul>>
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DescHTML
- * @author    Greg Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   Release: @VER@
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
- * @todo      CS cleanup - rename class to ParserList
+ * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - rename class to ParserList
  */
 class parserList extends parserStringWithInlineTags
 {
