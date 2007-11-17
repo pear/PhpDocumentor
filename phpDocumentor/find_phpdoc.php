@@ -25,18 +25,19 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @category  ToolsAndUtilities
- * @package   phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage setup
- * @author    Gregory Beaver <cellog@php.net>
- * @copyright 2002-2007 Gregory Beaver
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   CVS: $Id$
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    CVS: $Id$
  * @filesource
- * @link      http://www.phpdoc.org
- * @link      http://pear.php.net/PhpDocumentor
- * @since     1.2
- * @todo      CS cleanup - change package to PhpDocumentor
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change subpackage to Setup
  */
 /**
  * Dummy value
