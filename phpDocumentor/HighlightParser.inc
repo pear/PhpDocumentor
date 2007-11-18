@@ -16,7 +16,7 @@
  * 
  * PHP versions 4 and 5
  *
- * Copyright (c) 2002-2006 Gregory Beaver
+ * Copyright (c) 2002-2007 Gregory Beaver
  * 
  * LICENSE:
  * 
@@ -35,23 +35,36 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @category   ToolsAndUtilities
  * @package    phpDocumentor
  * @subpackage Parsers
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2007 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    CVS: $Id$
  * @filesource
  * @link       http://www.phpdoc.org
  * @link       http://pear.php.net/PhpDocumentor
- * @tutorial tags.example.pkg, tags.filesource.pkg, tags.inlinesource.pkg
+ * @tutorial   tags.example.pkg, tags.filesource.pkg, tags.inlinesource.pkg
  * @since      1.2.0beta3
+ * @todo       CS cleanup - change package to PhpDocumentor
  */
+
 /**
  * Retrieve tokens from an array of tokens organized by line numbers
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Parsers
- * @since 1.2.0beta3
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2.0beta3
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change class name to PhpDocumentor_*
  */
 class phpDocumentor_HighlightWordParser extends phpDocumentorTWordParser
 {
@@ -62,104 +75,122 @@ class phpDocumentor_HighlightWordParser extends phpDocumentorTWordParser
      */
     var $_listLineNums = array();
     /**
-     * @param array
-     * @param phpDocumentor_HighlightParser
+     * Initialize the parser object
+     *
+     * @param array                         &$input  the input
+     * @param phpDocumentor_HighlightParser &$parser the parser
+     *
+     * @return void
      */
     function setup(&$input, &$parser)
     {
-        $this->_parser = &$parser;
-        $this->data = &$input;
-        $this->_all = $input;
+        $this->_parser     = &$parser;
+        $this->data        = &$input;
+        $this->_all        = $input;
         $this->_sourceline = 0;
-        $this->pos = 0;
-        $this->linenum = 0;
+        $this->pos         = 0;
+        $this->linenum     = 0;
     }
     
     /**
      * debugging function
+     *
+     * @return void
      * @access private
      */
     function printState()
     {
         $linenum = $this->linenum;
-        $pos = $this->pos;
-        if (!isset($this->_all[$this->linenum][$this->pos]))
-        {
+        $pos     = $this->pos;
+        if (!isset($this->_all[$this->linenum][$this->pos])) {
             $linenum++;
             $pos = 0;
         }
         $details = '';
-        $token = $this->_all[$linenum][$pos];
-        if (is_array($token))
-        {
+        $token   = $this->_all[$linenum][$pos];
+        if (is_array($token)) {
             $details = token_name($token[0]);
-            $token = htmlspecialchars($token[1]);
-        } else $token = htmlspecialchars($token);
-        debug('Next Token '.$this->linenum.'-'.$this->pos.':'.$details);
+            $token   = htmlspecialchars($token[1]);
+        } else {
+            $token = htmlspecialchars($token);
+        }
+        debug('Next Token ' . $this->linenum . '-' . $this->pos . ':' . $details);
         var_dump($token);
     }
     
     /**
      * Retrieve the position of the next token that will be parsed
      * in the internal token array
+     *
      * @return array format: array(line number, position)
      */
     function nextToken()
     {
         $linenum = $this->linenum;
-        $pos = $this->pos;
-        if (!isset($this->_all[$this->linenum][$this->pos]))
-        {
+        $pos     = $this->pos;
+        if (!isset($this->_all[$this->linenum][$this->pos])) {
             $linenum++;
             $pos = 0;
         }
-        if (!isset($this->_all[$linenum][$pos])) return false;
+        if (!isset($this->_all[$linenum][$pos])) {
+            return false;
+        }
         return array($linenum, $pos);
     }
     
     /**
      * Retrieve the next token
+     *
      * @return array|string either array(PHP token constant, token) or string
      *                      non-specific separator
      */
     function getWord()
     {
-        if (!isset($this->_all[$this->linenum][$this->pos]))
-        {
+        if (!isset($this->_all[$this->linenum][$this->pos])) {
             $this->linenum++;
             $this->pos = 0;
-            if (!isset($this->_all[$this->linenum])) return false;
+            if (!isset($this->_all[$this->linenum])) {
+                return false;
+            }
             $this->_parser->newLineNum();
             return $this->getWord();
         }
         $word = $this->_all[$this->linenum][$this->pos++];
-        return str_replace("\t",'    ',$word);
+        return str_replace("\t", '    ', $word);
     }
 
     /**
      * back the word parser to the previous token as defined by $last_token
-     * @param array|string token, or output from {@link nextToken()}
-     * @param boolean if true, backupPos interprets $last_token to be the
-     *                position in the internal token array of the last token
+     *
+     * @param array|string $last_token token, or output from {@link nextToken()}
+     * @param bool         $is_pos     if true, backupPos interprets $last_token 
+     *                                 to be the position in the internal token
+     *                                 array of the last token
+     *
+     * @return void
      */
     function backupPos($last_token, $is_pos = false)
     {
         if (!$last_token) {
             return;
         }
-        if ($is_pos)
-        {
+        if ($is_pos) {
             $this->linenum = $last_token[0];
-            $this->pos = $last_token[1];
+            $this->pos     = $last_token[1];
             return;
         }
-        if ($last_token === false) return;
-//fancy_debug('before',$this->linenum,$this->pos,token_name($this->_all[$this->linenum][$this->pos][0]),htmlentities($this->_all[$this->linenum][$this->pos][1]),$this->_all[$this->linenum]);
-        do
-        {
+        if ($last_token === false) {
+            return;
+        }
+
+        //fancy_debug('before', $this->linenum, $this->pos, 
+        //    token_name($this->_all[$this->linenum][$this->pos][0]),
+        //    htmlentities($this->_all[$this->linenum][$this->pos][1]),
+        //    $this->_all[$this->linenum]);
+
+        do {
             $this->pos--;
-            if ($this->pos < 0)
-            {
+            if ($this->pos < 0) {
                 $this->linenum--;
                 if ($this->linenum < 0) {
                     var_dump($last_token);
@@ -167,77 +198,99 @@ class phpDocumentor_HighlightWordParser extends phpDocumentorTWordParser
                 }
                 $this->pos = count($this->_all[$this->linenum]) - 1;
             }
-        } while (!$this->tokenEquals($last_token,str_replace("\t", '    ', $this->_all[$this->linenum][$this->pos])));
-        //fancy_debug('after',$this->linenum,$this->pos,token_name($this->_all[$this->linenum][$this->pos][0]),htmlentities($this->_all[$this->linenum][$this->pos][1]));
+        } while (!$this->tokenEquals($last_token, str_replace("\t", '    ', 
+            $this->_all[$this->linenum][$this->pos])));
+
+        //fancy_debug('after', $this->linenum, $this->pos,
+        //    token_name($this->_all[$this->linenum][$this->pos][0]),
+        //    htmlentities($this->_all[$this->linenum][$this->pos][1]));
     }
 }
 
 /**
  * Highlights source code using {@link parse()}
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Parsers
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2007 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2.0beta3
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change class name to PhpDocumentor_*
  */
 class phpDocumentor_HighlightParser extends phpDocumentorTParser
 {
-    /**#@+ @access private */
+    /**#@+
+     * @access private
+     */
+
     /**
      * Highlighted source is built up in this string
      * @var string
      */
     var $_output;
+
     /**
      * contents of the current source code line as it is parsed
      * @var string
      */
     var $_line;
+
     /**
      * Used to retrieve highlighted tokens
      * @var Converter a descendant of Converter
      */
     var $_converter;
+
     /**
      * Path to file being highlighted, if this is from a @filesource tag
      * @var false|string full path
      */
     var $_filesourcepath;
+
     /**
      * @var array
      */
     var $eventHandlers = array(
-                                PARSER_EVENT_ARRAY => 'defaultHandler',
-                                PARSER_EVENT_CLASS => 'handleClass',
-                                PARSER_EVENT_COMMENT => 'handleComment',
-                                PARSER_EVENT_DOCBLOCK_TEMPLATE => 'handleDocBlockTemplate',
-                                PARSER_EVENT_END_DOCBLOCK_TEMPLATE => 'handleEndDocBlockTemplate',
-                                PARSER_EVENT_LOGICBLOCK => 'handleLogicBlock',
-                                PARSER_EVENT_METHOD_LOGICBLOCK => 'handleMethodLogicBlock',
-                                PARSER_EVENT_NOEVENTS => 'defaultHandler',
-                                PARSER_EVENT_OUTPHP => 'defaultHandler',
-                                PARSER_EVENT_CLASS_MEMBER => 'handleClassMember',
-                                PARSER_EVENT_DEFINE => 'defaultHandler',
-                                PARSER_EVENT_DEFINE_PARAMS => 'defaultHandler',
-                                PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS => 'defaultHandler',
-                                PARSER_EVENT_INCLUDE_PARAMS_PARENTHESIS => 'defaultHandler',
-                                PARSER_EVENT_DOCBLOCK => 'handleDocBlock',
-                                PARSER_EVENT_TAGS => 'handleTags',
-                                PARSER_EVENT_DESC => 'handleDesc',
-                                PARSER_EVENT_DOCKEYWORD => 'handleTag',
-                                PARSER_EVENT_DOCKEYWORD_EMAIL => 'handleDockeywordEmail',
-                                PARSER_EVENT_EOFQUOTE => 'handleQuote',
-                                PARSER_EVENT_FUNCTION => 'handleFunction',
-                                PARSER_EVENT_METHOD => 'handleMethod',
-                                PARSER_EVENT_FUNCTION_PARAMS => 'handleFunctionParams',
-                                PARSER_EVENT_FUNC_GLOBAL => 'handleFuncGlobal',
-                                PARSER_EVENT_INLINE_DOCKEYWORD => 'handleInlineDockeyword',
-                                PARSER_EVENT_INCLUDE => 'defaultHandler',
-                                PARSER_EVENT_INCLUDE_PARAMS => 'defaultHandler',
-                                PARSER_EVENT_QUOTE => 'handleQuote',
-                                PARSER_EVENT_QUOTE_VAR => 'handleQuoteVar',
-                                PARSER_EVENT_PHPCODE => 'handlePhpCode',
-                                PARSER_EVENT_SINGLEQUOTE => 'handleSingleQuote',
-                                PARSER_EVENT_STATIC_VAR => 'defaultHandler',
-                                PARSER_EVENT_STATIC_VAR_VALUE => 'defaultHandler',
-                                PARSER_EVENT_VAR => 'handleVar',
+        PARSER_EVENT_ARRAY                      => 'defaultHandler',
+        PARSER_EVENT_CLASS                      => 'handleClass',
+        PARSER_EVENT_COMMENT                    => 'handleComment',
+        PARSER_EVENT_DOCBLOCK_TEMPLATE          => 'handleDocBlockTemplate',
+        PARSER_EVENT_END_DOCBLOCK_TEMPLATE      => 'handleEndDocBlockTemplate',
+        PARSER_EVENT_LOGICBLOCK                 => 'handleLogicBlock',
+        PARSER_EVENT_METHOD_LOGICBLOCK          => 'handleMethodLogicBlock',
+        PARSER_EVENT_NOEVENTS                   => 'defaultHandler',
+        PARSER_EVENT_OUTPHP                     => 'defaultHandler',
+        PARSER_EVENT_CLASS_MEMBER               => 'handleClassMember',
+        PARSER_EVENT_DEFINE                     => 'defaultHandler',
+        PARSER_EVENT_DEFINE_PARAMS              => 'defaultHandler',
+        PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS  => 'defaultHandler',
+        PARSER_EVENT_INCLUDE_PARAMS_PARENTHESIS => 'defaultHandler',
+        PARSER_EVENT_DOCBLOCK                   => 'handleDocBlock',
+        PARSER_EVENT_TAGS                       => 'handleTags',
+        PARSER_EVENT_DESC                       => 'handleDesc',
+        PARSER_EVENT_DOCKEYWORD                 => 'handleTag',
+        PARSER_EVENT_DOCKEYWORD_EMAIL           => 'handleDockeywordEmail',
+        PARSER_EVENT_EOFQUOTE                   => 'handleQuote',
+        PARSER_EVENT_FUNCTION                   => 'handleFunction',
+        PARSER_EVENT_METHOD                     => 'handleMethod',
+        PARSER_EVENT_FUNCTION_PARAMS            => 'handleFunctionParams',
+        PARSER_EVENT_FUNC_GLOBAL                => 'handleFuncGlobal',
+        PARSER_EVENT_INLINE_DOCKEYWORD          => 'handleInlineDockeyword',
+        PARSER_EVENT_INCLUDE                    => 'defaultHandler',
+        PARSER_EVENT_INCLUDE_PARAMS             => 'defaultHandler',
+        PARSER_EVENT_QUOTE                      => 'handleQuote',
+        PARSER_EVENT_QUOTE_VAR                  => 'handleQuoteVar',
+        PARSER_EVENT_PHPCODE                    => 'handlePhpCode',
+        PARSER_EVENT_SINGLEQUOTE                => 'handleSingleQuote',
+        PARSER_EVENT_STATIC_VAR                 => 'defaultHandler',
+        PARSER_EVENT_STATIC_VAR_VALUE           => 'defaultHandler',
+        PARSER_EVENT_VAR                        => 'handleVar',
     );
 
     /**
@@ -245,59 +298,69 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      * @tutorial tags.pkg
      */
     var $tagHandlers = array(
-                                '*' => 'defaultTagHandler',
-                                'abstract' => 'coreTagHandler',
-                                'access' => 'coreTagHandler',
-                                'author' => 'coreTagHandler',
-                                'category' => 'coreTagHandler',
-                                'copyright' => 'coreTagHandler',
-                                'deprecated' => 'coreTagHandler',
-                                'example' => 'coreTagHandler',
-                                'filesource' => 'coreTagHandler',
-                                'final' => 'coreTagHandler',
-                                'global' => 'globalTagHandler',
-                                'ignore' => 'coreTagHandler',
-                                'license' => 'coreTagHandler',
-                                'link' => 'coreTagHandler',
-                                'name' => 'coreTagHandler',
-                                'package' => 'coreTagHandler',
-                                'param' => 'paramTagHandler',
-                                'parameter' => 'paramTagHandler',
-                                'see' => 'coreTagHandler',
-                                'since' => 'coreTagHandler',
-                                'subpackage' => 'coreTagHandler',
-                                'internal' => 'coreTagHandler',
-                                'return' => 'returnTagHandler',
-                                'static' => 'coreTagHandler',
-                                'staticvar' => 'staticvarTagHandler',
-								'throws' => 'coreTagHandler',
-                                'todo' => 'coreTagHandler',
-                                'tutorial' => 'coreTagHandler',
-                                'uses' => 'coreTagHandler',
-                                'var' => 'varTagHandler',
-                                'version' => 'coreTagHandler',
-                                'property' => 'propertyTagHandler',
-                                'property-read' => 'propertyTagHandler',
-                                'property-write' => 'propertyTagHandler',
-                                'method' => 'propertyTagHandler'
-                            );
+        '*'              => 'defaultTagHandler',
+        'abstract'       => 'coreTagHandler',
+        'access'         => 'coreTagHandler',
+        'author'         => 'coreTagHandler',
+        'category'       => 'coreTagHandler',
+        'copyright'      => 'coreTagHandler',
+        'deprecated'     => 'coreTagHandler',
+        'example'        => 'coreTagHandler',
+        'filesource'     => 'coreTagHandler',
+        'final'          => 'coreTagHandler',
+        'global'         => 'globalTagHandler',
+        'ignore'         => 'coreTagHandler',
+        'license'        => 'coreTagHandler',
+        'link'           => 'coreTagHandler',
+        'name'           => 'coreTagHandler',
+        'package'        => 'coreTagHandler',
+        'param'          => 'paramTagHandler',
+        'parameter'      => 'paramTagHandler',
+        'see'            => 'coreTagHandler',
+        'since'          => 'coreTagHandler',
+        'subpackage'     => 'coreTagHandler',
+        'internal'       => 'coreTagHandler',
+        'return'         => 'returnTagHandler',
+        'static'         => 'coreTagHandler',
+        'staticvar'      => 'staticvarTagHandler',
+        'throws'         => 'coreTagHandler',
+        'todo'           => 'coreTagHandler',
+        'tutorial'       => 'coreTagHandler',
+        'uses'           => 'coreTagHandler',
+        'var'            => 'varTagHandler',
+        'version'        => 'coreTagHandler',
+        'property'       => 'propertyTagHandler',
+        'property-read'  => 'propertyTagHandler',
+        'property-write' => 'propertyTagHandler',
+        'method'         => 'propertyTagHandler'
+    );
     /**#@-*/
     
     /**
+     * wraps the current line (via the converter) and resets it to empty
+     *
+     * @return void
      * @uses Converter::SourceLine() encloses {@link $_line} in a
      *                               converter-specific format
      */
     function newLineNum()
     {
-        if ($this->_pf_no_output_yet) return;
+        if ($this->_pf_no_output_yet) {
+            return;
+        }
         $this->_flush_save();
-        $this->_line .= $this->_converter->flushHighlightCache();
-        $this->_output .= $this->_converter->SourceLine($this->_wp->linenum, $this->_line, $this->_path);
-        $this->_line = '';
+        $this->_line   .= $this->_converter->flushHighlightCache();
+        $this->_output .= $this->_converter->SourceLine($this->_wp->linenum,
+            $this->_line, $this->_path);
+        $this->_line    = '';
     }
     
     /**
      * Start the parsing at a certain line number
+     *
+     * @param int $num line number
+     *
+     * @return void
      */
     function setLineNum($num)
     {
@@ -321,131 +384,145 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      * hyperlinks to the documentation for source code elements that are in the
      * source code.
      *
+     * @param array         &$parse_data       the parse data
+     * @param Converter     &$converter        the converter object
+     * @param bool          $inlinesourceparse whether this data is from an
+     *                                         inline {@}source} tag
+     * @param string|false  $class             if a string, it is the name of the 
+     *                                         class whose method we are parsing
+     *                                         containing a {@}source} tag
+     * @param false|integer $linenum           starting line number from
+     *                                         {@}source linenum}
+     * @param false|string  $filesourcepath    full path to file with @filesource
+     *                                         tag, if this is a @filesource parse
+     *
+     * @staticvar int used for recursion limiting if a handler for
+     *                an event is not found
+     * @return bool
      * @uses setupStates() initialize parser state variables
      * @uses configWordParser() pass $parse_data to prepare retrieval of tokens
-     * @param    array $parse_data
-     * @param    Converter $converter
-     * @param    boolean $inlinesourceparse whether this data is from an
-     *           inline {@}source} tag
-     * @param    string|false if a string, it is the name of the class whose
-     *           method we are parsing containing a {@}source} tag
-     * @param    false|integer starting line number from {@}source linenum}
-     * @param    false|string full path to file with @filesource tag, if this
-     *           is a @filesource parse
-     * @staticvar    integer    used for recursion limiting if a handler for
-     *                          an event is not found
-     * @return    bool
+     * @todo CS cleanup - rename tokenizer_ext constant to uppercase
      */
-    function parse (&$parse_data, &$converter, $inlinesourceparse = false, $class = false, $linenum = false, $filesourcepath = false)
+    function parse (&$parse_data, &$converter, $inlinesourceparse = false,
+        $class = false, $linenum = false, $filesourcepath = false)
     {
-        if (!tokenizer_ext)
-        {
-            if (is_array($parse_data))
-            {
-                $parse_data = join($parse_data,'');
+        if (!tokenizer_ext) {
+            if (is_array($parse_data)) {
+                $parse_data = join($parse_data, '');
             }
-            $parse_data = explode("\n", $parse_data);
+            $parse_data    = explode("\n", $parse_data);
             $this->_output = '';
-            foreach($parse_data as $linenum => $line)
-            {
-                if ($linenum > 0)
-                {
-                    $this->_output .= $converter->SourceLine($linenum, $line, $filesourcepath);
+            foreach ($parse_data as $linenum => $line) {
+                if ($linenum > 0) {
+                    $this->_output .= $converter->SourceLine($linenum,
+                        $line, $filesourcepath);
                 }
             }
             return $converter->PreserveWhiteSpace($this->_output);
         }
-        static $endrecur = 0;
+        static $endrecur  = 0;
         $this->_converter = &$converter;
         $converter->startHighlight();
         $this->_path = $filesourcepath;
         $this->setupStates($inlinesourceparse, $class);
 
         $this->configWordParser($parse_data);
-        if ($linenum !== false) $this->setLineNum($linenum);
+        if ($linenum !== false) {
+            $this->setLineNum($linenum);
+        }
         // initialize variables so E_ALL error_reporting doesn't complain
         $pevent = 0;
-        $word = 0;
+        $word   = 0;
 
-        do
-        {
+        do {
             $lpevent = $pevent;
-            $pevent = $this->_event_stack->getEvent();
-            if ($lpevent != $pevent)
-            {
+            $pevent  = $this->_event_stack->getEvent();
+            if ($lpevent != $pevent) {
                 $this->_last_pevent = $lpevent;
             }
 
-            if ($pevent == PARSER_EVENT_CLASS_MEMBER)
-            {
+            if ($pevent == PARSER_EVENT_CLASS_MEMBER) {
                 $this->_wp->setWhitespace(true);
-            } else
-            {
+            } else {
                 $this->_wp->setWhitespace(false);
             }
 
-            if (!is_array($word)) $lw = $word;
-            if (is_array($word) && $word[0] != T_WHITESPACE) $lw = $word;
+            if (!is_array($word)) {
+                $lw = $word;
+            }
+            if (is_array($word) && $word[0] != T_WHITESPACE) {
+                $lw = $word;
+            }
             $dbg_linenum = $this->_wp->linenum;
-            $dbg_pos = $this->_wp->getPos();
-            $word = $this->_wp->getWord();
-            if (is_array($word) && ($word[0] == T_WHITESPACE || $word[0] == T_COMMENT) && $pevent != PARSER_EVENT_CLASS_MEMBER)
-            {
-//                debug("added ".$this->_wp->linenum.'-'.$this->_wp->pos);
+            $dbg_pos     = $this->_wp->getPos();
+            $word        = $this->_wp->getWord();
+            if (is_array($word) && ($word[0] == T_WHITESPACE || 
+                $word[0] == T_COMMENT) && 
+                $pevent != PARSER_EVENT_CLASS_MEMBER
+            ) {
+                //debug("added " . $this->_wp->linenum . '-' . $this->_wp->pos);
                 $this->_addoutput($word);
                 continue;
-            } else $this->_pv_last_word = $lw;
-            if ($pevent != PARSER_EVENT_DOCBLOCK)
-            {
+            } else {
+                $this->_pv_last_word = $lw;
+            }
+            if ($pevent != PARSER_EVENT_DOCBLOCK) {
                 $this->_pv_last_next_word = $this->_pv_next_word;
-                $this->_pv_next_word = $this->_wp->nextToken();
+                $this->_pv_next_word      = $this->_wp->nextToken();
             }
             // in wordparser, have to keep track of lines
-//            $this->publishEvent(PHPDOCUMENTOR_EVENT_NEWLINENUM, $this->_wp->linenum);
-            if (PHPDOCUMENTOR_DEBUG == true)
-            {
+            //$this->publishEvent(PHPDOCUMENTOR_EVENT_NEWLINENUM, 
+            //    $this->_wp->linenum);
+            if (PHPDOCUMENTOR_DEBUG == true) {
                 echo "LAST: ";
-                if (is_array($this->_pv_last_word))
-                {
-                    echo token_name($this->_pv_last_word[0]). ' => |'.htmlspecialchars($this->_pv_last_word[1]);
-                } else echo "|" . $this->_pv_last_word;
+                if (is_array($this->_pv_last_word)) {
+                    echo token_name($this->_pv_last_word[0]) . 
+                        ' => |' .
+                        htmlspecialchars($this->_pv_last_word[1]);
+                } else {
+                    echo "|" . $this->_pv_last_word;
+                }
                 echo "|\n";
                 echo "PEVENT: " . $this->getParserEventName($pevent) . "\n";
-                echo "LASTPEVENT: " . $this->getParserEventName($this->_last_pevent) . "\n";
-//                echo "LINE: ".$this->_line."\n";
-//                echo "OUTPUT: ".$this->_output."\n";
-                echo $dbg_linenum.'-'.$dbg_pos . ": ";
-                if (is_array($word))
-                {
-                    echo token_name($word[0]).' => |'.htmlspecialchars($word[1]);
-                } else echo '|'.htmlspecialchars($word);
+                echo "LASTPEVENT: " .
+                    $this->getParserEventName($this->_last_pevent) . "\n";
+                //echo "LINE: "   . $this->_line   . "\n";
+                //echo "OUTPUT: " . $this->_output . "\n";
+                echo $dbg_linenum . '-' . $dbg_pos . ": ";
+                if (is_array($word)) {
+                    echo token_name($word[0]) . ' => |' . htmlspecialchars($word[1]);
+                } else {
+                    echo '|'.htmlspecialchars($word);
+                }
                 echo "|\n";
                 $this->_wp->printState();
                 echo "NEXT TOKEN: ";
                 $tok1 = $this->_pv_next_word;
-                $tok = $this->_wp->_all[$tok1[0]][$tok1[1]];
-                if (is_array($tok))
-                {
-                    echo token_name($tok[0]). ' => '.$tok1[0].'-'.$tok1[1].'|'.htmlspecialchars($tok[1]);
-                } else echo "|" . $tok;
+                $tok  = $this->_wp->_all[$tok1[0]][$tok1[1]];
+                if (is_array($tok)) {
+                    echo token_name($tok[0]) . ' => ' . $tok1[0] . '-' . $tok1[1] .
+                        '|' . htmlspecialchars($tok[1]);
+                } else {
+                    echo "|" . $tok;
+                }
                 echo "|\n";
                 echo "-------------------\n\n\n";
                 flush();
             }
-            if ($word !== false && isset($this->eventHandlers[$pevent]))
-            {
+            if ($word !== false && isset($this->eventHandlers[$pevent])) {
                 $handle = $this->eventHandlers[$pevent];
                 $this->$handle($word, $pevent);
-            } elseif ($word !== false)
-            {
-                debug('WARNING: possible error, no handler for event number '.$pevent);
-                if ($endrecur++ == 25)
-                {
+            } elseif ($word !== false) {
+                debug('WARNING: possible error, no handler for event number '
+                     . $pevent);
+                if ($endrecur++ == 25) {
                     die("FATAL ERROR, recursion limit reached");
                 }
             }
         } while (!($word === false));
-        if (strlen($this->_line)) $this->newLineNum();
+        if (strlen($this->_line)) {
+            $this->newLineNum();
+        }
         return $this->_output;
     }
 
@@ -454,9 +531,12 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      *
      * All Event Handlers use {@link checkEventPush()} and
      * {@link checkEventPop()} to set up the event stack and parser state.
+     *
+     * @param string|array $word   token value
+     * @param int          $pevent parser event from {@link Parser.inc}
+     *
+     * @return void
      * @access private
-     * @param string|array token value
-     * @param integer parser event from {@link Parser.inc}
      */
     /**
      * Most tokens only need highlighting, and this method handles them
@@ -464,7 +544,9 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
     function defaultHandler($word, $pevent)
     {
         $this->_addoutput($word);
-        if ($this->checkEventPush($word, $pevent)) return;
+        if ($this->checkEventPush($word, $pevent)) {
+            return;
+        }
         $this->checkEventPop($word, $pevent);
     }
     
@@ -477,12 +559,15 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      *     global $_phpDocumentor_setting;
      * }
      * </code>
+     *
      * @uses _globallink() instead of _addoutput(), to link to global variables
      *       if they are used in a function
      */
     function handleFuncGlobal($word, $pevent)
     {
-        if ($this->checkEventPush($word, $pevent)) return;
+        if ($this->checkEventPush($word, $pevent)) {
+            return;
+        }
         $this->_globallink($word);
         $this->checkEventPop($word, $pevent);
     }
@@ -506,43 +591,50 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function handleQuote($word, $pevent)
     {
-        if ($this->_pf_inmethod && is_array($word) && $word[0] == T_VARIABLE) $this->_pv_lastvar = $word;
-        if ($this->checkEventPush($word, $pevent))
-        {
+        if ($this->_pf_inmethod && is_array($word) && $word[0] == T_VARIABLE) {
+            $this->_pv_lastvar = $word;
+        }
+        if ($this->checkEventPush($word, $pevent)) {
             $this->_addoutput($word);
             return;
         }
         if ($this->_pf_quote_active &&
-              (($this->_pv_last_word == '"' && $this->_last_pevent != PARSER_EVENT_QUOTE) ||
-               (is_array($this->_pv_last_word) && $this->_pv_last_word[0] == T_END_HEREDOC &&
-                $this->_last_pevent != PARSER_EVENT_EOFQUOTE)))
-        {
+            (($this->_pv_last_word == '"' && 
+            $this->_last_pevent != PARSER_EVENT_QUOTE) ||
+            (is_array($this->_pv_last_word) && 
+            $this->_pv_last_word[0] == T_END_HEREDOC &&
+            $this->_last_pevent != PARSER_EVENT_EOFQUOTE))
+        ) {
             $this->_pf_quote_active = false;
             $this->_wp->backupPos($word);
             $this->_event_stack->popEvent();
             return;
         }
         if (!$this->_pf_quote_active && 
-            (($this->_pv_last_word == '"' && $this->_last_pevent != PARSER_EVENT_QUOTE) ||
-             (is_array($this->_pv_last_word) && $this->_pv_last_word[0] == T_END_HEREDOC &&
-                $this->_last_pevent != PARSER_EVENT_EOFQUOTE)))
-        {
-            if (is_array($word) && $word[0] == T_VARIABLE) $this->_pv_lastvar = $word;
-            $this->_pf_quote_active = true;
+            (($this->_pv_last_word == '"' && 
+            $this->_last_pevent != PARSER_EVENT_QUOTE) ||
+            (is_array($this->_pv_last_word) && 
+            $this->_pv_last_word[0] == T_END_HEREDOC &&
+            $this->_last_pevent != PARSER_EVENT_EOFQUOTE))
+        ) {
+            if (is_array($word) && $word[0] == T_VARIABLE) {
+                $this->_pv_lastvar = $word;
+            }
+            $this->_pf_quote_active      = true;
             $this->_save_highlight_state = $this->_converter->getHighlightState();
             $this->_converter->startHighlight();
             $this->_addoutput($word);
             $this->checkEventPop($word, $pevent);
             return;
-        } elseif (is_array($this->_pv_last_word) && $this->_pv_last_word[0] == T_CONSTANT_ENCAPSED_STRING)
-        {
-//            $this->_pv_quote_data = $this->_pv_last_word[1];
+        } elseif (is_array($this->_pv_last_word) && 
+            $this->_pv_last_word[0] == T_CONSTANT_ENCAPSED_STRING
+        ) {
+            //$this->_pv_quote_data = $this->_pv_last_word[1];
             $this->_event_stack->popEvent();
             $this->_wp->backupPos($word);
             return;
         }
-        if ($this->checkEventPop($word, $pevent))
-        {
+        if ($this->checkEventPop($word, $pevent)) {
             $this->_pf_quote_active = false;
         }
         $this->_addoutput($word);
@@ -557,20 +649,20 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function handleQuoteVar($word, $pevent)
     {
-        if ($this->checkEventPop($word, $pevent))
-        {
+        if ($this->checkEventPop($word, $pevent)) {
             $this->_pf_quote_active = true;
             $this->_addoutput($word);
             return;
         }
-        if ($this->_pf_inmethod && is_array($word) && $word[0] == T_VARIABLE) $this->_pv_lastvar = $word;
-        if ($this->checkEventPush($word, $pevent))
-        {
+        if ($this->_pf_inmethod && is_array($word) && $word[0] == T_VARIABLE) {
+            $this->_pv_lastvar = $word;
+        }
+        if ($this->checkEventPush($word, $pevent)) {
             $this->_pf_quote_active = false;
-            if (is_string($word) && ($word == '{' || $word == '"' || $word == "'"))
-            {
+            if (is_string($word) && ($word == '{' || $word == '"' || $word == "'")
+            ) {
                 $this->_pf_quote_active = true;
-                $this->_pv_lastvar = false;
+                $this->_pv_lastvar      = false;
             }
         }
         $this->_addoutput($word);
@@ -597,50 +689,58 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
     function handleDefine($word, $pevent)
     {
         static $token_save;
-        if (!isset($token_save)) $token_save = array();
-        $e = $this->checkEventPush( $word, $pevent);
-        if ($e && $e != PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS) return;
+        if (!isset($token_save)) {
+            $token_save = array();
+        }
+        $e = $this->checkEventPush($word, $pevent);
+        if ($e && $e != PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS) {
+            return;
+        }
         
-        if(!isset($this->_pv_define_params_data)) $this->_pv_define_params_data = '';
+        if (!isset($this->_pv_define_params_data)) {
+            $this->_pv_define_params_data = '';
+        }
         
-        if ($this->checkEventPop($word,$pevent))
-        {
+        if ($this->checkEventPop($word, $pevent)) {
             unset($token_save);
             $this->_addoutput($word);
         }
-        if ($this->_pf_definename_isset)
-        {
+        if ($this->_pf_definename_isset) {
             $this->_addoutput($word);
-        } else
-        {
-            if ($word != ",")
-            {
+        } else {
+            if ($word != ",") {
                 $token_save[] = $word;
-                if (is_array($word)) $word = $word[1];
+                if (is_array($word)) {
+                    $word = $word[1];
+                }
                 $this->_pv_define_params_data .= $word;
-            } else
-            {
-                if (substr($this->_pv_define_params_data,0,1) ==
-                    substr($this->_pv_define_params_data,strlen($this->_pv_define_params_data) - 1) &&
-                    in_array(substr($this->_pv_define_params_data,0,1),array('"',"'")))
-                { // remove leading and ending quotation marks if there are only two
-                    $a = substr($this->_pv_define_params_data,0,1);
-                    $b = substr($this->_pv_define_params_data,1,strlen($this->_pv_define_params_data) - 2);
-                    if (strpos($b,$a) === false)
-                    {
+            } else {
+                if (substr($this->_pv_define_params_data, 0, 1) ==
+                    substr($this->_pv_define_params_data,
+                        strlen($this->_pv_define_params_data) - 1) &&
+                    in_array(substr($this->_pv_define_params_data, 0, 1), 
+                        array('"', "'"))
+                ) {
+                    // remove leading and ending quotation marks 
+                    // if there are only two
+                    $a = substr($this->_pv_define_params_data, 0, 1);
+                    $b = substr($this->_pv_define_params_data, 1, 
+                        strlen($this->_pv_define_params_data) - 2);
+                    if (strpos($b, $a) === false) {
                         $this->_pv_define_params_data = $b;
                     }
                 }
                 $this->_pf_definename_isset = true;
+
                 $link = $this->_converter->getLink($this->_pv_define_params_data);
-                foreach ($token_save as $token)
-                {
-                    if (is_object($link))
-                    {
-                        if (is_array($token)) $token = $token[1];
-                        $this->_addoutput($this->_converter->returnSee($link, $token));
-                    } else
-                    {
+                foreach ($token_save as $token) {
+                    if (is_object($link)) {
+                        if (is_array($token)) {
+                            $token = $token[1];
+                        }
+                        $this->_addoutput($this->_converter->returnSee($link,
+                            $token));
+                    } else {
                         $this->_addoutput($save, $token);
                     }
                 }
@@ -654,14 +754,14 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      * as they need to retrieve the whole DocBlock before doing any output, so
      * the parser flag {@link $_pf_no_output_yet} is set to tell
      * {@link _addoutput()} not to spit anything out yet.
+     *
      * @uses _link() make any global code that is a documentable element link
      *       to the php manual or its documentation
      */
     function handlePhpCode($word, $pevent)
     {
         $test = $this->checkEventPush($word, $pevent);
-        if ($test == PARSER_EVENT_DOCBLOCK || $test == PARSER_EVENT_COMMENT)
-        {
+        if ($test == PARSER_EVENT_DOCBLOCK || $test == PARSER_EVENT_COMMENT) {
             if (substr($word[1], 0, 2) == '/*' && strpos($word[1], '*/')) {
                 $this->_pv_last_word = $word;
                 if ($word[1] == '/**#@-*/') {
@@ -672,11 +772,15 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
                 return $this->handleDocBlock($word, PARSER_EVENT_DOCBLOCK);
             }
             $this->_pf_no_output_yet = true;
-            $this->_pv_saveline = $this->_wp->linenum + 1;
+            $this->_pv_saveline      = $this->_wp->linenum + 1;
             return;
         }
-        if (is_array($word) && $word[0] == T_DOUBLE_COLON) $this->_pf_colon_colon = true;
-        if (!$this->_pf_colon_colon && is_array($word) && $word[0] == T_STRING) $this->_pv_last_string = $word;
+        if (is_array($word) && $word[0] == T_DOUBLE_COLON) {
+            $this->_pf_colon_colon = true;
+        }
+        if (!$this->_pf_colon_colon && is_array($word) && $word[0] == T_STRING) {
+            $this->_pv_last_string = $word;
+        }
         $this->_link($word);
         $this->checkEventPop($word, $pevent);
     }
@@ -691,12 +795,13 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function handleFunction($word, $pevent)
     {
-        if ($this->checkEventPush($word, $pevent))
-        {
+        if ($this->checkEventPush($word, $pevent)) {
             $this->_addoutput($word);
             return;
         }
-        if ($this->checkEventPop($word, $pevent)) return;
+        if ($this->checkEventPop($word, $pevent)) {
+            return;
+        }
         $this->_link($word);
     }
     
@@ -710,8 +815,7 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function handleMethod($word, $pevent)
     {
-        if ($this->checkEventPush($word, $pevent))
-        {
+        if ($this->checkEventPush($word, $pevent)) {
             $this->_addoutput($word);
             return;
         }
@@ -733,8 +837,7 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function handleFunctionParams($word, $pevent)
     {
-        if ($this->checkEventPush($word, $pevent))
-        {
+        if ($this->checkEventPush($word, $pevent)) {
             $this->_addoutput($word);
             return;
         }
@@ -752,20 +855,21 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function handleLogicBlock($word, $pevent)
     {
-        if ($this->checkEventPush($word, $pevent))
-        {
+        if ($this->checkEventPush($word, $pevent)) {
             $this->_addoutput($word);
             return;
         }
-        if (is_array($word) && $word[0] == T_DOUBLE_COLON) $this->_pf_colon_colon = true;
-        if (!$this->_pf_colon_colon && is_array($word) && $word[0] == T_STRING) $this->_pv_last_string = $word;
+        if (is_array($word) && $word[0] == T_DOUBLE_COLON) {
+            $this->_pf_colon_colon = true;
+        }
+        if (!$this->_pf_colon_colon && is_array($word) && $word[0] == T_STRING) {
+            $this->_pv_last_string = $word;
+        }
         $this->_link($word);
-        if ($this->checkEventPop($word,$pevent))
-        {
+        if ($this->checkEventPop($word, $pevent)) {
             $e = $this->_event_stack->popEvent();
             $this->_event_stack->pushEvent($e);
-            if ($e == PARSER_EVENT_FUNCTION)
-            {
+            if ($e == PARSER_EVENT_FUNCTION) {
                 $this->_wp->backupPos($word); 
             }
         }
@@ -782,39 +886,42 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function handleMethodLogicBlock($word, $pevent)
     {
-        if (isset($this->_pv_prev_var_type))
-        {
-//            debug('prevtype is set');
-            if (!is_array($word)) unset($this->_pv_prev_var_type);
-            else
-            {
-                if ($word[0] != T_WHITESPACE && $word[0] != T_STRING && $word[0] != T_OBJECT_OPERATOR)
-                {
-//                    fancy_debug('unset',$word);
+        if (isset($this->_pv_prev_var_type)) {
+            //debug('prevtype is set');
+            if (!is_array($word)) {
+                unset($this->_pv_prev_var_type);
+            } else {
+                if ($word[0] != T_WHITESPACE && 
+                    $word[0] != T_STRING && $word[0] != T_OBJECT_OPERATOR
+                ) {
+                    //fancy_debug('unset', $word);
                     unset($this->_pv_prev_var_type);
                 }
             }
         }
         $this->_pf_inmethod = true;
-        if ($e = $this->checkEventPush($word, $pevent))
-        {
+        if ($e = $this->checkEventPush($word, $pevent)) {
             $this->_addoutput($word);
             if ($e == PARSER_EVENT_CLASS_MEMBER) {
                 $this->_pf_no_output_yet = true;
             }
             return;
         }
-        if (is_array($word) && $word[0] == T_DOUBLE_COLON) $this->_pf_colon_colon = true;
-        if (!$this->_pf_colon_colon && is_array($word) && $word[0] == T_STRING) $this->_pv_last_string = $word;
-        if (is_array($word) && $word[0] == T_VARIABLE) $this->_pv_lastvar = $word;
+        if (is_array($word) && $word[0] == T_DOUBLE_COLON) {
+            $this->_pf_colon_colon = true;
+        }
+        if (!$this->_pf_colon_colon && is_array($word) && $word[0] == T_STRING) {
+            $this->_pv_last_string = $word;
+        }
+        if (is_array($word) && $word[0] == T_VARIABLE) {
+            $this->_pv_lastvar = $word;
+        }
         $this->_link($word);
-        if ($this->checkEventPop($word,$pevent))
-        {
+        if ($this->checkEventPop($word, $pevent)) {
             $this->_pf_inmethod = false;
-            $e = $this->_event_stack->popEvent();
+            $e                  = $this->_event_stack->popEvent();
             $this->_event_stack->pushEvent($e);
-            if ($e == PARSER_EVENT_METHOD)
-            {
+            if ($e == PARSER_EVENT_METHOD) {
                 $this->_wp->backupPos($word); 
             }
         }
@@ -847,71 +954,82 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function handleClassMember($word, $pevent)
     {
-        if (!isset($this->_pv_lastvar) && !isset($this->_pv_prev_var_type))
-        {
-//            fancy_debug('returned from',$word,$this->_pv_prev_var_type);
+        if (!isset($this->_pv_lastvar) && !isset($this->_pv_prev_var_type)) {
+            //fancy_debug('returned from', $word, $this->_pv_prev_var_type);
             $this->_pf_no_output_yet = false;
             $this->_event_stack->popEvent();
             return $this->defaultHandler($word, $pevent);
         }
-        if (isset($this->_pv_cm_name))
-        {
+        if (isset($this->_pv_cm_name)) {
             $this->_pf_obj_op = false;
-            $name = $this->_pv_cm_name;
+            $name             = $this->_pv_cm_name;
             unset($this->_pv_cm_name);
-//            debug('unset pvcmname');
+            //debug('unset pvcmname');
             $this->_event_stack->popEvent();
             // control variable for _pv_prev_var_type
             $setnow = false;
-            if ((isset($this->_pv_lastvar) && $this->_pv_lastvar[1] == '$this')
-                || isset($this->_pv_prev_var_type))
-            {
-                if (is_array($word) && $word[0] == T_WHITESPACE)
-                {
+            if ((isset($this->_pv_lastvar) && $this->_pv_lastvar[1] == '$this') ||
+                isset($this->_pv_prev_var_type)
+            ) {
+                if (is_array($word) && $word[0] == T_WHITESPACE) {
                     // preserve value of _pv_prev_var_type
                     $setnow = true;
-                    $save = $this->_wp->nextToken();
-                    $temp = $this->_wp->getWord();
+                    $save   = $this->_wp->nextToken();
+                    $temp   = $this->_wp->getWord();
                     $this->_wp->backupPos($save, true);
                 }
-                if ((is_string($word) && $word == '(') ||
-                    (isset($temp) && is_string($temp) && $temp == '('))
-                { // it's a function
+                if ((is_string($word) && $word == '(') || (isset($temp) && 
+                    is_string($temp) && $temp == '(')
+                ) {
+                    // it's a function
                     $this->_pf_no_output_yet = false;
                     $this->_methodlink($name);
                     unset($this->_pv_prev_var_type);
-                } else
-                { // it's a variable
-//                    fancy_debug('name is ',$name);
+                } else {
+                    // it's a variable
+                    //fancy_debug('name is ', $name);
                     $this->_pf_no_output_yet = false;
                     $this->_varlink($name, true);
-                    $templink = $this->_converter->getLink('object '.$this->_pv_class);
-                    $class = false;
+                    $templink = 
+                        $this->_converter->getLink('object ' . $this->_pv_class);
+                    $class    = false;
                     if (is_object($templink)) {
-                        $class = $this->_converter->classes->getClass($templink->name, $templink->path);
+                        $class = $this->_converter->classes
+                            ->getClass($templink->name, $templink->path);
                     }
-                    if ($class)
-                    {
+                    if ($class) {
                         $varname = $name;
-                        if (is_array($varname)) $varname = $name[1];
-                        if ($varname{0} != '$') $varname = '$'.$varname;
+                        if (is_array($varname)) {
+                            $varname = $name[1];
+                        }
+                        if ($varname{0} != '$') {
+                            $varname = '$'.$varname;
+                        }
                         $var = $class->getVar($this->_converter, $varname);
                         
-                        if (is_object($var) && $var->docblock->var)
+                        if (is_object($var) && $var->docblock->var) {
                             $type = $var->docblock->var->returnType;
-                        if (isset($type))
-                        {
-                            if (strpos($type, 'object') === false)
+                        }
+                        if (isset($type)) {
+                            if (strpos($type, 'object') === false) {
                                 $type = 'object '.$type;
+                            }
                             $type = $this->_converter->getLink($type);
-                            if (phpDocumentor_get_class($type) == 'classlink')
-                            { // the variable's type is a class, save it for future ->
-//                                fancy_debug('set prev_var_type!',$type->name);
-                                $setnow = true;
+                            if (phpDocumentor_get_class($type) == 'classlink') {
+                                // the variable's type is a class, 
+                                // save it for future ->
+                                //fancy_debug('set prev_var_type!', $type->name);
+                                $setnow                  = true;
                                 $this->_pv_prev_var_type = $type->name;
-                            } else unset($this->_pv_prev_var_type);
-                        } else unset($this->_pv_prev_var_type);
-                    } else unset($this->_pv_prev_var_type);
+                            } else {
+                                unset($this->_pv_prev_var_type);
+                            }
+                        } else {
+                            unset($this->_pv_prev_var_type);
+                        }
+                    } else {
+                        unset($this->_pv_prev_var_type);
+                    }
                 }
             } else {
                 $this->_pf_no_output_yet = false;
@@ -920,9 +1038,8 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
                 $this->_wp->getWord();
                 $this->_addoutput($name);
             }
-            if (!$setnow)
-            {
-//                debug('unset prevtype, no setnow');
+            if (!$setnow) {
+                //debug('unset prevtype, no setnow');
                 unset($this->_pv_prev_var_type);
             }
             unset($this->_pv_lastvar);
@@ -930,19 +1047,21 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
             // this does NewLinenum if necessary
             $this->_wp->backupPos($word);
             $this->_wp->getWord();
-            if ($word[0] == T_OBJECT_OPERATOR)
+            if ($word[0] == T_OBJECT_OPERATOR) {
                 $this->_wp->backupPos($word);
-            else
+            } else {
                 $this->_addoutput($word);
+            }
             return;
         }
-        if (!$this->_pf_obj_op && is_array($this->_pv_last_word) && $this->_pv_last_word[0] == T_OBJECT_OPERATOR)
-        {
-            if ((isset($this->_pv_lastvar) && $this->_pv_lastvar[1] == '$this') || isset($this->_pv_prev_var_type))
-            {
+        if (!$this->_pf_obj_op && is_array($this->_pv_last_word) && 
+            $this->_pv_last_word[0] == T_OBJECT_OPERATOR
+        ) {
+            if ((isset($this->_pv_lastvar) && $this->_pv_lastvar[1] == '$this') ||
+                isset($this->_pv_prev_var_type)
+            ) {
                 $this->_pf_obj_op = true;
-            } else
-            {
+            } else {
                 $this->_pf_no_output_yet = false;
                 // this does NewLinenum if necessary
                 $this->_wp->backupPos($word);
@@ -951,8 +1070,7 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
                 $this->_event_stack->popEvent();
             }
         }
-        if (is_array($word) && $word == T_WHITESPACE)
-        {
+        if (is_array($word) && $word == T_WHITESPACE) {
             $this->_pf_no_output_yet = false;
             // this does NewLinenum if necessary
             $this->_wp->backupPos($word);
@@ -960,12 +1078,12 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
             $this->_addoutput($word);
             return;
         }
-        if ($this->_pf_obj_op)
-        {
-            if (!(is_array($word) && ($word[0] == T_STRING || $word[0] == T_WHITESPACE)))
-            {
+        if ($this->_pf_obj_op) {
+            if (!(is_array($word) && ($word[0] == T_STRING || 
+                $word[0] == T_WHITESPACE))
+            ) {
                 unset($this->_pv_lastvar);
-//                debug('unset lastvar');
+                //debug('unset lastvar');
                 $this->_event_stack->popEvent();
                 $this->_pf_no_output_yet = false;
                 // this does NewLinenum if necessary
@@ -974,9 +1092,8 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
                 $this->_addoutput($word);
                 return;
             }
-            if ($word[0] == T_STRING)
-            {
-//                fancy_debug('set pvcmname to',$word);
+            if ($word[0] == T_STRING) {
+                //fancy_debug('set pvcmname to', $word);
                 $this->_pv_cm_name = $word;
             } else {
                 $this->_pf_no_output_yet = false;
@@ -1001,29 +1118,32 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
         $w = $this->_pv_last_word;
         // don't perform this check if this is a normal comment.  Docblocks
         // have the _pf_no_output_yet variable set to true
-        if ($this->_pf_no_output_yet &&
-              is_array($w) && (in_array($w[0], array(T_COMMENT, T_DOC_COMMENT)) && strpos($w[1],'/**') === 0)) {
+        if ($this->_pf_no_output_yet && is_array($w) && 
+            (in_array($w[0], array(T_COMMENT, T_DOC_COMMENT)) && 
+            strpos($w[1], '/**') === 0)
+        ) {
             $this->_event_stack->popEvent();
             $this->_event_stack->pushEvent(PARSER_EVENT_DOCBLOCK);
             return $this->handleDocBlock($word, PARSER_EVENT_DOCBLOCK);
         }
         if ($this->_pf_no_output_yet) {
-            $flag = 1;
+            $flag                    = 1;
             $this->_pf_no_output_yet = false;
             $this->_addoutput($this->_pv_last_word);
         }
-        if (!is_array($word) || !in_array($word[0], array(T_COMMENT, T_DOC_COMMENT)) ||
-            (in_array($word[0], array(T_COMMENT, T_DOC_COMMENT)) && strpos($word[1],'/**') === 0))
-        {
+        if (!is_array($word) || 
+            !in_array($word[0], array(T_COMMENT, T_DOC_COMMENT)) ||
+            (in_array($word[0], array(T_COMMENT, T_DOC_COMMENT)) && 
+            strpos($word[1], '/**') === 0)
+        ) {
             $this->_event_stack->popEvent();
-            if (strpos($this->_pv_last_word[1], "\n") !== false)
-            {
-//                $this->_wp->linenum++;
-//                $this->newLineNum();
+            if (strpos($this->_pv_last_word[1], "\n") !== false) {
+                //$this->_wp->linenum++;
+                //$this->newLineNum();
             }
             $this->_wp->backupPos($this->_pv_last_word);
             $this->_wp->getWord();
-//            var_dump($this->_wp->nextToken());
+            //var_dump($this->_wp->nextToken());
             return;
         } elseif (isset($flag)) {
             $this->newLineNum();
@@ -1052,21 +1172,22 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
     function handleClass($word, $pevent)
     {
         $this->_pf_in_class = true;
-        $a = $this->checkEventPush( $word, $pevent);
+        $a                  = $this->checkEventPush($word, $pevent);
 
-        if (!isset($this->_pv_class) && is_array($word) && $word[0] == T_STRING)
-        {
+        if (!isset($this->_pv_class) && is_array($word) && $word[0] == T_STRING) {
             $this->_pv_class = $this->_converter->class = $word[1];
             $this->_classlink($word);
             return;
         }
         
-        if (is_array($word) && in_array($word[0], array(T_PRIVATE, T_PROTECTED, T_PUBLIC))) {
+        if (is_array($word) && 
+            in_array($word[0], array(T_PRIVATE, T_PROTECTED, T_PUBLIC))
+        ) {
             $starttok = $this->_wp->nextToken();
-            $test = array(T_WHITESPACE);
+            $test     = array(T_WHITESPACE);
             while ($test && $test[0] == T_WHITESPACE) {
-                $tok = $this->_wp->nextToken();
-            	$test = $this->_wp->getWord();
+                $tok  = $this->_wp->nextToken();
+                $test = $this->_wp->getWord();
             } // while
             
             if (is_array($test) && $test[0] == T_VARIABLE) {
@@ -1076,7 +1197,9 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
             $this->_wp->backupPos($starttok, true);
         }
         
-        if (@in_array($this->_pv_last_word[0], array(T_PRIVATE, T_PROTECTED, T_PUBLIC))) {
+        if (@in_array($this->_pv_last_word[0], 
+            array(T_PRIVATE, T_PROTECTED, T_PUBLIC))
+        ) {
             if (is_array($word) && $word[0] == T_VARIABLE) {
                 $this->_wp->backupPos($this->_pv_last_word);
                 $this->_event_stack->pushEvent(PARSER_EVENT_VAR);
@@ -1084,21 +1207,20 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
             }
         }
 
-        if ($this->_pf_extends_found && is_array($word) && $word[0] == T_STRING)
-        {
+        if ($this->_pf_extends_found && is_array($word) && $word[0] == T_STRING) {
             $this->_classlink($word);
             return;
         }
-        if (is_array($word) && $word[0] == T_EXTENDS) $this->_pf_extends_found = true;
-        if ($a == PARSER_EVENT_DOCBLOCK)
-        {
+        if (is_array($word) && $word[0] == T_EXTENDS) {
+            $this->_pf_extends_found = true;
+        }
+        if ($a == PARSER_EVENT_DOCBLOCK) {
             $this->_pf_no_output_yet = true;
-            $this->_pv_saveline = $this->_wp->linenum + 1;
+            $this->_pv_saveline      = $this->_wp->linenum + 1;
             return;
         }
         $this->_addoutput($word);
-        if ($this->checkEventPop($word,$pevent))
-        {
+        if ($this->checkEventPop($word, $pevent)) {
             $this->_pf_in_class = false;
             unset($this->_pv_class);
         }
@@ -1113,18 +1235,17 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      *     var $Y;
      * }
      * </code>
+     *
      * @uses _varlink() make a link to $Y documentation in class variable
      *                  declaration "var $Y;"
      */
     function handleVar($word, $pevent)
     {
-        if ($this->checkEventPush($word, $pevent))
-        {
+        if ($this->checkEventPush($word, $pevent)) {
             $this->_addoutput($word);
             return;
         }
-        if (is_array($word) && $word[0] == T_VARIABLE)
-        {
+        if (is_array($word) && $word[0] == T_VARIABLE) {
             return $this->_varlink($word);
         }
         $this->_addoutput($word);
@@ -1141,68 +1262,64 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      * As it is not possible to distinguish any comment token from a docblock
      * token, this handler is also called for comments, and will pass control
      * to {@link handleComment()} if the comment is not a DocBlock
+     *
      * @uses commonDocBlock() once all lines of the DocBlock have been retrieved
      */
     function handleDocBlock($word, $pevent)
     {
-        if (!($this->_pf_docblock || $this->_pf_docblock_template))
-        {
-            if (strpos($this->_pv_last_word[1],'/**') !== 0)
-            { // not a docblock
+        if (!($this->_pf_docblock || $this->_pf_docblock_template)) {
+            if (strpos($this->_pv_last_word[1], '/**') !== 0) {
+                // not a docblock
                 $this->_wp->backupPos($this->_pv_last_word);
                 $this->_event_stack->popEvent();
                 $this->_event_stack->pushEvent(PARSER_EVENT_COMMENT);
                 $this->_pf_no_output_yet = false;
                 return;
-            } else
-            {
+            } else {
                 $this->_pf_no_output_yet = true;
-                $this->_pv_db_lines = array();
+                $this->_pv_db_lines      = array();
             }
         }
         $last_word = $this->_pv_last_word[1];
-        $dtype = '_pv_docblock';
-        if ($last_word == '/**#@-*/')
-        { // stop using docblock template
+        $dtype     = '_pv_docblock';
+        if ($last_word == '/**#@-*/') {
+            // stop using docblock template
             $this->_pf_no_output_yet = false;
             $this->_addDocBlockoutput('closetemplate', $last_word);
             if ($this->_pv_next_word !== false) {
-                $this->_wp->backupPos($this->_pv_next_word,true);
+                $this->_wp->backupPos($this->_pv_next_word, true);
             }
             $this->_event_stack->popEvent();
             return;
         }
-        if (!($this->_pf_docblock || $this->_pf_docblock_template))
-        {
+        if (!($this->_pf_docblock || $this->_pf_docblock_template)) {
             $this->_pv_db_lines = array();
-            if (strpos($last_word,'/**#@+') === 0)
-            { // docblock template definition
+            if (strpos($last_word, '/**#@+') === 0) {
+                // docblock template definition
                 $this->_pf_docblock_template = true;
-            } else
-            {
+            } else {
                 $this->_pf_docblock = true;
             }
             $this->_pv_db_lines[] = $last_word;
-            if (strpos($last_word,'*/') !== false)
-            {
+            if (strpos($last_word, '*/') !== false) {
                 $this->commonDocBlock();
                 return;
             }
             $this->_pv_db_lines[] = $word[1];
-            if (strpos($word[1],'*/') !== false)
-            {
+            if (strpos($word[1], '*/') !== false) {
                 $this->commonDocBlock();
             }
-        } else
-        {
+        } else {
             $this->_pv_db_lines[] = $word[1];
         }
-        if (($this->_pf_docblock || $this->_pf_docblock_template) && (strpos($word[1],'*/') !== false))
-        {
+        if (($this->_pf_docblock || $this->_pf_docblock_template) && 
+            (strpos($word[1], '*/') !== false)
+        ) {
             $this->commonDocBlock();
         }
     }
     /**#@-*/
+
     /**
      * This continuation of handleDocBlock splits DocBlock comments up into
      * phpDocumentor tokens.  It highlights DocBlock templates in a different
@@ -1213,6 +1330,8 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      * the type in "@var type description" will be highlighted as a php type,
      * and the var in "@param type $var description" will be highlighted as a
      * php variable.
+     *
+     * @return void
      * @uses handleDesc() highlight inline tags in the description
      * @uses handleTags() highlight all tags
      * @access private
@@ -1221,61 +1340,65 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
     {
         $this->_event_stack->popEvent();
         $lines = $this->_pv_db_lines;
-        $go = count($this->_pv_db_lines);
-        for($i=0;$i<$go;$i++)
-        {
-            if (substr(trim($lines[$i]),0,2) == '*/' || substr(trim($lines[$i]),0,1) != '*' && substr(trim($lines[$i]),0,3) != '/**')
-            {
-                $lines[$i] = array($lines[$i],false);
-            } elseif (substr(trim($lines[$i]),0,3) == '/**')
-            {
+        $go    = count($this->_pv_db_lines);
+        for ($i=0; $i < $go; $i++) {
+            if (substr(trim($lines[$i]), 0, 2) == '*/' || 
+                substr(trim($lines[$i]), 0, 1) != '*' && 
+                substr(trim($lines[$i]), 0, 3) != '/**'
+            ) {
+                $lines[$i] = array($lines[$i], false);
+            } elseif (substr(trim($lines[$i]), 0, 3) == '/**') {
                 $linesi = array();
-                $linesi[1] = substr(trim($lines[$i]),3); // remove leading "/**"
-                if (empty($linesi[1]))
-                $linesi[0] = $lines[$i];
-                else
-                $linesi[0] = substr($lines[$i],0,strpos($lines[$i],$linesi[1]));
+                // remove leading "/**"
+                $linesi[1] = substr(trim($lines[$i]), 3);
+                if (empty($linesi[1])) {
+                    $linesi[0] = $lines[$i];
+                } else {
+                    $linesi[0] = 
+                        substr($lines[$i], 0, strpos($lines[$i], $linesi[1]));
+                }
                 $lines[$i] = $linesi;
-            } else
-            {
+            } else {
                 $linesi = array();
-                $linesi[1] = substr(trim($lines[$i]),1); // remove leading "* "
-                if (empty($linesi[1]))
-                $linesi[0] = $lines[$i];
-                else
-                $linesi[0] = substr($lines[$i],0,strpos($lines[$i],$linesi[1]));
+                // remove leading "* "
+                $linesi[1] = substr(trim($lines[$i]), 1);
+                if (empty($linesi[1])) {
+                    $linesi[0] = $lines[$i];
+                } else {
+                    $linesi[0] = 
+                        substr($lines[$i], 0, strpos($lines[$i], $linesi[1]));
+                }
                 $lines[$i] = $linesi;
             }
         }
-        for($i = 0;$i<count($lines);$i++)
-        {
-            if ($lines[$i][1] === false) continue;
-            if (substr(trim($lines[$i][1]),0,1) == '@' && substr(trim($lines[$i][1]),0,2) != '@ ')
-            {
+        for ($i = 0; $i < count($lines); $i++) {
+            if ($lines[$i][1] === false) {
+                continue;
+            }
+            if (substr(trim($lines[$i][1]), 0, 1) == '@' && 
+                substr(trim($lines[$i][1]), 0, 2) != '@ '
+            ) {
                 $tagindex = $i;
-                $i = count($lines);
+                $i        = count($lines);
             }
         }
-        if (isset($tagindex))
-        {
-            $tags = array_slice($lines,$tagindex);
-            $desc = array_slice($lines,0,$tagindex);
-        } else
-        {
+        if (isset($tagindex)) {
+            $tags = array_slice($lines, $tagindex);
+            $desc = array_slice($lines, 0, $tagindex);
+        } else {
             $tags = array();
             $desc = $lines;
         }
-//        var_dump($desc,$tags);
+        //var_dump($desc, $tags);
         $this->_pf_no_output_yet = false;
-        $save = $this->_wp->linenum;
-        $this->_wp->linenum = $this->_pv_saveline;
+        $save                    = $this->_wp->linenum;
+        $this->_wp->linenum      = $this->_pv_saveline;
         $this->handleDesc($desc);
         $this->handleTags($tags);
         $this->_pv_db_lines = array();
         $this->_wp->linenum = $save;
-        if (strpos($this->_pv_last_word[1],'*/') !== false)
-        {
-            $this->_wp->backupPos($this->_pv_next_word,true);
+        if (strpos($this->_pv_last_word[1], '*/') !== false) {
+            $this->_wp->backupPos($this->_pv_next_word, true);
         }
         $this->_pf_docblock = $this->_pf_docblock_template = false;
     }
@@ -1285,25 +1408,28 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      *
      * This method simply finds inline tags and highlights them
      * separately from the rest of the description.
+     *
+     * @param mixed $desc the description piece(s)
+     *
+     * @return void
      * @uses getInlineTags()
      * @access private
      */
     function handleDesc($desc)
     {
-        $dbtype = 'docblock';
+        $dbtype  = 'docblock';
         $dbtype .= ($this->_pf_docblock ? '' : 'template');
-        foreach($desc as $line)
-        {
-            $this->getInlineTags($line[0].$line[1]);
-            if (strpos($line[0],'*/') === false &&
-                !(substr($line[0], 0, 2) == '/*' && strpos($line[1], '*/') !== false))
-            {
+        foreach ($desc as $line) {
+            $this->getInlineTags($line[0] . $line[1]);
+            if (strpos($line[0], '*/') === false &&
+                !(substr($line[0], 0, 2) == '/*' && 
+                strpos($line[1], '*/') !== false)
+            ) {
                 $this->newLineNum();
                 $this->_wp->linenum++;
             }
         }
-        if ($this->_pf_internal)
-        {
+        if ($this->_pf_internal) {
             $this->_pf_internal = false;
         }
     }
@@ -1314,45 +1440,53 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      * This method uses the {@link $tagHandlers} array to determine which
      * method will handle tags found in the docblock, and passes the data to
      * the individual handlers one by one
+     *
+     * @param array $tags array of tags to handle
+     *
+     * @return void
      * @access private
      */
     function handleTags($tags)
     {
         $newtags = array();
-        $curtag = array();
-        for($i=0;$i < count($tags);$i++)
-        {
+        $curtag  = array();
+        for ($i=0; $i < count($tags); $i++) {
             $tagsi = trim($tags[$i][1]);
-            if (substr($tagsi,0,1) == '@' && substr($tagsi,0,2) != '@ ')
-            { // start a new tag
-                $tags[$i][1] = array(substr($tags[$i][1],0,strpos($tags[$i][1],$tagsi)),$tagsi);
-                if (!empty($curtag))
-                {
+            if (substr($tagsi, 0, 1) == '@' && substr($tagsi, 0, 2) != '@ ') {
+                // start a new tag
+                $tags[$i][1] = array(substr($tags[$i][1], 0, 
+                    strpos($tags[$i][1], $tagsi)), $tagsi);
+                if (!empty($curtag)) {
                     $newtags[] = $curtag;
-                    $curtag = array();
+                    $curtag    = array();
                 }
                 $curtag[] = $tags[$i];
-            } else $curtag[] = $tags[$i];
+            } else {
+                $curtag[] = $tags[$i];
+            }
         }
-        if (!empty($curtag)) $newtags[] = $curtag;
-        foreach($newtags as $tag)
-        {
-            foreach($tag as $i => $t)
-            {
-                if ($t[1] === false) continue;
-                if (is_array($t[1]))
-                {
-                    $tag[$i][1][1] = explode(" ",str_replace("\t",'    ',$t[1][1]));
+        if (!empty($curtag)) {
+            $newtags[] = $curtag;
+        }
+        foreach ($newtags as $tag) {
+            foreach ($tag as $i => $t) {
+                if ($t[1] === false) {
+                    continue;
+                }
+                if (is_array($t[1])) {
+                    $tag[$i][1][1]
+                        = explode(" ", str_replace("\t", '    ', $t[1][1]));
                     $x = $tag[$i][1][1];
                 }
             }
-            $tagname = substr(array_shift($x),1);
+            $tagname   = substr(array_shift($x), 1);
             $restoftag = $tag;
-            if (isset($this->tagHandlers[$tagname]))
-            $handle = $this->tagHandlers[$tagname];
-            else
-            $handle = $this->tagHandlers['*'];
-            $this->$handle($tagname,$restoftag);
+            if (isset($this->tagHandlers[$tagname])) {
+                $handle = $this->tagHandlers[$tagname];
+            } else {
+                $handle = $this->tagHandlers['*'];
+            }
+            $this->$handle($tagname, $restoftag);
         }
     }
     
@@ -1362,81 +1496,84 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      * Normal inline tags are simply highlighted.  the {@}internal}} inline
      * tag {@tutorial tags.inlineinternal.pkg} is highlighted differently
      * to distinguish it from other inline tags.
+     *
+     * @param mixed $value       the tag value
+     * @param bool  $endinternal indicates the end of an @internal tag
+     *
+     * @return void
      * @access private
      */
     function getInlineTags($value, $endinternal = false)
     {
-        if (!$value) return;
-        if ($this->_pf_internal && !$endinternal)
-        {
-            if (strpos($value,'}}') !== false)
-            {
-                $x = strrpos($value,'}}');
+        if (!$value) {
+            return;
+        }
+        if ($this->_pf_internal && !$endinternal) {
+            if (strpos($value, '}}') !== false) {
+                $x = strrpos($value, '}}');
                 // add the rest of internal
-                $this->getInlineTags(substr($value,0,$x + 3), true);
+                $this->getInlineTags(substr($value, 0, $x + 3), true);
                 // strip internal from value
-                $value = substr($value,strrpos($value,'}}') + 1);
+                $value = substr($value, strrpos($value, '}}') + 1);
                 // turn off internal
                 $this->_pf_internal = false;
             }
         }
-        if (!$value) return;
-        $dbtype = 'docblock';
+        if (!$value) {
+            return;
+        }
+        $dbtype  = 'docblock';
         $dbtype .= ($this->_pf_docblock ? '' : 'template');
-        $save = $value;
-        $value = explode('{@',$value);
-        $newval = array();
+        $save    = $value;
+        $value   = explode('{@', $value);
+        $newval  = array();
         // everything before the first {@ is normal text
         $this->_addDocBlockoutput($dbtype, $value[0]);
-        for($i=1;$i<count($value);$i++)
-        {
-            if (substr($value[$i],0,1) == '}')
-            {
-                $this->_addDocBlockoutput($dbtype, '{@}'.substr($value[$i],1));
-            } else
-            {
-                $save = $value[$i];
-                $value[$i] = str_replace("\t","    ",$value[$i]);
-                $value[$i] = explode(" ",$value[$i]);
-                $word = array_shift($value[$i]);
-                $val = join(' ',$value[$i]);
-                if ($word == 'internal')
-                {
+        for ($i=1; $i < count($value); $i++) {
+            if (substr($value[$i], 0, 1) == '}') {
+                $this->_addDocBlockoutput($dbtype, '{@}' . substr($value[$i], 1));
+            } else {
+                $save      = $value[$i];
+                $value[$i] = str_replace("\t", "    ", $value[$i]);
+                $value[$i] = explode(" ", $value[$i]);
+                $word      = array_shift($value[$i]);
+                $val       = join(' ', $value[$i]);
+                if ($word == 'internal') {
                     $this->_pf_internal = true;
                     $this->_addDocBlockoutput($dbtype, '{@internal ');
-                    $value[$i] = substr($save,strlen('internal') + 1);
+                    $value[$i] = substr($save, strlen('internal') + 1);
                     // strip internal and cycle as if it were normal text.
                     $this->_addDocBlockoutput($dbtype, $value[$i]);
                     continue;
                 }
-                if (in_array(str_replace('}','',$word),$this->allowableInlineTags))
-                {
-                    if (strpos($word,'}'))
-                    {
-                        $word = str_replace('}','',$word);
-                        $val = '} '.$val;
+                if (in_array(str_replace('}', '', $word), $this->allowableInlineTags)
+                ) {
+                    if (strpos($word, '}')) {
+                        $word = str_replace('}', '', $word);
+                        $val  = '} ' . $val;
                     }
-                    $val = explode('}',$val);
-                    if (count($val) == 1)
-                    {
-//                         addError(PDERROR_UNTERMINATED_INLINE_TAG,$word,'',$save);
+                    $val = explode('}', $val);
+                    if (count($val) == 1) {
+                         //addError(PDERROR_UNTERMINATED_INLINE_TAG,
+                         //    $word, '', $save);
                     }
                     $rest = $val;
-                    $val = array_shift($rest);
-					if ($endinternal)
-					$rest = join('}',$rest);
-					else
-                    $rest = join(' ',$rest);
-                    if (isset($this->inlineTagHandlers[$word]))
-                    $handle = $this->inlineTagHandlers[$word];
-                    else
-                    $handle = $this->inlineTagHandlers['*'];
-                    $this->$handle($word,$val);
+                    $val  = array_shift($rest);
+                    if ($endinternal) {
+                        $rest = join('}', $rest);
+                    } else {
+                        $rest = join(' ', $rest);
+                    }
+                    if (isset($this->inlineTagHandlers[$word])) {
+                        $handle = $this->inlineTagHandlers[$word];
+                    } else {
+                        $handle = $this->inlineTagHandlers['*'];
+                    }
+                    $this->$handle($word, $val);
                     $this->_addDocBlockoutput($dbtype, $rest);
-                } else
-                {
-                    $val = $word.' '.$val;
-                    $this->_addDocBlockoutput($dbtype, '{@'.$val);
+                } else {
+                    $val = $word . ' ' . $val;
+                    $this->_addDocBlockoutput($dbtype, '{@' . $val);
                 }
             }
         }
@@ -1445,18 +1582,26 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
     
     /**
      * Handles all inline tags
+     *
+     * @param string $name  the tag name
+     * @param mixed  $value the tag value
+     *
+     * @return void
      * @access private
      */
     function handleDefaultInlineTag($name, $value)
     {
-        $this->_addDocBlockoutput('inlinetag','{@'.$name.' '.$value.'}');
+        $this->_addDocBlockoutput('inlinetag', '{@' . $name . ' ' . $value . '}');
     }
 
     /**#@+
      * phpDocumentor DocBlock tag handlers
+     *
+     * @param string $name    tag name
+     * @param array  $value   array of lines contained in the tag description
+     *
+     * @return void
      * @access private
-     * @param string tag name
-     * @param array array of lines contained in the tag description
      */
     /**
      * Handle normal tags
@@ -1466,20 +1611,19 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      *
      * Then, it highlights the tag as a regular or coretag based on $coretag.
      * Finally, it uses getInlineTags to highlight the description
+     *
+     * @param bool $coretag whether this tag is a core tag or not
+     *
      * @uses getInlineTags() highlight a tag description
-     * @param boolean whether this tag is a core tag or not
      */
     function defaultTagHandler($name, $value, $coretag = false)
     {
-        $dbtype = 'docblock';
+        $dbtype  = 'docblock';
         $dbtype .= ($this->_pf_docblock ? '' : 'template');
-        foreach($value as $line)
-        {
+        foreach ($value as $line) {
             $this->_addDocBlockoutput($dbtype, $line[0]);
-            if ($line[1] === false)
-            {
-                if (trim($line[0]) != '*/')
-                {
+            if ($line[1] === false) {
+                if (trim($line[0]) != '*/') {
                     $this->newLineNum();
                     $this->_wp->linenum++;
                 }
@@ -1487,23 +1631,23 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
             }
             $this->_addDocBlockoutput($dbtype, $line[1][0]);
             $stored = '';
-            if (is_array($line[1][1]))
-            {
-                foreach($line[1][1] as $i => $tpart)
-                {
-                    if ($tpart == '@'.$name && $i == 0)
-                    {
+            if (is_array($line[1][1])) {
+                foreach ($line[1][1] as $i => $tpart) {
+                    if ($tpart == '@' . $name && $i == 0) {
                         $tagname = 'tag';
-                        if ($coretag) $tagname = 'coretag';
-                        $this->_addDocBlockoutput($tagname,'@'.$name);
+                        if ($coretag) {
+                            $tagname = 'coretag';
+                        }
+                        $this->_addDocBlockoutput($tagname, '@' . $name);
                         continue;
                     }
-                    $stored .= ' '.$tpart;
+                    $stored .= ' ' . $tpart;
                 }
-            } else $stored = $line[1];
+            } else {
+                $stored = $line[1];
+            }
             $this->getInlineTags($stored);
-            if (strpos($stored,'*/') === false)
-            {
+            if (strpos($stored, '*/') === false) {
                 $this->newLineNum();
                 $this->_wp->linenum++;
             }
@@ -1511,6 +1655,8 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
     }
     
     /**
+     * main handler for "core" tags
+     *
      * @see defaultTagHandler()
      */
     function coreTagHandler($name, $value)
@@ -1536,59 +1682,61 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      * This handler works like {@link defaultTagHandler()} except it highlights
      * the type and variable (if present) in "@param type $variable description"
      * or "@param type description"
-     * @param boolean private parameter, checks for $var or not
+     *
+     * @param bool $checkforvar private parameter, checks for $var or not
      */
     function paramTagHandler($name, $value, $checkforvar = true)
     {
-        $dbtype = 'docblock';
+        $dbtype  = 'docblock';
         $dbtype .= ($this->_pf_docblock ? '' : 'template');
-        $ret = $this->retrieveType($value,0,$checkforvar);
-        foreach($value as $num => $line)
-        {
+        $ret     = $this->retrieveType($value, 0, $checkforvar);
+        foreach ($value as $num => $line) {
             $this->_addDocBlockoutput($dbtype, $line[0]);
-            if ($line[1] === false)
-            {
-                if (trim($line[0]) != '*/')
-                {
+            if ($line[1] === false) {
+                if (trim($line[0]) != '*/') {
                     $this->newLineNum();
                     $this->_wp->linenum++;
                 }
                 continue;
             }
             $this->_addDocBlockoutput($dbtype, $line[1][0]);
-            $stored = '';
+            $stored  = '';
             $typeloc = 1;
-            $varloc = 2;
-            if (is_array($line[1][1]))
-            {
-                $this->_addDocBlockoutput('coretag','@'.$name.' ');
-                foreach($ret[0] as $text)
-                {
-                    if (is_string($text)) $this->_addDocBlockoutput($dbtype,$text);
-                    if (is_array($text))
-                    {
-                        if ($text[0] != 'desc') $this->_addDocBlockoutput($text[0],$text[1]);
-                        else $stored .= $text[1];
+            $varloc  = 2;
+            if (is_array($line[1][1])) {
+                $this->_addDocBlockoutput('coretag', '@' . $name . ' ');
+                foreach ($ret[0] as $text) {
+                    if (is_string($text)) {
+                        $this->_addDocBlockoutput($dbtype, $text);
                     }
-                }
-            } else
-            {
-                if (isset($ret[$num]))
-                {
-                    foreach($ret[$num] as $text)
-                    {
-                        if (is_string($text)) $this->_addDocBlockoutput($dbtype,$text);
-                        if (is_array($text))
-                        {
-                            if ($text[0] != 'desc') $this->_addDocBlockoutput($text[0],$text[1]);
-                            else $stored .= $text[1];
+                    if (is_array($text)) {
+                        if ($text[0] != 'desc') {
+                            $this->_addDocBlockoutput($text[0], $text[1]);
+                        } else {
+                            $stored .= $text[1];
                         }
                     }
-                } else $stored = $line[1];
+                }
+            } else {
+                if (isset($ret[$num])) {
+                    foreach ($ret[$num] as $text) {
+                        if (is_string($text)) {
+                            $this->_addDocBlockoutput($dbtype, $text);
+                        }
+                        if (is_array($text)) {
+                            if ($text[0] != 'desc') {
+                                $this->_addDocBlockoutput($text[0], $text[1]);
+                            } else {
+                                $stored .= $text[1];
+                            }
+                        }
+                    }
+                } else {
+                    $stored = $line[1];
+                }
             }
             $this->getInlineTags($stored);
-            if (strpos($stored,'*/') === false)
-            {
+            if (strpos($stored, '*/') === false) {
                 $this->newLineNum();
                 $this->_wp->linenum++;
             }
@@ -1596,6 +1744,8 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
     }
     
     /**
+     * handles the @staticvar tag
+     *
      * @see paramTagHandler()
      */
     function staticvarTagHandler($name, $value)
@@ -1604,6 +1754,8 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
     }
     
     /**
+     * handles the @var tag
+     *
      * @see paramTagHandler()
      */
     function varTagHandler($name, $value)
@@ -1625,9 +1777,9 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
     /**
      * Handles @property(-read or -write) and @method magic tags
      */
-    function propertyTagHandler( $name, $value )
+    function propertyTagHandler($name, $value)
     {
-        return $this->paramTagHandler( $name, $value, true );
+        return $this->paramTagHandler($name, $value, true);
     }
 
     /**#@-*/
@@ -1642,140 +1794,166 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      * Even more complicated is the case where a tag variable can contain
      * multiple types, such as object blah|object blah2|false, and so this
      * method handles these cases.
-     * @param array array of words that were separated by spaces
-     * @param 0|1 0 = find the type, 1 = find the var, if present
-     * @param boolean flag to determine whether to check for the end of a
-     *        type is defined by a $varname
+     *
+     * @param array $value       array of words that were separated by spaces
+     * @param 0|1   $state       0 = find the type, 1 = find the var, if present
+     * @param bool  $checkforvar flag to determine whether to check for the end of a
+     *                           type is defined by a $varname
+     *
      * @return array Format: array(state (0 [find type], 1 [var], 2 [done]),
-     *                             
      * @access private
      */
     function retrieveType($value, $state = 0, $checkforvar = false)
     {
-        $index = 0;
+        $index  = 0;
         $result = array();
-        do
-        {
-            if (!isset($value[$index][1])) return $result;
+        do {
+            if (!isset($value[$index][1])) {
+                return $result;
+            }
             $val = $value[$index][1];
-            if (empty($val)) return $result;
-            if ($index == 0)
-            {
+            if (empty($val)) {
+                return $result;
+            }
+            if ($index == 0) {
                 $val = $val[1];
                 array_shift($val);
-            } else
-            {
-                $val = explode(' ',$val);
+            } else {
+                $val = explode(' ', $val);
             }
-            $ret = $this->_retrieveType($val, $state, $checkforvar);
-            $state = $ret[0];
+            $ret              = $this->_retrieveType($val, $state, $checkforvar);
+            $state            = $ret[0];
             $result[$index++] = $ret[1];
         } while ((!$checkforvar && $state < 1) || ($state < 2 && $checkforvar));
         return $result;
     }
-    
+
+    /**
+     * used by {@link retrieveType()} in its work
+     *
+     * @param array $value       array of words that were separated by spaces
+     * @param 0|1   $state       0 = find the type, 1 = find the var, if present
+     * @param bool  $checkforvar flag to determine whether to check for the end of a
+     *                           type is defined by a $varname
+     *
+     * @return array 
+     * @access private
+     */    
     function _retrieveType($value, $state, $checkforvar)
     {
-        $result = array();
+        $result   = array();
         $result[] = $this->_removeWhiteSpace($value, 0);
-        if ($state == 0)
-        {
-            if (!count($value)) return array(2,$result);
+        if ($state == 0) {
+            if (!count($value)) {
+                return array(2, $result);
+            }
             $types = '';
             $index = 0;
-            if (trim($value[0]) == 'object')
-            {
-                $result[] = array('tagphptype', $value[0].' ');
-                $types .= array_shift($value).' ';
+            if (trim($value[0]) == 'object') {
+                $result[] = array('tagphptype', $value[0] . ' ');
+                $types   .= array_shift($value).' ';
                 $result[] = $this->_removeWhiteSpace($value, 0);
-                if (!count($value))
-                { // was just passed "object"
-                    return array(2,$result);
+                if (!count($value)) {
+                    // was just passed "object"
+                    return array(2, $result);
                 }
-                if ($value[0]{0} == '$' || substr($value[0],0,2) == '&$')
-                { // was just passed "object" and the next thing is a variable name
-                    if ($checkforvar)
-                    {
-                        $result[] = array('tagvarname' , $value[0].' ');
+                if ($value[0]{0} == '$' || substr($value[0], 0, 2) == '&$') {
+                    // was just passed "object"
+                    // and the next thing is a variable name
+                    if ($checkforvar) {
+                        $result[] = array('tagvarname' , $value[0] . ' ');
                         array_shift($value);
                     }
                     $result[] = array('desc', join(' ', $value));
-                    return array(2,$result);
+                    return array(2, $result);
                 }
             }
             $done = false;
             $loop = -1;
-            do
-            { // this loop checks for type|type|type and for
-              // type|object classname|type|object classname2
-                if (strpos($value[0], '|'))
-                {
+            do {
+                // this loop checks for type|type|type and for
+                // type|object classname|type|object classname2
+                if (strpos($value[0], '|')) {
                     $temptypes = explode('|', $value[0]);
-                    while(count($temptypes))
-                    {
-                        $type = array_shift($temptypes);
-                        $result[] = array('tagphptype',$type);
-                        if (count($temptypes)) $result[] = '|';
+                    while (count($temptypes)) {
+                        $type     = array_shift($temptypes);
+                        $result[] = array('tagphptype', $type);
+                        if (count($temptypes)) {
+                            $result[] = '|';
+                        }
                     }
-                    if (trim($type) == 'object')
-                    {
+                    if (trim($type) == 'object') {
                         $result[] = array('tagphptype', $types . ' ');
-                        $result[] = $this->_removeWhiteSpace($value,0);
-                    } else $done = true;
+                        $result[] = $this->_removeWhiteSpace($value, 0);
+                    } else {
+                        $done = true;
+                    }
                     array_shift($value);
-                    if (count($value) && strlen($value[0]) && isset ($value[0]) && ($value[0]{0} == '$' || substr($value[0],0,2) == '&$'))
-                    { // was just passed "object" and the next thing is a variable name
-                        $result[] = array('tagvarname' , $value[0].' ');
+                    if (count($value) && strlen($value[0]) && isset ($value[0]) && 
+                        ($value[0]{0} == '$' || substr($value[0], 0, 2) == '&$')
+                    ) {
+                        // was just passed "object"
+                        // and the next thing is a variable name
+                        $result[] = array('tagvarname' , $value[0] . ' ');
                         array_shift($value);
                         $result[] = array('desc', join(' ', $value));
-                        return array(2,$result);
+                        return array(2, $result);
                     }
-                } else
-                {
-                    $result[] = array('tagphptype', $value[0].' ');
+                } else {
+                    $result[] = array('tagphptype', $value[0] . ' ');
                     array_shift($value);
                     $done = true;
                 }
                 $loop++;
             } while (!$done && count($value));
-            if ($loop) $result[] = ' ';
+            if ($loop) {
+                $result[] = ' ';
+            }
             // still searching for type
-            if (!$done && !count($value)) return array(0,$result);
+            if (!$done && !count($value)) {
+                return array(0, $result);
+            }
             // still searching for var
-            if ($done && !count($value)) return array(1,$result);
+            if ($done && !count($value)) {
+                return array(1, $result);
+            }
         }
-        $result[] = $this->_removeWhiteSpace($value,0);
-        $state = 1;
-        if ($checkforvar)
-        {
-            if (count($value))
-            {
+        $result[] = $this->_removeWhiteSpace($value, 0);
+        $state    = 1;
+        if ($checkforvar) {
+            if (count($value)) {
                 $state = 2;
-                if (substr($value[0],0,1) == '$' || substr($value[0],0,2) == '&$')
-                {
-                    $result[] = array('tagvarname' , $value[0].' ');
+                if (substr($value[0], 0, 1) == '$' || 
+                    substr($value[0], 0, 2) == '&$'
+                ) {
+                    $result[] = array('tagvarname' , $value[0] . ' ');
                     array_shift($value);
                 }
-            } else $state = 1;
+            } else {
+                $state = 1;
+            }
         }
-        $result[] = array('desc', join(' ',$value));
-        return array($state,$result);
+        $result[] = array('desc', join(' ', $value));
+        return array($state, $result);
     }
     
-    
     /**
-     * @param array array of string
-     * @param integer index to seek non-whitespace to
-     * @access private
+     * captures trailing whitespace
+     *
+     * @param array &$value array of string
+     * @param int   $index  index to seek non-whitespace to
+     *
      * @return string whitespace
+     * @access private
      */
     function _removeWhiteSpace(&$value, $index)
     {
         $result = '';
-        if (count($value) > $index && empty($value[$index]))
-        {
+        if (count($value) > $index && empty($value[$index])) {
             $found = false;
-            for($i=$index; $i<count($value) && !strlen($value[$i]); $i++) $result .= ' ';
+            for ($i = $index; $i < count($value) && !strlen($value[$i]); $i++) {
+                $result .= ' ';
+            }
             array_splice($value, $index, $i - $index);
         }
         return $result;
@@ -1783,8 +1961,10 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
 
     /**#@+
      * Link generation methods
+     *
+     * @param string|array $word token to try to link
+     *
      * @access private
-     * @param string|array token to try to link
      */
     /**
      * Generate a link to documentation for an element
@@ -1795,35 +1975,35 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function _link($word)
     {
-        if (is_array($word) && $word[0] == T_STRING)
-        {
-            if ($this->_pf_colon_colon)
-            {
+        if (is_array($word) && $word[0] == T_STRING) {
+            if ($this->_pf_colon_colon) {
                 $this->_pf_colon_colon = false;
-                $combo = $this->_pv_last_string[1].'::'.$word[1].'()';
-//                debug('testing '.$combo);
+
+                $combo = $this->_pv_last_string[1] . '::' . $word[1] . '()';
+                //debug('testing ' . $combo);
                 $link = $this->_converter->getLink($combo);
-                if (is_object($link))
-                {
-                    $this->_addoutput($this->_converter->returnSee($link, $word[1]), true);
+                if (is_object($link)) {
+                    $this->_addoutput($this->_converter->returnSee($link,
+                        $word[1]), true);
                     return;
                 }
                 $this->_addoutput($word);
                 return;
             }
-            $link = $this->_converter->getLink($word[1].'()');
-            if (is_object($link))
-            {
-                $this->_addoutput($this->_converter->returnSee($link, $word[1]), true);
+            $link = $this->_converter->getLink($word[1] . '()');
+            if (is_object($link)) {
+                $this->_addoutput($this->_converter->returnSee($link,
+                    $word[1]), true);
                 return;
-            } elseif (is_string($link) && strpos($link,'ttp://'))
-            {
-                $this->_addoutput($this->_converter->returnLink($link, $word[1]), true);
+            } elseif (is_string($link) && strpos($link, 'ttp://')) {
+                $this->_addoutput($this->_converter->returnLink($link,
+                    $word[1]), true);
                 return;
-            } else
-            {
+            } else {
                 $link = $this->_converter->getLink($word[1]);
-                if (is_object($link)) $word[1] = $this->_converter->returnSee($link, $word[1]);
+                if (is_object($link)) {
+                    $word[1] = $this->_converter->returnSee($link, $word[1]);
+                }
                 $this->_addoutput($word, true);
                 return;
             }
@@ -1836,14 +2016,17 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function _globallink($word)
     {
-        if (!is_array($word)) return $this->_addoutput($word);
-        if ($word[0] != T_VARIABLE) return $this->_addoutput($word);
-        if (is_array($word) && $word[0] == T_VARIABLE)
-        {
-            $link = $this->_converter->getLink('global '.$word[1]);
-            if (is_object($link))
-            {
-                $this->_addoutput($this->_converter->returnSee($link, $word[1]), true);
+        if (!is_array($word)) {
+            return $this->_addoutput($word);
+        }
+        if ($word[0] != T_VARIABLE) {
+            return $this->_addoutput($word);
+        }
+        if (is_array($word) && $word[0] == T_VARIABLE) {
+            $link = $this->_converter->getLink('global ' . $word[1]);
+            if (is_object($link)) {
+                $this->_addoutput($this->_converter->returnSee($link,
+                    $word[1]), true);
                 return;
             }
         }
@@ -1855,13 +2038,12 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function _classlink($word)
     {
-//            debug("checking class ".$word[1]);
-        if (is_array($word) && $word[0] == T_STRING)
-        {
+        //debug("checking class " . $word[1]);
+        if (is_array($word) && $word[0] == T_STRING) {
             $link = $this->_converter->getLink($word[1]);
-            if (is_object($link))
-            {
-                $this->_addoutput($this->_converter->returnSee($link, $word[1]), true);
+            if (is_object($link)) {
+                $this->_addoutput($this->_converter->returnSee($link,
+                    $word[1]), true);
                 return;
             }
         }
@@ -1873,29 +2055,29 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      */
     function _methodlink($word)
     {
-        if (is_array($word) && $word[0] == T_STRING)
-        {
-//            debug("checking method ".$this->_pv_class.'::'.$word[1].'()');
-            if (isset($this->_pv_prev_var_type))
-            {
-                $link = $this->_converter->getLink($this->_pv_prev_var_type.'::'.$word[1].'()');
-            } else
-                $link = $this->_converter->getLink($this->_pv_class.'::'.$word[1].'()');
-            if (is_object($link))
-            {
-                $this->_addoutput($this->_converter->returnSee($link, $word[1]), true);
+        if (is_array($word) && $word[0] == T_STRING) {
+            //debug("checking method " . $this->_pv_class . '::' . $word[1] . '()');
+            if (isset($this->_pv_prev_var_type)) {
+                $link = $this->_converter->getLink($this->_pv_prev_var_type . '::' .
+                    $word[1] . '()');
+            } else {
+                $link = $this->_converter->getLink($this->_pv_class . '::' . 
+                    $word[1] . '()');
+            }
+            if (is_object($link)) {
+                $this->_addoutput($this->_converter->returnSee($link,
+                    $word[1]), true);
                 return;
             }
-            if (isset($this->_pv_prev_var_type))
-            {
+            if (isset($this->_pv_prev_var_type)) {
                 $this->_addoutput($word);
                 return;
             }
-//            debug("checking method ".$word[1].'()');
-            $link = $this->_converter->getLink($word[1].'()');
-            if (is_object($link))
-            {
-                $this->_addoutput($this->_converter->returnSee($link, $word[1]), true);
+            //debug("checking method " . $word[1] . '()');
+            $link = $this->_converter->getLink($word[1] . '()');
+            if (is_object($link)) {
+                $this->_addoutput($this->_converter->returnSee($link,
+                    $word[1]), true);
                 return;
             }
         }
@@ -1904,39 +2086,40 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
     
     /**
      * Works like {@link _link()} except it only links to class variables
+     *
+     * @param bool $justastring true if the $word is only a string
      */
     function _varlink($word, $justastring=false)
     {
-        if ($justastring)
-        {
+        if ($justastring) {
             $word[0] = T_VARIABLE;
         }
-        if (is_array($word) && $word[0] == T_VARIABLE)
-        {
+        if (is_array($word) && $word[0] == T_VARIABLE) {
             $x = ($justastring ? '$' : '');
-//            debug("checking var ".$this->_pv_class.'::'.$x.$word[1]);
-            if (isset($this->_pv_prev_var_type))
-            {
-//            debug("checking var ".$this->_pv_prev_var_type.'::'.$x.$word[1]);
-                $link = $this->_converter->getLink($this->_pv_prev_var_type.'::'.$x.$word[1]);
+            //debug("checking var " . $this->_pv_class . '::' . $x . $word[1]);
+            if (isset($this->_pv_prev_var_type)) {
+                //debug("checking var " . $this->_pv_prev_var_type . '::' .
+                //    $x . $word[1]);
+                $link = $this->_converter->getLink($this->_pv_prev_var_type . '::' .
+                    $x . $word[1]);
+            } else {
+                $link = $this->_converter->getLink($this->_pv_class . '::' . 
+                    $x . $word[1]);
             }
-            else
-            $link = $this->_converter->getLink($this->_pv_class.'::'.$x.$word[1]);
-            if (is_object($link))
-            {
-                $this->_addoutput($this->_converter->returnSee($link, $word[1]), true);
+            if (is_object($link)) {
+                $this->_addoutput($this->_converter->returnSee($link,
+                    $word[1]), true);
                 return;
             }
-//            debug("checking var ".$x.$word[1]);
-            if (isset($this->_pv_prev_var_type))
-            {
+            //debug("checking var " . $x . $word[1]);
+            if (isset($this->_pv_prev_var_type)) {
                 $this->_addoutput($word);
                 return;
             }
-            $link = $this->_converter->getLink($x.$word[1]);
-            if (is_object($link))
-            {
-                $this->_addoutput($this->_converter->returnSee($link, $word[1]), true);
+            $link = $this->_converter->getLink($x . $word[1]);
+            if (is_object($link)) {
+                $this->_addoutput($this->_converter->returnSee($link,
+                    $word[1]), true);
                 return;
             }
         }
@@ -1953,50 +2136,63 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      *
      * If a string with variables like "$test this" is present, then special
      * handling is used to allow processing of the variable in context.
+     *
+     * @param mixed $word         the string|array tag token and value
+     * @param bool  $preformatted whether or not the $word is already formatted
+     *
+     * @return void
      * @see _flush_save()
      */
     function _addoutput($word, $preformatted = false)
     {
-        if ($this->_pf_no_output_yet) return;
-        if ($this->_pf_quote_active)
-        {
-            if (is_array($word)) $this->_save .= $this->_converter->highlightSource($word[0], $word[1]);
-            else
-            $this->_save .= $this->_converter->highlightSource(false, $word, true);
-        } else
-        {
+        if ($this->_pf_no_output_yet) {
+            return;
+        }
+        if ($this->_pf_quote_active) {
+            if (is_array($word)) {
+                $this->_save .= $this->_converter->highlightSource($word[0],
+                    $word[1]);
+            } else {
+                $this->_save .= $this->_converter->highlightSource(false,
+                    $word, true);
+            }
+        } else {
             $this->_flush_save();
-            if (is_string($word) && trim($word) == '')
-            {
+            if (is_string($word) && trim($word) == '') {
                 $this->_line .= $this->_converter->postProcess($word);
                 return;
             }
-            if (is_array($word) && trim($word[1]) == '')
-            {
+            if (is_array($word) && trim($word[1]) == '') {
                 $this->_line .= $this->_converter->postProcess($word[1]);
                 return;
             }
-            if (is_array($word)) 
-            {
-                $this->_line .= $this->_converter->highlightSource($word[0], $word[1], $preformatted);
-            } else
-            {
-                $this->_line .= $this->_converter->highlightSource(false, $word, $preformatted);
+            if (is_array($word)) {
+                $this->_line .= $this->_converter->highlightSource($word[0],
+                    $word[1], $preformatted);
+            } else {
+                $this->_line .= $this->_converter->highlightSource(false,
+                    $word, $preformatted);
             }
         }
     }
     
     /** 
      * Like {@link _output()}, but for DocBlock highlighting
+     *
+     * @param mixed $dbtype       the docblock type
+     * @param mixed $word         the string|array tag token and value
+     * @param bool  $preformatted whether or not the $word is already formatted
+     *
+     * @return void
      */
     function _addDocBlockoutput($dbtype, $word, $preformatted = false)
     {
-        if ($this->_pf_internal)
-        {
-            $this->_line .= $this->_converter->highlightDocBlockSource('internal', $word, $preformatted);
-        } else
-        {
-            $this->_line .= $this->_converter->highlightDocBlockSource($dbtype, $word, $preformatted);
+        if ($this->_pf_internal) {
+            $this->_line .= $this->_converter->highlightDocBlockSource('internal',
+                $word, $preformatted);
+        } else {
+            $this->_line .= $this->_converter->highlightDocBlockSource($dbtype,
+                $word, $preformatted);
         }
     }
     
@@ -2004,25 +2200,33 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
      * Flush a saved string variable highlighting
      *
      * {@source}
+     *
+     * @return void
+     * @todo CS cleanup - rename to _flushSave() for camelCase rule
      */
     function _flush_save()
     {
-        if (!empty($this->_save))
-        {
+        if (!empty($this->_save)) {
             $this->_save .= $this->_converter->flushHighlightCache();
             // clear the existing cache, reset it to the old value
             if (isset($this->_save_highlight_state)) {
-                $this->_converter->_setHighlightCache($this->_save_highlight_state[0], $this->_save_highlight_state[1]);
+                $this->_converter->
+                    _setHighlightCache($this->_save_highlight_state[0],
+                         $this->_save_highlight_state[1]);
             }
-            $this->_line .= $this->_converter->highlightSource(T_CONSTANT_ENCAPSED_STRING, $this->_save, true);
-            $this->_save = '';
+            $this->_line .= $this->_converter->
+                highlightSource(T_CONSTANT_ENCAPSED_STRING, $this->_save, true);
+            $this->_save  = '';
         }
     }
     /**#@-*/
     
     /**
      * Give the word parser necessary data to begin a new parse
-     * @param array all tokens separated by line number
+     *
+     * @param array &$data all tokens separated by line number
+     *
+     * @return void
      */
     function configWordParser(&$data)
     {
@@ -2032,366 +2236,368 @@ class phpDocumentor_HighlightParser extends phpDocumentorTParser
 
     /**
      * Initialize all parser state variables
-     * @param boolean true if we are highlighting an inline {@}source} tag's
-     *                output
-     * @param false|string name of class we are going to start from
+     *
+     * @param bool         $inlinesourceparse true if we are highlighting an inline 
+     *                                        {@}source} tag's output
+     * @param false|string $class             name of class we are going 
+     *                                        to start from
+     *
+     * @return void
      * @uses $_wp sets to a new {@link phpDocumentor_HighlightWordParser}
      */
     function setupStates($inlinesourceparse, $class)
     {
         $this->_output = '';
-        $this->_line = '';
+        $this->_line   = '';
         unset($this->_wp);
-        $this->_wp = new phpDocumentor_HighlightWordParser;
+        $this->_wp          = new phpDocumentor_HighlightWordParser;
         $this->_event_stack = new EventStack;
-        if ($inlinesourceparse)
-        {
+        if ($inlinesourceparse) {
             $this->_event_stack->pushEvent(PARSER_EVENT_PHPCODE);
-            if ($class)
-            {
+            if ($class) {
                 $this->_event_stack->pushEvent(PARSER_EVENT_CLASS);
                 $this->_pv_class = $class;
             }
-        } else $this->_pv_class = null;
-        $this->_pv_define = null;
-        $this->_pv_define_name = null;
-        $this->_pv_define_value = null;
-        $this->_pv_define_params_data = null;
-        $this->_pv_dtype = null;
-        $this->_pv_docblock = null;
-        $this->_pv_dtemplate = null;
-        $this->_pv_func = null;
-        $this->_pv_global_name = null;
-        $this->_pv_global_val = null;
-        $this->_pv_globals = null;
-        $this->_pv_global_count = null;
+        } else {
+            $this->_pv_class = null;
+        }
+
+        $this->_pv_define              = null;
+        $this->_pv_define_name         = null;
+        $this->_pv_define_value        = null;
+        $this->_pv_define_params_data  = null;
+        $this->_pv_dtype               = null;
+        $this->_pv_docblock            = null;
+        $this->_pv_dtemplate           = null;
+        $this->_pv_func                = null;
+        $this->_pv_global_name         = null;
+        $this->_pv_global_val          = null;
+        $this->_pv_globals             = null;
+        $this->_pv_global_count        = null;
         $this->_pv_include_params_data = null;
-        $this->_pv_include_name = null;
-        $this->_pv_include_value = null;
-        $this->_pv_linenum = null;
-        $this->_pv_periodline = null;
-        $this->_pv_paren_count = 0;
-        $this->_pv_statics = null;
-        $this->_pv_static_count = null;
-        $this->_pv_static_val = null;
-        $this->_pv_quote_data = null;
-        $this->_pv_function_data = null;
-        $this->_pv_var = null;
-        $this->_pv_varname = null;
-        $this->_pf_definename_isset = false;
-        $this->_pf_extends_found = false;
-        $this->_pf_includename_isset = false;
-        $this->_pf_get_source = false;
-        $this->_pf_getting_source = false;
-        $this->_pf_in_class = false;
-        $this->_pf_in_define = false;
-        $this->_pf_in_global = false;
-        $this->_pf_in_include = false;
-        $this->_pf_in_var = false;
-        $this->_pf_funcparam_val = false;
-        $this->_pf_quote_active = false;
-        $this->_pf_reset_quote_data = true;
-        $this->_pf_useperiod = false;
-        $this->_pf_var_equals = false;
-        $this->_pf_obj_op = false;
-        $this->_pf_docblock = false;
-        $this->_pf_docblock_template = false;
-        $this->_pf_colon_colon = false;
-        $this->_pv_last_string = false;
-        $this->_pf_inmethod = false;
-        $this->_pf_no_output_yet = false;
-        $this->_pv_saveline = 0;
-        $this->_pv_next_word = false;
-        $this->_save = '';
+        $this->_pv_include_name        = null;
+        $this->_pv_include_value       = null;
+        $this->_pv_linenum             = null;
+        $this->_pv_periodline          = null;
+        $this->_pv_paren_count         = 0;
+        $this->_pv_statics             = null;
+        $this->_pv_static_count        = null;
+        $this->_pv_static_val          = null;
+        $this->_pv_quote_data          = null;
+        $this->_pv_function_data       = null;
+        $this->_pv_var                 = null;
+        $this->_pv_varname             = null;
+        $this->_pf_definename_isset    = false;
+        $this->_pf_extends_found       = false;
+        $this->_pf_includename_isset   = false;
+        $this->_pf_get_source          = false;
+        $this->_pf_getting_source      = false;
+        $this->_pf_in_class            = false;
+        $this->_pf_in_define           = false;
+        $this->_pf_in_global           = false;
+        $this->_pf_in_include          = false;
+        $this->_pf_in_var              = false;
+        $this->_pf_funcparam_val       = false;
+        $this->_pf_quote_active        = false;
+        $this->_pf_reset_quote_data    = true;
+        $this->_pf_useperiod           = false;
+        $this->_pf_var_equals          = false;
+        $this->_pf_obj_op              = false;
+        $this->_pf_docblock            = false;
+        $this->_pf_docblock_template   = false;
+        $this->_pf_colon_colon         = false;
+        $this->_pv_last_string         = false;
+        $this->_pf_inmethod            = false;
+        $this->_pf_no_output_yet       = false;
+        $this->_pv_saveline            = 0;
+        $this->_pv_next_word           = false;
+        $this->_save                   = '';
     }
 
     /**
      * Initialize the {@link $tokenpushEvent, $wordpushEvent} arrays
+     *
+     * @return void
      */
     function phpDocumentor_HighlightParser()
     {
         if (!defined('T_INTERFACE')) {
             define('T_INTERFACE', -1);
         }
-        $this->allowableTags = $GLOBALS['_phpDocumentor_tags_allowed'];
-        $this->allowableInlineTags = $GLOBALS['_phpDocumentor_inline_doc_tags_allowed'];
-        $this->inlineTagHandlers = array('*' => 'handleDefaultInlineTag');
-/**************************************************************/
+        $this->allowableTags
+            = $GLOBALS['_phpDocumentor_tags_allowed'];
+        $this->allowableInlineTags
+            = $GLOBALS['_phpDocumentor_inline_doc_tags_allowed'];
+        $this->inlineTagHandlers
+            = array('*' => 'handleDefaultInlineTag');
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_NOEVENTS] = 
             array(
                 T_OPEN_TAG => PARSER_EVENT_PHPCODE,
             );
 
-/**************************************************************/
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_PHPCODE] = 
             array(
-                T_FUNCTION     => PARSER_EVENT_FUNCTION,
-                T_CLASS     => PARSER_EVENT_CLASS,
+                T_FUNCTION      => PARSER_EVENT_FUNCTION,
+                T_CLASS         => PARSER_EVENT_CLASS,
                 T_INTERFACE     => PARSER_EVENT_CLASS,
-                T_INCLUDE_ONCE => PARSER_EVENT_INCLUDE,
-                T_INCLUDE => PARSER_EVENT_INCLUDE,
-                T_START_HEREDOC   => PARSER_EVENT_EOFQUOTE,
-                T_REQUIRE    => PARSER_EVENT_INCLUDE,
-                T_REQUIRE_ONCE    => PARSER_EVENT_INCLUDE,
-                T_COMMENT   => PARSER_EVENT_COMMENT,
+                T_INCLUDE_ONCE  => PARSER_EVENT_INCLUDE,
+                T_INCLUDE       => PARSER_EVENT_INCLUDE,
+                T_START_HEREDOC => PARSER_EVENT_EOFQUOTE,
+                T_REQUIRE       => PARSER_EVENT_INCLUDE,
+                T_REQUIRE_ONCE  => PARSER_EVENT_INCLUDE,
+                T_COMMENT       => PARSER_EVENT_COMMENT,
                 T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
             );
-        $this->wordpushEvent[PARSER_EVENT_PHPCODE] =
+        $this->wordpushEvent[PARSER_EVENT_PHPCODE]  =
             array(
-                "define"     => PARSER_EVENT_DEFINE,
-                '"'    => PARSER_EVENT_QUOTE,
-                '\''    => PARSER_EVENT_QUOTE,
+                "define" => PARSER_EVENT_DEFINE,
+                '"'      => PARSER_EVENT_QUOTE,
+                '\''     => PARSER_EVENT_QUOTE,
             );
-/**************************************************************/
+        /**************************************************************/
 
-        $this->wordpushEvent[PARSER_EVENT_FUNCTION] =
+        $this->wordpushEvent[PARSER_EVENT_FUNCTION]  =
             array(
-                '{'     => PARSER_EVENT_LOGICBLOCK,
-                '('     => PARSER_EVENT_FUNCTION_PARAMS,
+                '{' => PARSER_EVENT_LOGICBLOCK,
+                '(' => PARSER_EVENT_FUNCTION_PARAMS,
             );
         $this->tokenpushEvent[PARSER_EVENT_FUNCTION] =
             array(
-                T_COMMENT   => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
+                T_COMMENT     => PARSER_EVENT_COMMENT,
+                T_DOC_COMMENT => PARSER_EVENT_DOCBLOCK,
             );
-
-        $this->wordpopEvent[PARSER_EVENT_FUNCTION] = array("}");
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_FUNCTION]   = array("}");
+        /**************************************************************/
 
         $this->tokenpopEvent[PARSER_EVENT_EOFQUOTE] = array(T_END_HEREDOC);
-/**************************************************************/
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_FUNCTION_PARAMS] =
             array(
                 T_CONSTANT_ENCAPSED_STRING => PARSER_EVENT_QUOTE,
-                T_ARRAY => PARSER_EVENT_ARRAY,
-                T_COMMENT => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
+                T_ARRAY                    => PARSER_EVENT_ARRAY,
+                T_COMMENT                  => PARSER_EVENT_COMMENT,
+                T_DOC_COMMENT              => PARSER_EVENT_DOCBLOCK,
             );
-        $this->wordpushEvent[PARSER_EVENT_FUNCTION_PARAMS] =
+        $this->wordpushEvent[PARSER_EVENT_FUNCTION_PARAMS]  =
             array(
                 '"' => PARSER_EVENT_QUOTE,
                 "'" => PARSER_EVENT_QUOTE,
             );
-        $this->wordpopEvent[PARSER_EVENT_FUNCTION_PARAMS] = array(")");
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_FUNCTION_PARAMS]   = array(")");
+        /**************************************************************/
 
-        $this->wordpushEvent[PARSER_EVENT_LOGICBLOCK] = 
+        $this->wordpushEvent[PARSER_EVENT_LOGICBLOCK]  = 
             array(
-                "{"    => PARSER_EVENT_LOGICBLOCK,
-                '"'    => PARSER_EVENT_QUOTE,
+                "{" => PARSER_EVENT_LOGICBLOCK,
+                '"' => PARSER_EVENT_QUOTE,
             );
         $this->tokenpushEvent[PARSER_EVENT_LOGICBLOCK] =
             array(
-                T_GLOBAL    => PARSER_EVENT_FUNC_GLOBAL,
-                T_STATIC    => PARSER_EVENT_STATIC_VAR,
-                T_START_HEREDOC   => PARSER_EVENT_EOFQUOTE,
-                T_CURLY_OPEN    => PARSER_EVENT_LOGICBLOCK,
+                T_GLOBAL                   => PARSER_EVENT_FUNC_GLOBAL,
+                T_STATIC                   => PARSER_EVENT_STATIC_VAR,
+                T_START_HEREDOC            => PARSER_EVENT_EOFQUOTE,
+                T_CURLY_OPEN               => PARSER_EVENT_LOGICBLOCK,
                 T_DOLLAR_OPEN_CURLY_BRACES => PARSER_EVENT_LOGICBLOCK,
             );
+        $this->wordpopEvent[PARSER_EVENT_LOGICBLOCK]   = array("}");
+        $this->tokenpopEvent[PARSER_EVENT_LOGICBLOCK]  = array(T_CURLY_OPEN);
 
-        $this->wordpopEvent[PARSER_EVENT_LOGICBLOCK] = array("}");
-        $this->tokenpopEvent[PARSER_EVENT_LOGICBLOCK] = array(T_CURLY_OPEN);
-
-/**************************************************************/
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_ARRAY] = 
             array(
-                T_COMMENT  => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
+                T_COMMENT     => PARSER_EVENT_COMMENT,
+                T_DOC_COMMENT => PARSER_EVENT_DOCBLOCK,
             );
-        $this->wordpopEvent[PARSER_EVENT_ARRAY] = array(")");
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_ARRAY]   = array(")");
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_FUNC_GLOBAL] =
             array(
-                T_COMMENT   => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
+                T_COMMENT     => PARSER_EVENT_COMMENT,
+                T_DOC_COMMENT => PARSER_EVENT_DOCBLOCK,
             );
-
-        $this->wordpopEvent[PARSER_EVENT_FUNC_GLOBAL] = array(";");
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_FUNC_GLOBAL]   = array(";");
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_STATIC_VAR] =
             array(
-                T_CONSTANT_ENCAPSED_STRING  => PARSER_EVENT_QUOTE,
-                T_COMMENT   => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
+                T_CONSTANT_ENCAPSED_STRING => PARSER_EVENT_QUOTE,
+                T_COMMENT                  => PARSER_EVENT_COMMENT,
+                T_DOC_COMMENT              => PARSER_EVENT_DOCBLOCK,
             );
-        $this->wordpushEvent[PARSER_EVENT_STATIC_VAR] =
+        $this->wordpushEvent[PARSER_EVENT_STATIC_VAR]  =
             array(
-                "="        => PARSER_EVENT_STATIC_VAR_VALUE,
+                "=" => PARSER_EVENT_STATIC_VAR_VALUE,
             );
-        $this->wordpopEvent[PARSER_EVENT_STATIC_VAR] = array(";");
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_STATIC_VAR]   = array(";");
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_STATIC_VAR_VALUE] = 
             array(
-                T_CONSTANT_ENCAPSED_STRING  => PARSER_EVENT_QUOTE,
-                T_COMMENT   => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
-                T_ARRAY     => PARSER_EVENT_ARRAY,
+                T_CONSTANT_ENCAPSED_STRING => PARSER_EVENT_QUOTE,
+                T_COMMENT                  => PARSER_EVENT_COMMENT,
+                T_DOC_COMMENT              => PARSER_EVENT_DOCBLOCK,
+                T_ARRAY                    => PARSER_EVENT_ARRAY,
             );
-        $this->wordpushEvent[PARSER_EVENT_STATIC_VAR_VALUE] =
+        $this->wordpushEvent[PARSER_EVENT_STATIC_VAR_VALUE]  =
             array(
                 '"' => PARSER_EVENT_QUOTE,
                 "'" => PARSER_EVENT_QUOTE,
             );
-        $this->wordpopEvent[PARSER_EVENT_STATIC_VAR_VALUE] = array(";",",");
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_STATIC_VAR_VALUE]   = array(";", ",");
+        /**************************************************************/
         $this->tokenpushEvent[PARSER_EVENT_QUOTE] = 
             array(
                 T_OBJECT_OPERATOR => PARSER_EVENT_CLASS_MEMBER,
-                T_CURLY_OPEN => PARSER_EVENT_QUOTE_VAR,
+                T_CURLY_OPEN      => PARSER_EVENT_QUOTE_VAR,
             );
-
-        $this->wordpopEvent[PARSER_EVENT_QUOTE] = array('"');
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_QUOTE]   = array('"');
+        /**************************************************************/
         $this->tokenpushEvent[PARSER_EVENT_QUOTE_VAR] = 
             array(
                 T_OBJECT_OPERATOR => PARSER_EVENT_CLASS_MEMBER,
-                T_CURLY_OPEN => PARSER_EVENT_QUOTE_VAR,
+                T_CURLY_OPEN      => PARSER_EVENT_QUOTE_VAR,
             );
-
-        $this->wordpushEvent[PARSER_EVENT_QUOTE_VAR] =
+        $this->wordpushEvent[PARSER_EVENT_QUOTE_VAR]  =
             array(
                 "{" => PARSER_EVENT_QUOTE_VAR,
                 '"' => PARSER_EVENT_QUOTE_VAR,
                 "'" => PARSER_EVENT_QUOTE_VAR,
             );
-        $this->wordpopEvent[PARSER_EVENT_QUOTE_VAR] = array('}');
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_QUOTE_VAR]   = array('}');
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_DEFINE] = 
             array(
-                T_COMMENT     => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
-                T_CONSTANT_ENCAPSED_STRING        => PARSER_EVENT_QUOTE,
+                T_COMMENT                  => PARSER_EVENT_COMMENT,
+                T_DOC_COMMENT              => PARSER_EVENT_DOCBLOCK,
+                T_CONSTANT_ENCAPSED_STRING => PARSER_EVENT_QUOTE,
             );
-        $this->wordpushEvent[PARSER_EVENT_DEFINE] = 
+        $this->wordpushEvent[PARSER_EVENT_DEFINE]  = 
             array(
-                "("     => PARSER_EVENT_DEFINE_PARAMS,
+                "(" => PARSER_EVENT_DEFINE_PARAMS,
             );
-        $this->wordpopEvent[PARSER_EVENT_DEFINE] = array(";");
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_DEFINE]   = array(";");
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_DEFINE_PARAMS] = 
             array(
                 T_COMMENT     => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
+                T_DOC_COMMENT => PARSER_EVENT_DOCBLOCK,
             );
-        $this->wordpushEvent[PARSER_EVENT_DEFINE_PARAMS] = 
+        $this->wordpushEvent[PARSER_EVENT_DEFINE_PARAMS]  = 
             array(
-                "("    =>    PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS,
+                "(" => PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS,
                 '"' => PARSER_EVENT_QUOTE,
                 "'" => PARSER_EVENT_QUOTE,
             );
-        $this->wordpopEvent[PARSER_EVENT_DEFINE_PARAMS] = array(")");
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_DEFINE_PARAMS]   = array(")");
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS] =
             array(
                 T_COMMENT     => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
+                T_DOC_COMMENT => PARSER_EVENT_DOCBLOCK,
             );
-        $this->wordpushEvent[PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS] =
+        $this->wordpushEvent[PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS]  =
             array(
-                "("    =>    PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS,
+                "(" => PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS,
                 '"' => PARSER_EVENT_QUOTE,
                 "'" => PARSER_EVENT_QUOTE,
             );
-        $this->wordpopEvent[PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS] = array(")");
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_DEFINE_PARAMS_PARENTHESIS]   = array(")");
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_VAR] = 
             array(
                 T_COMMENT     => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
-                T_ARRAY     => PARSER_EVENT_ARRAY,
+                T_DOC_COMMENT => PARSER_EVENT_DOCBLOCK,
+                T_ARRAY       => PARSER_EVENT_ARRAY,
             );
-        $this->wordpopEvent[PARSER_EVENT_VAR] = array(";");
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_VAR]   = array(";");
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_CLASS] = 
             array(
-                T_FUNCTION     => PARSER_EVENT_METHOD,
+                T_FUNCTION    => PARSER_EVENT_METHOD,
                 T_VAR         => PARSER_EVENT_VAR,
-                T_COMMENT         => PARSER_EVENT_DOCBLOCK,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
-                T_CLOSE_TAG        => PARSER_EVENT_OUTPHP,
+                T_COMMENT     => PARSER_EVENT_DOCBLOCK,
+                T_DOC_COMMENT => PARSER_EVENT_DOCBLOCK,
+                T_CLOSE_TAG   => PARSER_EVENT_OUTPHP,
             );
-        $this->wordpopEvent[PARSER_EVENT_CLASS] = array("}");
+        $this->wordpopEvent[PARSER_EVENT_CLASS]   = array("}");
+        /**************************************************************/
 
-/**************************************************************/
-
-        $this->wordpushEvent[PARSER_EVENT_METHOD] =
+        $this->wordpushEvent[PARSER_EVENT_METHOD]  =
             array(
-                '{'     => PARSER_EVENT_METHOD_LOGICBLOCK,
-                '('     => PARSER_EVENT_FUNCTION_PARAMS,
+                '{' => PARSER_EVENT_METHOD_LOGICBLOCK,
+                '(' => PARSER_EVENT_FUNCTION_PARAMS,
             );
         $this->tokenpushEvent[PARSER_EVENT_METHOD] =
             array(
-                T_COMMENT   => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
+                T_COMMENT     => PARSER_EVENT_COMMENT,
+                T_DOC_COMMENT => PARSER_EVENT_DOCBLOCK,
             );
+        $this->wordpopEvent[PARSER_EVENT_METHOD]   = array("}", ";");
+        /**************************************************************/
 
-        $this->wordpopEvent[PARSER_EVENT_METHOD] = array("}", ";");
-/**************************************************************/
-
-        $this->wordpushEvent[PARSER_EVENT_METHOD_LOGICBLOCK] = 
+        $this->wordpushEvent[PARSER_EVENT_METHOD_LOGICBLOCK]  = 
             array(
-                "{"    => PARSER_EVENT_METHOD_LOGICBLOCK,
-                '"'    => PARSER_EVENT_QUOTE,
+                "{" => PARSER_EVENT_METHOD_LOGICBLOCK,
+                '"' => PARSER_EVENT_QUOTE,
             );
         $this->tokenpushEvent[PARSER_EVENT_METHOD_LOGICBLOCK] =
             array(
-                T_OBJECT_OPERATOR => PARSER_EVENT_CLASS_MEMBER,
-                T_GLOBAL    => PARSER_EVENT_FUNC_GLOBAL,
-                T_STATIC    => PARSER_EVENT_STATIC_VAR,
-                T_CURLY_OPEN    => PARSER_EVENT_LOGICBLOCK,
+                T_OBJECT_OPERATOR          => PARSER_EVENT_CLASS_MEMBER,
+                T_GLOBAL                   => PARSER_EVENT_FUNC_GLOBAL,
+                T_STATIC                   => PARSER_EVENT_STATIC_VAR,
+                T_CURLY_OPEN               => PARSER_EVENT_LOGICBLOCK,
                 T_DOLLAR_OPEN_CURLY_BRACES => PARSER_EVENT_LOGICBLOCK,
             );
-
-        $this->wordpopEvent[PARSER_EVENT_METHOD_LOGICBLOCK] = array("}");
-        $this->tokenpopEvent[PARSER_EVENT_METHOD_LOGICBLOCK] = array(T_CURLY_OPEN);
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_METHOD_LOGICBLOCK]   = array("}");
+        $this->tokenpopEvent[PARSER_EVENT_METHOD_LOGICBLOCK]  = array(T_CURLY_OPEN);
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_INCLUDE] = 
             array(
                 T_COMMENT     => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
+                T_DOC_COMMENT => PARSER_EVENT_DOCBLOCK,
             );
-        $this->wordpushEvent[PARSER_EVENT_INCLUDE] = 
+        $this->wordpushEvent[PARSER_EVENT_INCLUDE]  = 
             array(
-                "("     => PARSER_EVENT_INCLUDE_PARAMS,
+                "(" => PARSER_EVENT_INCLUDE_PARAMS,
             );
-        $this->wordpopEvent[PARSER_EVENT_INCLUDE] = array(";");
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_INCLUDE]   = array(";");
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_INCLUDE_PARAMS] = 
             array(
                 T_COMMENT     => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
+                T_DOC_COMMENT => PARSER_EVENT_DOCBLOCK,
             );
-        $this->wordpushEvent[PARSER_EVENT_INCLUDE_PARAMS] = 
+        $this->wordpushEvent[PARSER_EVENT_INCLUDE_PARAMS]  = 
             array(
-                "("    =>    PARSER_EVENT_INCLUDE_PARAMS_PARENTHESIS,
+                "(" => PARSER_EVENT_INCLUDE_PARAMS_PARENTHESIS,
             );
-        $this->wordpopEvent[PARSER_EVENT_INCLUDE_PARAMS] = array(")");
-/**************************************************************/
+        $this->wordpopEvent[PARSER_EVENT_INCLUDE_PARAMS]   = array(")");
+        /**************************************************************/
 
         $this->tokenpushEvent[PARSER_EVENT_INCLUDE_PARAMS_PARENTHESIS] =
             array(
                 T_COMMENT     => PARSER_EVENT_COMMENT,
-                T_DOC_COMMENT   => PARSER_EVENT_DOCBLOCK,
+                T_DOC_COMMENT => PARSER_EVENT_DOCBLOCK,
             );
-        $this->wordpushEvent[PARSER_EVENT_INCLUDE_PARAMS_PARENTHESIS] =
+        $this->wordpushEvent[PARSER_EVENT_INCLUDE_PARAMS_PARENTHESIS]  =
             array(
-                "("    =>    PARSER_EVENT_INCLUDE_PARAMS_PARENTHESIS,
+                "(" => PARSER_EVENT_INCLUDE_PARAMS_PARENTHESIS,
             );
-        $this->wordpopEvent[PARSER_EVENT_INCLUDE_PARAMS_PARENTHESIS] = array(")");
+        $this->wordpopEvent[PARSER_EVENT_INCLUDE_PARAMS_PARENTHESIS]   = array(")");
     }
 }
 ?>
