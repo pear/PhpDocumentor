@@ -26,6 +26,7 @@
   <caution>If @package is not present in the same DocBlock, the @subpackage tag is ignored.  A SUBPACKAGE NAME MUST BE ONE WORD WITH NO SPACES OR NEWLINES CONTAINING ONLY LETTERS, DIGITS, and "_", "-", "[" or "]"</caution>
   <para>A @subpackage tag is applied to documented elements in the same way that @package is applied.</para>
   <para>If a file contains functions and defines, they will be packaged by a page-level DocBlock.  A page-level DocBlock is a DocBlock that is not paired with any phpDocumentor element (include, function, define, class, class function, class variable).</para>
+  <para>NOTE:  The @subpackage tag is intended to help categorize the elements that are in an actual @package value.  Since PHP itself doesn't allow you to have two functions with the same name in the same script, PhpDocumentor also requires all names in an @package to be unique... meaning, @subpackage does not allow further "naming separation" inside that @package.  What it does do is allow a level of visual grouping/separation of the elements inside that @package.</para>
  </refsect1>
  <refsect1 id="{@id example}">
   <title>Example</title>
