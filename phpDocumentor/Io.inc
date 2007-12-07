@@ -540,7 +540,11 @@ class Io
         foreach($allfiles as $file)
         {
             if ($this->checkIgnore(basename($file),dirname(realpath($file)),$ignore,$ignoresymlinks)) continue;
-            $path = substr(dirname($file),strlen(str_replace('\\','/',realpath($base_dir)))+1);
+            if (PHPDOCUMENTOR_WINDOWS) {
+                $path = substr(dirname($file),strlen(str_replace('\\','/',realpath($base_dir))));
+            } else {
+                $path = substr(dirname($file),strlen(str_replace('\\','/',realpath($base_dir)))+1);
+            }
             if (!$path) $path = '/';
             $parts = pathinfo($file);
             if (!isset($parts['extension']))
