@@ -64,12 +64,15 @@ class Io
     /**
      * A specific array of values that boolean-based arguments can understand,
      * aided by the {@link decideOnOrOff()} helper method.
+     * 
+     * Use lowercase letters always, to simplify string comparisons
      * @var array 
      */
     var $valid_booleans = array
     (
-        '', ' ', 'on', 'On', 'ON', 'y', 'Y', 'yes', 'Yes', 'YES', 'true', 'True', 'TRUE', '1', 
-        'off', 'Off', 'OFF', 'n', 'N', 'no', 'No', 'NO', 'false', 'False', 'FALSE', '0'
+        '', ' ', 'on', 'y', 'yes', 'true', '1', 
+        'off', 'n', 'no', 'false', '0'
+
     );
     
     /**
@@ -269,10 +272,12 @@ class Io
      * Parses $_SERVER['argv'] and creates a setup array
      * @return array a setup array
      * @global array command-line arguments
+     * @todo replace with Console_* ?
      */
     function parseArgv()
     {
         global $argv;
+
         // defaults for setting
         $setting['hidden'] = "off";
         $setting['ignoresymlinks'] = 'off';
@@ -284,9 +289,6 @@ class Io
         {
             foreach ($argv as $cmd)
             {
-                //if($cmd === 'phpdoc' || basename($cmd)==='phpdoc')
-                //    continue;
-
                 if ($cmd == '--') {
                     continue;
                 }
@@ -295,13 +297,27 @@ class Io
                     echo $this->displayHelpMsg();
                     die();
                 }
+
+                // at first, set the arg value as if we
+                // already know it's formatted normally, e.g.
+                //    -q on
+                $setting[$valnext] = $cmd;
+
                 if (isset($data['type']) && $data['type'] == 'set') {
-                    if (!in_array(strtolower($cmd), $data['validvalues'], true)) {
+
+                    if ($valnext !== 'junk' && strpos(trim($cmd),'-') === 0) {
+                        // if valnext isn't 'junk' (i.e it was an arg option) 
+                        // then the first arg needs an implicit "" as its value, e.g.
+                        //     ... -q -pp ...  ===>  ... -q '' -pp ... 
+                        $setting[$valnext] = '';
+
+                    } else if (!in_array(strtolower($cmd), $data['validvalues'], true)) {
+                        // the arg value is not a valid value
                         addErrorDie(PDERROR_INVALID_VALUES, $valnext, $cmd,
                             '(' . implode(', ', $data['validvalues']) . ')');
                     }
                 }
-                $setting[$valnext] = $cmd;
+
                 foreach( $this->phpDocOptions as $name => $data )
                 {
                     if (!empty($data['tag']))
@@ -317,10 +333,21 @@ class Io
                         }
                     }
                 }
-                if ($valnext == 'junk' && (strpos(trim($cmd),'-') === 0))
-                {
+
+                if ($valnext == 'junk' && (strpos(trim($cmd),'-') === 0)) {
+                    // this indicates the last arg of the command 
+                    // is an arg option (-) that was preceded by unrecognized "junk"
                     addErrorDie(PDERROR_UNKNOWN_COMMANDLINE,$cmd);
+
+                } else if ($valnext != 'junk' && (strpos(trim($cmd),'-') === 0)) {
+                    // this indicates the last arg of the command 
+                    // is an arg option (-) without an arg value
+                    
+                    // add an empty arg "value" for this arg "option"
+                    $setting[$valnext] = '';
                 }
+
+
             }
         } else
         {
@@ -336,6 +363,7 @@ class Io
             echo $this->displayhelpMsg();
             die();
         }
+
         return $setting;
     }
 
