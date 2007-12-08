@@ -420,12 +420,19 @@ class ProceduralPages
      */
     function setName($name)
     {
-        $this->pages[$name][$this->curfile] 
-            = $this->pages[$this->pathpages[$this->curfile]][$this->curfile];
-        $this->pages[$name][$this->curfile]->file 
-            = $name;
-        unset($this->pages[$this->pathpages[$this->curfile]][$this->curfile]);
-        $this->pathpages[$this->curfile] = $name;
+        if ($this->pages[$name][$this->curfile]->file == $name) {
+            addWarning(PDERROR_NAME_ALIAS_SAME_AS_TARGET,'');
+
+        } else {
+            $this->pages[$name][$this->curfile]
+                = $this->pages[$this->pathpages[$this->curfile]][$this->curfile];
+            $this->pages[$name][$this->curfile]->file
+                = $name;
+
+            unset($this->pages[$this->pathpages[$this->curfile]][$this->curfile]);
+
+            $this->pathpages[$this->curfile] = $name;
+        }
     }
     
     /**

@@ -123,18 +123,22 @@ define("PDERROR_UNKNOWN_TAG", 18);
 define("PDERROR_MULTIPLE_NAME_TAGS", 19);
 /**
  * warning triggered when there are multiple @name tags in a docblock
+ * @todo I think this description is a copy/paste that was never updated
  */
 define("PDERROR_PACKAGEOUTPUT_DELETES_PARENT_FILE", 20);
 /**
  * warning triggered when there are multiple @name tags in a docblock
+ * @todo I think this description is a copy/paste that was never updated
  */
 define("PDERROR_GLOBAL_NOT_FOUND", 21);
 /**
  * warning triggered when there are multiple @name tags in a docblock
+ * @todo I think this description is a copy/paste that was never updated
  */
 define("PDERROR_MULTIPLE_GLOBAL_TAGS", 22);
 /**
  * warning triggered when there are multiple @name tags in a docblock
+ * @todo I think this description is a copy/paste that was never updated
  */
 define("PDERROR_MALFORMED_GLOBAL_TAG", 23);
 /**
@@ -153,14 +157,17 @@ define("PDERROR_ELEMENT_IGNORED", 25);
 define("PDERROR_PARSEPRIVATE", 26);
 /**
  * warning triggered when an entire page is ignored because of @access private
+ * @todo I think this description is a copy/paste that was never updated
  */
 define("PDERROR_UNKNOWN_COMMANDLINE", 27);
 /**
  * warning triggered when an entire page is ignored because of @access private
+ * @todo I think this description is a copy/paste that was never updated
  */
 define("PDERROR_NEED_WHITESPACE", 28);
 /**
  * warning triggered when an entire page is ignored because of @access private
+ * @todo I think this description is a copy/paste that was never updated
  */
 define("PDERROR_CLASS_PARENT_NOT_FOUND", 29);
 /**
@@ -408,6 +415,11 @@ define("PDERROR_MISSING_PROPERTY_TAG_NAME", 79);
  * warning triggered when the PHP version being used has dangerous bug/behavior
  */
 define("PDERROR_DANGEROUS_PHP_BUG_EXISTS", 80);
+/**
+ * warning triggered when the alias value in an page-level docblock's @name tag
+ * is the same value as the target filename is it supposed to alias
+ */
+define("PDERROR_NAME_ALIAS_SAME_AS_TARGET", 81);
 
 /**
  * Error messages for phpDocumentor parser warnings
@@ -519,6 +531,9 @@ $GLOBALS['phpDocumentor_warning_descrip'] =
         ,
         PDERROR_MISSING_PROPERTY_TAG_NAME => 
             '@%s magic tag does not have name, illegal. Ignoring tag "@%s %s %s"'
+        ,
+        PDERROR_NAME_ALIAS_SAME_AS_TARGET => 
+            '@name value is the same as the filename it is supposed to alias'
         );
 
 
