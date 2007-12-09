@@ -496,7 +496,8 @@ $GLOBALS['phpDocumentor_warning_descrip'] =
             'will now replace with category %s'
         ,
         PDERROR_SOURCECODE_IGNORED => 
-            'sourcecode command-line option is ignored for PHP versions < 4.3.0'
+            'sourcecode command-line option is ignored ' . 
+            'when your PHP build has no tokenizer support'
         ,
         PDERROR_INHERITDOC_DONT_WORK_HERE => 
             '{@inheritdoc} can only be used in the docblock of a child class'
@@ -683,7 +684,7 @@ $GLOBALS['phpDocumentor_error_descrip'] =
             'Unclosed %s tag in DocBlock, parsing will be incorrect'
         ,
         PDERROR_TAG_NOT_HANDLED => 
-            '"%s" tag is not available in PHP versions less than 4.3.0, tag ignored'
+            '"%s" tag is not available in PHP built without tokenizer support, tag ignored'
         ,
         PDERROR_MALFORMED_TAG => 
             '"%s" tag was used without any parameters, illegal'

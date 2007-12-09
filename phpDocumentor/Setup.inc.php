@@ -207,8 +207,14 @@ class phpDocumentor_setup
             $this->parse = new phpDocumentorTParser;
         } else
         {
-            phpDocumentor_out("using default (slower) Parser - get PHP 4.3.0+
-and load the tokenizer extension for faster parsing (your version is ".phpversion()."\n");
+            phpDocumentor_out("No Tokenizer support detected, so using default (slower) Parser..." . PHP_EOL);
+
+            if (version_compare(phpversion(), '4.3.0', '<')) {
+                phpDocumentor_out("    for faster parsing, recompile PHP with --enable-tokenizer." . PHP_EOL );
+            } else {
+                phpDocumentor_out("    for faster parsing, recompile PHP without --disable-tokenizer." . PHP_EOL );
+            }
+
             $this->parse = new Parser;
         }
     }
