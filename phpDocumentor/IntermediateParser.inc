@@ -1124,7 +1124,7 @@ class phpDocumentor_IntermediateParser
             addWarning(PDERROR_NO_PACKAGE_TAG,'file',$this->data->parent->getPath(),$this->last->package);
         }
         if (isset($this->packagecategories[$this->package])
-            && $this->packagecategories[$this->package] != $this->category)
+            && $this->packagecategories[$this->package] != $data->category)
             addWarning(PDERROR_PACKAGECAT_SET,$this->package,
                         $this->packagecategories[$this->package],
                         $data->category);
