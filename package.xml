@@ -1431,20 +1431,20 @@ Includes these Sourceforge items:
     <file name="tokenizer_test.php" role="php" />
    </dir> <!-- /scripts -->
    <dir name="tests">
-    <file name="AllTests.php" role="php" />
-    <file name="HighlightParserGetInlineTagsTests.php" role="php" />
-    <file name="HighlightParserTests.php" role="php" />
-    <file name="IntermediateParserAddPrivatePageTests.php" role="php" />
-    <file name="IntermediateParserTests.php" role="php" />
-    <file name="ParserClassGetSourceLocationTests.php" role="php" />
-    <file name="ParserClassTests.php" role="php" />
-    <file name="ParserPageGetSourceLocationTests.php" role="php" />
-    <file name="ParserPageTests.php" role="php" />
-    <file name="phpDocumentorSetupCleanConverterNamePieceTests.php" role="php" />
-    <file name="phpDocumentorSetupDecideOnOrOffTests.php" role="php" />
-    <file name="phpDocumentorSetupTests.php" role="php" />
-    <file name="phpDocumentorTParserGetInlineTagsTests.php" role="php" />
-    <file name="phpDocumentorTParserTests.php" role="php" />
+    <file name="AllTests.php" role="test" />
+    <file name="HighlightParserGetInlineTagsTests.php" role="test" />
+    <file name="HighlightParserTests.php" role="test" />
+    <file name="IntermediateParserAddPrivatePageTests.php" role="test" />
+    <file name="IntermediateParserTests.php" role="test" />
+    <file name="ParserClassGetSourceLocationTests.php" role="test" />
+    <file name="ParserClassTests.php" role="test" />
+    <file name="ParserPageGetSourceLocationTests.php" role="test" />
+    <file name="ParserPageTests.php" role="test" />
+    <file name="phpDocumentorSetupCleanConverterNamePieceTests.php" role="test" />
+    <file name="phpDocumentorSetupDecideOnOrOffTests.php" role="test" />
+    <file name="phpDocumentorSetupTests.php" role="test" />
+    <file name="phpDocumentorTParserGetInlineTagsTests.php" role="test" />
+    <file name="phpDocumentorTParserTests.php" role="test" />
    </dir> <!-- /tests -->
    <dir name="tutorials">
     <dir name="Converters">
