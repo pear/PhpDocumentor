@@ -63,6 +63,7 @@ $options = array(
     'docbuilder' => 'data',
     'HTML_TreeMenu-1.1.2' => 'data',
     'tutorials' => 'doc',
+    'tests' => 'test',
     ),
 'simpleoutput' => true,
 'exceptions' =>
