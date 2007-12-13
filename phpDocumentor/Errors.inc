@@ -420,6 +420,10 @@ define("PDERROR_DANGEROUS_PHP_BUG_EXISTS", 80);
  * is the same value as the target filename is it supposed to alias
  */
 define("PDERROR_NAME_ALIAS_SAME_AS_TARGET", 81);
+/**
+ * warning triggered when the a loop recursion tripwire has been tripped
+ */
+define("PDERROR_LOOP_RECURSION_LIMIT_REACHED", 82);
 
 /**
  * Error messages for phpDocumentor parser warnings
@@ -719,6 +723,10 @@ $GLOBALS['phpDocumentor_error_descrip'] =
         PDERROR_DANGEROUS_PHP_BUG_EXISTS => 
             'Dangerous PHP Bug exists in PHP version %s that can be triggered ' .
             'by this parse (see PHP Bug #%s and PEAR Bug #%s)'
+        ,
+        PDERROR_LOOP_RECURSION_LIMIT_REACHED => 
+            'An internal loop in PhpDocumentor has reached its preset ' .
+            'recursion limit, preventing a possible infinite loop condition.'
         );
 
 /**

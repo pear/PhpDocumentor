@@ -385,8 +385,12 @@ class parserDescParser extends Parser
         $this->wp->setWhitespace(true);
         $this->p_vars['list_count'] = 0;
         if ($sdesc) $this->p_vars['start'] = false;
+
+        // beware of infinite loops
+        $infiniteLoopCatcher = 0;
         do
         {
+            $infiniteLoopCatcher++;
             if (!isset($this->pars[$this->p_vars['curpar']])) $this->pars[$this->p_vars['curpar']] = new $ind_type;
             $lpevent = $pevent;
             $pevent = $this->p_vars['event_stack']->getEvent();
@@ -428,12 +432,18 @@ class parserDescParser extends Parser
                 debug('WARNING: possible error, no ParserDescParser handler for event number '.$pevent);
                 if ($endrecur++ == 25)
                 {
-                    die("FATAL ERROR, recursion limit reached");
+                    addErrorDie(PDERROR_LOOP_RECURSION_LIMIT_REACHED);
                 }
             }
             if (is_object($word) || trim($word) != '')
             {
                 $this->p_vars['start'] = false;
+            }
+
+            if ($infiniteLoopCatcher > 10000) {
+                echo PHP_EOL . "FATAL ERROR:  Somehow we got into an infinite loop in parserDescCleanup->parse()'s do-while loop...";
+                echo PHP_EOL . "    The line being parsed was:  " . $word . PHP_EOL . PHP_EOL;
+                addErrorDie(PDERROR_LOOP_RECURSION_LIMIT_REACHED);
             }
         } while (is_object($word) || !($word === false) && $word != '');
         $context = $this->getContext();
