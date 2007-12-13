@@ -1141,7 +1141,8 @@ function addErrorDie($num)
         }
     }
     $phpDocumentor_errors->addErrorReturn($num, $a[0], $a[1], $a[2], $a[3]);
-    die($phpDocumentor_errors->returnLastError());
+    echo $phpDocumentor_errors->returnLastError();
+    die(1);
 }
 
 /**
