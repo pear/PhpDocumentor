@@ -7,46 +7,28 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 $packagedir = dirname(dirname(__FILE__));
 $notes = '
 Includes these PEAR items:
-Req #10670: Don&apos;t Die on Empty Tag Descriptions
-Bug #10864: PhpDocumentor dies when parsing illegal page-level docblock
-Bug #10870: Dead links generated with HTML:Smarty:PHP
-Bug #10871: Wrong rendering of inline {@internal}}
-Bug #10910: DOM templates create incorrect trees
-Bug #11409: PHP Notices accompany Global Never Found errors
-Doc #10675: Clear some errors.html items
-Doc #10730: Replace Sourceforge Trackers with PEAR
-Doc #10914: Can&apos;t use nested tags inside &lt;kbd&gt; or &lt;samp&gt;
-Doc #10972: @method does not work
-Doc #11032: param type1|type2 not documented
-Doc #11143: Provide a Minimal Tutorial File Setup Example
+Req #11755: Remove Unused DocBlock_Lexer and PHPT Tests [ashnazg]
+Req #11757: Move PhpUnit Tests into new tests dir [ashnazg]
+Bug #10909: PHP Notice in PDF Converter line 210 [ashnazg]
+Bug #11613: -q flag is not honoured [ashnazg]
+Bug #11683: examples displayed using earthli style are not rendered properly [ashnazg|kguest]
+Bug #11788: Two failing unit tests [ashnazg]
+Bug #11809: Incorrect @name usage causes fatal crash [ashnazg]
+Bug #12121: phpdoc.bat cannot launch php.exe [ashnazg|kalvaro]
+Bug #12172: media files are not being copied [ashnazg|nemesis]
+Bug #12201: Misleading error message [ashnazg|yunosh]
+Doc #12459: @subpackage does not fix name conflicts [ashnazg]
 
 Includes these Sourceforge items:
-- [1733938] regression: &quot;-&quot; not allowed anymore in converter (file)name
-- [1733936] &quot;phpdoc&quot; does not return with error code &quot;0&quot; on success
-- [1733345] inline @link tag renders wrong way
-- [1724990] @static tag example
-- [1724884] object return parameter value
-- [1722096] DocBlock template example does not work
-- [1720764] documentation update needed
-- [1672589] missing elements, bad links with HTML:Smarty:HandS
-- [1647423] memory_limit: bad if-clause
-- [1634153] require/include with concatenated file name
-- [1632496] {@internal}} becomes wrong on documentation
-- [1622538] List undocumented classes/functions
-- [1602988] Added --ignore-symlinks option
-- [1588942] Allow memory_limit setting in phpdoc.ini
-- [1588936] Show INI Path at Startup
-- [1585840] Refactored RETURNs #3
-- [1574047] Refactored RETURNs #2
-- [1574043] Refactored RETURNs #1
-- [1543289] Apply ignore patterns to subdir of dir, instead of full path
-- [1543287] Use predefined PHP env var in phpdoc script
-- [1540666] patch for @property, @property-read and @property-write tags
-- [1124133] &lt;code&gt; and @include....
-- [1044752] List undocumented classes/functions
+- [1846302] php version > 4.3.0 and tokenizer [ashnazg]
+- [1845584] File suffix should be lowercase [ashnazg]
+- [1842595] makedoc.sh doesn\'t like embedded blanks in paths [ashnazg|munroe_r]
+- [1839924] addErrorDie has to exit with non-zero return code! [ashnazg|blueyed]
+- [1826342] Data-dependent endless(?) loop in parser [ashnazg]
+- [1733936] "phpdoc" does not return with error code "0" on success [ashnazg|blueyed]
 
 ';
-$version = '1.4.0';
+$version = '1.4.1';
 $release_stability = 'stable';
 $api = '1.4.0';
 $api_stability = 'stable';
@@ -59,7 +41,6 @@ $options = array(
 'package' => 'PhpDocumentor',
 'dir_roles' => array(
     'Documentation' => 'doc',
-    'Documentation/tests' => 'test',
     'docbuilder' => 'data',
     'HTML_TreeMenu-1.1.2' => 'data',
     'tutorials' => 'doc',
@@ -76,24 +57,7 @@ $options = array(
         'INSTALL' => 'doc',
         'FAQ' => 'doc',
         'Authors' => 'doc',
-        'Release-1.2.0beta1' => 'doc',
-        'Release-1.2.0beta2' => 'doc',
-        'Release-1.2.0beta3' => 'doc',
-        'Release-1.2.0rc1' => 'doc',
-        'Release-1.2.0rc2' => 'doc',
-        'Release-1.2.0' => 'doc',
-        'Release-1.2.1' => 'doc',
-        'Release-1.2.2' => 'doc',
-        'Release-1.2.3' => 'doc',
-        'Release-1.2.3.1' => 'doc',
-        'Release-1.3.0' => 'doc',
-        'Release-1.3.1' => 'doc',
-        'Release-1.3.2' => 'doc',
-        'Release-1.4.0alpha1' => 'doc',
-        'Release-1.4.0alpha2' => 'doc',
-        'Release-1.4.0rc1' => 'doc',
-        'Release-1.4.0rc2' => 'doc',
-        'Release-1.4.0' => 'doc',
+        'Release-1.4.1' => 'doc',
         'pear-phpdoc' => 'script',
         'pear-phpdoc.bat' => 'script',
         'HTML_TreeMenu-1.1.2/TreeMenu.php' => 'php',
@@ -103,9 +67,7 @@ $options = array(
         ),
 'ignore' =>
     array('package.xml',
-          'package2.xml',
           '*templates/PEAR/*',
-          'publicweb-PEAR-1.2.1.patch.txt',
           ),
 'installexceptions' => array('pear-phpdoc' => '/', 'pear-phpdoc.bat' => '/', 'scripts/makedoc.sh' => '/'),
 );
@@ -167,7 +129,7 @@ $pfm2->generateContents();
 $pfm2->setPackageType('php');
 $pfm2->addRelease();
 $pfm2->setOsInstallCondition('windows');
-// these next two files are only used if the archive is extracted as-is
+// these next few files are only used if the archive is extracted as-is
 // without installing via "pear install blah"
 $pfm2->addIgnoreToRelease("phpdoc");
 $pfm2->addIgnoreToRelease('phpdoc.bat');
@@ -177,14 +139,6 @@ $pfm2->addInstallAs('pear-phpdoc', 'phpdoc');
 $pfm2->addInstallAs('pear-phpdoc.bat', 'phpdoc.bat');
 $pfm2->addInstallAs('user/pear-makedocs.ini', 'user/makedocs.ini');
 $pfm2->addRelease();
-// these next two files are only used if the archive is extracted as-is
-// without installing via "pear install blah"
-$pfm2->addIgnoreToRelease("phpdoc");
-$pfm2->addIgnoreToRelease('phpdoc.bat');
-$pfm2->addIgnoreToRelease('user/makedocs.ini');
-$pfm2->addIgnoreToRelease('pear-phpdoc.bat');
-$pfm2->addInstallAs('pear-phpdoc', 'phpdoc');
-$pfm2->addInstallAs('user/pear-makedocs.ini', 'user/makedocs.ini');
 if (isset($_GET['make']) || (isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] == 'make')) {
     $pfm2->writePackageFile();
 } else {

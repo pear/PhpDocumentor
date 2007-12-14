@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.6.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.7.0RC1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>PhpDocumentor</name>
  <channel>pear.php.net</channel>
  <summary>The phpDocumentor package provides automatic documenting of php api directly from the source.</summary>
@@ -69,10 +69,10 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>ashnazg@php.net</email>
   <active>yes</active>
  </developer>
- <date>2007-11-18</date>
- <time>10:28:34</time>
+ <date>2007-12-14</date>
+ <time>05:45:24</time>
  <version>
-  <release>1.4.0</release>
+  <release>1.4.1</release>
   <api>1.4.0</api>
  </version>
  <stability>
@@ -82,43 +82,25 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
  <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
  <notes>
 Includes these PEAR items:
-Req #10670: Don&amp;apos;t Die on Empty Tag Descriptions
-Bug #10864: PhpDocumentor dies when parsing illegal page-level docblock
-Bug #10870: Dead links generated with HTML:Smarty:PHP
-Bug #10871: Wrong rendering of inline {@internal}}
-Bug #10910: DOM templates create incorrect trees
-Bug #11409: PHP Notices accompany Global Never Found errors
-Doc #10675: Clear some errors.html items
-Doc #10730: Replace Sourceforge Trackers with PEAR
-Doc #10914: Can&amp;apos;t use nested tags inside &amp;lt;kbd&amp;gt; or &amp;lt;samp&amp;gt;
-Doc #10972: @method does not work
-Doc #11032: param type1|type2 not documented
-Doc #11143: Provide a Minimal Tutorial File Setup Example
+Req #11755: Remove Unused DocBlock_Lexer and PHPT Tests [ashnazg]
+Req #11757: Move PhpUnit Tests into new tests dir [ashnazg]
+Bug #10909: PHP Notice in PDF Converter line 210 [ashnazg]
+Bug #11613: -q flag is not honoured [ashnazg]
+Bug #11683: examples displayed using earthli style are not rendered properly [ashnazg|kguest]
+Bug #11788: Two failing unit tests [ashnazg]
+Bug #11809: Incorrect @name usage causes fatal crash [ashnazg]
+Bug #12121: phpdoc.bat cannot launch php.exe [ashnazg|kalvaro]
+Bug #12172: media files are not being copied [ashnazg|nemesis]
+Bug #12201: Misleading error message [ashnazg|yunosh]
+Doc #12459: @subpackage does not fix name conflicts [ashnazg]
 
 Includes these Sourceforge items:
-- [1733938] regression: &amp;quot;-&amp;quot; not allowed anymore in converter (file)name
-- [1733936] &amp;quot;phpdoc&amp;quot; does not return with error code &amp;quot;0&amp;quot; on success
-- [1733345] inline @link tag renders wrong way
-- [1724990] @static tag example
-- [1724884] object return parameter value
-- [1722096] DocBlock template example does not work
-- [1720764] documentation update needed
-- [1672589] missing elements, bad links with HTML:Smarty:HandS
-- [1647423] memory_limit: bad if-clause
-- [1634153] require/include with concatenated file name
-- [1632496] {@internal}} becomes wrong on documentation
-- [1622538] List undocumented classes/functions
-- [1602988] Added --ignore-symlinks option
-- [1588942] Allow memory_limit setting in phpdoc.ini
-- [1588936] Show INI Path at Startup
-- [1585840] Refactored RETURNs #3
-- [1574047] Refactored RETURNs #2
-- [1574043] Refactored RETURNs #1
-- [1543289] Apply ignore patterns to subdir of dir, instead of full path
-- [1543287] Use predefined PHP env var in phpdoc script
-- [1540666] patch for @property, @property-read and @property-write tags
-- [1124133] &amp;lt;code&amp;gt; and @include....
-- [1044752] List undocumented classes/functions
+- [1846302] php version &gt; 4.3.0 and tokenizer [ashnazg]
+- [1845584] File suffix should be lowercase [ashnazg]
+- [1842595] makedoc.sh doesn&apos;t like embedded blanks in paths [ashnazg|munroe_r]
+- [1839924] addErrorDie has to exit with non-zero return code! [ashnazg|blueyed]
+- [1826342] Data-dependent endless(?) loop in parser [ashnazg]
+- [1733936] &quot;phpdoc&quot; does not return with error code &quot;0&quot; on success [ashnazg|blueyed]
 
  </notes>
  <contents>
@@ -205,63 +187,63 @@ Includes these Sourceforge items:
     </dir> <!-- /Documentation/Release-old -->
     <dir name="tests">
      <dir name="bug-557861">
-      <file name="bug-557861.php" role="test" />
+      <file name="bug-557861.php" role="doc" />
      </dir> <!-- /Documentation/tests/bug-557861 -->
-     <file name="bug-441275.php" role="test" />
-     <file name="bug-441278.php" role="test" />
-     <file name="bug-441287.php" role="test" />
-     <file name="bug-441289.php" role="test" />
-     <file name="bug-441433.php" role="test" />
-     <file name="bug-443153.php" role="test" />
-     <file name="bug-445298.php" role="test" />
-     <file name="bug-445305.php" role="test" />
-     <file name="bug-445820.php" role="test" />
-     <file name="bug-489398.php" role="test" />
-     <file name="bug-540341.php" role="test" />
-     <file name="bug-540368.php" role="test" />
-     <file name="bug-541886.php" role="test" />
-     <file name="bug-542586.php" role="test" />
-     <file name="bug-548331.php" role="test" />
-     <file name="bug-550489.php" role="test" />
-     <file name="bug-551120.php" role="test" />
-     <file name="bug-553137.php" role="test" />
-     <file name="bug-553138.php" role="test" />
-     <file name="bug-553560.php" role="test" />
-     <file name="bug-553607.php" role="test" />
-     <file name="bug-554712.php" role="test" />
-     <file name="bug-555768.php" role="test" />
-     <file name="bug-556031-01.php" role="test" />
-     <file name="bug-556031.php" role="test" />
-     <file name="bug-556860.php" role="test" />
-     <file name="bug-556894.php" role="test" />
-     <file name="bug-557390.php" role="test" />
-     <file name="bug-558031.php" role="test" />
-     <file name="bug-558051.php" role="test" />
-     <file name="bug-559467.php" role="test" />
-     <file name="bug-559494.php" role="test" />
-     <file name="bug-559668.php" role="test" />
-     <file name="bug-560532.php" role="test" />
-     <file name="bug-560578.php" role="test" />
-     <file name="bug-560595.php" role="test" />
-     <file name="bug-561101.php" role="test" />
-     <file name="bug-562997.php" role="test" />
-     <file name="bug-566200.php" role="test" />
-     <file name="bug-566600.php" role="test" />
-     <file name="bug-567059.php" role="test" />
-     <file name="bug-587733.php" role="test" />
-     <file name="bug-645588.php" role="test" />
-     <file name="bug-698356.php" role="test" />
-     <file name="bug-772441.php" role="test" />
-     <file name="bug-904820.php" role="test" />
-     <file name="bug-authoremail.php" role="test" />
-     <file name="bug-defineparse.php" role="test" />
-     <file name="bug-eofquotes.php" role="test" />
-     <file name="bug-escaping.php" role="test" />
-     <file name="bug-loseprocedural.php" role="test" />
-     <file name="bug-loseunknowntags.php" role="test" />
-     <file name="bug-pageleveldocsblocks.php" role="test" />
-     <file name="bug-quote_new_parser.php" role="test" />
-     <file name="bug-shortdesc.php" role="test" />
+     <file name="bug-441275.php" role="doc" />
+     <file name="bug-441278.php" role="doc" />
+     <file name="bug-441287.php" role="doc" />
+     <file name="bug-441289.php" role="doc" />
+     <file name="bug-441433.php" role="doc" />
+     <file name="bug-443153.php" role="doc" />
+     <file name="bug-445298.php" role="doc" />
+     <file name="bug-445305.php" role="doc" />
+     <file name="bug-445820.php" role="doc" />
+     <file name="bug-489398.php" role="doc" />
+     <file name="bug-540341.php" role="doc" />
+     <file name="bug-540368.php" role="doc" />
+     <file name="bug-541886.php" role="doc" />
+     <file name="bug-542586.php" role="doc" />
+     <file name="bug-548331.php" role="doc" />
+     <file name="bug-550489.php" role="doc" />
+     <file name="bug-551120.php" role="doc" />
+     <file name="bug-553137.php" role="doc" />
+     <file name="bug-553138.php" role="doc" />
+     <file name="bug-553560.php" role="doc" />
+     <file name="bug-553607.php" role="doc" />
+     <file name="bug-554712.php" role="doc" />
+     <file name="bug-555768.php" role="doc" />
+     <file name="bug-556031-01.php" role="doc" />
+     <file name="bug-556031.php" role="doc" />
+     <file name="bug-556860.php" role="doc" />
+     <file name="bug-556894.php" role="doc" />
+     <file name="bug-557390.php" role="doc" />
+     <file name="bug-558031.php" role="doc" />
+     <file name="bug-558051.php" role="doc" />
+     <file name="bug-559467.php" role="doc" />
+     <file name="bug-559494.php" role="doc" />
+     <file name="bug-559668.php" role="doc" />
+     <file name="bug-560532.php" role="doc" />
+     <file name="bug-560578.php" role="doc" />
+     <file name="bug-560595.php" role="doc" />
+     <file name="bug-561101.php" role="doc" />
+     <file name="bug-562997.php" role="doc" />
+     <file name="bug-566200.php" role="doc" />
+     <file name="bug-566600.php" role="doc" />
+     <file name="bug-567059.php" role="doc" />
+     <file name="bug-587733.php" role="doc" />
+     <file name="bug-645588.php" role="doc" />
+     <file name="bug-698356.php" role="doc" />
+     <file name="bug-772441.php" role="doc" />
+     <file name="bug-904820.php" role="doc" />
+     <file name="bug-authoremail.php" role="doc" />
+     <file name="bug-defineparse.php" role="doc" />
+     <file name="bug-eofquotes.php" role="doc" />
+     <file name="bug-escaping.php" role="doc" />
+     <file name="bug-loseprocedural.php" role="doc" />
+     <file name="bug-loseunknowntags.php" role="doc" />
+     <file name="bug-pageleveldocsblocks.php" role="doc" />
+     <file name="bug-quote_new_parser.php" role="doc" />
+     <file name="bug-shortdesc.php" role="doc" />
     </dir> <!-- /Documentation/tests -->
     <file name="RoadMap" role="doc" />
     <file name="TODO" role="doc" />
@@ -1576,7 +1558,6 @@ Includes these Sourceforge items:
     <tasks:replace from="@VER@" to="version" type="package-info" />
     <tasks:replace from="@STABILITY@" to="state" type="package-info" />
    </file>
-   <file name="Release-1.4.0" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -1612,16 +1593,7 @@ Includes these Sourceforge items:
    <ignore name="scripts/makedoc.sh" />
   </filelist>
  </phprelease>
- <phprelease>
-  <filelist>
-   <install as="phpdoc" name="pear-phpdoc" />
-   <install as="user/makedocs.ini" name="user/pear-makedocs.ini" />
-   <ignore name="phpdoc" />
-   <ignore name="phpdoc.bat" />
-   <ignore name="user/makedocs.ini" />
-   <ignore name="pear-phpdoc.bat" />
-  </filelist>
- </phprelease>
+ <phprelease />
  <changelog>
   <release>
    <version>
@@ -3083,8 +3055,7 @@ Includes these Sourceforge items:
    </stability>
    <date>2007-11-18</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
-   <notes>
-Includes these PEAR items:
+   <notes>Includes these PEAR items:
 Req #10670: Don&amp;apos;t Die on Empty Tag Descriptions
 Bug #10864: PhpDocumentor dies when parsing illegal page-level docblock
 Bug #10870: Dead links generated with HTML:Smarty:PHP
@@ -3121,7 +3092,40 @@ Includes these Sourceforge items:
 - [1543287] Use predefined PHP env var in phpdoc script
 - [1540666] patch for @property, @property-read and @property-write tags
 - [1124133] &amp;lt;code&amp;gt; and @include....
-- [1044752] List undocumented classes/functions
+- [1044752] List undocumented classes/functions</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.4.1</release>
+    <api>1.4.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-12-14</date>
+   <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
+   <notes>
+Includes these PEAR items:
+Req #11755: Remove Unused DocBlock_Lexer and PHPT Tests [ashnazg]
+Req #11757: Move PhpUnit Tests into new tests dir [ashnazg]
+Bug #10909: PHP Notice in PDF Converter line 210 [ashnazg]
+Bug #11613: -q flag is not honoured [ashnazg]
+Bug #11683: examples displayed using earthli style are not rendered properly [ashnazg|kguest]
+Bug #11788: Two failing unit tests [ashnazg]
+Bug #11809: Incorrect @name usage causes fatal crash [ashnazg]
+Bug #12121: phpdoc.bat cannot launch php.exe [ashnazg|kalvaro]
+Bug #12172: media files are not being copied [ashnazg|nemesis]
+Bug #12201: Misleading error message [ashnazg|yunosh]
+Doc #12459: @subpackage does not fix name conflicts [ashnazg]
+
+Includes these Sourceforge items:
+- [1846302] php version &gt; 4.3.0 and tokenizer [ashnazg]
+- [1845584] File suffix should be lowercase [ashnazg]
+- [1842595] makedoc.sh doesn&apos;t like embedded blanks in paths [ashnazg|munroe_r]
+- [1839924] addErrorDie has to exit with non-zero return code! [ashnazg|blueyed]
+- [1826342] Data-dependent endless(?) loop in parser [ashnazg]
+- [1733936] &quot;phpdoc&quot; does not return with error code &quot;0&quot; on success [ashnazg|blueyed]
 
    </notes>
   </release>
