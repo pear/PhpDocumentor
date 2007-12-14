@@ -139,6 +139,14 @@ $pfm2->addInstallAs('pear-phpdoc', 'phpdoc');
 $pfm2->addInstallAs('pear-phpdoc.bat', 'phpdoc.bat');
 $pfm2->addInstallAs('user/pear-makedocs.ini', 'user/makedocs.ini');
 $pfm2->addRelease();
+// these next two files are only used if the archive is extracted as-is
+// without installing via "pear install blah"
+$pfm2->addIgnoreToRelease("phpdoc");
+$pfm2->addIgnoreToRelease('phpdoc.bat');
+$pfm2->addIgnoreToRelease('user/makedocs.ini');
+$pfm2->addIgnoreToRelease('pear-phpdoc.bat');
+$pfm2->addInstallAs('pear-phpdoc', 'phpdoc');
+$pfm2->addInstallAs('user/pear-makedocs.ini', 'user/makedocs.ini');
 if (isset($_GET['make']) || (isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] == 'make')) {
     $pfm2->writePackageFile();
 } else {
