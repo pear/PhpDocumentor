@@ -2453,7 +2453,6 @@ class phpDocumentorTParser extends Parser
      * @param integer $index  index to seek non-whitespace to
      *
      * @return void
-     * @access private
      */
     function _removeWhiteSpace(&$value, $index)
     {
@@ -2940,5 +2939,8 @@ class phpDocumentorTParser extends Parser
         $this->_wp->setup($data);
         $this->_wp->setWhitespace(false);
     }
+
+    /**#@-*/
+
 }
 ?>
