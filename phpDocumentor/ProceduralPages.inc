@@ -204,7 +204,7 @@ class ProceduralPages
      *             ...
      *         )
      *     )
-     * <pre>
+     * </pre>
      *
      * @var array
      */
