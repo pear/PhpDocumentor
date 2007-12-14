@@ -9,9 +9,12 @@ Joshua Eichorn jeichorn@phpdoc.org
 ################################################################################
 
 The phpDocumentor team would like to announce the release of phpDocumentor
-1.4.1.  This release fixes some runtime execution bugs, provides a few 
-clarification updates to the manual, and establishes unit tests available
-to the "pear run-tests" command.
+1.4.1.  This release deprecates the usage of the old "phpdoc.php" and 
+"new_phpdoc.php" webpage interfaces, in favor of the docbuilder interface...
+the files remain in the application, but for now they automatically redirect
+to the docbuilder interface.  This release also fixes some runtime execution 
+bugs, provides a few  clarification updates to the manual, and establishes 
+unit tests available to the "pear run-tests" command.
 
 ------
 IMPORTANT:  phpDocumentor 1.4.1 requires PHP version 4.2.0 or greater.
