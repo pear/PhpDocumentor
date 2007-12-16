@@ -46,7 +46,7 @@ if ('@PEAR-DIR@' != '@'.'PEAR-DIR@') {
     /** @ignore */
     define("PHPDOCUMENTOR_VER", "@VER@");
 } else {
-    define("PHPDOCUMENTOR_VER", "1.4.0");
+    define("PHPDOCUMENTOR_VER", "1.4.1");
 }
 
 /* phpDocumentor URL */
