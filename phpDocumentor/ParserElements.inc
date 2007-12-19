@@ -161,7 +161,6 @@ class parserElement extends parserBase
             $this->path = strtr($file,'/','\\');
         else
             $this->path = $file;
-        $this->path = $file;
     }
     
     /**

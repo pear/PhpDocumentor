@@ -1144,12 +1144,27 @@ class Converter
      * linking to line numbers of source.
      *
      * Wrapper for {@link $sourcePaths} in this version
+     * 
+     * {@internal since file paths get stored with most/all slashes 
+     * set to forward slash '/', we need to doublecheck that
+     * we're not given a backslashed path to search for...
+     * if we are, it's likely that it was originally stored
+     * with a forward slash.  Further, I'm not convinced it's safe
+     * to just check the {@link PHPDOCUMENTOR_WINDOWS} flag, so I'm checking
+     * specifically for backslashes intead.}}
+     * 
      * @param string full path to the source code file
      * @return boolean
      */
     function hasSourceCode($path)
     {
         return isset($this->sourcePaths[$path]);
+        if (strpos($path, '\\') > -1) {
+            $modifiedPath = str_replace('\\', '/', $path);
+            return isset($this->sourcePaths[$modifiedPath]);
+        } else {
+            return isset($this->sourcePaths[$path]);
+        }
     }
 
     /**
