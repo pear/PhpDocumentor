@@ -1410,7 +1410,7 @@ Includes these Sourceforge items:
     <file name="add_cvs.php" role="php" />
     <file name="create_examples.php" role="php" />
     <file name="create_package.xml.php" role="php" />
-    <file baseinstalldir="/" name="makedoc.sh" role="script" />
+    <file name="makedoc.sh" role="php" />
     <file name="tokenizer_test.php" role="php" />
    </dir> <!-- /scripts -->
    <dir name="tests">
