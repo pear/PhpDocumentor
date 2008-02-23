@@ -7,7 +7,7 @@
  * 
  * PHP versions 4 and 5
  *
- * Copyright (c) 2002-2006 Gregory Beaver
+ * Copyright (c) 2002-2008 Gregory Beaver
  * 
  * LICENSE:
  * 
@@ -26,10 +26,11 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @category   ToolsAndUtilities
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    CVS: $Id$
  * @filesource
@@ -38,22 +39,30 @@
  * @see        parserDocBlock, parserInclude, parserPage, parserClass
  * @see        parserDefine, parserFunction, parserMethod, parserVar
  * @since      separate file since version 1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
  */
 /**
  * used to represent standard tags like @access, etc.
  * This class is aware of inline tags, and will automatically handle them
  * using inherited functions
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
- * @author Greg Beaver <cellog@php.net>
- * @since 1.0rc1
- * @version $Id$
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.0rc1
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserTag extends parserStringWithInlineTags
 {
     /**
-     * Type is used by many functions to skip the hassle of if phpDocumentor_get_class($blah) == 'parserBlah'
-     * always '_tag'
+     * Type is used by many functions to skip the hassle of 
+     * if phpDocumentor_get_class($blah) == 'parserBlah' always '_tag'
      * @var string
      */
     var $type = '_tag';
@@ -67,49 +76,57 @@ class parserTag extends parserStringWithInlineTags
      * Set up the tag
      *
      * {@source}
-     * @param string $keyword tag name
-     * @param parserStringWithInlineTags $value
-     * @param boolean whether to parse the $value for html tags
+     *
+     * @param string                     $keyword tag name
+     * @param parserStringWithInlineTags $value   tag value
+     * @param boolean                    $noparse whether to parse the $value 
+     *                                            for html tags
      */
     function parserTag($keyword, $value, $noparse = false)
     {
         $this->keyword = $keyword;
-        if (!$noparse)
-        {
+        if (!$noparse) {
             $parser = new parserDescParser;
-            $parser->subscribe('*',$this);
-            $parser->parse($value->value,true,'parserstringwithinlinetags');
-        } else $this->value = $value;
+            $parser->subscribe('*', $this);
+            $parser->parse($value->value, true, 'parserstringwithinlinetags');
+        } else { 
+            $this->value = $value; 
+        }
     }
     
     /**
-     * @param Converter
+     * Perform the output conversion on this {@link parserTag}
+     * using the {@link Converter output converter} that is passed in
+     *
+     * @param Converter &$converter the converter object
+     *
+     * @return string
      * @see Converter
+     * @todo CS cleanup - rename to convert for camelCase rule
      */
     function Convert(&$converter)
     {
-        if (is_array($this->value))
-        {
-            if (count($this->value) == 1)
-            {
+        if (is_array($this->value)) {
+            if (count($this->value) == 1) {
                 reset($this->value);
-                list(,$val) = each($this->value);
-                $a = $val->Convert($converter);
+                list(, $val) = each($this->value);
+                $a           = $val->Convert($converter);
                 return $a;
             }
             $result = '';
-            foreach($this->value as $val)
-            {
-                // this is only true if we processed the description in
-                // the constructor
-                if (phpDocumentor_get_class($val) == 'parserstringwithinlinetags')
-                $result .= $converter->EncloseParagraph($val->Convert($converter));
-                else
-                $result .= $val->Convert($converter);
+            foreach ($this->value as $val) {
+                // this is only true if we processed the description
+                // in the constructor
+                if (phpDocumentor_get_class($val) 
+                        == 'parserstringwithinlinetags') {
+                    $result .= $converter->
+                        EncloseParagraph($val->Convert($converter));
+                } else {
+                    $result .= $val->Convert($converter);
+                }
             }
             return $result;
-        } else
-        {
+        } else {
             $a = $this->value->Convert($converter);
             return $a;
         }
@@ -121,8 +138,10 @@ class parserTag extends parserStringWithInlineTags
      *
      * Useful in determining whether to enclose the
      * tag in a paragraph or not.
+     *
+     * @return integer (actually, body is empty, so it doesn't return at all)
      * @access private
-     * @return integer
+     * @todo does this need to be implemented?  its body is empty
      */
     function _valueParagraphCount()
     {
@@ -130,10 +149,14 @@ class parserTag extends parserStringWithInlineTags
     
     /**
      * Called by the {@link parserDescParser} when processing a description.
-     * @param integer not used
-     * @param array array of {@link parserStringWithInlineTags} representing
-     *              paragraphs in the tag description
+     *
+     * @param integer $a    not used
+     * @param array   $desc array of {@link parserStringWithInlineTags} 
+     *                      representing paragraphs in the tag description
+     *
+     * @return void
      * @see parserTag::parserTag()
+     * @todo CS cleanup - rename to handleEvent for camelCase rule
      */
     function HandleEvent($a,$desc)
     {
@@ -141,28 +164,39 @@ class parserTag extends parserStringWithInlineTags
     }
     
     /**
-     * @return string returns the text minus any inline tags
+     * Returns the text minus any inline tags
+     *
+     * @return string the text minus any inline tags
      * @see parserStringWithInlineTags::getString()
      */
     function getString()
     {
-        if (is_array($this->value))
-        {
+        if (is_array($this->value)) {
             $result = '';
-            foreach($this->value as $val)
-            {
+            foreach ($this->value as $val) {
                 $result .= $val->getString();
             }
             return $result;
-        } else return $this->value->getString();
+        } else {
+            return $this->value->getString();
+        }
     }
 }
 
 /**
  * This class represents the @name tag
- * @tutorial tags.name.pkg
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @tutorial   tags.name.pkg
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserNameTag extends parserTag
 {
@@ -173,8 +207,10 @@ class parserNameTag extends parserTag
     var $keyword = 'name';
     
     /**
-     * @param string not used
-     * @param string name
+     * set up the name tag
+     *
+     * @param string $name  tag name (not used)
+     * @param string $value tag value 
      */
     function parserNameTag($name, $value)
     {
@@ -182,9 +218,13 @@ class parserNameTag extends parserTag
     }
     
     /**
-     * @see parserStringWithInlineTags::Convert()
-     * @param Converter
+     * process this tag through the given output converter
+     *
+     * @param Converter &$c output converter
+     *
      * @return string converted value of the tag
+     * @see parserStringWithInlineTags::Convert()
+     * @todo CS cleanup - rename to convert for camelCase rule
      */
     function Convert(&$c)
     {
@@ -194,9 +234,18 @@ class parserNameTag extends parserTag
 
 /**
  * This class represents the @access tag
- * @tutorial tags.access.pkg
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @tutorial   tags.access.pkg
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserAccessTag extends parserTag
 {
@@ -216,40 +265,42 @@ class parserAccessTag extends parserTag
     /**
      * checks $value to make sure it is private, protected or public, otherwise
      * it's not a valid @access tag
+     *
+     * @param parserStringWithInlineTags $value the tag value
+     *
      * @see $isvalid
-     * @param parserStringWithInlineTags $value
      */
     function parserAccessTag($value)
     {
-        if (!is_string($value))
-        {
-            if (is_object($value))
-            {
-                if (method_exists($value,'getstring'))
-                {
+        if (!is_string($value)) {
+            if (is_object($value)) {
+                if (method_exists($value, 'getstring')) {
                     $value = $value->getString();
                 }
             }
         }
-        switch(trim($value))
-        {
-            case 'private' :
-            case 'public' :
-            case 'protected' :
-                $this->value = $value;
-                $this->isvalid = true;
+        switch(trim($value)) {
+        case 'private' :
+        case 'public' :
+        case 'protected' :
+            $this->value   = $value;
+            $this->isvalid = true;
             break;
-            default :
-            addError(PDERROR_ACCESS_WRONG_PARAM,$value);
-                $this->value = 'public';
+        default :
+            addError(PDERROR_ACCESS_WRONG_PARAM, $value);
+            $this->value = 'public';
             break;
         }
     }
     
     /**
-     * @see parserStringWithInlineTags::Convert()
-     * @param Converter
+     * process this tag through the given output converter
+     *
+     * @param Converter &$converter the output converter
+     *
      * @return string converted value of the tag
+     * @see parserStringWithInlineTags::Convert()
+     * @todo CS cleanup - rename to convert for camelCase rule
      */
     function Convert(&$converter)
     {
@@ -258,6 +309,7 @@ class parserAccessTag extends parserTag
     
     /**
      * No inline tags are possible, returns 'public', 'protected' or 'private'
+     *
      * @return string returns the text minus any inline tags
      */
     function getString()
@@ -267,13 +319,20 @@ class parserAccessTag extends parserTag
 }
 
 /**
- * represents "@return"
- * @tutorial tags.return.pkg
- * @package phpDocumentor
+ * represents the "@return" tag
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
- * @author Greg Beaver <cellog@php.net>
- * @since 1.0rc1
- * @version $Id$
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @tutorial   tags.return.pkg
+ * @since      1.0rc1
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserReturnTag extends parserTag
 {
@@ -288,7 +347,8 @@ class parserReturnTag extends parserTag
     var $returnType = 'void';
     
     /**
-     * contains a link to the documentation for a class passed as a type in @return, @var or @param
+     * contains a link to the documentation for a class 
+     * passed as a type in @return, @var or @param
      *
      * Example:
      *
@@ -301,57 +361,65 @@ class parserReturnTag extends parserTag
      * ...
      * </code>
      *
-     * In this case, $converted_returnType will contain a link to myclass instead of the string 'myclass'
+     * In this case, $converted_returnType will contain a link to myclass 
+     * instead of the string 'myclass'
+     *
      * @var mixed either the same as $returnType or a link to the docs for a class
      * @see $returnType
      */
     var $converted_returnType = false;
     
     /**
-     * @param string
-     * @param parserStringWithInlineTags
+     * set up the tag
+     *
+     * @param string                     $returnType returned datatype
+     * @param parserStringWithInlineTags $value      tag value
      */
     function parserReturnTag($returnType, $value)
     {
         $this->returnType = $returnType;
-        parent::parserTag('return',$value);
+        parent::parserTag('return', $value);
     }
     
     /**
-     * sets up $converted_returnType
-     * @see parserStringWithInlineTags::Convert(), $converted_returnType
-     * @param Converter
+     * process this tag through the given output converter
+     * (sets up the $converted_returnType)
+     *
+     * @param Converter &$converter the output converter
+     *
      * @return string converted value of the tag
+     * @see parserStringWithInlineTags::Convert(), $converted_returnType
+     * @todo CS cleanup - rename to convert for camelCase rule
      */
     function Convert(&$converter)
     {
         $my_types = '';
-        if (strpos($this->returnType,'|'))
-        {
-            $types = explode('|',$this->returnType);
-            foreach($types as $returntype)
-            {
+        if (strpos($this->returnType, '|')) {
+            $types = explode('|', $this->returnType);
+            foreach ($types as $returntype) {
                 $a = $converter->getLink($returntype);
-                if (is_object($a) && phpDocumentor_get_class($a) == 'classlink')
-                {
-                    if (!empty($my_types)) $my_types .= '|';
-                    $my_types .= $converter->returnSee($a,$converter->type_adjust($returntype));
-                } else
-                {
-                    if (!empty($my_types)) $my_types .= '|';
+                if (is_object($a) && phpDocumentor_get_class($a) == 'classlink') {
+                    if (!empty($my_types)) {
+                        $my_types .= '|';
+                    }
+                    $my_types .= $converter->
+                        returnSee($a, $converter->type_adjust($returntype));
+                } else {
+                    if (!empty($my_types)) {
+                        $my_types .= '|';
+                    }
                     $my_types .= $converter->type_adjust($returntype);
                 }
             }
             $this->converted_returnType = $my_types;
-        } else
-        {
+        } else {
             $a = $converter->getLink($this->returnType);
-            if (is_object($a) && phpDocumentor_get_class($a) == 'classlink')
-            {
-                $this->converted_returnType = $converter->returnSee($a,$converter->type_adjust($this->returnType));
-            } else
-            {
-                $this->converted_returnType = $converter->type_adjust($this->returnType);
+            if (is_object($a) && phpDocumentor_get_class($a) == 'classlink') {
+                $this->converted_returnType = $converter->
+                    returnSee($a, $converter->type_adjust($this->returnType));
+            } else {
+                $this->converted_returnType = $converter->
+                    type_adjust($this->returnType);
             }
         }
         return parserTag::Convert($converter);
@@ -359,9 +427,20 @@ class parserReturnTag extends parserTag
 }
 
 /**
- * represents "@property" tag
- * @package phpDocumentor
+ * represents the "@property" tag
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @tutorial   tags.property.pkg
+ * @since      1.4.0a1
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserPropertyTag extends parserReturnTag
 {
@@ -377,20 +456,33 @@ class parserPropertyTag extends parserReturnTag
     var $returnType = 'mixed';
 
     /**
-     * @param string
-     * @param parserStringWithInlineTags
+     * set up the property tag
+     *
+     * @param string                     $returnType the tag value's datatype
+     * @param parserStringWithInlineTags $value      the tag value
      */
-    function parserPropertyTag( $returnType, $value )
+    function parserPropertyTag($returnType, $value)
     {
         $this->returnType = $returnType;
-        parent::parserTag( $this->keyword, $value );
+        parent::parserTag($this->keyword, $value);
     }
 }
 
 /**
- * represents "@property-read" tag
- * @package phpDocumentor
+ * represents the "@property-read" tag
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @tutorial   tags.property-read.pkg
+ * @since      1.4.0a1
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserPropertyReadTag extends parserPropertyTag
 {
@@ -402,9 +494,20 @@ class parserPropertyReadTag extends parserPropertyTag
 }
 
 /**
- * represents "@property-write" tag
- * @package phpDocumentor
+ * represents the "@property-write" tag
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @tutorial   tags.property-write.pkg
+ * @since      1.4.0a1
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserPropertyWriteTag extends parserPropertyTag
 {
@@ -416,9 +519,20 @@ class parserPropertyWriteTag extends parserPropertyTag
 }
 
 /**
- * represents "@method" tag
- * @package phpDocumentor
+ * represents the "@method" tag
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @tutorial   tags.method.pkg
+ * @since      1.4.0a1
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserMethodTag extends parserPropertyTag
 {
@@ -435,13 +549,20 @@ class parserMethodTag extends parserPropertyTag
 }
 
 /**
- * represents "@var"
- * @tutorial tags.var.pkg
- * @package phpDocumentor
+ * represents the "@var" tag
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
- * @author Greg Beaver <cellog@php.net>
- * @since 1.0rc1
- * @version $Id$
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @tutorial   tags.var.pkg
+ * @since      1.0rc1
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserVarTag extends parserReturnTag
 {
@@ -458,10 +579,19 @@ class parserVarTag extends parserReturnTag
 }
 
 /**
- * Represents "@param"
- * @tutorial tags.param.pkg
- * @package phpDocumentor
+ * represents the "@param" tag
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @tutorial   tags.param.pkg
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserParamTag extends parserVarTag
 {
@@ -473,10 +603,19 @@ class parserParamTag extends parserVarTag
 }
 
 /**
- * Represents "@staticvar"
- * @tutorial tags.staticvar.pkg
- * @package phpDocumentor
+ * represents the "@staticvar" tag
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @tutorial   tags.staticvar.pkg
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserStaticvarTag extends parserParamTag
 {
@@ -488,13 +627,20 @@ class parserStaticvarTag extends parserParamTag
 }
 
 /**
- * represents "@link"
- * @tutorial tags.link.pkg
- * @package phpDocumentor
+ * represents the "@link" tag
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
- * @author Greg Beaver <cellog@php.net>
- * @since 1.0rc1
- * @version $Id$
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.0rc1
+ * @tutorial   tags.link.pkg
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserLinkTag extends parserTag
 {
@@ -505,18 +651,19 @@ class parserLinkTag extends parserTag
     var $keyword = 'link';
     
     /**
-     * URL to link to
-     * @param string $link
+     * sets up the link tag
+     *
+     * @param string $link URL to link to
      */
     function parserLinkTag($link)
     {
         $start = $val = $link->getString();
-        if (strpos($val,' '))
-        {
-            $start = array_shift($val = explode(' ',$val));
+        if (strpos($val, ' ')) {
+            $start = array_shift($val = explode(' ', $val));
+
             $val = join($val, ' ');
         }
-        $a = new parserLinkInlineTag($start,$val);
+        $a = new parserLinkInlineTag($start, $val);
         $b = new parserStringWithInlineTags;
         $b->add($a);
         $this->value = $b;
@@ -524,13 +671,20 @@ class parserLinkTag extends parserTag
 }
 
 /**
- * represents "@see"
- * @tutorial tags.see.pkg
- * @package phpDocumentor
+ * represents the "@see" tag
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
- * @author Greg Beaver <cellog@php.net>
- * @since 1.0rc1
- * @version $Id$
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.0rc1
+ * @tutorial   tags.see.pkg
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserSeeTag extends parserLinkTag
 {
@@ -541,44 +695,56 @@ class parserSeeTag extends parserLinkTag
     var $keyword = 'see';
     
     /**
-     * @param string element to link to
+     * sets up the see tag
+     *
+     * @param string $name element to link to
      */
     function parserSeeTag($name)
     {
-        parserTag::parserTag($this->keyword,$name,true);
+        parserTag::parserTag($this->keyword, $name, true);
     }
 
     /**
-     * @param Converter
+     * process this tag through the given output converter
+     *
+     * @param Converter &$converter the output converter
+     *
+     * @return string converted value of the tag
      * @see parserStringWithInlineTags::Convert()
+     * @todo CS cleanup - rename to convert for camelCase rule
      */
     function Convert(&$converter)
     {
-        if ($this->value->hasInlineTag())
-        {
+        if ($this->value->hasInlineTag()) {
             addErrorDie(PDERROR_INLINETAG_IN_SEE);
         }
         $a = $converter->getLink(trim($this->value->Convert($converter)));
-        if (is_string($a))
-        {
+        if (is_string($a)) {
             // feature 564991
-            if (strpos($a,'://'))
-            {
+            if (strpos($a, '://')) {
                 // php function
-                return $converter->returnLink($a,str_replace('PHP_MANUAL#','',$this->value->Convert($converter)));
+                return $converter->returnLink($a, str_replace('PHP_MANUAL#', '', 
+                    $this->value->Convert($converter)));
             }
             return $a;
         }
-        if (is_object($a)) return $converter->returnSee($a);
-        // getLink parsed a comma-delimited list of linked thingies, add the commas back in
-        if (is_array($a))
-        {
+        if (is_object($a)) {
+            return $converter->returnSee($a);
+        }
+        // getLink parsed a comma-delimited list of linked thingies, 
+        // add the commas back in
+        if (is_array($a)) {
             $b = '';
-            foreach($a as $i => $bub)
-            {
-                if (!empty($b)) $b .= ', ';
-                if (is_string($a[$i])) $b .= $a[$i];
-                if (is_object($a[$i])) $b .= $converter->returnSee($a[$i]);
+            foreach ($a as $i => $bub) {
+                if (!empty($b)) {
+                    $b .= ', ';
+                }
+                if (is_string($a[$i])) {
+                    $b .= $a[$i];
+                }
+                if (is_object($a[$i])) {
+                    $b .= $converter->returnSee($a[$i]);
+                }
             }
             return $b;
         }
@@ -587,13 +753,22 @@ class parserSeeTag extends parserLinkTag
 }
 
 /**
- * represents "@license"
+ * represents the "@see" tag
  *
  * Link to a license, instead of including lines and lines of license information
  * in every file
- * @tutorial tags.license.pkg
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @tutorial   tags.license.pkg
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserLicenseTag extends parserLinkTag
 {
@@ -604,15 +779,19 @@ class parserLicenseTag extends parserLinkTag
     var $keyword = 'license';
     
     /**
-     * URL to link to
-     * @param string $link
+     * set up the license tag
+     *
+     * @param string $name unused?
+     * @param string $link URL to link to
      */
     function parserLicenseTag($name, $link)
     {
-        $a = explode(' ',$link->getString());
-        $url = array_shift($a);
-        $license = join($a,' ');
-        if (empty($license)) $license = $url;
+        $a       = explode(' ', $link->getString());
+        $url     = array_shift($a);
+        $license = join($a, ' ');
+        if (empty($license)) {
+            $license = $url;
+        }
         $a = new parserLinkInlineTag($url, $license);
         $b = new parserStringWithInlineTags;
         $b->add($a);
@@ -621,13 +800,23 @@ class parserLicenseTag extends parserLinkTag
 }
 
 /**
- * represents "@uses"
+ * represents the "@uses" tag
  *
- * This is exactly like @see except that the element used has a @useby link to this element added to its docblock
- * @package phpDocumentor
+ * This is exactly like @see except that the element used 
+ * has a @useby link to this element added to its docblock
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
- * @tutorial tags.uses.pkg
- * @since 1.2
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @tutorial   tags.uses.pkg
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserUsesTag extends parserSeeTag
 {
@@ -636,12 +825,17 @@ class parserUsesTag extends parserSeeTag
      * @var string
      */
     var $keyword = 'uses';
-    /** @access private */
+    /**
+     * @access private
+     */
     var $_description;
     
     /**
-     * @param string element to link to
-     * @param parserStringWithInlineTags description of how the element is used
+     * set up the uses tag
+     *
+     * @param string                     $seeel       element to link to
+     * @param parserStringWithInlineTags $description description of how 
+     *                                                the element is used
      */
     function parserUsesTag($seeel, $description)
     {
@@ -653,22 +847,26 @@ class parserUsesTag extends parserSeeTag
     }
     
     /**
-     * Return a link to documentation for other element, and description of how
-     * it is used
+     * Return a link to documentation for other element,
+     * and description of how it is used
      *
-     * Works exactly like {@link parent::Convert()} except that it also includes
-     * a description of how the element used is used.
-     * @return string
-     * @param Converter
+     * Works exactly like {@link parent::Convert()} 
+     * except that it also includes a description of 
+     * how the element used is used.
+     *
+     * @param Converter &$c the output converter
+     *
+     * @return string link to the uses target
+     * @todo CS cleanup - rename to convert for camelCase rule
      */
     function Convert(&$c)
     {
-        $val = $this->value;
-        $see = parent::Convert($c);
+        $val         = $this->value;
+        $see         = parent::Convert($c);
         $this->value = $this->_description;
-		  $desc_val = parserTag::Convert($c);
+        $desc_val    = parserTag::Convert($c);
         if (!empty($desc_val)) {
-           $see .= ' - '.$desc_val;
+            $see .= ' - '.$desc_val;
         }
         $this->value = $val;
         return $see;
@@ -676,6 +874,7 @@ class parserUsesTag extends parserSeeTag
     
     /**
      * Get the text of the link to the element that is being used
+     *
      * @return string
      * @access private
      */
@@ -686,6 +885,7 @@ class parserUsesTag extends parserSeeTag
     
     /**
      * Get the description of how the element used is being used.
+     *
      * @return parserStringWithInlineTags
      */
     function getDescription()
@@ -698,9 +898,18 @@ class parserUsesTag extends parserSeeTag
  * This is a virtual tag, it is created by @uses to cross-reference the used element
  *
  * This is exactly like @uses.
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
- * @since 1.2
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserUsedByTag extends parserUsesTag
 {
@@ -709,12 +918,16 @@ class parserUsedByTag extends parserUsesTag
      * @var string
      */
     var $keyword = 'usedby';
-    /** @access private */
+    /**
+     * @access private 
+     */
     var $_link;
     
     /**
-     * @param abstractLink link of element that uses this element
-     * @param string description of how the element is used
+     * set up the usedby tag
+     *
+     * @param abstractLink $link        link of element that uses this element
+     * @param string       $description description of how the element is used
      */
     function parserUsedByTag($link, $description)
     {
@@ -723,15 +936,19 @@ class parserUsedByTag extends parserUsesTag
     }
     
     /**
+     * process this tag through the given output converter
+     *
+     * @param Converter &$c the output converter
+     *
      * @return string
-     * @param Converter
+     * @todo CS cleanup - rename to convert for camelCase rule
      */
     function Convert(&$c)
     {
-        $see = $c->returnSee($this->_link);
-		  $desc_val = parserTag::Convert($c);
+        $see      = $c->returnSee($this->_link);
+        $desc_val = parserTag::Convert($c);
         if (!empty($desc_val)) {
-           $see .= ' - '.$desc_val;
+            $see .= ' - '.$desc_val;
         }
         return $see;
     }
@@ -741,11 +958,20 @@ class parserUsedByTag extends parserUsesTag
  * represents "@tutorial"
  *
  * This is exactly like @see except that it only links to tutorials
- * @tutorial phpDocumentor/tutorials.pkg
- * @tutorial tags.tutorial.pkg
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
- * @since 1.2
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @tutorial   phpDocumentor/tutorials.pkg
+ * @tutorial   tags.tutorial.pkg
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserTutorialTag extends parserSeeTag
 {
@@ -754,27 +980,39 @@ class parserTutorialTag extends parserSeeTag
      * @var string
      */
     var $keyword = 'tutorial';
+
     /**
-     * @param Converter
+     * process this tag through the given output converter
+     *
+     * @param Converter &$converter the output converter
+     *
+     * @return string|bool
      * @see parserStringWithInlineTags::Convert()
+     * @todo CS cleanup - rename to convert for camelCase rule
      */
     function Convert(&$converter)
     {
         $a = $converter->getTutorialLink(trim($this->value->Convert($converter)));
-        if (is_string($a))
-        {
+        if (is_string($a)) {
             return $a;
         }
-        if (is_object($a)) return $converter->returnSee($a);
-        // getLink parsed a comma-delimited list of linked thingies, add the commas back in
-        if (is_array($a))
-        {
+        if (is_object($a)) {
+            return $converter->returnSee($a);
+        }
+        // getLink parsed a comma-delimited list of linked thingies, 
+        // add the commas back in
+        if (is_array($a)) {
             $b = '';
-            foreach($a as $i => $bub)
-            {
-                if (!empty($b)) $b .= ', ';
-                if (is_string($a[$i])) $b .= $a[$i];
-                if (is_object($a[$i])) $b .= $converter->returnSee($a[$i]);
+            foreach ($a as $i => $bub) {
+                if (!empty($b)) {
+                    $b .= ', ';
+                }
+                if (is_string($a[$i])) {
+                    $b .= $a[$i];
+                }
+                if (is_object($a[$i])) {
+                    $b .= $converter->returnSee($a[$i]);
+                }
             }
             return $b;
         }
@@ -786,9 +1024,19 @@ class parserTutorialTag extends parserSeeTag
  * represents "@filesource"
  * 
  * Use this to create a link to a highlighted phpxref-style source file listing
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
- * @tutorial tags.filesource.pkg
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @tutorial   tags.filesource.pkg
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserFileSourceTag extends parserTag
 {
@@ -797,33 +1045,43 @@ class parserFileSourceTag extends parserTag
      * @var string
      */
     var $keyword = 'filesource';
-    /** @var array */
+    /**
+     * @var array
+     */
     var $source;
-    /** @var string */
+    /**
+     * @var string
+     */
     var $path;
     /**
      * Flag variable, controls double writes of file for each converter
-     * @access private
      * @var array
+     * @access private
      */
     var $_converted = array();
+
     /**
      * Set {@link $source} to $value, and set up path
-     * @param string
-     * @param array output from {@link phpDocumentorTWordParser::getFileSource()}
+     *
+     * @param string $filepath the file's path
+     * @param array  $value    output from 
+     *                         {@link phpDocumentorTWordParser::getFileSource()}
      */
     function parserFileSourceTag($filepath, $value)
     {
         parent::parserTag($this->keyword, '');
-        $this->path = $filepath;
+        $this->path   = $filepath;
         $this->source = $value;
     }
 
     /**
      * Return a link to the highlighted source and generate the source
-     * @uses ConvertSource() generate source code and write it out
+     *
+     * @param Converter &$c the output converter
+     *
      * @return string output from {@link getSourceLink()}
-     * @param Converter
+     * @uses ConvertSource() generate source code and write it out
+     * @todo CS cleanup - rename to convert for camelCase rule
      */
     function Convert(&$c)
     {
@@ -832,23 +1090,36 @@ class parserFileSourceTag extends parserTag
     }
 
     /**
-     * @param Converter
+     * convert the source code
+     *
+     * @param Converter &$c the output converter
+     *
+     * @return void
      * @uses phpDocumentor_HighlightParser highlights source code
      * @uses writeSource()
+     * @todo CS cleanup - rename to convertSource for camelCase rule
+     * @todo what's up with all the "return" statements?
+     *       can they _all_ be removed?
      */
     function ConvertSource(&$c)
     {
-        $this->writeSource($c, $c->ProgramExample($this->source, true, false, false, false, $this->path));
+        $this->writeSource($c, $c->
+            ProgramExample($this->source, true, false, false, false, $this->path));
         return;
         $parser = new phpDocumentor_HighlightParser;
         $return = '';
-        $return = $parser->parse($this->source,$c, false, false, false, $this->path);
+        $return = $parser->
+            parse($this->source, $c, false, false, false, $this->path);
         $this->writeSource($c, $return);
     }
 
     /**
-     * @param Converter
-     * @param string highlighted source code
+     * have the output converter write the source code
+     *
+     * @param Converter &$c     the output converter
+     * @param string    $source highlighted source code
+     *
+     * @return void
      * @uses Converter::writeSource() export highlighted file source
      */
     function writeSource(&$c, $source)
@@ -857,9 +1128,12 @@ class parserFileSourceTag extends parserTag
     }
 
     /**
-     * @uses Converter::getSourceLink()
-     * @param Converter
+     * gets path to the sourcecode file
+     *
+     * @param Converter &$c the output converter
+     *
      * @return output from getSourceLink()
+     * @uses Converter::getSourceLink()
      */
     function getSourceLink(&$c)
     {
@@ -870,10 +1144,17 @@ class parserFileSourceTag extends parserTag
 /**
  * represents "@example"
  * 
- * The example tag 
- * @package phpDocumentor
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage DocBlockTags
- * @tutorial tags.example.pkg
+ * @author     Greg Beaver <cellog@php.net>
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @tutorial   tags.example.pkg
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserExampleTag extends parserFileSourceTag
 {
@@ -882,15 +1163,21 @@ class parserExampleTag extends parserFileSourceTag
      * @var string
      */
     var $keyword = 'example';
+
     /**
      * Reads and parses the example file indicated
      *
      * The example tag takes one parameter: the full path to a php file that
      * should be parsed and included as an example.
+     *
+     * @param parserStringWithInlineTags $value        tag value
+     * @param string                     $current_path path of file containing 
+     *                                                 this @example tag
+     *
      * @uses phpDocumentorTWordParser::getFileSource() uses to parse an example
      *       and retrieve all tokens by line number
-     * @param parserStringWithInlineTags
-     * @param string path of file containing this @example tag
+     * @todo does this "x = y = z = false" still work as expected in PHP5?
+     * @todo CS cleanup - rename constant to TOKENIZER_EXT
      */
     function parserExampleTag($value, $current_path)
     {
@@ -899,48 +1186,50 @@ class parserExampleTag extends parserFileSourceTag
         $path = false;
         // code thanks to Sam Blum, modified by Greg Beaver
         $tagValue = $value->getString();
-        $path = $isAbsPath = $pathOnly = $fileName = $fileExt = $original_path  = $title = FALSE;
-        do
-        {
+
+        $path = $isAbsPath 
+              = $pathOnly 
+              = $fileName 
+              = $fileExt 
+              = $original_path  
+              = $title 
+              = false;
+        do {
             // make sure the format is stuff.ext description
-            if (!preg_match('`(.*)\.(\w*)\s(.*)`', $tagValue, $match))
-            {
+            if (!preg_match('`(.*)\.(\w*)\s(.*)`', $tagValue, $match)) {
                 // or format is stuff.ext
-                if (!preg_match('`(.*)\.(\w*)\s*$`', $tagValue, $match))
-                {
+                if (!preg_match('`(.*)\.(\w*)\s*$`', $tagValue, $match)) {
                     // Murphy: Some funny path was given
                     $original_path = $tagValue; // used for error output
                     break; // try-block
                 }
             }
-            if (strlen($match[1]) === 0)
-            {
+            if (strlen($match[1]) === 0) {
                 // Murphy: Some funny path was given
                 $original_path = $tagValue; // used for error output
                 break; // try-block
             }
             $fileExt = $match[2];
-            $title = 'example';
-            if (isset($match[3]))
-            {
+            $title   = 'example';
+            if (isset($match[3])) {
                 $title = trim($match[3]);
             }
-            $pathTmp = str_replace('\\', '/', $match[1]); // Replace windows '\' the path.
+            // Replace windows '\' the path.
+            $pathTmp = str_replace('\\', '/', $match[1]); 
 
             // Is there a path and a file or is it just a file?
-            if (strpos($pathTmp,'/') === false)
-            {
+            if (strpos($pathTmp, '/') === false) {
                 // No path part
                 $pathOnly = '';
                 $fileName = $pathTmp .'.'. $fileExt;
-            } else
-            {
-                $splitPos = strrpos($pathTmp,'/'); // split the path on the last directory, find the filename
+            } else {
+                // split the path on the last directory, find the filename
+                $splitPos = strrpos($pathTmp, '/'); 
                 $pathOnly = substr($match[1], 0, $splitPos+1);
                 $fileName = substr($match[1], $splitPos+1) .'.'. $fileExt;
                 // Is the path absolute? (i.e. does it start like an absolute path?)
-                if (('/' === $pathTmp[0]) || preg_match('`^\w*:`i', $pathTmp))
-                { // works for both windows 'C:' and URLs like 'http://'
+                if (('/' === $pathTmp[0]) || preg_match('`^\w*:`i', $pathTmp)) { 
+                    // works for both windows 'C:' and URLs like 'http://'
                     $isAbsPath = true; // Yes
                 }
             }
@@ -948,86 +1237,80 @@ class parserExampleTag extends parserFileSourceTag
             $original_path = $pathOnly . $fileName;
 
             // Now look for the file starting with abs. path.
-            if ($isAbsPath)
-            {
-                $tmp = realpath($original_path); // remove any weirdities like /../file.ext
-                if ($tmp && is_file($tmp))
-                {
+            if ($isAbsPath) {
+                // remove any weirdities like /../file.ext
+                $tmp = realpath($original_path); 
+                if ($tmp && is_file($tmp)) {
                     $path = $tmp;
                 }
-                // Alway break if abs. path was detected; even if file was not found.
+                // Alway break if abs. path was detected,
+                // even if file was not found.
                 break; // try-block
             }
 
             // Search for the example file some standard places 
             // 1) Look if the ini-var examplesdir is set and look there ...
-            if (isset($_phpDocumentor_setting['examplesdir']))
-            {
-                $tmp = realpath($_phpDocumentor_setting['examplesdir'] . PATH_DELIMITER  . $original_path);
-                if ($tmp && is_file($tmp))
-                {
+            if (isset($_phpDocumentor_setting['examplesdir'])) {
+                $tmp = realpath($_phpDocumentor_setting['examplesdir'] 
+                    . PATH_DELIMITER  . $original_path);
+                if ($tmp && is_file($tmp)) {
                     $path = $tmp; // Yo! found it :)
                     break; // try-block
                 }
             }
 
-            // 2) Then try to look for an 'example/'-dir below the *currently* parsed file ...
-            if (!empty($current_path))
-            {
-                $tmp = realpath(dirname($current_path) . PATH_DELIMITER . 'examples' . PATH_DELIMITER . $fileName);
-                if ($tmp && is_file($tmp))
-                {
+            // 2) Then try to look for an 'example/'-dir 
+            //    below the *currently* parsed file ...
+            if (!empty($current_path)) {
+                $tmp = realpath(dirname($current_path) . PATH_DELIMITER 
+                    . 'examples' . PATH_DELIMITER . $fileName);
+                if ($tmp && is_file($tmp)) {
                     $path = $tmp; // Yo! found it :)
                     break; // try-block
                 }
             }
 
-            // 3) Then try to look for the example file below the subdir PHPDOCUMENTOR_BASE/examples/ ...
-            if (is_dir(PHPDOCUMENTOR_BASE . PATH_DELIMITER . 'examples'))
-            {
-                $tmp = realpath(PHPDOCUMENTOR_BASE . PATH_DELIMITER . 'examples' . PATH_DELIMITER . $original_path);
-                if ($tmp && is_file($tmp))
-                {
+            // 3) Then try to look for the example file 
+            //    below the subdir PHPDOCUMENTOR_BASE/examples/ ...
+            if (is_dir(PHPDOCUMENTOR_BASE . PATH_DELIMITER . 'examples')) {
+                $tmp = realpath(PHPDOCUMENTOR_BASE . PATH_DELIMITER 
+                    . 'examples' . PATH_DELIMITER . $original_path);
+                if ($tmp && is_file($tmp)) {
                     $path = $tmp; // Yo! found it :)
                     break; // try-block
                 }
             }
 
             $tmp = realpath(PHPDOCUMENTOR_BASE . PATH_DELIMITER . $original_path);
-            if ($tmp && is_file($tmp))
-            {
+            if ($tmp && is_file($tmp)) {
                 $path = $tmp; // Yo! found it :)
                 break; // try-block
             }
             // If we reach this point, nothing was found and $path is false.
         } while (false);
 
-        if (!$path)
-        {
+        if (!$path) {
             addWarning(PDERROR_EXAMPLE_NOT_FOUND, $original_path);
             $this->_title = 'example not found';
-            $this->path = false;
-        } else
-        {
+            $this->path   = false;
+        } else {
             $this->_title = ($title) ? $title : 'example';
             // make a unique html-filename but avoid it to get too long.
-            $uniqueFileName = str_replace(array(':', DIRECTORY_SEPARATOR,'/'), array('_', '_', '_'), $path);
-            $uniqueFileName = substr($uniqueFileName,-50) . '_' . md5($path);
-            $this->path = $uniqueFileName;
+            $uniqueFileName = str_replace(array(':', 
+                DIRECTORY_SEPARATOR, '/'), array('_', '_', '_'), $path);
+            $uniqueFileName = substr($uniqueFileName, -50) . '_' . md5($path);
+            $this->path     = $uniqueFileName;
             
-            $f = @fopen($path,'r');
-            if ($f)
-            {
-                $example = fread($f,filesize($path));
-                if (tokenizer_ext)
-                {
+            $f = @fopen($path, 'r');
+            if ($f) {
+                $example = fread($f, filesize($path));
+                if (tokenizer_ext) {
                     $obj = new phpDocumentorTWordParser;
                     $obj->setup($example);
-                    $this->source = $obj->getFileSource();
+                    $this->source     = $obj->getFileSource();
                     $this->origsource = $example;
                     unset($obj);
-                } else
-                {
+                } else {
                     $this->source = $example;
                 }
             }
@@ -1035,9 +1318,16 @@ class parserExampleTag extends parserFileSourceTag
     }
     
     /**
-     * @param Converter
+     * convert the source code
+     *
+     * @param Converter &$c the output converter
+     *
+     * @return void
      * @uses phpDocumentor_HighlightParser highlights source code
      * @uses writeSource()
+     * @todo CS cleanup - rename to convertSource for camelCase rule
+     * @todo what's up with all the "return" statements?
+     *       can they _all_ be removed?
      */
     function ConvertSource(&$c)
     {
@@ -1046,26 +1336,33 @@ class parserExampleTag extends parserFileSourceTag
         return;
         $parser = new phpDocumentor_HighlightParser;
         $return = '';
-        $return = $parser->parse($this->source,$c);
+        $return = $parser->parse($this->source, $c);
         $this->writeSource($c, $return);
     }
 
     /**
-     * @param Converter $c
-     * @param string parsed example source
-     * @uses Converter::writeExample() writes final example out
+     * have the output converter write the source code
+     *
+     * @param Converter &$c     the output converter
+     * @param string    $source highlighted source code
+     *
+     * @return void
      * @access private
+     * @uses Converter::writeExample() writes final example out
      */
     function writeSource(&$c, $source)
     {
-        if ($this->path)
-        $c->writeExample($this->_title, $this->path, $source);
+        if ($this->path) {
+            $c->writeExample($this->_title, $this->path, $source);
+        }
     }
 
     /**
      * Retrieve a converter-specific link to the example
      *
-     * @param Converter
+     * @param Converter &$c the output converter
+     *
+     * @return string
      * @uses Converter::getExampleLink() retrieve the link to the example
      */
     function getSourceLink(&$c)

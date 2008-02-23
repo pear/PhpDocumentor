@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.7.0RC1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.7.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>PhpDocumentor</name>
  <channel>pear.php.net</channel>
  <summary>The phpDocumentor package provides automatic documenting of php api directly from the source.</summary>
@@ -69,8 +69,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>drewish@php.net</email>
   <active>yes</active>
  </developer>
- <date>2007-12-14</date>
- <time>06:02:03</time>
+ <date>2008-02-22</date>
+ <time>19:19:58</time>
  <version>
   <release>1.4.1</release>
   <api>1.4.0</api>
@@ -1356,7 +1356,9 @@ Includes these Sourceforge items:
     <file name="DescHTML.inc" role="php">
      <tasks:replace from="@VER@" to="version" type="package-info" />
     </file>
-    <file name="DocBlockTags.inc" role="php" />
+    <file name="DocBlockTags.inc" role="php">
+     <tasks:replace from="@VER@" to="version" type="package-info" />
+    </file>
     <file name="Errors.inc" role="php">
      <tasks:replace from="@VER@" to="version" type="package-info" />
     </file>
@@ -3114,7 +3116,7 @@ Includes these Sourceforge items:
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-12-14</date>
+   <date>2008-02-22</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>
 Includes these PEAR items:
