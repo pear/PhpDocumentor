@@ -64,12 +64,13 @@ $options = array(
         'phpDocumentor/Smarty-2.6.0/libs/debug.tpl' => 'php',
         'new_phpdoc.php' => 'data',
         'phpdoc.php' => 'data',
+        'scripts/makedoc.sh' => 'php',
         ),
 'ignore' =>
     array('package.xml',
           '*templates/PEAR/*',
           ),
-'installexceptions' => array('pear-phpdoc' => '/', 'pear-phpdoc.bat' => '/', 'scripts/makedoc.sh' => '/'),
+'installexceptions' => array('pear-phpdoc' => '/', 'pear-phpdoc.bat' => '/'),
 );
 $pfm2 = PEAR_PackageFileManager2::importOptions(dirname(dirname(__FILE__))
     . DIRECTORY_SEPARATOR . 'package.xml', array_merge($options, array('packagefile' => 'package.xml')));
