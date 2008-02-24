@@ -29,6 +29,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @category   ToolsAndUtilities
  * @package    phpDocumentor
  * @subpackage Links
  * @author     Gregory Beaver <cellog@php.net>
@@ -39,16 +40,29 @@
  * @link       http://www.phpdoc.org
  * @link       http://pear.php.net/PhpDocumentor
  * @since      1.2.0
+ * @todo       CS cleanup - change package to PhpDocumentor
  */
 
 /**
  * linking classes parent
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Links
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2006 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class abstractLink
 {
-    /**#@+ @var string */
+    /**#@+
+     * @var string
+     */
     var $path;
     /**
      * phpdoc alias _phpdoc_inc for phpdoc.inc
@@ -66,155 +80,282 @@ class abstractLink
     /**#@-*/
 
     /**
-     * @param string full path to file containing element
-     * @param string page name, as configured by {@link Parser::parse}
-     * @param string element name
-     * @param string package element is in
-     * @param string subpackage element is in
-     * @param string optional category that documentation is in
+     * sets up the link
+     *
+     * @param string $path       full path to file containing element
+     * @param string $fileAlias  page name, as configured by {@link Parser::parse}
+     * @param string $name       element name
+     * @param string $package    package element is in
+     * @param string $subpackage subpackage element is in
+     * @param string $category   optional category that documentation is in
+     *
+     * @return void
      */
-    function addLink($path, $fileAlias, $name, $package, $subpackage, $category = false)
+    function addLink($path, $fileAlias, $name, $package, $subpackage,
+        $category = false)
     {
-        $this->path = $path;
-        $this->fileAlias = $fileAlias;
-        $this->name = $name;
-        $this->category = $category;
-        $this->package = $package;
+        $this->path       = $path;
+        $this->fileAlias  = $fileAlias;
+        $this->name       = $name;
+        $this->category   = $category;
+        $this->package    = $package;
         $this->subpackage = $subpackage;
     }
 }
 
 /**
  * procedural page link
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Links
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2006 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class pageLink extends abstractLink
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     var $type = 'page';
 }
 
 /**
  * function link
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Links
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2006 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class functionLink extends abstractLink
 {
-    /** @var string */
+    /** 
+     * @var string
+     */
     var $type = 'function';
 }
 
 /**
  * define link
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Links
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2006 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class defineLink extends abstractLink
 {
-    /** @var string */
+    /** 
+     * @var string
+     */
     var $type = 'define';
 }
 
 /**
  * global variable link
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Links
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2006 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class globalLink extends abstractLink
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     var $type = 'global';
 }
 
 /**
  * class link
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Links
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2006 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class classLink extends abstractLink
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     var $type = 'class';
 }
 
 /**
  * method link
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Links
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2006 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class methodLink extends abstractLink
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     var $type = 'method';
-    /** @var string */
+    /**
+     * @var string
+     */
     var $class = '';
     
     /**
-     * @param string class name
-     * @param string full path to file containing element
-     * @param string page name, as configured by {@link Parser::parse}
-     * @param string element name
-     * @param string package element is in
-     * @param string subpackage element is in
+     * sets up the link
+     *
+     * @param string $class      class name
+     * @param string $path       full path to file containing element
+     * @param string $fileAlias  page name, as configured by {@link Parser::parse}
+     * @param string $name       element name
+     * @param string $package    package element is in
+     * @param string $subpackage subpackage element is in
+     * @param string $category   optional category that documentation is in
+     *
+     * @return void
      */
-    function addLink($class, $path ,$fileAlias,$name,$package,$subpackage, $category = false)
+    function addLink($class, $path , $fileAlias, $name, $package, $subpackage, 
+        $category = false)
     {
         $this->class = $class;
-        abstractLink::addLink($path, $fileAlias,$name,$package,$subpackage, $category);
+        abstractLink::addLink($path, $fileAlias, $name, $package, $subpackage, 
+            $category);
     }
 }
 
 /**
  * class variable link
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Links
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2006 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class varLink extends methodLink
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     var $type = 'var';
 }
 
 /**
  * class constant link
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Links
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2006 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class constLink extends methodLink
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     var $type = 'const';
 }
 
 /**
  * tutorial link
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Links
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2006 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class tutorialLink extends abstractLink
 {
-    /**#@+ @var string */
-    var $type = 'tutorial';
+    /**#@+
+     * @var string
+     */
+    var $type    = 'tutorial';
     var $section = '';
-    var $title = false;
+    var $title   = false;
     /**#@-*/
     
     /**
-     * @param string section/subsection name
-     * @param string full path to file containing element
-     * @param string page name, as configured by {@link Parser::parse}
-     * @param string element name
-     * @param string package element is in
-     * @param string subpackage element is in
-     * @param string title of tutorial
+     * sets up the link
+     *
+     * @param string $section    section/subsection name
+     * @param string $path       full path to file containing element
+     * @param string $name       page name, as configured by {@link Parser::parse}
+     * @param string $package    package element is in
+     * @param string $subpackage subpackage element is in
+     * @param string $title      title of tutorial
+     * @param string $category   optional category that documentation is in
+     *
+     * @return void
      */
-    function addLink($section,$path,$name,$package,$subpackage,$title = false, $category = false)
+    function addLink($section, $path, $name, $package, $subpackage, $title = false, 
+        $category = false)
     {
         $this->section = $section;
-        $this->title = $title;
-        parent::addLink($path,'',$name,$package,$subpackage, $category);
+        $this->title   = $title;
+        parent::addLink($path, '', $name, $package, $subpackage, $category);
     }
 }
 ?>
