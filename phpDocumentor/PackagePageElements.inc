@@ -19,7 +19,7 @@
  * 
  * PHP versions 4 and 5
  *
- * Copyright (c) 2002-2006 Gregory Beaver
+ * Copyright (c) 2002-2008 Gregory Beaver
  * 
  * LICENSE:
  * 
@@ -42,37 +42,57 @@
  * @package    phpDocumentor
  * @subpackage Tutorial
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    CVS: $Id$
  * @tutorial   tutorials.pkg
  * @link       http://www.phpdoc.org
  * @link       http://pear.php.net/PhpDocumentor
  * @since      1.2.0
+ * @todo       CS cleanup - change package to PhpDocumentor
  */
 /**
  * Represents <![CDATA[ ]]> sections.
  *
  * These sections are interpreted as plain text
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Tutorial
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @tutorial   tutorials.pkg
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserCData extends parserStringWithInlineTags
 {
     /**
+     * calls the output conversion
+     *
+     * @param Converter &$c          the output converter
+     * @param bool      $postprocess if postprocessing is needed
+     *
+     * @return string
      * @uses Converter::getCData() convert contents to text
-     * @param Converter
+     * @todo CS cleanup - rename to convert for camelCase rule
      */
     function Convert(&$c, $postprocess = true)
     {
         $val = $this->value;
-        if ($postprocess)
-        foreach($this->value as $key => $value)
-        {
-            if (is_string($value)) $this->value[$key] = $c->getCData($value);
+        if ($postprocess) {
+            foreach ($this->value as $key => $value) {
+                if (is_string($value)) {
+                    $this->value[$key] = $c->getCData($value);
+                }
+            }
         }
         $this->cache = false;
-        $x = parent::Convert($c, false);
+        $x           = parent::Convert($c, false);
         $this->value = $val;
         return $x;
     }
@@ -83,9 +103,21 @@ class parserCData extends parserStringWithInlineTags
  * This class is designed to represent all DocBook tags.  It is intelligent
  * enough to understand the <title> tag, and also the <refname> tag for
  * as title for <refentry>
- * @since 1.2
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Tutorial
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @tutorial   tutorials.pkg
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
+ * @todo       CS cleanup - rename to parserXmlDocBookTag for camelCase rule
  */
 class parserXMLDocBookTag extends parserStringWithInlineTags
 {
@@ -101,12 +133,20 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
      * @var string
      */
     var $name;
-    /**#@+ @access private */
-    /** @var parserCData */
+    /**#@+
+     * @access private
+     */
+    /**
+     * @var parserCData
+     */
     var $_cdata;
-    /** @var parserTag */
+    /**
+     * @var parserTag
+     */
     var $_title;
-    /** @var parserIdLineTag */
+    /**
+     * @var parserIdLineTag
+     */
     var $_id;
     /**
      * Set to <refpurpose> in <refsynopsisdiv>
@@ -114,8 +154,13 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
      */
     var $_description;
     /**#@-*/
+
     /**
-     * @param string tag name
+     * sets up the tag
+     *
+     * @param string $name tag name
+     *
+     * @todo CS cleanup - rename to parserXmlDocBookTag for camelCase rule
      */
     function parserXMLDocBookTag($name)
     {
@@ -123,28 +168,34 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
     }
     
     /**
-     * @param Converter
-     * @param boolean
+     * calls the output conversion
+     * 
+     * @param Converter &$c          the output converter
+     * @param bool      $postprocess if postprocessing is needed
+     *
+     * @return string
      * @uses Converter::TranslateTag() Calls this to enclose the contents of the
      *       DocBook tag based on the values in template options.ini file
      */
     function Convert(&$c, $postprocess = true)
     {
-        $value = parent::Convert($c, $postprocess);
+        $value    = parent::Convert($c, $postprocess);
         $simvalue = parent::Convert($c, false);
-        foreach($this->attributes as $a => $v)
-        {
-            $this->attributes[$a] = (is_string($v) ? $v : $v->Convert($c, $postprocess));
+        foreach ($this->attributes as $a => $v) {
+            $this->attributes[$a] = (is_string($v) ? $v : 
+                $v->Convert($c, $postprocess));
         }
-        if (isset($this->_title))
-        {
-            list($this->attributes,$value) = $c->ConvertTitle($this->name, $this->attributes, $this->_title->Convert($c, $postprocess), $value);
+        if (isset($this->_title)) {
+            list($this->attributes,$value) = $c->ConvertTitle($this->name, 
+                $this->attributes, $this->_title->Convert($c, $postprocess), $value);
         }
-        return $c->TranslateTag($this->name,$this->attributes,$value,$simvalue);
+        return $c->TranslateTag($this->name, $this->attributes, $value, $simvalue);
     }
     
     /**
      * Begin a new CData section
+     *
+     * @return void
      * @see addCData()
      */
     function startCData()
@@ -154,6 +205,8 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
     
     /**
      * Adds {@link $_cdata} to {@link $value}
+     *
+     * @return void
      */
     function endCData()
     {
@@ -162,22 +215,31 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
     }
     
     /**
-     * Retrieve either the table of contents index, or the location that
-     * the TOC will go
+     * Retrieve either the table of contents index, 
+     * or the location that the TOC will go
+     *
+     * @param false|integer $state either an index of the {@}toc} tag in $this->value
+     *                             or false, if the next index value of $this->value
+     *                             is needed
+     *
+     * @return int
      * @see setTOC()
-     * @param false|integer either an index of the {@}toc} tag in $this->value
-     *                      or false, if the next index value of $this->value
-     *                      is needed
      */
     function getTOC($state = false)
     {
-        if ($state !== false) return $this->value[$state];
+        if ($state !== false) {
+            return $this->value[$state];
+        }
         return count($this->value);
     }
     
     /**
-     * @param integer index of the TOC in $this->value
-     * @param parserTocInlineTag
+     * sets the TOC value
+     *
+     * @param integer            $state index of the TOC in $this->value
+     * @param parserTocInlineTag $val   tag value
+     *
+     * @return void
      */
     function setTOC($state, $val)
     {
@@ -186,7 +248,10 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
     
     /**
      * add a word to CData
-     * @param string
+     *
+     * @param string $word word to add
+     *
+     * @return void
      */
     function addCData($word)
     {
@@ -197,18 +262,20 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
      * Add an xml tag attribute name="value" pair
      *
      * if the attribute is id, value must be a {@link parserIdInlineTag}
-     * @param string attribute name
-     * @param string|parserIdInlineTag value of attribute
+     *
+     * @param string                   $name  attribute name
+     * @param string|parserIdInlineTag $value value of attribute
+     *
+     * @return void
      */
-    function addAttribute($name,$value)
+    function addAttribute($name, $value)
     {
         $this->attributes[$name] = $value;
-        if ($name == 'id')
-        {
+        if ($name == 'id') {
             // fix 1153593
-            if (is_string($value))
-            {
-                addWarning(PDERROR_ID_MUST_BE_INLINE,$this->name,$value,$this->name,$value);
+            if (is_string($value)) {
+                addWarning(PDERROR_ID_MUST_BE_INLINE, $this->name, $value, 
+                    $this->name, $value);
             } else {
                 $this->setId($value);
             }
@@ -222,7 +289,10 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
      * tag pair.  The <refentry> top-level tag is a little different.  Instead
      * of using <title></title>, phpDocumentor uses the contents of the
      * <refname> tag in the <refnamediv> tag
-     * @param parserXMLDocBookTag the title element
+     *
+     * @param parserXMLDocBookTag $title the title element
+     *
+     * @return void
      */
     function setTitle($title)
     {
@@ -231,7 +301,10 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
     
     /**
      * If the id attribute is present, this method will set its id
-     * @param parserIdInlineTag
+     *
+     * @param parserIdInlineTag $id the id value
+     *
+     * @return void
      */
     function setId($id)
     {
@@ -242,16 +315,21 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
      * Return converter-specific formatting of ID.
      *
      * Passes $c to {@link parserIdInlineTag::Convert()}
-     * @param Converter
+     *
+     * @param Converter &$c the output converter
+     *
      * @return string
      */
     function getId(&$c)
     {
-        if ($this->_id) return trim($this->_id->Convert($c));
+        if ($this->_id) {
+            return trim($this->_id->Convert($c));
+        }
     }
     
     /**
      * Determine whether the docbook element has a title
+     *
      * @return boolean
      */
     function hasTitle()
@@ -261,41 +339,43 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
     
     /**
      * Retrieve Converter-specific formatting of the title of this element
+     *
+     * @param Converter &$c the output converter
+     *
      * @return string
-     * @param Converter
      */
     function getTitle(&$c)
     {
-        if ($this->name == 'refentry')
-        {
-            foreach($this->value as $tag)
-            {
-                if (is_object($tag) && $tag->name == 'refnamediv')
-                {
+        if ($this->name == 'refentry') {
+            foreach ($this->value as $tag) {
+                if (is_object($tag) && $tag->name == 'refnamediv') {
                     return $tag->getTitle($c);
                 }
             }
         }
-        if ($this->name == 'refnamediv')
-        {
-            foreach($this->value as $tag)
-            {
-                if (is_object($tag) && is_a($tag, 'parserXMLDocBookTag') && $tag->name == 'refname')
-                {
+        if ($this->name == 'refnamediv') {
+            foreach ($this->value as $tag) {
+                if (is_object($tag) && is_a($tag, 'parserXMLDocBookTag') 
+                    && $tag->name == 'refname') {
                     $t = new parserStringWithInlineTags;
-                    foreach($tag->value as $val) $t->add($val);
+                    foreach ($tag->value as $val) {
+                        $t->add($val);
+                    }
                     $this->_title = $t;
                 }
-                if (is_object($tag) && is_a($tag, 'parserXMLDocBookTag') && $tag->name == 'refpurpose')
-                {
+                if (is_object($tag) && is_a($tag, 'parserXMLDocBookTag') 
+                    && $tag->name == 'refpurpose') {
                     $t = new parserStringWithInlineTags;
-                    foreach($tag->value as $val) $t->add($val);
+                    foreach ($tag->value as $val) {
+                        $t->add($val);
+                    }
                     $this->_description = $t;
                 }
             }
         }
-        if (isset($this->_title))
-        return $this->_title->Convert($c);
+        if (isset($this->_title)) {
+            return $this->_title->Convert($c);
+        }
         if (is_object($this->value[0]) && is_a($tag, 'parserXMLDocBookTag')) {
             return $this->value[0]->getTitle($c);
         }
@@ -312,27 +392,30 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
      *
      * This method uses the $_id members of nested docbook tags to retrieve
      * the section defined by $subsection
-     * @param Converter
-     * @param string converter-specific subsection
+     *
+     * @param Converter &$c         the output converter
+     * @param string    $subsection converter-specific subsection
+     *
+     * @return bool|string
      */
-    function getSubsection(&$c,$subsection)
+    function getSubsection(&$c, $subsection)
     {
         if (!is_object($this->_id)) {
             return false;
         }
         $search = phpDocumentor_clone($this->_id);
-        if (is_string($this->_id)) return false;
-        if (phpDocumentor_get_class($search) != 'parseridinlinetag') return false;
+        if (is_string($this->_id)) {
+            return false;
+        }
+        if (phpDocumentor_get_class($search) != 'parseridinlinetag') {
+            return false;
+        }
         $search->id = $subsection;
-        foreach($this->value as $el)
-        {
-            if (phpDocumentor_get_class($el) == 'parserxmldocbooktag')
-            {
-                if ($el->getId($c) == $search->Convert($c))
-                {
+        foreach ($this->value as $el) {
+            if (phpDocumentor_get_class($el) == 'parserxmldocbooktag') {
+                if ($el->getId($c) == $search->Convert($c)) {
                     return $el;
-                } elseif ($a = $el->getSubsection($c,$subsection))
-                {
+                } elseif ($a = $el->getSubsection($c, $subsection)) {
                     return $a;
                 }
             }
@@ -351,19 +434,26 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
      *  4. <b>text</b> - normal non-markup text
      *
      * All four kinds of data are added here
-     * @param parserEntity|parserCData|parserXMLDocBookTag|string nested tag,
-     *        entity, or text
+     *
+     * @param parserEntity|parserCData|parserXMLDocBookTag|string $el nested tag,
+     *                                                                entity, or text
+     *
+     * @return mixed
      */
     function add($el)
     {
-        if (is_string($el)) return parent::add($el);
-        if (phpDocumentor_get_class($el) == 'parserxmldocbooktag')
-        {
-            if ($el->name == 'title')
-            {
+        if (is_string($el)) {
+            return parent::add($el);
+        }
+        if (phpDocumentor_get_class($el) == 'parserxmldocbooktag') {
+            if ($el->name == 'title') {
                 $this->setTitle($el);
-            } else return parent::add($el);
-        } else return parent::add($el);
+            } else {
+                return parent::add($el);
+            }
+        } else {
+            return parent::add($el);
+        }
     }
 }
 
@@ -371,14 +461,27 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
  * a standard entity like &rdquo;
  *
  * This class is designed to represent all DocBook entities.
- * @since 1.2
- * @package phpDocumentor
+ *
+ * @category   ToolsAndUtilities
+ * @package    phpDocumentor
  * @subpackage Tutorial
+ * @author     Gregory Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    Release: @VER@
+ * @tutorial   tutorials.pkg
+ * @link       http://www.phpdoc.org
+ * @link       http://pear.php.net/PhpDocumentor
+ * @since      1.2
+ * @todo       CS cleanup - change package to PhpDocumentor
+ * @todo       CS cleanup - change classname to PhpDocumentor_*
  */
 class parserEntity
 {
     /**
-     * @param string entity name
+     * sets up the entity
+     *
+     * @param string $name entity name
      */
     function parserEntity($name)
     {
@@ -386,19 +489,23 @@ class parserEntity
     }
     
     /**
-     * @uses Converter::TranslateEntity() convert contents to text
-     * @param Converter
+     * calls the output conversion
+     *
+     * @param Converter &$c          the output converter
+     * @param bool      $postprocess if postprocessing is needed
+     *
      * @return string
+     * @uses Converter::TranslateEntity() convert contents to text
+     * @todo CS cleanup - rename to convert for camelCase rule
      */
     function Convert(&$c, $postprocess = true)
     {
-        if ($postprocess)
-        return $c->TranslateEntity($this->value);
-        else
-        {
-            $trans_tbl = get_html_translation_table (HTML_ENTITIES);
-            $trans_tbl = array_flip ($trans_tbl);
-            $ret = strtr ('&'.$this->value.';', $trans_tbl);
+        if ($postprocess) {
+            return $c->TranslateEntity($this->value);
+        } else {
+            $trans_tbl = get_html_translation_table(HTML_ENTITIES);
+            $trans_tbl = array_flip($trans_tbl);
+            $ret       = strtr('&'.$this->value.';', $trans_tbl);
             return $ret;
         }
     }
