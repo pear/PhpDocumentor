@@ -10,7 +10,7 @@
  * 
  * PHP versions 4 and 5
  *
- * Copyright (c) 2002-2006 Gregory Beaver
+ * Copyright (c) 2002-2008 Gregory Beaver
  * 
  * LICENSE:
  * 
@@ -33,7 +33,7 @@
  * @package    phpDocumentor
  * @subpackage Links
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    CVS: $Id$
  * @filesource
@@ -50,7 +50,7 @@
  * @package    phpDocumentor
  * @subpackage Links
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -110,7 +110,7 @@ class abstractLink
  * @package    phpDocumentor
  * @subpackage Links
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -133,7 +133,7 @@ class pageLink extends abstractLink
  * @package    phpDocumentor
  * @subpackage Links
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -156,7 +156,7 @@ class functionLink extends abstractLink
  * @package    phpDocumentor
  * @subpackage Links
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -179,7 +179,7 @@ class defineLink extends abstractLink
  * @package    phpDocumentor
  * @subpackage Links
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -202,7 +202,7 @@ class globalLink extends abstractLink
  * @package    phpDocumentor
  * @subpackage Links
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -225,7 +225,7 @@ class classLink extends abstractLink
  * @package    phpDocumentor
  * @subpackage Links
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -273,7 +273,7 @@ class methodLink extends abstractLink
  * @package    phpDocumentor
  * @subpackage Links
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -296,7 +296,7 @@ class varLink extends methodLink
  * @package    phpDocumentor
  * @subpackage Links
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -319,7 +319,7 @@ class constLink extends methodLink
  * @package    phpDocumentor
  * @subpackage Links
  * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2002-2006 Gregory Beaver
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org

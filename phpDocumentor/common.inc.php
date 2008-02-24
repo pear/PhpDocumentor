@@ -6,7 +6,7 @@
  * 
  * PHP versions 4 and 5
  *
- * Copyright (c) 2001-2007 Gregory Beaver
+ * Copyright (c) 2001-2008 Gregory Beaver
  * 
  * LICENSE:
  * 
@@ -28,7 +28,7 @@
  * @category  ToolsAndUtilities
  * @package   phpDocumentor
  * @author    Greg Beaver <cellog@php.net>
- * @copyright 2001-2007 Gregory Beaver
+ * @copyright 2001-2008 Gregory Beaver
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version   CVS: $Id$
  * @filesource

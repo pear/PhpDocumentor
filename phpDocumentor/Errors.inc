@@ -6,7 +6,7 @@
  * 
  * PHP versions 4 and 5
  *
- * Copyright (c) 2001-2007 Gregory Beaver
+ * Copyright (c) 2001-2008 Gregory Beaver
  * 
  * LICENSE:
  * 
@@ -29,7 +29,7 @@
  * @package    phpDocumentor
  * @subpackage Errors
  * @author     Greg Beaver <cellog@php.net>
- * @copyright  2001-2007 Gregory Beaver
+ * @copyright  2001-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    CVS: $Id$
  * @filesource
@@ -736,7 +736,7 @@ $GLOBALS['phpDocumentor_error_descrip'] =
  * @package    phpDocumentor
  * @subpackage Errors
  * @author     Greg Beaver <cellog@php.net>
- * @copyright  2001-2007 Gregory Beaver
+ * @copyright  2001-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -833,7 +833,7 @@ class RecordWarning
  * @package    phpDocumentor
  * @subpackage Errors
  * @author     Greg Beaver <cellog@php.net>
- * @copyright  2001-2007 Gregory Beaver
+ * @copyright  2001-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -883,7 +883,7 @@ class RecordError extends RecordWarning
  * @package    phpDocumentor
  * @subpackage Errors
  * @author     Greg Beaver <cellog@php.net>
- * @copyright  2001-2007 Gregory Beaver
+ * @copyright  2001-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org

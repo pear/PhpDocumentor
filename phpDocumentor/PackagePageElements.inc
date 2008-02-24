@@ -38,13 +38,14 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @category   ToolsAndUtilities
  * @package    phpDocumentor
  * @subpackage Tutorial
  * @author     Gregory Beaver <cellog@php.net>
  * @copyright  2002-2006 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    CVS: $Id$
- * @tutorial tutorials.pkg
+ * @tutorial   tutorials.pkg
  * @link       http://www.phpdoc.org
  * @link       http://pear.php.net/PhpDocumentor
  * @since      1.2.0

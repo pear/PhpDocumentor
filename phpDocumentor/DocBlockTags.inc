@@ -50,6 +50,7 @@
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -190,6 +191,7 @@ class parserTag extends parserStringWithInlineTags
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -239,6 +241,7 @@ class parserNameTag extends parserTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -325,6 +328,7 @@ class parserAccessTag extends parserTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -433,6 +437,7 @@ class parserReturnTag extends parserTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -475,6 +480,7 @@ class parserPropertyTag extends parserReturnTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -500,6 +506,7 @@ class parserPropertyReadTag extends parserPropertyTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -525,6 +532,7 @@ class parserPropertyWriteTag extends parserPropertyTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -555,6 +563,7 @@ class parserMethodTag extends parserPropertyTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -585,6 +594,7 @@ class parserVarTag extends parserReturnTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -609,6 +619,7 @@ class parserParamTag extends parserVarTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -633,6 +644,7 @@ class parserStaticvarTag extends parserParamTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -677,6 +689,7 @@ class parserLinkTag extends parserTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -762,6 +775,7 @@ class parserSeeTag extends parserLinkTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -809,6 +823,7 @@ class parserLicenseTag extends parserLinkTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -903,6 +918,7 @@ class parserUsesTag extends parserSeeTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -963,6 +979,7 @@ class parserUsedByTag extends parserUsesTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -1029,6 +1046,7 @@ class parserTutorialTag extends parserSeeTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
@@ -1148,6 +1166,7 @@ class parserFileSourceTag extends parserTag
  * @package    phpDocumentor
  * @subpackage DocBlockTags
  * @author     Greg Beaver <cellog@php.net>
+ * @copyright  2002-2008 Gregory Beaver
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
