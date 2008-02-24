@@ -479,7 +479,7 @@ class parserPropertyTag extends parserReturnTag
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
  * @link       http://pear.php.net/PhpDocumentor
- * @tutorial   tags.property-read.pkg
+ * @tutorial   tags.property.pkg
  * @since      1.4.0a1
  * @todo       CS cleanup - change package to PhpDocumentor
  * @todo       CS cleanup - change classname to PhpDocumentor_*
@@ -504,7 +504,7 @@ class parserPropertyReadTag extends parserPropertyTag
  * @version    Release: @VER@
  * @link       http://www.phpdoc.org
  * @link       http://pear.php.net/PhpDocumentor
- * @tutorial   tags.property-write.pkg
+ * @tutorial   tags.property.pkg
  * @since      1.4.0a1
  * @todo       CS cleanup - change package to PhpDocumentor
  * @todo       CS cleanup - change classname to PhpDocumentor_*
