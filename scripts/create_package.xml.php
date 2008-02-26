@@ -113,6 +113,7 @@ $pfm2->addReplacement('phpDocumentor/IntermediateParser.inc', 'package-info', '@
 $pfm2->addReplacement('phpDocumentor/IntermediateParser.inc', 'pear-config', '@PEAR-DIR@', 'php_dir');
 $pfm2->addReplacement('phpDocumentor/LinkClasses.inc', 'package-info', '@VER@', 'version');
 $pfm2->addReplacement('phpDocumentor/PackagePageElements.inc', 'package-info', '@VER@', 'version');
+$pfm2->addReplacement('phpDocumentor/ParserData.inc', 'package-info', '@VER@', 'version');
 $pfm2->addReplacement('phpDocumentor/phpDocumentorTParser.inc', 'package-info', '@VER@', 'version');
 $pfm2->addReplacement('phpDocumentor/phpDocumentorTWordParser.inc', 'package-info', '@VER@', 'version');
 $pfm2->addReplacement('phpDocumentor/ProceduralPages.inc', 'package-info', '@VER@', 'version');
