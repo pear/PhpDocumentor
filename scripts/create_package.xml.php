@@ -109,6 +109,7 @@ $pfm2->addReplacement('phpDocumentor/EventStack.inc', 'package-info', '@VER@', '
 $pfm2->addReplacement('phpDocumentor/common.inc.php', 'package-info', '@VER@', 'version');
 $pfm2->addReplacement('phpDocumentor/common.inc.php', 'pear-config', '@PEAR-DIR@', 'php_dir');
 $pfm2->addReplacement('phpDocumentor/HighlightParser.inc', 'package-info', '@VER@', 'version');
+$pfm2->addReplacement('phpDocumentor/InlineTags.inc', 'package-info', '@VER@', 'version');
 $pfm2->addReplacement('phpDocumentor/IntermediateParser.inc', 'package-info', '@VER@', 'version');
 $pfm2->addReplacement('phpDocumentor/IntermediateParser.inc', 'pear-config', '@PEAR-DIR@', 'php_dir');
 $pfm2->addReplacement('phpDocumentor/LinkClasses.inc', 'package-info', '@VER@', 'version');

@@ -69,8 +69,8 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>drewish@php.net</email>
   <active>yes</active>
  </developer>
- <date>2008-02-25</date>
- <time>05:56:11</time>
+ <date>2008-03-27</date>
+ <time>19:43:35</time>
  <version>
   <release>1.4.1</release>
   <api>1.4.0</api>
@@ -1369,7 +1369,9 @@ Includes these Sourceforge items:
     <file name="HighlightParser.inc" role="php">
      <tasks:replace from="@VER@" to="version" type="package-info" />
     </file>
-    <file name="InlineTags.inc" role="php" />
+    <file name="InlineTags.inc" role="php">
+     <tasks:replace from="@VER@" to="version" type="package-info" />
+    </file>
     <file name="IntermediateParser.inc" role="php">
      <tasks:replace from="@VER@" to="version" type="package-info" />
      <tasks:replace from="@PEAR-DIR@" to="php_dir" type="pear-config" />
@@ -3122,7 +3124,7 @@ Includes these Sourceforge items:
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2008-02-25</date>
+   <date>2008-03-27</date>
    <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
    <notes>
 Includes these PEAR items:
