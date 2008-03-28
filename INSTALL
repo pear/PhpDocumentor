@@ -75,7 +75,7 @@ the documentation of your webserver and of PHP for installation support.
 
 Windows and Unix
 ----------------
-Open a web browser and browse to phpdoc.php at the location that you set up.
+Open a web browser and browse to index.html at the location that you set up.
 Instructions are in the web interface.
 
 vim: set expandtab :
