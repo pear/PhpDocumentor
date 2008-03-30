@@ -626,6 +626,7 @@ class phpDocumentor_setup
                         $file = strtr($file, '\\', '/');
                         // file's subpath, relative to $dir
                         $file_subpath = str_replace('\\', '/', realpath(dirname($file)));
+                        $file_subpath = preg_replace('[\\/]', DIRECTORY_SEPARATOR, $file_subpath);
                         $file_subpath = preg_replace('~^' . preg_quote($dir, '~') . '~', '', $file_subpath);
 
                         if (!$this->setup->checkIgnore(basename($file), $file_subpath, $this->ignore_files,true,$this->ignoresymlinks))
