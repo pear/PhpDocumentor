@@ -7,28 +7,17 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 $packagedir = dirname(dirname(__FILE__));
 $notes = '
 Includes these PEAR items:
-Req #11755: Remove Unused DocBlock_Lexer and PHPT Tests [ashnazg]
-Req #11757: Move PhpUnit Tests into new tests dir [ashnazg]
-Bug #10909: PHP Notice in PDF Converter line 210 [ashnazg]
-Bug #11613: -q flag is not honoured [ashnazg]
-Bug #11683: examples displayed using earthli style are not rendered properly [ashnazg|kguest]
-Bug #11788: Two failing unit tests [ashnazg]
-Bug #11809: Incorrect @name usage causes fatal crash [ashnazg]
-Bug #12121: phpdoc.bat cannot launch php.exe [ashnazg|kalvaro]
-Bug #12172: media files are not being copied [ashnazg|nemesis]
-Bug #12201: Misleading error message [ashnazg|yunosh]
-Doc #12459: @subpackage does not fix name conflicts [ashnazg]
+Bug #12361: missing links to the filesource
+Bug #12699: makedocs.sh script needs a better install location
+Bug #12929: paramete \'ignore\' oper mistake
+Doc #12764: Update INSTALL for web docbuilder
 
 Includes these Sourceforge items:
-- [1846302] php version > 4.3.0 and tokenizer [ashnazg]
-- [1845584] File suffix should be lowercase [ashnazg]
-- [1842595] makedoc.sh doesn\'t like embedded blanks in paths [ashnazg|munroe_r]
-- [1839924] addErrorDie has to exit with non-zero return code! [ashnazg|blueyed]
-- [1826342] Data-dependent endless(?) loop in parser [ashnazg]
-- [1733936] "phpdoc" does not return with error code "0" on success [ashnazg|blueyed]
+- [1829133] Progress display not happening until conversion finished [ashnazg]
+- [1779257] ignore=.. option not working correctly on Win | fix attaced [ashnazg|mrasnika]
 
 ';
-$version = '1.4.1';
+$version = '1.4.2';
 $release_stability = 'stable';
 $api = '1.4.0';
 $api_stability = 'stable';
@@ -57,7 +46,7 @@ $options = array(
         'INSTALL' => 'doc',
         'FAQ' => 'doc',
         'Authors' => 'doc',
-        'Release-1.4.1' => 'doc',
+        'Release-1.4.2' => 'doc',
         'pear-phpdoc' => 'script',
         'pear-phpdoc.bat' => 'script',
         'HTML_TreeMenu-1.1.2/TreeMenu.php' => 'php',
