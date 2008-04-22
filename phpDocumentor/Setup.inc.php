@@ -201,12 +201,19 @@ class phpDocumentor_setup
         $this->parseIni();
         $this->setMemoryLimit();
 
-        if (tokenizer_ext)
-        {
+        /*
+         * NOTE:  
+         * It is possible for the tokenizer extension to be loaded,
+         * but actually be broken in the OS, and therefore not working...
+         * the conditional below will NOT recognize this scenario.
+         * You can separately run the {@link tokenizer_test.php} to
+         * verify that the tokenizer library is working correctly
+         * from the OS perspective.
+         */
+        if (tokenizer_ext) {
             phpDocumentor_out("using tokenizer Parser\n");
             $this->parse = new phpDocumentorTParser;
-        } else
-        {
+        } else {
             phpDocumentor_out("No Tokenizer support detected, so using default (slower) Parser..." . PHP_EOL);
 
             if (version_compare(phpversion(), '4.3.0', '<')) {
