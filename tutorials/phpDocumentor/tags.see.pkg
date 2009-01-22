@@ -69,7 +69,7 @@ class main_class
 {
     /**
      * example of linking to same class, outputs <u>main_class::parent_method()</u>
-     * @see function parent_method
+     * @see parent_method
      */
     var foo = 3;
 
@@ -94,7 +94,6 @@ class main_class
 subclass extends main_class
 {
     /**
-     * bar.
      * example of same class lookup - see will look through parent hierarchy to
      * find the method in { @link main_class}
      * the above inline link tag will parse as <u>main_class</u>
