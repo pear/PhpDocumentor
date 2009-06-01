@@ -40,7 +40,7 @@
  <refsect1 id="{@id description}">
   <title>Description</title>
   <para>NOTE: as of 0.4.1, @param can document phpdoc.de-style, with optional $paramname</para>
-  <para>datatype should be a valid PHP type or "mixed", or you can list multiple datatypes for a single parameter by delimiting them with the pipe (e.g. &quot;@param int|string $p1&quot;).  You may document parameters listed or any optional paramters that will be parsed by standard PHP functions func_num_args()/get_func_arg().  Recommended name format for parameters listed with func_get_arg() is:
+  <para>The datatype should be a valid PHP type (int, string, bool, etc), a class name for the type of object, or simply &quot;mixed&quot;.  Further, you can list multiple datatypes for a single parameter by delimiting them with the pipe (e.g. &quot;@param int|string $p1&quot;).  You may document parameters listed or any optional paramters that will be parsed by standard PHP functions func_num_args()/get_func_arg().  Recommended name format for parameters listed with func_get_arg() is:
    <itemizedlist>
     <listitem><para><emphasis>$paramname</emphasis> if there is only one parameter</para></listitem>
     <listitem><para><emphasis>$paramname,...</emphasis> if the number of parameters is unlimited</para></listitem>

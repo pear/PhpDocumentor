@@ -25,7 +25,7 @@
  <refsect1 id="{@id description}">
   <title>Description</title>
    <para>You may use the @var tag to document the data type of class variables.</para>
-   <para>datatype should be a valid PHP type or "mixed."  phpDocumentor will display the optional description unmodified, and defaults to "mixed" if the datatype is not present</para>
+   <para>The datatype should be a valid PHP type (int, string, bool, etc), a class name for the type of object, or simply &quot;mixed&quot;.  phpDocumentor will display the optional description unmodified, and defaults to "mixed" if the datatype is not present</para>
  </refsect1>
  <refsect1 id="{@id example}">
   <title>Example</title>

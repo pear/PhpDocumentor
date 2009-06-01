@@ -34,7 +34,7 @@
  <refsect1 id="{@id description}">
   <title>Description</title>
   <para>The @return tag is used to document the return value of functions or methods. @returns is an alias for @return to support tag formats of other automatic documentors</para>
-  <para>The datatype should be a valid PHP type, a class name for the type of object returned, or simply &quot;mixed&quot;.  If you want to explicitly show multiple possible return types, list them pipe-delimited without spaces (e.g. &quot;@return int|string&quot;).  If a class name is used as the datatype in the @return tag, phpDocumentor will automatically create a link to that class's documentation.  In addition, if a function returns multiple possible values, separate them using the | character, and phpDocumentor will parse out any class names in the return value.  phpDocumentor will display the optional description unmodified.</para>
+  <para>The datatype should be a valid PHP type (int, string, bool, etc), a class name for the type of object returned, or simply &quot;mixed&quot;.  If you want to explicitly show multiple possible return types, list them pipe-delimited without spaces (e.g. &quot;@return int|string&quot;).  If a class name is used as the datatype in the @return tag, phpDocumentor will automatically create a link to that class's documentation.  In addition, if a function returns multiple possible values, separate them using the | character, and phpDocumentor will parse out any class names in the return value.  phpDocumentor will display the optional description unmodified.</para>
  </refsect1>
  <refsect1 id="{@id example}">
   <title>Example</title>
