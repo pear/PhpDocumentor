@@ -46,7 +46,8 @@
     <listitem><para><emphasis>$paramname,...</emphasis> if the number of parameters is unlimited</para></listitem>
    </itemizedlist>
   </para>
-  <para>phpDocumentor will display the optional description unmodified</para>
+  <para>phpDocumentor will display the optional description unmodified.</para>
+  <para>Note that the <emphasis>$paramname,...</emphasis> will be shown in the output docs in both the parameter listing AND the function signature.  If you are not indicating in the actual code that the parameter is optional (via &quot;$paramname = 'a default value'&quot;), then you should mention in the parameter's description that the parameter is optional.</para>
  </refsect1>
  <refsect1 id="{@id example}">
   <title>Example</title>
@@ -103,6 +104,7 @@ function function2($foo, $bar)
  
 /**
  * Example of documenting undetermined function arguments
+ * (notice how $foo_desc is NOT part of the actual function signature in the code, but still gets documented)
  * @param string $foo
  * @param mixed $foo_desc optional description of foo
  */
@@ -118,9 +120,11 @@ function function3($foo)
 /**
  * Example of unlimited parameters.
  * Returns a formatted var_dump for debugging purposes
+ * (since the recurrences of $v are not listed in the actual function signature in the code,
+ * you may wish to highlight they are "optional" in their description)
  * @param string $s string to display
  * @param mixed $v variable to display with var_dump()
- * @param mixed $v,... unlimited number of additional variables to display with var_dump()
+ * @param mixed $v,... unlimited OPTIONAL number of additional variables to display with var_dump()
  */
 function fancy_debug($s,$v)
 {
