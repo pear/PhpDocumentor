@@ -304,7 +304,7 @@ class parserTutorialInlineTag extends parserLinkInlineTag
         $descrip = false;
         if (strpos($this->value, ',') === false) {
             if (strpos(trim($this->value), ' ')) {
-                $v     = split(' ', trim($this->value));
+                $v     = explode(' ', trim($this->value));
                 $value = $c->getTutorialLink($v[0]);
                 array_shift($v);
                 $descrip = join($v, ' ');
@@ -312,12 +312,12 @@ class parserTutorialInlineTag extends parserLinkInlineTag
                 $value = $c->getTutorialLink($this->value);
             }
         } else {
-            $vals    = split(',', $this->value);
+            $vals    = explode(',', $this->value);
             $descrip = array();
             foreach ($vals as $val) {
                 $val = trim($val);
                 if (strpos($val, ' ')) {
-                    $v       = split(' ', $val);
+                    $v       = explode(' ', $val);
                     $value[] = $c->getTutorialLink($v[0]);
                     array_shift($v);
                     $descrip[] = join($v, ' ');
