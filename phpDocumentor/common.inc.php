@@ -303,7 +303,10 @@ function fancy_debug($s,$v)
  */
 function phpDocumentor_get_class($object)
 {
-    return strtolower(get_class($object));
+    if (is_object($object)) {
+        return strtolower(get_class($object));
+    }
+    return false;
 }
 
 ?>
