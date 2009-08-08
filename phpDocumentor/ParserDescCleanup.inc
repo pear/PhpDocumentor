@@ -576,8 +576,10 @@ class parserDescParser extends Parser
             {
                 $this->addText($word);
                 $this->wp->backupPos($word.$word);
-            } else
-            $this->wp->backupPos($word);
+            } else {
+                $this->addText('<<');
+                $this->wp->backupPos($word);
+            }
             return;
         }
         $this->addText('<'.str_replace('>>','>',$word));
