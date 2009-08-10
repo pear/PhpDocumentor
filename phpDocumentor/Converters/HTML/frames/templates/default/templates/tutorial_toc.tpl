@@ -19,6 +19,7 @@
 							<li>{$toc[toc].link}</li>
 					{/if}
 				{else}
+				        </ul>
 					</ul>
 					<li>{$toc[toc].link}</li>
 				{/if}
