@@ -1022,7 +1022,7 @@ C:\>php-cli C:\path\to\phpdoc\phpdoc [commandline]
     <para>Use this option to tell phpDocumentor to parse files and directories that begin with a period (.)</para>
    </refsect3>
    <refsect3 id="{@id defaultcategoryname}">
-    <title>-dn, --defaultcategoryname</title>
+    <title>-dc, --defaultcategoryname</title>
     <para>This will tell phpDocumentor to group any uncategorized elements into the primary
      categoryname.  If not specified, the primary category is &quot;default.&quot;  The
      category should be specified using the {@tutorial tags.category.pkg} tag.
