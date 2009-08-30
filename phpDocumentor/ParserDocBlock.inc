@@ -589,7 +589,9 @@ class parserDocBlock
         global $_phpDocumentor_setting;
         if (phpDocumentor_setup::checkIgnoreTag($tag->keyword)) return;
         $value = $tag->value;
-        if (is_array($value)) $value = $value[0];
+        if (is_array($value)) {
+            $value = empty($value[0]) ? '' : $value[0];
+        }
         if ($tag->keyword == 'uses')
         {
             $this->addUses($value, $tag->_description);
