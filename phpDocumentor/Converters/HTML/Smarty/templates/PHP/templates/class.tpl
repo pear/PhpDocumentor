@@ -221,7 +221,7 @@
 
 {if $consts && count($consts) > 0}
 <hr />
-<a name="class_constss"></a>
+<a name="class_consts"></a>
 <h3>Class Constants</h3>
 <div class="tags">
 {include file="const.tpl"}
