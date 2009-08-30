@@ -666,14 +666,16 @@ class parserLinkTag extends parserTag
      * sets up the link tag
      *
      * @param string $link URL to link to
+     *                     (might also contain the URL's
+     *                     description text)
      */
     function parserLinkTag($link)
     {
         $start = $val = $link->getString();
         if (strpos($val, ' ')) {
-            $start = array_shift($val = explode(' ', $val));
-
-            $val = join($val, ' ');
+            $val   = explode(' ', $val);
+            $start = array_shift($val);
+            $val   = join($val, ' ');
         }
         $a = new parserLinkInlineTag($start, $val);
         $b = new parserStringWithInlineTags;
