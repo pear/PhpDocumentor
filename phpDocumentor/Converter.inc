@@ -1991,7 +1991,11 @@ class Converter
                 foreach($tutorial['child'] as $a => $b)
                 {
                     $btut = $b['tutorial'];
-                    $res['tutorial'] = $this->tutorials[$btut->package][$btut->subpackage][$btut->tutorial_type][$btut->name];
+                    $res = array(
+                        'tutorial' => $this->tutorials
+                            [$btut->package][$btut->subpackage]
+                            [$btut->tutorial_type][$btut->name]
+                    );
                     if (isset($b['child']))
                     {
                          $tempres = Converter::getTutorialTree($b);
