@@ -78,7 +78,9 @@ class phpDocumentorTWordParser extends WordParser
         T_DOC_COMMENT,
         T_OPEN_TAG,
         T_CLOSE_TAG,
-        T_INLINE_HTML);
+        T_INLINE_HTML,
+        T_START_HEREDOC,
+    );
     /**
      * @var array
      */
