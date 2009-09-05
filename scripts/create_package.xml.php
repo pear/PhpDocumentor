@@ -7,17 +7,32 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 $packagedir = dirname(dirname(__FILE__));
 $notes = '
 Includes these PEAR items:
-Bug #12361: missing links to the filesource
-Bug #12699: makedocs.sh script needs a better install location
-Bug #12929: paramete \'ignore\' oper mistake
-Doc #12764: Update INSTALL for web docbuilder
+ * Bug #11654: @static in DocBlock Template can cause PHP Notice [ashnazg|mvriel]
+ * Bug #11813: @link URL short description does&apos;nt work [ashnazg]
+ * Bug #13800: Invalid tutorials tree generation [ashnazg|wrzasq]
+ * Bug #14191: earthli template contains bad HTML [ashnazg|jorrit]
+ * Bug #14472: Incorrect line numbers with heredoc [ashnazg|indigo]
+ * Bug #15517: Wrong table of contents in tutorials [ashnazg]
+ * Bug #16431: Warning: get_class() expects parameter 1 to be object, string given [ashnazg|aharvey]
+ * Bug #16441: Parse error when parsing &lt;&lt;foo&gt;&gt; [ashnazg|marcusson]
+ * Bug #16446: Use of split() causes E_DEPRECATED warnings [ashnazg|aharvey]
+ * Feature #13599: Third Gotcha on Bare Minimum Tutorial example [ashnazg]
+ * Feature #14312: @param tag with additional arguments doesn&apos;t work as expected [ashnazg]
+ * Feature #14461: Data Type Confusion for Some Tags [ashnazg]
+
 
 Includes these Sourceforge items:
-- [1829133] Progress display not happening until conversion finished [ashnazg]
-- [1779257] ignore=.. option not working correctly on Win | fix attaced [ashnazg|mrasnika]
+* [2692032] use of templatebase - missing information [ashnazg]
+* [2669256] get_class() expects parameter 1 to be object, string given [ashnazg]
+* [2669110] ereg / split is deprecated [ashnazg]
+* [1940914] Tutorials tree is added to tutorials which have no children [ashnazg|wrzasq]
+* [1929926] Default version number not updated [ashnazg]
+* [1918851] @toc render is wrong in earthli tutorial_toc.tpl [ashnazg]
+* [1903136] Constant Link not worked [ashnazg|scholesmafia]
+* [1771553] @link URL short description does\'nt work [ashnazg]
 
 ';
-$version = '1.4.2';
+$version = '1.4.3';
 $release_stability = 'stable';
 $api = '1.4.0';
 $api_stability = 'stable';
@@ -46,7 +61,7 @@ $options = array(
         'INSTALL' => 'doc',
         'FAQ' => 'doc',
         'Authors' => 'doc',
-        'Release-1.4.2' => 'doc',
+        'Release-1.4.3' => 'doc',
         'pear-phpdoc' => 'script',
         'pear-phpdoc.bat' => 'script',
         'HTML_TreeMenu-1.1.2/TreeMenu.php' => 'php',
