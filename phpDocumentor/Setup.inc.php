@@ -975,4 +975,21 @@ function checkForBugCondition($php_version, $php_bug_number = 'none', $pear_bug_
         addErrorDie(PDERROR_DANGEROUS_PHP_BUG_EXISTS, $php_version, $php_bug_number, $pear_bug_number);
     }
 }
+
+/*
+ * Workaround for PHP Bug #49647 ("DOMUserData does not exist")
+ * DOMUserData class was prototyped in ext/dom/node.c but never implemented...
+ * it was removed in PHP 5.2.12 and 5.3.1
+ */
+if (extension_loaded('dom')
+    && (
+        version_compare(PHP_VERSION, '5.2.12', 'lt')
+        || version_compare(PHP_VERSION, '5.3.0', 'eq')
+    )
+) {
+    /**
+     * @ignore
+     */
+    class DOMUserData {}
+}
 ?>
