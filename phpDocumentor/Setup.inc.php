@@ -221,6 +221,8 @@ class phpDocumentor_setup
             } else {
                 phpDocumentor_out("    for faster parsing, recompile PHP without --disable-tokenizer." . PHP_EOL );
             }
+            
+            phpDocumentor_out("WARNING:  this Parser is only PHP4-capable... it cannot parse PHP5 code." . PHP_EOL);
 
             $this->parse = new Parser;
         }
