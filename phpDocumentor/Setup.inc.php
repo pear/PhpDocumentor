@@ -376,7 +376,8 @@ class phpDocumentor_setup
         // Setup the different classes
         if (isset($_phpDocumentor_setting['templatebase']))
         {
-            $this->render->setTemplateBase(trim($_phpDocumentor_setting['templatebase']));
+            $GLOBALS['_phpDocumentor_template_base'] = trim($_phpDocumentor_setting['templatebase']); 
+            $this->render->setTemplateBase($GLOBALS['_phpDocumentor_template_base']);
         }
         if (isset($_phpDocumentor_setting['target']) && !empty($_phpDocumentor_setting['target']))
         {

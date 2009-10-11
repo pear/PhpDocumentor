@@ -5147,7 +5147,9 @@ class Converter
      */
     function setTemplateDir($dir)
     {
-        if ('@DATA-DIR@' != '@'.'DATA-DIR@') {
+        if (isset($GLOBALS['_phpDocumentor_template_base'])) {
+            $templateBase = str_replace('\\', '/', $GLOBALS['_phpDocumentor_template_base']);
+        } else if ('@DATA-DIR@' != '@'.'DATA-DIR@') {
             $templateBase = str_replace('\\', '/', '@DATA-DIR@/PhpDocumentor/phpDocumentor');
         } else {
             $templateBase = str_replace('\\','/',$GLOBALS['_phpDocumentor_install_dir']) . '/phpDocumentor';
