@@ -990,6 +990,7 @@ if (extension_loaded('dom')
     )
 ) {
     /**
+     * @package phpDocumentor
      * @ignore
      */
     class DOMUserData {}
