@@ -449,7 +449,7 @@ class phpDocumentor_XML_Beautifier_Tokenizer extends XML_Beautifier_Tokenizer
         switch ($event) {
             case PHPDOC_XMLTOKEN_EVENT_COMMENT :
 //                echo "comment: $this->_curthing\n";
-                $this->$method(false, $this->_curthing);
+                $this->$method($this->_curthing);
             break;
             case PHPDOC_XMLTOKEN_EVENT_OPENTAG :
 //                echo "open tag: $this->_tag\n";
