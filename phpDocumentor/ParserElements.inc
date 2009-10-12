@@ -642,7 +642,7 @@ class parserFunction extends parserElement
             if (isset($param[2]))
             {
                 $link = $converter->getLink('object ' . $param[2]);
-                if ($link) {
+				if ($link && $link != 'object ' . $param[2]) {
                     $link = $converter->returnSee($link, $param[2], true);
                     $b['type'] = $link;
                 } else {
