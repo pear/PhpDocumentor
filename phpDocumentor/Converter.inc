@@ -2671,7 +2671,7 @@ class Converter
             if (isset($pageel->docblock) && phpDocumentor_get_class($pageel->docblock) == 'parserdocblock')
             {
                 $a = $pageel->docblock->getKeyword('todo');
-                if ($a)
+                if ($a && !empty($a->value[0]))
                 {
                     $this->addTodoLink($this->addLink($element),$a);
                 }
@@ -2684,7 +2684,7 @@ class Converter
             if (!$this->parseprivate && ($a == 'private'))
                 return;
             $a = $element->docblock->getKeyword('todo');
-            if ($a)
+            if ($a && !empty($a->value[0]))
             {
                 if ($element->type != 'include') {
                     $this->addTodoLink($this->addLink($element),$a);
