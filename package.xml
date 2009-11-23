@@ -271,39 +271,6 @@ Includes these Sourceforge items:
     <file baseinstalldir="PhpDocumentor" name="TreeMenu.js" role="data" />
     <file baseinstalldir="PhpDocumentor" name="TreeMenu.php" role="php" />
    </dir> <!-- /HTML_TreeMenu-1.1.2 -->
-   <dir name="media">
-    <dir name="images">
-     <dir name="earthli">
-      <file baseinstalldir="PhpDocumentor" name="abstract_class.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="abstract_method.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="abstract_private_class.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="abstract_private_method.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="class.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="class_folder.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="constant.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="constructor_method.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="destructor_method.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="file.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="folder.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="function.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="function_folder.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="global.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="index.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="lock.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="method.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="next_button.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="package.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="package_folder.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="previous_button.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="private_class.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="private_method.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="private_variable.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="tutorial.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="tutorial_folder.png" role="data" />
-      <file baseinstalldir="PhpDocumentor" name="variable.png" role="data" />
-     </dir> <!-- /media/images/earthli -->
-    </dir> <!-- /media/images -->
-   </dir> <!-- /media -->
    <dir name="phpDocumentor">
     <dir name="Converters">
      <dir name="CHM">
