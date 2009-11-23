@@ -153,7 +153,6 @@
 			<div class="const-summary">
 				{section name=consts loop=$consts}
 				<div class="const-title">
-					<img src="{$subdir}media/images/Constant.png" alt=" " />
 					<a href="#{$consts[consts].const_name}" title="details" class="const-name">{$consts[consts].const_name}</a> = 					<span class="var-type">{$consts[consts].const_value}</span>
 
 				</div>
@@ -414,7 +413,6 @@
 					<p>Inherited from <span class="classname">{$iconsts[iconsts].parent_class}</span></p>
 					<blockquote>
 						{section name=iconsts2 loop=$iconsts[iconsts].iconsts}
-							<img src="{$subdir}media/images/{if $iconsts[iconsts].iconsts[iconsts2].access == 'private'}PrivateVariable{else}Variable{/if}.png" />
 							<span class="const-title">
 								<span class="const-name">{$iconsts[iconsts].iconsts[iconsts2].link}</span>{if $iconsts[iconsts].iconsts[iconsts2].iconst_sdesc}: {$iconsts[iconsts].iconsts[iconsts2].iconst_sdesc}{/if}<br>
 							</span>
