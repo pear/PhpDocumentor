@@ -7,7 +7,7 @@
 
 <table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
   <tr>
-    <td class="header_top">{$package}</td>
+    <td class="header_top"><a href="http://pear.php.net/package/{$default_package}">{$package}</a></td>
   </tr>
   <tr><td class="header_line"><img src="{$subdir}media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
   <tr>

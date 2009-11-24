@@ -5087,6 +5087,7 @@ class Converter
         $templ->config_dir = realpath($this->smarty_dir . PATH_DELIMITER . 'configs');
         $templ->assign("date",date("r",time()));
         $templ->assign("maintitle",$this->title);
+        $templ->assign('default_package',$GLOBALS['phpDocumentor_DefaultPackageName']);
         $templ->assign("package",$this->package);
         $templ->assign("phpdocversion",PHPDOCUMENTOR_VER);
         $templ->assign("phpdocwebsite",PHPDOCUMENTOR_WEBSITE);
