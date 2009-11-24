@@ -1055,6 +1055,45 @@ Includes these Sourceforge items:
          </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/HandS/templates -->
          <file baseinstalldir="PhpDocumentor" name="options.ini" role="data" />
         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/HandS -->
+        <dir name="PEAR">
+         <dir name="templates">
+          <dir name="media">
+           <file baseinstalldir="PhpDocumentor" name="background.png" role="data" />
+           <file baseinstalldir="PhpDocumentor" name="empty.png" role="data" />
+           <file baseinstalldir="PhpDocumentor" name="pear.gif" role="data" />
+           <file baseinstalldir="PhpDocumentor" name="style.css" role="data" />
+          </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/PEAR/templates/media -->
+          <file baseinstalldir="PhpDocumentor" name="basicindex.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="blank.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="class.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="classleft.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="classtrees.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="define.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="docblock.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="elementindex.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="errors.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="examplesource.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="fileleft.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="filesource.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="footer.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="function.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="global.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="header.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="include.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="index.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="method.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="packages.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="page.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="pkgelementindex.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="ric.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="todolist.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="tutorial.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="tutorial_toc.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="tutorial_tree.tpl" role="data" />
+          <file baseinstalldir="PhpDocumentor" name="var.tpl" role="data" />
+         </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/PEAR/templates -->
+         <file baseinstalldir="PhpDocumentor" name="options.ini" role="data" />
+        </dir> <!-- /phpDocumentor/Converters/HTML/Smarty/templates/PEAR -->
         <dir name="PHP">
          <dir name="templates">
           <dir name="media">

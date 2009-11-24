@@ -1,62 +1,83 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<title>{$title}</title>
-	<link rel="stylesheet" type="text/css" id="layout" href="{$subdir}media/layout.css" media="screen">
-	<link rel="stylesheet" type="text/css" href="{$subdir}media/style.css" media="all">
-	<link rel="stylesheet" type="text/css" href="{$subdir}media/print.css" media="print">
+<title>{$title}</title>
+<link rel="stylesheet" type="text/css" href="{$subdir}media/style.css">
 </head>
+<body>
 
-<body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" bgcolor="#ffffff" text="#000000" link="#006600" alink="#cccc00" vlink="#003300">
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">{$package}</td>
+  </tr>
+  <tr><td class="header_line"><img src="{$subdir}media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+  		  [ <a href="{$subdir}classtrees_{$package}.html" class="menu">class tree: {$package}</a> ]
+		  [ <a href="{$subdir}elementindex_{$package}.html" class="menu">index: {$package}</a> ]
+		  [ <a href="{$subdir}elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="{$subdir}media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
 
-<div id="header">
-	<div id="header1">
-		<div id="logo">
-			<a href="http://pear.php.net/"><img src="{$subdir}media/pearsmall.gif" border="0" width="104" height="50" alt="PEAR"></a>
-		</div>
-		<h1 class="right">Documentation for: {$package}</h1>
-		<div id="navlinks" class="right">
-			<span id="docfiles">
-{if count($ric)}
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+{if count($ric) >= 1}
+	<div id="ric">
 		{section name=ric loop=$ric}
-			<a href="{$subdir}{$ric[ric].file}">{$ric[ric].name}</a> |
+			<p><a href="{$subdir}{$ric[ric].file}">{$ric[ric].name}</a></p>
 		{/section}
+	</div>
 {/if}
 {if $hastodos}
-			 <a href="{$subdir}{$todolink}">Todo List</a>
+	<div id="todolist">
+			<p><a href="{$subdir}{$todolink}">Todo List</a></p>
+	</div>
 {/if}
-		</span>
-		</div>
-	</div>
-	<div id="header2">
-		<div id="indexes">
-	        {assign var="packagehaselements" value=false}
-	        {foreach from=$packageindex item=thispackage}
-	            {if in_array($package, $thispackage)}
-	                {assign var="packagehaselements" value=true}
-	            {/if}
-	        {/foreach}
-	        {if $packagehaselements}
-				[ <a href="{$subdir}classtrees_{$package}.html">Class Tree: {$package}</a> ]
-				[ <a href="{$subdir}elementindex_{$package}.html">Index: {$package}</a> ]
-	        {/if}
-			[ <a href="{$subdir}elementindex.html">All elements</a> ]
-		</div>
-		<form>
-			View Package:
-			<select class="package-selector" onchange="window.location=this[selectedIndex].value">
-		{section name=packagelist loop=$packageindex}
-		<option value="{$subdir}{$packageindex[packagelist].link}">{$packageindex[packagelist].title}</option>
-		{/section}
-			</select>
-		</form>
-	</div>
-</div>
+      <b>Packages:</b><br />
+      {section name=packagelist loop=$packageindex}
+        <a href="{$subdir}{$packageindex[packagelist].link}">{$packageindex[packagelist].title}</a><br />
+      {/section}
+      <br /><br />
+{if $tutorials}
+		<b>Tutorials/Manuals:</b><br />
+		{if $tutorials.pkg}
+			<strong>Package-level:</strong>
+			{section name=ext loop=$tutorials.pkg}
+				{$tutorials.pkg[ext]}
+			{/section}
+		{/if}
+		{if $tutorials.cls}
+			<strong>Class-level:</strong>
+			{section name=ext loop=$tutorials.cls}
+				{$tutorials.cls[ext]}
+			{/section}
+		{/if}
+		{if $tutorials.proc}
+			<strong>Procedural-level:</strong>
+			{section name=ext loop=$tutorials.proc}
+				{$tutorials.proc[ext]}
+			{/section}
+		{/if}
+{/if}
+      {if !$noleftindex}{assign var="noleftindex" value=false}{/if}
+      {if !$noleftindex}
+      {if $compiledclassindex}
+      <b>Classes:</b><br />
+      {eval var=$compiledclassindex}
+      {/if}
+      {if $compiledfileindex}
+      <b>Files:</b><br />
+      {eval var=$compiledfileindex}
+      {/if}
+      {/if}
+    </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
 
-
-<div id="content">
-	{if !$hasel}{assign var="hasel" value=false}{/if}
-	{if $hasel}
-	<h1>{$eltype|capitalize}: {$class_name}</h1>
-	<p style="margin: 0px;">Source Location: {$source_location}</p>
-	{/if}
+{if !$hasel}{assign var="hasel" value=false}{/if}
+{if $hasel}
+<h1>{$eltype|capitalize}: {$class_name}</h1>
+Source Location: {$source_location}<br /><br />
+{/if}

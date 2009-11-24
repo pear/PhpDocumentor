@@ -1,13 +1,11 @@
-{if $sdesc != ''}
-<p align="center"><strong>{$sdesc|default:''}
-</strong></p>
-{/if}
+{if $sdesc != ''}{$sdesc|default:''}<br />{/if}
 {if $desc != ''}{$desc|default:''}{/if}
-{if count($tags)}
-<h4>Tags:</h4>
+{if count($tags) > 0}
+<div class="tags">
 <ul>
 {section name=tag loop=$tags}
-	<li><b>{$tags[tag].keyword}</b> - {$tags[tag].data}</li>
+<li><b>{$tags[tag].keyword|capitalize}:</b> {if $tags[tag].keyword == 'static'}This method can be called statically{else}{$tags[tag].data}{/if}</li>
 {/section}
 </ul>
+</div>
 {/if}
