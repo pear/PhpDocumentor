@@ -37,10 +37,10 @@ method {$methods[methods].function_call}, {$methods[methods].sdesc}<br />
     <table border="0" cellspacing="0" cellpadding="0">
     {section name=params loop=$methods[methods].params}
       <tr>
-        <td class="type">{$methods[methods].params[params].datatype}&nbsp;&nbsp;</td>
+        <td>{$methods[methods].params[params].datatype}&nbsp;&nbsp;</td>
         <td><tt>{$methods[methods].params[params].var}</tt>&nbsp;&nbsp;</td>
-        <td>&mdash;</td>
-        <td>&nbsp;&nbsp;{$methods[methods].params[params].data}</td>
+        <td>&mdash;&nbsp;</td>
+        <td>{$methods[methods].params[params].data}</td>
       </tr>
     {/section}
     </table>

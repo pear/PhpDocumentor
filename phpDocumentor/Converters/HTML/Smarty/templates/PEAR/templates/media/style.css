@@ -24,6 +24,7 @@ a.menu
 td
 {
   font-size:          10pt;
+  vertical-align:     top;
 }
 
 td.header_top
