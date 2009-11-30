@@ -152,6 +152,7 @@ define("ahhhh","Now the Page-level DocBlock is for the page, and the Define DocB
      <listitem><para>If there is no long description, the long description will be inherited.</para></listitem>
      <listitem><para>If there is a long description, and you still want to inherit the parent's description, use {@tutorial tags.inlineinheritdoc.pkg}</para></listitem>
     </itemizedlist>
+    Be aware that this kind of docblock inheritance expects children to be in the same package as the parent.  Otherwise, the docblock inheritance will not apply.
    </para>
    <para>
     <programlisting role="php">
