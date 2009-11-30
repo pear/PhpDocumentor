@@ -17,6 +17,12 @@
      {@link mailto:cellog@php.net cellog@php.net}
     </authorblurb>
    </author>
+  <author>
+    Chuck Burgess
+    <authorblurb>
+     {@link mailto:ashnazg@php.net ashnazg@php.net}
+    </authorblurb>
+   </author>
   </authorgroup>
  </refsynopsisdiv>
  {@toc}
@@ -130,6 +136,7 @@ define("ahhhh","Now the Page-level DocBlock is for the page, and the Define DocB
   <title>Class Elements</title>
   <para>A class's DocBlock may have any of the standard phpDocumentor Tags (see {@tutorial tags.pkg#manual.standard}) plus the following tags:
    <itemizedlist>
+    <listitem><para>{@tutorial tags.abstract.pkg}</para></listitem>
     <listitem><para>{@tutorial tags.package.pkg}</para></listitem>
     <listitem><para>{@tutorial tags.subpackage.pkg}</para></listitem>
     <listitem><para>{@tutorial tags.static.pkg}</para></listitem>
@@ -212,6 +219,7 @@ class child4 extends parclass
    <title>class methods</title>
    <para>A method's DocBlock may have any of the standard phpDocumentor Tags (see {@tutorial tags.pkg#manual.standard}) plus the following tags:
     <itemizedlist>
+     <listitem><para>{@tutorial tags.abstract.pkg}</para></listitem>
      <listitem><para>{@tutorial tags.global.pkg}</para></listitem>
      <listitem><para>{@tutorial tags.param.pkg}</para></listitem>
      <listitem><para>{@tutorial tags.return.pkg}</para></listitem>
