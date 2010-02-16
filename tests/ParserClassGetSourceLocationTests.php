@@ -16,7 +16,7 @@
 
 /**
  * PHPUnit main() hack
- * 
+ *
  * "Call class::main() if this source file is executed directly."
  * @since 1.4.0a1
  */
@@ -25,14 +25,14 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 /**
  * TestCase
- * 
+ *
  * required by PHPUnit
  * @since 1.4.0a1
  */
 require_once "PHPUnit/Framework/TestCase.php";
 /**
  * TestSuite
- * 
+ *
  * required by PHPUnit
  * @since 1.4.0a1
  */
@@ -40,7 +40,7 @@ require_once "PHPUnit/Framework/TestSuite.php";
 
 /**
  * Base directory of code
- * 
+ *
  * Needed by some of the objects being tested in the suites.
  * @since 1.4.1
  */
@@ -51,11 +51,11 @@ if (!defined("PHPDOCUMENTOR_BASE")) {
 
 /**
  * PhpDocumentor Setup
- * 
+ *
  * required by PhpDocumentor to instantiate the environment
- * @since 1.4.0a1 
+ * @since 1.4.0a1
  */
-require_once 'PhpDocumentor/phpDocumentor/Setup.inc.php';
+require_once 'phpDocumentor/Setup.inc.php';
 
 /**
  * Unit Testing of the ParserClass's getSourceLocation() method
@@ -130,7 +130,7 @@ class tests_ParserClassGetSourceLocationTests extends PHPUnit_Framework_TestCase
     /**
      * demonstrate the correct behavior -----------------------|
      */
-     
+
     /**
      * Shows correct behavior when
      * sourceLocation is not set yet
@@ -160,23 +160,23 @@ class tests_ParserClassGetSourceLocationTests extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Shows correct behavior when 
+     * Shows correct behavior when
      * sourceLocation is set to an absolute path that is not a "pear" location,
      * with no pearize value set
      * @since 1.4.0a1
      */
     public function testWhenNonPearLocationSetAndPearizeNull() {
-        $this->pc->setSourceLocation('/where/on/earth/are/we');        
+        $this->pc->setSourceLocation('/where/on/earth/are/we');
         $this->assertEquals($this->pc->getSourceLocation($this->ps->render), '/where/on/earth/are/we');
     }
     /**
      * Shows correct behavior when
      * sourceLocation is set to an absolute path that is not a "pear" location,
-     * with pearize explicitly false 
+     * with pearize explicitly false
      * @since 1.4.0a1
      */
     public function testWhenNonPearLocationSetAndPearizeFalse() {
-        $this->pc->setSourceLocation('/where/on/earth/are/we');        
+        $this->pc->setSourceLocation('/where/on/earth/are/we');
         $this->assertEquals($this->pc->getSourceLocation($this->ps->render, false), '/where/on/earth/are/we');
     }
     /**
@@ -186,10 +186,10 @@ class tests_ParserClassGetSourceLocationTests extends PHPUnit_Framework_TestCase
      * @since 1.4.0a1
      */
     public function testWhenNonPearLocationSetAndPearizeTrue() {
-        $this->pc->setSourceLocation('/where/on/earth/are/we');        
+        $this->pc->setSourceLocation('/where/on/earth/are/we');
         $this->assertEquals($this->pc->getSourceLocation($this->ps->render, true), '/where/on/earth/are/we');
     }
-    
+
     /**
      * Show correct behavior when
      * sourceLocation is set to an absolute path that IS a "pear" location,

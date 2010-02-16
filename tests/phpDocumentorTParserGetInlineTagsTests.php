@@ -9,7 +9,7 @@
 
 /**
  * PHPUnit main() hack
- * 
+ *
  * "Call class::main() if this source file is executed directly."
  * @since 1.4.0a2
  */
@@ -18,14 +18,14 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 /**
  * TestCase
- * 
+ *
  * required by PHPUnit
  * @since 1.4.0a2
  */
 require_once "PHPUnit/Framework/TestCase.php";
 /**
  * TestSuite
- * 
+ *
  * required by PHPUnit
  * @since 1.4.0a2
  */
@@ -33,7 +33,7 @@ require_once "PHPUnit/Framework/TestSuite.php";
 
 /**
  * Base directory of code
- * 
+ *
  * Needed by some of the objects being tested in the suites.
  * @since 1.4.1
  */
@@ -44,11 +44,11 @@ if (!defined("PHPDOCUMENTOR_BASE")) {
 
 /**
  * PhpDocumentor Setup
- * 
+ *
  * required by PhpDocumentor to instantiate the environment
- * @since 1.4.0a2 
+ * @since 1.4.0a2
  */
-require_once 'PhpDocumentor/phpDocumentor/Setup.inc.php';
+require_once 'phpDocumentor/Setup.inc.php';
 
 /**
  * Unit Testing of the phpDocumentorTParser's getInlineTags() method
@@ -134,9 +134,9 @@ class tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit_Framework_Tes
     /**
      * Shows correct behavior for handling an inline link tag
      * e.g. {at-link URL link-text}
-     * 
+     *
      * There should be NO difference in results due to --parseprivate flag
-     * 
+     *
      * @since 1.4.0a2
      */
     public function testShowCorrectBehaviorInlineLinkWhenParsePrivateOn() {
@@ -154,9 +154,9 @@ class tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit_Framework_Tes
     /**
      * Shows correct behavior for handling an inline link tag
      * e.g. {at-link URL link-text}
-     * 
+     *
      * There should be NO difference in results due to --parseprivate flag
-     * 
+     *
      * @since 1.4.0a2
      */
     public function testShowCorrectBehaviorInlineLinkWhenParsePrivateOff() {
@@ -175,9 +175,9 @@ class tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit_Framework_Tes
     /**
      * Shows correct behavior for handling an inline example tag
      * e.g. {at-example path-to-file}
-     * 
+     *
      * There should be NO difference in results due to --parseprivate flag
-     * 
+     *
      * @since 1.4.0a2
      */
     public function testShowCorrectBehaviorInlineExampleWhenParsePrivateOn() {
@@ -201,9 +201,9 @@ class tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit_Framework_Tes
     /**
      * Shows correct behavior for handling an inline example tag
      * e.g. {at-example path-to-file}
-     * 
+     *
      * There should be NO difference in results due to --parseprivate flag
-     * 
+     *
      * @since 1.4.0a2
      */
     public function testShowCorrectBehaviorInlineExampleWhenParsePrivateOff() {
@@ -228,9 +228,9 @@ class tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit_Framework_Tes
     /**
      * Shows correct behavior for handling an inline source tag
      * e.g. {at-source}
-     * 
+     *
      * There should be NO difference in results due to --parseprivate flag
-     * 
+     *
      * @since 1.4.0a2
      */
     public function testShowCorrectBehaviorInlineSourceWhenParsePrivateOn() {
@@ -252,9 +252,9 @@ class tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit_Framework_Tes
     /**
      * Shows correct behavior for handling an inline source tag
      * e.g. {at-source}
-     * 
+     *
      * There should be NO difference in results due to --parseprivate flag
-     * 
+     *
      * @since 1.4.0a2
      */
     public function testShowCorrectBehaviorInlineSourceWhenParsePrivateOff() {
@@ -277,9 +277,9 @@ class tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit_Framework_Tes
     /**
      * Shows correct behavior for handling an inline tutorial tag
      * e.g. {at-tutorial path-to-pkgfile}
-     * 
+     *
      * There should be NO difference in results due to --parseprivate flag
-     * 
+     *
      * @since 1.4.0a2
      */
     public function testShowCorrectBehaviorInlineTutorialWhenParsePrivateOn() {
@@ -298,9 +298,9 @@ class tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit_Framework_Tes
     /**
      * Shows correct behavior for handling an inline tutorial tag
      * e.g. {at-tutorial path-to-pkgfile}
-     * 
+     *
      * There should be NO difference in results due to --parseprivate flag
-     * 
+     *
      * @since 1.4.0a2
      */
     public function testShowCorrectBehaviorInlineTutorialWhenParsePrivateOff() {
@@ -321,11 +321,11 @@ class tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit_Framework_Tes
     /**
      * Shows correct behavior for handling an inline internal tag
      * e.g. {at-internal blah-blah-blah}
-     * 
+     *
      * There SHOULD be differences in results due to --parseprivate flag
-     * 
+     *
      * This test demonstrates PEAR Bug #10871
-     * 
+     *
      * @since 1.4.0a2
      */
     public function testShowCorrectBehaviorInlineInternalWhenParsePrivateOn() {
@@ -339,9 +339,9 @@ class tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit_Framework_Tes
     /**
      * Shows correct behavior for handling an inline internal tag
      * e.g. {at-internal blah-blah-blah}
-     * 
+     *
      * There SHOULD be differences in results due to --parseprivate flag
-     * 
+     *
      * @since 1.4.0a2
      */
     public function testShowCorrectBehaviorInlineInternalWhenParsePrivateOff() {
@@ -372,7 +372,7 @@ class tests_phpDocumentorTParserGetInlineTagsTests extends PHPUnit_Framework_Tes
 
     /**
      * END OF "NOW LIST THE TEST CASES" ----------------------------------------------|
-     */   
+     */
 }
 
 /**

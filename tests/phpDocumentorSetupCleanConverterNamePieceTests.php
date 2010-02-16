@@ -9,7 +9,7 @@
 
 /**
  * PHPUnit main() hack
- * 
+ *
  * "Call class::main() if this source file is executed directly."
  * @since 1.3.2
  */
@@ -18,14 +18,14 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 /**
  * TestCase
- * 
+ *
  * required by PHPUnit
  * @since 1.3.2
  */
 require_once "PHPUnit/Framework/TestCase.php";
 /**
  * TestSuite
- * 
+ *
  * required by PHPUnit
  * @since 1.3.2
  */
@@ -33,7 +33,7 @@ require_once "PHPUnit/Framework/TestSuite.php";
 
 /**
  * Base directory of code
- * 
+ *
  * Needed by some of the objects being tested in the suites.
  * @since 1.4.1
  */
@@ -44,11 +44,11 @@ if (!defined("PHPDOCUMENTOR_BASE")) {
 
 /**
  * PhpDocumentor Setup
- * 
+ *
  * required by PhpDocumentor to instantiate the environment
- * @since 1.3.2 
+ * @since 1.3.2
  */
-require_once 'PhpDocumentor/phpDocumentor/Setup.inc.php';
+require_once 'phpDocumentor/Setup.inc.php';
 
 
 /**
@@ -366,7 +366,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
      * odd, edge cases -------------------------------------------------|
      */
 
-    /** 
+    /**
      * Verify no up-to-parent pathing is allowed...
      * the resulting converter names are generally invalid.
      * This test uses one arg with value of "../../HTML"
@@ -375,7 +375,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
     public function testPreventUpToParentPathingOnPrimaryWithOneArg() {
         $this->assertEquals("HTML",             $this->ps->cleanConverterNamePiece("../../HTML"));
     }
-    /** 
+    /**
      * Verify no up-to-parent pathing is allowed...
      * the resulting converter names are generally invalid.
      * This test uses two args with value of "../../HTML"
@@ -384,7 +384,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
     public function testPreventUpToParentPathingOnPrimaryWithTwoArgs() {
         $this->assertEquals("HTML",             $this->ps->cleanConverterNamePiece("../../HTML",   $this->CHARACTERS_ALLOWED_IN_PRIMARY));
     }
-    /** 
+    /**
      * Verify no up-to-parent pathing is allowed...
      * the resulting converter names are generally invalid.
      * This test uses two args with value of "../../frames"
@@ -393,7 +393,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
     public function testPreventUpToParentPathingOnSecondary() {
         $this->assertEquals("//frames",         $this->ps->cleanConverterNamePiece("../../frames", $this->CHARACTERS_ALLOWED_IN_SECONDARY));
     }
-    /** 
+    /**
      * Verify no up-to-parent pathing is allowed...
      * the resulting converter names are generally invalid.
      * This test uses two args with value of "../../default"
@@ -403,7 +403,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
         //    when '.' is allowed to remain, a '..' always returns false to avoid directory traversal
         $this->assertEquals(false,              $this->ps->cleanConverterNamePiece("../../default",$this->CHARACTERS_ALLOWED_IN_TERTIARY));
     }
-    /** 
+    /**
      * Verify no up-to-parent pathing is allowed...
      * the resulting converter names are generally invalid.
      * This test uses one arg with value of "/var/log/HTML"
@@ -412,7 +412,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
     public function testDoNotAllowTruePathingOnPrimaryWithOneArg() {
         $this->assertEquals("varlogHTML",       $this->ps->cleanConverterNamePiece("/var/log/HTML"));
     }
-    /** 
+    /**
      * Verify no up-to-parent pathing is allowed...
      * the resulting converter names are generally invalid.
      * This test uses two args with value of "/var/log/HTML"
@@ -421,7 +421,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
     public function testDoNotAllowTruePathingOnPrimaryWithTwoArgs() {
         $this->assertEquals("varlogHTML",       $this->ps->cleanConverterNamePiece("/var/log/HTML",   $this->CHARACTERS_ALLOWED_IN_PRIMARY));
     }
-    /** 
+    /**
      * Verify no up-to-parent pathing is allowed...
      * the resulting converter names are generally invalid.
      * This test uses two args with value of "/var/log/frames"
@@ -430,7 +430,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
     public function testDoNotAllowTruePathingOnSecondary() {
         $this->assertEquals("/var/log/frames",  $this->ps->cleanConverterNamePiece("/var/log/frames", $this->CHARACTERS_ALLOWED_IN_SECONDARY));
     }
-    /** 
+    /**
      * Verify no up-to-parent pathing is allowed...
      * the resulting converter names are generally invalid.
      * This test uses two args with value of "/var/log/default"
@@ -442,7 +442,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
 
 
 
-    /** 
+    /**
      * Extreme example of messy input...
      * the resulting converter names are generally invalid.
      * This test uses one arg with value of "H/.T./M##L"
@@ -451,7 +451,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
     public function testExtremeExampleButValidPrimaryWithOneArg() {
         $this->assertEquals("HTML",             $this->ps->cleanConverterNamePiece("H/.T./M##L"));
     }
-    /** 
+    /**
      * Extreme example of messy input...
      * the resulting converter names are generally invalid.
      * This test uses two args with value of "H/.T./M##L"
@@ -460,7 +460,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
     public function testExtremeExampleButValidPrimaryWithTwoArgs() {
         $this->assertEquals("HTML",             $this->ps->cleanConverterNamePiece("H/.T./M##L", $this->CHARACTERS_ALLOWED_IN_PRIMARY));
     }
-    /** 
+    /**
      * Extreme example of messy input...
      * the resulting converter names are generally invalid.
      * This test uses two args with value of "....frames"
@@ -469,7 +469,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
     public function testExtremeExampleButValidSecondary() {
         $this->assertEquals("frames",           $this->ps->cleanConverterNamePiece("....frames", $this->CHARACTERS_ALLOWED_IN_SECONDARY));
     }
-    /** 
+    /**
      * Extreme example of messy input...
      * the resulting converter names are generally invalid.
      * This test uses two args with value of "..//.frames"
@@ -478,7 +478,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
     public function testExtremeExampleAndInvalidSecondary() {
         $this->assertEquals("//frames",         $this->ps->cleanConverterNamePiece("..//.frames",     $this->CHARACTERS_ALLOWED_IN_SECONDARY));
     }
-    /** 
+    /**
      * Extreme example of messy input...
      * the resulting converter names are generally invalid.
      * This test uses two arg with value of "/./default/.##/"
@@ -487,7 +487,7 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
     public function testExtremeExampleAndInvalidTertiaryA() {
         $this->assertEquals("/./default/./",    $this->ps->cleanConverterNamePiece("/./default/.##/", $this->CHARACTERS_ALLOWED_IN_TERTIARY));
     }
-    /** 
+    /**
      * Extreme example of messy input...
      * the resulting converter names are generally invalid.
      * This test uses two arg with value of "//default//"
@@ -500,10 +500,10 @@ class tests_phpDocumentorSetupCleanConverterNamePieceTests extends PHPUnit_Frame
     /**
      * END OF "odd, edge cases" ----------------------------------------|
      */
-     
+
     /**
      * END OF "NOW LIST THE TEST CASES" ----------------------------------------------|
-     */ 
+     */
 }
 
 /**

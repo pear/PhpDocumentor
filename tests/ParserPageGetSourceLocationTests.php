@@ -16,7 +16,7 @@
 
 /**
  * PHPUnit main() hack
- * 
+ *
  * "Call class::main() if this source file is executed directly."
  * @since 1.4.0a1
  */
@@ -25,14 +25,14 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 /**
  * TestCase
- * 
+ *
  * required by PHPUnit
  * @since 1.4.0a1
  */
 require_once "PHPUnit/Framework/TestCase.php";
 /**
  * TestSuite
- * 
+ *
  * required by PHPUnit
  * @since 1.4.0a1
  */
@@ -40,7 +40,7 @@ require_once "PHPUnit/Framework/TestSuite.php";
 
 /**
  * Base directory of code
- * 
+ *
  * Needed by some of the objects being tested in the suites.
  * @since 1.4.1
  */
@@ -51,11 +51,11 @@ if (!defined("PHPDOCUMENTOR_BASE")) {
 
 /**
  * PhpDocumentor Setup
- * 
+ *
  * required by PhpDocumentor to instantiate the environment
- * @since 1.4.0a1 
+ * @since 1.4.0a1
  */
-require_once 'PhpDocumentor/phpDocumentor/Setup.inc.php';
+require_once 'phpDocumentor/Setup.inc.php';
 
 /**
  * Unit Testing of the ParserPage's getSourceLocation() method
@@ -129,7 +129,7 @@ class tests_ParserPageGetSourceLocationTests extends PHPUnit_Framework_TestCase 
     /**
      * demonstrate the correct behavior -----------------------|
      */
-     
+
     /**
      * Shows correct behavior when
      * sourceLocation is not set yet
@@ -157,25 +157,25 @@ class tests_ParserPageGetSourceLocationTests extends PHPUnit_Framework_TestCase 
     public function testWhenLocationNotSetAndPearizeTrue() {
         $this->assertEquals($this->pp->getSourceLocation($this->ps->render, true), false);
     }
-    
+
     /**
-     * Shows correct behavior when 
+     * Shows correct behavior when
      * sourceLocation is set to an absolute path that is not a "pear" location,
      * with no pearize value set
      * @since 1.4.0a1
      */
     public function testWhenNonPearLocationSetAndPearizeNull() {
-        $this->pp->setSourceLocation('/where/on/earth/are/we');        
+        $this->pp->setSourceLocation('/where/on/earth/are/we');
         $this->assertEquals($this->pp->getSourceLocation($this->ps->render), '/where/on/earth/are/we');
     }
     /**
      * Shows correct behavior when
      * sourceLocation is set to an absolute path that is not a "pear" location,
-     * with pearize explicitly false 
+     * with pearize explicitly false
      * @since 1.4.0a1
      */
     public function testWhenNonPearLocationSetAndPearizeFalse() {
-        $this->pp->setSourceLocation('/where/on/earth/are/we');        
+        $this->pp->setSourceLocation('/where/on/earth/are/we');
         $this->assertEquals($this->pp->getSourceLocation($this->ps->render, false), '/where/on/earth/are/we');
     }
     /**
@@ -184,11 +184,11 @@ class tests_ParserPageGetSourceLocationTests extends PHPUnit_Framework_TestCase 
      * with pearize explicitly true
      * @since 1.4.0a1
      * @todo Revisit this test... I think it highlights a bug in the getSourceLocation method.
-     *       Compare it with the same test in bug1574047.php 
+     *       Compare it with the same test in bug1574047.php
      *       against similar method parserClass->getSourceLocation().
      */
     public function testWhenNonPearLocationSetAndPearizeTrue() {
-        $this->pp->setSourceLocation('/where/on/earth/are/we');        
+        $this->pp->setSourceLocation('/where/on/earth/are/we');
         $this->assertEquals($this->pp->getSourceLocation($this->ps->render, true), 'whereoneartharewe');
     }
 
@@ -197,7 +197,7 @@ class tests_ParserPageGetSourceLocationTests extends PHPUnit_Framework_TestCase 
      * sourceLocation is set to an absolute path that IS a "pear" location,
      * with pearize not set
      * @since 1.4.0a1
-     */    
+     */
     public function testWhenPearLocationSetAndPearizeNull() {
         $this->pp->sourceLocation = '/outside/pear/inside';
         $this->assertEquals($this->pp->getSourceLocation($this->ps->render), '/outside/pear/inside');
@@ -207,7 +207,7 @@ class tests_ParserPageGetSourceLocationTests extends PHPUnit_Framework_TestCase 
      * sourceLocation is set to an absolute path that IS a "pear" location,
      * with pearize explicitly false
      * @since 1.4.0a1
-     */    
+     */
     public function testWhenPearLocationSetAndPearizeFalse() {
         $this->pp->sourceLocation = '/outside/pear/inside';
         $this->assertEquals($this->pp->getSourceLocation($this->ps->render, false), '/outside/pear/inside');
@@ -217,7 +217,7 @@ class tests_ParserPageGetSourceLocationTests extends PHPUnit_Framework_TestCase 
      * sourceLocation is set to an absolute path that IS a "pear" location,
      * with pearize explicitly true
      * @since 1.4.0a1
-     */    
+     */
     public function testWhenPearLocationSetAndPearizeTrue() {
         $this->pp->sourceLocation = '/outside/pear/inside';
         $this->assertEquals($this->pp->getSourceLocation($this->ps->render, true), 'inside');
@@ -246,7 +246,7 @@ class tests_ParserPageGetSourceLocationTests extends PHPUnit_Framework_TestCase 
      * with pearize explicitly true
      * @since 1.4.0a1
      * @todo Revisit this test... I think it highlights a bug in the getSourceLocation method.
-     *       Compare it with the same test in bug1574047.php 
+     *       Compare it with the same test in bug1574047.php
      *       against similar method parserClass->getSourceLocation().
      */
     public function testWhenNonPearLocationSetIncludingDotsAndPearizeTrue() {
@@ -277,7 +277,7 @@ class tests_ParserPageGetSourceLocationTests extends PHPUnit_Framework_TestCase 
      * with pearize explicitly false
      * @since 1.4.0a1
      * @todo Revisit this test... I think it highlights a bug in the getSourceLocation method.
-     *       Compare it with the same test in bug1574047.php 
+     *       Compare it with the same test in bug1574047.php
      *       against similar method parserClass->getSourceLocation().
      */
     public function testWhenNonPearRelativeLocationSetAndPearizeTrue() {
@@ -360,7 +360,7 @@ class tests_ParserPageGetSourceLocationTests extends PHPUnit_Framework_TestCase 
 
     /**
      * END OF "NOW LIST THE TEST CASES" ----------------------------------------------|
-     */ 
+     */
 
 }
 

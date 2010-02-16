@@ -9,7 +9,7 @@
 
 /**
  * PHPUnit main() hack
- * 
+ *
  * "Call class::main() if this source file is executed directly."
  * @since 1.4.0a2
  */
@@ -18,14 +18,14 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 /**
  * TestCase
- * 
+ *
  * required by PHPUnit
  * @since 1.4.0a2
  */
 require_once "PHPUnit/Framework/TestCase.php";
 /**
  * TestSuite
- * 
+ *
  * required by PHPUnit
  * @since 1.4.0a2
  */
@@ -33,7 +33,7 @@ require_once "PHPUnit/Framework/TestSuite.php";
 
 /**
  * Base directory of code
- * 
+ *
  * Needed by some of the objects being tested in the suites.
  * @since 1.4.1
  */
@@ -44,11 +44,11 @@ if (!defined("PHPDOCUMENTOR_BASE")) {
 
 /**
  * PhpDocumentor Setup
- * 
+ *
  * required by PhpDocumentor to instantiate the environment
- * @since 1.4.0a2 
+ * @since 1.4.0a2
  */
-require_once 'PhpDocumentor/phpDocumentor/Setup.inc.php';
+require_once 'phpDocumentor/Setup.inc.php';
 
 /**
  * Unit Testing of the HighlightParser's getInlineTags() method
@@ -167,7 +167,7 @@ class tests_HighlightParserGetInlineTagsTests extends PHPUnit_Framework_TestCase
 
     /**
      * END OF "NOW LIST THE TEST CASES" ----------------------------------------------|
-     */   
+     */
 }
 
 /**
