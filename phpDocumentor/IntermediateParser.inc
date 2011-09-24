@@ -5,24 +5,24 @@
  * The Intermediary Data Parser (intermediate between Parse and Converter)
  *
  * phpDocumentor :: automatic documentation generator
- * 
+ *
  * PHP versions 4 and 5
  *
  * Copyright (c) 2002-2006 Gregory Beaver
- * 
+ *
  * LICENSE:
- * 
+ *
  * This library is free software; you can redistribute it
  * and/or modify it under the terms of the GNU Lesser General
  * Public License as published by the Free Software Foundation;
  * either version 2.1 of the License, or (at your option) any
  * later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
@@ -63,7 +63,7 @@ class phpDocumentor_IntermediateParser
      * @var parserDocBlock
      */
     var $last;
-    
+
     /**
      * type of the last parser Element handled
      *
@@ -78,7 +78,7 @@ class phpDocumentor_IntermediateParser
      * @var string
      */
     var $lasttype = '';
-    
+
     /**
      * Name of the class currently being parsed.
      * It is only used (and only valid) when phpDocumentor_IntermediateParser is
@@ -86,16 +86,16 @@ class phpDocumentor_IntermediateParser
      * @var string
      */
     var $cur_class = '';
-    
+
     /**
      * type of the current parser Element being handled
-     * 
+     *
      * This is used by {@link HandleEvent()} to set the {@link $lasttype} var,
      * which is used to detect page-level DocBlocks
      * @var string
      */
     var $type = '';
-    
+
     /**
      * set in {@link Setup.inc.php} to the value of the parseprivate commandline
      * option.  If this option is true, elements with an @access private tag
@@ -104,26 +104,26 @@ class phpDocumentor_IntermediateParser
      * @var boolean
      */
     var $parsePrivate = false;
-    
+
     /**
      * this variable is used to prevent parsing of elements with an @ignore tag
      * @see $packageoutput
      * @see $parsePrivate
      */
     var $private_class = false;
-    
+
     /**
      * used to set the output directory
      * @see setTargetDir()
      */
     var $targetDir;
-    
+
     /**
      * used to set the template base directory
      * @see setTemplateBase()
      */
     var $templateBase;
-    
+
     /**
      * array of parsed package pages
      *
@@ -131,7 +131,7 @@ class phpDocumentor_IntermediateParser
      * @var array
      */
     var $package_pages = array();
-    
+
     /**
      * @var array array of all {@link parserData} containing page information
      */
@@ -162,7 +162,7 @@ class phpDocumentor_IntermediateParser
      * @see Converter::getLink()
      */
     var $package_parents = array();
-    
+
     /**
      * Used to determine the category for tutorials.
      *
@@ -171,11 +171,11 @@ class phpDocumentor_IntermediateParser
      * @var array Format: packagename => categoryname
      */
     var $packagecategories = array();
-    
+
     /**
      * list of all packages encountered while documenting.  Used in automatic
      * linking.
-     * 
+     *
      * Converter::getLink() first checks if an ambiguous link is found in the
      * current package.  If not, it then checks in parent packages, and if still
      * not found, uses this array to check in the rest of the packages before
@@ -184,7 +184,7 @@ class phpDocumentor_IntermediateParser
      * @see Converter::getLink()
      */
     var $all_packages = array();
-    
+
     /**
      * array of packages to parser and output documentation for, if not all
      * packages should be documented
@@ -204,7 +204,7 @@ class phpDocumentor_IntermediateParser
      * @var false|array
      */
     var $packageoutput = false;
-    
+
     /**
      * the functions which handle output from the {@link Parser}
      * @see handleEvent(), handleDocBlock(), handlePage(), handleClass()
@@ -225,7 +225,7 @@ class phpDocumentor_IntermediateParser
             'global' => 'handleGlobal',
             'tutorial' => 'handleTutorial',
             );
-    
+
     /**
      * $data contains parsed structures for the current page being parsed
      *
@@ -235,7 +235,7 @@ class phpDocumentor_IntermediateParser
      * @var parserData
      */
     var $data;
-    
+
     /**
      * set in {@link Setup.inc.php} to the value of the quitemode commandline
      * option.
@@ -251,22 +251,22 @@ class phpDocumentor_IntermediateParser
      * set in {@link Setup.inc.php} to the value of the undocumentedElementWarnings commandline
      * option.
      *
-     * If this option is true, warnings about certain elements (classes, methods) 
+     * If this option is true, warnings about certain elements (classes, methods)
      * that are not documented with DocBlocks will be shown while parsing,
-     * and will also be displayed in the errors.html page 
+     * and will also be displayed in the errors.html page
      * (other documentation is unaffected)
      * @var boolean
      * @tutorial phpDocumentor.howto.pkg#using.command-line.undocumentedelements
      */
     var $undocumentedElementWarnings = false;
-        
+
     /**
      * used to keep track of inheritance at the smartest level possible for a
      * dumb computer
      * @var Classes
      */
     var $classes = false;
-    
+
     /**
      * used to keep track of all elements in a procedural page.  Handles name
      * conflicts with elegance
@@ -274,7 +274,7 @@ class phpDocumentor_IntermediateParser
      * @var ProceduralPages
      */
     var $proceduralpages = false;
-    
+
     /**
      * an array of template names indexed by converter name
      *
@@ -285,15 +285,15 @@ class phpDocumentor_IntermediateParser
      * @see Converter
      */
     var $converters = false;
-    /** 
+    /**
      * @var string Title of generated documentation, passed to Converters
      */
     var $title = '';
-    
+
     var $uses = array();
 
     var $db_template;
-    
+
     /**
      * Stores parsed CHANGELOG/INSTALL/README files
      * @var array Format: array(CHANGELOG => contents,
@@ -301,7 +301,7 @@ class phpDocumentor_IntermediateParser
      *                          README => contents)
      */
     var $ric = array();
-    
+
     /**
      * Flag used to determine whether the last docblock
      * was a page-level docblock.
@@ -309,7 +309,7 @@ class phpDocumentor_IntermediateParser
      * @access private
      */
     var $_lastDocBlockWasPageLevel = false;
-    
+
     /**
      * Flag used to determine whether the Page-level
      * DocBlock was declared in old or new style
@@ -330,7 +330,7 @@ class phpDocumentor_IntermediateParser
         $this->classes = new Classes;
         $this->proceduralpages = new ProceduralPages;
     }
-    
+
     /**
      * Retrieve the relative path.  If the path contains "pear/" it will
      * be used as the base, otherwise the Program_Root string will be used.
@@ -361,7 +361,7 @@ class phpDocumentor_IntermediateParser
             return dirname(str_replace($_phpDocumentor_options['Program_Root'] . PATH_DELIMITER,'',$sourceloc));
         }
     }
-    
+
     /**
      * Guess the package/subpackage based on subdirectory if the --pear option
      *
@@ -376,7 +376,7 @@ class phpDocumentor_IntermediateParser
     function _guessPackage($path, $sourceloc)
     {
         global $_phpDocumentor_setting;
-        if ($_phpDocumentor_setting['pear'])
+        if (isset($_phpDocumentor_setting['pear']) && $_phpDocumentor_setting['pear'])
         {
             $subpath = explode(PATH_DELIMITER, $this->_getSourceLocation($path, $sourceloc));
             if (!empty($subpath[0]))
@@ -388,7 +388,7 @@ class phpDocumentor_IntermediateParser
             } else return array($this->package, $this->subpackage);
         } else return array($this->package, $this->subpackage);
     }
-    
+
     /**
      * handles post-parsing of include/require/include_once/require_once
      *
@@ -444,7 +444,7 @@ class phpDocumentor_IntermediateParser
         $this->proceduralpages->addInclude($data);
         $this->last = false;
     }
-    
+
     /**
      * handles post-parsing of global variables
      *
@@ -504,7 +504,7 @@ class phpDocumentor_IntermediateParser
         $this->proceduralpages->addGlobal($data);
         $this->last = false;
     }
-    
+
     /**
      * handles post-parsing of Package-level documentation pages.
      *
@@ -517,7 +517,7 @@ class phpDocumentor_IntermediateParser
         $this->package_pages[$data->package] = &$data;
         $this->last = false;
     }
-    
+
     /**
      * handle post-parsing of Tutorials.
      *
@@ -538,7 +538,7 @@ class phpDocumentor_IntermediateParser
         }
         $this->tutorials[$data->package][$data->subpackage][$data->tutorial_type][$data->name] = $data;
     }
-    
+
     /**
      * handles post-parsing of class vars
      *
@@ -561,8 +561,8 @@ class phpDocumentor_IntermediateParser
             {
                 // use the docblock template
                 $this->last = phpDocumentor_clone($this->db_template);
-            } 
-            else 
+            }
+            else
             {
                 // we don't have a docblock, create an empty one to get rid of errors
                 $this->last = new parserDocblock();
@@ -582,8 +582,8 @@ class phpDocumentor_IntermediateParser
         {
             $this->last->addVar('mixed',new parserStringWithInlineTags);
         }
-        
-        if ($_phpDocumentor_setting['pear'])
+
+        if (isset($_phpDocumentor_setting['pear']) && $_phpDocumentor_setting['pear'])
         {
             if (strpos($data->getName(), '_') == 1 && !$this->last->getKeyword('access'))
             {
@@ -597,7 +597,7 @@ class phpDocumentor_IntermediateParser
         $this->classes->addVar($data);
         $this->last = false;
     }
-    
+
     /**
      * handles post-parsing of class constants
      *
@@ -641,7 +641,7 @@ class phpDocumentor_IntermediateParser
         $this->classes->addConst($data);
         $this->last = false;
     }
-    
+
     /**
      * handles post-parsing of class methods
      *
@@ -670,7 +670,7 @@ class phpDocumentor_IntermediateParser
 			if ($this->undocumentedElementWarnings)
             {
                 addWarning(PDERROR_UNDOCUMENTED_ELEMENT,'Method',$data->getName(),'method');
-            }        	
+            }
             if (isset($this->db_template))
             {
                 // use the docblock template
@@ -725,7 +725,7 @@ class phpDocumentor_IntermediateParser
             $data->setDestructor();
         }
 
-        if ($_phpDocumentor_setting['pear'])
+        if (isset($_phpDocumentor_setting['pear']) && $_phpDocumentor_setting['pear'])
         {
             if (strpos($data->getName(), '_') === 0 && substr($data->getName(), 1) == $data->class)
             { // is destructor
@@ -835,7 +835,7 @@ class phpDocumentor_IntermediateParser
         $this->proceduralpages->addFunction($data);
         $this->last = false;
     }
-    
+
     /**
      * handles post-parsing of defines
      *
@@ -888,7 +888,7 @@ class phpDocumentor_IntermediateParser
         $this->proceduralpages->addDefine($data);
         $this->last = false;
     }
-    
+
     /**
      * handles post-parsing of classes
      *
@@ -905,7 +905,7 @@ class phpDocumentor_IntermediateParser
     function handleClass($event,$data)
     {
         global $_phpDocumentor_setting;
-        if ($data->isInterface()) 
+        if ($data->isInterface())
         {
             $objectType = 'interface';
         }
@@ -922,7 +922,8 @@ class phpDocumentor_IntermediateParser
                 $doc->category = $this->category;
                 $doc->package = $this->package;
                 $doc->subpackage = $this->subpackage;
-                if ($_phpDocumentor_setting['sourcecode']) {
+                if (isset($_phpDocumentor_setting['sourcecode']) &&
+                    $_phpDocumentor_setting['sourcecode']) {
                     $doc->canSource();
                     $doc->addFileSource($this->data->parent->path, $this->data->parent->source);
                 }
@@ -988,7 +989,7 @@ class phpDocumentor_IntermediateParser
         }
         $this->last = false;
     }
-    
+
     /**
      * handles post-parsing of procedural pages
      *
@@ -1011,7 +1012,7 @@ class phpDocumentor_IntermediateParser
         $this->classes->nextFile($data->getPath());
         $this->packageoutput = $data->getPackageOutput();
     }
-    
+
     /**
      * handles post-parsing of DocBlocks
      *
@@ -1087,7 +1088,7 @@ class phpDocumentor_IntermediateParser
         $this->all_packages[$data->package] = 1;
         $this->last = $data;
     }
-    
+
     /**
      * Process a Page-level DocBlock
      *
@@ -1114,7 +1115,7 @@ class phpDocumentor_IntermediateParser
         $this->data->clean = false;
         $this->data->explicitDocBlock();
         $data->canSource();
-        if ($_phpDocumentor_setting['sourcecode'])
+        if (isset($_phpDocumentor_setting['source']) && $_phpDocumentor_setting['sourcecode'])
         {
             $data->addFileSource($this->data->parent->path, $this->data->parent->source);
         }
@@ -1170,7 +1171,7 @@ class phpDocumentor_IntermediateParser
             $this->parsePackagePage($this->package, $this->data->parent->getPath());
         }
     }
-    
+
     /**
      * Backward-compatibility only, use the new tutorials for more power
      * @tutorial tutorials.pkg
@@ -1209,7 +1210,7 @@ class phpDocumentor_IntermediateParser
             }
         }
     }
-    
+
     /**
      * called via {@link Parser::parse()} and Parser's inherited method
      * {@link Publisher::publishEvent()}
@@ -1245,7 +1246,8 @@ class phpDocumentor_IntermediateParser
                         {
                             $doc = new parserDocBlock;
                         }
-                        if ($_phpDocumentor_setting['sourcecode'])
+                        if (isset($_phpDocumentor_setting['sourcecode']) &&
+                            $_phpDocumentor_setting['sourcecode'])
                         {
                             $doc->canSource();
                             $doc->addFileSource($this->data->parent->path, $this->data->parent->source);
@@ -1271,8 +1273,8 @@ class phpDocumentor_IntermediateParser
             }
             //echo $this->state_lookup[$data] . "\n";
             //echo $data."\n";
-        } 
-         else 
+        }
+         else
         {
             if ($event == PHPDOCUMENTOR_EVENT_README_INSTALL_CHANGELOG)
             {
@@ -1340,16 +1342,16 @@ class phpDocumentor_IntermediateParser
                 }
                 $this->type = $type;
                 //echo $type . "\n";
-                
+
                 if (isset($this->event_handlers[$type]))
                 {
                     $handle = $this->event_handlers[$type];
                     $this->$handle($event,$data);
                 }
-            } 
+            }
         }
     }
-    
+
     /**
      * Replaces the {@link parserPage} represented by $this->pages[$path] with
      * $page
@@ -1384,7 +1386,7 @@ class phpDocumentor_IntermediateParser
             }
         }
     }
-    
+
     /**
      * add a new {@link parserPage} to the $pages array if none is found
      *
@@ -1422,7 +1424,7 @@ class phpDocumentor_IntermediateParser
             $this->proceduralpages->addPage($this->pages[$path]->parent);
         }
     }
-    
+
     /**
      * Adds a {@link parserPage} element to the {@link parserData} element in
      * $this->privatepages[$path]
@@ -1437,7 +1439,7 @@ class phpDocumentor_IntermediateParser
     {
         /*
          * if privatepages is still empty,
-         * we need to initialize it with an empty 
+         * we need to initialize it with an empty
          * path=>ParserData element, so that it has
          * a top-level element... otherwise the setParent() call
          * below will crap out.
@@ -1461,7 +1463,7 @@ class phpDocumentor_IntermediateParser
             }
         }
     }
-    
+
     /**
      * adds a processed descendant of {@link parserElement} to the {@link $pages}
      * array or {@link $privatepages} array
@@ -1493,14 +1495,14 @@ class phpDocumentor_IntermediateParser
             }
         }
     }
-    
+
     /**
      * Add all the @uses tags from $element to the $uses array so that @usedby
      * virtual tags can be added
      * @uses parserUsesTag::getSeeElement() used to initialize {@link $uses}
      * @uses parserUsesTag::getDescription() used to initialize {@link $uses}
      * @param parserElement descendant of parserElement
-     * @param string full path to the file 
+     * @param string full path to the file
      */
     function addUses($element, $path)
     {
@@ -1549,7 +1551,7 @@ class phpDocumentor_IntermediateParser
             }
         }
     }
-    
+
     /**
      * Add a {@link parserUsedByTag} link to every element referred to by @uses
      * @param Converter temporary converter used to retrieve abstract links
@@ -1600,7 +1602,7 @@ class phpDocumentor_IntermediateParser
                                       str_replace('link', '',
                                       phpDocumentor_get_class($reallink)) &&
                                       $this->pages[$reallink->path]->
-                                      elements[$i]->getName() 
+                                      elements[$i]->getName()
                                       == $reallink->name) {
                                     $this->pages[$reallink->path]->elements[$i]->
                                     docblock->addUsedBy(
@@ -1622,7 +1624,7 @@ class phpDocumentor_IntermediateParser
                                 if ($this->pages[$reallink->path]->classelements[$i]->type ==
                                       str_replace('link','',phpDocumentor_get_class($reallink)) &&
                                       $this->pages[$reallink->path]->classelements[$i]->getName() == $reallink->name &&
-                                      (!isset($reallink->class) || 
+                                      (!isset($reallink->class) ||
                                       $this->pages[$reallink->path]->classelements[$i]->getClass() == $reallink->class))
                                 {
                                     $this->pages[$reallink->path]->classelements[$i]->docblock->addUsedBy($element[0]->getLink($converter,false,true), $element[1]);
@@ -1636,7 +1638,7 @@ class phpDocumentor_IntermediateParser
             }
         }
     }
-    
+
     /**
      * Interface to the Converter
      *
@@ -1653,7 +1655,7 @@ class phpDocumentor_IntermediateParser
         $converter->Output($title);
         $converter->cleanup();
     }
-    
+
     /**
      * Clean up classes
      *
@@ -1665,7 +1667,7 @@ class phpDocumentor_IntermediateParser
     {
         $this->classes->Inherit($this);
     }
-    
+
     /**
      * Clean up Procedural Pages
      * {@source}
@@ -1676,7 +1678,7 @@ class phpDocumentor_IntermediateParser
     {
         $this->proceduralpages->setupPages($this);
     }
-    
+
     /**
      * If the parent class of $class is in a different package, adds it to the
      * {@link $package_parents} array
@@ -1690,7 +1692,7 @@ class phpDocumentor_IntermediateParser
         $this->package_parents[$class->docblock->package] = $par->docblock->package;
         if (!isset($this->package_parents[$par->docblock->package]) || !$this->package_parents[$par->docblock->package]) $this->package_parents[$par->docblock->package] = false;
     }
-    
+
     /**
      * Add a converter name to use to the list of converters
      *
@@ -1762,7 +1764,7 @@ class phpDocumentor_IntermediateParser
     {
         return strnatcasecmp($a->getName(), $b->getName());
     }
-    
+
     /**
      * does a natural case sort on two class elements (either
      * {@link parserClass, parserMethod} or {@link parserVar}
@@ -1776,7 +1778,7 @@ class phpDocumentor_IntermediateParser
     {
         if (phpDocumentor_get_class($a) == 'parserclass') $atest = $a->name; else $atest = $a->class;
         if (phpDocumentor_get_class($b) == 'parserclass') $btest = $b->name; else $btest = $b->class;
-        
+
         if(($c = strnatcasecmp($atest, $btest)) != 0) return $c;
         if (phpDocumentor_get_class($a) != 'parserclass') $atest .= $a->name;
         if (phpDocumentor_get_class($b) != 'parserclass') $btest .= $b->name;
@@ -1789,7 +1791,7 @@ class phpDocumentor_IntermediateParser
         }
         return strnatcasecmp($atest,$btest);
     }
-    
+
     /**
      * call this method once parsing has completed.
      *
@@ -1919,7 +1921,7 @@ class phpDocumentor_IntermediateParser
     {
         $this->undocumentedElementWarnings = $undocumentedElementWarnings;
     }
-    
+
     /**
      * set display of elements marked with @access private
      *
