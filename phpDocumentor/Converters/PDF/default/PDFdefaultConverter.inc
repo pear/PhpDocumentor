@@ -3,24 +3,24 @@
  * Outputs documentation in PDF format
  *
  * phpDocumentor :: automatic documentation generator
- * 
+ *
  * PHP versions 4 and 5
  *
  * Copyright (c) 2002-2006 Gregory Beaver
- * 
+ *
  * LICENSE:
- * 
+ *
  * This library is free software; you can redistribute it
  * and/or modify it under the terms of the GNU Lesser General
  * Public License as published by the Free Software Foundation;
  * either version 2.1 of the License, or (at your option) any
  * later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
@@ -102,7 +102,7 @@ class PDFdefaultConverter extends Converter
         $this->pdf->ezText($template->fetch('title_page.tpl'));
         unset($template);
     }
-    
+
     function writeSource($path, $value)
     {
         $templ = &$this->newSmarty();
@@ -117,12 +117,12 @@ class PDFdefaultConverter extends Converter
         $this->setSourcePaths($path);
         $this->_sourcecode[$pathinfo['package']][] = $templ->fetch('filesource.tpl');
     }
-    
+
     function postProcess($text)
     {
         return htmlspecialchars($text);
     }
-    
+
     function writeExample($title, $path, $source)
     {
         $templ = &$this->newSmarty();
@@ -136,24 +136,24 @@ class PDFdefaultConverter extends Converter
         $templ->assign('file',$path);
         $this->pdf->ezText($templ->fetch('examplesource.tpl'));
     }
-    
+
     function getExampleLink($path, $title)
     {
         return '';
         return $this->returnLink('{$subdir}__examplesource' . PATH_DELIMITER . 'exsource_'.$path.'.html',$title);
     }
-    
+
     function getSourceLink($path)
     {
 //        var_dump(htmlentities('<c:ilink:'.$this->getFileSourceName($path).'>Source Code for this file</c:ilink>'));
         return '<c:ilink:'.$this->getFileSourceName($path).'>Source Code for this file</c:ilink>';
     }
-    
+
     function getFileSourceName($path, $anchor = '')
     {
         return urlencode($anchor . parent::getFileSourceName($path));
     }
-    
+
     /**
      * Retrieve a Converter-specific anchor to a segment of a source code file
      * parsed via a {@tutorial tags.filesource.pkg} tag.
@@ -174,7 +174,7 @@ class PDFdefaultConverter extends Converter
             return '</text><pdffunction:addDestination arg="'.$this->getFileSourceName($sourcefile, $anchor).'" arg="FitH" arg=$this->y /><text size="8">';
         }
     }
-    
+
     /**
      * Returns a bookmark using Cezpdf 009
      *
@@ -225,7 +225,7 @@ class PDFdefaultConverter extends Converter
         }
         return $element;
     }
-    
+
     /**
      * @param string
      * @param string
@@ -235,7 +235,7 @@ class PDFdefaultConverter extends Converter
     {
         return "<c:alink:$link>$text</c:alink>";
     }
-    
+
     /**
      * Convert README/INSTALL/CHANGELOG file contents to output format
      * @param README|INSTALL|CHANGELOG
@@ -250,7 +250,7 @@ class PDFdefaultConverter extends Converter
     {
         if (!$element->docblock) return;
         $template = &$this->newSmarty();
-        
+
         $nopackage = true;
         if ($element->type == 'page' || $element->type == 'class') $nopackage = false;
         $tagses = $element->docblock->listTags();
@@ -327,7 +327,7 @@ class PDFdefaultConverter extends Converter
         $this->convertParams($element);
         $this->pdf->ezText($template->fetch('docblock.tpl'));
     }
-    
+
     function convertParams(&$element)
     {
         if ($element->type != 'function' && $element->type != 'method') return;
@@ -345,7 +345,7 @@ class PDFdefaultConverter extends Converter
             $this->pdf->ezText($template->fetch('params.tpl'));
         }
     }
-    
+
     function convertGlobal(&$element)
     {
         $sdesc = '';
@@ -367,12 +367,12 @@ class PDFdefaultConverter extends Converter
         $this->pdf->ezText($template->fetch('global.tpl'));
         $this->convertDocBlock($element);
     }
-    
+
     function getGlobalValue($value)
     {
         return parent::getGlobalValue(htmlspecialchars($value));
     }
-    
+
     function convertMethod(&$element)
     {
         $sdesc = '';
@@ -412,7 +412,7 @@ class PDFdefaultConverter extends Converter
         $this->pdf->ezText($template->fetch('method.tpl'));
         $this->convertDocBlock($element);
     }
-    
+
     function convertVar(&$element)
     {
         $sdesc = '';
@@ -435,7 +435,7 @@ class PDFdefaultConverter extends Converter
         $this->pdf->ezText($template->fetch('var.tpl'));
         $this->convertDocBlock($element);
     }
-    
+
     function convertConst(&$element)
     {
         $sdesc = '';
@@ -457,7 +457,7 @@ class PDFdefaultConverter extends Converter
         $this->pdf->ezText($template->fetch('const.tpl'));
         $this->convertDocBlock($element);
     }
-    
+
     function convertClass(&$element)
     {
         $template = &$this->newSmarty();
@@ -490,7 +490,7 @@ class PDFdefaultConverter extends Converter
         $this->pdf->ezText($template->fetch('class.tpl'));
         $this->convertDocBlock($element);
     }
-    
+
     function convertInclude(&$element)
     {
         $template = &$this->newSmarty();
@@ -504,7 +504,7 @@ class PDFdefaultConverter extends Converter
         $this->pdf->ezText($template->fetch('include.tpl'));
         $this->convertDocBlock($element);
     }
-    
+
     function convertFunction(&$element)
     {
         $sdesc = '';
@@ -537,7 +537,7 @@ class PDFdefaultConverter extends Converter
         $this->pdf->ezText($template->fetch('function.tpl'));
         $this->convertDocBlock($element);
     }
-    
+
     function convertDefine(&$element)
     {
         $sdesc = '';
@@ -558,7 +558,7 @@ class PDFdefaultConverter extends Converter
         $this->pdf->ezText($template->fetch('define.tpl'));
         $this->convertDocBlock($element);
     }
-    
+
     function convertPage(&$element)
     {
         $template = &$this->newSmarty();
@@ -588,8 +588,8 @@ class PDFdefaultConverter extends Converter
             $this->convertDocBlock($element);
         }
     }
-    
-        
+
+
     /**
      * Used to translate an XML DocBook tag from a tutorial by reading the
      * options.ini file for the template.
@@ -626,12 +626,12 @@ class PDFdefaultConverter extends Converter
     {
         return 'tutorial'.$package.$subpackage.$tutorial.$id;
     }
-    
+
     function getCData($value)
     {
         return str_replace(array('<c:','<C:'),array("&lt;c:","&lt;C:"),$value);
     }
-    
+
     /**
      * @deprecated html package pages just don't work with PDF, use {@tutorial tutorials.pkg}
      */
@@ -641,7 +641,7 @@ class PDFdefaultConverter extends Converter
         $x = substr($x,strpos($x,'<body'));
         $this->package_pages[$element->package] = trim(substr($x,strpos($x,'>') + 1,strpos($x,'</body>') - 6));
     }
-    
+
     function convertTutorial(&$element)
     {
         $x = $element->Convert($this, true);
@@ -655,10 +655,10 @@ class PDFdefaultConverter extends Converter
         $template->assign('element',$element);
         $this->pdf->ezText($template->fetch('tutorial.tpl'));
     }
-    
+
     /**
      * returns a template-enabled array of class trees
-     * 
+     *
      * @param    string    $package    package to generate a class tree for
      * @see $roots, getRootTree()
      */
@@ -673,7 +673,7 @@ class PDFdefaultConverter extends Converter
         }
         return $trees;
     }
-    
+
     /**
      * return formatted class tree for the Class Trees page
      *
@@ -730,21 +730,22 @@ class PDFdefaultConverter extends Converter
                 {
 //                    debug("end of children for $cur");
                     $cur = array_pop($lastcur);
-                    $cur = array_pop($lastcur);
+                    $cur = array_pop($lastcur); // will fall into infinite loop if this second array_pop() is removed
                     $my_tree .= '</ul></li>'."\n";
-                    if ($dopar && ($cur == '#root' || !$cur)) $my_tree .= '</ul></li>';
                 }
-            } else 
+            } else
             {
 //                debug("$cur has no children");
                 $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link'], false, false)."</li>";
-                if ($dopar && $cur == '#root') $my_tree .= '</ul></li>';
                 $cur = array_pop($lastcur);
             }
         } while ($cur);
+        if ($dopar) {
+            $my_tree .= '</ul></li>'."\n";
+        }
         return $my_tree;
     }
-    
+
     /**
      * calls {@link Cezpdf::ezOutput()} and writes documentation.pdf to targetDir
      */
@@ -806,7 +807,7 @@ class PDFdefaultConverter extends Converter
                 }
             }
             $template->assign('todos',$todolist);
-            
+
             $this->pdf->ezText($template->fetch('todolist.tpl'));
         }
         if (false) {
@@ -826,13 +827,13 @@ class PDFdefaultConverter extends Converter
         flush();
         $this->writeFile("documentation.pdf", $x, true);
     }
-    
+
     function mystrnatcasecmp($a,$b)
     {
         return strnatcasecmp($a[0],$b[0]);
     }
-    
-    
+
+
     /**
      * @param string name of class
      * @param string package name
@@ -962,13 +963,13 @@ class PDFdefaultConverter extends Converter
         Converter::setTemplateDir($dir);
         $this->smarty_dir = $this->templateDir;
     }
-    
+
     /** @return 1 always the same */
     function getState()
     {
         return 1;
     }
-    
+
     /**
      * @see parent::unmangle()
      */

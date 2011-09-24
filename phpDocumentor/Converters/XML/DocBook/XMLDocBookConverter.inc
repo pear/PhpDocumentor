@@ -62,66 +62,66 @@ class XMLDocBookConverter extends Converter
      * @var boolean
      */
     var $local = true;
-    
+
     /**
      * name of current page being converted
      * @var string
      */
     var $page;
-    
+
     /**
      * path of current page being converted
      * @var string
      */
     var $path;
-    
+
     /**
      * name of current class being converted
      * @var string
      */
     var $class;
-    
+
     /**
      * template for the procedural page currently being processed
      * @var Template
      */
     var $page_data;
-    
+
     /**
      * output directory for the current procedural page being processed
      * @var string
      */
     var $page_dir;
-    
+
     /**
      * target directory passed on the command-line.
      * {@link $targetDir} is malleable, always adding package/ and package/subpackage/ subdirectories onto it.
      * @var string
      */
     var $base_dir;
-    
+
     /**
      * output directory for the current class being processed
      * @var string
      */
     var $class_dir;
-    
+
     /**
      * template for the class currently being processed
      * @var Template
      */
     var $class_data;
-    
+
     /**
      * array of converted package page names.
      * Used to link to the package page in the left index
      * @var array Format: array(package => 1)
      */
     var $package_pages = array();
-    
+
     /**
      * controls formatting of parser informative output
-     * 
+     *
      * Converter prints:
      * "Converting /path/to/file.php... Procedural Page Elements... Classes..."
      * Since HTMLdefaultConverter outputs files while converting, it needs to send a \n to start a new line.  However, if there
@@ -130,13 +130,13 @@ class XMLDocBookConverter extends Converter
      * @var boolean
      */
     var $juststarted = false;
-    
+
     /**
      * contains all of the template procedural page element loop data needed for the current template
      * @var array
      */
     var $current;
-    
+
     /**
      * contains all of the template class element loop data needed for the current template
      * @var array
@@ -151,7 +151,7 @@ class XMLDocBookConverter extends Converter
      * @var array
      */
     var $template_options = array('usepear' => false);
-    
+
     var $function_data = array();
     var $method_data = array();
     var $sourceloc = '';
@@ -168,7 +168,7 @@ class XMLDocBookConverter extends Converter
     {
         die("XMLDocBookConverter is not supported in this development version.  Use XML:DocBook/peardoc2:default");
     }
-    
+
     /**
      * do that stuff in $template_options
      */
@@ -176,13 +176,13 @@ class XMLDocBookConverter extends Converter
     {
         return Converter::getLink($expr, $package, $packages);
     }
-    
+
     function unmangle($s,$sourcecode)
     {
         return '<programlisting role="php"><![CDATA[
 '.$sourcecode.']]></programlisting>';
     }
-    
+
     function type_adjust($typename)
     {
         if (isset($this->template_options['typechanging'][trim($typename)]))
@@ -201,14 +201,14 @@ class XMLDocBookConverter extends Converter
         }
         return $typename;
     }
-    
+
     function &SmartyInit(&$templ)
     {
         $this->makeLeft();
         $templ->assign("packageindex",$this->package_index);
         return $templ;
     }
-    
+
     /**
      * Writes out the template file of {@link $class_data} and unsets the template to save memory
      * @see registerCurrentClass()
@@ -240,7 +240,7 @@ class XMLDocBookConverter extends Converter
         $this->writefile(str_replace(array('_','.'),array('-','--'),strtolower($this->class)) . '.xml',$this->class_data->fetch('class.tpl'));
         unset($this->class_data);
     }
-    
+
     /**
      * Writes out the template file of {@link $page_data} and unsets the template to save memory
      * @see registerCurrent()
@@ -268,7 +268,7 @@ class XMLDocBookConverter extends Converter
         $this->writefile(strtolower($this->page) . '.xml',$this->page_data->fetch('page.tpl'));
         unset($this->page_data);
     }
-    
+
     /**
      * @param string
      * @param string
@@ -278,7 +278,7 @@ class XMLDocBookConverter extends Converter
     {
         return '<ulink url="'.$link.'">'.$text.'</ulink>';
     }
-    
+
     function makeLeft()
     {
         static $done = false;
@@ -316,7 +316,7 @@ class XMLDocBookConverter extends Converter
             }
         }
     }
-    
+
     /**
      * HTMLdefaultConverter chooses to format both package indexes and the complete index here
      *
@@ -346,7 +346,7 @@ class XMLDocBookConverter extends Converter
         phpDocumentor_out("\n");
         flush();
     }
-    
+
     /**
      * HTMLdefaultConverter uses this function to format template index.html and packages.html
      *
@@ -402,7 +402,7 @@ class XMLDocBookConverter extends Converter
         unset($index);
 
     }
-    
+
     function writeNewPPage($key)
     {
         // will implement in next release with other templates than peardoc2
@@ -421,7 +421,7 @@ class XMLDocBookConverter extends Converter
 //        $this->writefile("li_$key.html",$template->fetch('index.tpl'));
         unset($template);
     }
-    
+
     /**
      * Generate indexes for li_package.html and classtree output files
      *
@@ -429,7 +429,7 @@ class XMLDocBookConverter extends Converter
      * iterating through each of the $page_elements, $class_elements and  $function_elements arrays to retrieve
      * the pre-sorted {@link abstractLink} descendants needed for index generation.  Conversion of these links to
      * text is done by {@link returnSee()}.  The {@link $local} parameter is set to false to ensure that paths are correct.
-     * 
+     *
      * Then it uses {@link generateFormattedClassTrees()} to create class trees from the template file classtrees.html.  Output
      * filename is classtrees_packagename.html.  This function also unsets {@link $elements} and {@link $pkg_elements} to free
      * up the considerable memory these two class vars use
@@ -464,7 +464,7 @@ class XMLDocBookConverter extends Converter
         unset($this->elements);
         unset($this->pkg_elements);
     }
-    
+
     /**
      * This function takes an {@link abstractLink} descendant and returns an html link
      *
@@ -564,7 +564,7 @@ class XMLDocBookConverter extends Converter
             return 'package.'.strtolower($element->package.'.'.$a.str_replace(array('_','.'),array('-','--'),$element->name)).'-tutorial';
         }
     }
-    
+
     /**
      * Get the id value needed to allow linking
      * @param mixed descendant of parserElement or parserData/parserPage
@@ -682,7 +682,7 @@ class XMLDocBookConverter extends Converter
         phpDocumentor_out("\n\nTo view errors and warnings, look at ".$this->base_dir. PATH_DELIMITER . "errors.html\n");
         flush();
     }
-    
+
     function postProcess($text)
     {
         return htmlentities($text);
@@ -692,19 +692,19 @@ class XMLDocBookConverter extends Converter
     {
         return parent::prepareDocBlock($element, array('staticvar' => 'staticvar','deprec' => 'deprecated','abstract' => 'abstract','TODO' => 'todo', 'uses' => 'see', 'usedby' => 'see', 'tutorial' => 'see'), $nopackage);
     }
-    
+
     function getTutorialId($package,$subpackage,$tutorial,$id)
     {
         $subpackage = (empty($subpackage) ? '' : '.'.$subpackage);
         $id = (empty($id) ? '' : '.'.$id);
         return 'package.'.strtolower($package.$subpackage.str_replace(array('_','.'),array('-','--'),$tutorial).$id);
     }
-    
+
     function getCData($value)
     {
         return '<!CDATA['.$value.']]>';
     }
-    
+
     /**
      * Converts package page and sets its package as used in {@link $package_pages}
      * @param parserPackagePage
@@ -732,7 +732,7 @@ class XMLDocBookConverter extends Converter
         unset($template);
         $this->package_pages[$element->package] = trim(substr($x,strpos($x,'>') + 1));
     }
-    
+
     function convertTutorial(&$element)
     {
         $template = &parent::convertTutorial($element);
@@ -765,7 +765,7 @@ class XMLDocBookConverter extends Converter
         $this->setTargetDir($this->base_dir . PATH_DELIMITER . strtolower($element->package . $a));
         $this->writeFile(str_replace(array('_','.'),array('-','--'),strtolower($element->name)).'-tutorial.xml',$contents);
     }
-    
+
     /**
      * Converts class variables for template output.
      * @see prepareDocBlock(), getFormattedOverrides()
@@ -801,7 +801,7 @@ class XMLDocBookConverter extends Converter
                                                'line_number' => $element->getLineNumber(),
                                                'id' => $this->getId($element)));
     }
-    
+
     /**
      * Converts class for template output
      * @see prepareDocBlock(), generateChildClassList(), generateFormattedClassTree(), getFormattedConflicts()
@@ -815,7 +815,7 @@ class XMLDocBookConverter extends Converter
         $this->class_dir = $element->docblock->package;
         if (!empty($element->docblock->subpackage)) $this->class_dir .= PATH_DELIMITER . $element->docblock->subpackage;
         $docblock = $this->prepareDocBlock($element,false);
-        
+
         $this->class_data->assign("sdesc",$docblock['sdesc']);
         $this->class_data->assign("desc",$docblock['desc']);
         $this->class_data->assign("tags",$docblock['tags']);
@@ -847,7 +847,7 @@ class XMLDocBookConverter extends Converter
             $this->class_summary->assign("children", $this->generateChildClassList($element));
             $this->class_summary->assign("class_tree", $this->generateFormattedClassTree($element));
             $this->class_summary->assign("conflicts", $this->getFormattedConflicts($element,"classes"));
-        
+
             $this->class_summary->assign("source_location",$element->getSourceLocation($this,$this->template_options['usepear']));
             $this->class_summary->assign("id",$this->getId($element).'-summary');
             $this->class_data->append("method_ids",$this->getId($element).'.'.strtolower(str_replace('_','-',$element->getName())).'-summary');
@@ -864,7 +864,7 @@ class XMLDocBookConverter extends Converter
         }
         $this->sourceloc = $element->getSourceLocation($this,$this->template_options['usepear']);
     }
-    
+
     /**
      * Converts method for template output
      * @see prepareDocBlock(), parserMethod::getFunctionCall(), getFormattedDescMethods(), getFormattedOverrides()
@@ -943,7 +943,7 @@ class XMLDocBookConverter extends Converter
         $this->method_data[$i][0]->assign('params',$params);
         $this->method_data[$i][0]->assign('id',$this->getId($element));
     }
-    
+
     /**
      * Converts function for template output
      * @see prepareDocBlock(), parserFunction::getFunctionCall(), getFormattedConflicts()
@@ -994,7 +994,7 @@ class XMLDocBookConverter extends Converter
         $this->function_data[$i][0]->assign('source_location',$this->returnSee($this->getLink(basename($this->curpage->getFile())),$this->sourceloc));
         $this->function_data[$i][0]->assign('id',$this->getId($element));
     }
-    
+
     /**
      * Converts include elements for template output
      * @see prepareDocBlock()
@@ -1012,7 +1012,7 @@ class XMLDocBookConverter extends Converter
                                                   'line_number' => $element->getLineNumber(),
                                                   'include_file'    => '-'.strtr($element->getValue(),array('"' => '', "'" => '','.' => '-'))));
     }
-    
+
     /**
      * Converts defines for template output
      * @see prepareDocBlock(), getFormattedConflicts()
@@ -1031,7 +1031,7 @@ class XMLDocBookConverter extends Converter
                                                  'line_number' => $element->getLineNumber(),
                                                  'id' => $this->getId($element)));
     }
-    
+
     /**
      * Converts global variables for template output
      * @param parserGlobal
@@ -1053,7 +1053,7 @@ class XMLDocBookConverter extends Converter
                                                  'conflicts'    => $this->getFormattedConflicts($element,"global variables"),
                                                  'id' => $this->getId($element)));
     }
-    
+
     /**
      * converts procedural pages for template output
      * @see prepareDocBlock(), getClassesOnPage()
@@ -1105,7 +1105,7 @@ class XMLDocBookConverter extends Converter
             $this->page_data->append("function_ids",$this->getId($element).'.'.strtolower($this->getPageName($element->parent)).'-summary');
         }
     }
-    
+
     function getPageName(&$element)
     {
         return str_replace(array('/','_','.'),array('-','-','---'),$element->getSourceLocation($this,$this->template_options['usepear']));
@@ -1118,7 +1118,7 @@ class XMLDocBookConverter extends Converter
      * @return array Format: array(root,child,child,child,...,$class)
      * @uses parserClass::getParentClassTree()
      */
-    
+
     function generateFormattedClassTree($class)
     {
         $tree = $class->getParentClassTree($this);
@@ -1135,7 +1135,7 @@ class XMLDocBookConverter extends Converter
                 if (is_object($parent))
                 $x = $parent->getLink($this);
                 if (!$x) $x = $parent->getName();
-                $result[] = 
+                $result[] =
                     $x;
                 if (is_object($parent))
                 $parent = $tree[$parent->getName()];
@@ -1148,13 +1148,13 @@ class XMLDocBookConverter extends Converter
             return array($class->getName());
         }
     }
-    
+
     /** @access private */
     function sortVar($a, $b)
     {
         return strnatcasecmp($a->getName(),$b->getName());
     }
-    
+
     /** @access private */
     function sortMethod($a, $b)
     {
@@ -1165,7 +1165,7 @@ class XMLDocBookConverter extends Converter
 
     /**
      * returns a template-enabled array of class trees
-     * 
+     *
      * @param    string    $package    package to generate a class tree for
      * @see $roots, HTMLConverter::getRootTree()
      */
@@ -1180,7 +1180,7 @@ class XMLDocBookConverter extends Converter
         }
         return $trees;
     }
-    
+
     /**
      * return formatted class tree for the Class Trees page
      *
@@ -1237,18 +1237,19 @@ class XMLDocBookConverter extends Converter
                 {
 //                    debug("end of children for $cur");
                     $cur = array_pop($lastcur);
-                    $cur = array_pop($lastcur);
+                    $cur = array_pop($lastcur); // will fall into infinite loop if this second array_pop() is removed
                     $my_tree .= '</itemizedlist></listitem>'."\n";
-                    if ($dopar && ($cur == '#root' || !$cur)) $my_tree .= '</itemizedlist></listitem>';
                 }
-            } else 
+            } else
             {
 //                debug("$cur has no children");
                 $my_tree .= '<listitem>'.$this->returnSee($tree[$cur]['link'], false, false)."</listitem>";
-                if ($dopar && $cur == '#root') $my_tree .= '</itemizedlist></listitem>';
                 $cur = array_pop($lastcur);
             }
         } while ($cur);
+        if ($dopar) {
+            $my_tree .= '</itemizedlist></listitem>'."\n";
+        }
         return $my_tree;
     }
     /**
@@ -1281,7 +1282,7 @@ class XMLDocBookConverter extends Converter
                                                 , false
                                                 , true);
                         $oo['sdesc'] = "$aa";
-                        $elindex['index'][] = $oo; 
+                        $elindex['index'][] = $oo;
                     break;
                     case 'define':
                         $aa = '';
@@ -1294,7 +1295,7 @@ class XMLDocBookConverter extends Converter
                                                  $this->elements[$letter][$i]->getName()
                                                  , false);
                         $oo['sdesc'] = "$aa";
-                        $elindex['index'][] = $oo; 
+                        $elindex['index'][] = $oo;
                     break;
                     case 'global':
                         $aa = '';
@@ -1307,7 +1308,7 @@ class XMLDocBookConverter extends Converter
                                                  $this->elements[$letter][$i]->getName()
                                                  , false);
                         $oo['sdesc'] = "$aa";
-                        $elindex['index'][] = $oo; 
+                        $elindex['index'][] = $oo;
                     break;
                     case 'function':
                         $aa = '';
@@ -1320,7 +1321,7 @@ class XMLDocBookConverter extends Converter
                                                    $this->elements[$letter][$i]->getName().'()'
                                                    , false);
                         $oo['sdesc'] = "$aa";
-                        $elindex['index'][] = $oo; 
+                        $elindex['index'][] = $oo;
                     break;
                     case 'method':
                         $aa = '';
@@ -1334,7 +1335,7 @@ class XMLDocBookConverter extends Converter
                                                  $this->elements[$letter][$i]->class.'::'.$this->elements[$letter][$i]->getName().'()'
                                                  , false);
                         $oo['sdesc'] = "$aa";
-                        $elindex['index'][] = $oo; 
+                        $elindex['index'][] = $oo;
                     break;
                     case 'var':
                         $aa = '';
@@ -1348,7 +1349,7 @@ class XMLDocBookConverter extends Converter
                                               $this->elements[$letter][$i]->class.'::'.$this->elements[$letter][$i]->getName()
                                               , false);
                         $oo['sdesc'] = "$aa";
-                        $elindex['index'][] = $oo; 
+                        $elindex['index'][] = $oo;
                     break;
                     case 'page':
                         $oo['name'] = $this->elements[$letter][$i]->getFile();
@@ -1358,7 +1359,7 @@ class XMLDocBookConverter extends Converter
                                                $this->elements[$letter][$i]->getPath(),
                                                $this->elements[$letter][$i]->getFile()
                                                , false);
-                        $elindex['index'][] = $oo; 
+                        $elindex['index'][] = $oo;
                     break;
                 }
             }
@@ -1373,13 +1374,13 @@ class XMLDocBookConverter extends Converter
         }
         return array($elementindex,$letters);
     }
-    
+
     function setTemplateDir($dir)
     {
         Converter::setTemplateDir($dir);
         $this->smarty_dir = $this->templateDir;
     }
-    
+
     /**
      * calls the converter setTargetDir, and then copies any template images and the stylesheet if they haven't been copied
      * @see Converter::setTargetDir()
@@ -1394,20 +1395,20 @@ class XMLDocBookConverter extends Converter
         $stylesheets = array();
         $dir = $this->templateDir;
         $this->templateDir = $this->templateDir.'templates/';
-        $d = dir($this->templateDir); 
+        $d = dir($this->templateDir);
         $template_images = array();
         while($entry = $d->read())
         {
-            $sp = explode(".", $entry); 
+            $sp = explode(".", $entry);
             if ( preg_match("/\.(gif|jpg|png)$/i", $entry) )
             {
                 $template_images[] = $entry;
             }
         }
-        $d = dir($this->templateDir); 
+        $d = dir($this->templateDir);
         while($entry = $d->read())
         {
-            $sp = explode(".", $entry); 
+            $sp = explode(".", $entry);
             if ( preg_match("/\.css$/i", $entry) )
             {
                 $stylesheets[] = $entry;
@@ -1437,7 +1438,7 @@ class XMLDocBookConverter extends Converter
         }
         $this->templateDir = $dir;
     }
-    
+
     /**
      * Generate alphabetical index of all elements by package and subpackage
      *
@@ -1480,7 +1481,7 @@ class XMLDocBookConverter extends Converter
                                                     , true);
                             $oo['subpackage'] = $subpackage;
                             $oo['sdesc'] = $aa;
-                            $elindex[$letter]['index'][] = $oo; 
+                            $elindex[$letter]['index'][] = $oo;
                         break;
                         case 'define':
                             $aa = $els[$letter][$i]->docblock->getSDesc($this);
@@ -1493,20 +1494,20 @@ class XMLDocBookConverter extends Converter
                                                      , false);
                             $oo['subpackage'] = $subpackage;
                             $oo['sdesc'] = $aa;
-                            $elindex[$letter]['index'][] = $oo; 
+                            $elindex[$letter]['index'][] = $oo;
                         break;
                         case 'global':
                             $aa = $els[$letter][$i]->docblock->getSDesc($this);
                             $oo['name'] = $els[$letter][$i]->getName();
                             $oo['listing'] =
                                 'in file '.$els[$letter][$i]->file.', global variable '.$this->getGlobalLink($els[$letter][$i]->getName(),
-                                                     $els[$letter][$i]->docblock->package, 
+                                                     $els[$letter][$i]->docblock->package,
                                                      $els[$letter][$i]->getPath(),
                                                      $els[$letter][$i]->getName()
                                                      ,false);
                             $oo['subpackage'] = $subpackage;
                             $oo['sdesc'] = $aa;
-                            $elindex[$letter]['index'][] = $oo; 
+                            $elindex[$letter]['index'][] = $oo;
                         break;
                         case 'function':
                             $aa = $els[$letter][$i]->docblock->getSDesc($this);
@@ -1519,7 +1520,7 @@ class XMLDocBookConverter extends Converter
                                                        , false);
                             $oo['subpackage'] = $subpackage;
                             $oo['sdesc'] = $aa;
-                            $elindex[$letter]['index'][] = $oo; 
+                            $elindex[$letter]['index'][] = $oo;
                         break;
                         case 'method':
                             $aa = $els[$letter][$i]->docblock->getSDesc($this);
@@ -1527,13 +1528,13 @@ class XMLDocBookConverter extends Converter
                             $oo['listing'] =
                                 'in file '.$els[$letter][$i]->file.', method '.$this->getMethodLink($els[$letter][$i]->getName(),
                                                      $els[$letter][$i]->class,
-                                                     $els[$letter][$i]->docblock->package, 
+                                                     $els[$letter][$i]->docblock->package,
                                                      $els[$letter][$i]->getPath(),
                                                      $els[$letter][$i]->class.'::'.$els[$letter][$i]->getName().'()'
                                                      , false);
                             $oo['subpackage'] = $subpackage;
                             $oo['sdesc'] = $aa;
-                            $elindex[$letter]['index'][] = $oo; 
+                            $elindex[$letter]['index'][] = $oo;
                         break;
                         case 'var':
                             $aa = $els[$letter][$i]->docblock->getSDesc($this);
@@ -1547,7 +1548,7 @@ class XMLDocBookConverter extends Converter
                                                   , false);
                             $oo['subpackage'] = $subpackage;
                             $oo['sdesc'] = $aa;
-                            $elindex[$letter]['index'][] = $oo; 
+                            $elindex[$letter]['index'][] = $oo;
                         break;
                         case 'page':
                             $oo['name'] = $els[$letter][$i]->getFile();
@@ -1558,7 +1559,7 @@ class XMLDocBookConverter extends Converter
                                                    $els[$letter][$i]->getFile()
                                                    , false);
                             $oo['subpackage'] = $subpackage;
-                            $elindex[$letter]['index'][] = $oo; 
+                            $elindex[$letter]['index'][] = $oo;
                         break;
                     }
                 }
@@ -1579,7 +1580,7 @@ class XMLDocBookConverter extends Converter
         } else $letters = array();
         return array($elementindex,$letters);
     }
-    
+
     /**
      *
      * @see generatePkgElementIndex()
@@ -1614,7 +1615,7 @@ class XMLDocBookConverter extends Converter
         }
         return array($packages,$package_names,$letters);
     }
-    
+
     /**
      * @param string name of class
      * @param string package name
@@ -1728,7 +1729,7 @@ class XMLDocBookConverter extends Converter
         if (!$a) return false;
         return $this->returnSee($a, $text, $local);
     }
-    
+
     /**
      * does a nat case sort on the specified second level value of the array
      *
@@ -1740,10 +1741,10 @@ class XMLDocBookConverter extends Converter
     {
         $aa = strtoupper($a[$this->rcnatcmpkey]);
         $bb = strtoupper($b[$this->rcnatcmpkey]);
-        
+
         return strnatcasecmp($aa, $bb);
     }
-    
+
     /**
      * does a nat case sort on the specified second level value of the array.
      * this one puts constructors first
@@ -1756,7 +1757,7 @@ class XMLDocBookConverter extends Converter
     {
         $aa = strtoupper($a[$this->rcnatcmpkey]);
         $bb = strtoupper($b[$this->rcnatcmpkey]);
-        
+
         if (strpos($aa,'CONSTRUCTOR') === 0)
         {
             return -1;
@@ -1775,7 +1776,7 @@ class XMLDocBookConverter extends Converter
         }
         return strnatcasecmp($aa, $bb);
     }
-    
+
     /**
      * This function is not used by HTMLdefaultConverter, but is required by Converter
      */

@@ -4,24 +4,24 @@
  * This Converter takes output from the {@link Parser} and converts it to HTML-ready output for use with {@link Smarty}.
  *
  * phpDocumentor :: automatic documentation generator
- * 
+ *
  * PHP versions 4 and 5
  *
  * Copyright (c) 2002-2006 Gregory Beaver
- * 
+ *
  * LICENSE:
- * 
+ *
  * This library is free software; you can redistribute it
  * and/or modify it under the terms of the GNU Lesser General
  * Public License as published by the Free Software Foundation;
  * either version 2.1 of the License, or (at your option) any
  * later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
@@ -73,36 +73,36 @@ class HTMLframesConverter extends Converter
      * @var array
      */
     var $leftindex = array('classes' => true, 'pages' => true, 'functions' => true, 'defines' => false, 'globals' => false);
-    
+
     /**
      * output directory for the current procedural page being processed
      * @var string
      */
     var $page_dir;
-    
+
     /**
      * target directory passed on the command-line.
      * {@link $targetDir} is malleable, always adding package/ and package/subpackage/ subdirectories onto it.
      * @var string
      */
     var $base_dir;
-    
+
     /**
      * output directory for the current class being processed
      * @var string
      */
     var $class_dir;
-    
+
     /**
      * array of converted package page names.
      * Used to link to the package page in the left index
      * @var array Format: array(package => 1)
      */
     var $package_pages = array();
-    
+
     /**
      * controls formatting of parser informative output
-     * 
+     *
      * Converter prints:
      * "Converting /path/to/file.php... Procedural Page Elements... Classes..."
      * Since HTMLdefaultConverter outputs files while converting, it needs to send a \n to start a new line.  However, if there
@@ -111,13 +111,13 @@ class HTMLframesConverter extends Converter
      * @var boolean
      */
     var $juststarted = false;
-    
+
     /**
      * contains all of the template procedural page element loop data needed for the current template
      * @var array
      */
     var $current;
-    
+
     /**
      * contains all of the template class element loop data needed for the current template
      * @var array
@@ -125,7 +125,7 @@ class HTMLframesConverter extends Converter
     var $currentclass;
     var $wrote = false;
     var $ric_set = array();
-    
+
     /**
      * sets {@link $base_dir} to $targetDir
      * @see Converter()
@@ -135,7 +135,7 @@ class HTMLframesConverter extends Converter
         Converter::Converter($allp, $packp, $classes, $procpages,$po, $pp, $qm, $targetDir, $templateDir, $title);
         $this->base_dir = $targetDir;
     }
-    
+
     /**
      * @deprecated in favor of PHP 4.3.0+ tokenizer-based source highlighting
      */
@@ -172,7 +172,7 @@ class HTMLframesConverter extends Converter
         $this->setSourcePaths($path);
         $this->writefile($this->getFileSourceName($path).'.html',$templ->fetch('filesource.tpl'));
     }
-    
+
     function writeExample($title, $path, $source)
     {
         $templ = &$this->newSmarty();
@@ -195,7 +195,7 @@ class HTMLframesConverter extends Converter
     {
         return $this->returnLink('{$subdir}__examplesource' . PATH_DELIMITER . 'exsource_'.$path.'.html',$title);
     }
-    
+
     function getSourceLink($path)
     {
         return $this->returnLink('{$subdir}__filesource/' .
@@ -250,7 +250,7 @@ class HTMLframesConverter extends Converter
                 "$extra</div></li>\n";
         }
     }
-    
+
     /**
      * Used to convert the <<code>> tag in a docblock
      * @param string
@@ -263,7 +263,7 @@ class HTMLframesConverter extends Converter
         return '<div class="src-code"><ol>' . parent::ProgramExample($example, $tutorial, $inlinesourceparse, $class, $linenum, $filesourcepath)
                .'</ol></div>';
     }
-    
+
     /**
      * @param string
      */
@@ -280,7 +280,7 @@ class HTMLframesConverter extends Converter
         if (!isset($this->template_options['desctranslate']['/code'])) return $example;
         return $example . $this->template_options['desctranslate']['/code'];
     }
-    
+
     function getCurrentPageLink()
     {
         return $this->curname . '.html';
@@ -297,7 +297,7 @@ class HTMLframesConverter extends Converter
         }
         return htmlspecialchars($text);
     }
-    
+
     /**
      * Use the template tutorial_toc.tpl to generate a table of contents for HTML
      * @return string table of contents formatted for use in the current output format
@@ -309,7 +309,7 @@ class HTMLframesConverter extends Converter
         $template->assign('toc',$toc);
         return $template->fetch('tutorial_toc.tpl');
     }
-    
+
     function &SmartyInit(&$templ)
     {
         if (!isset($this->package_index))
@@ -325,7 +325,7 @@ class HTMLframesConverter extends Converter
         $templ->assign("subdir",'');
         return $templ;
     }
-    
+
     /**
      * Writes out the template file of {@link $class_data} and unsets the template to save memory
      * @see registerCurrentClass()
@@ -347,7 +347,7 @@ class HTMLframesConverter extends Converter
         $this->writefile($this->class . '.html',$this->class_data->fetch('class.tpl'));
         unset($this->class_data);
     }
-    
+
     /**
      * Writes out the template file of {@link $page_data} and unsets the template to save memory
      * @see registerCurrent()
@@ -366,7 +366,7 @@ class HTMLframesConverter extends Converter
         $this->writefile($this->page . '.html',$this->page_data->fetch('page.tpl'));
         unset($this->page_data);
     }
-    
+
     /**
      * @param string
      * @param string
@@ -376,7 +376,7 @@ class HTMLframesConverter extends Converter
     {
         return '<a href="'.$link.'">'.$text.'</a>';
     }
-    
+
     function makeLeft()
     {
         foreach($this->page_elements as $package => $o1)
@@ -408,7 +408,7 @@ class HTMLframesConverter extends Converter
                     }
                     if ($class && isset($class->docblock) && $class->docblock->hasaccess) {
                         $left[$package][$subpackage]['classes'][] =
-                            array("link" => $this->getId($links[$i]), 
+                            array("link" => $this->getId($links[$i]),
                                   "title" => $links[$i]->name,
                                   'is_interface' => $isinterface,
                                   'is_class' => $isclass,
@@ -416,7 +416,7 @@ class HTMLframesConverter extends Converter
                                   "abstract" => isset ($class->docblock->tags['abstract'][0]));
                     } else {
                         $left[$package][$subpackage]['classes'][] =
-                            array("link" => $this->getId($links[$i]), 
+                            array("link" => $this->getId($links[$i]),
                                   "title" => $links[$i]->name,
                                   'is_interface' => $isinterface,
                                   'is_class' => $isclass,
@@ -544,7 +544,7 @@ class HTMLframesConverter extends Converter
         }
         return $ret;
     }
-    
+
     function getTutorialTree($tutorial,$k = false)
     {
         $ret = '';
@@ -586,7 +586,7 @@ class HTMLframesConverter extends Converter
         $ret = $template->fetch('tutorial_tree.tpl');
 				return $ret;
     }
-    
+
     /**
      * HTMLdefaultConverter chooses to format both package indexes and the complete index here
      *
@@ -612,7 +612,7 @@ class HTMLframesConverter extends Converter
         phpDocumentor_out("\n");
         flush();
         }
-    
+
     /**
      * HTMLdefaultConverter uses this function to format template index.html and packages.html
      *
@@ -691,7 +691,7 @@ class HTMLframesConverter extends Converter
         $this->writefile("packages.html",$package->fetch('top_frame.tpl'));
         unset($index);
     }
-    
+
     function writeNewPPage($key)
     {
         return;
@@ -705,11 +705,11 @@ class HTMLframesConverter extends Converter
         phpDocumentor_out("\n");
         flush();
         $this->setTargetDir($this->base_dir);
-    
+
         $this->writefile("li_$key.html",$template->fetch('index.tpl'));
         unset($template);
     }
-    
+
     /**
      * Generate indexes for li_package.html and classtree output files
      *
@@ -717,7 +717,7 @@ class HTMLframesConverter extends Converter
      * iterating through each of the $page_elements, $class_elements and  $function_elements arrays to retrieve
      * the pre-sorted {@link abstractLink} descendants needed for index generation.  Conversion of these links to
      * text is done by {@link returnSee()}.  The {@link $local} parameter is set to false to ensure that paths are correct.
-     * 
+     *
      * Then it uses {@link generateFormattedClassTrees()} to create class trees from the template file classtrees.html.  Output
      * filename is classtrees_packagename.html.  This function also unsets {@link $elements} and {@link $pkg_elements} to free
      * up the considerable memory these two class vars use
@@ -754,7 +754,7 @@ class HTMLframesConverter extends Converter
                 $template->assign("packagedoc",false);
             }
             $this->writefile("li_$package.html",$template->fetch('left_frame.tpl'));
-            
+
             // Create class tree page
             $template = &$this->newSmarty();
             $template->assign("classtrees",$this->generateFormattedClassTrees($package));
@@ -769,7 +769,7 @@ class HTMLframesConverter extends Converter
         unset($this->elements);
         unset($this->pkg_elements);
     }
-    
+
     /**
      * This function takes an {@link abstractLink} descendant and returns an html link
      *
@@ -807,7 +807,7 @@ class HTMLframesConverter extends Converter
         }
         return '<a href="'.$this->getId($element).'">'.$eltext.'</a>';
     }
-    
+
     function getId($element, $fullpath = true)
     {
         if (phpDocumentor_get_class($element) == 'parserdata')
@@ -860,7 +860,7 @@ class HTMLframesConverter extends Converter
             return $b.$element->package.$c.'/tutorial_'.$element->name.'.html'.$d;
         }
     }
-    
+
     /**
      * Convert README/INSTALL/CHANGELOG file contents to output format
      * @param README|INSTALL|CHANGELOG
@@ -875,7 +875,7 @@ class HTMLframesConverter extends Converter
         $this->writefile('ric_'.$name . '.html',$template->fetch('ric.tpl'));
         $this->ric_set[$name] = true;
     }
-    
+
     function ConvertTodoList()
     {
         $todolist = array();
@@ -904,7 +904,7 @@ class HTMLframesConverter extends Converter
         $this->setTargetDir($this->base_dir);
         $this->writefile('todolist.html',$templ->fetch('todolist.tpl'));
     }
-    
+
     /**
      * Create errors.html template file output
      *
@@ -971,17 +971,17 @@ class HTMLframesConverter extends Converter
         phpDocumentor_out("\n\nTo view errors and warnings, look at ".$this->base_dir. PATH_DELIMITER . "errors.html\n");
         flush();
     }
-    
+
     function getTutorialId($package,$subpackage,$tutorial,$id)
     {
         return $id;
     }
-    
+
     function getCData($value)
     {
         return '<pre>'.htmlentities($value).'</pre>';
     }
-    
+
     /**
      * Converts package page and sets its package as used in {@link $package_pages}
      * @param parserPackagePage
@@ -999,7 +999,7 @@ class HTMLframesConverter extends Converter
         $this->setTargetDir($this->base_dir . PATH_DELIMITER . $element->package);
         $this->writeFile('package_'.$element->package.'.html',str_replace('{$subdir}','../',$contents));
     }
-    
+
     /**
      * @param parserTutorial
      */
@@ -1020,7 +1020,7 @@ class HTMLframesConverter extends Converter
         $this->setTargetDir($this->base_dir . PATH_DELIMITER . $element->package . $a);
         $this->writeFile('tutorial_'.$element->name.'.html',$contents);
     }
-    
+
     /**
      * Converts class for template output
      * @see prepareDocBlock(), generateChildClassList(), generateFormattedClassTree(), getFormattedConflicts()
@@ -1034,7 +1034,7 @@ class HTMLframesConverter extends Converter
         if (!empty($element->docblock->subpackage)) $this->class_dir .= PATH_DELIMITER . $element->docblock->subpackage;
         $a = '../';
         if ($element->docblock->subpackage != '') $a = "../$a";
-        
+
         $this->class_data->assign('subdir',$a);
         $this->class_data->assign("title","Docs For Class " . $element->getName());
         $this->class_data->assign("page",$element->getName() . '.html');
@@ -1069,7 +1069,7 @@ class HTMLframesConverter extends Converter
     {
         parent::convertMethod($element, array('method_dest' => $this->getId($element,false)));
     }
-    
+
     /**
      * Converts function for template output
      * @see prepareDocBlock(), parserFunction::getFunctionCall(), getFormattedConflicts()
@@ -1080,7 +1080,7 @@ class HTMLframesConverter extends Converter
         $funcloc = $this->getId($this->addLink($element));
         parent::convertFunction($element,array('function_dest' => $this->getId($element,false)));
     }
-    
+
     /**
      * Converts include elements for template output
      * @see prepareDocBlock()
@@ -1090,7 +1090,7 @@ class HTMLframesConverter extends Converter
     {
         parent::convertInclude($element, array('include_file'    => '_'.strtr($element->getValue(),array('"' => '', "'" => '','.' => '_'))));
     }
-    
+
     /**
      * Converts defines for template output
      * @see prepareDocBlock(), getFormattedConflicts()
@@ -1100,7 +1100,7 @@ class HTMLframesConverter extends Converter
     {
         parent::convertDefine($element, array('define_link' => $this->getId($element,false)));
     }
-    
+
     /**
      * Converts global variables for template output
      * @param parserGlobal
@@ -1109,7 +1109,7 @@ class HTMLframesConverter extends Converter
     {
         parent::convertGlobal($element, array('global_link' => $this->getId($element,false)));
     }
-    
+
     /**
      * converts procedural pages for template output
      * @see prepareDocBlock(), getClassesOnPage()
@@ -1125,7 +1125,7 @@ class HTMLframesConverter extends Converter
         $this->page_data->assign("page",$this->getPageName($element) . '.html');
         $this->page_data->assign("title","Docs for page ".$element->parent->getFile());
     }
-    
+
     function getPageName(&$element)
     {
         if (phpDocumentor_get_class($element) == 'parserpage') return '_'.$element->getName();
@@ -1139,7 +1139,7 @@ class HTMLframesConverter extends Converter
      * @return array Format: array(root,child,child,child,...,$class)
      * @uses parserClass::getParentClassTree()
      */
-    
+
     function generateFormattedClassTree($class)
     {
         $tree = $class->getParentClassTree($this);
@@ -1160,7 +1160,7 @@ class HTMLframesConverter extends Converter
                     $x = $parent->getLink($this);
                     if (!$x) $x = $parent->getName();
                 }
-                $result[] = 
+                $result[] =
                     $x;
                 $distance[] =
                     "\n%s|\n" .
@@ -1183,13 +1183,13 @@ class HTMLframesConverter extends Converter
             return array('classes'=>$class->getName(),'distance'=>array(''));
         }
     }
-    
+
     /** @access private */
     function sortVar($a, $b)
     {
         return strnatcasecmp($a->getName(),$b->getName());
     }
-    
+
     /** @access private */
     function sortMethod($a, $b)
     {
@@ -1200,7 +1200,7 @@ class HTMLframesConverter extends Converter
 
     /**
      * returns a template-enabled array of class trees
-     * 
+     *
      * @param    string    $package    package to generate a class tree for
      * @see $roots, HTMLConverter::getRootTree()
      */
@@ -1254,7 +1254,7 @@ class HTMLframesConverter extends Converter
 
     /**
      * returns a template-enabled array of interface inheritance trees
-     * 
+     *
      * @param    string    $package    package to generate a class tree for
      * @see $roots, HTMLConverter::getRootTree()
      */
@@ -1305,7 +1305,7 @@ class HTMLframesConverter extends Converter
         }
         return $trees;
     }
-    
+
     /**
      * return formatted class tree for the Class Trees page
      *
@@ -1383,24 +1383,25 @@ class HTMLframesConverter extends Converter
                 {
 //                    debug("end of children for $cur");
                     $cur = array_pop($lastcur);
-                    $cur = array_pop($lastcur);
+                    $cur = array_pop($lastcur); // will fall into infinite loop if this second array_pop() is removed
                     $my_tree .= '</ul></li>'."\n";
-                    if ($dopar && ($cur == '#root' || !$cur)) $my_tree .= '</ul></li>';
                 }
-            } else 
+            } else
             {
 //                debug("$cur has no children");
                 $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link'])."</li>";
-                if ($dopar && $cur == '#root') $my_tree .= '</ul></li>';
                 $cur = array_pop($lastcur);
             }
         } while ($cur);
+        if ($dopar) {
+            $my_tree .= '</ul></li>'."\n";
+        }
         return $my_tree;
     }
 
     /**
      * Generate indexing information for given element
-     * 
+     *
      * @param parserElement descendant of parserElement
      * @see generateElementIndex()
      * @return array
@@ -1410,11 +1411,11 @@ class HTMLframesConverter extends Converter
         $Result['type'] = $elt->type;
         $Result['file_name'] = $elt->file;
         $Result['path'] = $elt->getPath();
-        
+
         if (isset($elt->docblock))
 					{
 						$Result['description'] = $elt->docblock->getSDesc($this);
-						
+
 						if ($elt->docblock->hasaccess)
 							$Result['access'] = $elt->docblock->tags['access'][0]->value;
 						else
@@ -1424,7 +1425,7 @@ class HTMLframesConverter extends Converter
 					}
         else
             $Result['description'] = '';
-        
+
         $aa = $Result['description'];
         if (!empty($aa)) $aa = "<br>&nbsp;&nbsp;&nbsp;&nbsp;$aa";
 
@@ -1554,7 +1555,7 @@ class HTMLframesConverter extends Converter
         }
         return array($elementindex,$letters);
     }
-    
+
     function copyMediaRecursively($media,$targetdir,$subdir = '')
     {
         $versionControlDirectories = array ('CVS', 'media/CVS', 'media\\CVS', '.svn', 'media/.svn', 'media\\.svn');
@@ -1579,13 +1580,13 @@ class HTMLframesConverter extends Converter
                         // create the subdir
                         phpDocumentor_out("creating $targetdir" . PATH_DELIMITER . "$dir\n");
                         Converter::setTargetDir($targetdir . PATH_DELIMITER . $dir);
-                        if (!empty($subdir)) 
+                        if (!empty($subdir))
                         {
                             $subdir .= PATH_DELIMITER;
                         }
                         $this->copyMediaRecursively($files,"$targetdir/$dir",$subdir . $dir);
                     }
-                } 
+                }
                 else
                 {
                     // copy the file
@@ -1595,7 +1596,7 @@ class HTMLframesConverter extends Converter
             }
         }
     }
-    
+
     /**
      * calls the converter setTargetDir, and then copies any template images and the stylesheet if they haven't been copied
      * @see Converter::setTargetDir()
@@ -1613,7 +1614,7 @@ class HTMLframesConverter extends Converter
         $info = new Io;
         $this->copyMediaRecursively($info->getDirTree($this->templateDir.'media',$this->templateDir),$tdir);
     }
-    
+
     /**
      * Generate alphabetical index of all elements by package and subpackage
      *
@@ -1666,7 +1667,7 @@ class HTMLframesConverter extends Converter
         } else $letters = array();
         return array($elementindex,$letters);
     }
-    
+
     /**
      *
      * @see generatePkgElementIndex()
@@ -1701,7 +1702,7 @@ class HTMLframesConverter extends Converter
         }
         return array($packages,$package_names,$letters);
     }
-    
+
     /**
      * @param string name of class
      * @param string package name
@@ -1832,7 +1833,7 @@ class HTMLframesConverter extends Converter
         if (!$a) return false;
         return $this->returnSee($a, $text);
     }
-    
+
     /**
      * does a nat case sort on the specified second level value of the array
      *
@@ -1844,10 +1845,10 @@ class HTMLframesConverter extends Converter
     {
         $aa = strtoupper($a[$this->rcnatcmpkey]);
         $bb = strtoupper($b[$this->rcnatcmpkey]);
-        
+
         return strnatcasecmp($aa, $bb);
     }
-    
+
     /**
      * does a nat case sort on the specified second level value of the array.
      * this one puts constructors first
@@ -1860,7 +1861,7 @@ class HTMLframesConverter extends Converter
     {
         $aa = strtoupper($a[$this->rcnatcmpkey]);
         $bb = strtoupper($b[$this->rcnatcmpkey]);
-        
+
         if (strpos($aa,'CONSTRUCTOR') === 0)
         {
             return -1;
@@ -1879,7 +1880,7 @@ class HTMLframesConverter extends Converter
         }
         return strnatcasecmp($aa, $bb);
     }
-    
+
     /**
      * This function is not used by HTMLdefaultConverter, but is required by Converter
      */
