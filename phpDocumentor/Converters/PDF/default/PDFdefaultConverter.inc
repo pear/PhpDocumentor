@@ -689,7 +689,7 @@ class PDFdefaultConverter extends Converter
         $lastcur = array(false);
         $kids = array();
         $dopar = false;
-        if ($tree[$cur]['parent'])
+        if (isset($tree[$cur]['parent']) && $tree[$cur]['parent'])
         {
             $dopar = true;
             if (!is_object($tree[$cur]['parent']))

@@ -1375,7 +1375,11 @@ class HTMLSmartyConverter extends Converter
         $lastcur = array(false);
         $kids = array();
         $dopar = false;
-        if (!$noparent && $tree[$cur]['parent'])
+        if (
+            !$noparent
+            && isset($tree[$cur]['parent'])
+            && $tree[$cur]['parent']
+        )
         {
             $dopar = true;
             if (!is_object($tree[$cur]['parent']))
@@ -1402,10 +1406,13 @@ class HTMLSmartyConverter extends Converter
                 {
 //                    debug("set $cur kids");
                     $kids[$cur] = 1;
+                    $thisLinkName = isset($tree[$cur]['link']->name) ? $tree[$cur]['link']->name : '';
+                    $thisLinkPackage = isset($tree[$cur]['link']->package) ? $tree[$cur]['link']->package : '';
                     $root = $this->classes->getClassByPackage(
-                        $tree[$cur]['link']->name,
-                        $tree[$cur]['link']->package);
-                    if ($implements = $root->getImplements()) {
+                        $thisLinkName,
+                        $thisLinkPackage
+                    );
+                    if ($root && $implements = $root->getImplements()) {
                         $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link']) .
                             ' (implements ';
                         foreach ($implements as $i => $interface) {
