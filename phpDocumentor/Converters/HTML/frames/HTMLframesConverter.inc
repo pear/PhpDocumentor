@@ -1332,12 +1332,10 @@ class HTMLframesConverter extends Converter
             $dopar = true;
             if (!is_object($tree[$cur]['parent']))
             {
-//                debug("parent ".$tree[$cur]['parent']." not found");
                 $my_tree .= '<li>' . $tree[$cur]['parent'] .'<ul>';
             }
             else
             {
-//                        debug("parent ".$this->returnSee($tree[$cur]['parent'])." in other package");
                 $root = $this->classes->getClassByPackage($tree[$cur]['parent']->name,
                     $package);
                 $my_tree .= '<li>' . $this->returnSee($tree[$cur]['parent']);
@@ -1346,13 +1344,10 @@ class HTMLframesConverter extends Converter
         }
         do
         {
-//            fancy_debug($cur,$lastcur,$kids);
             if (count($tree[$cur]['children']))
             {
-//                debug("$cur has children");
                 if (!isset($kids[$cur]))
                 {
-//                    debug("set $cur kids");
                     $kids[$cur] = 1;
                     $thisLinkName = isset($tree[$cur]['link']->name) ? $tree[$cur]['link']->name : '';
                     $thisLinkPackage = isset($tree[$cur]['link']->package) ? $tree[$cur]['link']->package : '';
@@ -1379,23 +1374,18 @@ class HTMLframesConverter extends Converter
                 }
                 array_push($lastcur,$cur);
                 list(,$cur) = each($tree[$cur]['children']);
-//                var_dump('listed',$cur);
                 if ($cur)
                 {
                     $cur = $cur['package'] . '#' . $cur['class'];
-//                    debug("set cur to child $cur");
-//                    $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link']);
                     continue;
                 } else
                 {
-//                    debug("end of children for $cur");
                     $cur = array_pop($lastcur);
                     $cur = array_pop($lastcur); // will fall into infinite loop if this second array_pop() is removed
                     $my_tree .= '</ul></li>'."\n";
                 }
             } else
             {
-//                debug("$cur has no children");
                 $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link'])."</li>";
                 $cur = array_pop($lastcur);
             }
