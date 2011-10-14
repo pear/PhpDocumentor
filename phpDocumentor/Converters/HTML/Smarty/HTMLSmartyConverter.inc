@@ -1369,86 +1369,71 @@ class HTMLSmartyConverter extends Converter
      */
     function getRootTree($tree, $package, $noparent = false)
     {
-        if (!$tree) return '';
+        if (!$tree) { return ''; }
         $my_tree = '';
         $cur = '#root';
         $lastcur = array(false);
         $kids = array();
         $dopar = false;
-        if (
-            !$noparent
-            && isset($tree[$cur]['parent'])
-            && $tree[$cur]['parent']
-        )
-        {
+        if (!$noparent && isset($tree[$cur]['parent']) && $tree[$cur]['parent']) {
             $dopar = true;
-            if (!is_object($tree[$cur]['parent']))
-            {
-//                debug("parent ".$tree[$cur]['parent']." not found");
+            if (!is_object($tree[$cur]['parent'])) {
                 $my_tree .= '<li>' . $tree[$cur]['parent'] .'<ul>';
-            }
-            else
-            {
-//                        debug("parent ".$this->returnSee($tree[$cur]['parent'])." in other package");
-                $root = $this->classes->getClassByPackage($tree[$cur]['parent']->name,
-                    $package);
+            } else {
+                $root = $this->classes->getClassByPackage($tree[$cur]['parent']->name, $package);
                 $my_tree .= '<li>' . $this->returnSee($tree[$cur]['parent']);
-                if ($tree[$cur]['parent']->package != $package) $my_tree .= ' <b>(Different package)</b><ul>';
+                if ($tree[$cur]['parent']->package != $package) { $my_tree .= ' <b>(Different package)</b><ul>'; }
             }
         }
-        do
-        {
-//            fancy_debug($cur,$lastcur,$kids);
-            if (count($tree[$cur]['children']))
-            {
-//                debug("$cur has children");
-                if (!isset($kids[$cur]))
-                {
-//                    debug("set $cur kids");
-                    $kids[$cur] = 1;
-                    $thisLinkName = isset($tree[$cur]['link']->name) ? $tree[$cur]['link']->name : '';
-                    $thisLinkPackage = isset($tree[$cur]['link']->package) ? $tree[$cur]['link']->package : '';
-                    $root = $this->classes->getClassByPackage(
-                        $thisLinkName,
-                        $thisLinkPackage
-                    );
-                    if ($root && $implements = $root->getImplements()) {
-                        $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link']) .
-                            ' (implements ';
-                        foreach ($implements as $i => $interface) {
-                            if ($i && $i != count($implements) - 1) $my_tree .= ', ';
-                            if ($link = $this->getLink('object ' .  $interface)) {
-                                $my_tree .= $this->returnSee($link);
-                            } else {
-                                $my_tree .= $interface;
-                            }
+
+        do {
+            // if class has no children, or has children that are not yet handled
+            if (!isset($kids[$cur])) {
+
+                // show the class name itself
+                $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link']);
+
+                // handle interfaces, if there are any
+                $root = $this->classes->getClassByPackage(
+                    (isset($tree[$cur]['link']->name)    ? $tree[$cur]['link']->name    : ''),
+                    (isset($tree[$cur]['link']->package) ? $tree[$cur]['link']->package : '')
+                );
+                $interfaces = $root->getImplements();
+                if (count($interfaces) > 0) {
+                    $my_tree .= ' (implements ';
+                    $needsComma = false;
+                    foreach ($interfaces as $interface) {
+                        $my_tree .= $needsComma ? ', ' : '';
+                        $link = $this->getLink('object ' . $interface, $package);
+                        if (is_a($link,'abstractLink')) {
+                            $my_tree .= $this->returnSee($link);
+                        } else {
+                            $my_tree .= $interface;
                         }
-                        $my_tree .= ')';
-                    } else {
-                        $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link']);
+                        $needsComma = true;
                     }
+                    unset($needsComma);
+                    $my_tree .= ')';
+                }
+            }
+
+            if (count($tree[$cur]['children'])) {
+                if (!isset($kids[$cur])) {
+                    $kids[$cur] = 1;
                     $my_tree .= '<ul>'."\n";
                 }
                 array_push($lastcur,$cur);
                 list(,$cur) = each($tree[$cur]['children']);
-//                var_dump('listed',$cur);
-                if ($cur)
-                {
+                if ($cur) {
                     $cur = $cur['package'] . '#' . $cur['class'];
-//                    debug("set cur to child $cur");
-//                    $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link']);
                     continue;
-                } else
-                {
-//                    debug("end of children for $cur");
+                } else {
                     $cur = array_pop($lastcur);
                     $cur = array_pop($lastcur); // will fall into infinite loop if this second array_pop() is removed
                     $my_tree .= '</ul></li>'."\n";
                 }
-            } else
-            {
-//                debug("$cur has no children");
-                $my_tree .= '<li>'.$this->returnSee($tree[$cur]['link'])."</li>";
+            } else {
+                $my_tree .= '</li>';
                 $cur = array_pop($lastcur);
             }
         } while ($cur);
