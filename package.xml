@@ -69,10 +69,10 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>drewish@katherinehouse.com</email>
   <active>no</active>
  </developer>
- <date>2009-09-05</date>
- <time>03:08:28</time>
+ <date>2011-12-03</date>
+ <time>13:00:00</time>
  <version>
-  <release>1.4.3</release>
+  <release>1.4.4</release>
   <api>1.4.0</api>
  </version>
  <stability>
@@ -82,28 +82,32 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
  <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
  <notes>
 Includes these PEAR items:
- * Bug #11654: @static in DocBlock Template can cause PHP Notice [ashnazg|mvriel]
- * Bug #11813: @link URL short description does&apos;nt work [ashnazg]
- * Bug #13800: Invalid tutorials tree generation [ashnazg|wrzasq]
- * Bug #14191: earthli template contains bad HTML [ashnazg|jorrit]
- * Bug #14472: Incorrect line numbers with heredoc [ashnazg|indigo]
- * Bug #15517: Wrong table of contents in tutorials [ashnazg]
- * Bug #16431: Warning: get_class() expects parameter 1 to be object, string given [ashnazg|aharvey]
- * Bug #16441: Parse error when parsing &lt;&lt;foo&gt;&gt; [ashnazg|marcusson]
- * Bug #16446: Use of split() causes E_DEPRECATED warnings [ashnazg|aharvey]
- * Feature #13599: Third Gotcha on Bare Minimum Tutorial example [ashnazg]
- * Feature #14312: @param tag with additional arguments doesn&apos;t work as expected [ashnazg]
- * Feature #14461: Data Type Confusion for Some Tags [ashnazg]
+ * Fix Bug #11543: empty @todo tags/comments shouldn&apos;t be included in TODO list [ashnazg]
+ * Fix Bug #12704: XML/Beautifier removed comment in XML Docbook peardoc2 converter
+   template [ashnazg]
+ * Fix Bug #13606: parameter name and description do not line up in generated docs [ashnazg]
+ * Fix Bug #13653: Media file copy - copies incorrect file [ashnazg]
+ * Fix Bug #14201: templatebase not working as intended [ashnazg]
+ * Fix Bug #14640: class witch extending DOMDocument [ashnazg]
+ * Fix Bug #16279: Type Hints in Function Signature Cause Loss of @param type [ashnazg]
+ * Fix Bug #16546: Default parser uses php 4.0 standards [ashnazg]
+ * Fix Bug #16825: Templates Point to Nonexistent Image Files [ashnazg]
+ * Fix Bug #16826: Unused media folder and files exist [ashnazg]
+ * Fix Bug #17395: Fatal Error when trying to run document [ashnazg]
+ * Fix Bug #18058: Patch: fix some notices (which may cause a crash of other tools) [ashnazg]
+ * Fix Bug #18100: phpdocu-general@sourceforge.net bounces [ashnazg]
+ * Fix Bug #18220: Truncated filenames in Converter files [ashnazg]
+ * Fix Bug #18782: class tree generation mistake [ashnazg]
+ * Fix Bug #18870: Class tree wont shows implemented interfaces if class has no childs [ashnazg]
+ * Fix Bug #18871: Class tree wont shows internal PHP interfaces [ashnazg]
+ * Fix Bug #18872: Class tree puts comma uncorrectly in interfaces list [ashnazg]
+ * Fix Bug #19017: remove error_reporting (for PEAR QA team) [ashnazg]
+ * Implement Feature #12211: @inheritdoc not working for child methods &amp; variables [ashnazg]
+ * Implement Feature #15580: Add link back from api document to pear website or package website [ashnazg]
+ * Implement Feature #17906: Please, consider realising &apos;Plain.php&apos; file under PHP 3.01 license [ashnazg]
 
 Includes these Sourceforge items:
-* [2692032] use of templatebase - missing information [ashnazg]
-* [2669256] get_class() expects parameter 1 to be object, string given [ashnazg]
-* [2669110] ereg / split is deprecated [ashnazg]
-* [1940914] Tutorials tree is added to tutorials which have no children [ashnazg|wrzasq]
-* [1929926] Default version number not updated [ashnazg]
-* [1918851] @toc render is wrong in earthli tutorial_toc.tpl [ashnazg]
-* [1903136] Constant Link not worked [ashnazg|scholesmafia]
-* [1771553] @link URL short description does\'nt work [ashnazg]
+* [2155014] fatal error when parsing 'myclass extends DOMDocument'
  </notes>
  <contents>
   <dir baseinstalldir="PhpDocumentor" name="/">
