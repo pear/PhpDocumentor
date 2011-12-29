@@ -3,10 +3,13 @@
 /**
  * Master Unit Test Suite file for PhpDocumentor
  * 
- * This top-level test suite file organizes 
- * all class test suite files, 
- * so that the full suite can be run 
- * by PhpUnit or via "pear run-tests -u". 
+ * This top-level test suite file organizes all class test suite files, 
+ * so that the full suite can be run by calling:
+ *     php -d error_reporting=22527 tests/AllTests.php
+ *
+ * But modern versions of PHPUnit don't need the AllTests file.  Just cd
+ * into the directory above "tests" and call:
+ *     phpunit -d error_reporting=22527 tests
  *
  * PHP versions 4 and 5
  *
@@ -21,44 +24,21 @@
  * @todo     CS cleanup - change package to PhpDocumentor
  */
 
-
 /**
- * Check PHP version... PhpUnit v3+ requires at least PHP v5.1.4
+ * Obtain the helper file.
  */
-if (version_compare(PHP_VERSION, "5.1.4") < 0) {
-    // Cannnot run test suites
-    echo "Cannot run test suites... requires at least PHP v5.1.4.\n";
-    exit(1);
+require_once dirname(__FILE__) . '/helper.inc';
+
+// Keep tests from running twice when calling this file directly via PHPUnit.
+$call_main = false;
+if (strpos($_SERVER['argv'][0], 'phpunit') === false) {
+    // Called via php, not PHPUnit.  Pass the request to PHPUnit.
+    if (!defined('PHPUnit_MAIN_METHOD')) {
+        /** The test's main method name */
+        define('PHPUnit_MAIN_METHOD', 'PhpDocumentor_AllTests::main');
+        $call_main = true;
+    }
 }
-
-
-/**
- * Derive the "main" method name
- * @internal PhpUnit would have to rename PHPUnit_MAIN_METHOD to PHPUNIT_MAIN_METHOD
- *           to make this usage meet the PEAR CS... we cannot rename it here.
- */
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'PhpDocumentor_AllTests::main');
-}
-
-
-/*
- * Files needed by PhpUnit
- */
-require_once 'PHPUnit/Framework.php';
-require_once 'PHPUnit/TextUI/TestRunner.php';
-
-
-/*
- * You must add each additional class-level test suite file here
- */
-require_once 'phpDocumentorSetupTests.php';
-require_once 'phpDocumentorTParserTests.php';
-require_once 'IntermediateParserTests.php';
-require_once 'HighlightParserTests.php';
-require_once 'ParserClassTests.php';
-require_once 'ParserPageTests.php';
-
 
 /**
  * Master Unit Test Suite class for PhpDocumentor
@@ -80,7 +60,6 @@ require_once 'ParserPageTests.php';
  */
 class PhpDocumentor_AllTests
 {
-
     /**
      * Launches the TextUI test runner
      *
@@ -91,7 +70,6 @@ class PhpDocumentor_AllTests
     {
         PHPUnit_TextUI_TestRunner::run(self::suite());
     }
-
 
     /**
      * Adds all class test suites into the master suite
@@ -105,27 +83,13 @@ class PhpDocumentor_AllTests
         $suite = new PHPUnit_Framework_TestSuite(
             'PhpDocumentor Full Suite of Unit Tests');
 
-        /*
-         * You must add each additional class-level test suite name here
-         */
-        $suite->addTest(tests_phpDocumentorSetupTests::suite());
-        $suite->addTest(tests_phpDocumentorTParserTests::suite());
-        $suite->addTest(tests_IntermediateParserTests::suite());
-        $suite->addTest(tests_HighlightParserTests::suite());
-        $suite->addTest(tests_ParserClassTests::suite());
-        $suite->addTest(tests_ParserPageTests::suite());
+        $dir = new GlobIterator(dirname(__FILE__) . '/*Test.php');
+        $suite->addTestFiles($dir);
+
         return $suite;
     }
 }
 
-/**
- * Call the main method if this file is executed directly
- * @internal PhpUnit would have to rename PHPUnit_MAIN_METHOD to PHPUNIT_MAIN_METHOD
- *           to make this usage meet the PEAR CS... we cannot rename it here.
- */
-if (PHPUnit_MAIN_METHOD == 'PhpDocumentor_AllTests::main') {
+if ($call_main) {
     PhpDocumentor_AllTests::main();
 }
-
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-?>

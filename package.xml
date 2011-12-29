@@ -1439,19 +1439,16 @@ Includes these Sourceforge items:
    </dir> <!-- /scripts -->
    <dir name="tests">
     <file baseinstalldir="PhpDocumentor" name="AllTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="HighlightParserGetInlineTagsTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="HighlightParserTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="IntermediateParserAddPrivatePageTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="IntermediateParserTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="ParserClassGetSourceLocationTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="ParserClassTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="ParserPageGetSourceLocationTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="ParserPageTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="phpDocumentorSetupCleanConverterNamePieceTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="phpDocumentorSetupDecideOnOrOffTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="phpDocumentorSetupTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="phpDocumentorTParserGetInlineTagsTests.php" role="test" />
-    <file baseinstalldir="PhpDocumentor" name="phpDocumentorTParserTests.php" role="test" />
+    <file baseinstalldir="PhpDocumentor" name="HighlightParserGetInlineTagsTest.php" role="test" />
+    <file baseinstalldir="PhpDocumentor" name="IntermediateParserAddPrivatePageTest.php" role="test" />
+    <file baseinstalldir="PhpDocumentor" name="ParserClassGetSourceLocationTest.php" role="test" />
+    <file baseinstalldir="PhpDocumentor" name="ParserPageGetSourceLocationTest.php" role="test" />
+    <file baseinstalldir="PhpDocumentor" name="SetupCleanConverterNamePieceTest.php" role="test" />
+    <file baseinstalldir="PhpDocumentor" name="SetupDecideOnOrOffTest.php" role="test" />
+    <file baseinstalldir="PhpDocumentor" name="TParserGetInlineTagsTest.php" role="test" />
+    <file baseinstalldir="PhpDocumentor" name="helper.inc" role="test">
+     <tasks:replace from="@php_dir@" to="php_dir" type="pear-config" />
+    </file>
    </dir> <!-- /tests -->
    <dir name="tutorials">
     <dir name="Converters">

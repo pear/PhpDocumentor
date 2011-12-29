@@ -8,47 +8,9 @@
  */
 
 /**
- * PHPUnit main() hack
- *
- * "Call class::main() if this source file is executed directly."
- * @since 1.4.0a2
+ * Obtain the helper file.
  */
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "IntermediateParserAddPrivatePageTests::main");
-}
-/**
- * TestCase
- *
- * required by PHPUnit
- * @since 1.4.0a2
- */
-require_once "PHPUnit/Framework/TestCase.php";
-/**
- * TestSuite
- *
- * required by PHPUnit
- * @since 1.4.0a2
- */
-require_once "PHPUnit/Framework/TestSuite.php";
-
-/**
- * Base directory of code
- *
- * Needed by some of the objects being tested in the suites.
- * @since 1.4.1
- */
-chdir(dirname(dirname(__FILE__)));
-if (!defined("PHPDOCUMENTOR_BASE")) {
-    define("PHPDOCUMENTOR_BASE", dirname(dirname(__FILE__)));
-}
-
-/**
- * PhpDocumentor Setup
- *
- * required by PhpDocumentor to instantiate the environment
- * @since 1.4.0a2
- */
-require_once 'phpDocumentor/Setup.inc.php';
+require_once dirname(__FILE__) . '/helper.inc';
 
 /**
  * Unit Testing of the IntermediateParser's addPrivatePage() method
@@ -57,28 +19,28 @@ require_once 'phpDocumentor/Setup.inc.php';
  * @author Chuck Burgess
  * @since 1.4.0a2
  */
-class tests_IntermediateParserAddPrivatePageTests extends PHPUnit_Framework_TestCase {
+class IntermediateParserAddPrivatePageTest extends PHPUnit_Framework_TestCase {
 
     /**
-     * phpDocumentor_setup object
+     * @var phpDocumentor_setup
      * @access private
      * @since 1.4.0a2
      */
     private $ps;
     /**
-     * IntermediateParser object
+     * @var phpDocumentor_IntermediateParser
      * @access private
      * @since 1.4.0a2
      */
     private $ip;
     /**
-     * parserPage object
+     * @var parserPage
      * @access private
      * @since 1.4.0a2
      */
     private $pp;
     /**
-     * parserData object
+     * @var parserData
      * @access private
      * @since 1.4.0a2
      */
@@ -89,19 +51,6 @@ class tests_IntermediateParserAddPrivatePageTests extends PHPUnit_Framework_Test
      * @since 1.4.0a2
      */
     private $path;
-
-    /**
-     * Runs the test methods of this class.
-     * @access public
-     * @static
-     * @since 1.4.0a2
-     */
-    public static function main() {
-        require_once "PHPUnit/TextUI/TestRunner.php";
-
-        $suite  = new PHPUnit_Framework_TestSuite("tests_IntermediateParserAddPrivatePageTests");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -255,13 +204,3 @@ class tests_IntermediateParserAddPrivatePageTests extends PHPUnit_Framework_Test
      * END OF "NOW LIST THE TEST CASES" ----------------------------------------------|
      */
 }
-
-/**
- * PHPUnit main() hack
- * "Call class::main() if this source file is executed directly."
- * @since 1.4.0a2
- */
-if (PHPUnit_MAIN_METHOD == "IntermediateParserAddPrivatePageTests::main") {
-    tests_IntermediateParserAddPrivatePageTests::main();
-}
-?>
