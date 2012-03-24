@@ -1345,7 +1345,7 @@ class HTMLframesConverter extends Converter
                     (isset($tree[$cur]['link']->name)    ? $tree[$cur]['link']->name    : ''),
                     (isset($tree[$cur]['link']->package) ? $tree[$cur]['link']->package : '')
                 );
-                $interfaces = $root->getImplements();
+                $interfaces = !empty($root) ? $root->getImplements() : array();
                 if (count($interfaces) > 0) {
                     $my_tree .= ' (implements ';
                     $needsComma = false;
