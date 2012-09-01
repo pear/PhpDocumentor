@@ -129,6 +129,11 @@ class CHMdefaultConverter extends Converter
     var $KLinks = array();
 
     /**
+     * track which files have already been parsed
+     */
+    var $_filenames = array();
+
+    /**
      * sets {@link $base_dir} to $targetDir
      * @see Converter()
      */
@@ -159,6 +164,10 @@ class CHMdefaultConverter extends Converter
      */
     function writeSource($path, $value)
     {
+        if (in_array($path, $this->_filenames)) {
+            return; // this file has already been parsed
+        }
+        array_push($this->_filenames,$path);
         $templ = &$this->newSmarty();
         $pathinfo = $this->proceduralpages->getPathInfo($path, $this);
         $templ->assign('source',$value);
