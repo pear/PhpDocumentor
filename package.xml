@@ -1230,7 +1230,9 @@ Includes these Sourceforge items:
            <file baseinstalldir="PhpDocumentor" name="constants.tpl" role="data" />
            <file baseinstalldir="PhpDocumentor" name="docblock.tpl" role="data" />
            <file baseinstalldir="PhpDocumentor" name="errors.tpl" role="data" />
+           <file baseinstalldir="PhpDocumentor" name="footer.tpl" role="data" />
            <file baseinstalldir="PhpDocumentor" name="globals.tpl" role="data" />
+           <file baseinstalldir="PhpDocumentor" name="header.tpl" role="data" />
            <file baseinstalldir="PhpDocumentor" name="imethods.tpl" role="data" />
            <file baseinstalldir="PhpDocumentor" name="ivars.tpl" role="data" />
            <file baseinstalldir="PhpDocumentor" name="method.tpl" role="data" />
