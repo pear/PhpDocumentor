@@ -1121,7 +1121,7 @@ class phpDocumentor_IntermediateParser
         $this->data->clean = false;
         $this->data->explicitDocBlock();
         $data->canSource();
-        if (isset($_phpDocumentor_setting['source']) && $_phpDocumentor_setting['sourcecode'])
+        if (isset($_phpDocumentor_setting['sourcecode']) && $_phpDocumentor_setting['sourcecode'])
         {
             $data->addFileSource($this->data->parent->path, $this->data->parent->source);
         }
