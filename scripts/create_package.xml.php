@@ -1,6 +1,13 @@
 <?php
+/**
+ * @category ToolsAndUtilities
+ * @package  phpDocumentor
+ */
+
 set_time_limit(0);
+/** @ignore */
 require_once('PEAR/PackageFileManager.php');
+/** @ignore */
 require_once('PEAR/PackageFileManager2.php');
 PEAR::setErrorHandling(PEAR_ERROR_DIE);
 

@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" id="layout" href="{$subdir}media/layout.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="{$subdir}media/style.css" media="all">
 	<link rel="stylesheet" type="text/css" href="{$subdir}media/print.css" media="print">
+        <meta http-equiv='Content-Type' content='text/html; charset={$charset}'/>
 </head>
 
 <body>

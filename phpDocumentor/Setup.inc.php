@@ -25,6 +25,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @category   ToolsAndUtilities
  * @package    phpDocumentor
  * @author     Gregory Beaver <cellog@php.net>
  * @copyright  2002-2006 Gregory Beaver
@@ -94,6 +95,7 @@ $GLOBALS['phpDocumentor_DefaultPackageName'] = 'default';
 $GLOBALS['phpDocumentor_DefaultCategoryName'] = 'default';
 
 /**
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  */
 class phpDocumentor_setup
@@ -272,7 +274,9 @@ class phpDocumentor_setup
         if (!isset($_phpDocumentor_setting['junk'])) $_phpDocumentor_setting['junk'] = '';
         if (!isset($_phpDocumentor_setting['title'])) $_phpDocumentor_setting['title'] = 'Generated Documentation';
         $temp_title = $_phpDocumentor_setting['title'];
-        $this->render = new phpDocumentor_IntermediateParser($temp_title);
+        if (!isset($_phpDocumentor_setting['charset'])) $_phpDocumentor_setting['charset'] = 'iso-8859-1';
+        $charset = $_phpDocumentor_setting['charset'];
+        $this->render = new phpDocumentor_IntermediateParser($temp_title, $charset);
         if (isset($_phpDocumentor_setting['help']) || $_phpDocumentor_setting['junk'] == "-h" || $_phpDocumentor_setting['junk'] == "--help")
         {
             echo $this->setup->displayHelpMsg();
@@ -684,7 +688,7 @@ class phpDocumentor_setup
                 flush();
                 $fp = fopen($file,'r');
                 $contents = fread($fp,filesize($file));
-                $this->render->HandleEvent(PHPDOCUMENTOR_EVENT_README_INSTALL_CHANGELOG, array(basename($file),$contents));
+                $this->render->HandleEvent(PHPDOCUMENTOR_EVENT_README_INSTALL_CHANGELOG, array(preg_replace('|^' . $source_base . DIRECTORY_SEPARATOR . '|', '', $file),$contents));
                 fclose($fp);
             }
             phpDocumentor_out("\ndone\n");
@@ -990,6 +994,7 @@ if (extension_loaded('dom')
     )
 ) {
     /**
+     * @category ToolsAndUtilities
      * @package phpDocumentor
      * @ignore
      */

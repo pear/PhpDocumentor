@@ -26,6 +26,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @category   ToolsAndUtilities
  * @package    phpDocumentor
  * @author     Andrew Eddie
  * @author     Greg Beaver <cellog@php.net>
@@ -37,9 +38,11 @@
  */
 if ('@DATA-DIR@' != '@'.'DATA-DIR@')
 {
+    /** @ignore */
     include_once( "PhpDocumentor/phpDocumentor/common.inc.php");
 } else {
     $path = dirname(dirname(__FILE__));
+    /** @ignore */
     include_once( "$path/phpDocumentor/common.inc.php");
 }
 //

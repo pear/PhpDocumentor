@@ -69,45 +69,31 @@ http://localhost/pear/PhpDocumentor is the web interface</description>
   <email>drewish@katherinehouse.com</email>
   <active>no</active>
  </developer>
- <date>2011-12-03</date>
- <time>13:00:00</time>
+ <date>2012-09-01</date>
  <version>
-  <release>1.4.4</release>
-  <api>1.4.0</api>
+  <release>1.5.0a1</release>
+  <api>1.5.0</api>
  </version>
  <stability>
-  <release>stable</release>
+  <release>alpha</release>
   <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
  <notes>
-Includes these PEAR items:
- * Fix Bug #11543: empty @todo tags/comments shouldn&apos;t be included in TODO list [ashnazg]
- * Fix Bug #12704: XML/Beautifier removed comment in XML Docbook peardoc2 converter
-   template [ashnazg]
- * Fix Bug #13606: parameter name and description do not line up in generated docs [ashnazg]
- * Fix Bug #13653: Media file copy - copies incorrect file [ashnazg]
- * Fix Bug #14201: templatebase not working as intended [ashnazg]
- * Fix Bug #14640: class witch extending DOMDocument [ashnazg]
- * Fix Bug #16279: Type Hints in Function Signature Cause Loss of @param type [ashnazg]
- * Fix Bug #16546: Default parser uses php 4.0 standards [ashnazg]
- * Fix Bug #16825: Templates Point to Nonexistent Image Files [ashnazg]
- * Fix Bug #16826: Unused media folder and files exist [ashnazg]
- * Fix Bug #17395: Fatal Error when trying to run document [ashnazg]
- * Fix Bug #18058: Patch: fix some notices (which may cause a crash of other tools) [ashnazg]
- * Fix Bug #18100: phpdocu-general@sourceforge.net bounces [ashnazg]
- * Fix Bug #18220: Truncated filenames in Converter files [ashnazg]
- * Fix Bug #18782: class tree generation mistake [ashnazg]
- * Fix Bug #18870: Class tree wont shows implemented interfaces if class has no childs [ashnazg]
- * Fix Bug #18871: Class tree wont shows internal PHP interfaces [ashnazg]
- * Fix Bug #18872: Class tree puts comma uncorrectly in interfaces list [ashnazg]
- * Fix Bug #19017: remove error_reporting (for PEAR QA team) [ashnazg]
- * Implement Feature #12211: @inheritdoc not working for child methods &amp; variables [ashnazg]
- * Implement Feature #15580: Add link back from api document to pear website or package website [ashnazg]
- * Implement Feature #17906: Please, consider realising &apos;Plain.php&apos; file under PHP 3.01 license [ashnazg]
+This release includes a new --charset runtime option.
 
-Includes these Sourceforge items:
-* [2155014] fatal error when parsing 'myclass extends DOMDocument'
+This release will also see and document "RIC" files (Readme/Changelog/Install) in project subdirectories,
+rather than only seeing them in the project root.
+
+* Bug #12733: Warning in error.html file with XML:DocBook:peardoc2 [ashnazg]
+* Bug #16784: CHM: files are duplicated in the [FILES] section of the project file. [ashnazg]
+* Bug #19197: Fatal Error on building documentation [ashnazg]
+* Bug #19243: Tutorials are not honoring ordered vs unordered lists [ashnazg|lapistano]
+* Bug #19410: Sourcecode Option does not work [ashnazg|rhorber]
+
+* Req #4960: support for different encoding [ashnazg|miau]
+* Req #12236: Allow RIC files in all directory [ashnazg|yunosh]
+* Req #19242: Allow images in tutorials [ashnazg|lapistano]
  </notes>
  <contents>
   <dir baseinstalldir="PhpDocumentor" name="/">
@@ -193,6 +179,7 @@ Includes these Sourceforge items:
      <file baseinstalldir="PhpDocumentor" name="Release-1.4.0rc2" role="doc" />
      <file baseinstalldir="PhpDocumentor" name="Release-1.4.1" role="doc" />
      <file baseinstalldir="PhpDocumentor" name="Release-1.4.2" role="doc" />
+     <file baseinstalldir="PhpDocumentor" name="Release-1.4.3" role="doc" />
     </dir> <!-- /Documentation/Release-old -->
     <dir name="tests">
      <dir name="bug-557861">
@@ -1230,7 +1217,9 @@ Includes these Sourceforge items:
            <file baseinstalldir="PhpDocumentor" name="constants.tpl" role="data" />
            <file baseinstalldir="PhpDocumentor" name="docblock.tpl" role="data" />
            <file baseinstalldir="PhpDocumentor" name="errors.tpl" role="data" />
+           <file baseinstalldir="PhpDocumentor" name="footer.tpl" role="data" />
            <file baseinstalldir="PhpDocumentor" name="globals.tpl" role="data" />
+           <file baseinstalldir="PhpDocumentor" name="header.tpl" role="data" />
            <file baseinstalldir="PhpDocumentor" name="imethods.tpl" role="data" />
            <file baseinstalldir="PhpDocumentor" name="ivars.tpl" role="data" />
            <file baseinstalldir="PhpDocumentor" name="method.tpl" role="data" />
@@ -1580,7 +1569,6 @@ Includes these Sourceforge items:
     <tasks:replace from="@VER@" to="version" type="package-info" />
     <tasks:replace from="@STABILITY@" to="state" type="package-info" />
    </file>
-   <file baseinstalldir="PhpDocumentor" name="Release-1.4.3" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -3220,6 +3208,30 @@ Includes these Sourceforge items:
   </release>
   <release>
    <version>
+    <release>1.4.2</release>
+    <api>1.4.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-03-30</date>
+   <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
+   <notes>
+Includes these PEAR items:
+Bug #12361: missing links to the filesource
+Bug #12699: makedocs.sh script needs a better install location
+Bug #12929: paramete &apos;ignore&apos; oper mistake
+Doc #12764: Update INSTALL for web docbuilder
+
+Includes these Sourceforge items:
+- [1829133] Progress display not happening until conversion finished [ashnazg]
+- [1779257] ignore=.. option not working correctly on Win | fix attaced [ashnazg|mrasnika]
+
+   </notes>
+  </release>
+  <release>
+   <version>
     <release>1.4.3</release>
     <api>1.4.0</api>
    </version>
@@ -3239,6 +3251,75 @@ Doc #12764: Update INSTALL for web docbuilder
 Includes these Sourceforge items:
 - [1829133] Progress display not happening until conversion finished [ashnazg]
 - [1779257] ignore=.. option not working correctly on Win | fix attaced [ashnazg|mrasnika]
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.4.4</release>
+    <api>1.4.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2011-12-03</date>
+   <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
+   <notes>
+Includes these PEAR items:
+ * Fix Bug #11543: empty @todo tags/comments shouldn&apos;t be included in TODO list [ashnazg]
+ * Fix Bug #12704: XML/Beautifier removed comment in XML Docbook peardoc2 converter
+   template [ashnazg]
+ * Fix Bug #13606: parameter name and description do not line up in generated docs [ashnazg]
+ * Fix Bug #13653: Media file copy - copies incorrect file [ashnazg]
+ * Fix Bug #14201: templatebase not working as intended [ashnazg]
+ * Fix Bug #14640: class witch extending DOMDocument [ashnazg]
+ * Fix Bug #16279: Type Hints in Function Signature Cause Loss of @param type [ashnazg]
+ * Fix Bug #16546: Default parser uses php 4.0 standards [ashnazg]
+ * Fix Bug #16825: Templates Point to Nonexistent Image Files [ashnazg]
+ * Fix Bug #16826: Unused media folder and files exist [ashnazg]
+ * Fix Bug #17395: Fatal Error when trying to run document [ashnazg]
+ * Fix Bug #18058: Patch: fix some notices (which may cause a crash of other tools) [ashnazg]
+ * Fix Bug #18100: phpdocu-general@sourceforge.net bounces [ashnazg]
+ * Fix Bug #18220: Truncated filenames in Converter files [ashnazg]
+ * Fix Bug #18782: class tree generation mistake [ashnazg]
+ * Fix Bug #18870: Class tree wont shows implemented interfaces if class has no childs [ashnazg]
+ * Fix Bug #18871: Class tree wont shows internal PHP interfaces [ashnazg]
+ * Fix Bug #18872: Class tree puts comma uncorrectly in interfaces list [ashnazg]
+ * Fix Bug #19017: remove error_reporting (for PEAR QA team) [ashnazg]
+ * Implement Feature #12211: @inheritdoc not working for child methods &amp; variables [ashnazg]
+ * Implement Feature #15580: Add link back from api document to pear website or package website [ashnazg]
+ * Implement Feature #17906: Please, consider realising &apos;Plain.php&apos; file under PHP 3.01 license [ashnazg]
+
+Includes these Sourceforge items:
+* [2155014] fatal error when parsing 'myclass extends DOMDocument'
+   </notes>
+  </release>
+  <release>
+   <date>2012-09-01</date>
+   <version>
+    <release>1.5.0a1</release>
+    <api>1.5.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>stable</api>
+    </stability>
+   <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
+   <notes>
+This release includes a new --charset runtime option.
+
+This release will also see and document "RIC" files (Readme/Changelog/Install) in project subdirectories,
+rather than only seeing them in the project root.
+
+* Bug #12733: Warning in error.html file with XML:DocBook:peardoc2 [ashnazg]
+* Bug #16784: CHM: files are duplicated in the [FILES] section of the project file. [ashnazg]
+* Bug #19197: Fatal Error on building documentation [ashnazg]
+* Bug #19243: Tutorials are not honoring ordered vs unordered lists [ashnazg|lapistano]
+* Bug #19410: Sourcecode Option does not work [ashnazg|rhorber]
+
+* Req #4960: support for different encoding [ashnazg|miau]
+* Req #12236: Allow RIC files in all directory [ashnazg|yunosh]
+* Req #19242: Allow images in tutorials [ashnazg|lapistano]
    </notes>
   </release>
  </changelog>

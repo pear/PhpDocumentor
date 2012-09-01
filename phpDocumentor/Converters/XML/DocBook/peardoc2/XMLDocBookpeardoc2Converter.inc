@@ -217,12 +217,12 @@ class XMLDocBookpeardoc2Converter extends Converter
      * sets {@link $base_dir} to $targetDir
      * @see Converter()
      */
-    function XMLDocBookpeardoc2Converter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $templateDir, $title)
+    function XMLDocBookpeardoc2Converter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $templateDir, $title, $charset)
     {
         if (!class_exists('XML_Beautifier')) {
             @include_once 'XML/Beautifier.php';
         }
-        Converter::Converter($allp, $packp, $classes, $procpages,$po, $pp, $qm, $targetDir, $templateDir, $title);
+        Converter::Converter($allp, $packp, $classes, $procpages,$po, $pp, $qm, $targetDir, $templateDir, $title, $charset);
         if (class_exists('XML_Beautifier')) {
             require_once 'phpDocumentor/Converters/XML/DocBook/peardoc2/Beautifier.php';
             $this->_beautifier = new phpDocumentor_peardoc2_XML_Beautifier;
