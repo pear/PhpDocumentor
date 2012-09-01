@@ -3220,6 +3220,30 @@ Includes these Sourceforge items:
   </release>
   <release>
    <version>
+    <release>1.4.2</release>
+    <api>1.4.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-03-30</date>
+   <license uri="http://www.opensource.org/licenses/lgpl-license.php">LGPL</license>
+   <notes>
+Includes these PEAR items:
+Bug #12361: missing links to the filesource
+Bug #12699: makedocs.sh script needs a better install location
+Bug #12929: paramete &apos;ignore&apos; oper mistake
+Doc #12764: Update INSTALL for web docbuilder
+
+Includes these Sourceforge items:
+- [1829133] Progress display not happening until conversion finished [ashnazg]
+- [1779257] ignore=.. option not working correctly on Win | fix attaced [ashnazg|mrasnika]
+
+   </notes>
+  </release>
+  <release>
+   <version>
     <release>1.4.3</release>
     <api>1.4.0</api>
    </version>
