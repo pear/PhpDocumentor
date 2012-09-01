@@ -193,6 +193,7 @@ Includes these Sourceforge items:
      <file baseinstalldir="PhpDocumentor" name="Release-1.4.0rc2" role="doc" />
      <file baseinstalldir="PhpDocumentor" name="Release-1.4.1" role="doc" />
      <file baseinstalldir="PhpDocumentor" name="Release-1.4.2" role="doc" />
+     <file baseinstalldir="PhpDocumentor" name="Release-1.4.3" role="doc" />
     </dir> <!-- /Documentation/Release-old -->
     <dir name="tests">
      <dir name="bug-557861">
@@ -1582,7 +1583,6 @@ Includes these Sourceforge items:
     <tasks:replace from="@VER@" to="version" type="package-info" />
     <tasks:replace from="@STABILITY@" to="state" type="package-info" />
    </file>
-   <file baseinstalldir="PhpDocumentor" name="Release-1.4.3" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
