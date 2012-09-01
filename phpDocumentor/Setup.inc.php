@@ -686,7 +686,7 @@ class phpDocumentor_setup
                 flush();
                 $fp = fopen($file,'r');
                 $contents = fread($fp,filesize($file));
-                $this->render->HandleEvent(PHPDOCUMENTOR_EVENT_README_INSTALL_CHANGELOG, array(basename($file),$contents));
+                $this->render->HandleEvent(PHPDOCUMENTOR_EVENT_README_INSTALL_CHANGELOG, array(preg_replace('|^' . $source_base . DIRECTORY_SEPARATOR . '|', '', $file),$contents));
                 fclose($fp);
             }
             phpDocumentor_out("\ndone\n");

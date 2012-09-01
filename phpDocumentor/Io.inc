@@ -544,7 +544,7 @@ class Io
         $names = $GLOBALS['_phpDocumentor_RIC_files'];
         foreach($filelist as $file)
         {
-            if ((dirname($file) == $base) && in_array(strtoupper(basename($file)), $names))
+            if (in_array(strtoupper(basename($file)), $names))
             { // be sure to change $this->checkIgnore() if any other files are added here!!
                 $ric[] = $file;
             } else

@@ -872,7 +872,7 @@ class HTMLSmartyConverter extends Converter
     function Convert_RIC($name, $contents)
     {
         $this->ric_contents[$name] = $contents;
-        $this->ric_set[] = array('file' => 'ric_'.$name . '.html','name' => $name);
+        $this->ric_set[] = array('file' => 'ric_'.str_replace(DIRECTORY_SEPARATOR, '_', $name) . '.html','name' => $name);
     }
 
     function writeRIC()
@@ -886,7 +886,7 @@ class HTMLSmartyConverter extends Converter
             $template->assign('name',$name);
             $template->assign('title',$name);
             $this->setTargetDir($this->base_dir);
-            $this->writefile('ric_'.$name . '.html',$template->fetch('ric.tpl'));
+            $this->writefile('ric_'.str_replace(DIRECTORY_SEPARATOR, '_', $name). '.html',$template->fetch('ric.tpl'));
         }
     }
 

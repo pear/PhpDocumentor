@@ -683,7 +683,7 @@ class HTMLframesConverter extends Converter
         {
             foreach($this->ric_set as $name => $u)
             {
-                $package->append('ric',array('file' => 'ric_'.$name.'.html','name' => $name));
+                $package->append('ric',array('file' => 'ric_'.str_replace(DIRECTORY_SEPARATOR, '_', $name).'.html','name' => $name));
             }
         }
         $package->assign("packages",$this->package_index);
@@ -872,7 +872,7 @@ class HTMLframesConverter extends Converter
         $template->assign('contents',$contents);
         $template->assign('name',$name);
         $this->setTargetDir($this->base_dir);
-        $this->writefile('ric_'.$name . '.html',$template->fetch('ric.tpl'));
+        $this->writefile('ric_'.str_replace(DIRECTORY_SEPARATOR, '_', $name). '.html',$template->fetch('ric.tpl'));
         $this->ric_set[$name] = true;
     }
 
