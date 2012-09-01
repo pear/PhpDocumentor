@@ -25,6 +25,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @category   ToolsAndUtilities
  * @package    phpDocumentor
  * @author     Gregory Beaver <cellog@php.net>
  * @copyright  2002-2006 Gregory Beaver
@@ -94,6 +95,7 @@ $GLOBALS['phpDocumentor_DefaultPackageName'] = 'default';
 $GLOBALS['phpDocumentor_DefaultCategoryName'] = 'default';
 
 /**
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  */
 class phpDocumentor_setup
@@ -992,6 +994,7 @@ if (extension_loaded('dom')
     )
 ) {
     /**
+     * @category ToolsAndUtilities
      * @package phpDocumentor
      * @ignore
      */

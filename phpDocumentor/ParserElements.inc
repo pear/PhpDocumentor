@@ -25,6 +25,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @category   ToolsAndUtilities
  * @package    phpDocumentor
  * @subpackage ParserElements
  * @author     Gregory Beaver <cellog@php.net>
@@ -40,6 +41,7 @@
 /**
  * all elements except {@link parserPackagePage} descend from this abstract class
  * @abstract
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  * @subpackage ParserElements
  * @author Greg Beaver <cellog@php.net>
@@ -192,6 +194,7 @@ class parserElement extends parserBase
 }
 
 /**
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  * @subpackage ParserElements
  * @author Greg Beaver <cellog@php.net>
@@ -208,6 +211,7 @@ class parserInclude extends parserElement
 }
 
 /**
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  * @subpackage ParserElements
  * @author Greg Beaver <cellog@php.net>
@@ -312,6 +316,7 @@ class parserGlobal extends parserElement
 }
 
 /**
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  * @subpackage ParserElements
  * @author Greg Beaver <cellog@php.net>
@@ -673,6 +678,7 @@ class parserFunction extends parserElement
 }
 
 /**
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  * @subpackage ParserElements
  * @author Greg Beaver <cellog@php.net>
@@ -1406,6 +1412,7 @@ class parserClass extends parserElement
 }
 
 /**
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  * @subpackage ParserElements
  * @author Greg Beaver <cellog@php.net>
@@ -1570,6 +1577,7 @@ class parserVar extends parserElement
 }
 
 /**
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  * @subpackage ParserElements
  * @author Greg Beaver <cellog@php.net>
@@ -1619,6 +1627,7 @@ class parserConst extends parserElement
 }
 
 /**
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  * @subpackage ParserElements
  * @author Greg Beaver <cellog@php.net>
@@ -1974,6 +1983,7 @@ class parserMethod extends parserFunction
 }
 
 /**
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  * @subpackage ParserElements
  * @author Greg Beaver <cellog@php.net>
@@ -2018,6 +2028,7 @@ class parserDefine extends parserElement
 }
 
 /**
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  * @subpackage ParserElements
  * @author Greg Beaver <cellog@php.net>
@@ -2052,6 +2063,7 @@ class parserPackagePage extends parserStringWithInlineTags
 }
 
 /**
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  * @subpackage ParserElements
  * @since 1.2

@@ -26,6 +26,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @category   ToolsAndUtilities
  * @package    Converters
  * @subpackage HTMLframes
  * @author     Gregory Beaver <cellog@php.net>
@@ -43,6 +44,7 @@
  * HTML output converter.
  * This Converter takes output from the {@link Parser} and converts it to HTML-ready output for use with {@link Smarty}.
  *
+ * @category ToolsAndUtilities
  * @package Converters
  * @subpackage HTMLframes
  * @see parserDocBlock, parserInclude, parserPage, parserClass, parserDefine, parserFunction, parserMethod, parserVar
