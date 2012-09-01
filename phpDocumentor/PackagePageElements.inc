@@ -189,6 +189,32 @@ class parserXMLDocBookTag extends parserStringWithInlineTags
             list($this->attributes,$value) = $c->ConvertTitle($this->name, 
                 $this->attributes, $this->_title->Convert($c, $postprocess), $value);
         }
+
+        // if current element is a graphic make sure the linked file is copied to the
+        // given location
+        if ($this->name == "graphic")
+        {
+          $val = $this->attributes['fileref'];
+          $src = substr($c->curpath, 0, (strrpos($c->curpath, $c->package) - strlen($c->curpath)) );
+          $sourceDir = $src.$c->package.'/';
+          $targetDir = $c->base_dir.'/'.$c->package.'/';
+          $targetDir.= (!empty($c->subpackage)) ? $c->subpackage.'/' : '';
+          $targetDir .= 'figures/';
+          $filename = substr($val, strrpos($val, '/') + 1);
+
+          if (file_exists($sourceDir.$val))
+          {
+            if (!file_exists($targetDir))
+            {
+                mkdir($targetDir,0775, true);
+            }
+            if (copy($sourceDir.$val, $targetDir.$filename))
+            {
+              $this->attributes['fileref'] = './figures/'.$filename;
+            }
+          }
+        }
+
         return $c->TranslateTag($this->name, $this->attributes, $value, $simvalue);
     }
     
