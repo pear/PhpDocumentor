@@ -1267,7 +1267,8 @@ class Converter
             } else
             { // if close tag is specified, use the open and close as literal
                 if ($name == 'programlisting' && isset($attr['role']) &&
-                      ($attr['role'] == 'php' || $attr['role'] == 'tutorial' || $attr['role'] == 'html'))
+                      ($attr['role'] == 'php' || $attr['role'] == 'tutorial' ||
+                       $attr['role'] == 'html' || $attr['role'] == 'xml') )
                 { // highlight PHP source
 //                    var_dump($unconvertedcdata, $cdata);exit;
                     if ($attr['role'] == 'php') {
@@ -1276,7 +1277,10 @@ class Converter
                         $cdata = $this->TutorialExample($unconvertedcdata);
                     } elseif ($attr['role'] == 'html') {
                         $cdata = $unconvertedcdata;
+                    } elseif ($attr['role'] == 'xml') {
+                        $cdata = '<pre>'.htmlentities($unconvertedcdata).'</pre>';
                     }
+                    $cdata = $this->template_options['ppage'][$name].$this->AttrToString($name,$attr). $cdata .$this->template_options['ppage']['/'.$name];
                 } else
                 {// normal case below
                     $cdata = $this->template_options['ppage'][$name].$this->AttrToString($name,$attr). $cdata .$this->template_options['ppage']['/'.$name];
