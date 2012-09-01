@@ -26,6 +26,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @category   ToolsAndUtilities
  * @package    Converters
  * @subpackage HTMLframes
  * @author     Gregory Beaver <cellog@php.net>
@@ -43,6 +44,7 @@
  * HTML output converter.
  * This Converter takes output from the {@link Parser} and converts it to HTML-ready output for use with {@link Smarty}.
  *
+ * @category ToolsAndUtilities
  * @package Converters
  * @subpackage HTMLframes
  * @see parserDocBlock, parserInclude, parserPage, parserClass, parserDefine, parserFunction, parserMethod, parserVar
@@ -130,9 +132,9 @@ class HTMLframesConverter extends Converter
      * sets {@link $base_dir} to $targetDir
      * @see Converter()
      */
-    function HTMLframesConverter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $templateDir, $title)
+    function HTMLframesConverter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $templateDir, $title, $charset)
     {
-        Converter::Converter($allp, $packp, $classes, $procpages,$po, $pp, $qm, $targetDir, $templateDir, $title);
+        Converter::Converter($allp, $packp, $classes, $procpages,$po, $pp, $qm, $targetDir, $templateDir, $title, $charset);
         $this->base_dir = $targetDir;
     }
 
@@ -683,7 +685,7 @@ class HTMLframesConverter extends Converter
         {
             foreach($this->ric_set as $name => $u)
             {
-                $package->append('ric',array('file' => 'ric_'.$name.'.html','name' => $name));
+                $package->append('ric',array('file' => 'ric_'.str_replace(DIRECTORY_SEPARATOR, '_', $name).'.html','name' => $name));
             }
         }
         $package->assign("packages",$this->package_index);
@@ -872,7 +874,7 @@ class HTMLframesConverter extends Converter
         $template->assign('contents',$contents);
         $template->assign('name',$name);
         $this->setTargetDir($this->base_dir);
-        $this->writefile('ric_'.$name . '.html',$template->fetch('ric.tpl'));
+        $this->writefile('ric_'.str_replace(DIRECTORY_SEPARATOR, '_', $name). '.html',$template->fetch('ric.tpl'));
         $this->ric_set[$name] = true;
     }
 

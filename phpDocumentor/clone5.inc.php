@@ -45,6 +45,8 @@
  * @return object the new clone
  * @ignore
  * @todo CS cleanup - rename function to PhpDocumentor_clone
+ * @category  ToolsAndUtilities
+ * @package   phpDocumentor
  */
 function phpDocumentor_clone($obj)
 {

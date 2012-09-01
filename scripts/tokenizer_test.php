@@ -1,6 +1,7 @@
 <?php
 /**
- * @package tests
+ * @category ToolsAndUtilities
+ * @package phpDocumentor
  */
 /**
 $fp = fopen("../phpDocumentor/Converter.inc","r");

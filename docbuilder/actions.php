@@ -23,6 +23,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @category   ToolsAndUtilities
  * @package    phpDocumentor
  * @author     Andrew Eddie
  * @author     Greg Beaver <cellog@php.net>
@@ -33,8 +34,10 @@
 $path = dirname(__FILE__);
 if ('@WEB-DIR@' != '@'.'WEB-DIR@')
 {
+    /** @ignore */
     include_once( "@WEB-DIR@/PhpDocumentor/docbuilder/includes/utilities.php" );
 } else {
+    /** @ignore */
     include_once( "$path/includes/utilities.php" );
 }
 

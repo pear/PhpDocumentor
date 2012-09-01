@@ -2,7 +2,7 @@
 <head>
 	<title>{$maintitle}</title>
 			<link rel="stylesheet" href="{$subdir}media/stylesheet.css" />
-			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+			<meta http-equiv='Content-Type' content='text/html; charset={$charset}'/>
 </head>
 <body>
 <div align="center"><h1>{$maintitle}</h1></div>

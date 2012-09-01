@@ -2,6 +2,7 @@
 <head>
 <title>{$title}</title>
 <link rel="stylesheet" type="text/css" href="{$subdir}media/style.css">
+<meta http-equiv='Content-Type' content='text/html; charset={$charset}'/>
 </head>
 <body>
 

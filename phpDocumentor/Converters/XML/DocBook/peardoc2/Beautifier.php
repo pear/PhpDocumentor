@@ -27,6 +27,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @category   ToolsAndUtilities
  * @package    phpDocumentor
  * @subpackage Parsers
  * @author     Greg Beaver <cellog@php.net>
@@ -42,6 +43,7 @@
 
 /**
  * This is just like XML_Beautifier, but uses {@link phpDocumentor_XML_Beautifier_Tokenizer}
+ * @category ToolsAndUtilities
  * @package phpDocumentor
  * @subpackage Parsers
  * @since 1.3.0
