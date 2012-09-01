@@ -85,9 +85,9 @@ class PDFdefaultConverter extends Converter
     /**
      * @see Converter::Converter()
      */
-    function PDFdefaultConverter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $templateDir, $title)
+    function PDFdefaultConverter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $templateDir, $title, $charset)
     {
-        Converter::Converter($allp, $packp, $classes, $procpages, $po, $pp, $qm, $targetDir, $templateDir, $title);
+        Converter::Converter($allp, $packp, $classes, $procpages, $po, $pp, $qm, $targetDir, $templateDir, $title, $charset);
         $this->pdf =& new phpdocpdf($this, $this->getConverterDir() . PATH_DELIMITER .'templates/fonts/','letter');
         $this->pdf->selectFont($this->getConverterDir() . PATH_DELIMITER .'templates/fonts/Helvetica.afm');
 // put a line top and bottom on all the pages

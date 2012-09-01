@@ -164,7 +164,7 @@ class XMLDocBookConverter extends Converter
      * sets {@link $base_dir} to $targetDir
      * @see Converter()
      */
-    function XMLDocBookConverter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $templateDir, $title)
+    function XMLDocBookConverter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $templateDir, $title, $charset)
     {
         die("XMLDocBookConverter is not supported in this development version.  Use XML:DocBook/peardoc2:default");
     }

@@ -145,9 +145,9 @@ class HTMLSmartyConverter extends Converter
     var $ric_contents = array();
     /**#@-*/
 
-    function HTMLSmartyConverter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $templateDir, $title)
+    function HTMLSmartyConverter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $templateDir, $title, $charset)
     {
-        Converter::Converter($allp, $packp, $classes, $procpages,$po, $pp, $qm, $targetDir, $templateDir, $title);
+        Converter::Converter($allp, $packp, $classes, $procpages,$po, $pp, $qm, $targetDir, $templateDir, $title, $charset);
         $this->base_dir = $targetDir;
     }
 

@@ -392,6 +392,12 @@ class Converter
     var $title = 'Generated Documentation';
 
     /**
+     * @var string
+     * @see phpDocumentor_IntermediateParser::$charset
+     */
+    var $charset = 'iso-8859-1';
+
+    /**
      * Options for each template, parsed from the options.ini file in the template base directory
      * @tutorial phpDocumentor/tutorials.pkg#conversion.ppage
      * @var array
@@ -448,8 +454,9 @@ class Converter
      * @param string {@link $targetDir} value
      * @param string {@link $templateDir} value
      * @param string (@link $title} value
+     * @param string (@link $charset} value
      */
-    function Converter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $template, $title)
+    function Converter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $template, $title, $charset)
     {
         $this->all_packages = $allp;
         $this->package_parents = $packp;
@@ -467,6 +474,7 @@ class Converter
         $this->classes = &$classes;
         $this->roots = $classes->getRoots($this->processSpecialRoots);
         $this->title = $title;
+        $this->charset = $charset;
         $this->setTemplateDir($template);
         $this->setTargetdir($targetDir);
     }
@@ -5091,6 +5099,7 @@ class Converter
         $templ->config_dir = realpath($this->smarty_dir . PATH_DELIMITER . 'configs');
         $templ->assign("date",date("r",time()));
         $templ->assign("maintitle",$this->title);
+        $templ->assign("charset",$this->charset);
         $templ->assign('default_package',$GLOBALS['phpDocumentor_DefaultPackageName']);
         $templ->assign("package",$this->package);
         $templ->assign("phpdocversion",PHPDOCUMENTOR_VER);

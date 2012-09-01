@@ -138,6 +138,10 @@ class Io
         $this->phpDocOptions['title']['desc'] = "title of generated documentation, default is 'Generated Documentation'";
         $this->phpDocOptions['title']['type'] = "value";
 
+        $this->phpDocOptions['charset']['tag'] = array("-cs", "--charset");
+        $this->phpDocOptions['charset']['desc'] = "character encoding used in the Content-Type meta element or the XML declaration, default is 'iso-8859-1'";
+        $this->phpDocOptions['charset']['type'] = "value";
+
         $this->phpDocOptions['help']['tag'] = array("-h", "--help");
         $this->phpDocOptions['help']['desc'] = "    show this help message";
 

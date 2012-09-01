@@ -290,6 +290,11 @@ class phpDocumentor_IntermediateParser
      */
     var $title = '';
 
+    /**
+     * @var string Character encoding of generated documentation, passed to Converters
+     */
+    var $charset = '';
+
     var $uses = array();
 
     var $db_template;
@@ -323,9 +328,10 @@ class phpDocumentor_IntermediateParser
      * @param string Title of generated documentation, passed to Converters
      * @see $title, $data, $classes, $proceduralpages
      */
-    function phpDocumentor_IntermediateParser($title='Generated Documentation')
+    function phpDocumentor_IntermediateParser($title='Generated Documentation', $charset='iso-8859-1')
     {
         $this->title = $title;
+        $this->charset = $charset;
         $this->data = new parserData;
         $this->classes = new Classes;
         $this->proceduralpages = new ProceduralPages;
@@ -1830,7 +1836,7 @@ class phpDocumentor_IntermediateParser
             }
             phpDocumentor_out("Formatting @uses list...");
             flush();
-            $a = new __dummyConverter($this->all_packages, $this->package_parents, $this->classes, $this->proceduralpages, $this->packageoutput, $this->parsePrivate, $this->quietMode, $this->targetDir , '', $this->title);
+            $a = new __dummyConverter($this->all_packages, $this->package_parents, $this->classes, $this->proceduralpages, $this->packageoutput, $this->parsePrivate, $this->quietMode, $this->targetDir , '', $this->title, $this->charset);
             $this->_setupUsesList($a);
             unset($a);
             phpDocumentor_out("done\n\n");
@@ -1856,7 +1862,7 @@ class phpDocumentor_IntermediateParser
                             {
                                 $extraout .= SMART_PATH_DELIMITER . str_replace(PATH_DELIMITER, SMART_PATH_DELIMITER, substr($template,0,strlen($template) - 1));
                             }
-                            $a = new $converter($this->all_packages, $this->package_parents, $this->classes, $this->proceduralpages, $this->packageoutput, $this->parsePrivate, $this->quietMode, $this->targetDir . $extraout, $template, $this->title);
+                            $a = new $converter($this->all_packages, $this->package_parents, $this->classes, $this->proceduralpages, $this->packageoutput, $this->parsePrivate, $this->quietMode, $this->targetDir . $extraout, $template, $this->title, $this->charset);
                             if (isset($this->templateBase))
                             {
                                 $a->setTemplateBase($this->templateBase, $template);

@@ -272,7 +272,9 @@ class phpDocumentor_setup
         if (!isset($_phpDocumentor_setting['junk'])) $_phpDocumentor_setting['junk'] = '';
         if (!isset($_phpDocumentor_setting['title'])) $_phpDocumentor_setting['title'] = 'Generated Documentation';
         $temp_title = $_phpDocumentor_setting['title'];
-        $this->render = new phpDocumentor_IntermediateParser($temp_title);
+        if (!isset($_phpDocumentor_setting['charset'])) $_phpDocumentor_setting['charset'] = 'iso-8859-1';
+        $charset = $_phpDocumentor_setting['charset'];
+        $this->render = new phpDocumentor_IntermediateParser($temp_title, $charset);
         if (isset($_phpDocumentor_setting['help']) || $_phpDocumentor_setting['junk'] == "-h" || $_phpDocumentor_setting['junk'] == "--help")
         {
             echo $this->setup->displayHelpMsg();

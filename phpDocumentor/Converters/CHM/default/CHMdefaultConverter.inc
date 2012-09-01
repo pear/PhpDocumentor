@@ -132,9 +132,9 @@ class CHMdefaultConverter extends Converter
      * sets {@link $base_dir} to $targetDir
      * @see Converter()
      */
-    function CHMdefaultConverter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $templateDir, $title)
+    function CHMdefaultConverter(&$allp, &$packp, &$classes, &$procpages, $po, $pp, $qm, $targetDir, $templateDir, $title, $charset)
     {
-        Converter::Converter($allp, $packp, $classes, $procpages,$po, $pp, $qm, $targetDir, $templateDir, $title);
+        Converter::Converter($allp, $packp, $classes, $procpages,$po, $pp, $qm, $targetDir, $templateDir, $title, $charset);
         $this->base_dir = $targetDir;
     }
 
