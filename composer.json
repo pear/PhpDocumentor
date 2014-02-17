@@ -1,0 +1,43 @@
+{
+    "authors": [
+        {
+            "email": "jeichorn@JoshuaEichorn.com",
+            "name": "Joshua Eichorn",
+            "role": "Lead"
+        },
+        {
+            "email": "greg@chiaraquartet.net",
+            "name": "Greg Beaver",
+            "role": "Lead"
+        },
+        {
+            "email": "demon.gene@gmail.com",
+            "name": "Chuck Burgess",
+            "role": "Lead"
+        },
+        {
+            "email": "drewish@katherinehouse.com",
+            "name": "Andrew Morton",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "./"
+        ]
+    },
+    "description": "More info available on: http://pear.php.net/package/PhpDocumentor",
+    "license": "LGPL",
+    "name": "pear/phpdocumentor",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=PhpDocumentor",
+        "source": "https://github.com/pear/PhpDocumentor"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear_exception": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
